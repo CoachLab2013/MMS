@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_BodiesByOrganisation" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
-	<property name="ireport.zoom" value="1.7715610000000017"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="7"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
-	<field name="organisationName" class="java.lang.String"/>
-	<field name="numberOfBodies" class="java.lang.Integer"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="numberOfErrors" class="java.lang.Integer"/>
+	<field name="numberOfWarnings" class="java.lang.Integer"/>
+	<field name="numberOfEvents" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -14,7 +16,7 @@
 		<band height="141" splitType="Stretch">
 			<image>
 				<reportElement uuid="e28ca0ab-e448-4ccc-8b97-9102dbd6a9cf" x="0" y="0" width="400" height="90"/>
-				<imageExpression><![CDATA[".\\Logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["Logo.png"]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement uuid="b17de317-b63a-4080-aaef-d4bc34a974cc" x="400" y="0" width="362" height="90"/>
@@ -75,22 +77,37 @@
 	</pageFooter>
 	<summary>
 		<band height="226" splitType="Stretch">
-			<pieChart>
+			<barChart>
 				<chart>
-					<reportElement uuid="5b40376e-8a79-480e-9e81-18d49b1001d2" x="0" y="0" width="762" height="226"/>
-					<chartTitle/>
+					<reportElement uuid="8eb2c13e-5ced-4fa1-889d-68dfa95d5bb5" x="0" y="0" width="762" height="226"/>
+					<chartTitle position="Top">
+						<titleExpression><![CDATA["Monthly Statistics"]]></titleExpression>
+					</chartTitle>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
-				<pieDataset>
-					<keyExpression><![CDATA[$F{organisationName}]]></keyExpression>
-					<valueExpression><![CDATA[$F{numberOfBodies}]]></valueExpression>
-				</pieDataset>
-				<piePlot>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Errors"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{date}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{numberOfErrors}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Warnings"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{date}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{numberOfWarnings}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Events"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{date}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{numberOfEvents}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
 					<plot/>
 					<itemLabel/>
-				</piePlot>
-			</pieChart>
+				</barPlot>
+			</barChart>
 		</band>
 	</summary>
 </jasperReport>
