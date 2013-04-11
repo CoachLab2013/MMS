@@ -72,11 +72,11 @@ public class EmployeeDb extends DatabaseConnector
                                     + employee.getRole() + "')");
             statement.executeQuery("update accesscontrol set access=" + employee.getAccess() + " where role='" + employee.getRole() + "';");
             statement.close();
-            connection.close();
+            connection.close(); //Where do you initialize this connection?
         } 
         catch (SQLException ex) 
         {
-            return "failed "+ex.getMessage();
+            return "failed " + ex.getMessage();
         }
         return "successful";
     }
