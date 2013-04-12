@@ -1,4 +1,4 @@
-
+package mms.db;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -19,7 +19,7 @@ public class Employee
     private String surname;
     private String rank;
     private int access;
-    private String role;
+    private String email;
     /**
      * default constructor
      */
@@ -31,7 +31,7 @@ public class Employee
         surname = "";
         rank = "";
         access = 0;
-        role = "";
+        email = "";
     }
     /**
      * constructs a employee object to save to database
@@ -43,7 +43,7 @@ public class Employee
      * @param access 1-lowest access level , 2-medium access level, 3-high access level and 4-highest access level
      * @param role pathologist,administrator,supervisor,forensic officer and facility manager
      */
-    public Employee(String personnelNumber,String password,String name,String surname,String rank,int access,String role)
+    public Employee(String personnelNumber,String password,String name,String surname,String rank,int access,String email)
     {
         this.personnelNumber = personnelNumber;
         this.password = hashPassword(password);
@@ -51,7 +51,7 @@ public class Employee
         this.surname = surname;
         this.rank = rank;
         this.access = access;
-        this.role = role;
+        this.email = email;
     }
     /**
      * this constructor is meant for when and employee logs in.
@@ -143,11 +143,11 @@ public class Employee
     }
     /**
      * 
-     * @return role of an employee
+     * @return email of an employee
      */
-    public String getRole()
+    public String getEmail()
     {
-        return role;
+        return email;
     }
     /**
      * sets hashed password using SHA-512
@@ -199,11 +199,11 @@ public class Employee
     }
     /**
      * 
-     * @param role sets the role a employee plays in the organization
+     * @param role sets the email a employee plays in the organization
      */
-    public void setRole(String role)
+    public void setEmail(String email)
     {
-        this.role = role;
+        this.email = email;
     }
     
 }
