@@ -1,26 +1,26 @@
-package jcse.coachlab2013.mms.reports.bodiesbyorganisation;
-
-import jcse.coachlab2013.mms.reports.ReportGenerator;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jcse.coachlab2013.mms.reports.turnaroundonresults;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import jcse.coachlab2013.mms.reports.ReportGenerator;
 
 /**
  *
  * @author Mubien Nakhooda Coachlab 2013
- * 
- * Class is used to receive information from the database, format the data and populate a set of dataBean Objects
- * The ReportGenerator class is used to compile the information into a pdf report
  */
-public class Report_BodiesByOrganisation {
-        
+public class Report_TurnAroundOnResults {
+
     private String source;
     private String destination;
-    private ArrayList<Bean_BodiesByOrganisation> beanList;
+    private ArrayList<Bean_TurnAroundOnResults> beanList;
     private Map parameters;
     
-    private Report_BodiesByOrganisation(String source, String destination)
+    private Report_TurnAroundOnResults(String source, String destination)
     {
         this.source = source;
         this.destination = destination;
@@ -49,11 +49,11 @@ public class Report_BodiesByOrganisation {
         rg.savePDF(destination); 
     }
     
-    private Bean_BodiesByOrganisation produce(String name, Integer number)
+    private Bean_TurnAroundOnResults produce(String name, Integer number)
     {
-        Bean_BodiesByOrganisation bean = new Bean_BodiesByOrganisation();
-        bean.setOrganisationName(name);
-        bean.setNumberOfBodies(number);
+        Bean_TurnAroundOnResults bean = new Bean_TurnAroundOnResults();
+        bean.setAnalysisType(name);
+        bean.setAverageTurnAroundTime(number);
         
         return bean;
     }
@@ -62,7 +62,6 @@ public class Report_BodiesByOrganisation {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-                
-        new Report_BodiesByOrganisation("./src/jcse/coachlab2013/mms/reports/bodiesbyorganisation/Report_BodiesByOrganisation.jasper", "./test_report1.pdf").createReport();
+        new Report_TurnAroundOnResults("./src/jcse/coachlab2013/mms/reports/turnaroundonresults/Report_TurnAroundOnResults.jasper", "./test_report1.pdf").createReport();
     }
 }
