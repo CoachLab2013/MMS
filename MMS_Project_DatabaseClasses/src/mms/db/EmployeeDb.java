@@ -1,5 +1,8 @@
-
+package mms.db;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -62,21 +65,26 @@ public class EmployeeDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeUpdate("insert into employee (password,personnelNumber,name,surname,rank,role)" + " values"
+            statement.executeUpdate("insert into employee (password,personnelNumber,name,surname,rank,access,email)" + " values"
                                     +"('" 
                                     +employee.getPassword() + "','" 
                                     + employee.getPersonnelNumber() + "','"
                                     + employee.getName() +"','"
                                     + employee.getSurname() + "','"
-                                    + employee.getRank() + "','"
-                                    + employee.getRole() + "')");
-            statement.executeQuery("update accesscontrol set access=" + employee.getAccess() + " where role='" + employee.getRole() + "';");
+                                    + employee.getRank() + "',"
+                                    + employee.getAccess() + ",'"
+                                    + employee.getEmail() 
+                                    + "')");
             statement.close();
             connection.close(); //Where do you initialize this connection?
         } 
         catch (SQLException ex) 
         {
             return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            System.out.println("error" + ex.getMessage());
         }
         return "successful";
     }
@@ -87,7 +95,25 @@ public class EmployeeDb extends DatabaseConnector
     @Override
     public String read()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try 
+        {
+            statement.executeQuery("select name,surname,rank,email from employee where password='" + employee.getPassword() + "' and personnelNumber='" + employee.getPersonnelNumber() + "';");
+            try (ResultSet resultSet = statement.getResultSet()) 
+            {
+                resultSet.next();
+                employee.setName(resultSet.getString("name"));
+                employee.setSurname(resultSet.getString("surname"));
+                employee.setRank(resultSet.getString("rank"));
+                employee.setEmail(resultSet.getString("email"));
+            }
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return employee.getName() + " " +employee.getSurname() +" "+employee.getRank() + " " + employee.getEmail();
     }
     
 }
