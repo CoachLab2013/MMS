@@ -62,6 +62,6 @@ public class Report_TurnAroundOnResults {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Report_TurnAroundOnResults("./src/jcse/coachlab2013/mms/reports/turnaroundonresults/Report_TurnAroundOnResults.jasper", "./test_report1.pdf").createReport();
+        new Report_TurnAroundOnResults("./build/classes/jcse/coachlab2013/mms/reports/turnaroundonresults/Report_TurnAroundOnResults.jrxml", "./test_report1.pdf").createReport();
     }
 }

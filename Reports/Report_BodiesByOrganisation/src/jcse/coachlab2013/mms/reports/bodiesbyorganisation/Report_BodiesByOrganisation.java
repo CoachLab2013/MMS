@@ -63,6 +63,6 @@ public class Report_BodiesByOrganisation {
      */
     public static void main(String[] args) {
                 
-        new Report_BodiesByOrganisation("./src/jcse/coachlab2013/mms/reports/bodiesbyorganisation/Report_BodiesByOrganisation.jasper", "./test_report1.pdf").createReport();
+        new Report_BodiesByOrganisation("./build/classes/jcse/coachlab2013/mms/reports/bodiesbyorganisation/Report_BodiesByOrganisation.jrxml", "./test_report1.pdf").createReport();
     }
 }

@@ -61,6 +61,6 @@ public class Report_FacilityStorage {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Report_FacilityStorage("./src/jcse/coachlab2013/mms/reports/facilitystorage/Report_FacilityStorage.jasper", "./test_report1.pdf").createReport();
+        new Report_FacilityStorage("./build/classes/jcse/coachlab2013/mms/reports/facilitystorage/Report_FacilityStorage.jrxml", "./test_report1.pdf").createReport();
     }
 }

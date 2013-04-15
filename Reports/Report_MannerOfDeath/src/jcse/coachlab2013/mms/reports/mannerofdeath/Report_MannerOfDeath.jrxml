@@ -26,7 +26,7 @@
 			</textField>
 			<image>
 				<reportElement uuid="c4e1a57f-2593-4a17-a262-21dbbac256ee" x="0" y="0" width="400" height="90"/>
-				<imageExpression><![CDATA[".\\Logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["./Logo.png"]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement uuid="5890cbd9-5d24-474b-921f-b28df68b7007" x="379" y="0" width="176" height="90"/>

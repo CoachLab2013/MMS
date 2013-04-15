@@ -66,6 +66,6 @@ public class Report_MannerOfDeathStatistics {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-          new Report_MannerOfDeathStatistics("./src/jcse/coachlab2013/mms/reports/mannerofdeathstatistics/Report_MannerOfDeathStatistics.jasper", "./test_report1.pdf").createReport();
+          new Report_MannerOfDeathStatistics("./build/classes/jcse/coachlab2013/mms/reports/mannerofdeathstatistics/Report_MannerOfDeathStatistics.jrxml", "./test_report1.pdf").createReport();
     }
 }
