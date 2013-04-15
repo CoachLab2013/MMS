@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6921fbf3-c5d7-4cf0-9b75-73a54d6ac426">
-	<property name="ireport.zoom" value="0.75"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
+	<property name="ireport.zoom" value="0.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
 	<field name="bodyAge" class="java.lang.String"/>
 	<field name="numberOfDeaths" class="java.lang.Integer"/>
@@ -11,76 +12,75 @@
 	</background>
 	<pageHeader>
 		<band height="141" splitType="Stretch">
+			<image>
+				<reportElement uuid="e28ca0ab-e448-4ccc-8b97-9102dbd6a9cf" x="0" y="0" width="400" height="90"/>
+				<imageExpression><![CDATA[".\\Logo.png"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement uuid="b17de317-b63a-4080-aaef-d4bc34a974cc" x="400" y="0" width="362" height="90"/>
+				<staticText>
+					<reportElement uuid="6c469fa2-58f2-44dd-867d-52b6869633c1" style="Heading 1" x="0" y="61" width="362" height="15" forecolor="#A79155"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="10" isBold="true" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[FORENSIC PATHOLOGY SERVICE]]></text>
+				</staticText>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="c65a1836-afd8-4f8f-8d16-0ae7d99dbd55" x="0" y="76" width="362" height="14" forecolor="#444444"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true" isItalic="false"/>
+						<paragraph spacingBefore="-5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
 			<line>
-				<reportElement uuid="c0054524-43ff-42fb-a326-0288dd335590" x="124" y="58" width="431" height="1"/>
+				<reportElement uuid="52cdc383-7077-4b37-a11b-881cf0073355" x="125" y="58" width="637" height="1"/>
 				<graphicElement>
 					<pen lineWidth="2.0" lineColor="#004696"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement uuid="36c9b5cf-5644-455c-a5d0-a9ee62957be1" x="3" y="90" width="553" height="51"/>
+				<reportElement uuid="59bdf692-cafe-4ecf-948d-221c10ad8f18" x="0" y="90" width="762" height="51"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="22" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{ReportTitle}]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement uuid="c4e1a57f-2593-4a17-a262-21dbbac256ee" x="0" y="0" width="400" height="90"/>
-				<imageExpression><![CDATA["./Logo.png"]]></imageExpression>
-			</image>
-			<frame>
-				<reportElement uuid="5890cbd9-5d24-474b-921f-b28df68b7007" x="379" y="0" width="176" height="90"/>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement uuid="320f564e-d302-4b49-9608-245a14c8dbd5" x="0" y="74" width="176" height="16" forecolor="#444444"/>
-					<textElement textAlignment="Right">
-						<font size="10" isBold="true" isItalic="false"/>
-						<paragraph lineSpacing="Single" spacingBefore="-3"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement uuid="bcb7e6c4-44dc-44b3-9228-eb7f1415d9be" x="0" y="59" width="176" height="15" forecolor="#A79155"/>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
-						<font size="10" isBold="true" isStrikeThrough="false"/>
-						<paragraph lineSpacing="Single"/>
-					</textElement>
-					<text><![CDATA[FORENSIC PATHOLOGY SERVICE]]></text>
-				</staticText>
-			</frame>
 			<line>
-				<reportElement uuid="bbbf39fb-8434-4b3c-9e5c-c51040594477" x="0" y="140" width="555" height="1" forecolor="#444444"/>
+				<reportElement uuid="ce9f76ea-4b9f-48a5-884f-62397689f982" x="0" y="140" width="762" height="1" forecolor="#444444"/>
 			</line>
 		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
+		<band height="60" splitType="Stretch">
 			<textField>
-				<reportElement uuid="9f6d7a0a-28f4-4c66-8f1d-ca146d65fee4" x="406" y="0" width="98" height="54"/>
+				<reportElement uuid="37e39b56-f39b-433a-96a5-8ec3c2b94da5" x="613" y="0" width="98" height="54"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="4613ee49-3569-4534-8041-ce133a3f7da1" x="504" y="0" width="51" height="54"/>
+				<reportElement uuid="bc6ba8df-3f2a-40c3-91cd-1242148b3877" x="711" y="0" width="51" height="54"/>
 				<textElement verticalAlignment="Bottom">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement uuid="d9f9c0cf-b0f2-4f2d-9569-b8f0c0cdef82" x="0" y="0" width="555" height="1" forecolor="#444444"/>
+				<reportElement uuid="79815529-9ad4-4453-8f21-0f0cc2921c13" x="0" y="0" width="762" height="1" forecolor="#444444"/>
 			</line>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="142" splitType="Stretch">
+		<band height="200" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="0cccd6d8-06c4-4c03-862b-7b5f32bda79f" x="0" y="0" width="555" height="142"/>
+					<reportElement uuid="0cccd6d8-06c4-4c03-862b-7b5f32bda79f" positionType="FixRelativeToBottom" x="112" y="42" width="555" height="142"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
