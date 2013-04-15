@@ -35,7 +35,7 @@ public class Report_FacilityStorage {
         beanList.add(produce(75)); 
                 
         parameters = new HashMap();
-        parameters.put("ReportTitle", "Facility Storage Status"); 
+        parameters.put("ReportTitle", "Facility Storage Status Report"); 
         parameters.put("TotalBins", 200);  
         parameters.put("avgIntake", 1.3);  
         parameters.put("avgOutput", 1);   

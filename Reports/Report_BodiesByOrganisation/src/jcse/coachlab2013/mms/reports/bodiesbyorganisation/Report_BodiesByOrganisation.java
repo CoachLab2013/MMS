@@ -32,14 +32,14 @@ public class Report_BodiesByOrganisation {
         
         beanList = new ArrayList<>();
                 
-        beanList.add(produce("A",1));
-        beanList.add(produce("B",2));
-        beanList.add(produce("C",3));
-        beanList.add(produce("D",4));
-        beanList.add(produce("E",5));   
+        beanList.add(produce("SAPS",1));
+        beanList.add(produce("Hospital",2));
+        beanList.add(produce("Clinic",3));
+        beanList.add(produce("Private",4));
+        beanList.add(produce("Unknown",5));   
                 
         parameters = new HashMap();
-        parameters.put("ReportTitle", "Bodies By Organisation"); 
+        parameters.put("ReportTitle", "Bodies By Organisation Report"); 
             
     }
     
