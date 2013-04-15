@@ -62,14 +62,14 @@
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement uuid="37e39b56-f39b-433a-96a5-8ec3c2b94da5" x="613" y="0" width="98" height="54"/>
+				<reportElement key="textFieldCurrentPage" uuid="37e39b56-f39b-433a-96a5-8ec3c2b94da5" x="613" y="0" width="98" height="54"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="bc6ba8df-3f2a-40c3-91cd-1242148b3877" x="711" y="0" width="51" height="54"/>
+				<reportElement key="textFieldNumberOfPages" uuid="bc6ba8df-3f2a-40c3-91cd-1242148b3877" x="711" y="0" width="51" height="54"/>
 				<textElement verticalAlignment="Bottom">
 					<font size="12"/>
 				</textElement>

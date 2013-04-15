@@ -35,7 +35,7 @@ public class Report_FacilityStorage {
         beanList.add(produce(75)); 
                 
         parameters = new HashMap();
-        parameters.put("ReportTitle", "Facility Storage Status"); 
+        parameters.put("ReportTitle", "Facility Storage Status Report"); 
         parameters.put("TotalBins", 200);  
         parameters.put("avgIntake", 1.3);  
         parameters.put("avgOutput", 1);   
@@ -61,6 +61,6 @@ public class Report_FacilityStorage {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Report_FacilityStorage("./src/jcse/coachlab2013/mms/reports/facilitystorage/Report_FacilityStorage.jasper", "./test_report1.pdf").createReport();
+        new Report_FacilityStorage("./build/classes/jcse/coachlab2013/mms/reports/facilitystorage/Report_FacilityStorage.jrxml", "./test_report1.pdf").createReport();
     }
 }

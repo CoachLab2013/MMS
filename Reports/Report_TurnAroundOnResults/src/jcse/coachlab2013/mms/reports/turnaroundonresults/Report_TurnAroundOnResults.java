@@ -32,14 +32,14 @@ public class Report_TurnAroundOnResults {
         
         beanList = new ArrayList<>();
                 
-        beanList.add(produce("A",1));
-        beanList.add(produce("B",2));
-        beanList.add(produce("C",3));
-        beanList.add(produce("D",4));
-        beanList.add(produce("E",5));   
+        beanList.add(produce("Alcohol Analysis",1));
+        beanList.add(produce("Histology Analysis",2));
+        beanList.add(produce("Post Mortem Analysis",5));
+        beanList.add(produce("Toxicology Analysis",1));
+        beanList.add(produce("Carbon Monoxide Analysis",3));   
                 
         parameters = new HashMap();
-        parameters.put("ReportTitle", "Bodies By Organisation"); 
+        parameters.put("ReportTitle", "Turn Around On Results Report"); 
             
     }
     
@@ -62,6 +62,6 @@ public class Report_TurnAroundOnResults {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Report_TurnAroundOnResults("./src/jcse/coachlab2013/mms/reports/turnaroundonresults/Report_TurnAroundOnResults.jasper", "./test_report1.pdf").createReport();
+        new Report_TurnAroundOnResults("./build/classes/jcse/coachlab2013/mms/reports/turnaroundonresults/Report_TurnAroundOnResults.jrxml", "./test_report1.pdf").createReport();
     }
 }
