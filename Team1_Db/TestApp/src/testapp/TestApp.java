@@ -27,12 +27,15 @@ public class TestApp {
         System.out.println(empDb.add());*/
         
         //user login
-        EmployeeDb empDb = new EmployeeDb(new Employee("00000000","1234")/*,"Chester","Cobus","ADMIN",1,"cacobus15@gmail.com",true)*/,"root","hello", "localhost","/mydb");
-        empDb.init();
+       /* EmployeeDb empDb = new EmployeeDb(new Employee("00000000","1234")/*,"Chester","Cobus","ADMIN",1,"cacobus15@gmail.com",true),"root","hello", "localhost","/mydb");
+        empDb.init(); */
         
         //System.out.println(empDb.delete());
         //System.out.println(empDb.edit());
-        System.out.println(empDb.read());
+        
+       /*
+        * 
+        * System.out.println(empDb.read());
         empDb.init();
         //list of employees
         ArrayList<Employee> list = empDb.employeeList();
@@ -40,11 +43,34 @@ public class TestApp {
         {
              System.out.println(list.get(i).getPersonnelNumber() + " " +list.get(i).getName());
         }
+        * 
+        * /
         //Audit Trail
          /*AuditTrail AuditTr = new AuditTrail("2013/04/11", "13:30:22" , "Added" , "Exception type" ,"12345678");
          DatabaseConnector AuditDb = new AuditTrailDb(AuditTr,"root","hello","localhost","/mydb");
          AuditDb.init();
          System.out.println(AuditDb.add());*/
          
+        
+        //TESTING ORGANIZATION STUFF:
+        //connection
+        OrganizationDb orgDb = new OrganizationDb("root","password123","localhost","/mydb", new Organization("TestHospital1", "0118677777", "Hospital"));
+        orgDb.init();
+        
+        //adding organization
+        System.out.println(orgDb.add());
+        
+       /* //list of organizations
+        ArrayList<Organization> orglist = orgDb.organizationList();
+        for(int j = 0; j<orglist.size(); j++){
+            System.out.println(orglist.get(j).getName() + " " + orglist.get(j).getContactNumber() + " " + orglist.get(j).getType());
+        } */
+        
+        //edit
+        
+       /* //deleting organizations
+        orgDb.delete(); */
+        
+        
     }
 }

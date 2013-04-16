@@ -1,0 +1,175 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package testapp;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Administrator
+ */
+public class OrganizationDb extends DatabaseConnector{
+    private Organization organization;
+    public OrganizationDb(String n, String p, String u, String d, Organization o){
+        super(n, p, u, d);
+        
+        this.organization = o;
+    }
+    @Override
+    public String add(){
+        try 
+        {
+            statement.executeUpdate("INSERT INTO Organization VALUES ()");
+            //statement.close();
+            statement.executeQuery("SELECT MAX(idOrganization) as latestID FROM Organization" );
+            int newID;
+            try (ResultSet resultSet = statement.getResultSet()){
+                resultSet.next();
+                newID = resultSet.getInt("latestID");
+                System.out.println(newID);
+            }
+            //statement.close();
+            statement.executeUpdate("INSERT INTO " + organization.getType() + " (Organization_idOrganization, name, contactNumber) VALUES ( '" + newID + "', '" + organization.getName() +"', '" + organization.getContactNumber() + "' )");
+            statement.close();
+            connection.close(); 
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "added organization to organization table"; 
+    }
+    
+    // Function to read a single Organization FROM the Datebase
+    @Override
+    public String read(){
+        try 
+        {
+            statement.executeQuery("SELECT idOrganization FROM Organization;");
+            try (ResultSet resultSet = statement.getResultSet()) 
+            {
+                resultSet.next();
+                organization.setIdOrganization(Integer.parseInt(resultSet.getString("idOrganization")));
+            }
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "added to organization table";
+    }
+    
+    //Function to read all the organizations from the database and return them in a list for displaying
+    public  ArrayList<Organization> organizationList()
+    {
+        ArrayList<Organization> list = new ArrayList<>();
+        try 
+        {
+            statement.executeQuery("SELECT idOrganization,name,contactNumber FROM Hospital;");
+            try (ResultSet resultSet = statement.getResultSet()) 
+            {
+                while(resultSet.next())
+                {
+                    Organization org = new Organization();
+                    org.setIdOrganization(resultSet.getInt("idOrganization"));
+                    org.setName(resultSet.getString("name"));
+                    org.setContactNumber(resultSet.getString("contactNumber"));
+                    org.setType("Hospital");
+                    list.add(org);
+                }
+            }
+            statement.close();
+            statement.executeQuery("SELECT idOrganization,name,contactNumber FROM PathologyUnit;");
+            try (ResultSet resultSet = statement.getResultSet()) 
+            {
+                while(resultSet.next())
+                {
+                    Organization org = new Organization();
+                    org.setIdOrganization(resultSet.getInt("idOrganization"));
+                    org.setName(resultSet.getString("name"));
+                    org.setContactNumber(resultSet.getString("contactNumber"));
+                    org.setType("PathologyUnit");
+                    list.add(org);
+                }
+            }
+            statement.close();
+            statement.executeQuery("SELECT idOrganization,name,contactNumber FROM SampleLab;");
+            try (ResultSet resultSet = statement.getResultSet()) 
+            {
+                while(resultSet.next())
+                {
+                    Organization org = new Organization();
+                    org.setIdOrganization(resultSet.getInt("idOrganization"));
+                    org.setName(resultSet.getString("name"));
+                    org.setContactNumber(resultSet.getString("contactNumber"));
+                    org.setType("SampleLab");
+                    list.add(org);
+                }
+            }
+            statement.close();
+            statement.executeQuery("SELECT idOrganization,name,contactNumber FROM PoliceStation;");
+            try (ResultSet resultSet = statement.getResultSet()) 
+            {
+                while(resultSet.next())
+                {
+                    Organization org = new Organization();
+                    org.setIdOrganization(resultSet.getInt("idOrganization"));
+                    org.setName(resultSet.getString("name"));
+                    org.setContactNumber(resultSet.getString("contactNumber"));
+                    org.setType("PoliceStation");
+                    list.add(org);
+                }
+            }
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("fail " + ex.getMessage());
+        }
+        return list;
+    }
+    
+    @Override
+    public String edit(){
+        try 
+        {
+            statement.executeUpdate("UPDATE " + organization.getType() + " SET name='" +organization.getName()+ "' ,contactNumber='" +organization.getContactNumber() +"';" );
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "Update Successful";
+    }
+    
+    @Override
+    public String delete(){
+        try 
+        {
+            int universalID = organization.getIdOrganization();
+            statement.executeUpdate("DELETE FROM " + organization.getType() + " where Organization_idOrganization=" + universalID +";" );
+            statement.close();
+            statement.executeUpdate("DELETE FROM Organization WHERE idOrganization = " + universalID);
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "Deleted Item from Organization";
+    }
+}
