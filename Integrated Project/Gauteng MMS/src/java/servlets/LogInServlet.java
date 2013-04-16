@@ -6,15 +6,12 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import servlets.Tools;
 
 /**
  *
@@ -42,17 +39,23 @@ public class LogInServlet extends HttpServlet {
             String personnelnumber = request.getParameter("personnelnumber");
             String password = request.getParameter("password");
             
-            boolean loggedin = t.logIn(personnelnumber, password);
-            if(loggedin){
-                HttpSession sess = request.getSession();
-                sess.setAttribute("personnelnumber", personnelnumber);
-                sess.setAttribute("password", password);
-                response.sendRedirect("/Home.jsp");
-            }
-            else{
+            int access = t.logIn(personnelnumber, password);
+            if(access == -1){
                 HttpSession sess = request.getSession();
                 sess.setAttribute("loginerror", "Invalid personnel number and/or password");
                 response.sendRedirect("/Gauteng_MMS/");
+            }
+            else{
+                HttpSession sess = request.getSession();
+                sess.setAttribute("personnelnumber", personnelnumber);
+                sess.setAttribute("access", access);
+                if (access == 4){
+                    response.sendRedirect("Admin.jsp");
+                }
+                else{
+                    response.sendRedirect("Home.jsp");
+                }
+                
             }
             
         } finally {            
