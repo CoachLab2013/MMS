@@ -13,13 +13,15 @@ import java.util.ArrayList;
  *
  * @author Chester
  */
-public class TestApp {
 
+public class TestApp {
+public DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello");
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) 
     {
+        
         //add user
         /*Employee emp = new Employee("12345678","1234", "john","smith", "manager", 1, "200935415@student.uj.ac.za",true);
         DatabaseConnector empDb = new EmployeeDb(emp,"root","hello", "localhost","/mydb");
@@ -27,24 +29,37 @@ public class TestApp {
         System.out.println(empDb.add());*/
         
         //user login
-        EmployeeDb empDb = new EmployeeDb(new Employee("00000000","1234")/*,"Chester","Cobus","ADMIN",1,"cacobus15@gmail.com",true)*/,"root","hello", "localhost","/mydb");
-        empDb.init();
+        //EmployeeDb empDb = new EmployeeDb(new Employee("00000000","1234","Chester","Cobus","ADMIN",1,"cacobus15@gmail.com",true),"root","hello", "localhost","/mydb");
+        //empDb.init();
         
         //System.out.println(empDb.delete());
         //System.out.println(empDb.edit());
-        System.out.println(empDb.read());
-        empDb.init();
+        /*System.out.println(empDb.read());
+        empDb.init();*/
         //list of employees
-        ArrayList<Employee> list = empDb.employeeList();
+        /*ArrayList<Employee> list = empDb.employeeList();
         for(int i = 0;i < list.size();i++)
         {
              System.out.println(list.get(i).getPersonnelNumber() + " " +list.get(i).getName());
-        }
+        }*/
         //Audit Trail
          /*AuditTrail AuditTr = new AuditTrail("2013/04/11", "13:30:22" , "Added" , "Exception type" ,"12345678");
          DatabaseConnector AuditDb = new AuditTrailDb(AuditTr,"root","hello","localhost","/mydb");
          AuditDb.init();
          System.out.println(AuditDb.add());*/
          
+        //Reference List
+        ReferenceListDb db = new ReferenceListDb("gender","idGender","type","female",1,"root","hello","localhost","/mydb");
+        //db.init();
+        //System.out.println(db.add());
+        db.init();
+        
+        //System.out.println(db.edit());
+        ArrayList<String> list = db.employeeList();
+        for(int i = 0;i < list.size();i++)
+        {
+            System.out.println(list.get(i));
+        }
+        
     }
 }

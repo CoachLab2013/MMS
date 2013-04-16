@@ -128,8 +128,7 @@ public class EmployeeDb extends DatabaseConnector
         {
             statement.executeQuery("select personnelNumber,name,surname,rank,email,active from employee;");
             Employee emp = null;
-            try (ResultSet resultSet = statement.getResultSet()) 
-            {
+            ResultSet resultSet = statement.getResultSet();
                 while(resultSet.next())
                 {
                     emp = new Employee();
@@ -141,7 +140,7 @@ public class EmployeeDb extends DatabaseConnector
                     emp.setActive(resultSet.getBoolean("active"));
                     list.add(emp);
                 }
-            }
+           
             statement.close();
             connection.close();
         } 

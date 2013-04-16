@@ -73,7 +73,8 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `mydb`.`DeathCall` (
   `idDeathCall` INT NOT NULL ,
   `timeOfCall` TIME NULL ,
-  `numberCallMade` VARCHAR(10) NULL ,
+  `dateOfCall` DATE NULL ,
+  `numberOfCaller` VARCHAR(10) NULL ,
   `institution` VARCHAR(45) NULL ,
   `sceneAddress` VARCHAR(100) NULL ,
   `province` VARCHAR(45) NULL ,
@@ -186,6 +187,21 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `mydb`.`PostMortem`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`PostMortem` (
+  `labNumber` VARCHAR(45) NOT NULL ,
+  `icd10` VARCHAR(3) NOT NULL ,
+  `chiefFind` BLOB NOT NULL ,
+  `causeOfDeath` BLOB NOT NULL ,
+  `status` BIT NOT NULL ,
+  `approved` BIT NOT NULL ,
+  `DHA1663number` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`labNumber`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mydb`.`Body`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`Body` (
@@ -216,12 +232,15 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Body` (
   `bodyReleased` BIT NULL ,
   `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
   `bodyType` VARCHAR(45) NULL ,
+  `dateBodyReleased` DATETIME NULL ,
+  `PostMortem_labNumber` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`idDeathRegisterNumber`) ,
   INDEX `fk_Body_BodyAddress_idx` (`addressOfDeceased` ASC) ,
   INDEX `fk_Body_Kin1_idx` (`Kin_idKin` ASC) ,
   INDEX `fk_Body_AtMortuary1_idx` (`AtMortuary_idAtMortuary` ASC) ,
   INDEX `fk_Body_AtScene1_idx` (`AtScene_idAtScene` ASC) ,
   INDEX `fk_Body_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
+  INDEX `fk_Body_PostMortem1_idx` (`PostMortem_labNumber` ASC) ,
   CONSTRAINT `fk_Body_BodyAddress`
     FOREIGN KEY (`addressOfDeceased` )
     REFERENCES `mydb`.`BodyAddress` (`idBodyAddress` )
@@ -246,18 +265,12 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Body` (
     FOREIGN KEY (`Incident_incidentLogNumber` )
     REFERENCES `mydb`.`Incident` (`incidentLogNumber` )
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Body_PostMortem1`
+    FOREIGN KEY (`PostMortem_labNumber` )
+    REFERENCES `mydb`.`PostMortem` (`labNumber` )
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Informant`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`Informant` (
-  `idInformant` INT NOT NULL ,
-  `name` VARCHAR(45) NULL ,
-  `address` VARCHAR(100) NULL ,
-  PRIMARY KEY (`idInformant`) )
 ENGINE = InnoDB;
 
 
@@ -272,7 +285,6 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Property` (
   `type` VARCHAR(45) NULL ,
   `sealType` VARCHAR(45) NULL ,
   `takenBy` VARCHAR(10) NULL ,
-  `Informant_idInformant` INT NULL ,
   `witness1_name` VARCHAR(45) NULL ,
   `witness1_surname` VARCHAR(45) NULL ,
   `witness2_name` VARCHAR(45) NULL ,
@@ -282,13 +294,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Property` (
   `SAPS_taken` BIT NULL ,
   `Body_idDeathRegisterNumber` VARCHAR(45) NULL ,
   PRIMARY KEY (`idProperty`) ,
-  INDEX `fk_Property_Informant1_idx` (`Informant_idInformant` ASC) ,
   INDEX `fk_Property_Body1_idx` (`Body_idDeathRegisterNumber` ASC) ,
-  CONSTRAINT `fk_Property_Informant1`
-    FOREIGN KEY (`Informant_idInformant` )
-    REFERENCES `mydb`.`Informant` (`idInformant` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Property_Body1`
     FOREIGN KEY (`Body_idDeathRegisterNumber` )
     REFERENCES `mydb`.`Body` (`idDeathRegisterNumber` )
@@ -350,6 +356,46 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`BodyLink` (
   CONSTRAINT `fk_BodyLink_BodyFile2`
     FOREIGN KEY (`BodyFile_Body_idDeathRegisterNumber1` )
     REFERENCES `mydb`.`BodyFile` (`Body_idDeathRegisterNumber` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`LabRecord`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`LabRecord` (
+  `receivedAllSamples` BIT NOT NULL ,
+  `labNumber` VARCHAR(45) NOT NULL ,
+  INDEX `fk_LabRecord_PostMortem1_idx` (`labNumber` ASC) ,
+  PRIMARY KEY (`labNumber`) ,
+  CONSTRAINT `fk_LabRecord_PostMortem1`
+    FOREIGN KEY (`labNumber` )
+    REFERENCES `mydb`.`PostMortem` (`labNumber` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`ForensicSample`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`ForensicSample` (
+  `sealNumber` VARCHAR(45) NOT NULL ,
+  `deathRegisterNumber` VARCHAR(45) NOT NULL ,
+  `reason` BLOB NOT NULL ,
+  `sealType` VARCHAR(45) NOT NULL ,
+  `brokenSealNumber` VARCHAR(45) NOT NULL ,
+  `typeOfAnalysis` VARCHAR(45) NOT NULL ,
+  `institution` VARCHAR(45) NOT NULL ,
+  `specialInstructions` VARCHAR(45) NOT NULL ,
+  `received` BIT NOT NULL ,
+  `labNumber` VARCHAR(45) NULL ,
+  PRIMARY KEY (`sealNumber`) ,
+  INDEX `fk_ForensicSample_LabRecord1_idx` (`labNumber` ASC) ,
+  CONSTRAINT `fk_ForensicSample_LabRecord1`
+    FOREIGN KEY (`labNumber` )
+    REFERENCES `mydb`.`LabRecord` (`labNumber` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
