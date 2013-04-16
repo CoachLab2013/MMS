@@ -54,22 +54,23 @@ public class TestApp {
         
         //TESTING ORGANIZATION STUFF:
         //connection
-        OrganizationDb orgDb = new OrganizationDb("root","password123","localhost","/mydb", new Organization("TestHospital1", "0118677777", "Hospital"));
+        OrganizationDb orgDb = new OrganizationDb("root","password123","localhost","/mydb", new Organization("TestHospital2", "0118677778", "Hospital"));
         orgDb.init();
         
-        //adding organization
-        System.out.println(orgDb.add());
+        /*//adding organization
+        System.out.println(orgDb.add());*/
         
-       /* //list of organizations
-        ArrayList<Organization> orglist = orgDb.organizationList();
+        //list of organizations
+        /*ArrayList<Organization> orglist = orgDb.organizationList();
         for(int j = 0; j<orglist.size(); j++){
             System.out.println(orglist.get(j).getName() + " " + orglist.get(j).getContactNumber() + " " + orglist.get(j).getType());
-        } */
+        }*/
         
         //edit
         
-       /* //deleting organizations
-        orgDb.delete(); */
+        
+       /*//deleting organizations
+       System.out.println(orgDb.delete("Hospital", 8));*/
         
         
     }

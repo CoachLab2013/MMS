@@ -24,15 +24,12 @@ public class OrganizationDb extends DatabaseConnector{
         try 
         {
             statement.executeUpdate("INSERT INTO Organization VALUES ()");
-            //statement.close();
             statement.executeQuery("SELECT MAX(idOrganization) as latestID FROM Organization" );
             int newID;
             try (ResultSet resultSet = statement.getResultSet()){
                 resultSet.next();
                 newID = resultSet.getInt("latestID");
-                System.out.println(newID);
             }
-            //statement.close();
             statement.executeUpdate("INSERT INTO " + organization.getType() + " (Organization_idOrganization, name, contactNumber) VALUES ( '" + newID + "', '" + organization.getName() +"', '" + organization.getContactNumber() + "' )");
             statement.close();
             connection.close(); 
@@ -75,55 +72,52 @@ public class OrganizationDb extends DatabaseConnector{
         ArrayList<Organization> list = new ArrayList<>();
         try 
         {
-            statement.executeQuery("SELECT idOrganization,name,contactNumber FROM Hospital;");
+            statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM Hospital;");
             try (ResultSet resultSet = statement.getResultSet()) 
             {
                 while(resultSet.next())
                 {
                     Organization org = new Organization();
-                    org.setIdOrganization(resultSet.getInt("idOrganization"));
+                    org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
                     org.setName(resultSet.getString("name"));
                     org.setContactNumber(resultSet.getString("contactNumber"));
                     org.setType("Hospital");
                     list.add(org);
                 }
             }
-            statement.close();
-            statement.executeQuery("SELECT idOrganization,name,contactNumber FROM PathologyUnit;");
+            statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM PathologyUnit;");
             try (ResultSet resultSet = statement.getResultSet()) 
             {
                 while(resultSet.next())
                 {
                     Organization org = new Organization();
-                    org.setIdOrganization(resultSet.getInt("idOrganization"));
+                    org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
                     org.setName(resultSet.getString("name"));
                     org.setContactNumber(resultSet.getString("contactNumber"));
                     org.setType("PathologyUnit");
                     list.add(org);
                 }
             }
-            statement.close();
-            statement.executeQuery("SELECT idOrganization,name,contactNumber FROM SampleLab;");
+            statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM SamlpeLab;");
             try (ResultSet resultSet = statement.getResultSet()) 
             {
                 while(resultSet.next())
                 {
                     Organization org = new Organization();
-                    org.setIdOrganization(resultSet.getInt("idOrganization"));
+                    org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
                     org.setName(resultSet.getString("name"));
                     org.setContactNumber(resultSet.getString("contactNumber"));
                     org.setType("SampleLab");
                     list.add(org);
                 }
             }
-            statement.close();
-            statement.executeQuery("SELECT idOrganization,name,contactNumber FROM PoliceStation;");
+            statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM PoliceStation;");
             try (ResultSet resultSet = statement.getResultSet()) 
             {
                 while(resultSet.next())
                 {
                     Organization org = new Organization();
-                    org.setIdOrganization(resultSet.getInt("idOrganization"));
+                    org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
                     org.setName(resultSet.getString("name"));
                     org.setContactNumber(resultSet.getString("contactNumber"));
                     org.setType("PoliceStation");
@@ -142,9 +136,12 @@ public class OrganizationDb extends DatabaseConnector{
     
     @Override
     public String edit(){
+        return "never implemented";
+    }
+    public String edit(Organization inOrganization){
         try 
         {
-            statement.executeUpdate("UPDATE " + organization.getType() + " SET name='" +organization.getName()+ "' ,contactNumber='" +organization.getContactNumber() +"';" );
+            statement.executeUpdate("UPDATE " + inOrganization.getType() + " SET name='" +inOrganization.getName()+ "', contactNumber='" +inOrganization.getContactNumber() +"';" );
             statement.close();
             connection.close();
         } 
@@ -157,12 +154,14 @@ public class OrganizationDb extends DatabaseConnector{
     
     @Override
     public String delete(){
+        return "never implemented";
+    }
+    public String delete(String inType, int inID){
         try 
         {
-            int universalID = organization.getIdOrganization();
-            statement.executeUpdate("DELETE FROM " + organization.getType() + " where Organization_idOrganization=" + universalID +";" );
-            statement.close();
-            statement.executeUpdate("DELETE FROM Organization WHERE idOrganization = " + universalID);
+            int universalID = inID;//organization.getIdOrganization();
+            statement.executeUpdate("DELETE FROM " + inType + " WHERE Organization_idOrganization= '" + universalID +"';" );
+            statement.executeUpdate("DELETE FROM Organization WHERE idOrganization = '" + universalID +"'");
             statement.close();
             connection.close();
         } 
@@ -170,6 +169,6 @@ public class OrganizationDb extends DatabaseConnector{
         {
             return "fail " + ex.getMessage();
         }
-        return "Deleted Item from Organization";
+        return "Deleted Item from Organization and " + inType ;
     }
 }

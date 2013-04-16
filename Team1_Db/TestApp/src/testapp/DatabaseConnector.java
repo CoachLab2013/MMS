@@ -44,6 +44,6 @@ public abstract class DatabaseConnector
     }
     public abstract String add();
     public abstract String read(); 
-    public abstract String edit();
-    public abstract String delete();
+    public abstract String edit(); //not needed here
+    public abstract String delete(); //not needed here
 }
