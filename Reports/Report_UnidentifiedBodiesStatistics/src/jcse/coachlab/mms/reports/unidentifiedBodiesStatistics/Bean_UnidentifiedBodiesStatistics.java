@@ -27,6 +27,10 @@ public class Bean_UnidentifiedBodiesStatistics {
     public void setNumPeople(double numPeople) {
         this.numPeople = numPeople;
     }
+
+    void setBinsUsed(Integer number) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     
