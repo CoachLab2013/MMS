@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package deathcall;
+package testapp;
 
 import java.sql.SQLException;
 
@@ -82,6 +82,15 @@ public class deathCallDb extends DatabaseConnector
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    // code below added by bandile because netbeans is complaining
+     @Override
+    public String delete(){
+        return "never implemented";
+    }
     
+     @Override
+     public String edit(){
+         return "never implemented";
+     }
     
 }

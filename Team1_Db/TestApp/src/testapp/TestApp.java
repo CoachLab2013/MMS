@@ -29,7 +29,6 @@ public DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello");
         System.out.println(empDb.add());*/
         
         //user login
-<<<<<<< HEAD
        /* EmployeeDb empDb = new EmployeeDb(new Employee("00000000","1234")/*,"Chester","Cobus","ADMIN",1,"cacobus15@gmail.com",true),"root","hello", "localhost","/mydb");
         empDb.init(); */
         
@@ -40,7 +39,6 @@ public DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello");
         * 
         * System.out.println(empDb.read());
         empDb.init();
-=======
         //EmployeeDb empDb = new EmployeeDb(new Employee("00000000","1234","Chester","Cobus","ADMIN",1,"cacobus15@gmail.com",true),"root","hello", "localhost","/mydb");
         //empDb.init();
         
@@ -48,26 +46,17 @@ public DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello");
         //System.out.println(empDb.edit());
         /*System.out.println(empDb.read());
         empDb.init();*/
->>>>>>> origin/master
         //list of employees
         /*ArrayList<Employee> list = empDb.employeeList();
         for(int i = 0;i < list.size();i++)
         {
              System.out.println(list.get(i).getPersonnelNumber() + " " +list.get(i).getName());
-<<<<<<< HEAD
-        }
-        * 
-        * /
-=======
-        }*/
->>>>>>> origin/master
         //Audit Trail
          /*AuditTrail AuditTr = new AuditTrail("2013/04/11", "13:30:22" , "Added" , "Exception type" ,"12345678");
          DatabaseConnector AuditDb = new AuditTrailDb(AuditTr,"root","hello","localhost","/mydb");
          AuditDb.init();
          System.out.println(AuditDb.add());*/
          
-<<<<<<< HEAD
         
         //TESTING ORGANIZATION STUFF:
         //connection
@@ -89,8 +78,9 @@ public DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello");
        /*//deleting organizations
        System.out.println(orgDb.delete("Hospital", 8));*/
         
-=======
-        //Reference List
+        //END OF ORGANIZATION STUFF.
+        
+       /* //Reference List
         ReferenceListDb db = new ReferenceListDb("gender","idGender","type","female",1,"root","hello","localhost","/mydb");
         //db.init();
         //System.out.println(db.add());
@@ -101,8 +91,14 @@ public DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello");
         for(int i = 0;i < list.size();i++)
         {
             System.out.println(list.get(i));
-        }
->>>>>>> origin/master
-        
+        }*/
+
+        //TESTING DEATHCALL STUFF
+        /*//timeOfCall,numberCallMade,institution,sceneAddress,province,region,sceneCondition,nameOfCaller
+         DeathCall Dcall = new DeathCall("12:12:12","111","institution","address","province","region","scene condition","name of caller");
+         deathCallDb AuditDb = new deathCallDb(Dcall,"root","200971082","localhost","/mydb");
+         AuditDb.init();
+         System.out.println(AuditDb.add());*/
+        //END OF DEATHCALL STUFF
     }
 }
