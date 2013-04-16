@@ -2,8 +2,8 @@
   /**
    * this is the class that will connect to the database and do the adding to the database
    */
- package testapp;
-import java.sql.*;
+   package testapp;
+   import java.sql.*;
    class AuditTrailDb extends DatabaseConnector
    {
    
@@ -61,7 +61,38 @@ import java.sql.*;
          return "successful";
       
       
-          }
+      }
+      public  ArrayList<AuditTrail> AuditTrailList()
+      {
+         ArrayList<AuditTrail> list = new ArrayList<AuditTrail>();
+         try 
+         {
+            statement.executeQuery("SELECT * FROM  audittrail");
+            AuditTrail auditTr = null;
+            try (ResultSet resultSet = statement.getResultSet()) 
+            {
+               while(resultSet.next())
+               {
+                  auditTr = new AuditTrail ();
+                  auditTr .setDate(resultSet.getString("date"));
+                  auditTr .SetTime(resultSet.getString("time"));
+                  auditTr .setEventType(resultSet.getString("eventType"));
+                  auditTr .setEventMessage(resultSet.getString("eventMessge"));
+                  auditTr .setCurrentUser(resultSet.getString("currentUser"));
+                 
+                  list.add(auditTr);
+               }
+            }
+            statement.close();
+            connection.close();
+         } 
+            catch (SQLException ex) 
+            {
+               System.out.println("fail " + ex.getMessage());
+            }
+         return list;
+      }
+   
       /**
        * 
        * @the method to read the items from the audit trail is not implemented 
@@ -72,14 +103,14 @@ import java.sql.*;
       {
          return "Not yet implemented";
       }
-
-    @Override
-    public String edit() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String delete() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+   
+      @Override
+      public String edit() {
+         throw new UnsupportedOperationException("Not supported yet.");
+      }
+   
+      @Override
+      public String delete() {
+         throw new UnsupportedOperationException("Not supported yet.");
+      }
    }
