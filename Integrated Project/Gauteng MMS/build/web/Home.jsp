@@ -16,7 +16,6 @@
         <title>Gauteng Mortuary Management System</title>
     </head>
     <body>
-        
       
         <%-- <p>Welcome MR Pathologist <span>Logout</span></p>--%>
         <p>
@@ -32,27 +31,30 @@
             </ul>
             <div class="tab-content" >
                 <div id="Incident" class="tab-pane active">  
-                    <div align="center"><h2>Incidents </h2> </div>  
-                    <div class="tabbable">
-                        <ul class="nav nav-tabs " data-tabs="tabs">
-                            <li class="active"><a href="#Incident Details" data-toggle="tab">Incident Details</a> </li>
-                            <li><a href="#Call Details" data-toggle="tab">Call Details</a></li>
-                            <li><a href="#Dispatch Vehicle" data-toggle="tab">Dispatch Vehicle</a></li>
-                        </ul>
-            <div class="tab-content" >
-                <div id="Incident" class="tab-pane active">  
-                    <div align="center"><h2>Incidents </h2> </div>  
-                    
-                </div>
-                <div id="BodyFile" class="tab-pane "> 
-                    <div align="center"><h2>Body File </h2> </div>
-                </div>           
-            </div>
-
+                    <div align="center"><h2>Incidents </h2> </div>
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs " data-tabs="tabs">
+                                <li class="active"><a href="#Open Incidents" data-toggle="tab">Open Incidents</a> </li>
+                                <li><a href="#Log Incident" data-toggle="tab">Log Incident</a></li>    
+                                <li><a href="#Edit Incident" data-toggle="tab">Edit Incident</a></li>
+                            </ul>
+                            <div class="tab-content" >
+                                <div id="Open Incidents" class="tab-pane active">  
+                                    <div align="center"><h3>Open Incidents </h3> </div>
+                                 </div>
+                                <div id="Log Incident" class="tab-pane "> 
+                                    <div align="center"><h3>Log Incident </h3> </div>
+                                </div>   
+                                <div id="Edit Incident" class="tab-pane "> 
+                                    <div align="center"><h3>Edit Incident </h3> </div>
+                                </div> 
+                            </div>
                     </div>
+                                          
                 </div>
                 <div id="BodyFile" class="tab-pane "> 
                     <div align="center"><h2>Body File </h2> </div>
+                    
                 </div>           
             </div>
 
