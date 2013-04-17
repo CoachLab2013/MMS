@@ -78,6 +78,9 @@ public class deathCallDb extends DatabaseConnector
      * 
      * @return   
      */
+	  /**
+	  the class below will load all the death call details an arraylist 
+	  */
     
      public  ArrayList<DeathCall> deathCalllList()
       {
