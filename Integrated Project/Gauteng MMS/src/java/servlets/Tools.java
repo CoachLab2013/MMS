@@ -5,7 +5,6 @@
 package servlets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import database.*;
 
 /**
@@ -32,7 +31,7 @@ public class Tools {
      * @param personnelnumber the personnel number of the user
      * @param password the user's password
      */
-    public boolean logIn(String personnelnumber, String password){
+    public int logIn(String personnelnumber, String password){
         //if we have valid inputs then check the database
         if(verifier.checkFormatOfPersonnelNumber(personnelnumber) && !verifier.checkLength(password,0)){
             //now check the database for this user
@@ -43,16 +42,17 @@ public class Tools {
             String status = empdb.read();
             if(status.contains("fail")){
                   this.makeAuditTrail("Warning", "Unsuccessfull log in", personnelnumber);
-                  return false;
+                  return -1;
              }
             else{
                 this.makeAuditTrail("Log In", "Successfull log in", personnelnumber);
-                return true; 
+                int access = Integer.parseInt(status.substring(0, 1));
+                return access; 
             }
         }
         else{
             this.makeAuditTrail("Warning", "Unsuccessfull log in", personnelnumber);
-            return false;
+            return -1;
         } 
         
     }
