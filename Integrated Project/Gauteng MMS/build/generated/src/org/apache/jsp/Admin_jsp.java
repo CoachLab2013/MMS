@@ -1,0 +1,387 @@
+package org.apache.jsp;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.jsp.*;
+
+public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
+    implements org.apache.jasper.runtime.JspSourceDependent {
+
+  private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
+
+  private static java.util.List<String> _jspx_dependants;
+
+  private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
+
+  public java.util.List<String> getDependants() {
+    return _jspx_dependants;
+  }
+
+  public void _jspService(HttpServletRequest request, HttpServletResponse response)
+        throws java.io.IOException, ServletException {
+
+    PageContext pageContext = null;
+    HttpSession session = null;
+    ServletContext application = null;
+    ServletConfig config = null;
+    JspWriter out = null;
+    Object page = this;
+    JspWriter _jspx_out = null;
+    PageContext _jspx_page_context = null;
+
+    try {
+      response.setContentType("text/html;charset=UTF-8");
+      pageContext = _jspxFactory.getPageContext(this, request, response,
+      			null, true, 8192, true);
+      _jspx_page_context = pageContext;
+      application = pageContext.getServletContext();
+      config = pageContext.getServletConfig();
+      session = pageContext.getSession();
+      out = pageContext.getOut();
+      _jspx_out = out;
+      _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
+
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("<html>\n");
+      out.write("    <head>\n");
+      out.write("        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js\"></script>\n");
+      out.write("        <link type=\"text/css\" rel=\"stylesheet\"  href=\"bootstrap/css/bootstrap.css\">           \n");
+      out.write("        <script  src=\"bootstrap/js/bootstrap-tabs.js\"></script>\n");
+      out.write("        <link type=\"text/css\" rel=\"stylesheet\"  href=\"CSS/Design.css\"> \n");
+      out.write(" \n");
+      out.write("        <title>MMS Administration</title>\n");
+      out.write("   \n");
+      out.write("    </head>\n");
+      out.write("    <body>  \n");
+      out.write("        ");
+
+            String userResult = "";
+            String addUserTab = "";
+            String currentUserTab = "";
+            if (null != session.getAttribute("result")) {
+               userResult= session.getAttribute("result").toString();
+                  if (null != session.getAttribute("tab")) {
+               addUserTab= session.getAttribute("tab").toString();                 
+               currentUserTab="";
+             }
+            }else{
+             addUserTab= "";
+             currentUserTab="active";
+            }
+            
+             
+            
+            
+        
+      out.write("\n");
+      out.write("    \n");
+      out.write("        <p>\n");
+      out.write("            <span style=\"float: left\">Welcome Mrs Admin </span>\n");
+      out.write("            <span style=\"float: right\">Logout  .</span>\n");
+      out.write("        </p>\n");
+      out.write("        <div align=\"center\"><h1><img src=\"Images/logo.jpg\" width=\"75\" height=\"75\"> Gauteng MMS Administration</h1></div>\n");
+      out.write("\n");
+      out.write("        ");
+      out.write("\n");
+      out.write("        <div class=\"tabbable\">\n");
+      out.write("            <ul class=\"nav nav-tabs \" data-tabs=\"tabs\">\n");
+      out.write("                <li class=\"active\"><a href=\"#User\" data-toggle=\"tab\">Users</a> </li>\n");
+      out.write("                <li><a href=\"#RefList\" data-toggle=\"tab\">Reference Lists</a></li>       \n");
+      out.write("            </ul>\n");
+      out.write("            ");
+      out.write("\n");
+      out.write("            <div class=\"tab-content\" >\n");
+      out.write("                <div id=\"User\" class=\"tab-pane active\">  \n");
+      out.write("                    <div align=\"center\"><h2>Users </h2> </div>\n");
+      out.write("                    ");
+      out.write("\n");
+      out.write("                    <div class=\"tabbable\">\n");
+      out.write("                        ");
+      out.write("\n");
+      out.write("                        <ul class=\"nav nav-tabs \" data-tabs=\"tabs\">\n");
+      out.write("                            <li class=\"");
+out.println( String.valueOf(currentUserTab));
+      out.write("\"><a href=\"#cUser\" data-toggle=\"tab\">Current Users</a> </li>\n");
+      out.write("                            <li class=\"");
+out.println( String.valueOf(addUserTab));
+      out.write(" \"><a href=\"#aUser\" data-toggle=\"tab\">Add User</a></li>       \n");
+      out.write("                        </ul>\n");
+      out.write("                        \n");
+      out.write("                        <div class=\"tab-content\" >\n");
+      out.write("                            <div id=\"cUser\" class=\"tab-pane ");
+out.println( String.valueOf(currentUserTab));
+      out.write("\">  \n");
+      out.write("                                <div align=\"center\"><h2>Users </h2> </div>\n");
+      out.write("                                ");
+      out.write("\n");
+      out.write("                                <table border=\"1\" class=\"bordered-table\">\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <td width=\"150\"><H4>Name</H4></td>\n");
+      out.write("                                        <td width=\"150\"><H4>Surname</H4></td>\n");
+      out.write("                                        <td width=\"150\"><H4>Personnel number</H4></td>\n");
+      out.write("                                        <td width=\"150\"><H4>Rank/Position<H4></td>\n");
+      out.write("                                                    <td width=\"150\"><H4>Email Address<H4></td>\n");
+      out.write("\n");
+      out.write("                                                                </tr>\n");
+      out.write("                                                                <tr>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("\n");
+      out.write("                                                                </tr>\n");
+      out.write("                                                                <tr>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></td>\n");
+      out.write("                                                                    <td width=\"100\"height=\"30\"><H4></td>\n");
+      out.write("                                                                </tr>\n");
+      out.write("                                                                <tr>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></td>\n");
+      out.write("                                                                    <td width=\"100\"height=\"30\"><H4></td>\n");
+      out.write("                                                                </tr>\n");
+      out.write("                                                                <tr>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></H4></td>\n");
+      out.write("                                                                    <td width=\"100\" height=\"30\"><H4></td>\n");
+      out.write("                                                                    <td width=\"100\"height=\"30\"><H4></td>\n");
+      out.write("                                                                </tr>\n");
+      out.write("                                                                </table>\n");
+      out.write("\n");
+      out.write("                                                                <br>\n");
+      out.write("\n");
+      out.write("                                                                <input type=\"button\" value=\"Deactivate\" onClick=\"Edit()\">\n");
+      out.write("                                                                <input type=\"button\" value=\"Edit\" onClick=\"Edit()\">\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("                                                                </div>\n");
+      out.write("                                                                <div id=\"aUser\" class=\"tab-pane ");
+out.println( String.valueOf( addUserTab));
+      out.write(" \">  \n");
+      out.write("                                                                    ");
+      out.write("\n");
+      out.write("                                                                    <div align=\"center\"><h2>Add User </h2> </div>  \n");
+      out.write("\n");
+      out.write("                                                                    <form name=\"AddUser\" method=\"post\" action=\"ReferenceListServlet\" >\n");
+      out.write("\n");
+      out.write("                                                                        <div class=\"offset2 span7 \">\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddUser\" style=\"visibility: hidden\" />\n");
+      out.write("                                                                            <fieldset>\n");
+      out.write("                                                                                <legend>User Personal Details</legend>\n");
+      out.write("                                                                                <div class=\"control-group form-horizontal\">\n");
+      out.write("\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"firstName\">Full Name(s):</label> \n");
+      out.write("                                                                                    <div class=\"controls\">\n");
+      out.write("                                                                                        <input type=\"text\" name=\"firstName\"  id=\"firstName\"/> \n");
+      out.write("                                                                                    </div>\n");
+      out.write("                                                                                </div>\n");
+      out.write("\n");
+      out.write("                                                                                <div class=\"control-group form-horizontal\">\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"surname\">Surname:</label> \n");
+      out.write("                                                                                    <div class=\"controls\">\n");
+      out.write("                                                                                        <input  type=\"text\" name=\"surname\"  id=\"surname\" />\n");
+      out.write("                                                                                    </div>\n");
+      out.write("                                                                                </div>\n");
+      out.write("\n");
+      out.write("                                                                                <div class=\"control-group form-horizontal\">\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"email\">Email:</label> \n");
+      out.write("                                                                                    <div class=\"controls\">\n");
+      out.write("                                                                                        <input type=\"text\" name=\"email\"  id=\"email\" />\n");
+      out.write("                                                                                    </div>\n");
+      out.write("                                                                                </div>\n");
+      out.write("                                                                            </fieldset>\n");
+      out.write("\n");
+      out.write("                                                                            </br> </br>\n");
+      out.write("\n");
+      out.write("                                                                            <fieldset>\n");
+      out.write("                                                                                <legend>User Employment Details</legend>\n");
+      out.write("                                                                                <div class=\"control-group form-horizontal\">\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"personnelNumber\">Personnel Number:</label>\n");
+      out.write("                                                                                    <div class=\"controls\">\n");
+      out.write("                                                                                        <input type=\"text\" name=\"personnelNumber\"  id=\"personnelNumber\"  />\n");
+      out.write("                                                                                    </div>\n");
+      out.write("                                                                                </div>\n");
+      out.write("\n");
+      out.write("                                                                                <div class=\"control-group form-horizontal\">\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"level\">Access Level:</label>\n");
+      out.write("                                                                                    ");
+      out.write("\n");
+      out.write("                                                                                    <div class=\"controls\">\n");
+      out.write("                                                                                        <select name=\"level\">\n");
+      out.write("                                                                                            <option> '<'select'>'</option>\n");
+      out.write("                                                                                            <option>Supervisor</option>\n");
+      out.write("                                                                                            <option>FPS Officer</option>\n");
+      out.write("                                                                                            <option>Pathologist</option>\n");
+      out.write("                                                                                            <option>Administrator</option>\n");
+      out.write("\n");
+      out.write("                                                                                        </select>\n");
+      out.write("                                                                                    </div>\n");
+      out.write("                                                                                </div>\n");
+      out.write("\n");
+      out.write("                                                                                <div class=\"control-group form-horizontal\">\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"rank\">Rank:</label>\n");
+      out.write("                                                                                    ");
+      out.write("\n");
+      out.write("                                                                                    <div class=\"controls\">\n");
+      out.write("                                                                                        <select name=\"rank\">\n");
+      out.write("                                                                                           \n");
+      out.write("                                                                                           <option> '<'select'>'</option>\n");
+      out.write("                                                                                            <option>Slave</option>\n");
+      out.write("                                                                                            <option>Master</option>\n");
+      out.write("                                                                                        </select>\n");
+      out.write("                                                                                    </div>\n");
+      out.write("                                                                                </div>\n");
+      out.write("\n");
+      out.write("                                                                                <div class=\"control-group form-horizontal\">\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"Active\">Active:</label>\n");
+      out.write("                                                                                    ");
+      out.write("\n");
+      out.write("                                                                                    <div class=\"controls\">\n");
+      out.write("                                                                                        <select name=\"Active\" tabindex=\"1\">\n");
+      out.write("                                                                                            <option>False</option>\n");
+      out.write("                                                                                            <option>True</option>\n");
+      out.write("                                                                                        </select>\n");
+      out.write("                                                                                    </div>\n");
+      out.write("                                                                                </div>\n");
+      out.write("\n");
+      out.write("                                                                            </fieldset>\n");
+      out.write("                                                                            <br/> <br/>                                 \n");
+      out.write("                                                                            <div class=\"offset4\">\n");
+      out.write("                                                                                <input type=\"submit\"  class=\"btn btn-primary\" type=\"button\" value=\"Add User\" /> \n");
+      out.write("                                                                               <label  class=\"control-label \" > ");
+ out.println( String.valueOf( userResult)); 
+      out.write("</label>\n");
+      out.write("                                                                                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <br/> <br/> \n");
+      out.write("\n");
+      out.write("                                                                        </div>\n");
+      out.write("                                                                    </form>\n");
+      out.write("                                                                </div>           \n");
+      out.write("                                                                </div>\n");
+      out.write("\n");
+      out.write("                                                                </div>       \n");
+      out.write("                                                                </div>\n");
+      out.write("                                                                <div id=\"RefList\" class=\"tab-pane \"> \n");
+      out.write("                                                                    ");
+      out.write("\n");
+      out.write("                                                                    <div align=\"center\"><h2>Reference Lists </h2> </div> \n");
+      out.write("                                                                    <div class=\"tabbable\">\n");
+      out.write("                                                                        ");
+      out.write("\n");
+      out.write("                                                                        <ul class=\"nav nav-tabs \" data-tabs=\"tabs\">\n");
+      out.write("\n");
+      out.write("                                                                            <li class=\"active\"><a href=\"#inst\" data-toggle=\"tab\">Institution</a> </li>\n");
+      out.write("                                                                            <li><a href=\"#anlysis\" data-toggle=\"tab\">Type of Analysis</a></li>\n");
+      out.write("                                                                            <li><a href=\"#prop\" data-toggle=\"tab\">Property</a></li>\n");
+      out.write("                                                                            <li><a href=\"#vehicles\" data-toggle=\"tab\">Vehicles</a></li>\n");
+      out.write("                                                                            <li><a href=\"#rank\" data-toggle=\"tab\">Rank</a></li>\n");
+      out.write("                                                                            <li><a href=\"#gender\" data-toggle=\"tab\">Gender</a></li>\n");
+      out.write("                                                                            <li><a href=\"#occupation\" data-toggle=\"tab\">Occupation</a></li>\n");
+      out.write("                                                                            <li><a href=\"#race\" data-toggle=\"tab\">Race</a></li>\n");
+      out.write("                                                                            <li><a href=\"#mStatus\" data-toggle=\"tab\">Marital Status</a></li>\n");
+      out.write("                                                                            <li><a href=\"#org\" data-toggle=\"tab\">Organisation</a></li>\n");
+      out.write("                                                                            <li><a href=\"#province\" data-toggle=\"tab\">Province</a></li>\n");
+      out.write("                                                                            <li><a href=\"#icd10Codes\" data-toggle=\"tab\">ICD10 Codes</a></li>\n");
+      out.write("                                                                            <li><a href=\"#mDeath\" data-toggle=\"tab\">Manner of Death</a></li>\n");
+      out.write("                                                                            <li><a href=\"#sType\" data-toggle=\"tab\">Sample Type</a></li>\n");
+      out.write("                                                                            <li><a href=\"#status\" data-toggle=\"tab\">Status</a></li>\n");
+      out.write("                                                                            <li><a href=\"#relationship\" data-toggle=\"tab\">Relationship</a></li>\n");
+      out.write("\n");
+      out.write("                                                                        </ul>\n");
+      out.write("                                                                        <div class=\"tab-content\" >\n");
+      out.write("                                                                            <div id=\"inst\" class=\"tab-pane active\">  \n");
+      out.write("                                                                                <div align=\"center\"><h2>Institution </h2> </div>\n");
+      out.write("                                                                            </div>\n");
+      out.write("                                                                            <div id=\"anlysis\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Type of Analysis </h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"prop\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Property</h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"vehicles\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Vehicles</h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"rank\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Rank</h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"gender\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Gender</h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"occupation\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Occupation</h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"race\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Race </h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"mStatus\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Marital Status </h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"org\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2> Organisation </h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"province\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2> Province </h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"icd10Codes\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>ICD10 Codes </h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"mDeath\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2> Manner of Death</h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"sType\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Sample Type</h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"status\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Status</h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("\n");
+      out.write("                                                                            <div id=\"relationship\" class=\"tab-pane \"> \n");
+      out.write("                                                                                <div align=\"center\"><h2>Relationship</h2> </div>                   \n");
+      out.write("                                                                            </div>\n");
+      out.write("                                                                        </div>\n");
+      out.write("\n");
+      out.write("                                                                    </div> \n");
+      out.write("                                                                </div>           \n");
+      out.write("                                                                </div>\n");
+      out.write("\n");
+      out.write("                                                                </div>\n");
+      out.write("\n");
+      out.write("                                                                </body>\n");
+      out.write("                                                                </html>\n");
+    } catch (Throwable t) {
+      if (!(t instanceof SkipPageException)){
+        out = _jspx_out;
+        if (out != null && out.getBufferSize() != 0)
+          out.clearBuffer();
+        if (_jspx_page_context != null) _jspx_page_context.handlePageException(t);
+        else throw new ServletException(t);
+      }
+    } finally {
+      _jspxFactory.releasePageContext(_jspx_page_context);
+    }
+  }
+}
