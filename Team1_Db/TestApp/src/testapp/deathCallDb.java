@@ -4,7 +4,9 @@
  */
 package testapp;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * 
@@ -59,7 +61,7 @@ public class deathCallDb extends DatabaseConnector
                                     + deathCall.getSceneCondition()+ "','"
                                     + deathCall.getnameOfCaller()+"')");
             statement.close();
-            connection.close();
+            connection.close(); //deathCall
         } 
         catch (SQLException ex)  
         {
@@ -74,9 +76,47 @@ public class deathCallDb extends DatabaseConnector
     }
     /**
      * 
-     * @return 
+     * @return   
      */
-
+	  /**
+	  the class below will load all the death call details an arraylist 
+	  */
+    
+     public  ArrayList<DeathCall> deathCalllList()
+      {
+         ArrayList<DeathCall> list = new ArrayList<DeathCall>();
+         try 
+         {
+            statement.executeQuery("SELECT * FROM deathcall");
+            DeathCall dCall= null;
+            try (ResultSet resultSet = statement.getResultSet()) 
+            {
+               while(resultSet.next())
+               {
+                  dCall= new DeathCall ();
+                  dCall.setTimeofCall(resultSet.getString("timeOfCall"));
+                 dCall.setNumberCallMade(resultSet.getString("numberCallMade"));
+                  dCall.setInstitution(resultSet.getString("institution"));
+                 dCall.setSceneAddress(resultSet.getString("sceneAddress"));
+                  dCall.setProvince(resultSet.getString("province"));
+		 dCall.setRegion(resultSet.getString("region"));
+		 dCall.setSceneCondition(resultSet.getString("sceneConditions"));
+                  dCall.setnameOfCaller(resultSet.getString("nameOfCaller"));
+                 
+                  list.add(dCall);
+               }
+            }
+            statement.close();
+            connection.close();
+         } 
+            catch (SQLException ex) 
+            {
+               System.out.println("fail " + ex.getMessage());
+            }
+       
+         return list;
+      }
+   
     @Override
     public String read() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
