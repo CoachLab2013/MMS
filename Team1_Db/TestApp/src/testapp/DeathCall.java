@@ -93,9 +93,10 @@ public String getSceneCondition()
 {
     return sceneCondition;
 }
-
-
-
+public void setSceneCondition(String sceneCondition)
+{
+    this.sceneCondition=sceneCondition;
+}
 public void setTimeofCall(String timeOfCall)
 {
     this.timeOfCall = timeOfCall;

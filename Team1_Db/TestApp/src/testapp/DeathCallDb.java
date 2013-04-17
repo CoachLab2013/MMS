@@ -13,18 +13,18 @@ import java.util.ArrayList;
  * @author Innovation Hub
  * @JCSE
  */
-public class deathCallDb extends DatabaseConnector
+public class DeathCallDb extends DatabaseConnector
 {
      private DeathCall deathCall;
      
-        public deathCallDb(DeathCall deathCall , DbDetail dbDetail)
+        public DeathCallDb(DeathCall deathCall , DbDetail dbDetail)
       {
          super(dbDetail);
          this.deathCall = deathCall;
       
       }
         
-         public deathCallDb(DbDetail dbDetail)
+         public DeathCallDb(DbDetail dbDetail)
       {
          super(dbDetail);
          deathCall = null;
@@ -95,14 +95,13 @@ public class deathCallDb extends DatabaseConnector
                {
                   dCall= new DeathCall ();
                   dCall.setTimeofCall(resultSet.getString("timeOfCall"));
-                 dCall.setNumberCallMade(resultSet.getString("numberCallMade"));
+                  dCall.setNumberCallMade(resultSet.getString("numberCallMade"));
                   dCall.setInstitution(resultSet.getString("institution"));
-                 dCall.setSceneAddress(resultSet.getString("sceneAddress"));
+                  dCall.setSceneAddress(resultSet.getString("sceneAddress"));
                   dCall.setProvince(resultSet.getString("province"));
-		 dCall.setRegion(resultSet.getString("region"));
-		 dCall.setSceneCondition(resultSet.getString("sceneConditions"));
+		  dCall.setRegion(resultSet.getString("region"));
+		  dCall.setSceneCondition(resultSet.getString("sceneConditions"));
                   dCall.setnameOfCaller(resultSet.getString("nameOfCaller"));
-                 
                   list.add(dCall);
                }
             }
