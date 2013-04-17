@@ -4,6 +4,7 @@
  */
 package testapp;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -19,25 +20,26 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) 
+    public static void main(String[] args) throws SQLException 
     {
         
         //add user
         /*Employee emp = new Employee("12345678","1234", "john","smith", "manager", 1, "200935415@student.uj.ac.za",true);
-        DatabaseConnector empDb = new EmployeeDb(emp,"root","hello", "localhost","/mydb");
+        DatabaseConnector empDb = new EmployeeDb(emp,dbDetail);
         boolean status = empDb.init();
         System.out.println(empDb.add());*/
         
         //user login
-       /* EmployeeDb empDb = new EmployeeDb(new Employee("00000000","1234")/*,"Chester","Cobus","ADMIN",1,"cacobus15@gmail.com",true),"root","hello", "localhost","/mydb");
-        empDb.init(); */
+        //EmployeeDb empDb = new EmployeeDb(new Employee("12345678","1234"),dbDetail);
+        //empDb.init(); 
         
         //System.out.println(empDb.delete());
         //System.out.println(empDb.edit());
+        //System.out.println(empDb.read());
         
        /*
         * 
-        * System.out.println(empDb.read());
+        * 
         empDb.init();
         //EmployeeDb empDb = new EmployeeDb(new Employee("00000000","1234","Chester","Cobus","ADMIN",1,"cacobus15@gmail.com",true),"root","hello", "localhost","/mydb");
         //empDb.init();
@@ -60,8 +62,8 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello
         
         //TESTING ORGANIZATION STUFF:
         //connection
-        OrganizationDb orgDb = new OrganizationDb(new Organization("TestHospital2", "0118677778", "Hospital"), dbDetail);
-        orgDb.init();
+        //OrganizationDb orgDb = new OrganizationDb(new Organization("TestHospital2", "0118677778", "Hospital"), dbDetail);
+        //orgDb.init();
         
         /*//adding organization
         System.out.println(orgDb.add());*/
@@ -100,5 +102,22 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello
          AuditDb.init();
          System.out.println(AuditDb.add());*/
         //END OF DEATHCALL STUFF
+        
+        //Add Vehicle and Driver
+        DatabaseConnector db= null;//new VehicleDb(new Vehicle("TVD702", 4),dbDetail);
+        /*db.init();
+        /*System.out.println(db.add());*/
+        VehicleDb vehicleDb = (VehicleDb)db;
+        vehicleDb  = new VehicleDb(new Vehicle("BHSN54",6),dbDetail);
+        vehicleDb .init();
+        System.out.println(vehicleDb.assignDriver(new Driver(2,null,null)));
+        //
+        /*ArrayList<Vehicle> list = vehicleDb.vehicleList();
+        for(int i = 0;i < list.size();i++)
+        {
+            System.out.println(list.get(i).getRegistrationNumber() + " " + list.get(i).getCrew());
+        }*/
+        //System.out.println(db.add());
+        
     }
 }

@@ -165,25 +165,27 @@ public class ReferenceListDb extends DatabaseConnector
         }
         return "successful";
     }
-    public  ArrayList<String> employeeList()
+    /**
+     * 
+     * @return list of strings of the reference list
+     */
+    public  ArrayList<String> referenceList() throws SQLException
     {
         ArrayList<String> reflist = new ArrayList<String>();
         try 
         {
             statement.executeQuery("select "+field2 + " from "+ tableName+ ";");
-            try (ResultSet resultSet = statement.getResultSet()) 
+            ResultSet resultSet = statement.getResultSet();
+            while(resultSet.next())
             {
-                while(resultSet.next())
-                {
-                    reflist.add(resultSet.getString(field2));
-                }
+                reflist.add(resultSet.getString(field2));
             }
             statement.close();
             connection.close();
         } 
         catch (SQLException ex) 
         {
-            reflist.add("failed "+ex.getMessage());
+            throw new SQLException(ex.getMessage());
         }
         return reflist;
     }

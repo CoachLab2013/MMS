@@ -63,7 +63,7 @@ import java.util.ArrayList;
       
       
       }
-      public  ArrayList<AuditTrail> AuditTrailList()
+      public  ArrayList<AuditTrail> AuditTrailList() throws SQLException
       {
          ArrayList<AuditTrail> list = new ArrayList<>();
          try 
@@ -88,7 +88,7 @@ import java.util.ArrayList;
          } 
             catch (SQLException ex) 
             {
-               System.out.println("fail " + ex.getMessage());
+               throw new SQLException(ex.getMessage());
             }
          return list;
       }

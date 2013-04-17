@@ -31,10 +31,9 @@ public class OrganizationDb extends DatabaseConnector{
             statement.executeUpdate("INSERT INTO Organization VALUES ()");
             statement.executeQuery("SELECT MAX(idOrganization) as latestID FROM Organization" );
             int newID;
-            try (ResultSet resultSet = statement.getResultSet()){
-                resultSet.next();
-                newID = resultSet.getInt("latestID");
-            }
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            newID = resultSet.getInt("latestID");
             statement.executeUpdate("INSERT INTO " + organization.getType() + " (Organization_idOrganization, name, contactNumber) VALUES ( '" + newID + "', '" + organization.getName() +"', '" + organization.getContactNumber() + "' )");
             statement.close();
             connection.close(); 
@@ -56,11 +55,9 @@ public class OrganizationDb extends DatabaseConnector{
         try 
         {
             statement.executeQuery("SELECT idOrganization FROM Organization;");
-            try (ResultSet resultSet = statement.getResultSet()) 
-            {
-                resultSet.next();
-                organization.setIdOrganization(Integer.parseInt(resultSet.getString("idOrganization")));
-            }
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            organization.setIdOrganization(Integer.parseInt(resultSet.getString("idOrganization")));
             statement.close();
             connection.close();
         } 
@@ -78,56 +75,48 @@ public class OrganizationDb extends DatabaseConnector{
         try 
         {
             statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM Hospital;");
-            try (ResultSet resultSet = statement.getResultSet()) 
+            ResultSet resultSet = statement.getResultSet();
+            while(resultSet.next())
             {
-                while(resultSet.next())
-                {
-                    Organization org = new Organization();
-                    org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
-                    org.setName(resultSet.getString("name"));
-                    org.setContactNumber(resultSet.getString("contactNumber"));
-                    org.setType("Hospital");
-                    list.add(org);
-                }
+                Organization org = new Organization();
+                org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
+                org.setName(resultSet.getString("name"));
+                org.setContactNumber(resultSet.getString("contactNumber"));
+                org.setType("Hospital");
+                list.add(org);
             }
             statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM PathologyUnit;");
-            try (ResultSet resultSet = statement.getResultSet()) 
+            resultSet = statement.getResultSet();
+            while(resultSet.next())
             {
-                while(resultSet.next())
-                {
                     Organization org = new Organization();
                     org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
                     org.setName(resultSet.getString("name"));
                     org.setContactNumber(resultSet.getString("contactNumber"));
                     org.setType("PathologyUnit");
                     list.add(org);
-                }
             }
             statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM SamlpeLab;");
-            try (ResultSet resultSet = statement.getResultSet()) 
+            resultSet = statement.getResultSet();
+            while(resultSet.next())
             {
-                while(resultSet.next())
-                {
-                    Organization org = new Organization();
-                    org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
-                    org.setName(resultSet.getString("name"));
-                    org.setContactNumber(resultSet.getString("contactNumber"));
-                    org.setType("SampleLab");
-                    list.add(org);
-                }
+                Organization org = new Organization();
+                org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
+                org.setName(resultSet.getString("name"));
+                org.setContactNumber(resultSet.getString("contactNumber"));
+                org.setType("SampleLab");
+                list.add(org);
             }
             statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM PoliceStation;");
-            try (ResultSet resultSet = statement.getResultSet()) 
+            resultSet = statement.getResultSet();
+            while(resultSet.next())
             {
-                while(resultSet.next())
-                {
-                    Organization org = new Organization();
-                    org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
-                    org.setName(resultSet.getString("name"));
-                    org.setContactNumber(resultSet.getString("contactNumber"));
-                    org.setType("PoliceStation");
-                    list.add(org);
-                }
+                Organization org = new Organization();
+                org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
+                org.setName(resultSet.getString("name"));
+                org.setContactNumber(resultSet.getString("contactNumber"));
+                org.setType("PoliceStation");
+                list.add(org);
             }
             statement.close();
             connection.close();
