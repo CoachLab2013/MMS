@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 public class OrganizationDb extends DatabaseConnector{
     private Organization organization;
-    public OrganizationDb(String n, String p, String u, String d, Organization o){
-        super(n, p, u, d);
+    public OrganizationDb(Organization inOrganization, DbDetail dbDetail){
+        super(dbDetail);
         
-        this.organization = o;
+        this.organization = inOrganization;
     }
     @Override
     public String add(){

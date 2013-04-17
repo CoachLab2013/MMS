@@ -15,16 +15,16 @@ public class deathCallDb extends DatabaseConnector
 {
      private DeathCall deathCall;
      
-        public deathCallDb(DeathCall deathCall , String username , String password , String url , String dbName)
+        public deathCallDb(DeathCall deathCall , DbDetail dbDetail)
       {
-         super(username,password,url,dbName);
+         super(dbDetail);
          this.deathCall = deathCall;
       
       }
         
-         public deathCallDb(String username , String password , String url , String dbName)
+         public deathCallDb(DbDetail dbDetail)
       {
-         super(username,password,url,dbName);
+         super(dbDetail);
          deathCall = null;
       
       }

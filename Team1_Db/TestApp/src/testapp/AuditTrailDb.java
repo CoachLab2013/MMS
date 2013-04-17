@@ -11,16 +11,16 @@ import java.util.ArrayList;
       private AuditTrail auditTrail;
        
    
-      public AuditTrailDb(AuditTrail auditTrail , String username , String password , String url , String dbName)
+      public AuditTrailDb(AuditTrail auditTrail, DbDetail dbDetail)
       {
-         super(username,password,url,dbName);
+         super(dbDetail);
          this.auditTrail = auditTrail;
       
       }
       
-      public AuditTrailDb(String username , String password , String url , String dbName)
+      public AuditTrailDb(DbDetail dbDetail)
       {
-         super(username,password,url,dbName);
+         super(dbDetail);
          auditTrail = null;
       
       }

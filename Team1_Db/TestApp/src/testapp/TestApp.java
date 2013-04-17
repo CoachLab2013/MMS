@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class TestApp {
-public DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello");
+public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello");
     /**
      * @param args the command line arguments
      */
@@ -60,7 +60,7 @@ public DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello");
         
         //TESTING ORGANIZATION STUFF:
         //connection
-        OrganizationDb orgDb = new OrganizationDb("root","password123","localhost","/mydb", new Organization("TestHospital2", "0118677778", "Hospital"));
+        OrganizationDb orgDb = new OrganizationDb(new Organization("TestHospital2", "0118677778", "Hospital"), dbDetail);
         orgDb.init();
         
         /*//adding organization
