@@ -14,11 +14,16 @@ import java.util.ArrayList;
  */
 public class OrganizationDb extends DatabaseConnector{
     private Organization organization;
+    //CONSTUCTOR
     public OrganizationDb(Organization inOrganization, DbDetail dbDetail){
         super(dbDetail);
         
         this.organization = inOrganization;
     }
+    
+    //DATABASE METHODS
+    
+    //function to add an organization to the appropiate tables
     @Override
     public String add(){
         try 
@@ -60,7 +65,7 @@ public class OrganizationDb extends DatabaseConnector{
         {
             return "fail " + ex.getMessage();
         }
-        return "added to organization table";
+        return "read from organization table successful";
     }
     
     //Function to read all the organizations from the database and return them in a list for displaying
@@ -123,6 +128,7 @@ public class OrganizationDb extends DatabaseConnector{
         return list;
     }
     
+    //function(s) to edit the details of a specific organization
     @Override
     public String edit(){
         return "never implemented";
@@ -141,6 +147,7 @@ public class OrganizationDb extends DatabaseConnector{
         return "Update Successful";
     }
     
+    //function(s) to delete an organization from the appropriate tables
     @Override
     public String delete(){
         return "never implemented";
@@ -160,4 +167,4 @@ public class OrganizationDb extends DatabaseConnector{
         }
         return "Deleted Item from Organization and " + inType ;
     }
-}
+}//
