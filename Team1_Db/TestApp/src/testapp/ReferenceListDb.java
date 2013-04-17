@@ -17,26 +17,26 @@ public class ReferenceListDb extends DatabaseConnector
     private String data;
     private String tableName, field1, field2;
     private int id;
-    public ReferenceListDb(String username,String password,String url,String dbName)
+    public ReferenceListDb(DbDetail dbDetail)
     {
-        super(username,password,url,dbName);
+        super(dbDetail);
         data = "";
         tableName = "";
         field1 = "";
         field2 = "";
         id = 0;
     }
-    public ReferenceListDb(String tableName,String field1,String field2,String data,String username,String password,String url,String dbName)
+    public ReferenceListDb(String tableName,String field1,String field2,String data, DbDetail dbDetail)
     {
-        super(username,password,url,dbName);
+        super(dbDetail);
         this.data = data;
         this.tableName = tableName;
         this.field1 = field1;
         this.field2 = field2;
     }
-    public ReferenceListDb(String tableName,String field1,String field2,String data,int id,String username,String password,String url,String dbName)
+    public ReferenceListDb(String tableName,String field1,String field2,String data,int id, DbDetail dbDetail)
     {
-        super(username,password,url,dbName);
+        super(dbDetail);
         this.data = data;
         this.tableName = tableName;
         this.field1 = field1;

@@ -4,22 +4,23 @@
    */
    package testapp;
    import java.sql.*;
+import java.util.ArrayList;
    class AuditTrailDb extends DatabaseConnector
    {
    
       private AuditTrail auditTrail;
        
    
-      public AuditTrailDb(AuditTrail auditTrail , String username , String password , String url , String dbName)
+      public AuditTrailDb(AuditTrail auditTrail, DbDetail dbDetail)
       {
-         super(username,password,url,dbName);
+         super(dbDetail);
          this.auditTrail = auditTrail;
       
       }
       
-      public AuditTrailDb(String username , String password , String url , String dbName)
+      public AuditTrailDb(DbDetail dbDetail)
       {
-         super(username,password,url,dbName);
+         super(dbDetail);
          auditTrail = null;
       
       }
@@ -44,7 +45,7 @@
       
          try   
          { 
-            statement.executeUpdate("insert into audittrail (date,time,eventType,eventMessge,currentUser)" + " values"
+            statement.executeUpdate("INSERT INTO audittrail (date,time,eventType,eventMessge,currentUser)" + " VALUES"
                                     +"('" 
                                     +auditTrail.getDate() + "','" 
                                     + auditTrail.getTime() + "','"
@@ -64,16 +65,15 @@
       }
       public  ArrayList<AuditTrail> AuditTrailList()
       {
-         ArrayList<AuditTrail> list = new ArrayList<AuditTrail>();
+         ArrayList<AuditTrail> list = new ArrayList<>();
          try 
          {
             statement.executeQuery("SELECT * FROM  audittrail");
-            AuditTrail auditTr = null;
             try (ResultSet resultSet = statement.getResultSet()) 
             {
                while(resultSet.next())
                {
-                  auditTr = new AuditTrail ();
+                  AuditTrail auditTr = new AuditTrail ();
                   auditTr .setDate(resultSet.getString("date"));
                   auditTr .SetTime(resultSet.getString("time"));
                   auditTr .setEventType(resultSet.getString("eventType"));

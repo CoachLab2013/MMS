@@ -20,12 +20,12 @@ public abstract class DatabaseConnector
     private String password;
     protected Connection connection;
     protected Statement statement;
-    public DatabaseConnector(String username,String password,String url,String dbName)
+    public DatabaseConnector(DbDetail dbDetail)
     {
-        this.username = username;
-        this.password = password;
-        this.url = url;
-        this.dbName = dbName;
+        this.username = dbDetail.getUsername();
+        this.password = dbDetail.getPassword();
+        this.url = dbDetail.getUrl();
+        this.dbName = dbDetail.getDbName();
     }
     public boolean init()
     {
@@ -44,6 +44,6 @@ public abstract class DatabaseConnector
     }
     public abstract String add();
     public abstract String read(); 
-    public abstract String edit();
-    public abstract String delete();
+    public abstract String edit(); //not needed here
+    public abstract String delete(); //not needed here
 }

@@ -24,9 +24,9 @@ public class EmployeeDb extends DatabaseConnector
      * @param url the location of the database specified by the IP address or domain name
      * @param dbName the database name in the stored on the server
      */
-    public EmployeeDb(Employee employee,String username,String password,String url,String dbName)
+    public EmployeeDb(Employee employee, DbDetail dbDetail)
     {
-        super(username, password, url, dbName);
+        super(dbDetail);
         this.employee = employee;
     }
     /**
@@ -36,9 +36,9 @@ public class EmployeeDb extends DatabaseConnector
      * @param url the location of the database specified by the IP address or domain name
      * @param dbName the database name in the stored on the server
      */
-    public EmployeeDb(String username,String password,String url,String dbName)
+    public EmployeeDb(DbDetail dbDetail)
     {
-        super(username, password, url, dbName);
+        super(dbDetail);
         employee = null;
     }
     /**
