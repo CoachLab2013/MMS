@@ -23,7 +23,7 @@
             <div align="center">
                 <img src="Images/logo.jpg" width="150" height="150">
             </div>
-            <br/>
+            
             <form name="login" method="post" action="LogInServlet" class="form-horizontal" >
                
                 <div class="offset5  span7 ">
