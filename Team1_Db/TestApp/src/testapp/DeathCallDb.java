@@ -117,18 +117,21 @@ public class DeathCallDb extends DatabaseConnector
       }
    
     @Override
-    public String read() {
+    public String read() 
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     // code below added by bandile because netbeans is complaining
      @Override
-    public String delete(){
+    public String delete()
+    {
         return "never implemented";
     }
     
      @Override
-     public String edit(){
+     public String edit()
+     {
          return "never implemented";
      }
     

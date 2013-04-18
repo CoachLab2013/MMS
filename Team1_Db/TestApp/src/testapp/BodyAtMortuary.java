@@ -10,5 +10,12 @@ package testapp;
  */
 public class BodyAtMortuary extends Body
 {
-    
+    public BodyAtMortuary()
+    {
+        
+    }
+    public void bodyWasAtScene(BodyAtScene atScene)
+    {
+        
+    }
 }
