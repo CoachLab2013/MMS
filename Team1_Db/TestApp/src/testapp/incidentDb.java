@@ -75,7 +75,13 @@ public class IncidentDb extends DatabaseConnector
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
     public String edit(){
+        return "";
+    }
+    
+    @Override
+    public String delete(){
         return "";
     }
     
