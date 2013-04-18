@@ -40,7 +40,7 @@ public class VehicleDispatchDb extends DatabaseConnector {
         }
         catch (Exception ex)
         {
-            return "error" + ex.getMessage();
+            return "error " + ex.getMessage();
         }
         return "Added Vehicle Dispatch Details";
     }

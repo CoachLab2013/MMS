@@ -24,8 +24,8 @@ public class VehicleDispatch {
         this.vehicle = new Vehicle();
     }
     
-    public VehicleDispatch(int inIdVehicleDispatch, String inNotificationDateTime, String inDepartureDateTime, String inDispatchMessage, Vehicle inVehicle ){
-        this.idVehicleDispatch = inIdVehicleDispatch;
+    public VehicleDispatch(String inNotificationDateTime, String inDepartureDateTime, String inDispatchMessage, Vehicle inVehicle ){
+        //this.idVehicleDispatch = inIdVehicleDispatch;
         this.notificationDateTime = inNotificationDateTime;
         this.departureDateTime = inDepartureDateTime;
         this.dispatchMessage = inDispatchMessage;
