@@ -76,4 +76,13 @@ p { padding-left: 15px; }
     font-weight: bold;
 }
 label{ width: auto}
- 
+
+ .label-required   {
+
+    color: #e32;
+
+    content: '*';
+
+    display:inline;
+
+}
