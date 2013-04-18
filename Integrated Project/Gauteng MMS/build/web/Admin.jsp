@@ -8,42 +8,41 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        
+    <head>        
         <title>MMS Administration</title>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
         <script src="bootstrap/js/bootstrap-tabs.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link type="text/css" rel="stylesheet"  href="CSS/Design.css">
         <script src="js/jquery-1.7.1.min.js"></script>
         <script src="js/jquery.validate.min.js"></script>
-       <script src="js/script.js"></script>
-         <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
+        <script src="js/script.js"></script>
+        <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
     </head>
     <body>  
-      
+
 
         <%
             String userResult = "";
             String addUserTab = "";
             String currentUserTab = "";
             if (null != session.getAttribute("result")) {
-               userResult= session.getAttribute("result").toString();
-                  if (null != session.getAttribute("tab")) {
-               addUserTab= session.getAttribute("tab").toString();                 
-               currentUserTab="";
-             }
-            }else{
-             addUserTab= "";
-             currentUserTab="active";
+                userResult = session.getAttribute("result").toString();
+                if (null != session.getAttribute("tab")) {
+                    addUserTab = session.getAttribute("tab").toString();
+                    currentUserTab = "";
+                }
+            } else {
+                addUserTab = "";
+                currentUserTab = "active";
             }
-            
-             
-            
-            
+
+
+
+
         %>
-    
+
         <p>
             <span style="float: left">Welcome Mrs Admin </span>
             <span style="float: right">Logout  .</span>
@@ -64,12 +63,12 @@
                     <div class="tabbable">
                         <%-- Users tab has 2 tabs, and they are the following --%>
                         <ul class="nav nav-tabs " data-tabs="tabs">
-                            <li class="<%out.println( String.valueOf(currentUserTab));%>"><a href="#cUser" data-toggle="tab">Current Users</a> </li>
-                            <li class="<%out.println( String.valueOf(addUserTab));%> "><a href="#aUser" data-toggle="tab">Add User</a></li>       
+                            <li class="<%out.println(String.valueOf(currentUserTab));%>"><a href="#cUser" data-toggle="tab">Current Users</a> </li>
+                            <li class="<%out.println(String.valueOf(addUserTab));%> "><a href="#aUser" data-toggle="tab">Add User</a></li>       
                         </ul>
-                        
+
                         <div class="tab-content" >
-                            <div id="cUser" class="tab-pane <%out.println( String.valueOf(currentUserTab));%>">  
+                            <div id="cUser" class="tab-pane <%out.println(String.valueOf(currentUserTab));%>">  
                                 <div align="center"><h2>Users </h2> </div>
                                 <%--  Current user content --%>
                                 <table border="1" class="bordered-table">
@@ -119,7 +118,7 @@
 
 
                                                                 </div>
-                                                                <div id="aUser" class="tab-pane <%out.println( String.valueOf( addUserTab));%> ">  
+                                                                <div id="aUser" class="tab-pane <%out.println(String.valueOf(addUserTab));%> ">  
                                                                     <%--  Add user content --%>
                                                                     <div align="center"><h2>Add User </h2> </div>  
 
@@ -130,7 +129,7 @@
                                                                             <fieldset>
                                                                                 <legend>User Personal Details</legend>
                                                                                 <div class="control-group   error">
-                                                                                                                                
+
                                                                                     <label  class="control-label  " id="firstName"   for="firstName">Full Name(s):</label> 
                                                                                     <div class="controls">
                                                                                         <input type="text" name="firstName"  id="firstName"  /> 
@@ -168,7 +167,7 @@
                                                                                     <%-- Drop down list for occupation --%>
                                                                                     <div class="controls">
                                                                                         <select name="level" id="Level">
-                                                                                            <option value=""> <% out.println( String.valueOf("-Please Select-")); %></option>
+                                                                                            <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
                                                                                             <option value="1">Supervisor</option>
                                                                                             <option value="2">FPS Officer</option>
                                                                                             <option value="3">Pathologist</option>
@@ -178,13 +177,13 @@
                                                                                     </div>
                                                                                 </div>
 
-                  
+
                                                                                 <div class="control-group error ">
                                                                                     <label  class="control-label" for="Active">Active:</label>
                                                                                     <%-- Drop down list for rank --%>
                                                                                     <div class="controls">
                                                                                         <select name="Active" tabindex="1" id="Active">
-                                                                                             <option value=""> <% out.println( String.valueOf("-Please Select-")); %></option>
+                                                                                            <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
                                                                                             <option value="0">False</option>
                                                                                             <option value="1">True</option>
                                                                                         </select>
@@ -195,8 +194,8 @@
                                                                             <br/> <br/>                                 
                                                                             <div class="offset4">
                                                                                 <input type="submit"  class="btn btn-primary" type="button" value="Add User" /> 
-                                                                               <label  class="control-label " > <% out.println( String.valueOf( userResult)); %></label>
-                                                                                   
+                                                                                <label  class="control-label " > <% out.println(String.valueOf(userResult));%></label>
+
                                                                             </div>
 
                                                                             <br/> <br/> 
@@ -236,6 +235,28 @@
                                                                         <div class="tab-content" >
                                                                             <div id="inst" class="tab-pane active">  
                                                                                 <div align="center"><h2>Institution </h2> </div>
+
+                                                                                <div class="offset2 ">
+                                                                                    <div class="control-group form-horizontal">
+                                                                                        <label class="control-label" for="txtInsitution">Institution Name:</label>
+                                                                                        <div class="controls">
+                                                                                            <input type="text" id="txtInsitution" name="txtInsitution" value="" />
+                                                                                            <input type="submit" value="Add Institution" name="cmdInsitution" />
+                                                                                        </div>
+
+                                                                                        <br/>  </div>
+
+                                                                                    <label class="control-label" for="InsitutionList">Current Institutions:</label>
+
+                                                                                    <select id="InsitutionList" name="InsitutionList" size="5">
+                                                                                        <option> </option>
+                                                                                        <option> </option>
+                                                                                        <option> </option>
+                                                                                        <option> </option>
+                                                                                        <option> </option>
+                                                                                    </select>
+
+                                                                                </div>     
                                                                             </div>
                                                                             <div id="anlysis" class="tab-pane "> 
                                                                                 <div align="center"><h2>Type of Analysis </h2> </div>                   
@@ -303,6 +324,6 @@
                                                                 </div>
 
                                                                 </div>
-      
+
                                                                 </body>
                                                                 </html>
