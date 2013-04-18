@@ -9,10 +9,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+            <style type="text/css">
+                label.error { 
+                    float: none; 
+                    color: red; 
+                    padding-left: .5em; 
+                    vertical-align: top; 
+                }
+            </style>
+<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+            <script src="js/LoginScript.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
- 
         <title>Gauteng Mortuary Management System</title>
     </head>
     <body>
@@ -31,25 +40,7 @@
             </ul>
             <div class="tab-content" >
                 <div id="Incident" class="tab-pane active">  
-                    <div align="center"><h2>Incidents </h2> </div>
-                        <div class="tabbable">
-                            <ul class="nav nav-tabs " data-tabs="tabs">
-                                <li class="active"><a href="#Open Incidents" data-toggle="tab">Open Incidents</a> </li>
-                                <li><a href="#Log Incident" data-toggle="tab">Log Incident</a></li>    
-                                <li><a href="#Edit Incident" data-toggle="tab">Edit Incident</a></li>
-                            </ul>
-                            <div class="tab-content" >
-                                <div id="Open Incidents" class="tab-pane active">  
-                                    <div align="center"><h3>Open Incidents </h3> </div>
-                                 </div>
-                                <div id="Log Incident" class="tab-pane "> 
-                                    <div align="center"><h3>Log Incident </h3> </div>
-                                </div>   
-                                <div id="Edit Incident" class="tab-pane "> 
-                                    <div align="center"><h3>Edit Incident </h3> </div>
-                                </div> 
-                            </div>
-                    </div>
+                       <jsp:include page="IncidentsTabContent.jsp" /> 
                                           
                 </div>
                 <div id="BodyFile" class="tab-pane "> 

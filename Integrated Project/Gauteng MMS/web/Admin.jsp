@@ -38,10 +38,6 @@
              addUserTab= "";
              currentUserTab="active";
             }
-            
-             
-            
-            
         %>
     
         <p>
