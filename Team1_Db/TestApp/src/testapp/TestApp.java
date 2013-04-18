@@ -125,11 +125,28 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello
         
         
         //TESTING INCIDENT
-         /*//String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
-        Incident inci = new  Incident("incident number","refe" ,2,"10/10/10","12:43:23" , "circumstance of death", "place body found", "specialCircumstances");
-        IncidentDb inciDb = new IncidentDb(inci,"root","200971082","localhost","/mydb");
+         //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
+        Incident inci = new  Incident("001234444","refe" ,2,"10/10/10","12:43:23" , "circumstance of death", "place body found", "specialCircumstances","",2,false);
+        IncidentDb inciDb = new IncidentDb(inci,dbDetail);
         inciDb.init();
-        System.out.println(inciDb.add());*/
+        ArrayList<Incident> list = inciDb.incidentList();
+        for(int i = 0;i < list.size();i++)
+        {
+            System.out.println(list.get(i).getIncidentLogNumber());
+        }
+        //System.out.println(inciDb.add());
         //END OF INCIDENT STUFF
+        
+        //TEST INCIDENT MESSAGE
+        /*IncidentMessage msg = new IncidentMessage("2013-04-17","11:29:00","Stabbed","John",false,false);
+        IncidentMessageDb db = new IncidentMessageDb(msg, dbDetail);
+        db.init();
+        //System.out.println(db.add());
+        ArrayList<IncidentMessage> list = db.messageList();
+        for(int i = 0;i < list.size();i++)
+        {
+            System.out.println(list.get(i).getMannerOfDeath());
+        }*/
+        //END OF INCIDENT MESSAGE
     }
 }

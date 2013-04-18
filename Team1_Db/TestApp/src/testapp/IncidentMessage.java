@@ -15,7 +15,7 @@ public class IncidentMessage
     private String mannerOfDeath;
     private String nameOfDeceased;
     private boolean vip;
-    private boolean caseStatus;
+    private boolean bodyFileStatus;
     public IncidentMessage()
     {
         
@@ -29,14 +29,14 @@ public class IncidentMessage
      * @param vip
      * @param caseStatus 
      */
-    public IncidentMessage(String date,String time,String mannerOfDeath,String nameOfDeceased,boolean vip,boolean caseStatus)
+    public IncidentMessage(String date,String time,String mannerOfDeath,String nameOfDeceased,boolean vip,boolean bodyFileStatus)
     {
         this.date = date;
         this.time = time;
         this.mannerOfDeath = mannerOfDeath;
         this.nameOfDeceased = nameOfDeceased;
         this.vip = vip;
-        this.caseStatus = caseStatus;
+        this.bodyFileStatus = bodyFileStatus;
     }
     /**
      * 
@@ -82,9 +82,9 @@ public class IncidentMessage
      * 
      * @return boolean is case closed
      */
-    public boolean isCaseClosed()
+    public boolean isClosed()
     {
-        return caseStatus;
+        return bodyFileStatus;
     }
     /**
      * 
@@ -130,8 +130,8 @@ public class IncidentMessage
      * 
      * @param caseStatus boolean
      */
-    public void setCaseStatus(boolean caseStatus)
+    public void setBodyFileStatus(boolean bodyFileStatus)
     {
-        this.caseStatus = caseStatus;
+        this.bodyFileStatus = bodyFileStatus;
     }
 }
