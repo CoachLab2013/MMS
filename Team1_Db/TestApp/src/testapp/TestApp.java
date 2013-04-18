@@ -82,6 +82,8 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello
         
         //END OF ORGANIZATION STUFF.
         
+        
+        //TESTING REFERENCE LIST STUFF
        /* //Reference List
         ReferenceListDb db = new ReferenceListDb("gender","idGender","type","female",1,"root","hello","localhost","/mydb");
         //db.init();
@@ -94,6 +96,7 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello
         {
             System.out.println(list.get(i));
         }*/
+        //END OF REFERENCE LIST STUFF
 
         //TESTING DEATHCALL STUFF
         /*//timeOfCall,numberCallMade,institution,sceneAddress,province,region,sceneCondition,nameOfCaller
@@ -103,21 +106,30 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello
          System.out.println(AuditDb.add());*/
         //END OF DEATHCALL STUFF
         
-        //Add Vehicle and Driver
-        DatabaseConnector db= null;//new VehicleDb(new Vehicle("TVD702", 4),dbDetail);
-        /*db.init();
-        /*System.out.println(db.add());*/
+        //TESTING VEHICLE STUFF
+        /*DatabaseConnector db= null;//new VehicleDb(new Vehicle("TVD702", 4),dbDetail);
+        db.init();
+        System.out.println(db.add());
         VehicleDb vehicleDb = (VehicleDb)db;
         vehicleDb  = new VehicleDb(new Vehicle("BHSN54",6),dbDetail);
         vehicleDb .init();
         System.out.println(vehicleDb.assignDriver(new Driver(2,null,null)));
         //
-        /*ArrayList<Vehicle> list = vehicleDb.vehicleList();
+        ArrayList<Vehicle> list = vehicleDb.vehicleList();
         for(int i = 0;i < list.size();i++)
         {
             System.out.println(list.get(i).getRegistrationNumber() + " " + list.get(i).getCrew());
-        }*/
-        //System.out.println(db.add());
+        }
+        //System.out.println(db.add());*/
+        //END OF VEHICLE
         
+        
+        //TESTING INCIDENT
+         /*//String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
+        Incident inci = new  Incident("incident number","refe" ,2,"10/10/10","12:43:23" , "circumstance of death", "place body found", "specialCircumstances");
+        IncidentDb inciDb = new IncidentDb(inci,"root","200971082","localhost","/mydb");
+        inciDb.init();
+        System.out.println(inciDb.add());*/
+        //END OF INCIDENT STUFF
     }
 }

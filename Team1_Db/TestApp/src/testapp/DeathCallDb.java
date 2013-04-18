@@ -88,12 +88,10 @@ public class DeathCallDb extends DatabaseConnector
          try 
          {
             statement.executeQuery("SELECT * FROM deathcall");
-            DeathCall dCall= null;
-            try (ResultSet resultSet = statement.getResultSet()) 
-            {
+            ResultSet resultSet = statement.getResultSet();
                while(resultSet.next())
                {
-                  dCall= new DeathCall ();
+                  DeathCall dCall= new DeathCall ();
                   dCall.setTimeofCall(resultSet.getString("timeOfCall"));
                   dCall.setNumberCallMade(resultSet.getString("numberCallMade"));
                   dCall.setInstitution(resultSet.getString("institution"));
@@ -103,8 +101,7 @@ public class DeathCallDb extends DatabaseConnector
 		  dCall.setSceneCondition(resultSet.getString("sceneConditions"));
                   dCall.setnameOfCaller(resultSet.getString("nameOfCaller"));
                   list.add(dCall);
-               }
-            }
+              }
             statement.close();
             connection.close();
          } 

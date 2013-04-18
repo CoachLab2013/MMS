@@ -65,12 +65,11 @@ import java.util.ArrayList;
       }
       public  ArrayList<AuditTrail> AuditTrailList() throws SQLException
       {
-         ArrayList<AuditTrail> list = new ArrayList<>();
+         ArrayList<AuditTrail> list = new ArrayList<AuditTrail>();
          try 
          {
             statement.executeQuery("SELECT * FROM  audittrail");
-            try (ResultSet resultSet = statement.getResultSet()) 
-            {
+            ResultSet resultSet = statement.getResultSet();
                while(resultSet.next())
                {
                   AuditTrail auditTr = new AuditTrail ();
@@ -82,11 +81,9 @@ import java.util.ArrayList;
                  
                   list.add(auditTr);
                }
-            }
             statement.close();
             connection.close();
-         } 
-            catch (SQLException ex) 
+         }catch (SQLException ex) 
             {
                throw new SQLException(ex.getMessage());
             }
