@@ -46,7 +46,7 @@ public class VehicleDispatchDb extends DatabaseConnector {
     }
     
     @Override
-    public String read(/*what user will search by*/){
+    public String read(/*what user will search by*/){ //Strange
         try 
         {
             statement.executeQuery("SELECT * FROM VehicleDispatch;" /*WHERE Something= criteria*/);
@@ -71,9 +71,19 @@ public class VehicleDispatchDb extends DatabaseConnector {
     
     @Override
     public String edit(){
-        return "never implemented";
+        try 
+        {
+            statement.executeUpdate("UPDATE VehicleDispatch SET departureDateTime='" + vehicleDispatch.getDepartureDateTime() + "', dispatchMessage='" + vehicleDispatch.getDispatchMessage() +"', notificationDateTime='" + vehicleDispatch.getNotificationDateTime() +"', Vehicle_registrationNumber='" + vehicleDispatch.getVehicle_registrationNumber() +"' WHERE idVehicleDispatch = '" + vehicleDispatch.getIdVehicleDispatch() + "';" );
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "Update Successful";
     }
-    public String edit(VehicleDispatch inVehicleDispatch){
+    /*public String edit(VehicleDispatch inVehicleDispatch){
         try 
         {
             statement.executeUpdate("UPDATE VehicleDispatch SET departureDateTime='" + inVehicleDispatch.getDepartureDateTime() + "', dispatchMessage='" + inVehicleDispatch.getDispatchMessage() +"', notificationDateTime='" + inVehicleDispatch.getNotificationDateTime() +"', Vehicle_registrationNumber='" + inVehicleDispatch.getVehicle_registrationNumber() +"' WHERE idVehicleDispatch = '" + inVehicleDispatch.getIdVehicleDispatch() + "';" );
@@ -85,13 +95,23 @@ public class VehicleDispatchDb extends DatabaseConnector {
             return "fail " + ex.getMessage();
         }
         return "Update Successful";
-    }
+    }*/
     
     @Override
     public String delete(){
-        return "never implemented";
+        try 
+        {
+            statement.executeUpdate("DELETE FROM VehicleDispatch WHERE idVehicleDispatch = '" + vehicleDispatch.getIdVehicleDispatch() +"'");
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "delete successful";
     }
-    public String delete(VehicleDispatch inVehicleDispatch){
+    /*public String delete(VehicleDispatch inVehicleDispatch){
         try 
         {
             statement.executeUpdate("DELETE FROM VehicleDispatch WHERE idVehicleDispatch = '" + inVehicleDispatch.getIdVehicleDispatch() +"'");
@@ -103,5 +123,5 @@ public class VehicleDispatchDb extends DatabaseConnector {
             return "fail " + ex.getMessage();
         }
         return "delete successful";
-    }
+    }*/
 }
