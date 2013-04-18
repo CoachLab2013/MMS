@@ -9,27 +9,39 @@ import java.util.ArrayList;
    {
    
       private AuditTrail auditTrail;
-       
-   
+      /**
+       * 
+       * @param auditTrail AuditTrail object
+       * @param dbDetail DbDetail object
+       */
       public AuditTrailDb(AuditTrail auditTrail, DbDetail dbDetail)
       {
          super(dbDetail);
          this.auditTrail = auditTrail;
       
       }
-      
+      /**
+       * 
+       * @param dbDetail DbDetail object
+       */
       public AuditTrailDb(DbDetail dbDetail)
       {
          super(dbDetail);
          auditTrail = null;
       
       }
-      
+      /**
+       * 
+       * @return AuditTrail
+       */
       public AuditTrail getAuditTrail()
       {
          return auditTrail;
       }
-      
+      /**
+       * 
+       * @param auditTrail AuditTrail
+       */
       public void  setAuditTrail(AuditTrail auditTrail)
       {
          this.auditTrail = auditTrail;
@@ -63,6 +75,11 @@ import java.util.ArrayList;
       
       
       }
+      /**
+       * 
+       * @return ArrayList of audit trail objects
+       * @throws SQLException 
+       */
       public  ArrayList<AuditTrail> AuditTrailList() throws SQLException
       {
          ArrayList<AuditTrail> list = new ArrayList<AuditTrail>();
@@ -94,7 +111,6 @@ import java.util.ArrayList;
        * 
        * @the method to read the items from the audit trail is not implemented 
        */
-      
       @Override
       public  String read()
       {
