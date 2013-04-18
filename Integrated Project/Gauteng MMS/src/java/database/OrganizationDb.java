@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package testapp;
+package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,16 +14,11 @@ import java.util.ArrayList;
  */
 public class OrganizationDb extends DatabaseConnector{
     private Organization organization;
-    //CONSTUCTOR
     public OrganizationDb(Organization inOrganization, DbDetail dbDetail){
         super(dbDetail);
         
         this.organization = inOrganization;
     }
-    
-    //DATABASE METHODS
-    
-    //function to add an organization to the appropiate tables
     @Override
     public String add(){
         try 
@@ -65,13 +60,13 @@ public class OrganizationDb extends DatabaseConnector{
         {
             return "fail " + ex.getMessage();
         }
-        return "read from organization table successful";
+        return "added to organization table";
     }
     
     //Function to read all the organizations from the database and return them in a list for displaying
     public  ArrayList<Organization> organizationList()
     {
-        ArrayList<Organization> list = new ArrayList<>();
+        ArrayList<Organization> list = new ArrayList<Organization>();
         try 
         {
             statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM Hospital;");
@@ -128,22 +123,11 @@ public class OrganizationDb extends DatabaseConnector{
         return list;
     }
     
-    //function(s) to edit the details of a specific organization
     @Override
     public String edit(){
-         try 
-        {
-            statement.executeUpdate("UPDATE " + organization.getType() + " SET name='" + organization.getName()+ "', contactNumber='" + organization.getContactNumber() +"';" );
-            statement.close();
-            connection.close();
-        } 
-        catch (SQLException ex) 
-        {
-            return "fail " + ex.getMessage();
-        }
-        return "Update Successful";
+        return "never implemented";
     }
-    /*public String edit(Organization inOrganization){
+    public String edit(Organization inOrganization){
         try 
         {
             statement.executeUpdate("UPDATE " + inOrganization.getType() + " SET name='" +inOrganization.getName()+ "', contactNumber='" +inOrganization.getContactNumber() +"';" );
@@ -155,26 +139,13 @@ public class OrganizationDb extends DatabaseConnector{
             return "fail " + ex.getMessage();
         }
         return "Update Successful";
-    }*/
+    }
     
-    //function(s) to delete an organization from the appropriate tables
     @Override
     public String delete(){
-        try 
-        {
-            int universalID = organization.getIdOrganization();
-            statement.executeUpdate("DELETE FROM " + organization.getType() + " WHERE Organization_idOrganization= '" + universalID +"';" );
-            statement.executeUpdate("DELETE FROM Organization WHERE idOrganization = '" + universalID +"'");
-            statement.close();
-            connection.close();
-        } 
-        catch (SQLException ex) 
-        {
-            return "fail " + ex.getMessage();
-        }
-        return "Deleted Item from Organization and " + organization.getType();
+        return "never implemented";
     }
-    /*public String delete(String inType, int inID){
+    public String delete(String inType, int inID){
         try 
         {
             int universalID = inID;//organization.getIdOrganization();
@@ -188,5 +159,5 @@ public class OrganizationDb extends DatabaseConnector{
             return "fail " + ex.getMessage();
         }
         return "Deleted Item from Organization and " + inType ;
-    }*/
+    }
 }
