@@ -7,7 +7,7 @@
 specialCircumstances , DeathCall_idDeathCall , VehicleDispatch_idVehicleDispatch , IncidentMessage_idIncidentMessage , status , reason , bodyCount
 
  */
-package incident;
+package testapp;
 
 import java.sql.SQLException;
 
@@ -16,20 +16,20 @@ import java.sql.SQLException;
  * @author Innovation Hub
  * @JCSE
  */
-public class incidentDb extends DatabaseConnector 
+public class IncidentDb extends DatabaseConnector 
 {
     private Incident inciden;
      
-        public incidentDb(Incident inciden , String username , String password , String url , String dbName)
+        public IncidentDb(Incident inciden , DbDetail dbDetail)
       {
-         super(username,password,url,dbName);
+         super(dbDetail);
          this.inciden = inciden;
       
       }
         
-         public incidentDb(String username , String password , String url , String dbName)
+         public IncidentDb(DbDetail dbDetail)
       {
-         super(username,password,url,dbName);
+         super(dbDetail);
          inciden = null;
       
       }
@@ -73,6 +73,10 @@ public class incidentDb extends DatabaseConnector
     @Override
     public String read() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public String edit(){
+        return "";
     }
     
 }

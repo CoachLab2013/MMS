@@ -75,14 +75,8 @@ public class IncidentDb extends DatabaseConnector
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    //added this code because netbeans is complains without it: Bandile
-    @Override
-    public String delete(){
-        return "";
-    }
-    
-    @Override
     public String edit(){
         return "";
     }
+    
 }
