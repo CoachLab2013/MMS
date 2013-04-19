@@ -15,6 +15,7 @@ public class VehicleDispatch {
     private String departureDateTime;
     private String dispatchMessage;
     private Vehicle vehicle;
+    private Incident incident;
     
     //CONSTUCTORS
     public VehicleDispatch(){
@@ -53,6 +54,10 @@ public class VehicleDispatch {
         return this.vehicle;
     }
     
+    public Incident getIncident(){
+        return this.incident;
+    }
+    
     // SET METHODS
     public void setIdVehicleDispatch(int inIdVehicleDispatch){
         this.idVehicleDispatch = inIdVehicleDispatch;
@@ -72,5 +77,9 @@ public class VehicleDispatch {
     
     public void setVehicle(Vehicle inVehicle){
         this.vehicle = inVehicle;
+    }
+    
+    public void setIncident(Incident inIncident){
+        this.incident = inIncident;
     }
 }

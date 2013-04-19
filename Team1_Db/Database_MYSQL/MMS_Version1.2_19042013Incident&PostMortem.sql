@@ -21,6 +21,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Incident` (
   `status` BIT NULL ,
   `reason` BLOB NULL ,
   `bodyCount` INT NULL ,
+  `placeBodyFound` VARCHAR(45) NULL ,
   PRIMARY KEY (`incidentLogNumber`) )
 ENGINE = InnoDB;
 
