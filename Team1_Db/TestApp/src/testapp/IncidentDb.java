@@ -44,7 +44,7 @@ public class IncidentDb extends DatabaseConnector
         
           try  
         {  //
-            statement.executeUpdate("insert into incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount)" + " values"
+            statement.executeUpdate("insert into incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " values"
                                     +"('" 
                                     + incident.getIncidentLogNumber() + "','" 
                                     + incident.getReferenceNumber()+ "','"
@@ -52,10 +52,11 @@ public class IncidentDb extends DatabaseConnector
                                     + incident.getDateOfIncident()+ "','"
                                     + incident.getTimeOfIncident()+ "','"
                                     + incident.getCircumstanceOfDeath() + "','"
-                                    + incident.getSpecialCircumstances()+ "','"
-                                    + incident.getReason() + "',"
-                                    + incident.isOpen() + ","
-                                    + incident.getBodyCount()
+                                    + incident.getSpecialCircumstances()+ "',"
+                                    + incident.isOpen() + ",'"
+                                    + incident.getReason()+ "',"
+                                    + incident.getBodyCount() + ",'"
+                                    + incident.getPlaceBodyFound() + "'"
                                     + ")");
             statement.close(); //status , reason , bodyCountb 
             connection.close(); //deathCall
