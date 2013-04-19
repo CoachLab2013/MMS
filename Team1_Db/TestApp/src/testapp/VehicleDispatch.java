@@ -23,14 +23,15 @@ public class VehicleDispatch {
         this.departureDateTime = "";
         this.dispatchMessage = "";
         this.vehicle = new Vehicle();
+        this.incident = new Incident();
     }
     
-    public VehicleDispatch(String inNotificationDateTime, String inDepartureDateTime, String inDispatchMessage, Vehicle inVehicle ){
-        //this.idVehicleDispatch = inIdVehicleDispatch;
+    public VehicleDispatch(String inNotificationDateTime, String inDepartureDateTime, String inDispatchMessage, Vehicle inVehicle, Incident inIncident ){
         this.notificationDateTime = inNotificationDateTime;
         this.departureDateTime = inDepartureDateTime;
         this.dispatchMessage = inDispatchMessage;
         this.vehicle = inVehicle;
+        this.incident = inIncident;
     }
     
     // GET  METHODS

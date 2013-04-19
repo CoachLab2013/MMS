@@ -11,7 +11,7 @@ USE `mydb` ;
 DROP TABLE IF EXISTS `mydb`.`Incident` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Incident` (
-  `incidentLogNumber` VARCHAR(45) NOT NULL ,
+  `incidentLogNumber` VARCHAR(9) NOT NULL ,
   `referenceNumber` VARCHAR(9) NULL ,
   `numberOfBodies` INT NULL ,
   `dateOfIncident` DATE NULL ,
@@ -53,9 +53,9 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Body` (
   `bodyStatus` BIT NULL ,
   `dateBodyReceieved` DATETIME NULL ,
   `bodyReleased` BIT NULL ,
-  `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
   `bodyType` VARCHAR(45) NULL ,
   `dateBodyReleased` DATETIME NULL ,
+  `Incident_incidentLogNumber` VARCHAR(9) NOT NULL ,
   PRIMARY KEY (`idDeathRegisterNumber`) ,
   INDEX `fk_Body_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   CONSTRAINT `fk_Body_Incident1`
@@ -125,7 +125,7 @@ DROP TABLE IF EXISTS `mydb`.`Property` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Property` (
   `idProperty` INT NOT NULL AUTO_INCREMENT ,
-  `sealNumber` VARCHAR(45) NULL ,
+  `sealNumber` VARCHAR(9) NULL ,
   `description` BLOB NULL ,
   `date` DATE NULL ,
   `type` VARCHAR(45) NULL ,
@@ -165,7 +165,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`DeathCall` (
   `region` VARCHAR(45) NULL ,
   `sceneConditions` VARCHAR(45) NULL ,
   `nameOfCaller` VARCHAR(45) NULL ,
-  `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
+  `Incident_incidentLogNumber` VARCHAR(9) NOT NULL ,
   PRIMARY KEY (`idDeathCall`) ,
   INDEX `fk_DeathCall_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   CONSTRAINT `fk_DeathCall_Incident1`
@@ -218,19 +218,19 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`VehicleDispatch` (
   `notificationDateTime` DATETIME NULL ,
   `departureDateTime` DATETIME NULL ,
   `dispatchMessage` BLOB NULL ,
-  `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
   `Vehicle_registrationNumber` VARCHAR(11) NOT NULL ,
+  `Incident_incidentLogNumber` VARCHAR(9) NOT NULL ,
   PRIMARY KEY (`idVehicleDispatch`) ,
-  INDEX `fk_VehicleDispatch_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   INDEX `fk_VehicleDispatch_Vehicle1_idx` (`Vehicle_registrationNumber` ASC) ,
-  CONSTRAINT `fk_VehicleDispatch_Incident1`
-    FOREIGN KEY (`Incident_incidentLogNumber` )
-    REFERENCES `mydb`.`Incident` (`incidentLogNumber` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_VehicleDispatch_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   CONSTRAINT `fk_VehicleDispatch_Vehicle1`
     FOREIGN KEY (`Vehicle_registrationNumber` )
     REFERENCES `mydb`.`Vehicle` (`registrationNumber` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_VehicleDispatch_Incident1`
+    FOREIGN KEY (`Incident_incidentLogNumber` )
+    REFERENCES `mydb`.`Incident` (`incidentLogNumber` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -249,7 +249,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`IncidentMessage` (
   `nameOfDeceased` VARCHAR(45) NULL ,
   `vip` BIT NULL ,
   `caseStatus` BIT NULL ,
-  `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
+  `Incident_incidentLogNumber` VARCHAR(9) NOT NULL ,
   PRIMARY KEY (`idIncidentMessage`) ,
   INDEX `fk_IncidentMessage_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   CONSTRAINT `fk_IncidentMessage_Incident1`
