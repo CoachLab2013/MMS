@@ -2,21 +2,28 @@
     Document   : Admin
     Created on : 12 Apr 2013, 12:19:36 PM
     Author     : Sandile
+ 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
-        <script  src="bootstrap/js/bootstrap-tabs.js"></script>
-        <link type="text/css" rel="stylesheet"  href="CSS/Design.css"> 
- 
+        
         <title>MMS Administration</title>
-   
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
+        <script src="bootstrap/js/bootstrap-tabs.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <link type="text/css" rel="stylesheet"  href="CSS/Design.css">
+        <script src="js/jquery-1.7.1.min.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
+       <script src="js/script.js"></script>
+         <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
     </head>
     <body>  
+      
+
         <%
             String userResult = "";
             String addUserTab = "";
@@ -116,28 +123,28 @@
                                                                     <%--  Add user content --%>
                                                                     <div align="center"><h2>Add User </h2> </div>  
 
-                                                                    <form name="AddUser" method="post" action="ReferenceListServlet" >
+                                                                    <form name="AddUser" id="AddUser" method="post" action="ReferenceListServlet" class="form-horizontal">
 
                                                                         <div class="offset2 span7 ">
                                                                             <input type="text" name="form" value="AddUser" style="visibility: hidden" />
                                                                             <fieldset>
                                                                                 <legend>User Personal Details</legend>
-                                                                                <div class="control-group form-horizontal">
-
-                                                                                    <label  class="control-label" for="firstName">Full Name(s):</label> 
+                                                                                <div class="control-group   error">
+                                                                                                                                
+                                                                                    <label  class="control-label  " id="firstName"   for="firstName">Full Name(s):</label> 
                                                                                     <div class="controls">
-                                                                                        <input type="text" name="firstName"  id="firstName"/> 
+                                                                                        <input type="text" name="firstName"  id="firstName"  /> 
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label  class="control-label" for="surname">Surname:</label> 
+                                                                                <div class="control-group error ">
+                                                                                    <label  class="control-label" id="surname" for="surname">Surname:</label> 
                                                                                     <div class="controls">
                                                                                         <input  type="text" name="surname"  id="surname" />
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="control-group form-horizontal">
+                                                                                <div class="control-group error ">
                                                                                     <label  class="control-label" for="email">Email:</label> 
                                                                                     <div class="controls">
                                                                                         <input type="text" name="email"  id="email" />
@@ -149,48 +156,37 @@
 
                                                                             <fieldset>
                                                                                 <legend>User Employment Details</legend>
-                                                                                <div class="control-group form-horizontal">
+                                                                                <div class="control-group error ">
                                                                                     <label  class="control-label" for="personnelNumber">Personnel Number:</label>
                                                                                     <div class="controls">
                                                                                         <input type="text" name="personnelNumber"  id="personnelNumber"  />
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="control-group form-horizontal">
+                                                                                <div class="control-group error ">
                                                                                     <label  class="control-label" for="level">Access Level:</label>
                                                                                     <%-- Drop down list for occupation --%>
                                                                                     <div class="controls">
-                                                                                        <select name="level">
-                                                                                            <option> '<'select'>'</option>
-                                                                                            <option>Supervisor</option>
-                                                                                            <option>FPS Officer</option>
-                                                                                            <option>Pathologist</option>
-                                                                                            <option>Administrator</option>
+                                                                                        <select name="level" id="Level">
+                                                                                            <option value=""> <% out.println( String.valueOf("-Please Select-")); %></option>
+                                                                                            <option value="1">Supervisor</option>
+                                                                                            <option value="2">FPS Officer</option>
+                                                                                            <option value="3">Pathologist</option>
+                                                                                            <option value="4">Administrator</option>
 
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label  class="control-label" for="rank">Rank:</label>
-                                                                                    <%-- Drop down list for rank --%>
-                                                                                    <div class="controls">
-                                                                                        <select name="rank">
-                                                                                           
-                                                                                           <option> '<'select'>'</option>
-                                                                                            <option>Slave</option>
-                                                                                            <option>Master</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="control-group form-horizontal">
+                  
+                                                                                <div class="control-group error ">
                                                                                     <label  class="control-label" for="Active">Active:</label>
                                                                                     <%-- Drop down list for rank --%>
                                                                                     <div class="controls">
-                                                                                        <select name="Active" tabindex="1">
-                                                                                            <option>False</option>
-                                                                                            <option>True</option>
+                                                                                        <select name="Active" tabindex="1" id="Active">
+                                                                                             <option value=""> <% out.println( String.valueOf("-Please Select-")); %></option>
+                                                                                            <option value="0">False</option>
+                                                                                            <option value="1">True</option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -307,6 +303,6 @@
                                                                 </div>
 
                                                                 </div>
-
+      
                                                                 </body>
                                                                 </html>
