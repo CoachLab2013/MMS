@@ -30,7 +30,7 @@ public class VehicleDispatchDb extends DatabaseConnector {
     public String add(){
         try 
         {
-            statement.executeUpdate("INSERT INTO VehicleDispatch (notificationDateTime, departureDateTime, dispatchMessage, Vehicle_registrationNumber) VALUES ( '" + vehicleDispatch.getNotificationDateTime() + "', '" + vehicleDispatch.getDepartureDateTime() +"', '" + vehicleDispatch.getDispatchMessage() + "', '" + vehicleDispatch.getVehicle().getRegistrationNumber() +"' )");
+            statement.executeUpdate("INSERT INTO VehicleDispatch (idVehicleDispatch, notificationDateTime, departureDateTime, dispatchMessage, Vehicle_registrationNumber) VALUES ( '1234567891', '" + this.vehicleDispatch.getNotificationDateTime() + "', '" + this.vehicleDispatch.getDepartureDateTime() +"', '" + this.vehicleDispatch.getDispatchMessage() + "', '" + this.vehicleDispatch.getVehicle().getRegistrationNumber() +"' )");
             statement.close();
             connection.close(); 
         } 
