@@ -69,6 +69,8 @@ public class VehicleDispatchDb extends DatabaseConnector {
         return "read successful"; /*Should return vehicle dispatch object*/
     }
     
+    
+    
     @Override
     public String edit(){
         try 
