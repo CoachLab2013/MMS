@@ -71,7 +71,7 @@ public class OrganizationDb extends DatabaseConnector{
     //Function to read all the organizations from the database and return them in a list for displaying
     public  ArrayList<Organization> organizationList()
     {
-        ArrayList<Organization> list = new ArrayList<>();
+        ArrayList<Organization> list = new ArrayList<Organization>();
         try 
         {
             statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM Hospital;");
