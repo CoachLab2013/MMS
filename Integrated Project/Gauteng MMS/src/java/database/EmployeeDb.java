@@ -81,11 +81,11 @@ public class EmployeeDb extends DatabaseConnector
         } 
         catch (SQLException ex) 
         {
-            return "failed "+ex.getMessage();
+            return "sql failed ex "+ex.getMessage();
         }
         catch (Exception ex)
         {
-            return "failed "+ex.getMessage();
+            return "ex failed "+ex.getMessage();
         }
         return "successful";
     }
