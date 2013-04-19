@@ -87,12 +87,13 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         Incident incid = new Incident();
         incid.setIncidentLogNumber("TESTLOGNUMBER1");
         Vehicle car = new Vehicle("RRB123", 2);
-        VehicleDispatch carDispatch = new VehicleDispatch("1000-01-01 00:00:00","1000-01-01 00:00:20", "Our first dispatch ever", car, incid);
+        VehicleDispatch carDispatch = new VehicleDispatch("1000-01-01 00:00:30","1000-01-01 00:00:40", "Our edited dispatch", car, incid);
+            carDispatch.setIdVehicleDispatch(2);
         VehicleDispatchDb dispatchDb = new VehicleDispatchDb(dbDetail, carDispatch);
         dispatchDb.init();
         
         //adding
-        System.out.println(dispatchDb.add());
+        //System.out.println(dispatchDb.add());
         
         //Deleting
         //System.out.println(dispatchDb.delete());

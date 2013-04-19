@@ -13,7 +13,7 @@ public class VehicleDispatch {
     private int idVehicleDispatch;
     private String notificationDateTime;
     private String departureDateTime;
-    private String dispatchMessage;
+    //private String dispatchMessage;
     private Vehicle vehicle;
     private Incident incident;
     
@@ -21,7 +21,7 @@ public class VehicleDispatch {
     public VehicleDispatch(){
         this.notificationDateTime = "";
         this.departureDateTime = "";
-        this.dispatchMessage = "";
+        //this.dispatchMessage = "";
         this.vehicle = new Vehicle();
         this.incident = new Incident();
     }
@@ -29,7 +29,7 @@ public class VehicleDispatch {
     public VehicleDispatch(String inNotificationDateTime, String inDepartureDateTime, String inDispatchMessage, Vehicle inVehicle, Incident inIncident ){
         this.notificationDateTime = inNotificationDateTime;
         this.departureDateTime = inDepartureDateTime;
-        this.dispatchMessage = inDispatchMessage;
+        //this.dispatchMessage = inDispatchMessage;
         this.vehicle = inVehicle;
         this.incident = inIncident;
     }
@@ -47,9 +47,9 @@ public class VehicleDispatch {
         return this.departureDateTime;
     }
     
-    public String getDispatchMessage(){
+    /*public String getDispatchMessage(){
         return this.dispatchMessage;
-    }
+    }*/
     
     public Vehicle getVehicle(){
         return this.vehicle;
@@ -72,9 +72,9 @@ public class VehicleDispatch {
         this.departureDateTime = inDepartureDateTime;
     }
     
-    public void setDispatchMessage(String inDispatchMessage){
+    /*public void setDispatchMessage(String inDispatchMessage){
         this.dispatchMessage = inDispatchMessage;
-    }
+    }*/
     
     public void setVehicle(Vehicle inVehicle){
         this.vehicle = inVehicle;
