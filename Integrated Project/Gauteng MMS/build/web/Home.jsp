@@ -19,7 +19,7 @@
             </style>
 <script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script language="javascript" type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
-            <script src="js/LoginScript.js"></script>
+            
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
         <title>Gauteng Mortuary Management System</title>

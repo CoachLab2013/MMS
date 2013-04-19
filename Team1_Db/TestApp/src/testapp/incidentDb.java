@@ -7,55 +7,56 @@
 specialCircumstances , DeathCall_idDeathCall , VehicleDispatch_idVehicleDispatch , IncidentMessage_idIncidentMessage , status , reason , bodyCount
 
  */
-package incident;
+package testapp;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
  * @author Innovation Hub
  * @JCSE
  */
-public class incidentDb extends DatabaseConnector 
+public class IncidentDb extends DatabaseConnector 
 {
-    private Incident inciden;
+    private Incident incident;
      
-        public incidentDb(Incident inciden , String username , String password , String url , String dbName)
+        public IncidentDb(Incident incident, DbDetail dbDetail)
       {
-         super(username,password,url,dbName);
-         this.inciden = inciden;
+         super(dbDetail);
+         this.incident = incident;
       
       }
         
-         public incidentDb(String username , String password , String url , String dbName)
+         public IncidentDb(DbDetail dbDetail)
       {
-         super(username,password,url,dbName);
-         inciden = null;
+         super(dbDetail);
+         incident = null;
       
       }
     
 
     @Override
-    public String add() {
+    public String add() 
+    {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
           try  
         {  //
-            statement.executeUpdate("insert into incident (incidentLogNumber , referenceNumber , numberOfBodies , dateOfIncident , timeOfIncident , circumstanceOfDeath ,specialCircumstances , DeathCall_idDeathCall , VehicleDispatch_idVehicleDispatch , IncidentMessage_idIncidentMessage , status , reason , bodyCount)" + " values"
+            statement.executeUpdate("insert into incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount)" + " values"
                                     +"('" 
-                                    + inciden.getIncidentLogNumber() + "','" 
-                                    + inciden.getReferenceNumber()+ "','"
-                                    + inciden.getNumberOfBodies() +"','"
-                                    + inciden.getDateOfIncident()+ "','"
-                                    + inciden.getTimeOfIncident()+ "','"
-                                    + inciden.getCircumstanceOfDeath() + "','"
-                                    + inciden.getSpecialCircumstances()+ "','"
-                                    + 5+"','"
-                                    + 6+ "','"  
-                                    + 7+ "','"
-                                    + 1+ "','"
-                                    + "Reason"+ "','"
-                                    + 7+ "')");
+                                    + incident.getIncidentLogNumber() + "','" 
+                                    + incident.getReferenceNumber()+ "','"
+                                    + incident.getNumberOfBodies() +"','"
+                                    + incident.getDateOfIncident()+ "','"
+                                    + incident.getTimeOfIncident()+ "','"
+                                    + incident.getCircumstanceOfDeath() + "','"
+                                    + incident.getSpecialCircumstances()+ "','"
+                                    + incident.getReason() + "',"
+                                    + incident.isOpen() + ","
+                                    + incident.getBodyCount()
+                                    + ")");
             statement.close(); //status , reason , bodyCountb 
             connection.close(); //deathCall
         } 
@@ -69,10 +70,52 @@ public class incidentDb extends DatabaseConnector
         }
         return "successful";
     }
-
+    public  ArrayList<Incident> incidentList() throws SQLException
+    {
+        ArrayList<Incident> incidentList = new ArrayList<Incident>();
+        try 
+        {
+            statement.executeQuery("select incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound from incident;");
+            ResultSet resultSet = statement.getResultSet();
+            while(resultSet.next())
+            {
+                incidentList.add(new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status")));
+            }
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            throw new SQLException(ex.getMessage());
+        }
+        return incidentList;
+    }
     @Override
-    public String read() {
+    public String read() 
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    //incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound
+    @Override
+    public String edit()
+    {
+        try 
+        {                                                                                                                                                                                                                                                                                                                                                                                         
+            statement.executeUpdate("update incident set incidentLogNumber='" + incident.getIncidentLogNumber() + "',referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"' where status=0;" );
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "successful";
+    }
+    
+    @Override
+    public String delete()
+    {
+        return "";
     }
     
 }

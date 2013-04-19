@@ -30,7 +30,7 @@ public class VehicleDispatchDb extends DatabaseConnector {
     public String add(){
         try 
         {
-            statement.executeUpdate("INSERT INTO VehicleDispatch (notificationDateTime, departureDateTime, dispatchMessage, Vehicle_registrationNumber) VALUES ( '" + vehicleDispatch.getNotificationDateTime() + "', '" + vehicleDispatch.getDepartureDateTime() +"', '" + vehicleDispatch.getDispatchMessage() + "', '" + vehicleDispatch.getVehicle_registrationNumber() +"' )");
+            statement.executeUpdate("INSERT INTO VehicleDispatch (notificationDateTime, departureDateTime, dispatchMessage, Vehicle_registrationNumber) VALUES ( '" + vehicleDispatch.getNotificationDateTime() + "', '" + vehicleDispatch.getDepartureDateTime() +"', '" + vehicleDispatch.getDispatchMessage() + "', '" + vehicleDispatch.getVehicle().getRegistrationNumber() +"' )");
             statement.close();
             connection.close(); 
         } 
@@ -47,18 +47,18 @@ public class VehicleDispatchDb extends DatabaseConnector {
     
     @Override
     public String read(/*what user will search by*/){ //Strange
+        String vehicleRegistration;
         try 
         {
             statement.executeQuery("SELECT * FROM VehicleDispatch;" /*WHERE Something= criteria*/);
-            try (ResultSet resultSet = statement.getResultSet()) 
-            {
-                resultSet.next();
-                vehicleDispatch.setDepartureDateTime(resultSet.getString("departureDateTime"));
-                vehicleDispatch.setDispatchMessage(resultSet.getString("dispatchMessage"));
-                vehicleDispatch.setIdVehicleDispatch(resultSet.getInt("idVehicleDispatch"));
-                vehicleDispatch.setNotificationDateTime(resultSet.getString("notificationDateTime"));
-                vehicleDispatch.setVehicle_registrationNumber(resultSet.getString("Vehicle_registrationNumber"));
-            }
+            ResultSet resultSet = statement.getResultSet(); 
+            resultSet.next();
+            vehicleDispatch.setDepartureDateTime(resultSet.getString("departureDateTime"));
+            vehicleDispatch.setDispatchMessage(resultSet.getString("dispatchMessage"));
+            vehicleDispatch.setIdVehicleDispatch(resultSet.getInt("idVehicleDispatch"));
+            vehicleDispatch.setNotificationDateTime(resultSet.getString("notificationDateTime"));
+            vehicleRegistration = resultSet.getString("Vehicle_registrationNumber");
+            statement.executeQuery("SELECT * FROM Vehicle WHERE registrationNumber = '" + vehicleRegistration+ "';"  );
             statement.close();
             connection.close();
         } 
@@ -73,7 +73,7 @@ public class VehicleDispatchDb extends DatabaseConnector {
     public String edit(){
         try 
         {
-            statement.executeUpdate("UPDATE VehicleDispatch SET departureDateTime='" + vehicleDispatch.getDepartureDateTime() + "', dispatchMessage='" + vehicleDispatch.getDispatchMessage() +"', notificationDateTime='" + vehicleDispatch.getNotificationDateTime() +"', Vehicle_registrationNumber='" + vehicleDispatch.getVehicle_registrationNumber() +"' WHERE idVehicleDispatch = '" + vehicleDispatch.getIdVehicleDispatch() + "';" );
+            statement.executeUpdate("UPDATE VehicleDispatch SET departureDateTime='" + vehicleDispatch.getDepartureDateTime() + "', dispatchMessage='" + vehicleDispatch.getDispatchMessage() +"', notificationDateTime='" + vehicleDispatch.getNotificationDateTime() +"', Vehicle_registrationNumber='" + vehicleDispatch.getVehicle().getRegistrationNumber() +"' WHERE idVehicleDispatch = '" + vehicleDispatch.getIdVehicleDispatch() + "';" );
             statement.close();
             connection.close();
         } 

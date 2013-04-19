@@ -37,7 +37,7 @@ $(document).ready(function(){
           
           password:{
                 required: "Please enter in your password.",
-                minlength: "Your password must be at least 6 characters long.",
+                minlength: "Your password must be at least 6 characters long."
           }//end messages for personnelnumber
             
         }//end of messages
