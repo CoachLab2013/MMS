@@ -181,7 +181,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Driver` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Driver` (
-  `idDriver` INT NOT NULL AUTO_INCREMENT ,
+  `idDriver` VARCHAR(45) NOT NULL ,
   `name` VARCHAR(45) NULL ,
   `surname` VARCHAR(45) NULL ,
   PRIMARY KEY (`idDriver`) )
@@ -194,9 +194,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Vehicle` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Vehicle` (
-  `registrationNumber` VARCHAR(11) NOT NULL ,
+  `registrationNumber` VARCHAR(45) NOT NULL ,
   `crew` INT NULL ,
-  `Driver_idDriver` INT NOT NULL ,
+  `Driver_idDriver` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`registrationNumber`) ,
   INDEX `fk_Vehicle_Driver1_idx` (`Driver_idDriver` ASC) ,
   CONSTRAINT `fk_Vehicle_Driver1`
@@ -217,19 +217,19 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`VehicleDispatch` (
   `notificationDateTime` DATETIME NULL ,
   `departureDateTime` DATETIME NULL ,
   `dispatchMessage` BLOB NULL ,
+  `Vehicle_registrationNumber` VARCHAR(45) NOT NULL ,
   `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
-  `Vehicle_registrationNumber` VARCHAR(11) NOT NULL ,
   PRIMARY KEY (`idVehicleDispatch`) ,
-  INDEX `fk_VehicleDispatch_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   INDEX `fk_VehicleDispatch_Vehicle1_idx` (`Vehicle_registrationNumber` ASC) ,
-  CONSTRAINT `fk_VehicleDispatch_Incident1`
-    FOREIGN KEY (`Incident_incidentLogNumber` )
-    REFERENCES `mydb`.`Incident` (`incidentLogNumber` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_VehicleDispatch_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   CONSTRAINT `fk_VehicleDispatch_Vehicle1`
     FOREIGN KEY (`Vehicle_registrationNumber` )
     REFERENCES `mydb`.`Vehicle` (`registrationNumber` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_VehicleDispatch_Incident1`
+    FOREIGN KEY (`Incident_incidentLogNumber` )
+    REFERENCES `mydb`.`Incident` (`incidentLogNumber` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
