@@ -117,7 +117,7 @@ public void setNumberOfBodies(int numberOfBodies)
 {
     this.numberOfBodies = numberOfBodies;
 }
-public void sgetDateOfIncident(String dateOfIncident)
+public void setDateOfIncident(String dateOfIncident)
 {
     this.dateOfIncident = dateOfIncident;
 }

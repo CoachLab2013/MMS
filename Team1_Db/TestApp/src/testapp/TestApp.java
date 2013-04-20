@@ -84,8 +84,15 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","hello
         
         //TESTING VEHICLE DISPATCH STUFF
         //creating the objects to work with
+//<<<<<<< HEAD
         /*Vehicle car = new Vehicle("RRB123", 2);
         VehicleDispatch carDispatch = new VehicleDispatch("1000-01-01 00:00:00","1000-01-01 00:00:20", "Our first dispatch ever", car);
+=======
+        Incident incid = new Incident();
+        incid.setIncidentLogNumber("TESTLOGNUMBER1");
+        Vehicle car = new Vehicle("RRB123", 2);
+        VehicleDispatch carDispatch = new VehicleDispatch("1000-01-01 00:00:00","1000-01-01 00:00:20", "Our first dispatch ever", car, incid);
+>>>>>>> origin/master
         VehicleDispatchDb dispatchDb = new VehicleDispatchDb(dbDetail, carDispatch);
         dispatchDb.init();
         
