@@ -11,17 +11,17 @@ USE `mydb` ;
 DROP TABLE IF EXISTS `mydb`.`Incident` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Incident` (
-  `incidentLogNumber` VARCHAR(9) NOT NULL ,
-  `referenceNumber` VARCHAR(9) NULL ,
-  `numberOfBodies` INT NULL ,
-  `dateOfIncident` DATE NULL ,
-  `timeOfIncident` TIME NULL ,
-  `circumstanceOfDeath` VARCHAR(45) NULL ,
-  `specialCircumstances` BLOB NULL ,
-  `status` BIT NULL ,
-  `reason` BLOB NULL ,
-  `bodyCount` INT NULL ,
-  `placeBodyFound` VARCHAR(45) NULL ,
+  `incidentLogNumber` VARCHAR(45) NOT NULL ,
+  `referenceNumber` VARCHAR(9) NOT NULL ,
+  `numberOfBodies` INT NOT NULL ,
+  `dateOfIncident` DATE NOT NULL ,
+  `timeOfIncident` TIME NOT NULL ,
+  `circumstanceOfDeath` VARCHAR(45) NOT NULL ,
+  `specialCircumstances` VARCHAR(50) NOT NULL ,
+  `status` BIT NOT NULL ,
+  `reason` LONGTEXT NOT NULL ,
+  `bodyCount` INT NOT NULL ,
+  `placeBodyFound` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`incidentLogNumber`) )
 ENGINE = InnoDB;
 
@@ -33,29 +33,29 @@ DROP TABLE IF EXISTS `mydb`.`Body` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Body` (
   `idDeathRegisterNumber` VARCHAR(45) NOT NULL ,
-  `gender` VARCHAR(45) NULL ,
-  `race` VARCHAR(45) NULL ,
-  `assignedTo` VARCHAR(45) NULL ,
-  `nameOfDeceased` VARCHAR(45) NULL ,
-  `surnameOfDeceased` VARCHAR(45) NULL ,
-  `placeOfBirth` VARCHAR(45) NULL ,
-  `dateOfBirth` DATE NULL ,
-  `ageOnDateFound` INT NULL ,
-  `maritalStatus` VARCHAR(45) NULL ,
-  `occupation` VARCHAR(45) NULL ,
-  `citizen` VARCHAR(45) NULL ,
-  `maidenName` VARCHAR(45) NULL ,
-  `identifiedDateTime` DATETIME NULL ,
-  `estimatedAgeYear` INT NULL ,
-  `estimatedAgeMonth` INT NULL ,
-  `ID` VARCHAR(13) NULL ,
-  `passport` VARCHAR(45) NULL ,
-  `bodyStatus` BIT NULL ,
-  `dateBodyReceieved` DATETIME NULL ,
-  `bodyReleased` BIT NULL ,
-  `bodyType` VARCHAR(45) NULL ,
-  `dateBodyReleased` DATETIME NULL ,
-  `Incident_incidentLogNumber` VARCHAR(9) NOT NULL ,
+  `gender` VARCHAR(45) NOT NULL ,
+  `race` VARCHAR(45) NOT NULL ,
+  `assignedTo` VARCHAR(45) NOT NULL ,
+  `nameOfDeceased` VARCHAR(45) NOT NULL ,
+  `surnameOfDeceased` VARCHAR(45) NOT NULL ,
+  `placeOfBirth` VARCHAR(45) NOT NULL ,
+  `dateOfBirth` DATE NOT NULL ,
+  `ageOnDateFound` INT NOT NULL ,
+  `maritalStatus` VARCHAR(45) NOT NULL ,
+  `occupation` VARCHAR(45) NOT NULL ,
+  `citizen` VARCHAR(45) NOT NULL ,
+  `maidenName` VARCHAR(45) NOT NULL ,
+  `identifiedDateTime` DATETIME NOT NULL ,
+  `estimatedAgeYear` INT NOT NULL ,
+  `estimatedAgeMonth` INT NOT NULL ,
+  `ID` VARCHAR(13) NOT NULL ,
+  `passport` VARCHAR(45) NOT NULL ,
+  `bodyStatus` BIT NOT NULL ,
+  `dateBodyReceieved` DATETIME NOT NULL ,
+  `bodyReleased` BIT NOT NULL ,
+  `Incident_incidentLogNumber` VARCHAR(45) NULL ,
+  `bodyType` VARCHAR(45) NOT NULL ,
+  `dateBodyReleased` DATETIME NOT NULL ,
   PRIMARY KEY (`idDeathRegisterNumber`) ,
   INDEX `fk_Body_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   CONSTRAINT `fk_Body_Incident1`
@@ -72,17 +72,16 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`BodyAddress` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`BodyAddress` (
-  `idBodyAddress` INT NOT NULL ,
-  `building` VARCHAR(45) NULL ,
-  `street` VARCHAR(45) NULL ,
-  `suburb` VARCHAR(45) NULL ,
-  `city` VARCHAR(45) NULL ,
-  `postalCode` VARCHAR(45) NULL ,
-  `province` VARCHAR(45) NULL ,
-  `region` VARCHAR(45) NULL ,
-  `magisterialDistrict` VARCHAR(45) NULL ,
+  `building` VARCHAR(45) NOT NULL ,
+  `street` VARCHAR(45) NOT NULL ,
+  `suburb` VARCHAR(45) NOT NULL ,
+  `city` VARCHAR(45) NOT NULL ,
+  `postalCode` VARCHAR(45) NOT NULL ,
+  `province` VARCHAR(45) NOT NULL ,
+  `region` VARCHAR(45) NOT NULL ,
+  `magisterialDistrict` VARCHAR(45) NOT NULL ,
   `Body_idDeathRegisterNumber` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idBodyAddress`) ,
+  PRIMARY KEY (`Body_idDeathRegisterNumber`) ,
   INDEX `fk_BodyAddress_Body1_idx` (`Body_idDeathRegisterNumber` ASC) ,
   CONSTRAINT `fk_BodyAddress_Body1`
     FOREIGN KEY (`Body_idDeathRegisterNumber` )
@@ -98,18 +97,17 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Kin` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Kin` (
-  `idKin` INT NOT NULL AUTO_INCREMENT ,
-  `passport` VARCHAR(45) NULL ,
-  `name` VARCHAR(45) NULL ,
-  `surname` VARCHAR(45) NULL ,
-  `relationWithDeceased` VARCHAR(45) NULL ,
-  `contactNumber` VARCHAR(10) NULL ,
-  `address` VARCHAR(100) NULL ,
-  `workAddress` VARCHAR(100) NULL ,
-  `ID` VARCHAR(13) NULL ,
+  `passport` VARCHAR(45) NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
+  `surname` VARCHAR(45) NOT NULL ,
+  `relationWithDeceased` VARCHAR(45) NOT NULL ,
+  `contactNumber` VARCHAR(10) NOT NULL ,
+  `address` VARCHAR(100) NOT NULL ,
+  `workAddress` VARCHAR(100) NOT NULL ,
+  `ID` VARCHAR(13) NOT NULL ,
   `Body_idDeathRegisterNumber` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idKin`) ,
   INDEX `fk_Kin_Body1_idx` (`Body_idDeathRegisterNumber` ASC) ,
+  PRIMARY KEY (`Body_idDeathRegisterNumber`) ,
   CONSTRAINT `fk_Kin_Body1`
     FOREIGN KEY (`Body_idDeathRegisterNumber` )
     REFERENCES `mydb`.`Body` (`idDeathRegisterNumber` )
@@ -124,23 +122,22 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Property` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Property` (
-  `idProperty` INT NOT NULL AUTO_INCREMENT ,
-  `sealNumber` VARCHAR(9) NULL ,
-  `description` BLOB NULL ,
-  `date` DATE NULL ,
-  `type` VARCHAR(45) NULL ,
-  `sealType` VARCHAR(45) NULL ,
-  `takenBy` VARCHAR(10) NULL ,
-  `witness1_name` VARCHAR(45) NULL ,
-  `witness1_surname` VARCHAR(45) NULL ,
-  `witness2_name` VARCHAR(45) NULL ,
-  `witness2_surname` VARCHAR(45) NULL ,
-  `SAPS_name` VARCHAR(45) NULL ,
-  `SAPS_surname` VARCHAR(45) NULL ,
-  `SAPS_taken` BIT NULL ,
+  `sealNumber` VARCHAR(45) NOT NULL ,
+  `description` BLOB NOT NULL ,
+  `date` DATE NOT NULL ,
+  `type` VARCHAR(45) NOT NULL ,
+  `sealType` VARCHAR(45) NOT NULL ,
+  `takenBy` VARCHAR(10) NOT NULL ,
+  `witness1_name` VARCHAR(45) NOT NULL ,
+  `witness1_surname` VARCHAR(45) NOT NULL ,
+  `witness2_name` VARCHAR(45) NOT NULL ,
+  `witness2_surname` VARCHAR(45) NOT NULL ,
+  `SAPS_name` VARCHAR(45) NOT NULL ,
+  `SAPS_surname` VARCHAR(45) NOT NULL ,
+  `SAPS_taken` BIT NOT NULL ,
   `Body_idDeathRegisterNumber` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idProperty`) ,
   INDEX `fk_Property_Body1_idx` (`Body_idDeathRegisterNumber` ASC) ,
+  PRIMARY KEY (`Body_idDeathRegisterNumber`) ,
   CONSTRAINT `fk_Property_Body1`
     FOREIGN KEY (`Body_idDeathRegisterNumber` )
     REFERENCES `mydb`.`Body` (`idDeathRegisterNumber` )
@@ -156,16 +153,16 @@ DROP TABLE IF EXISTS `mydb`.`DeathCall` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`DeathCall` (
   `idDeathCall` INT NOT NULL AUTO_INCREMENT ,
-  `timeOfCall` TIME NULL ,
-  `dateOfCall` DATE NULL ,
-  `numberOfCaller` VARCHAR(10) NULL ,
-  `institution` VARCHAR(45) NULL ,
-  `sceneAddress` VARCHAR(100) NULL ,
-  `province` VARCHAR(45) NULL ,
-  `region` VARCHAR(45) NULL ,
-  `sceneConditions` VARCHAR(45) NULL ,
-  `nameOfCaller` VARCHAR(45) NULL ,
-  `Incident_incidentLogNumber` VARCHAR(9) NOT NULL ,
+  `timeOfCall` TIME NOT NULL ,
+  `dateOfCall` DATE NOT NULL ,
+  `numberOfCaller` VARCHAR(10) NOT NULL ,
+  `institution` VARCHAR(45) NOT NULL ,
+  `sceneAddress` VARCHAR(100) NOT NULL ,
+  `province` VARCHAR(45) NOT NULL ,
+  `region` VARCHAR(45) NOT NULL ,
+  `sceneConditions` VARCHAR(45) NOT NULL ,
+  `nameOfCaller` VARCHAR(45) NOT NULL ,
+  `Incident_incidentLogNumber` VARCHAR(45) NULL ,
   PRIMARY KEY (`idDeathCall`) ,
   INDEX `fk_DeathCall_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   CONSTRAINT `fk_DeathCall_Incident1`
@@ -177,34 +174,13 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Driver`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Driver` ;
-
-CREATE  TABLE IF NOT EXISTS `mydb`.`Driver` (
-  `idDriver` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NULL ,
-  `surname` VARCHAR(45) NULL ,
-  PRIMARY KEY (`idDriver`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `mydb`.`Vehicle`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mydb`.`Vehicle` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Vehicle` (
   `registrationNumber` VARCHAR(11) NOT NULL ,
-  `crew` INT NULL ,
-  `Driver_idDriver` INT NOT NULL ,
-  PRIMARY KEY (`registrationNumber`) ,
-  INDEX `fk_Vehicle_Driver1_idx` (`Driver_idDriver` ASC) ,
-  CONSTRAINT `fk_Vehicle_Driver1`
-    FOREIGN KEY (`Driver_idDriver` )
-    REFERENCES `mydb`.`Driver` (`idDriver` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`registrationNumber`) )
 ENGINE = InnoDB;
 
 
@@ -215,22 +191,21 @@ DROP TABLE IF EXISTS `mydb`.`VehicleDispatch` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`VehicleDispatch` (
   `idVehicleDispatch` INT NOT NULL AUTO_INCREMENT ,
-  `notificationDateTime` DATETIME NULL ,
-  `departureDateTime` DATETIME NULL ,
-  `dispatchMessage` BLOB NULL ,
-  `Vehicle_registrationNumber` VARCHAR(11) NOT NULL ,
-  `Incident_incidentLogNumber` VARCHAR(9) NOT NULL ,
+  `notificationDateTime` DATETIME NOT NULL ,
+  `departureDateTime` DATETIME NOT NULL ,
+  `Incident_incidentLogNumber` VARCHAR(45) NULL ,
+  `Vehicle_registrationNumber` VARCHAR(11) NULL ,
   PRIMARY KEY (`idVehicleDispatch`) ,
-  INDEX `fk_VehicleDispatch_Vehicle1_idx` (`Vehicle_registrationNumber` ASC) ,
   INDEX `fk_VehicleDispatch_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
-  CONSTRAINT `fk_VehicleDispatch_Vehicle1`
-    FOREIGN KEY (`Vehicle_registrationNumber` )
-    REFERENCES `mydb`.`Vehicle` (`registrationNumber` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_VehicleDispatch_Vehicle1_idx` (`Vehicle_registrationNumber` ASC) ,
   CONSTRAINT `fk_VehicleDispatch_Incident1`
     FOREIGN KEY (`Incident_incidentLogNumber` )
     REFERENCES `mydb`.`Incident` (`incidentLogNumber` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_VehicleDispatch_Vehicle1`
+    FOREIGN KEY (`Vehicle_registrationNumber` )
+    REFERENCES `mydb`.`Vehicle` (`registrationNumber` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -243,13 +218,13 @@ DROP TABLE IF EXISTS `mydb`.`IncidentMessage` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`IncidentMessage` (
   `idIncidentMessage` INT NOT NULL AUTO_INCREMENT ,
-  `date` VARCHAR(45) NULL ,
-  `time` VARCHAR(45) NULL ,
-  `mannerOfDeath` VARCHAR(45) NULL ,
-  `nameOfDeceased` VARCHAR(45) NULL ,
-  `vip` BIT NULL ,
-  `caseStatus` BIT NULL ,
-  `Incident_incidentLogNumber` VARCHAR(9) NOT NULL ,
+  `date` VARCHAR(45) NOT NULL ,
+  `time` VARCHAR(45) NOT NULL ,
+  `mannerOfDeath` VARCHAR(45) NOT NULL ,
+  `nameOfDeceased` VARCHAR(45) NOT NULL ,
+  `vip` BIT NOT NULL ,
+  `bodyFileStatus` BIT NOT NULL ,
+  `Incident_incidentLogNumber` VARCHAR(45) NULL ,
   PRIMARY KEY (`idIncidentMessage`) ,
   INDEX `fk_IncidentMessage_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   CONSTRAINT `fk_IncidentMessage_Incident1`
@@ -261,26 +236,49 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `mydb`.`Member`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Member` ;
+
+CREATE  TABLE IF NOT EXISTS `mydb`.`Member` (
+  `idMember` INT NOT NULL ,
+  `name` VARCHAR(45) NOT NULL ,
+  `surname` VARCHAR(45) NOT NULL ,
+  `rank` VARCHAR(45) NOT NULL ,
+  `personnelNumber` VARCHAR(10) NOT NULL ,
+  `organization` VARCHAR(45) NOT NULL ,
+  `contactNumber` VARCHAR(10) NOT NULL ,
+  PRIMARY KEY (`idMember`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mydb`.`AtScene`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mydb`.`AtScene` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`AtScene` (
-  `idAtScene` INT NOT NULL ,
-  `sceneIncidentOccured` VARCHAR(45) NULL ,
-  `sceneDateTime` DATETIME NULL ,
-  `pathOnScene` BIT NULL ,
-  `allegedInjuryDateTime` DATETIME NULL ,
-  `allegedDeathDateTime` DATETIME NULL ,
-  `externalCircumstanceOfInjury` BLOB NULL ,
-  `placeOfDeath` VARCHAR(45) NULL ,
-  `dateTimeBodyFound` DATETIME NULL ,
+  `sceneIncidentOccured` VARCHAR(45) NOT NULL ,
+  `sceneDateTime` DATETIME NOT NULL ,
+  `pathOnScene` BIT NOT NULL ,
+  `allegedInjuryDateTime` DATETIME NOT NULL ,
+  `allegedDeathDateTime` DATETIME NOT NULL ,
+  `externalCircumstanceOfInjury` VARCHAR(45) NOT NULL ,
+  `placeOfDeath` VARCHAR(45) NOT NULL ,
+  `dateTimeBodyFound` DATETIME NOT NULL ,
   `Body_idDeathRegisterNumber` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idAtScene`) ,
+  `Member_idMember` INT NULL ,
   INDEX `fk_AtScene_Body1_idx` (`Body_idDeathRegisterNumber` ASC) ,
+  PRIMARY KEY (`Body_idDeathRegisterNumber`) ,
+  INDEX `fk_AtScene_Member1_idx` (`Member_idMember` ASC) ,
   CONSTRAINT `fk_AtScene_Body1`
     FOREIGN KEY (`Body_idDeathRegisterNumber` )
     REFERENCES `mydb`.`Body` (`idDeathRegisterNumber` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_AtScene_Member1`
+    FOREIGN KEY (`Member_idMember` )
+    REFERENCES `mydb`.`Member` (`idMember` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -292,11 +290,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`AtMortuary` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`AtMortuary` (
-  `idAtMortuary` INT NOT NULL ,
-  `bodyReceievedFromPerNumber` VARCHAR(10) NULL ,
-  `bodyHandOverFromPerNumber` VARCHAR(10) NULL ,
+  `bodyReceievedFromPerNumber` VARCHAR(10) NOT NULL ,
+  `bodyHandOverFromPerNumber` VARCHAR(10) NOT NULL ,
   `Body_idDeathRegisterNumber` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idAtMortuary`) ,
+  PRIMARY KEY (`Body_idDeathRegisterNumber`) ,
   INDEX `fk_AtMortuary_Body1_idx` (`Body_idDeathRegisterNumber` ASC) ,
   CONSTRAINT `fk_AtMortuary_Body1`
     FOREIGN KEY (`Body_idDeathRegisterNumber` )
@@ -312,41 +309,17 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`BodyFile` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`BodyFile` (
-  `dateCaseOpened` DATE NULL ,
-  `caseStatus` BIT NULL ,
+  `dateFileOpened` DATE NOT NULL ,
+  `bodyFileStatus` BIT NOT NULL ,
   `Body_idDeathRegisterNumber` VARCHAR(45) NOT NULL ,
-  `allSamplesReceived` BIT NULL ,
-  `bodyIdentified` BIT NULL ,
-  `postMortemComplete` BIT NULL ,
+  `allSamplesReceived` BIT NOT NULL ,
+  `bodyIdentified` BIT NOT NULL ,
+  `postMortemComplete` BIT NOT NULL ,
   INDEX `fk_Case_Body1_idx` (`Body_idDeathRegisterNumber` ASC) ,
   PRIMARY KEY (`Body_idDeathRegisterNumber`) ,
   CONSTRAINT `fk_Case_Body1`
     FOREIGN KEY (`Body_idDeathRegisterNumber` )
     REFERENCES `mydb`.`Body` (`idDeathRegisterNumber` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Member`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Member` ;
-
-CREATE  TABLE IF NOT EXISTS `mydb`.`Member` (
-  `idMember` INT NOT NULL ,
-  `name` VARCHAR(45) NULL ,
-  `surname` VARCHAR(45) NULL ,
-  `rank` VARCHAR(45) NULL ,
-  `personnelNumber` VARCHAR(10) NULL ,
-  `organization` VARCHAR(45) NULL ,
-  `contactNumber` VARCHAR(10) NULL ,
-  `AtScene_idAtScene` INT NOT NULL ,
-  PRIMARY KEY (`idMember`) ,
-  INDEX `fk_Member_AtScene1_idx` (`AtScene_idAtScene` ASC) ,
-  CONSTRAINT `fk_Member_AtScene1`
-    FOREIGN KEY (`AtScene_idAtScene` )
-    REFERENCES `mydb`.`AtScene` (`idAtScene` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -359,7 +332,7 @@ DROP TABLE IF EXISTS `mydb`.`BodyLink` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`BodyLink` (
   `idBodyLink` INT NOT NULL ,
-  `BodyFile_Body_idDeathRegisterNumber1` VARCHAR(45) NOT NULL ,
+  `BodyFile_Body_idDeathRegisterNumber1` VARCHAR(45) NULL ,
   PRIMARY KEY (`idBodyLink`) ,
   INDEX `fk_BodyLink_BodyFile2_idx` (`BodyFile_Body_idDeathRegisterNumber1` ASC) ,
   CONSTRAINT `fk_BodyLink_BodyFile2`
@@ -378,12 +351,12 @@ DROP TABLE IF EXISTS `mydb`.`PostMortem` ;
 CREATE  TABLE IF NOT EXISTS `mydb`.`PostMortem` (
   `labNumber` VARCHAR(45) NOT NULL ,
   `icd10` VARCHAR(3) NOT NULL ,
-  `chiefFind` BLOB NOT NULL ,
-  `causeOfDeath` BLOB NOT NULL ,
+  `chiefFind` LONGTEXT NOT NULL ,
+  `causeOfDeath` LONGTEXT NOT NULL ,
   `status` BIT NOT NULL ,
   `approved` BIT NOT NULL ,
   `DHA1663number` VARCHAR(45) NOT NULL ,
-  `Body_idDeathRegisterNumber` VARCHAR(45) NOT NULL ,
+  `Body_idDeathRegisterNumber` VARCHAR(45) NULL ,
   PRIMARY KEY (`labNumber`) ,
   INDEX `fk_PostMortem_Body1_idx` (`Body_idDeathRegisterNumber` ASC) ,
   CONSTRAINT `fk_PostMortem_Body1`
@@ -420,14 +393,14 @@ DROP TABLE IF EXISTS `mydb`.`ForensicSample` ;
 CREATE  TABLE IF NOT EXISTS `mydb`.`ForensicSample` (
   `sealNumber` VARCHAR(45) NOT NULL ,
   `deathRegisterNumber` VARCHAR(45) NOT NULL ,
-  `reason` BLOB NOT NULL ,
+  `reason` LONGTEXT NOT NULL ,
   `sealType` VARCHAR(45) NOT NULL ,
   `brokenSealNumber` VARCHAR(45) NOT NULL ,
   `typeOfAnalysis` VARCHAR(45) NOT NULL ,
   `institution` VARCHAR(45) NOT NULL ,
   `specialInstructions` VARCHAR(45) NOT NULL ,
   `received` BIT NOT NULL ,
-  `labNumber` VARCHAR(45) NOT NULL ,
+  `labNumber` VARCHAR(45) NULL ,
   PRIMARY KEY (`sealNumber`) ,
   INDEX `fk_ForensicSample_LabRecord1_idx` (`labNumber` ASC) ,
   CONSTRAINT `fk_ForensicSample_LabRecord1`
