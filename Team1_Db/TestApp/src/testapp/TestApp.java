@@ -82,9 +82,8 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         //creating the objects to work with
         Incident incid = new Incident();
         incid.setIncidentLogNumber("TESTLOGNUMBER1");
-        Vehicle car = new Vehicle("RRB123", 2);
+        Vehicle car = new Vehicle("RRB123");
         VehicleDispatch carDispatch = new VehicleDispatch("1000-01-01 00:00:30","1000-01-01 00:00:40", "Our edited dispatch", car, incid);
-            carDispatch.setIdVehicleDispatch(2);
         VehicleDispatchDb dispatchDb = new VehicleDispatchDb(dbDetail, carDispatch);
         dispatchDb.init();
         
