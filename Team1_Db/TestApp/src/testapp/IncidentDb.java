@@ -36,6 +36,15 @@ public class IncidentDb extends DatabaseConnector
       
       }
     
+         //GET METHODS
+         public Incident getIncident(){
+             return this.incident;
+         }
+         
+         //SET METHODS
+         public void setIncident(Incident inIncident){
+             this.incident = inIncident;
+         }
 
     @Override
     public String add() 
@@ -96,9 +105,26 @@ public class IncidentDb extends DatabaseConnector
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public Incident findIncident(String inIncidentLogNumber) throws SQLException{
+        Incident found;
+        try 
+        {
+            statement.executeQuery("SELECT * FROM incident WERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            found = new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"));
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            throw new SQLException(ex.getMessage());
+        }
+        return found;
+    }
     //incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound
     @Override
-    public String edit()
+    public String edit()//WILL NEED TO PASS PRIMARY KEY FOR WHERE CLAUSE
     {
         try 
         {                                                                                                                                                                                                                                                                                                                                                                                         
@@ -116,7 +142,7 @@ public class IncidentDb extends DatabaseConnector
     @Override
     public String delete()
     {
-        return "";
+        return "SHOULD NOT BE ABLE TO DELETE AN INCIDENT UNLESS YOU HAVE HIGH ACCESS";
     }
     
 }
