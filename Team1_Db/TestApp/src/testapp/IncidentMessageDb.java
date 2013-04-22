@@ -65,7 +65,7 @@ public class IncidentMessageDb extends DatabaseConnector
             {
                 IncidentDb incidentDb = new IncidentDb(dbDetail);
                 Incident incident = incidentDb.findIncident(resultSet.getString("Incident_incidentLogNumber"));
-                msglist.add(new IncidentMessage(resultSet.getString("date"), resultSet.getString("time"), resultSet.getString("mannerOfDeath"), resultSet.getString("nameOfDeceased"), resultSet.getBoolean("vip"), resultSet.getBoolean("status"), in));
+                msglist.add(new IncidentMessage(resultSet.getString("date"), resultSet.getString("time"), resultSet.getString("mannerOfDeath"), resultSet.getString("nameOfDeceased"), resultSet.getBoolean("vip"), resultSet.getBoolean("status"), incident));
             }
             statement.close();
             connection.close();

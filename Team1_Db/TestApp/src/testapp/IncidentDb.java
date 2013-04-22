@@ -45,6 +45,38 @@ public class IncidentDb extends DatabaseConnector
          public void setIncident(Incident inIncident){
              this.incident = inIncident;
          }
+         
+    //DATABSE METHODS
+    public int countOpenIncidents() throws SQLException{
+        int count = 0;
+        try 
+        {
+            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM incident WHERE status='true';");
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            count = resultSet.getInt("countOpenIncidents");
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            throw new SQLException(ex.getMessage());
+        }
+             return count;
+    }
+    
+    public void closeIncident(String inIncidentLogNumber) throws SQLException{
+        try 
+        {                                                                                                                                                                                                                                                                                                                                                                                         
+            statement.executeUpdate("UPDATE incident SET status = 'false' WHERE incidentLogNumber = '"+ inIncidentLogNumber +"';" );
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            throw new SQLException(ex.getMessage());
+        }
+    }
 
     @Override
     public String add() 
@@ -86,6 +118,27 @@ public class IncidentDb extends DatabaseConnector
         try 
         {
             statement.executeQuery("select incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound from incident;");
+            ResultSet resultSet = statement.getResultSet();
+            while(resultSet.next())
+            {
+                incidentList.add(new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status")));
+            }
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            throw new SQLException(ex.getMessage());
+        }
+        return incidentList;
+    }
+    
+    public  ArrayList<Incident> openIncidentList() throws SQLException
+    {
+        ArrayList<Incident> incidentList = new ArrayList<Incident>();
+        try 
+        {
+            statement.executeQuery("SELECT * FROM incident WHERE staus = 'true';");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
