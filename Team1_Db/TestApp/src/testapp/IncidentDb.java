@@ -181,7 +181,7 @@ public class IncidentDb extends DatabaseConnector
     {
         try 
         {                                                                                                                                                                                                                                                                                                                                                                                         
-            statement.executeUpdate("UPDATE Incident SET referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"' WHERE incidentLogNumber= '" + incident.getIncidentLogNumber() + "';" );
+            statement.executeUpdate("UPDATE Incident SET referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"', status="+ incident.isOpen() +" WHERE incidentLogNumber= '" + incident.getIncidentLogNumber() + "';" );
             statement.close();
             connection.close();
         } 

@@ -144,7 +144,7 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         //TESTING INCIDENT
          //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
-        Incident inci = new  Incident("001232223","refer" ,3,"2013-04-20","12:43:30" , "rap shooting", "gutter", "had beef with 50cent","hill",3,false);
+        Incident inci = new  Incident("001232223","refer" ,4,"2013-04-11","12:50:30" , "rap stabbing", "vegas", "had beef with TI","the vegas strip",3,true);
         IncidentDb inciDb = new IncidentDb(inci,dbDetail);
         inciDb.init();
         
