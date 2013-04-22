@@ -40,15 +40,7 @@ public class VehicleDispatchDb extends DatabaseConnector {
     public String add(){
         try 
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            statement.executeUpdate("INSERT INTO VehicleDispatch (notificationDateTime, departureDateTime, dispatchMessage, Vehicle_registrationNumber) VALUES ( '" + vehicleDispatch.getNotificationDateTime() + "', '" + vehicleDispatch.getDepartureDateTime() +"', '" + vehicleDispatch.getDispatchMessage() + "', '" + vehicleDispatch.getVehicle().getRegistrationNumber() +"' )");
-=======
-            statement.executeUpdate("INSERT INTO VehicleDispatch (notificationDateTime, departureDateTime, dispatchMessage) VALUES ('" + this.vehicleDispatch.getNotificationDateTime() + "', '" + this.vehicleDispatch.getDepartureDateTime() +"', '" + this.vehicleDispatch.getDispatchMessage() + "');" /*'" + this.vehicleDispatch.getIncident().getIncidentLogNumber() + "', '" + this.vehicleDispatch.getVehicle().getRegistrationNumber() +"' )*/);
->>>>>>> origin/master
-=======
             statement.executeUpdate("INSERT INTO VehicleDispatch (notificationDateTime, departureDateTime, Incident_incidentLogNumber, Vehicle_registrationNumber) VALUES ('" + this.vehicleDispatch.getNotificationDateTime() + "', '" + this.vehicleDispatch.getDepartureDateTime() +"', '" + this.vehicleDispatch.getIncident().getIncidentLogNumber() + "', '" + this.vehicleDispatch.getVehicle().getRegistrationNumber() +"';)");
->>>>>>> origin/master
             statement.close();
             connection.close(); 
         } 
