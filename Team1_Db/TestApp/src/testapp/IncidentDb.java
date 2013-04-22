@@ -85,8 +85,8 @@ public class IncidentDb extends DatabaseConnector
         
           try  
         {  //
-            statement.executeUpdate("insert into incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " values"
-                                    +"('" 
+            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " VALUES"
+                                    +" ('" 
                                     + incident.getIncidentLogNumber() + "','" 
                                     + incident.getReferenceNumber()+ "','"
                                     + incident.getNumberOfBodies() +"','"
@@ -117,7 +117,7 @@ public class IncidentDb extends DatabaseConnector
         ArrayList<Incident> incidentList = new ArrayList<Incident>();
         try 
         {
-            statement.executeQuery("select incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound from incident;");
+            statement.executeQuery("SELECT * FROM incident;");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
@@ -138,7 +138,7 @@ public class IncidentDb extends DatabaseConnector
         ArrayList<Incident> incidentList = new ArrayList<Incident>();
         try 
         {
-            statement.executeQuery("SELECT * FROM incident WHERE staus = 'true';");
+            statement.executeQuery("SELECT * FROM incident WHERE status = 1;");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
@@ -177,11 +177,11 @@ public class IncidentDb extends DatabaseConnector
     }
     //incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound
     @Override
-    public String edit()//WILL NEED TO PASS PRIMARY KEY FOR WHERE CLAUSE
+    public String edit()//WILL NEED TO PASS PRIMARY KEY FOR WHERE CLAUSE unless we assume we cannot edit primary
     {
         try 
         {                                                                                                                                                                                                                                                                                                                                                                                         
-            statement.executeUpdate("update incident set incidentLogNumber='" + incident.getIncidentLogNumber() + "',referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"' where status=0;" );
+            statement.executeUpdate("UPDATE Incident SET referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"' WHERE incidentLogNumber= '" + incident.getIncidentLogNumber() + "';" );
             statement.close();
             connection.close();
         } 
