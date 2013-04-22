@@ -10,10 +10,9 @@ package testapp;
  * @author Administrator
  */
 public class VehicleDispatch {
-    private int idVehicleDispatch;
     private String notificationDateTime;
     private String departureDateTime;
-    private String dispatchMessage;
+    //private String dispatchMessage;
     private Vehicle vehicle;
 <<<<<<< HEAD
 =======
@@ -24,7 +23,6 @@ public class VehicleDispatch {
     public VehicleDispatch(){
         this.notificationDateTime = "";
         this.departureDateTime = "";
-        this.dispatchMessage = "";
         this.vehicle = new Vehicle();
 <<<<<<< HEAD
     }
@@ -39,7 +37,6 @@ public class VehicleDispatch {
 >>>>>>> origin/master
         this.notificationDateTime = inNotificationDateTime;
         this.departureDateTime = inDepartureDateTime;
-        this.dispatchMessage = inDispatchMessage;
         this.vehicle = inVehicle;
 <<<<<<< HEAD
 =======
@@ -48,20 +45,12 @@ public class VehicleDispatch {
     }
     
     // GET  METHODS
-    public int getIdVehicleDispatch(){
-        return this.idVehicleDispatch;
-    }
-    
     public String getNotificationDateTime(){
         return this.notificationDateTime;
     }
     
     public String getDepartureDateTime(){
         return this.departureDateTime;
-    }
-    
-    public String getDispatchMessage(){
-        return this.dispatchMessage;
     }
     
     public Vehicle getVehicle(){
@@ -76,20 +65,12 @@ public class VehicleDispatch {
     }
     
     // SET METHODS
-    public void setIdVehicleDispatch(int inIdVehicleDispatch){
-        this.idVehicleDispatch = inIdVehicleDispatch;
-    }
-    
     public void setNotificationDateTime(String inNotificationDateTime){
         this.notificationDateTime = inNotificationDateTime;
     }
     
     public void setDepartureDateTime(String inDepartureDateTime){
         this.departureDateTime = inDepartureDateTime;
-    }
-    
-    public void setDispatchMessage(String inDispatchMessage){
-        this.dispatchMessage = inDispatchMessage;
     }
     
     public void setVehicle(Vehicle inVehicle){
