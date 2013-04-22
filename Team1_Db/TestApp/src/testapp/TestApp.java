@@ -58,34 +58,35 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         //TESTING ORGANIZATION STUFF:
         //connection
-        //OrganizationDb orgDb = new OrganizationDb(new Organization("TestHospital2", "0118677778", "Hospital"), dbDetail);
+        //OrganizationDb orgDb = new OrganizationDb(new Organization(3,"TestSampleLab","0119876543","Sample Lab"), dbDetail);
         //orgDb.init();
         
-        /*//adding organization
-        System.out.println(orgDb.add());*/
+        //adding organization
+        //System.out.println(orgDb.add());
         
         //list of organizations
-        /*ArrayList<Organization> orglist = orgDb.organizationList();
-        for(int j = 0; j<orglist.size(); j++){
-            System.out.println(orglist.get(j).getName() + " " + orglist.get(j).getContactNumber() + " " + orglist.get(j).getType());
-        }*/
+        //ArrayList<Organization> orglist = orgDb.organizationList();
+        //for(int j = 0; j<orglist.size(); j++){
+        //    System.out.println(orglist.get(j).getIdOrganization() + " " + orglist.get(j).getName() + " " + orglist.get(j).getContactNumber() + " " + orglist.get(j).getType());
+        //}
         
-        //edit
+        //edit organization
+        //System.out.println(orgDb.edit());
         
         
-       /*//deleting organizations
-       System.out.println(orgDb.delete("Hospital", 8));*/
+       //deleting organization
+       //System.out.println(orgDb.delete());
         
         //END OF ORGANIZATION STUFF.
         
        //TESTING VEHICLE DISPATCH STUFF
         //creating the objects to work with
-        Incident incid = new Incident();
-        incid.setIncidentLogNumber("TESTLOGNUMBER1");
-        Vehicle car = new Vehicle("RRB123");
-        VehicleDispatch carDispatch = new VehicleDispatch("1000-01-01 00:00:30","1000-01-01 00:00:40", "Our edited dispatch", car, incid);
-        VehicleDispatchDb dispatchDb = new VehicleDispatchDb(dbDetail, carDispatch);
-        dispatchDb.init();
+        //Incident incid = new Incident();
+        //incid.setIncidentLogNumber("TESTLOGNUMBER1");
+        //Vehicle car = new Vehicle("RRB123");
+       // VehicleDispatch carDispatch = new VehicleDispatch("1000-01-01 00:00:30","1000-01-01 00:00:40", "Our edited dispatch", car, incid);
+        //VehicleDispatchDb dispatchDb = new VehicleDispatchDb(dbDetail, carDispatch);
+        //dispatchDb.init();
         
         //adding
         //System.out.println(dispatchDb.add());
@@ -143,15 +144,24 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         //TESTING INCIDENT
          //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
-        /*Incident inci = new  Incident("001232222","refe" ,2,"2013-04-19","12:43:23" , "circumstance of death", "place body found", "specialCircumstances","hill",2,false);
+        Incident inci = new  Incident("001232222","refe" ,2,"2013-04-19","12:43:23" , "circumstance of death", "place body found", "specialCircumstances","hill",2,false);
         IncidentDb inciDb = new IncidentDb(inci,dbDetail);
-        inciDb.init();*/
+        inciDb.init();
+        
+        //adding an incident
+        
+        //listing incidents
         //ArrayList<Incident> list = inciDb.incidentList();
         /*for(int i = 0;i < list.size();i++)
         {
             System.out.println(list.get(i).getIncidentLogNumber());
         }*/
         //System.out.println(inciDb.add());
+        
+        //edit incidents
+        
+        //delete incidents
+        
         //END OF INCIDENT STUFF
         
         //TEST INCIDENT MESSAGE

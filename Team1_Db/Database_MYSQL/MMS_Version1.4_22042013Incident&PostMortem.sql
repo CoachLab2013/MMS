@@ -53,7 +53,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Body` (
   `bodyStatus` BIT NOT NULL ,
   `dateBodyReceieved` DATETIME NOT NULL ,
   `bodyReleased` BIT NOT NULL ,
-  `Incident_incidentLogNumber` VARCHAR(45) NULL ,
+  `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
   `bodyType` VARCHAR(45) NOT NULL ,
   `dateBodyReleased` DATETIME NOT NULL ,
   PRIMARY KEY (`idDeathRegisterNumber`) ,
@@ -162,7 +162,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`DeathCall` (
   `region` VARCHAR(45) NOT NULL ,
   `sceneConditions` VARCHAR(45) NOT NULL ,
   `nameOfCaller` VARCHAR(45) NOT NULL ,
-  `Incident_incidentLogNumber` VARCHAR(45) NULL ,
+  `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`idDeathCall`) ,
   INDEX `fk_DeathCall_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   CONSTRAINT `fk_DeathCall_Incident1`
@@ -193,7 +193,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`VehicleDispatch` (
   `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
   `notificationDateTime` DATETIME NOT NULL ,
   `departureDateTime` DATETIME NOT NULL ,
-  `Vehicle_registrationNumber` VARCHAR(11) NULL ,
+  `Vehicle_registrationNumber` VARCHAR(11) NOT NULL ,
   INDEX `fk_VehicleDispatch_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
   INDEX `fk_VehicleDispatch_Vehicle1_idx` (`Vehicle_registrationNumber` ASC) ,
   PRIMARY KEY (`Incident_incidentLogNumber`) ,
@@ -329,7 +329,7 @@ DROP TABLE IF EXISTS `mydb`.`BodyLink` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`BodyLink` (
   `idBodyLink` INT NOT NULL ,
-  `BodyFile_Body_idDeathRegisterNumber1` VARCHAR(45) NULL ,
+  `BodyFile_Body_idDeathRegisterNumber1` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`idBodyLink`) ,
   INDEX `fk_BodyLink_BodyFile2_idx` (`BodyFile_Body_idDeathRegisterNumber1` ASC) ,
   CONSTRAINT `fk_BodyLink_BodyFile2`
@@ -353,7 +353,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`PostMortem` (
   `status` BIT NOT NULL ,
   `approved` BIT NOT NULL ,
   `DHA1663number` VARCHAR(45) NOT NULL ,
-  `Body_idDeathRegisterNumber` VARCHAR(45) NULL ,
+  `Body_idDeathRegisterNumber` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`labNumber`) ,
   INDEX `fk_PostMortem_Body1_idx` (`Body_idDeathRegisterNumber` ASC) ,
   CONSTRAINT `fk_PostMortem_Body1`
@@ -397,7 +397,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`ForensicSample` (
   `institution` VARCHAR(45) NOT NULL ,
   `specialInstructions` VARCHAR(45) NOT NULL ,
   `received` BIT NOT NULL ,
-  `labNumber` VARCHAR(45) NULL ,
+  `labNumber` VARCHAR(45) NOT NULL ,
   `dateSent` DATE NOT NULL ,
   `dateRecieved` DATE NOT NULL ,
   PRIMARY KEY (`sealNumber`) ,

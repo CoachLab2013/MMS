@@ -69,9 +69,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`OrganizationType` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`OrganizationType` (
-  `idOrganizationType` INT NOT NULL ,
-  `description` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idOrganizationType`) )
+  `type` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`type`) )
 ENGINE = InnoDB;
 
 
@@ -84,12 +83,12 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Organization` (
   `idOrganization` INT NOT NULL ,
   `name` VARCHAR(45) NULL ,
   `contactNumber` VARCHAR(45) NULL ,
-  `OrganizationType_idOrganizationType` INT NOT NULL ,
+  `OrganizationType_type` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`idOrganization`) ,
-  INDEX `fk_Organization_OrganizationType1_idx` (`OrganizationType_idOrganizationType` ASC) ,
+  INDEX `fk_Organization_OrganizationType1_idx` (`OrganizationType_type` ASC) ,
   CONSTRAINT `fk_Organization_OrganizationType1`
-    FOREIGN KEY (`OrganizationType_idOrganizationType` )
-    REFERENCES `mydb`.`OrganizationType` (`idOrganizationType` )
+    FOREIGN KEY (`OrganizationType_type` )
+    REFERENCES `mydb`.`OrganizationType` (`type` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

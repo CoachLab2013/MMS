@@ -79,7 +79,7 @@ public class OrganizationDb extends DatabaseConnector{
             while(resultSet.next())
             {
                 Organization org = new Organization();
-                org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
+                org.setIdOrganization(resultSet.getInt("idOrganization"));
                 org.setName(resultSet.getString("name"));
                 org.setContactNumber(resultSet.getString("contactNumber"));
                 org.setType(resultSet.getString("OrganizationType_type"));
@@ -97,7 +97,7 @@ public class OrganizationDb extends DatabaseConnector{
     
     //function(s) to edit the details of a specific organization
     @Override
-    public String edit(){//Has to pass primary key
+    public String edit(){//Has to pass primary key un less we assume they cannot change the primary key
          try 
         {
             statement.executeUpdate("UPDATE Organization SET name='" + organization.getName()+ "', contactNumber='" + organization.getContactNumber() +"', OrganizationType_type='"+ organization.getType() +"' WHERE idOrganization = '"+ organization.getIdOrganization() +"';" );

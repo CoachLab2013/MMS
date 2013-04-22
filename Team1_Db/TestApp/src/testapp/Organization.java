@@ -14,22 +14,25 @@ public class Organization {
     private int idOrganization;
     private String type;
     
+    //CONSTRUCTORS
     public Organization(){
         this.name = "";
         this.contactNumber = "";
         this.type = "";
     }
     
+    public Organization(int inIdOrganization, String inName, String inContactNumber, String inType){
+        this.name = inName;
+        this.contactNumber = inContactNumber;
+        this.type = inType;
+        this.idOrganization = inIdOrganization;
+    }
+    
     public Organization(String inName, String inContactNumber, String inType){
         this.name = inName;
         this.contactNumber = inContactNumber;
         this.type = inType;
-        
-        //SQL CODE:
-        /*
-         INSERT INTO organizations VALUES (NULL, 'this.name', 'this.contactNumber');
-         */
-    } 
+    }
     
     //GET METHODS
     public int getIdOrganization(){
