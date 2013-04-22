@@ -50,6 +50,18 @@
             String main1 = "";
             String addUserTab = "";
             String currentUserTab = "";
+<<<<<<< HEAD
+            if (null != session.getAttribute("result")) {
+               userResult= session.getAttribute("result").toString();
+                  if (null != session.getAttribute("tab")) {
+               addUserTab= session.getAttribute("tab").toString();                 
+               currentUserTab="";
+             }
+            }else{
+             addUserTab= "";
+             currentUserTab="active";
+            }
+=======
             String main2 = "";
 
             String inst = "";
@@ -258,6 +270,7 @@
             ArrayList<String> institutionList = emp.referenceList();
             */
 
+>>>>>>> origin/master
         %>
 
         <p>

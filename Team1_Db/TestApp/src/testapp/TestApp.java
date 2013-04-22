@@ -79,7 +79,13 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         //END OF ORGANIZATION STUFF.
         
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        //TESTING VEHICLE DISPATCH STUFF
+=======
        //TESTING VEHICLE DISPATCH STUFF
+>>>>>>> origin/master
         //creating the objects to work with
         //Incident incid = new Incident();
         //incid.setIncidentLogNumber("TESTLOGNUMBER1");
@@ -100,6 +106,7 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         //reading
         //System.out.println(dispatchDb.read());
         //END OF VEHICLE DISPATCH STUFF
+>>>>>>> origin/master
         
         //TESTING REFERENCE LIST STUFF
         /*//Reference List
@@ -140,11 +147,27 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         }
         //System.out.println(db.add());*/
         //END OF VEHICLE
+<<<<<<< HEAD
         
         
         //TESTING INCIDENT
          //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
+<<<<<<< HEAD
         Incident inci = new  Incident("001232223","refer" ,4,"2013-04-11","12:50:30" , "rap stabbing", "vegas", "had beef with TI","the vegas strip",3,true);
+=======
+=======
+        
+        
+        //TESTING INCIDENT
+<<<<<<< HEAD
+        /* //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
+>>>>>>> origin/master
+        Incident inci = new  Incident("001234444","refe" ,2,"10/10/10","12:43:23" , "circumstance of death", "place body found", "specialCircumstances","",2,false);
+=======
+         //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
+        Incident inci = new  Incident("001232222","refe" ,2,"2013-04-19","12:43:23" , "circumstance of death", "place body found", "specialCircumstances","hill",2,false);
+>>>>>>> origin/master
+>>>>>>> origin/master
         IncidentDb inciDb = new IncidentDb(inci,dbDetail);
         inciDb.init();
         
@@ -152,16 +175,34 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         //System.out.println(inciDb.add());
         
         //listing incidents
+<<<<<<< HEAD
         //ArrayList<Incident> list = inciDb.openIncidentList();
         //for(int i = 0;i < list.size();i++)
         //{
         //    System.out.println(list.get(i).getIncidentLogNumber() + " " + list.get(i).getReferenceNumber() + " " + list.get(i).getNumberOfBodies() + " " + list.get(i).getDateOfIncident() + " " + list.get(i).getTimeOfIncident() + " " + list.get(i).getCircumstanceOfDeath() + " " + list.get(i).getPlaceBodyFound() + " " + list.get(i).getSpecialCircumstances() + " " + list.get(i).getBodyCount() + " " + list.get(i).isOpen());
         //}
+=======
+        //ArrayList<Incident> list = inciDb.incidentList();
+        /*for(int i = 0;i < list.size();i++)
+        {
+            System.out.println(list.get(i).getIncidentLogNumber());
+<<<<<<< HEAD
+        }
+<<<<<<< HEAD
+        //System.out.println(inciDb.add());
+=======
+        //System.out.println(inciDb.add());*/
+>>>>>>> origin/master
+=======
+        }*/
+        //System.out.println(inciDb.add());
+>>>>>>> origin/master
         
         //edit incidents
         System.out.println(inciDb.edit());
         //delete incidents
         
+>>>>>>> origin/master
         //END OF INCIDENT STUFF
         
         //TEST INCIDENT MESSAGE

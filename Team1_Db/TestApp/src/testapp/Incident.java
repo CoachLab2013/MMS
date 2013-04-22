@@ -119,7 +119,11 @@ public void setNumberOfBodies(int numberOfBodies)
 {
     this.numberOfBodies = numberOfBodies;
 }
+<<<<<<< HEAD
+public void sgetDateOfIncident(String dateOfIncident)
+=======
 public void setDateOfIncident(String dateOfIncident)
+>>>>>>> origin/master
 {
     this.dateOfIncident = dateOfIncident;
 }
