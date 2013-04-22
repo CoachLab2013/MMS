@@ -31,6 +31,7 @@ public class Organization {
          */
     } 
     
+    //GET METHODS
     public int getIdOrganization(){
         return this.idOrganization;
     }
@@ -53,6 +54,7 @@ public class Organization {
         return this.type;
     }
     
+    //SET METHODS
     public void setIdOrganization(int id){
         this.idOrganization = id;
     }
