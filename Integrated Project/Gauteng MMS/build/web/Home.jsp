@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+ 
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +25,6 @@
         <title>Gauteng Mortuary Management System</title>
     </head>
     <body>
-      
         <%-- <p>Welcome MR Pathologist <span>Logout</span></p>--%>
         <p>
              
@@ -35,8 +34,8 @@
         <div align="center"><h1> <img src="Images/logo.jpg" width="75" height="75"> Gauteng Mortuary Management System</h1></div>
          <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
-                <li class="active"><a href="#Incident" data-toggle="tab">Incidents</a> </li>
-                <li><a href="#BodyFile" data-toggle="tab">Body File</a></li>       
+                <li id="IncidentTab" class="active"><a href="#Incident" data-toggle="tab">Incidents</a> </li>
+                <li id ="BodyFileTab"><a href="#BodyFile" data-toggle="tab">Body File</a></li>       
             </ul>
             <div class="tab-content" >
                 <div id="Incident" class="tab-pane active">  

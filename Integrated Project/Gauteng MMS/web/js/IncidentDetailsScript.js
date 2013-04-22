@@ -60,10 +60,10 @@ $(document).ready(function(){
         },
         errorPlacement: function(error, element) {
             if ((element.attr("name") == "year") || (element.attr("name") == "month") || (element.attr("name") == "day")){
-                error.insertAfter("#day");
+                error.insertAfter("#detailform #day");
             } 
             else if((element.attr("name") == "hour") || (element.attr("name") == "minute")){
-                error.insertAfter("#minute");
+                error.insertAfter("#detailform #minute");
             }
             else {
                 error.insertAfter(element);
@@ -99,7 +99,7 @@ $(document).ready(function(){
           
           
           numberofbodies:{
-              valueNotEquals: "Plase select the number of bodies."
+              valueNotEquals: "Please select the number of bodies."
           },//end message for number of bodies
           
           placefound:{
@@ -107,7 +107,7 @@ $(document).ready(function(){
             },//end messages for place found
             
             specialcircumstances:{
-              valueNotEquals: "Plase select a special circumstance."
+              valueNotEquals: "Please select a special circumstance."
           }//end message for specialcircumstances
             
         }//end of messages
@@ -130,6 +130,8 @@ $(document).ready(function(){
         var year = $("#year").val();
         var month = $("#month").val();
         var day = $("#day").val();
+        var nummonth = $("option:selected","#month").attr("num");
+        var date = new Date();
        if((month=="April")|| (month=="June") || (month=="September") || (month=="November")){
             if(day >30){
                 return !value;
@@ -137,14 +139,23 @@ $(document).ready(function(){
             return value;    
         }
         else if(month == "February"){
-            if(!(year%4 ==0) && day > 29){
-                return !value;
+            if((year%4) ==0){
+                if(day>29){
+                    return !value;
+                }
+                else{
+                    return value;
+                }
             }
             else if(day > 28){
                 return !value;
             }
             return value;
         }
+        if((year == date.getFullYear())&& (nummonth==(date.getMonth()+1)) && (day>date.getDate())){
+            return !value;
+        }
+        
         return value;
     },"must be a valid date");
     
@@ -157,8 +168,8 @@ $(document).ready(function(){
         var month = $("option:selected","#month").attr("num");
         var day = $("#day").val();
         if((year == (date.getFullYear()))  && (month == (date.getMonth()+1)) &&(day == date.getDate()) ){
-            var hour = $("#hour").val();
-            var min = $("#minute").val();
+            var hour = $("#detailform #hour").val();
+            var min = $("#detailform #minute").val();
             if(hour > date.getHours()){
                 return !value;
             }
@@ -167,6 +178,23 @@ $(document).ready(function(){
             }
         }
         return value;
+    });
+    
+    
+    $("#detailform").submit(function(){
+        if($("#detailform").valid()){
+            $("#IncidentDetailsTab").removeClass("active");
+            $("#IncidentDetails").removeClass("tab-pane active");
+            $("#CallDetails").removeClass("tab-pane");
+            $("#IncidentDetails").addClass("tab-pane");
+            $("#CallDetails").addClass("tab-pane active");
+            $("#CallDetailsTab").addClass("active");
+        }
+        return false;
+    });
+    
+    $("#incidentcancel").click(function(){
+        $("label.error").hide();
     });
     
 }); 

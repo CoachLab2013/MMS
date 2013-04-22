@@ -38,7 +38,7 @@
                 <img src="Images/logo.jpg" width="150" height="150">
             </div>
             
-            <form name="login" method="post" action="LogInServlet" class="form-horizontal" id="loginform" >
+            <form name="loginform" method="post" action="LogInServlet" class="form-horizontal" id="loginform" >
                
                 <div class="offset5  span7 ">
                     <fieldset class="fieldset">

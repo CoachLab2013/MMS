@@ -19,14 +19,14 @@ and open the template in the editor.
                 <li><a href="#EditIncident" data-toggle="tab">Edit Incident</a></li> 
             </ul>
             <div class="tab-content" >
-                <div id="OpenIncidents" class="tab-pane active">  
+                <div id="OpenIncidents" class="tab-pane active" name="openincidents">  
                     <jsp:include page="OpenIncidentContent.jsp" />                            
                 </div>
-                <div id="LogIncident" class="tab-pane "> 
+                <div id="LogIncident" class="tab-pane" name="logincident"> 
                      <jsp:include page="LogIncidentTabContent.jsp" />
                 </div>   
-                <div id="EditIncident" class="tab-pane "> 
-                    <div align="center"><h4>Edit Incident </h4> </div>
+                <div id="EditIncident" class="tab-pane" name="editincident"> 
+                    <jsp:include page="EditIncidentTabContent.jsp" />
                 </div> 
             </div>
 

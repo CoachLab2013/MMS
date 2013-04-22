@@ -17,9 +17,9 @@
     <body>
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
-                <li class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a> </li>
-                <li><a href="#CallDetails" data-toggle="tab">Call Details</a></li>   
-                <li><a href="#DispatchVehicle" data-toggle="tab">Dispatch Vehicle</a></li> 
+                <li id="IncidentDetailsTab" class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a> </li>
+                <li id="CallDetailsTab"><a href="#CallDetails" data-toggle="tab">Call Details</a></li>   
+                <li id="DispatchVehicleTab"><a href="#DispatchVehicle" data-toggle="tab">Dispatch Vehicle</a></li> 
             </ul>
             <div class="tab-content" >
                 <div id="IncidentDetails" class="tab-pane active">  

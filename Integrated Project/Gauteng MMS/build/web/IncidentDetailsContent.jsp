@@ -21,11 +21,11 @@
             </style>
 <script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script language="javascript" type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
-        <script src="js/IncidentDetailsScript.js"></script>
+ <script src="js/IncidentDetailsScript.js"></script>
     </head>
     <body>
         <legend>Incidents> Log Incident> Incident Details</legend>
-        <form id="detailform" method="post" action="">
+        <form id="detailform"  name="detailform" class="form-horizontal" method="post" action="">
         <table>
             <tr>
                 <td>FPS Incident Log Number:  </td> <td><input type="text" id="fpsnumber" name="fpsnumber" readonly="true" 
@@ -123,7 +123,7 @@
             </tr>
             <tr>
                 <td>
-                <br> <br>  <td>    <input type="submit" value="Record Call Details" /><td><br/></td>
+                <br> <br>  <td>    <input type="submit" value="Continue" id="incidentcontinue" /> <input type="reset" value="Cancel" id="incidentcancel" /><td></td>
                 </td>  
             </tr>
         </table>

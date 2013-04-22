@@ -49,6 +49,7 @@ public class LogInServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("personnelnumber", personnelnumber);
                 sess.setAttribute("access", access);
+                sess.setAttribute("loggedin", true);
                 if (access == 4){
                     response.sendRedirect("Admin.jsp");
                 }

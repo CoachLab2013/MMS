@@ -44,7 +44,7 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
-      out.write("\r\n");
+      out.write(" \r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
@@ -64,7 +64,6 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <title>Gauteng Mortuary Management System</title>\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
-      out.write("      \r\n");
       out.write("        ");
       out.write("\r\n");
       out.write("        <p>\r\n");
@@ -75,8 +74,8 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <div align=\"center\"><h1> <img src=\"Images/logo.jpg\" width=\"75\" height=\"75\"> Gauteng Mortuary Management System</h1></div>\r\n");
       out.write("         <div class=\"tabbable\">\r\n");
       out.write("            <ul class=\"nav nav-tabs \" data-tabs=\"tabs\">\r\n");
-      out.write("                <li class=\"active\"><a href=\"#Incident\" data-toggle=\"tab\">Incidents</a> </li>\r\n");
-      out.write("                <li><a href=\"#BodyFile\" data-toggle=\"tab\">Body File</a></li>       \r\n");
+      out.write("                <li id=\"IncidentTab\" class=\"active\"><a href=\"#Incident\" data-toggle=\"tab\">Incidents</a> </li>\r\n");
+      out.write("                <li id =\"BodyFileTab\"><a href=\"#BodyFile\" data-toggle=\"tab\">Body File</a></li>       \r\n");
       out.write("            </ul>\r\n");
       out.write("            <div class=\"tab-content\" >\r\n");
       out.write("                <div id=\"Incident\" class=\"tab-pane active\">  \r\n");
