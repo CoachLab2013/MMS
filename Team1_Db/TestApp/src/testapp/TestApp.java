@@ -18,12 +18,13 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
      */
     public static void main(String[] args) throws SQLException 
     {
-        
-        //add user
-        /*Employee emp = new Employee("12345678","1234", "john","smith", "manager", 1, "200935415@student.uj.ac.za",true);
+        //TESTING EMPLOYEE STUFF
+        Employee emp = new Employee("12388678","1214", "john","smith", "manager", 1, "200935415@student.uj.ac.za",true);
         DatabaseConnector empDb = new EmployeeDb(emp,dbDetail);
-        boolean status = empDb.init();
-        System.out.println(empDb.add());*/
+        empDb.init();
+        
+        //adding and employee
+        System.out.println(empDb.add());
         
         //user login
         //EmployeeDb empDb = new EmployeeDb(new Employee("12345678","1234"),dbDetail);
@@ -144,9 +145,9 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         //TESTING INCIDENT
          //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
-        Incident inci = new  Incident("001232523","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",3,true);
-        IncidentDb inciDb = new IncidentDb(inci,dbDetail);
-        inciDb.init();
+        //Incident inci = new  Incident("001232523","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",3,true);
+        //IncidentDb inciDb = new IncidentDb(inci,dbDetail);
+        //inciDb.init();
         
         //adding an incident
         //System.out.println(inciDb.add());
@@ -164,7 +165,7 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         
         //counting open incidents
-        System.out.println(inciDb.countOpenIncidents("2013-04-06"));
+        //System.out.println(inciDb.countOpenIncidents("2013-04-06"));
         //END OF INCIDENT STUFF
         
         //TEST INCIDENT MESSAGE
