@@ -52,7 +52,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`AuditTrail` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`AuditTrail` (
-  `idAuditTrail` INT NOT NULL ,
+  `idAuditTrail` INT NOT NULL AUTO_INCREMENT ,
   `date` DATE NOT NULL ,
   `time` TIME NOT NULL ,
   `eventType` VARCHAR(45) NOT NULL ,

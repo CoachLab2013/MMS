@@ -36,7 +36,7 @@ public class BodyDb extends DatabaseConnector{
     public String add(){
          try 
         {
-            statement.executeUpdate("INSERT INTO Body (deathRegisterNumber, gender, race, assignedTo, nameOfDeceased, surnameOfDeceased, placeOfBirth, dateOfBirth, ageOnDateFound, ) VALUES (' "+ organization.getName() + "','"+ organization.getContactNumber() +"','"+ organization.getType() +"')");
+            statement.executeUpdate("INSERT INTO Body (deathRegisterNumber, gender, race, assignedTo, nameOfDeceased, surnameOfDeceased, placeOfBirth, dateOfBirth, ageOnDateFound, maritalStatus, occupation, citizen, maidenName, dateTimeIdentified, ) VALUES (' "+ organization.getName() + "','"+ organization.getContactNumber() +"','"+ organization.getType() +"')");
             statement.close();
             connection.close(); 
         } 
