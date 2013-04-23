@@ -51,7 +51,7 @@ public class IncidentDb extends DatabaseConnector
         int count = 0;
         try 
         {
-            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM incident WHERE status='true';");
+            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM incident WHERE status=true;");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             count = resultSet.getInt("countOpenIncidents");

@@ -36,7 +36,7 @@
                     String date[] = datetime[0].split("-");
                     String currentdate = date[0]+date[1]+date[2];
                     Tools t = new Tools();
-                    out.println("value ="+ "ascsa");
+                    out.println("value ="+ t.getIncidentLogNumber());
                 %>/></td>
             </tr>     
             <tr>
