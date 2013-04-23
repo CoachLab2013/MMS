@@ -47,11 +47,11 @@ public class IncidentDb extends DatabaseConnector
          }
          
     //DATABSE METHODS
-    public int countOpenIncidents() throws SQLException{
+    public int countOpenIncidents(String inDate) throws SQLException{
         int count = 0;
         try 
         {
-            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM incident WHERE status='true';");
+            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM incident WHERE status='true' AND dateOfIncident = '"+ inDate +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             count = resultSet.getInt("countOpenIncidents");

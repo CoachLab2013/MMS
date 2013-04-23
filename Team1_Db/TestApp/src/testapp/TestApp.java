@@ -149,7 +149,7 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         inciDb.init();
         
         //adding an incident
-        //System.out.println(inciDb.add());
+        System.out.println(inciDb.add());
         
         //listing incidents
         //ArrayList<Incident> list = inciDb.incidentList();
@@ -160,7 +160,7 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         //System.out.println(inciDb.add());
         
         //edit incidents
-        System.out.println(inciDb.edit());
+        //System.out.println(inciDb.edit());
         //delete incidents
         
         //END OF INCIDENT STUFF
