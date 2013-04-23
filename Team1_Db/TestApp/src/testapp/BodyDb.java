@@ -4,6 +4,8 @@
  */
 package testapp;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author Administrator
@@ -15,14 +17,38 @@ public class BodyDb extends DatabaseConnector{
         super(dbDetail);
     }
     
-    //GET METHODS
+    public BodyDb(DbDetail dbDetail, Body inBody){
+        super(dbDetail);
+        this.body = inBody;
+    }
     
+    //GET METHODS
+    public Body getBody(){
+        return this.body;
+    }
     //SET METHODS
+    public void setBody(Body inBody){
+        this.body = inBody;
+    }
     
     //DATABASE METHODS
     @Override
     public String add(){
-        return null;
+         try 
+        {
+            statement.executeUpdate("INSERT INTO Body (deathRegisterNumber, gender, race, assignedTo, nameOfDeceased, surnameOfDeceased, placeOfBirth, dateOfBirth, ageOnDateFound, ) VALUES (' "+ organization.getName() + "','"+ organization.getContactNumber() +"','"+ organization.getType() +"')");
+            statement.close();
+            connection.close(); 
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "added organization to organization table";
         
     }
     
