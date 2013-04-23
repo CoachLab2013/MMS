@@ -57,13 +57,14 @@ import java.util.ArrayList;
       
          try   
          { 
-            statement.executeUpdate("INSERT INTO audittrail (date,time,eventType,eventMessge,currentUser)" + " VALUES"
+            statement.executeUpdate("INSERT INTO audittrail (date,time,eventType,eventMessge,currentUser, eventLocation)" + " VALUES"
                                     +"('" 
-                                    +auditTrail.getDate() + "','" 
-                                    + auditTrail.getTime() + "','"
-                                    + auditTrail.getEventType() +"','"
-                                    + auditTrail.getEventMessage() + "','"
-                                    + auditTrail.getCurrentUser() + "')");
+                                    +auditTrail.getDate() + "', '" 
+                                    + auditTrail.getTime() + "', '"
+                                    + auditTrail.getEventType() +"', '"
+                                    + auditTrail.getEventMessage() + "', '"
+                                    + auditTrail.getCurrentUser() + "', '"
+                                    + auditTrail.getEventLocation() +"')");
             statement.close();
             connection.close();
          } 
@@ -90,11 +91,12 @@ import java.util.ArrayList;
                while(resultSet.next())
                {
                   AuditTrail auditTr = new AuditTrail ();
-                  auditTr .setDate(resultSet.getString("date"));
-                  auditTr .SetTime(resultSet.getString("time"));
-                  auditTr .setEventType(resultSet.getString("eventType"));
-                  auditTr .setEventMessage(resultSet.getString("eventMessge"));
-                  auditTr .setCurrentUser(resultSet.getString("currentUser"));
+                  auditTr.setDate(resultSet.getString("date"));
+                  auditTr.setTime(resultSet.getString("time"));
+                  auditTr.setEventType(resultSet.getString("eventType"));
+                  auditTr.setEventMessage(resultSet.getString("eventMessge"));
+                  auditTr.setCurrentUser(resultSet.getString("currentUser"));
+                  auditTr.setEventLocation(resultSet.getString("eventLocation"));
                  
                   list.add(auditTr);
                }

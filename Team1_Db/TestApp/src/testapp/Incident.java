@@ -52,7 +52,7 @@ this.reason = reason;
 this.bodyCount = bodyCount;
 this.status = status;
 }
-
+//GET METHODS
 public String getIncidentLogNumber()
 {
     return incidentLogNumber;
@@ -105,6 +105,8 @@ public boolean isOpen()
 {
     return status;
 }
+
+//SET METHODS
 public void setIncidentLogNumber(String incidentLogNumber)
 {
     this.incidentLogNumber = incidentLogNumber;

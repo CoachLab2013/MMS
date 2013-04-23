@@ -30,9 +30,9 @@ public class VehicleDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeUpdate("insert into vehicle (registrationNumber,crew) values"
+            statement.executeUpdate("insert into vehicle (registrationNumber) values"
                                     +"('" 
-                                    + vehicle.getRegistrationNumber() + "',"+vehicle.getCrew()  +")");
+                                    + vehicle.getRegistrationNumber() + "');");
             statement.close();
             connection.close();
         } 
@@ -55,7 +55,7 @@ public class VehicleDb extends DatabaseConnector
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
-                 vehicles.add(new Vehicle(resultSet.getString("registrationNumber"), resultSet.getInt("crew")));
+                 vehicles.add(new Vehicle(resultSet.getString("registrationNumber")));
             }
             statement.close();
             connection.close();
@@ -73,11 +73,11 @@ public class VehicleDb extends DatabaseConnector
     }
 
     @Override
-    public String edit() 
+    public String edit() //WILL NEED TO PASS PRIMARY KEY VALUE
     {
         try 
         {
-            statement.executeUpdate("update vehicle set crew=" + vehicle.getCrew() + " where registrationNumber='" + vehicle.getRegistrationNumber() +"';" );
+            statement.executeUpdate("update vehicle set registrationNumber = '" + vehicle.getRegistrationNumber() + "' where registrationNumber='" + vehicle.getRegistrationNumber() +"';" );
             statement.close();
             connection.close();
         } 
