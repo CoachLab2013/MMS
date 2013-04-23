@@ -14,7 +14,13 @@ import java.util.ArrayList;
  */
 public class OrganizationDb extends DatabaseConnector{
     private Organization organization;
-    //CONSTUCTOR
+    //CONSTUCTORS
+    public OrganizationDb(DbDetail dbDetail){
+        super(dbDetail);
+        
+        this.organization = new Organization();
+    }
+    
     public OrganizationDb(Organization inOrganization, DbDetail dbDetail){
         super(dbDetail);
         
@@ -28,13 +34,7 @@ public class OrganizationDb extends DatabaseConnector{
     public String add(){
         try 
         {
-            statement.executeUpdate("INSERT INTO Organization VALUES ()");
-            statement.executeQuery("SELECT MAX(idOrganization) as latestID FROM Organization" );
-            int newID;
-            ResultSet resultSet = statement.getResultSet();
-            resultSet.next();
-            newID = resultSet.getInt("latestID");
-            statement.executeUpdate("INSERT INTO " + organization.getType() + " (Organization_idOrganization, name, contactNumber) VALUES ( '" + newID + "', '" + organization.getName() +"', '" + organization.getContactNumber() + "' )");
+            statement.executeUpdate("INSERT INTO Organization (name, contactNumber, OrganizationType_type) VALUES (' "+ organization.getName() + "','"+ organization.getContactNumber() +"','"+ organization.getType() +"')");
             statement.close();
             connection.close(); 
         } 
@@ -51,10 +51,10 @@ public class OrganizationDb extends DatabaseConnector{
     
     // Function to read a single Organization FROM the Datebase
     @Override
-    public String read(){
+    public String read(){// need to pass primary key
         try 
         {
-            statement.executeQuery("SELECT idOrganization FROM Organization;");
+            statement.executeQuery("SELECT * FROM Organization;");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             organization.setIdOrganization(Integer.parseInt(resultSet.getString("idOrganization")));
@@ -71,51 +71,18 @@ public class OrganizationDb extends DatabaseConnector{
     //Function to read all the organizations from the database and return them in a list for displaying
     public  ArrayList<Organization> organizationList()
     {
-        ArrayList<Organization> list = new ArrayList<>();
+        ArrayList<Organization> list = new ArrayList<Organization>();
         try 
         {
-            statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM Hospital;");
+            statement.executeQuery("SELECT * FROM Organization;");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
                 Organization org = new Organization();
-                org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
+                org.setIdOrganization(resultSet.getInt("idOrganization"));
                 org.setName(resultSet.getString("name"));
                 org.setContactNumber(resultSet.getString("contactNumber"));
-                org.setType("Hospital");
-                list.add(org);
-            }
-            statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM PathologyUnit;");
-            resultSet = statement.getResultSet();
-            while(resultSet.next())
-            {
-                    Organization org = new Organization();
-                    org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
-                    org.setName(resultSet.getString("name"));
-                    org.setContactNumber(resultSet.getString("contactNumber"));
-                    org.setType("PathologyUnit");
-                    list.add(org);
-            }
-            statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM SamlpeLab;");
-            resultSet = statement.getResultSet();
-            while(resultSet.next())
-            {
-                Organization org = new Organization();
-                org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
-                org.setName(resultSet.getString("name"));
-                org.setContactNumber(resultSet.getString("contactNumber"));
-                org.setType("SampleLab");
-                list.add(org);
-            }
-            statement.executeQuery("SELECT Organization_idOrganization,name,contactNumber FROM PoliceStation;");
-            resultSet = statement.getResultSet();
-            while(resultSet.next())
-            {
-                Organization org = new Organization();
-                org.setIdOrganization(resultSet.getInt("Organization_idOrganization"));
-                org.setName(resultSet.getString("name"));
-                org.setContactNumber(resultSet.getString("contactNumber"));
-                org.setType("PoliceStation");
+                org.setType(resultSet.getString("OrganizationType_type"));
                 list.add(org);
             }
             statement.close();
@@ -130,13 +97,10 @@ public class OrganizationDb extends DatabaseConnector{
     
     //function(s) to edit the details of a specific organization
     @Override
-    public String edit(){
-        return "never implemented";
-    }
-    public String edit(Organization inOrganization){
-        try 
+    public String edit(){//Has to pass primary key un less we assume they cannot change the primary key
+         try 
         {
-            statement.executeUpdate("UPDATE " + inOrganization.getType() + " SET name='" +inOrganization.getName()+ "', contactNumber='" +inOrganization.getContactNumber() +"';" );
+            statement.executeUpdate("UPDATE Organization SET name='" + organization.getName()+ "', contactNumber='" + organization.getContactNumber() +"', OrganizationType_type='"+ organization.getType() +"' WHERE idOrganization = '"+ organization.getIdOrganization() +"';" );
             statement.close();
             connection.close();
         } 
@@ -150,14 +114,9 @@ public class OrganizationDb extends DatabaseConnector{
     //function(s) to delete an organization from the appropriate tables
     @Override
     public String delete(){
-        return "never implemented";
-    }
-    public String delete(String inType, int inID){
         try 
         {
-            int universalID = inID;//organization.getIdOrganization();
-            statement.executeUpdate("DELETE FROM " + inType + " WHERE Organization_idOrganization= '" + universalID +"';" );
-            statement.executeUpdate("DELETE FROM Organization WHERE idOrganization = '" + universalID +"'");
+            statement.executeUpdate("DELETE FROM Organization WHERE idOrganization = '" + organization.getIdOrganization() +"'");
             statement.close();
             connection.close();
         } 
@@ -165,6 +124,6 @@ public class OrganizationDb extends DatabaseConnector{
         {
             return "fail " + ex.getMessage();
         }
-        return "Deleted Item from Organization and " + inType ;
+        return "Deleted Item from Organization";
     }
-}//
+}
