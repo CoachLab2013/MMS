@@ -11,24 +11,24 @@ package testapp;
 public class Vehicle 
 {
     private String registrationNumber;
-    private int crew;
+    //private int crew;
     /**
      * default constructor for creating a vehicle object
      */
     public Vehicle()
     {
         registrationNumber = "";
-        crew = 0;
+        //crew = 0;
     }
     /**
      * parameter constructor taking registration number of a vehicle and crew number to create a vehicle object
      * @param registrationNumber String unique license number to identify a specific vehicle
      * @param crew Integer number of people in a vehicle
      */
-    public Vehicle(String registrationNumber,int crew)
+    public Vehicle(String registrationNumber)
     {
         this.registrationNumber = registrationNumber;
-        this.crew = crew;
+        //this.crew = crew;
     }
     /**
      * 
@@ -42,10 +42,10 @@ public class Vehicle
      * 
      * @return Integer number people been assigned to a vehicle
      */
-    public int getCrew()
+    /*public int getCrew()
     {
         return crew;
-    }
+    }*/
     /**
      * 
      * @param registrationNumber String
@@ -58,10 +58,10 @@ public class Vehicle
      * 
      * @param crew Integer
      */
-    public void setCrew(int crew)
+    /*public void setCrew(int crew)
     {
         this.crew = crew;
-    }
+    }*/
 }
 
 

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package testapp;
 
 import java.sql.SQLException;
@@ -12,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Chester
+ * @author Team 1
  */
 
 public class TestApp {
@@ -22,12 +18,13 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
      */
     public static void main(String[] args) throws SQLException 
     {
+        //TESTING EMPLOYEE STUFF
+        //Employee emp = new Employee("12388678","1214", "john","smith", "manager", 1, "200935415@student.uj.ac.za",true);
+        //DatabaseConnector empDb = new EmployeeDb(emp,dbDetail);
+        //empDb.init();
         
-        //add user
-        /*Employee emp = new Employee("12345678","1234", "john","smith", "manager", 1, "200935415@student.uj.ac.za",true);
-        DatabaseConnector empDb = new EmployeeDb(emp,dbDetail);
-        boolean status = empDb.init();
-        System.out.println(empDb.add());*/
+        //adding and employee
+        //System.out.println(empDb.add());
         
         //user login
         //EmployeeDb empDb = new EmployeeDb(new Employee("12345678","1234"),dbDetail);
@@ -62,37 +59,38 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         //TESTING ORGANIZATION STUFF:
         //connection
-        //OrganizationDb orgDb = new OrganizationDb(new Organization("TestHospital2", "0118677778", "Hospital"), dbDetail);
+        //OrganizationDb orgDb = new OrganizationDb(new Organization(3,"TestSampleLab","0119876543","Sample Lab"), dbDetail);
         //orgDb.init();
         
-        /*//adding organization
-        System.out.println(orgDb.add());*/
+        //adding organization
+        //System.out.println(orgDb.add());
         
         //list of organizations
-        /*ArrayList<Organization> orglist = orgDb.organizationList();
-        for(int j = 0; j<orglist.size(); j++){
-            System.out.println(orglist.get(j).getName() + " " + orglist.get(j).getContactNumber() + " " + orglist.get(j).getType());
-        }*/
+        //ArrayList<Organization> orglist = orgDb.organizationList();
+        //for(int j = 0; j<orglist.size(); j++){
+        //    System.out.println(orglist.get(j).getIdOrganization() + " " + orglist.get(j).getName() + " " + orglist.get(j).getContactNumber() + " " + orglist.get(j).getType());
+        //}
         
-        //edit
+        //edit organization
+        //System.out.println(orgDb.edit());
         
         
-       /*//deleting organizations
-       System.out.println(orgDb.delete("Hospital", 8));*/
+       //deleting organization
+       //System.out.println(orgDb.delete());
         
         //END OF ORGANIZATION STUFF.
         
-        //TESTING VEHICLE DISPATCH STUFF
+       //TESTING VEHICLE DISPATCH STUFF
         //creating the objects to work with
-        Incident incid = new Incident();
-        incid.setIncidentLogNumber("TESTLOGNUMBER1");
-        Vehicle car = new Vehicle("RRB123", 2);
-        VehicleDispatch carDispatch = new VehicleDispatch("1000-01-01 00:00:00","1000-01-01 00:00:20", "Our first dispatch ever", car, incid);
-        VehicleDispatchDb dispatchDb = new VehicleDispatchDb(dbDetail, carDispatch);
-        dispatchDb.init();
+        //Incident incid = new Incident();
+        //incid.setIncidentLogNumber("TESTLOGNUMBER1");
+        //Vehicle car = new Vehicle("RRB123");
+       // VehicleDispatch carDispatch = new VehicleDispatch("1000-01-01 00:00:30","1000-01-01 00:00:40", "Our edited dispatch", car, incid);
+        //VehicleDispatchDb dispatchDb = new VehicleDispatchDb(dbDetail, carDispatch);
+        //dispatchDb.init();
         
         //adding
-        System.out.println(dispatchDb.add());
+        //System.out.println(dispatchDb.add());
         
         //Deleting
         //System.out.println(dispatchDb.delete());
@@ -105,7 +103,7 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         //END OF VEHICLE DISPATCH STUFF
         
         //TESTING REFERENCE LIST STUFF
-       /* //Reference List
+        /*//Reference List
         ReferenceListDb db = new ReferenceListDb("gender","idGender","type","female",1,"root","hello","localhost","/mydb");
         //db.init();
         //System.out.println(db.add());
@@ -146,16 +144,28 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         
         //TESTING INCIDENT
-        /* //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
-        Incident inci = new  Incident("001234444","refe" ,2,"10/10/10","12:43:23" , "circumstance of death", "place body found", "specialCircumstances","",2,false);
-        IncidentDb inciDb = new IncidentDb(inci,dbDetail);
-        inciDb.init();
-        ArrayList<Incident> list = inciDb.incidentList();
-        for(int i = 0;i < list.size();i++)
-        {
-            System.out.println(list.get(i).getIncidentLogNumber());
-        }
-        //System.out.println(inciDb.add());*/
+         //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
+        //Incident inci = new  Incident("001232523","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",3,true);
+        //IncidentDb inciDb = new IncidentDb(inci,dbDetail);
+        //inciDb.init();
+        
+        //adding an incident
+        //System.out.println(inciDb.add());
+        
+        //listing incidents
+       // ArrayList<Incident> list = inciDb.openIncidentList();
+        //for(int i = 0;i < list.size();i++)
+        //{
+        //    System.out.println(list.get(i).getIncidentLogNumber() + " " + list.get(i).getReferenceNumber() + " " + list.get(i).getNumberOfBodies() + " " + list.get(i).getDateOfIncident() + " " + list.get(i).getTimeOfIncident() + " " + list.get(i).getCircumstanceOfDeath() + " " + list.get(i).getPlaceBodyFound() + " " + list.get(i).getSpecialCircumstances() + " " + list.get(i).getBodyCount() + " " + list.get(i).isOpen());
+        //}
+        
+        //edit incidents
+        //System.out.println(inciDb.edit());
+        //delete incidents
+        
+        
+        //counting open incidents
+        //System.out.println(inciDb.countOpenIncidents("2013-04-06"));
         //END OF INCIDENT STUFF
         
         //TEST INCIDENT MESSAGE

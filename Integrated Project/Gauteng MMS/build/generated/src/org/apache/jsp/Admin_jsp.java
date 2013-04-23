@@ -46,6 +46,29 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+<<<<<<< HEAD
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("<!DOCTYPE html>\r\n");
+      out.write("<html>\r\n");
+      out.write("    <head>\r\n");
+      out.write("        \r\n");
+      out.write("        <title>MMS Administration</title>\r\n");
+      out.write("     <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js\"></script>\r\n");
+      out.write("        <link type=\"text/css\" rel=\"stylesheet\"  href=\"bootstrap/css/bootstrap.css\">           \r\n");
+      out.write("        <script src=\"bootstrap/js/bootstrap-tabs.js\"></script>\r\n");
+      out.write("        <script src=\"bootstrap/js/bootstrap.min.js\"></script>\r\n");
+      out.write("        <link type=\"text/css\" rel=\"stylesheet\"  href=\"CSS/Design.css\">\r\n");
+      out.write("        <script src=\"js/jquery-1.7.1.min.js\"></script>\r\n");
+      out.write("        <script src=\"js/jquery.validate.min.js\"></script>\r\n");
+      out.write("       <script src=\"js/script.js\"></script>\r\n");
+      out.write("         <link  type=\"text/css\" href=\"CSS files/style.css\" rel=\"stylesheet\">\r\n");
+      out.write("    </head>\r\n");
+      out.write("    <body>  \r\n");
+      out.write("      \r\n");
+      out.write("\r\n");
+=======
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -73,6 +96,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <body>  \n");
       out.write("\n");
       out.write("\n");
+>>>>>>> origin/master
       out.write("        ");
 
             //variables to store results
@@ -97,6 +121,18 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String main1 = "";
             String addUserTab = "";
             String currentUserTab = "";
+<<<<<<< HEAD
+            if (null != session.getAttribute("result")) {
+               userResult= session.getAttribute("result").toString();
+                  if (null != session.getAttribute("tab")) {
+               addUserTab= session.getAttribute("tab").toString();                 
+               currentUserTab="";
+             }
+            }else{
+             addUserTab= "";
+             currentUserTab="active";
+            }
+=======
             String main2 = "";
 
             String inst = "";
@@ -310,6 +346,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
              ArrayList<String> institutionList = emp.referenceList();
              */
 
+>>>>>>> origin/master
         
       out.write("\n");
       out.write("\n");
@@ -421,7 +458,110 @@ out.println(String.valueOf(currentUserTab));
       out.write("                                                    <div id=\"aUser\" class=\"tab-pane ");
 out.println(String.valueOf(addUserTab));
       out.write(" \">  \n");
+<<<<<<< HEAD
       out.write("                                                        ");
+=======
+      out.write("                                                                    ");
+<<<<<<< HEAD
+      out.write("\r\n");
+      out.write("                                                                    <div align=\"center\"><h2>Add User </h2> </div>  \r\n");
+      out.write("\r\n");
+      out.write("                                                                    <form name=\"AddUser\" id=\"AddUser\" method=\"post\" action=\"ReferenceListServlet\" class=\"form-horizontal\">\r\n");
+      out.write("\r\n");
+      out.write("                                                                        <div class=\"offset2 span7 \">\r\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddUser\" style=\"visibility: hidden\" />\r\n");
+      out.write("                                                                            <fieldset>\r\n");
+      out.write("                                                                                <legend>User Personal Details</legend>\r\n");
+      out.write("                                                                                <div class=\"control-group   error\">\r\n");
+      out.write("                                                                                                                                \r\n");
+      out.write("                                                                                    <label  class=\"control-label  \" id=\"firstName\"   for=\"firstName\">Full Name(s):</label> \r\n");
+      out.write("                                                                                    <div class=\"controls\">\r\n");
+      out.write("                                                                                        <input type=\"text\" name=\"firstName\"  id=\"firstName\"  /> \r\n");
+      out.write("                                                                                    </div>\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <div class=\"control-group error \">\r\n");
+      out.write("                                                                                    <label  class=\"control-label\" id=\"surname\" for=\"surname\">Surname:</label> \r\n");
+      out.write("                                                                                    <div class=\"controls\">\r\n");
+      out.write("                                                                                        <input  type=\"text\" name=\"surname\"  id=\"surname\" />\r\n");
+      out.write("                                                                                    </div>\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <div class=\"control-group error \">\r\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"email\">Email:</label> \r\n");
+      out.write("                                                                                    <div class=\"controls\">\r\n");
+      out.write("                                                                                        <input type=\"text\" name=\"email\"  id=\"email\" />\r\n");
+      out.write("                                                                                    </div>\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("                                                                            </fieldset>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            </br> </br>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <fieldset>\r\n");
+      out.write("                                                                                <legend>User Employment Details</legend>\r\n");
+      out.write("                                                                                <div class=\"control-group error \">\r\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"personnelNumber\">Personnel Number:</label>\r\n");
+      out.write("                                                                                    <div class=\"controls\">\r\n");
+      out.write("                                                                                        <input type=\"text\" name=\"personnelNumber\"  id=\"personnelNumber\"  />\r\n");
+      out.write("                                                                                    </div>\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <div class=\"control-group error \">\r\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"level\">Access Level:</label>\r\n");
+      out.write("                                                                                    ");
+      out.write("\r\n");
+      out.write("                                                                                    <div class=\"controls\">\r\n");
+      out.write("                                                                                        <select name=\"level\" id=\"Level\">\r\n");
+      out.write("                                                                                            <option value=\"\"> ");
+ out.println( String.valueOf("-Please Select-")); 
+      out.write("</option>\r\n");
+      out.write("                                                                                            <option value=\"1\">Supervisor</option>\r\n");
+      out.write("                                                                                            <option value=\"2\">FPS Officer</option>\r\n");
+      out.write("                                                                                            <option value=\"3\">Pathologist</option>\r\n");
+      out.write("                                                                                            <option value=\"4\">Administrator</option>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                        </select>\r\n");
+      out.write("                                                                                    </div>\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                  \r\n");
+      out.write("                                                                                <div class=\"control-group error \">\r\n");
+      out.write("                                                                                    <label  class=\"control-label\" for=\"Active\">Active:</label>\r\n");
+      out.write("                                                                                    ");
+      out.write("\r\n");
+      out.write("                                                                                    <div class=\"controls\">\r\n");
+      out.write("                                                                                        <select name=\"Active\" tabindex=\"1\" id=\"Active\">\r\n");
+      out.write("                                                                                             <option value=\"\"> ");
+ out.println( String.valueOf("-Please Select-")); 
+      out.write("</option>\r\n");
+      out.write("                                                                                            <option value=\"0\">False</option>\r\n");
+      out.write("                                                                                            <option value=\"1\">True</option>\r\n");
+      out.write("                                                                                        </select>\r\n");
+      out.write("                                                                                    </div>\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            </fieldset>\r\n");
+      out.write("                                                                            <br/> <br/>                                 \r\n");
+      out.write("                                                                            <div class=\"offset4\">\r\n");
+      out.write("                                                                                <input type=\"submit\"  class=\"btn btn-primary\" type=\"button\" value=\"Add User\" /> \r\n");
+      out.write("                                                                               <label  class=\"control-label \" > ");
+ out.println( String.valueOf( userResult)); 
+      out.write("</label>\r\n");
+      out.write("                                                                                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <br/> <br/> \r\n");
+      out.write("\r\n");
+      out.write("                                                                        </div>\r\n");
+      out.write("                                                                    </form>\r\n");
+      out.write("                                                                </div>           \r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                </div>       \r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("                                                                <div id=\"RefList\" class=\"tab-pane \"> \r\n");
+=======
+>>>>>>> origin/master
       out.write("\n");
       out.write("                                                        <div align=\"center\"><h2>Add User </h2> </div>  \n");
       out.write("\n");
@@ -522,11 +662,116 @@ out.println(String.valueOf(addUserTab));
       out.write("                                                    <div id=\"RefList\" class=\"tab-pane ");
 out.println(String.valueOf(main2));
       out.write(" \"> \n");
+<<<<<<< HEAD
       out.write("                                                        ");
       out.write("\n");
       out.write("                                                        <div align=\"center\"><h2>Reference Lists </h2> </div> \n");
       out.write("                                                        <div class=\"tabbable\">\n");
       out.write("                                                            ");
+=======
+>>>>>>> origin/master
+      out.write("                                                                    ");
+      out.write("\n");
+      out.write("                                                                    <div align=\"center\"><h2>Reference Lists </h2> </div> \n");
+      out.write("                                                                    <div class=\"tabbable\">\n");
+      out.write("                                                                        ");
+<<<<<<< HEAD
+      out.write("\r\n");
+      out.write("                                                                        <ul class=\"nav nav-tabs \" data-tabs=\"tabs\">\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <li class=\"active\"><a href=\"#inst\" data-toggle=\"tab\">Institution</a> </li>\r\n");
+      out.write("                                                                            <li><a href=\"#anlysis\" data-toggle=\"tab\">Type of Analysis</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#prop\" data-toggle=\"tab\">Property</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#vehicles\" data-toggle=\"tab\">Vehicles</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#rank\" data-toggle=\"tab\">Rank</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#gender\" data-toggle=\"tab\">Gender</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#occupation\" data-toggle=\"tab\">Occupation</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#race\" data-toggle=\"tab\">Race</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#mStatus\" data-toggle=\"tab\">Marital Status</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#org\" data-toggle=\"tab\">Organisation</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#province\" data-toggle=\"tab\">Province</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#icd10Codes\" data-toggle=\"tab\">ICD10 Codes</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#mDeath\" data-toggle=\"tab\">Manner of Death</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#sType\" data-toggle=\"tab\">Sample Type</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#status\" data-toggle=\"tab\">Status</a></li>\r\n");
+      out.write("                                                                            <li><a href=\"#relationship\" data-toggle=\"tab\">Relationship</a></li>\r\n");
+      out.write("\r\n");
+      out.write("                                                                        </ul>\r\n");
+      out.write("                                                                        <div class=\"tab-content\" >\r\n");
+      out.write("                                                                            <div id=\"inst\" class=\"tab-pane active\">  \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Institution </h2> </div>\r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("                                                                            <div id=\"anlysis\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Type of Analysis </h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"prop\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Property</h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"vehicles\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Vehicles</h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"rank\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Rank</h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"gender\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Gender</h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"occupation\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Occupation</h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"race\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Race </h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"mStatus\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Marital Status </h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"org\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2> Organisation </h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"province\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2> Province </h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"icd10Codes\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>ICD10 Codes </h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"mDeath\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2> Manner of Death</h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"sType\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Sample Type</h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"status\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Status</h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <div id=\"relationship\" class=\"tab-pane \"> \r\n");
+      out.write("                                                                                <div align=\"center\"><h2>Relationship</h2> </div>                   \r\n");
+      out.write("                                                                            </div>\r\n");
+      out.write("                                                                        </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                    </div> \r\n");
+      out.write("                                                                </div>           \r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("      \r\n");
+      out.write("                                                                </body>\r\n");
+      out.write("                                                                </html>\r\n");
+=======
+>>>>>>> origin/master
       out.write("\n");
       out.write("                                                            <ul class=\"nav nav-tabs \" data-tabs=\"tabs\">\n");
       out.write("\n");
@@ -1248,8 +1493,14 @@ out.println(String.valueOf(relationship));
       out.write("\n");
       out.write("                                                    </div>\n");
       out.write("\n");
+<<<<<<< HEAD
       out.write("                                                    </body>\n");
       out.write("                                                    </html>\n");
+=======
+      out.write("                                                                </body>\n");
+      out.write("                                                                </html>\n");
+>>>>>>> origin/master
+>>>>>>> origin/master
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

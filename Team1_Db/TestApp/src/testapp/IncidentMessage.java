@@ -16,6 +16,7 @@ public class IncidentMessage
     private String nameOfDeceased;
     private boolean vip;
     private boolean bodyFileStatus;
+    private Incident incident;//added by Bandile
     public IncidentMessage()
     {
         
@@ -29,7 +30,7 @@ public class IncidentMessage
      * @param vip
      * @param caseStatus 
      */
-    public IncidentMessage(String date,String time,String mannerOfDeath,String nameOfDeceased,boolean vip,boolean bodyFileStatus)
+    public IncidentMessage(String date,String time,String mannerOfDeath,String nameOfDeceased,boolean vip,boolean bodyFileStatus, Incident inIncident)
     {
         this.date = date;
         this.time = time;
@@ -37,7 +38,10 @@ public class IncidentMessage
         this.nameOfDeceased = nameOfDeceased;
         this.vip = vip;
         this.bodyFileStatus = bodyFileStatus;
+        this.incident = inIncident;
     }
+    
+    //GET METHODS
     /**
      * 
      * @return String date
@@ -86,6 +90,12 @@ public class IncidentMessage
     {
         return bodyFileStatus;
     }
+    
+    public Incident getIncident(){
+        return this.incident;
+    }
+    
+    //SET METHODS
     /**
      * 
      * @param date format yyyy-MM-dd
@@ -133,5 +143,9 @@ public class IncidentMessage
     public void setBodyFileStatus(boolean bodyFileStatus)
     {
         this.bodyFileStatus = bodyFileStatus;
+    }
+    
+    public void setIncident(Incident inIncident){
+        this.incident = inIncident;
     }
 }

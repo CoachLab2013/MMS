@@ -25,6 +25,11 @@ public abstract class Body
     protected String maidenName;
     protected String dateTimeIdentified;
     protected BodyAddress bodyAddress;
+    protected int estimatedAgeYear;
+    protected int estimatedAgeMonth;
+    protected String ID;
+    protected String passport;
+    
     public Body()
     {
         
