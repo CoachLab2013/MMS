@@ -55,9 +55,10 @@ public class Tools {
              }
             else{
                 this.makeAuditTrail("Log In", "Successfull log in", personnelnumber,"Log In Screen");
-                sess.setAttribute("name", emp.getName());
+                sess.setAttribute("employee", emp);
+                /*sess.setAttribute("name", emp.getName());
                 sess.setAttribute("surname", emp.getSurname());
-                sess.setAttribute("access", emp.getAccess());
+                sess.setAttribute("access", emp.getAccess());*/
                 int access = Integer.parseInt(status.substring(0, 1));
                 return access; 
             }
@@ -91,9 +92,11 @@ public class Tools {
         incidentdb.init();
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String[] datetime = timestamp.split(" ");
+        String timestamp2 = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(Calendar.getInstance().getTime());
+        String datenum = timestamp2.split(" ")[0];
         try{
-            int incidentnum = incidentdb.countOpenIncidents() + 1;
-            String lognumber = Integer.toString(incidentnum) + datetime[0];
+            int incidentnum = incidentdb.countOpenIncidents(datetime[0]) + 1;
+            String lognumber = Integer.toString(incidentnum) + datenum;
             return lognumber;
         }
         catch(Exception e){
