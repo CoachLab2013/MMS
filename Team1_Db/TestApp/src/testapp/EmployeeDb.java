@@ -24,9 +24,9 @@ public class EmployeeDb extends DatabaseConnector
      * @param url the location of the database specified by the IP address or domain name
      * @param dbName the database name in the stored on the server
      */
-    public EmployeeDb(Employee employee,String username,String password,String url,String dbName)
+    public EmployeeDb(Employee employee, DbDetail dbDetail)
     {
-        super(username, password, url, dbName);
+        super(dbDetail);
         this.employee = employee;
     }
     /**
@@ -36,9 +36,9 @@ public class EmployeeDb extends DatabaseConnector
      * @param url the location of the database specified by the IP address or domain name
      * @param dbName the database name in the stored on the server
      */
-    public EmployeeDb(String username,String password,String url,String dbName)
+    public EmployeeDb(DbDetail dbDetail)
     {
-        super(username, password, url, dbName);
+        super(dbDetail);
         employee = null;
     }
     /**
@@ -99,15 +99,13 @@ public class EmployeeDb extends DatabaseConnector
         try 
         {
             statement.executeQuery("select name,surname,rank,email,access from employee where password='" + employee.getPassword() + "' and personnelNumber='" + employee.getPersonnelNumber() + "' and active=1;");
-            try (ResultSet resultSet = statement.getResultSet()) 
-            {
-                resultSet.next();
-                employee.setName(resultSet.getString("name"));
-                employee.setSurname(resultSet.getString("surname"));
-                employee.setRank(resultSet.getString("rank"));
-                employee.setEmail(resultSet.getString("email"));
-                employee.setAccess(resultSet.getInt("access"));
-            }
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            employee.setName(resultSet.getString("name"));
+            employee.setSurname(resultSet.getString("surname"));
+            employee.setRank(resultSet.getString("rank"));
+            employee.setEmail(resultSet.getString("email"));
+            employee.setAccess(resultSet.getInt("access"));
             statement.close();
             connection.close();
         } 
@@ -121,33 +119,31 @@ public class EmployeeDb extends DatabaseConnector
      * 
      * @return ArrayList of employee objects from database
      */
-    public  ArrayList<Employee> employeeList()
+    public  ArrayList<Employee> employeeList() throws SQLException
     {
         ArrayList<Employee> list = new ArrayList<Employee>();
         try 
         {
             statement.executeQuery("select personnelNumber,name,surname,rank,email,active from employee;");
             Employee emp = null;
-            try (ResultSet resultSet = statement.getResultSet()) 
+            ResultSet resultSet = statement.getResultSet();
+            while(resultSet.next())
             {
-                while(resultSet.next())
-                {
-                    emp = new Employee();
-                    emp.setPersonnelNumber(resultSet.getString("personnelNumber"));
-                    emp.setName(resultSet.getString("name"));
-                    emp.setSurname(resultSet.getString("surname"));
-                    emp.setRank(resultSet.getString("rank"));
-                    emp.setEmail(resultSet.getString("email"));
-                    emp.setActive(resultSet.getBoolean("active"));
-                    list.add(emp);
-                }
+                emp = new Employee();
+                emp.setPersonnelNumber(resultSet.getString("personnelNumber"));
+                emp.setName(resultSet.getString("name"));
+                emp.setSurname(resultSet.getString("surname"));
+                emp.setRank(resultSet.getString("rank"));
+                emp.setEmail(resultSet.getString("email"));
+                emp.setActive(resultSet.getBoolean("active"));
+                list.add(emp);
             }
             statement.close();
             connection.close();
         } 
         catch (SQLException ex) 
         {
-            System.out.println("fail " + ex.getMessage());
+           throw new SQLException(ex.getMessage());
         }
         return list;
     }

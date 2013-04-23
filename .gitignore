@@ -16,8 +16,21 @@
 /Reports/Report_MannerOfDeath/dist/
 /Reports/Report_BodiesByOrganisation/dist/
 /Reports/Report_TurnAroundOnResults/dist/
+<<<<<<< HEAD
+/Team1_Db/TestApp/dist/
+=======
 >>>>>>> origin/master
+/Reports/Report_UnidentifiedBodiesStatistics/build/
+>>>>>>> origin/master
+<<<<<<< HEAD
 /Reports/Report_UnidentifiedBodiesStatistics/build/
 /Reports/Incident_housekeeping/nbproject/private/
 /Reports/IncidentHouseKeeping/nbproject/private/
 /Reports/Incident_housekeeping/build/
+=======
+/Reports/AuditTrail/nbproject/private/
+>>>>>>> origin/master
+/Reports/ExcelReports/Report_IncidentHouseKeeping/nbproject/private/
+/Reports/ExcelReports/Report_IncidentHouseKeeping/build/
+/Reports/ExcelReports/Report_CaseReport/nbproject/private/
+/Reports/ExcelReports/Report_CaseReport/build/
