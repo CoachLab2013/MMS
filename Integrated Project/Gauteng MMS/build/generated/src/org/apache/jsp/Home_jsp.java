@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import servlets.Tools;
 
 public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -44,6 +45,7 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
       out.write(" \r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
@@ -64,6 +66,11 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <title>Gauteng Mortuary Management System</title>\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
+      out.write("        ");
+ Tools t = new Tools();
+        out.println(t.adduser());
+        
+      out.write("\r\n");
       out.write("        ");
       out.write("\r\n");
       out.write("        <p>\r\n");

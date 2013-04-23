@@ -4,6 +4,7 @@
     Author     : Sandile
 --%>
 
+<%@page import="database.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  
 <!DOCTYPE html>
@@ -28,8 +29,8 @@
         <%-- <p>Welcome MR Pathologist <span>Logout</span></p>--%>
         <p>
              
-  <span style="float: left">Welcome Mr Pathologist </span>
-  <span style="float: right">Logout  .</span>
+            <span style="float: left"><%out.println("Welcome: " + session.getAttribute("name") + " " + session.getAttribute("surname")); %></span>
+  <span style="float: right">Logout</span>
         </p>
         <div align="center"><h1> <img src="Images/logo.jpg" width="75" height="75"> Gauteng Mortuary Management System</h1></div>
          <div class="tabbable">
