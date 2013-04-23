@@ -38,6 +38,20 @@ public Incident()
  bodyCount = 0;
  status = false;
 }
+public Incident(String inIncidentLogNumber)
+{
+ incidentLogNumber= inIncidentLogNumber;
+ referenceNumber="";
+ numberOfBodies=0;
+ dateOfIncident="";
+ timeOfIncident="";
+ circumstanceOfDeath="";
+ placeBodyFound="";
+ specialCircumstances="";
+ reason = "";
+ bodyCount = 0;
+ status = false;
+}
 public Incident(String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances,String reason,int bodyCount,boolean status)
 {
 this. incidentLogNumber = incidentLogNumber;

@@ -156,9 +156,32 @@ public class IncidentDb extends DatabaseConnector
     @Override
     public String read() 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try 
+        {
+            statement.executeQuery("SELECT * FROM incident WERE incidentLogNumber ='"+ incident.getIncidentLogNumber() +"';");
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            incident.setBodyCount(resultSet.getInt("bodyCount"));
+            incident.setCircumstanceOfDeath(resultSet.getString("circumstanceOfDeath"));
+            incident.setDateOfIncident(resultSet.getString("dateOfIncident"));
+            incident.setNumberOfBodies(resultSet.getInt("numberOfBodies"));
+            incident.setPlaceBodyFound(resultSet.getString("placeBodyFound"));
+            incident.setReason(resultSet.getString("reason"));
+            incident.setReferenceNumber(resultSet.getString("referenceNumber"));
+            incident.setSpecialCircumstances(resultSet.getString("specialCircumstances"));
+            incident.setStatus(resultSet.getBoolean("status"));
+            incident.setTimeOfIncident(resultSet.getString("timeOfIncident"));
+            //found = new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"));
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "read successful";
     }
-    public Incident findIncident(String inIncidentLogNumber) throws SQLException{
+    /*public Incident findIncident(String inIncidentLogNumber) throws SQLException{
         Incident found;
         try 
         {
@@ -174,7 +197,7 @@ public class IncidentDb extends DatabaseConnector
             throw new SQLException(ex.getMessage());
         }
         return found;
-    }
+    }*/
     //incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound
     @Override
     public String edit()//WILL NEED TO PASS PRIMARY KEY FOR WHERE CLAUSE unless we assume we cannot edit primary
