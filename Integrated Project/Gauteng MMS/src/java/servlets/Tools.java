@@ -88,6 +88,7 @@ public class Tools {
     public String getIncidentLogNumber(){
         Incident incident = new Incident();
         IncidentDb incidentdb = new IncidentDb(incident,dbdetail);
+        incidentdb.init();
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String[] datetime = timestamp.split(" ");
         try{

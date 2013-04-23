@@ -3,7 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import servlets.Tools;
+import database.Employee;
 
 public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -67,16 +67,13 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
       out.write("        ");
- Tools t = new Tools();
-        out.println(t.adduser());
-        
-      out.write("\r\n");
-      out.write("        ");
       out.write("\r\n");
       out.write("        <p>\r\n");
       out.write("             \r\n");
-      out.write("  <span style=\"float: left\">Welcome Mr Pathologist </span>\r\n");
-      out.write("  <span style=\"float: right\">Logout  .</span>\r\n");
+      out.write("            <span style=\"float: left\">");
+out.println("Welcome: " + session.getAttribute("name") + " " + session.getAttribute("surname")); 
+      out.write("</span>\r\n");
+      out.write("  <span style=\"float: right\">Logout</span>\r\n");
       out.write("        </p>\r\n");
       out.write("        <div align=\"center\"><h1> <img src=\"Images/logo.jpg\" width=\"75\" height=\"75\"> Gauteng Mortuary Management System</h1></div>\r\n");
       out.write("         <div class=\"tabbable\">\r\n");

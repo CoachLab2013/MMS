@@ -4,6 +4,7 @@
     Author     : Administrator
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -34,7 +35,8 @@
                     String[] datetime = timestamp.split(" ");
                     String date[] = datetime[0].split("-");
                     String currentdate = date[0]+date[1]+date[2];
-                    out.println("value ="+"number"+currentdate);
+                    Tools t = new Tools();
+                    out.println("value ="+ "ascsa");
                 %>/></td>
             </tr>     
             <tr>
