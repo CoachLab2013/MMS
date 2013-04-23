@@ -36,6 +36,10 @@ public abstract class Body
     protected String bodyType;
     protected String dateBodyReleased;
     
+    public Body()
+    {
+        
+    }
     public Body(String deathRegisterNumber)
     {
         this.deathRegisterNumber = deathRegisterNumber;
