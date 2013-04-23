@@ -185,7 +185,7 @@ public class ReferenceListDb extends DatabaseConnector
         } 
         catch (SQLException ex) 
         {
-            throw new SQLException(ex.getMessage()+" "+field2 +" "+tableName);
+            throw new SQLException(ex.getMessage());
         }
         return reflist;
     }
