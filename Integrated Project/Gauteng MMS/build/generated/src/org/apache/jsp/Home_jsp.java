@@ -72,6 +72,8 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("             \r\n");
       out.write("            <span style=\"float: left\">Welcome ");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${employee.getName()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(' ');
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${employee.getSurname()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("</span>\r\n");
       out.write("  <span style=\"float: right\">Logout</span>\r\n");
       out.write("        </p>\r\n");

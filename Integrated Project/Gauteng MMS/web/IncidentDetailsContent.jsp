@@ -110,17 +110,7 @@
             <tr>
                 <td> Special Circumstances:</td> 
                 <td>
-                    <select name="specialcircumstances">
-                        <option selected="selected">Select</option>>
-                        <option></option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
-                    </select>
+                    <jsp:include page="SpecialCircumstances.jsp" />
                 </td>
             </tr>
             <tr>

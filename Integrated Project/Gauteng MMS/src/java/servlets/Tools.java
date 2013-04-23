@@ -7,6 +7,7 @@ package servlets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
+import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -104,5 +105,21 @@ public class Tools {
         }
     }
     //end getIncidentLogNumber
+    
+    /**
+     * 
+     */
+    public ArrayList<String> getReferenceList(String listname){
+        ReferenceListDb refdb = new ReferenceListDb(dbdetail,listname);
+        refdb.init();
+        try{
+            return refdb.referenceList();
+        }
+        catch(Exception e){
+            ArrayList<String> error = new ArrayList<String>();
+            error.add("Error loading list: " + e.getMessage());
+            return error;
+        }
+    }
 }
 //end Tools class
