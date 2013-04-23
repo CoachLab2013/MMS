@@ -144,7 +144,7 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         //TESTING INCIDENT
          //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
-        Incident inci = new  Incident("001232223","refer" ,4,"2013-04-11","12:50:30" , "rap stabbing", "vegas", "had beef with TI","the vegas strip",3,true);
+        Incident inci = new  Incident("001232523","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",3,true);
         IncidentDb inciDb = new IncidentDb(inci,dbDetail);
         inciDb.init();
         
@@ -152,16 +152,19 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         //System.out.println(inciDb.add());
         
         //listing incidents
-        //ArrayList<Incident> list = inciDb.openIncidentList();
+       // ArrayList<Incident> list = inciDb.openIncidentList();
         //for(int i = 0;i < list.size();i++)
         //{
         //    System.out.println(list.get(i).getIncidentLogNumber() + " " + list.get(i).getReferenceNumber() + " " + list.get(i).getNumberOfBodies() + " " + list.get(i).getDateOfIncident() + " " + list.get(i).getTimeOfIncident() + " " + list.get(i).getCircumstanceOfDeath() + " " + list.get(i).getPlaceBodyFound() + " " + list.get(i).getSpecialCircumstances() + " " + list.get(i).getBodyCount() + " " + list.get(i).isOpen());
         //}
         
         //edit incidents
-        System.out.println(inciDb.edit());
+        //System.out.println(inciDb.edit());
         //delete incidents
         
+        
+        //counting open incidents
+        System.out.println(inciDb.countOpenIncidents("2013-04-06"));
         //END OF INCIDENT STUFF
         
         //TEST INCIDENT MESSAGE

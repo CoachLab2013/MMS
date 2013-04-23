@@ -51,7 +51,7 @@ public class IncidentDb extends DatabaseConnector
         int count = 0;
         try 
         {
-            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM incident WHERE status='true' AND dateOfIncident = '" + inDate + "';");
+            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE status=true AND dateOfIncident = '" + inDate + "';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             count = resultSet.getInt("countOpenIncidents");
@@ -68,7 +68,7 @@ public class IncidentDb extends DatabaseConnector
     public void closeIncident(String inIncidentLogNumber) throws SQLException{
         try 
         {                                                                                                                                                                                                                                                                                                                                                                                         
-            statement.executeUpdate("UPDATE incident SET status = 'false' WHERE incidentLogNumber = '"+ inIncidentLogNumber +"';" );
+            statement.executeUpdate("UPDATE incident SET status = false WHERE incidentLogNumber = '"+ inIncidentLogNumber +"';" );
             statement.close();
             connection.close();
         } 
