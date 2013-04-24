@@ -13,12 +13,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <select name="specialcircumstances">
+        <select name="specialcircumstances" id="specialcircumstances">
             <option selected="selected">Select</option>
             <% 
                 ArrayList<String> list = new ArrayList<String>();
                 Tools t = new Tools();
-                list = t.getReferenceList("province");
+                list = t.getReferenceList("specialcircumstance");
                 int size = list.size();
                 for(int i=0;i<size;i++){
                     out.println("<option>"+list.get(i)+"</option>");

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import java.text.SimpleDateFormat;
@@ -25,18 +21,18 @@ public class Tools {
     }
     //end constructor
     
-    /*public String adduser(){
-        //Employee e = new Employee("11111111","password","User","UserSurname","Admin",4,"user1@user.com",true);
+   /* public String adduser(){
+        Employee e = new Employee("11111111","password","User","UserSurname","Admin",4,"user1@user.com",true);
         Employee e2 = new Employee("12345678","123456","User2","UserSurname2","Pathologist",3,"user2@user.com",true);
-        //EmployeeDb db1 = new EmployeeDb(e,dbdetail);
-        //db1.init();
+        EmployeeDb db1 = new EmployeeDb(e,dbdetail);
+        db1.init();
         EmployeeDb db2 = new EmployeeDb(e2,dbdetail);
         db2.init();
         String s = db2.add();
-        //db2.add();
+        db2.add();
         
         return s;
-    }*/
+    }%/
     
     /**
      * Try to log in a user, if the login is successful then return true, otherwise return false
@@ -57,9 +53,6 @@ public class Tools {
             else{
                 this.makeAuditTrail("Log In", "Successfull log in", personnelnumber,"Log In Screen");
                 sess.setAttribute("employee", emp);
-                /*sess.setAttribute("name", emp.getName());
-                sess.setAttribute("surname", emp.getSurname());
-                sess.setAttribute("access", emp.getAccess());*/
                 int access = Integer.parseInt(status.substring(0, 1));
                 return access; 
             }
@@ -96,7 +89,7 @@ public class Tools {
         String timestamp2 = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(Calendar.getInstance().getTime());
         String datenum = timestamp2.split(" ")[0];
         try{
-            int incidentnum = incidentdb.countOpenIncidents(datetime[0]) + 1;
+            int incidentnum = incidentdb.countOpenIncidents(datetime[0])+1;
             String lognumber = Integer.toString(incidentnum) + datenum;
             return lognumber;
         }
@@ -107,7 +100,9 @@ public class Tools {
     //end getIncidentLogNumber
     
     /**
-     * 
+     * This returns the contents of a reference list from the database
+     * @param listname  name of the table containing the list elements
+     * @return returns the contents of a reference list from the database or an error
      */
     public ArrayList<String> getReferenceList(String listname){
         ReferenceListDb refdb = new ReferenceListDb(dbdetail,listname);
@@ -121,5 +116,71 @@ public class Tools {
             return error;
         }
     }
+    //end getReferenceList
+    
+    public String makeYear(String name){
+        String out = "<select id="+name+" name="+name+">";
+        out = out + "<option selected='selected'>Year</option>";
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        String[] datetime = timestamp.split(" ");
+        String date[] = datetime[0].split("-");
+        String year = date[0];
+        int intyear = Integer.parseInt(year);
+        for(int i= intyear;i>=(intyear-150);i--){
+            out = out + "<option>" +Integer.toString(i) +"</option>";
+        }
+        out = out + "</select>";
+        return out;
+    }
+    //end makeYear
+    
+    public String makeMonth(String name){
+        String out = "<select id="+name+" name="+name+">";
+        out = out + "<option selected='selected'>Month</option>";
+        out = out + "<option num=1>January</option>";
+        out = out +"<option num=2>February</option>";
+        out = out +"<option num=3>March</option>";
+        out = out +"<option num=4>April</option>";
+        out = out +"<option num=5>May</option>";
+        out = out +"<option num=6>June</option>";
+        out = out +"<option num=7>July</option>";
+        out = out +"<option num=8>August</option>";
+        out = out +"<option num=9>September</option>";
+        out = out +"<option num=10>October</option>";
+        out = out +"<option num=11>November</option>";
+        out = out + "<option num=12>December</option>";
+        out = out + "</select>";
+        return out;
+    }
+    
+    public String makeDay(String name){
+        String out = "<select id="+name+" name="+name+">";
+        out = out + "<option selected='selected'>Day</option>";
+        for(int i=1;i<32;i++){
+            out = out + "<option>"+Integer.toString(i)+"</option>";
+        }
+        out = out + "</select>";
+        return out;
+    }
+    
+    public String makeHour(String name){
+        String out = "<select name=" + name+" id=" +name+">";
+        out = out + "<option selected='selected'>Hour</option>";
+        for(int i=0;i<24;i++){
+            out = out + "<option>"+Integer.toString(i)+"</option>";
+        }
+        out =  out + "</select>";
+        return out;
+    }
+    
+    public String makeMinute(String name){
+        String out = "<select name=" + name+" id=" +name+">";
+        out = out + "<option selected='selected'>Minute</option>";
+        for(int i=0;i<50;i++){
+            out = out + "<option>"+Integer.toString(i)+"</option>";
+        }
+        out =  out + "</select>";
+        return out;
+    }    
 }
 //end Tools class

@@ -14,12 +14,12 @@ $(document).ready(function(){
     $("#callform").validate({
         rules:{
             
-          hour:{
+          callhour:{
               valueNotEquals: "Hour",
               validcalltime: true
           },//end rule for hour
           
-          minute:{
+          callminute:{
               valueNotEquals: "Minute",
               validcalltime: true
           },//end rule for minute*/
@@ -53,11 +53,11 @@ $(document).ready(function(){
             
         },//end of rules
         groups: {
-                calltime: "hour minute"
+                calltime: "callhour callminute"
         },
         errorPlacement: function(error, element) {
-            if((element.attr("name") == "hour") || (element.attr("name") == "minute")){
-                error.insertAfter("#callform #minute");
+            if((element.attr("name") == "callhour") || (element.attr("name") == "callminute")){
+                error.insertAfter("#callminute");
             }
             else {
                 error.insertAfter(element);
@@ -66,12 +66,12 @@ $(document).ready(function(){
         
         messages:{
           
-         hour:{
+         callhour:{
               valueNotEquals: "Invalid time.",
               validcalltime : "Invalid time."
           },//end message for hour
           
-          minute:{
+          callminute:{
               valueNotEquals: "Invalid time.",
               validcalltime : "Invalid time."
           },//end message for minute
@@ -121,8 +121,8 @@ $(document).ready(function(){
      */
     $.validator.addMethod("validcalltime",function(value){
         var date = new Date();
-        var hour = $("#callform #hour").val();
-        var min = $("#callform #minute").val();
+        var hour = $("#callhour").val();
+        var min = $("#callminute").val();
         if(hour > date.getHours()){
             return !value;
         }
@@ -134,16 +134,56 @@ $(document).ready(function(){
     });
     
      $("#callform").submit(function(){
-        if($("#callform").valid()){
+       if($("#callform").valid()){
+            
             $("#CallDetailsTab").removeClass("active");
             $("#CallDetails").removeClass("tab-pane active");
             $("#DispatchVehicle").removeClass("tab-pane");
             $("#CallDetails").addClass("tab-pane");
             $("#DispatchVehicle").addClass("tab-pane active");
             $("#DispatchVehicleTab").addClass("active");
+            addinfo("fpsnumber",$("#fpsnumber"));
+            addinfo("SAPSnumber",$( "#SAPSnumber"));
+            addinfo("detailyear",$("#detailyear"));
+            var form = document.forms["callform"];
+            var el = document.createElement("input");
+            el.type = "hidden";
+            el.name = "detailmonth";
+            el.value = $("option:selected","#detailmonth").attr("num");
+            form.appendChild(el);
+            addinfo("detailday",$("#detailday"));
+            addinfo("detailhour",$("#detailhour"));
+            addinfo("detailminute",$("#detailminute"));
+            addinfo("numberofbodies",$("#numberofbodies"));
+            addinfo("placefound",$("#placefound"));
+            addinfo("circumstancesofdeath",$("#circumstancesofdeath"));
+            addinfo("specialcircumstances",$("#specialcircumstances"));
+            $("#callform").submit();
         }
-        return false;
+        return true;
     });
+    
+  function addinfo(name,element)
+{
+   var form = document.forms["callform"];
+   // form.action = 'put your url here';
+   var el = document.createElement("input");
+   el.type = "hidden";
+   el.name = name;
+   el.value = element.val();
+   form.appendChild(el);
+}
+    
+   /* $("#createincident").on("click",function(){
+        
+        //alert($().val());
+        //document.$("#callform").submit();
+        //mergeForms("detailform","callform");
+        //getIncidentDetails();
+        v
+        
+    });*/
+     
     
     $("#callcancel").click(function(){
         $("label.error").hide();

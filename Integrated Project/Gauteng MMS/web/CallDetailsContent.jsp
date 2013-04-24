@@ -4,6 +4,7 @@
     Author     : Administrator
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,10 +24,17 @@
     </head>
     <body>
         <legend>Incidents> Log Incident> Call Details</legend>
-        <form name="callform" id="callform">
+        <form name="callform" id="callform" method="post" action="LogIncidentServlet">
+    
             <table>
                 <tr>     
-                    <td>  Time of Call:  </td><td><jsp:include page="Time.jsp" /></td>
+                    <td>  Time of Call:  </td><td>
+                    <%
+                        Tools t = new Tools();
+                        out.print(t.makeHour("callhour") +" ");
+                        out.print(t.makeMinute("callminute"));
+                    %>
+                    </td>
 
                 </tr>
                 <tr>
@@ -77,7 +85,7 @@
                     <td>  Scene condition: </td><td><textarea cols="50" rows="3" name="condition" id="condition"> </textarea><br></td>
                         </tr>
                         <tr>
-                            <td></td> <td>  <input type="submit" value="Create Incident" name="createincident" /> <input type="reset" value="Cancel" id="callcancel" /><br></td>
+                            <td></td> <td>  <input type="submit" value="Create Incident" name="createincident" id="createincident" /> <input type="reset" value="Cancel" id="callcancel" /><br></td>
 
                         </tr>
         </table>
