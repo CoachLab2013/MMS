@@ -10,7 +10,7 @@ package testapp;
  */
 public class BodyAtMortuary extends Body
 {
-    private BodyAtScene bodyAtScene;
+    //private BodyAtScene bodyAtScene;
     private String bodyReceivedFromPerNum;
     private String bodyHandOverFromPerNum;
 
@@ -18,16 +18,17 @@ public class BodyAtMortuary extends Body
     public BodyAtMortuary() {
     }
 
-    public BodyAtMortuary(BodyAtScene bodyAtScene, String bodyReceivedFromPerNum, String bodyHandOverFromPerNum, String deathRegisterNumber) {
+    //Constructors with at Scene
+    public BodyAtMortuary(String bodyReceivedFromPerNum, String bodyHandOverFromPerNum, String deathRegisterNumber) {
         super(deathRegisterNumber);
-        this.bodyAtScene = bodyAtScene;
+        //this.bodyAtScene = bodyAtScene;
         this.bodyReceivedFromPerNum = bodyReceivedFromPerNum;
         this.bodyHandOverFromPerNum = bodyHandOverFromPerNum;
     }
 
-    public BodyAtMortuary(BodyAtScene bodyAtScene, String bodyReceivedFromPerNum, String bodyHandOverFromPerNum, String deathRegisterNumber, String gender, String race, String assignedTo, String nameOfDeceased, String surnameOfDeceased, String placeOfBirth, String dateOfBirth, int ageOnDateFound, String martitalStatus, String occupation, String citizen, String maidenName, String inIdentifiedDateTime, BodyAddress bodyAddress, int estimatedAgeYear, int estimatedAgeMonth, String ID, String passport, boolean bodyStatus, String dateBodyReceived, boolean bodyReleased, Incident incident, String bodyType, String dateBodyReleased) {
+    public BodyAtMortuary(String bodyReceivedFromPerNum, String bodyHandOverFromPerNum, String deathRegisterNumber, String gender, String race, String assignedTo, String nameOfDeceased, String surnameOfDeceased, String placeOfBirth, String dateOfBirth, int ageOnDateFound, String martitalStatus, String occupation, String citizen, String maidenName, String inIdentifiedDateTime, BodyAddress bodyAddress, int estimatedAgeYear, int estimatedAgeMonth, String ID, String passport, boolean bodyStatus, String dateBodyReceived, boolean bodyReleased, Incident incident, String bodyType, String dateBodyReleased) {
         super(deathRegisterNumber, gender, race, assignedTo, nameOfDeceased, surnameOfDeceased, placeOfBirth, dateOfBirth, ageOnDateFound, martitalStatus, occupation, citizen, maidenName, inIdentifiedDateTime, bodyAddress, estimatedAgeYear, estimatedAgeMonth, ID, passport, bodyStatus, dateBodyReceived, bodyReleased, incident, bodyType, dateBodyReleased);
-        this.bodyAtScene = bodyAtScene;
+        //this.bodyAtScene = bodyAtScene;
         this.bodyReceivedFromPerNum = bodyReceivedFromPerNum;
         this.bodyHandOverFromPerNum = bodyHandOverFromPerNum;
     }
@@ -35,10 +36,10 @@ public class BodyAtMortuary extends Body
     //GET METHODS
     /**
      * @return the bodyAtScene
-     */
+     
     public BodyAtScene getBodyAtScene() {
         return bodyAtScene;
-    }
+    }*/
 
     /**
      * @return the bodyReceivedFromPerNum
@@ -57,10 +58,10 @@ public class BodyAtMortuary extends Body
     //SET METHODS
     /**
      * @param bodyAtScene the bodyAtScene to set
-     */
+     
     public void setBodyAtScene(BodyAtScene bodyAtScene) {
         this.bodyAtScene = bodyAtScene;
-    }
+    }*/
 
     /**
      * @param bodyReceivedFromPerNum the bodyReceivedFromPerNum to set
