@@ -51,7 +51,7 @@ public class IncidentDb extends DatabaseConnector
         int count = 0;
         try 
         {
-            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE status=true AND dateOfIncident = '" + inDate + "';");
+            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE incidentLogNumber LIKE '%" + inDate + "';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             count = resultSet.getInt("countOpenIncidents");

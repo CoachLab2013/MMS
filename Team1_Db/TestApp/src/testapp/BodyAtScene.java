@@ -19,7 +19,13 @@ public class BodyAtScene /*extends Body*/
     private String placeOfDeath;
     private String dateTimeBodyFound;
     private Body body;
+    
+    //CONSTRUCTORS
+    public BodyAtScene(Body inBody){
+        this.body = inBody;
+    }
     public BodyAtScene(){
+        
     }
 
     /**
