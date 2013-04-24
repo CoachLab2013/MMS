@@ -66,7 +66,7 @@ public class EmployeeDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeUpdate("insert into employee (password,personnelNumber,name,surname,rank,access,email,active)" + " values"
+            statement.executeUpdate("INSERT INTO Employee (password,personnelNumber,name,surname,rank,access,email,active)" + " values"
                                     +"('" 
                                     +employee.getPassword() + "','" 
                                     + employee.getPersonnelNumber() + "','"
