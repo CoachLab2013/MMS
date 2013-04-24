@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Chester
+ * @author 
  */
 public class IncidentMessageDb extends DatabaseConnector
 {

@@ -19,13 +19,21 @@ public class BodyAtScene /*extends Body*/
     private String placeOfDeath;
     private String dateTimeBodyFound;
     private Body body;
-    
+
     //CONSTRUCTORS
-    public BodyAtScene(Body inBody){
-        this.body = inBody;
+    public BodyAtScene(Body body) {
+        this.body = body;
     }
-    public BodyAtScene(){
-        
+    public BodyAtScene(String sceneIncidentOccured, String sceneDateTime, boolean pathOnScene, String allegedInjuryDateTime, String allegedDeathDateTime, String externalCircumstanceOfInjury, String placeOfDeath, String dateTimeBodyFound, Body body) {
+        this.sceneIncidentOccured = sceneIncidentOccured;
+        this.sceneDateTime = sceneDateTime;
+        this.pathOnScene = pathOnScene;
+        this.allegedInjuryDateTime = allegedInjuryDateTime;
+        this.allegedDeathDateTime = allegedDeathDateTime;
+        this.externalCircumstanceOfInjury = externalCircumstanceOfInjury;
+        this.placeOfDeath = placeOfDeath;
+        this.dateTimeBodyFound = dateTimeBodyFound;
+        this.body = body;
     }
 
     /**
