@@ -53,32 +53,20 @@
 
                         </tr>
                         <tr>
-                        <td> Provinces:         </td><td>      <select name="province" id="province"><br>
-
-          <option slected="selected">Select</option>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
-      </select><br></td>
+                        <td> Province:         </td><td>
+                            <% 
+                        out.println(t.makeReferenceList("province"));
+                            %>
+                            
+                        </td>
 
                         </tr>
                         <tr>
-                    <td>  Region:</td><td><select name="region" id="region"><br>
-         <option selected="selected">Select</option>
-         <option></option>
-         <option></option>
-         <option></option>
-         <option></option>
-         <option></option>
-         <option></option>
-         <option></option>
-         <option></option>
-                        </select><br></td>
+                    <td>  Region:</td><td>
+                        <% 
+                            out.println(t.makeReferenceList("region"));
+                        %>
+                    </td>
                         </tr>
 
                         <tr>
@@ -86,7 +74,6 @@
                         </tr>
                         <tr>
                             <td></td> <td>  <input type="submit" value="Create Incident" name="createincident" id="createincident" /> <input type="reset" value="Cancel" id="callcancel" /><br></td>
-
                         </tr>
         </table>
     </form>

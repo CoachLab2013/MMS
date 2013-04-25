@@ -23,6 +23,12 @@
     </head>
     
     <body>
+        <% 
+            if(session.getAttribute("incidentlogged") != null){
+                out.print(session.getAttribute("incidentlogged"));
+                //session.removeAttribute("incidentlogged");
+           }
+        %>
         <legend>Incidents> Log Incident> Dispatch Vehicle</legend>
         <form id="vehicleform" name="vehicleform" method="post" action="">
     <table>

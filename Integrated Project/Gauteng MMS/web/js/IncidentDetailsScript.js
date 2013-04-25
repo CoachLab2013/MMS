@@ -48,7 +48,7 @@ $(document).ready(function(){
                 required: true
             },//end rules for place found
             
-            specialcircumstances:{
+            specialcircumstance:{
               valueNotEquals: "Select"
           }//end rule for specialcircumstances
             
@@ -106,7 +106,7 @@ $(document).ready(function(){
                 required: "Please specify the address where the body was found."
             },//end messages for place found
             
-            specialcircumstances:{
+            specialcircumstance:{
               valueNotEquals: "Please select a special circumstance."
           }//end message for specialcircumstances
             

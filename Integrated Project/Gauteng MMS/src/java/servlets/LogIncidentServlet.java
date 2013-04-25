@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -49,29 +50,33 @@ public class LogIncidentServlet extends HttpServlet {
         incident.setNumberOfBodies(Integer.parseInt(request.getParameter("numberofbodies" )));
         incident.setPlaceBodyFound(request.getParameter("placefound"));
         incident.setCircumstanceOfDeath(request.getParameter("circumstancesofdeath"));
-        incident.setSpecialCircumstances(request.getParameter("specialcircumstances"));
+        incident.setSpecialCircumstances(request.getParameter("specialcircumstance"));
         incident.setStatus(true);
         
         DbDetail dbdetail = new DbDetail("localhost","/mydb","asheen","password");
         IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
         incidentdb.init();
-        out.println("Incident message "+incidentdb.add()+"<br>");
+        incidentdb.add();
         
-        DeathCall call = new DeathCall();
+        DeathCall dcall = new DeathCall();
         String calltime = request.getParameter("callhour") + ":" + request.getParameter("callminute")+ ":00"; 
-        call.setTimeofCall(calltime);
-        call.setNumberCallMade(request.getParameter("phonenumber"));
-        call.setnameOfCaller(request.getParameter("name"));
-        call.setInstitution(request.getParameter("institution"));
-        call.setSceneAddress(request.getParameter("address"));        
-        call.setProvince(request.getParameter("province"));
-        call.setRegion(request.getParameter("region"));
-        call.setSceneCondition(request.getParameter("condition"));
+        dcall.setTimeofCall(calltime);
+        dcall.setNumberCallMade(request.getParameter("phonenumber"));
+        dcall.setnameOfCaller(request.getParameter("name"));
+        dcall.setInstitution(request.getParameter("institution"));
+        dcall.setSceneAddress(request.getParameter("address"));        
+        dcall.setProvince(request.getParameter("province"));
+        dcall.setRegion(request.getParameter("region"));
+        dcall.setSceneCondition(request.getParameter("condition"));
         
-        DeathCallDb calldb = new DeathCallDb(call,dbdetail);
+        DeathCallDb calldb = new DeathCallDb(dcall,dbdetail);
         calldb.init();
+        calldb.add() ;
         
-        out.println("Call message " + calldb.add())  ;
+        HttpSession sess = request.getSession();
+        sess.setAttribute("incidentlogged", "Incident created succesully");
+        sess.setAttribute("incident", incident);
+        response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

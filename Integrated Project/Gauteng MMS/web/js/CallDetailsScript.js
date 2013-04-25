@@ -157,10 +157,10 @@ $(document).ready(function(){
             addinfo("numberofbodies",$("#numberofbodies"));
             addinfo("placefound",$("#placefound"));
             addinfo("circumstancesofdeath",$("#circumstancesofdeath"));
-            addinfo("specialcircumstances",$("#specialcircumstances"));
+            addinfo("specialcircumstance",$("#specialcircumstance"));
             $("#callform").submit();
         }
-        return true;
+        return false;
     });
     
   function addinfo(name,element)

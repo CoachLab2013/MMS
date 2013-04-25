@@ -89,7 +89,7 @@ public class Tools {
         String timestamp2 = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(Calendar.getInstance().getTime());
         String datenum = timestamp2.split(" ")[0];
         try{
-            int incidentnum = incidentdb.countOpenIncidents(datetime[0])+1;
+            int incidentnum = incidentdb.countOpenIncidents(datenum)+1;
             String lognumber = Integer.toString(incidentnum) + datenum;
             return lognumber;
         }
@@ -98,25 +98,6 @@ public class Tools {
         }
     }
     //end getIncidentLogNumber
-    
-    /**
-     * This returns the contents of a reference list from the database
-     * @param listname  name of the table containing the list elements
-     * @return returns the contents of a reference list from the database or an error
-     */
-    public ArrayList<String> getReferenceList(String listname){
-        ReferenceListDb refdb = new ReferenceListDb(dbdetail,listname);
-        refdb.init();
-        try{
-            return refdb.referenceList();
-        }
-        catch(Exception e){
-            ArrayList<String> error = new ArrayList<String>();
-            error.add("Error loading list: " + e.getMessage());
-            return error;
-        }
-    }
-    //end getReferenceList
     
     public String makeYear(String name){
         String out = "<select id="+name+" name="+name+">";
@@ -181,6 +162,38 @@ public class Tools {
         }
         out =  out + "</select>";
         return out;
-    }    
+    }  
+    
+      /**
+     * This returns the contents of a reference list from the database
+     * @param listname  name of the table containing the list elements
+     * @return returns the contents of a reference list from the database or an error
+     */
+    public ArrayList<String> getReferenceList(String listname){
+        ReferenceListDb refdb = new ReferenceListDb(dbdetail,listname);
+        refdb.init();
+        try{
+            return refdb.referenceList();
+        }
+        catch(Exception e){
+            ArrayList<String> error = new ArrayList<String>();
+            error.add("Error loading list: " + e.getMessage());
+            return error;
+        }
+    }
+    //end getReferenceList
+    
+    public String makeReferenceList(String listname){
+        ArrayList<String> list = new ArrayList<String>();
+        list = this.getReferenceList(listname);
+        String out = "<select name='"+listname+"' id='"+listname+"'>";
+        out = out+ "<option selected='slected'>Select</option>";
+        int size = list.size();
+        for(int i=0;i<size;i++){
+            out= out + "<option>"+list.get(i)+"</option>";
+        }
+        out = out + "</select>";
+        return out;
+    }
 }
 //end Tools class

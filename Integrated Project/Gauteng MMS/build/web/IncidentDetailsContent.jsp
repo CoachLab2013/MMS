@@ -92,7 +92,9 @@
             <tr>
                 <td> Special Circumstances:</td> 
                 <td>
-                    <jsp:include page="SpecialCircumstancesList.jsp" />
+                    <% 
+                           out.println(t.makeReferenceList("specialcircumstance"));
+                    %>
                 </td>
             </tr>
             <tr>
