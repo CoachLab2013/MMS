@@ -52,12 +52,12 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
              System.out.println(list.get(i).getPersonnelNumber() + " " +list.get(i).getName());*/
         //TESTING AUDIT TRAIL STUFF
         //Audit Trail
-         AuditTrail AuditTr = new AuditTrail("2013/04/11", "13:30:22" , "Added" , "sucessfully added" ,"12345678", "Log In Screen");
-         DatabaseConnector AuditDb = new AuditTrailDb(AuditTr,dbDetail);
-         AuditDb.init();
+         //AuditTrail AuditTr = new AuditTrail("2013/04/11", "13:30:22" , "Added" , "sucessfully added" ,"12345678", "Log In Screen");
+         //DatabaseConnector AuditDb = new AuditTrailDb(AuditTr,dbDetail);
+         //AuditDb.init();
          
          //ADDING AN AUDIT TRAIL
-         System.out.println(AuditDb.add());
+         //System.out.println(AuditDb.add());
          
         
         //TESTING ORGANIZATION STUFF:
@@ -148,7 +148,7 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         //TESTING INCIDENT
          //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
-        //Incident inci = new  Incident("001232523","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",3,true);
+        //Incident inci = new  Incident("00220130424","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",3,true);
         //IncidentDb inciDb = new IncidentDb(inci,dbDetail);
         //inciDb.init();
         
@@ -168,7 +168,7 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         
         
         //counting open incidents
-        //System.out.println(inciDb.countOpenIncidents("2013-04-06"));
+        //System.out.println(inciDb.countOpenIncidents("20130424"));
         //END OF INCIDENT STUFF
         
         //TEST INCIDENT MESSAGE

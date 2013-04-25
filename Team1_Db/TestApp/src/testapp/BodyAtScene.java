@@ -18,13 +18,13 @@ public class BodyAtScene /*extends Body*/
     private String externalCircumstanceOfInjury;
     private String placeOfDeath;
     private String dateTimeBodyFound;
-    private Body body;
+    private BodyAtMortuary body;
 
     //CONSTRUCTORS
-    public BodyAtScene(Body body) {
+    public BodyAtScene(BodyAtMortuary body) {
         this.body = body;
     }
-    public BodyAtScene(String sceneIncidentOccured, String sceneDateTime, boolean pathOnScene, String allegedInjuryDateTime, String allegedDeathDateTime, String externalCircumstanceOfInjury, String placeOfDeath, String dateTimeBodyFound, Body body) {
+    public BodyAtScene(String sceneIncidentOccured, String sceneDateTime, boolean pathOnScene, String allegedInjuryDateTime, String allegedDeathDateTime, String externalCircumstanceOfInjury, String placeOfDeath, String dateTimeBodyFound, BodyAtMortuary body) {
         this.sceneIncidentOccured = sceneIncidentOccured;
         this.sceneDateTime = sceneDateTime;
         this.pathOnScene = pathOnScene;
@@ -158,7 +158,7 @@ public class BodyAtScene /*extends Body*/
     /**
      * @param body the body to set
      */
-    public void setBody(Body body) {
+    public void setBody(BodyAtMortuary body) {
         this.body = body;
     }
 }
