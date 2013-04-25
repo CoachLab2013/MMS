@@ -11,6 +11,8 @@ import database.Incident;
 import database.IncidentDb;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,20 +60,25 @@ public class LogIncidentServlet extends HttpServlet {
         incidentdb.init();
         incidentdb.add();
         
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        String[] datetime = timestamp.split(" ");
         DeathCall dcall = new DeathCall();
         String calltime = request.getParameter("callhour") + ":" + request.getParameter("callminute")+ ":00"; 
-        dcall.setTimeofCall(calltime);
-        dcall.setNumberCallMade(request.getParameter("phonenumber"));
-        dcall.setnameOfCaller(request.getParameter("name"));
+        dcall.setTimeOfCall(calltime);
+        
+        dcall.setDateOfCall(datetime[0]);
+        dcall.setNumberOfCaller(request.getParameter("phonenumber"));
+        dcall.setNameOfCaller(request.getParameter("name"));
         dcall.setInstitution(request.getParameter("institution"));
         dcall.setSceneAddress(request.getParameter("address"));        
         dcall.setProvince(request.getParameter("province"));
         dcall.setRegion(request.getParameter("region"));
-        dcall.setSceneCondition(request.getParameter("condition"));
+        dcall.setSceneConditions(request.getParameter("condition"));
+        dcall.setIncident(incident);
         
         DeathCallDb calldb = new DeathCallDb(dcall,dbdetail);
         calldb.init();
-        calldb.add() ;
+        calldb.add();
         
         HttpSession sess = request.getSession();
         sess.setAttribute("incidentlogged", "Incident created succesully");

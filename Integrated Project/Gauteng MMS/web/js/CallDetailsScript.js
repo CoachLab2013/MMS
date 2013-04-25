@@ -135,13 +135,6 @@ $(document).ready(function(){
     
      $("#callform").submit(function(){
        if($("#callform").valid()){
-            
-            $("#CallDetailsTab").removeClass("active");
-            $("#CallDetails").removeClass("tab-pane active");
-            $("#DispatchVehicle").removeClass("tab-pane");
-            $("#CallDetails").addClass("tab-pane");
-            $("#DispatchVehicle").addClass("tab-pane active");
-            $("#DispatchVehicleTab").addClass("active");
             addinfo("fpsnumber",$("#fpsnumber"));
             addinfo("SAPSnumber",$( "#SAPSnumber"));
             addinfo("detailyear",$("#detailyear"));

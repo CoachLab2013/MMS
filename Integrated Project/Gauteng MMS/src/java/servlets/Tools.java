@@ -32,7 +32,7 @@ public class Tools {
         db2.add();
         
         return s;
-    }%/
+    }*/
     
     /**
      * Try to log in a user, if the login is successful then return true, otherwise return false
