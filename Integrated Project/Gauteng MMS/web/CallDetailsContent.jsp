@@ -4,6 +4,7 @@
     Author     : Administrator
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,10 +24,17 @@
     </head>
     <body>
         <legend>Incidents> Log Incident> Call Details</legend>
-        <form name="callform" id="callform">
+        <form name="callform" id="callform" method="post" action="LogIncidentServlet">
+    
             <table>
                 <tr>     
-                    <td>  Time of Call:  </td><td><jsp:include page="Time.jsp" /></td>
+                    <td>  Time of Call:  </td><td>
+                    <%
+                        Tools t = new Tools();
+                        out.print(t.makeHour("callhour") +" ");
+                        out.print(t.makeMinute("callminute"));
+                    %>
+                    </td>
 
                 </tr>
                 <tr>
@@ -45,40 +53,27 @@
 
                         </tr>
                         <tr>
-                        <td> Provinces:         </td><td>      <select name="province" id="province"><br>
-
-          <option slected="selected">Select</option>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
-      </select><br></td>
+                        <td> Province:         </td><td>
+                            <% 
+                        out.println(t.makeReferenceList("province"));
+                            %>
+                            
+                        </td>
 
                         </tr>
                         <tr>
-                    <td>  Region:</td><td><select name="region" id="region"><br>
-         <option selected="selected">Select</option>
-         <option></option>
-         <option></option>
-         <option></option>
-         <option></option>
-         <option></option>
-         <option></option>
-         <option></option>
-         <option></option>
-                        </select><br></td>
+                    <td>  Region:</td><td>
+                        <% 
+                            out.println(t.makeReferenceList("region"));
+                        %>
+                    </td>
                         </tr>
 
                         <tr>
                     <td>  Scene condition: </td><td><textarea cols="50" rows="3" name="condition" id="condition"> </textarea><br></td>
                         </tr>
                         <tr>
-                            <td></td> <td>  <input type="submit" value="Create Incident" name="createincident" /> <input type="reset" value="Cancel" id="callcancel" /><br></td>
-
+                            <td></td> <td>  <input type="submit" value="Create Incident" name="createincident" id="createincident" /> <input type="reset" value="Cancel" id="callcancel" /><br></td>
                         </tr>
         </table>
     </form>

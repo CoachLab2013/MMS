@@ -5,7 +5,7 @@
    package testapp;
    import java.sql.*;
 import java.util.ArrayList;
-   class AuditTrailDb extends DatabaseConnector
+   public class AuditTrailDb extends DatabaseConnector
    {
    
       private AuditTrail auditTrail;

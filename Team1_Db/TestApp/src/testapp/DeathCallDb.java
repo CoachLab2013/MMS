@@ -16,11 +16,12 @@ import java.util.ArrayList;
 public class DeathCallDb extends DatabaseConnector
 {
      private DeathCall deathCall;
-     
+     private DbDetail dbDetail;
         public DeathCallDb(DeathCall deathCall , DbDetail dbDetail)
       {
          super(dbDetail);
          this.deathCall = deathCall;
+         this.dbDetail = dbDetail;
       
       }
         
@@ -28,6 +29,7 @@ public class DeathCallDb extends DatabaseConnector
       {
          super(dbDetail);
          deathCall = null;
+         this.dbDetail = dbDetail;
       
       }
 
@@ -50,16 +52,18 @@ public class DeathCallDb extends DatabaseConnector
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
          try  
         { 
-            statement.executeUpdate("insert into deathcall(timeOfCall,numberCallMade,institution,sceneAddress,province,region,sceneConditions,nameOfCaller)" + " values"
-                                    +"('" 
-                                    + deathCall.getTimeofCall() + "','" 
-                                    + deathCall.getNumberCallMade()+ "','"
+            statement.executeUpdate("INSERT INTO Deathcall(Incident_incidentLogNumber, dateOfCall, timeOfCall, numberOfCaller, institution, sceneAddress, province, region, sceneConditions, nameOfCaller)" + " VALUES"
+                                    +" ('" 
+                                    + deathCall.getIncident().getIncidentLogNumber() + "','" 
+                                    + deathCall.getDateOfCall() + "','" 
+                                    + deathCall.getTimeOfCall() + "','" 
+                                    + deathCall.getNumberOfCaller()+ "','"
                                     + deathCall.getInstitution() +"','"
                                     + deathCall.getSceneAddress() + "','"
                                     + deathCall.getProvince() + "','"
                                     + deathCall.getRegion() + "','"
-                                    + deathCall.getSceneCondition()+ "','"
-                                    + deathCall.getnameOfCaller()+"')");
+                                    + deathCall.getSceneConditions()+ "','"
+                                    + deathCall.getNameOfCaller()+"')");
             statement.close();
             connection.close(); //deathCall
         } 
@@ -82,7 +86,7 @@ public class DeathCallDb extends DatabaseConnector
 	  the class below will load all the death call details an arraylist 
 	  */
     
-     public  ArrayList<DeathCall> deathCalllList()
+     public  ArrayList<DeathCall> deathCallList()
       {
          ArrayList<DeathCall> list = new ArrayList<DeathCall>();
          try 
@@ -91,15 +95,20 @@ public class DeathCallDb extends DatabaseConnector
             ResultSet resultSet = statement.getResultSet();
                while(resultSet.next())
                {
-                  DeathCall dCall= new DeathCall ();
-                  dCall.setTimeofCall(resultSet.getString("timeOfCall"));
-                  dCall.setNumberCallMade(resultSet.getString("numberCallMade"));
+                  DeathCall dCall= new DeathCall();
+                  dCall.setTimeOfCall(resultSet.getString("timeOfCall"));
+                  dCall.setDateOfCall(resultSet.getString("dateOfCall"));
+                  dCall.setNumberOfCaller(resultSet.getString("numberOfCaller"));
                   dCall.setInstitution(resultSet.getString("institution"));
                   dCall.setSceneAddress(resultSet.getString("sceneAddress"));
                   dCall.setProvince(resultSet.getString("province"));
 		  dCall.setRegion(resultSet.getString("region"));
-		  dCall.setSceneCondition(resultSet.getString("sceneConditions"));
-                  dCall.setnameOfCaller(resultSet.getString("nameOfCaller"));
+		  dCall.setSceneConditions(resultSet.getString("sceneConditions"));
+                  dCall.setNameOfCaller(resultSet.getString("nameOfCaller"));
+                  IncidentDb incidentDb = new IncidentDb(deathCall.getIncident(), dbDetail);
+                  incidentDb.init();
+                  incidentDb.read();
+                  dCall.setIncident(incidentDb.getIncident());
                   list.add(dCall);
               }
             statement.close();
@@ -129,7 +138,17 @@ public class DeathCallDb extends DatabaseConnector
      @Override
      public String edit()
      {
-         return "never implemented";
+          try 
+        {
+            statement.executeUpdate("UPDATE DeathCall SET timeOfCall='" + deathCall.getTimeOfCall() + "', dateOfCall='" + deathCall.getDateOfCall() +"', numberOfCaller='"+ deathCall.getNumberOfCaller() +"', institution='"+ deathCall.getInstitution() +"', sceneAddress='"+ deathCall.getSceneAddress() +"', province='"+ deathCall.getProvince() +"', region='"+ deathCall.getRegion() +"', sceneConditions='"+ deathCall.getSceneConditions() +"', nameOfCaller='"+ deathCall.getNameOfCaller() +"' WHERE Incident_incidentLogNumber = '"+ deathCall.getIncident().getIncidentLogNumber() +"';" );
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "Update Successful";
      }
     
 }

@@ -26,6 +26,15 @@ public class ReferenceListDb extends DatabaseConnector
         field2 = "";
         id = 0;
     }
+    public ReferenceListDb(DbDetail dbDetail,String inTableName)
+    {
+        super(dbDetail);
+        data = "";
+        tableName = inTableName;
+        field1 = "";
+        field2 = "";
+        id = 0;
+    }
     public ReferenceListDb(String tableName,String field1,String field2,String data, DbDetail dbDetail)
     {
         super(dbDetail);
@@ -33,15 +42,6 @@ public class ReferenceListDb extends DatabaseConnector
         this.tableName = tableName;
         this.field1 = field1;
         this.field2 = field2;
-    }
-    public ReferenceListDb(String tableName,String field1,String field2,String data,int id, DbDetail dbDetail)
-    {
-        super(dbDetail);
-        this.data = data;
-        this.tableName = tableName;
-        this.field1 = field1;
-        this.field2 = field2;
-        this.id = id;
     }
     //tableName, field1, field2
     /**
@@ -174,18 +174,18 @@ public class ReferenceListDb extends DatabaseConnector
         ArrayList<String> reflist = new ArrayList<String>();
         try 
         {
-            statement.executeQuery("select "+field2 + " from "+ tableName+ ";");
+            statement.executeQuery("SELECT type FROM "+ tableName+ ";");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
-                reflist.add(resultSet.getString(field2));
+                reflist.add(resultSet.getString("type"));
             }
             statement.close();
             connection.close();
         } 
         catch (SQLException ex) 
         {
-            throw new SQLException(ex.getMessage()+" "+field2 +" "+tableName);
+            throw new SQLException(ex.getMessage());
         }
         return reflist;
     }

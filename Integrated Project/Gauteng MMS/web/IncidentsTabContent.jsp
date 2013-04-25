@@ -14,9 +14,9 @@ and open the template in the editor.
         
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
-                <li class="active"><a href="#OpenIncidents" data-toggle="tab">Open Incidents</a> </li>
-                <li><a href="#LogIncident" data-toggle="tab">Log Incident</a></li>   
-                <li><a href="#EditIncident" data-toggle="tab">Edit Incident</a></li> 
+                <li id ="OpenIncidentsTab" class="active"><a href="#OpenIncidents" data-toggle="tab">Open Incidents</a> </li>
+                <li id="LogIncidentTab"><a href="#LogIncident" data-toggle="tab">Log Incident</a></li>   
+                <li id="EditIncidentTab"><a href="#EditIncident" data-toggle="tab">Edit Incident</a></li> 
             </ul>
             <div class="tab-content" >
                 <div id="OpenIncidents" class="tab-pane active" name="openincidents">  

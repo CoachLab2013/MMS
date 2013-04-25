@@ -10,19 +10,22 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Chester
+ * @author 
  */
 public class IncidentMessageDb extends DatabaseConnector
 {
     private IncidentMessage incidentMessage;
-    public IncidentMessageDb(DbDetail dbDetail)
+    private DbDetail dbDetail;
+    public IncidentMessageDb(DbDetail inDbDetail)
     {
-        super(dbDetail);
+        super(inDbDetail);
+        this.dbDetail = inDbDetail;
         incidentMessage = null;
     }
-    public IncidentMessageDb(IncidentMessage incidentMessage,DbDetail dbDetail)
+    public IncidentMessageDb(IncidentMessage incidentMessage,DbDetail inDbDetail)
     {
-        super(dbDetail);
+        super(inDbDetail);
+        this.dbDetail = inDbDetail;
         this.incidentMessage = incidentMessage;
     }
 
@@ -31,12 +34,13 @@ public class IncidentMessageDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeUpdate("insert into incidentmessage (date,time,mannerOfDeath,nameOfDeceased) values"
+            statement.executeUpdate("insert into incidentmessage (date, time, mannerOfDeath, nameOfDeceased, Incident_incidentLogNumber) values"
                                     +"('" 
                                      + incidentMessage.getDate() + "','"
                                      + incidentMessage.getTime() + "','"
                                      + incidentMessage.getMannerOfDeath() + "','"
-                                     + incidentMessage.getNameOfDeceased()+ "')");
+                                     + incidentMessage.getNameOfDeceased()+ "','"
+                                    + incidentMessage.getIncident().getIncidentLogNumber() + "')");
             statement.close();
             connection.close();
         } 
@@ -59,10 +63,14 @@ public class IncidentMessageDb extends DatabaseConnector
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
-                msglist.add(new IncidentMessage(resultSet.getString("date"), resultSet.getString("time"), resultSet.getString("mannerOfDeath"), resultSet.getString("nameOfDeceased"), resultSet.getBoolean("vip"), resultSet.getBoolean("status")));
+                IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")),dbDetail);
+                incidentDb.read();
+                //Incident incident = incidentDb.findIncident(resultSet.getString("Incident_incidentLogNumber"));
+                msglist.add(new IncidentMessage(resultSet.getString("date"), resultSet.getString("time"), resultSet.getString("mannerOfDeath"), resultSet.getString("nameOfDeceased"), resultSet.getBoolean("vip"), resultSet.getBoolean("status"), incidentDb.getIncident()));
             }
             statement.close();
             connection.close();
+            
         } 
         catch (SQLException ex) 
         {

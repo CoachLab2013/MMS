@@ -152,7 +152,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`DeathCall` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`DeathCall` (
-  `idDeathCall` INT NOT NULL AUTO_INCREMENT ,
+  `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
   `timeOfCall` TIME NOT NULL ,
   `dateOfCall` DATE NOT NULL ,
   `numberOfCaller` VARCHAR(10) NOT NULL ,
@@ -162,9 +162,8 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`DeathCall` (
   `region` VARCHAR(45) NOT NULL ,
   `sceneConditions` VARCHAR(45) NOT NULL ,
   `nameOfCaller` VARCHAR(45) NOT NULL ,
-  `Incident_incidentLogNumber` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idDeathCall`) ,
   INDEX `fk_DeathCall_Incident1_idx` (`Incident_incidentLogNumber` ASC) ,
+  PRIMARY KEY (`Incident_incidentLogNumber`) ,
   CONSTRAINT `fk_DeathCall_Incident1`
     FOREIGN KEY (`Incident_incidentLogNumber` )
     REFERENCES `mydb`.`Incident` (`incidentLogNumber` )
