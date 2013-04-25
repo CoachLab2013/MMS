@@ -158,7 +158,7 @@ public class IncidentDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeQuery("SELECT * FROM incident WERE incidentLogNumber ='"+ incident.getIncidentLogNumber() +"';");
+            statement.executeQuery("SELECT * FROM Incident WHERE incidentLogNumber = '"+ incident.getIncidentLogNumber() +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             incident.setBodyCount(resultSet.getInt("bodyCount"));

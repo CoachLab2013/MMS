@@ -121,11 +121,25 @@ public static DbDetail dbDetail = new DbDetail("localhost","/mydb","root","passw
         //END OF REFERENCE LIST STUFF
 
         //TESTING DEATHCALL STUFF
-        /*//timeOfCall,numberCallMade,institution,sceneAddress,province,region,sceneCondition,nameOfCaller
-         DeathCall Dcall = new DeathCall("12:12:12","111","institution","address","province","region","scene condition","name of caller");
-         deathCallDb AuditDb = new deathCallDb(Dcall,"root","200971082","localhost","/mydb");
-         AuditDb.init();
-         System.out.println(AuditDb.add());*/
+        //timeOfCall,numberCallMade,institution,sceneAddress,province,region,sceneCondition,nameOfCaller
+         Incident incident = new Incident();
+         incident.setIncidentLogNumber("00220130424");
+         DeathCall Dcall = new DeathCall(incident,"00:30:30","2013-01-01","0119876333","institutions","scene Address","Province","Region", "scene Conditions", "name Of Caller");
+         DeathCallDb deathCalldb = new DeathCallDb(Dcall,dbDetail);
+         deathCalldb.init();
+        
+        //adding a deathCall
+        //System.out.println(deathCalldb.add());
+         
+         //edit deathCall
+         //System.out.println(deathCalldb.edit());
+         
+         //listing DeatCall
+         ArrayList<DeathCall> dcList = deathCalldb.deathCallList();
+         for(int i = 0; i < dcList.size(); i++){
+             System.out.println(dcList.get(i).getIncident().getIncidentLogNumber() + " " + dcList.get(i).getDateOfCall() + " " + dcList.get(i).getInstitution() + " " + dcList.get(i).getNameOfCaller() + " " + dcList.get(i).getNumberOfCaller() + " " + dcList.get(i).getProvince() + " " + dcList.get(i).getRegion() + " " + dcList.get(i).getSceneAddress() + " " + dcList.get(i).getSceneConditions() + " " + dcList.get(i).getTimeOfCall());
+             //System.out.println(dcList.get(i).toString());
+         }
         //END OF DEATHCALL STUFF
         
         //TESTING VEHICLE STUFF
