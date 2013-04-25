@@ -15,27 +15,27 @@ $(document).ready(function(){
     $("#detailform").validate({
         rules:{
             
-            year:{
+            detailyear:{
               valueNotEquals: "Year",
               validdate : true
           },//end rule for year
           
-          month:{
+          detailmonth:{
               valueNotEquals: "Month",
               validdate: true
           },//end rule for month
           
-          day:{
+          detailday:{
               valueNotEquals: "Day",
               validdate: true
           },//end rule for day
           
-          hour:{
+          detailhour:{
               valueNotEquals: "Hour",
               validtime: true
           },//end rule for hour
           
-          minute:{
+          detailminute:{
               valueNotEquals: "Minute",
               validtime: true
           },//end rule for minute
@@ -48,22 +48,22 @@ $(document).ready(function(){
                 required: true
             },//end rules for place found
             
-            specialcircumstances:{
+            specialcircumstance:{
               valueNotEquals: "Select"
           }//end rule for specialcircumstances
             
         },//end of rules
         
                groups: {
-                date: "year month day",
-                time: "hour minute"
+                date: "detailyear detailmonth detailday",
+                time: "detailhour detailminute"
         },
         errorPlacement: function(error, element) {
-            if ((element.attr("name") == "year") || (element.attr("name") == "month") || (element.attr("name") == "day")){
-                error.insertAfter("#detailform #day");
+            if ((element.attr("name") == "detailyear") || (element.attr("name") == "detailmonth") || (element.attr("name") == "detailday")){
+                error.insertAfter("#detailday");
             } 
-            else if((element.attr("name") == "hour") || (element.attr("name") == "minute")){
-                error.insertAfter("#detailform #minute");
+            else if((element.attr("name") == "detailhour") || (element.attr("name") == "detailminute")){
+                error.insertAfter("#detailminute");
             }
             else {
                 error.insertAfter(element);
@@ -72,27 +72,27 @@ $(document).ready(function(){
         
         messages:{
           
-          year:{
+          detailyear:{
               valueNotEquals: "Invalid date.",
               validdate: "Invalid date."
           },//end message for year
           
-          month:{
+          detailmonth:{
               valueNotEquals: "Invalid date.",
               validdate: "Invalid date."
           },//end message for month
           
-          day:{
+          detailday:{
               valueNotEquals: "Invalid date.",
               validdate: "Invalid date."
           },//end message for day
           
-          hour:{
+          detailhour:{
               valueNotEquals: "Invalid time.",
               validtime : "Invalid time."
           },//end message for hour
           
-          minute:{
+          detailminute:{
               valueNotEquals: "Invalid time.",
               validtime : "Invalid time."
           },//end message for minute
@@ -106,7 +106,7 @@ $(document).ready(function(){
                 required: "Please specify the address where the body was found."
             },//end messages for place found
             
-            specialcircumstances:{
+            specialcircumstance:{
               valueNotEquals: "Please select a special circumstance."
           }//end message for specialcircumstances
             
@@ -127,10 +127,10 @@ $(document).ready(function(){
      * Custom rule to check valid date
      */
     $.validator.addMethod("validdate",function(value){
-        var year = $("#year").val();
-        var month = $("#month").val();
-        var day = $("#day").val();
-        var nummonth = $("option:selected","#month").attr("num");
+        var year = $("#detailyear").val();
+        var month = $("#detailmonth").val();
+        var day = $("#detailday").val();
+        var nummonth = $("option:selected","#detailmonth").attr("num");
         var date = new Date();
        if((month=="April")|| (month=="June") || (month=="September") || (month=="November")){
             if(day >30){
@@ -164,12 +164,12 @@ $(document).ready(function(){
      */
     $.validator.addMethod("validtime",function(value){
         var date = new Date();
-        var year = $("#year").val();
-        var month = $("option:selected","#month").attr("num");
-        var day = $("#day").val();
+        var year = $("#detailyear").val();
+        var month = $("option:selected","#detailmonth").attr("num");
+        var day = $("#detailday").val();
         if((year == (date.getFullYear()))  && (month == (date.getMonth()+1)) &&(day == date.getDate()) ){
-            var hour = $("#detailform #hour").val();
-            var min = $("#detailform #minute").val();
+            var hour = $("#detailhour").val();
+            var min = $("#detailminute").val();
             if(hour > date.getHours()){
                 return !value;
             }
@@ -181,7 +181,7 @@ $(document).ready(function(){
     });
     
     
-    $("#detailform").submit(function(){
+    $("#incidentcontinue").on("click",function(){
         if($("#detailform").valid()){
             $("#IncidentDetailsTab").removeClass("active");
             $("#IncidentDetails").removeClass("tab-pane active");

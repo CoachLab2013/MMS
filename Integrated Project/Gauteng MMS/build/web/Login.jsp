@@ -44,7 +44,7 @@
                     <fieldset class="fieldset">
                         <legend class="legend"> Login</legend>
                         <div class="control-group">
-                            <label class="control-label" for="personelnumber">Personnel Number</label> 
+                            <label class="control-label" for="personelnumber">Persal Number</label> 
                             <div class="controls">
                                 <input type="text" name="personnelnumber" id="persnnlnum"/> 
                             </div>

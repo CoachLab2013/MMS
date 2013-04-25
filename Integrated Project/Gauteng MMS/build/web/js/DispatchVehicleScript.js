@@ -39,6 +39,13 @@ $(document).ready(function(){
     $("#vehiclecancel").click(function(){
         $("label.error").hide();
     });
+    
+    $("#yesdispatch").on("click",function(){
+        $("#vehicleform").show();
+        return false;
+    });
+    
+    
 });
 
 

@@ -25,12 +25,12 @@
                 <div id="IncidentDetails" class="tab-pane active">  
                     <jsp:include page="IncidentDetailsContent.jsp" />
                 </div>
-                
+
                 <div id="CallDetails" class="tab-pane "> 
-                    
-                     <jsp:include page="CallDetailsContent.jsp" />
+
+                    <jsp:include page="CallDetailsContent.jsp" />
                 </div> 
-                
+
                 <div id="DispatchVehicle" class="tab-pane "> 
                     <jsp:include page="DispatchVehicleContent.jsp" />
                 </div> 

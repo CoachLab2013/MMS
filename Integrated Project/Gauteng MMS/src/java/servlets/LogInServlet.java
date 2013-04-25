@@ -38,17 +38,13 @@ public class LogInServlet extends HttpServlet {
             Tools t = new Tools();
             String personnelnumber = request.getParameter("personnelnumber");
             String password = request.getParameter("password");
-            
-            int access = t.logIn(personnelnumber, password);
+            HttpSession sess = request.getSession();
+            int access = t.logIn(personnelnumber, password, sess);
             if(access == -1){
-                HttpSession sess = request.getSession();
                 sess.setAttribute("loginerror", "Unidentified user, incident has been logged.");
                 response.sendRedirect("/Gauteng_MMS/");
             }
             else{
-                HttpSession sess = request.getSession();
-                sess.setAttribute("personnelnumber", personnelnumber);
-                sess.setAttribute("access", access);
                 sess.setAttribute("loggedin", true);
                 if (access == 4){
                     response.sendRedirect("Admin.jsp");
