@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html>
     <head>        
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
         <script src="bootstrap/js/bootstrap-tabs.js"></script>
@@ -53,18 +53,18 @@
             String main1 = "";
             String addUserTab = "";
             String currentUserTab = "";
-<<<<<<< HEAD
+
             if (null != session.getAttribute("result")) {
-               userResult= session.getAttribute("result").toString();
-                  if (null != session.getAttribute("tab")) {
-               addUserTab= session.getAttribute("tab").toString();                 
-               currentUserTab="";
-             }
-            }else{
-             addUserTab= "";
-             currentUserTab="active";
+                userResult = session.getAttribute("result").toString();
+                if (null != session.getAttribute("tab")) {
+                    addUserTab = session.getAttribute("tab").toString();
+                    currentUserTab = "";
+                }
+            } else {
+                addUserTab = "";
+                currentUserTab = "active";
             }
-=======
+
             String main2 = "";
 
             String inst = "";
@@ -83,9 +83,9 @@
             String rank = "";
             String vehi = "";
             String property = "";
-            
-      
-     
+
+
+
             //Determine which tab must be open
             try {
                 if (session.getAttribute("main").equals("ref")) {
@@ -167,15 +167,15 @@
 
                     main1 = "active";
 
-        
-                        
-                        if (session.getAttribute("tab").equals("Adduser")) {
-                            addUserTab = "active";
-                            userResult = session.getAttribute("result").toString();
-                        }else{
 
-                          currentUserTab = "active";
-                        }
+
+                    if (session.getAttribute("tab").equals("Adduser")) {
+                        addUserTab = "active";
+                        userResult = session.getAttribute("result").toString();
+                    } else {
+
+                        currentUserTab = "active";
+                    }
 
                 }
             } catch (Exception ex) {
@@ -278,7 +278,7 @@
              ArrayList<String> institutionList = emp.referenceList();
              */
 
->>>>>>> origin/master
+
         %>
 
         <p>
@@ -313,7 +313,7 @@
                                     <tr>
                                         <th width="150"><H4>Name</H4></th>
                                     <th width="150"><H4>Surname</H4></th>
-                                    <th width="150"><H4>Personnel number</H4></th>
+                                    <th width="150"><H4>Persal number</H4></th>
                                     <th width="150"><H4>Email Address <H4></th>
                                             <th width="150"><H4>Active<H4></th>
                                                     </tr>
@@ -322,15 +322,15 @@
                                                         for (int i = 0; i < employeeList.size(); i++) {
                                                     %>
                                                     <TR>
-                                                        
-                                                    <form name="EditUser" id="EditUser" method="post" action="EditUser" >
-                                                        <input type="hidden" name="userPersonnel" value="<%= employeeList.get(i).getName().trim() %> ">
 
-                                                        <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()  %> target="_blank"><%= employeeList.get(i).getName().trim() %></a></TD>
-                                                        <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()  %> target="_blank"><%= employeeList.get(i).getSurname().trim() %></a></TD>
-                                                        <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()  %> target="_blank"><%= employeeList.get(i).getPersonnelNumber().trim() %></a></TD>
-                                                        <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()  %> target="_blank"><%= employeeList.get(i).getEmail().trim() %></a></TD>
-                                                        <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()  %> target="_blank"><%= employeeList.get(i).isActive() %></a></TD>
+                                                    <form name="EditUser" id="EditUser" method="post" action="EditUser" >
+                                                        <input type="hidden" name="userPersonnel" value="<%= employeeList.get(i).getName().trim()%> ">
+
+                                                        <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getName().trim()%></a></TD>
+                                                        <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getSurname().trim()%></a></TD>
+                                                        <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getPersonnelNumber().trim()%></a></TD>
+                                                        <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getEmail().trim()%></a></TD>
+                                                        <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).isActive()%></a></TD>
                                                     </form>
                                                     </TR>
                                                     <%
@@ -353,6 +353,7 @@
                                                                 <input type="text" name="form" value="AddUser" style="visibility: hidden" />
                                                                 <fieldset>
                                                                     <legend>User Personal Details</legend>
+                                                                         <label  > <% out.println(String.valueOf(userResult));%> </label>
                                                                     <div class="control-group   error">
 
                                                                         <label  class="control-label"   for="firstName">Full Name(s):</label> 
@@ -380,8 +381,10 @@
 
                                                                 <fieldset>
                                                                     <legend>User Employment Details</legend>
+                                                                   
+                                                               
                                                                     <div class="control-group error ">
-                                                                        <label  class="control-label" for="personnelNumber">Personnel Number:</label>
+                                                                        <label  class="control-label" for="personnelNumber">Persal Number:</label>
                                                                         <div class="controls">
                                                                             <input type="text" name="personnelNumber" maxlength="8" id="personnelNumber"  />
                                                                         </div>
@@ -420,7 +423,6 @@
                                                                 <div class="offset4">
                                                                     <input type="submit"  class="btn btn-primary" type="button" value="Add User" /> 
                                                                     <%--Display save result --%> 
-                                                                    <label class="control-label"> <% out.println(String.valueOf(userResult));%> </label>
                                                                 </div>
 
                                                                 <br/> <br/> 

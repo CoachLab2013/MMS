@@ -43,7 +43,7 @@ public final class EditAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write("\n");
       out.write("\n");
-      out.write("\n");
+      out.write(" \n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
@@ -63,28 +63,74 @@ public final class EditAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        ");
 
             //Java code
+                 String name = "";
+                String surnme = "";
+                String email = "";
+                String personnel ="";
+                int level = 0;
+                Boolean active = false;
+                String editResult ="";
+                String Supervisor = " ";
+                String fpsOfficer = " ";
+                String Pathologist = " ";
+                String Administrator = " ";
 
-            String name = "Sandile";//(String) session.getAttribute("name");
-            String surnme = "Nhlapho";//(String) session.getAttribute("surname");
-            String email = "nhlaphosandile@yahoo.com";//(String) session.getAttribute("email");
-            String personnel = "200919694";// (String) session.getAttribute("personnel");
-            int level = 1;//Integer.parseInt((String) session.getAttribute("level"));
-            Boolean active = true;// (Boolean) session.getAttribute("active");
+                String Afalse = "";
+                String Atrue = "";
+            try {
+                  name = (String) session.getAttribute("name");
+                  surnme = (String) session.getAttribute("surname");
+                  email = (String) session.getAttribute("email");
+                  personnel = (String) session.getAttribute("personnel");
+                  level = Integer.parseInt(session.getAttribute("level").toString());
+                  active = (Boolean) session.getAttribute("active");
+                  editResult = session.getAttribute("result").toString();
+                  Supervisor = " ";
+                  fpsOfficer = " ";
+                  Pathologist = " ";
+                  Administrator = " ";
 
+                  Afalse = "";
+                  Atrue = "";
+                if (level == 1) {
+                    Supervisor = "selected";
+                } else if (level == 2) {
+                    fpsOfficer = "selected";
+                } else if (level == 3) {
+                    Pathologist = "selected";
+                } else if (level == 4) {
+                    Administrator = "selected";
+                }
+
+                if (active) {
+                    Atrue = "selected";
+                } else if (!active) {
+                    Afalse = "selected";
+                }
+            } catch (NullPointerException ex) {
+                //Log out
+                
+                 response.sendRedirect("Login.jsp");
+            }
+        
       out.write("\n");
-      out.write("        <div align=\"center\"><h2>Edit User </h2> </div>  \n");
       out.write("\n");
-      out.write("        <form name=\"AddUser\" id=\"AddUser\" method=\"post\" action=\"ReferenceListServlet\" class=\"form-horizontal\">\n");
+      out.write("        <div align=\"center\"><h2>Edit User  </h2> </div>  \n");
+      out.write("\n");
+      out.write("        <form name=\"EditUser\" id=\"EditUser\" method=\"post\" action=\"EditUser\" class=\"form-horizontal\">\n");
       out.write("\n");
       out.write("            <div class=\"offset2 span7 \">\n");
-      out.write("                <input type=\"text\" name=\"form\" value=\"AddUser\" style=\"visibility: hidden\" />\n");
+      out.write("                <input type=\"text\" name=\"form\" value=\"EditUser\" style=\"visibility: hidden\" />\n");
       out.write("                <fieldset>\n");
       out.write("                    <legend>User Personal Details</legend>\n");
+      out.write("                    <label   > ");
+ out.println(String.valueOf(editResult));
+      out.write(" </label>\n");
       out.write("                    <div class=\"control-group \">\n");
       out.write("\n");
-      out.write("                        <label  class=\"control-label\"   for=\"firstName\">Full Name(s):</label> \n");
+      out.write("                        <label  class=\"control-label\" for=\"firstName\">Full Name(s):</label> \n");
       out.write("                        <div class=\"controls error\">\n");
-      out.write("                            <input type=\"text\" name=\"firstName\"  id=\"firstName\" value=");
+      out.write("                            <input type=\"text\" name=\"firstName\" id=\"firstName\" value=");
       out.print( name);
       out.write("  /> \n");
       out.write("                        </div>\n");
@@ -95,7 +141,7 @@ public final class EditAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <div class=\"controls error\">\n");
       out.write("                            <input  type=\"text\" name=\"surname\"  id=\"surname\"  value=");
       out.print( surnme);
-      out.write("/>\n");
+      out.write(" />\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("\n");
@@ -114,9 +160,9 @@ public final class EditAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <fieldset>\n");
       out.write("                    <legend>User Employment Details</legend>\n");
       out.write("                    <div class=\"control-group  \">\n");
-      out.write("                        <label  class=\"control-label\" for=\"personnelNumber\">Personnel Number:</label>\n");
+      out.write("                        <label  class=\"control-label\" for=\"personnelNumber\">Persal Number:</label>\n");
       out.write("                        <div class=\"controls error\">\n");
-      out.write("                            <input type=\"text\" name=\"personnelNumber\" value=");
+      out.write("                            <input type=\"text\" maxlength=\"8\" readonly name=\"personnelNumber\" value=");
       out.print( personnel);
       out.write(" id=\"personnelNumber\"  />\n");
       out.write("                        </div>\n");
@@ -127,17 +173,22 @@ public final class EditAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        ");
       out.write("\n");
       out.write("                        <div class=\"controls error\">\n");
-      out.write("                            <select name=\"level\" id=\"Level\" >\n");
+      out.write("                            <select name=\"level\" id=\"level\">\n");
       out.write("                                <option value=\"\"> ");
  out.println(String.valueOf("-Please Select-"));
       out.write("</option>\n");
-      out.write("                                <option value=\"1\">Supervisor</option>\n");
-      out.write("                                <option value=\"2\">FPS Officer</option>\n");
-      out.write("                                <option value=\"3\">Pathologist</option>\n");
-      out.write("                                <option value=\"4\">Administrator</option>\n");
-      out.write("                                <option selected=\"selected\">\n");
-      out.write("                                    ");
-      out.print(level);
+      out.write("                                <option ");
+ out.println(String.valueOf(Supervisor));
+      out.write("  value=\"1\">Supervisor</option>\n");
+      out.write("                                <option ");
+ out.println(String.valueOf(fpsOfficer));
+      out.write("   value=\"2\">FPS Officer</option>\n");
+      out.write("                                <option ");
+ out.println(String.valueOf(Pathologist));
+      out.write("   value=\"3\">Pathologist</option>\n");
+      out.write("                                <option ");
+ out.println(String.valueOf(Administrator));
+      out.write("  value=\"4\">Administrator</option>\n");
       out.write("\n");
       out.write("                                </option>\n");
       out.write("\n");
@@ -147,21 +198,21 @@ public final class EditAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("                    <div class=\"control-group  \">\n");
-      out.write("                        <label  class=\"control-label\" for=\"Active\">Active:</label>\n");
+      out.write("                        <label  class=\"control-label\" for=\"active\">Active:</label>\n");
       out.write("                        ");
       out.write("\n");
       out.write("                        <div class=\"controls error\">\n");
-      out.write("                            <select name=\"Active\" tabindex=\"1\" id=\"Active\">\n");
+      out.write("                            <select name=\"active\" tabindex=\"1\" id=\"active\">\n");
       out.write("                                <option value=\"\"> ");
  out.println(String.valueOf("-Please Select-"));
       out.write("</option>\n");
-      out.write("                                <option value=\"false\">False</option>\n");
-      out.write("                                <option value=\"true\">True</option>\n");
-      out.write("                            <option selected=\"selected\">\n");
-      out.write("                                ");
-      out.print( active.toString() );
+      out.write("                                <option ");
+ out.println(String.valueOf(Afalse));
+      out.write(" value=\"false\">False</option>\n");
+      out.write("                                <option ");
+ out.println(String.valueOf(Atrue));
+      out.write("value=\"true\">True</option>\n");
       out.write("\n");
-      out.write("                                </option>\n");
       out.write("                            </select>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");

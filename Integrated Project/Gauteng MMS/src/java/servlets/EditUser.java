@@ -97,7 +97,6 @@ public class EditUser extends HttpServlet {
             id = found.getAccess();
             sess.setAttribute("personnel", found.getPersonnelNumber().trim());
             sess.setAttribute("level", found.getAccess());
-            //JOptionPane.showMessageDialog(null,  found.getAccess());
             sess.setAttribute("active", found.isActive());
             sess.setAttribute("result", "" );
             response.sendRedirect("EditAdmin.jsp");
@@ -149,7 +148,7 @@ public class EditUser extends HttpServlet {
             String personnel = request.getParameter("personnelNumber");
             String email = request.getParameter("email");
 
-            boolean active = Boolean.valueOf(request.getParameter("Active"));
+            boolean active = Boolean.valueOf(request.getParameter("active"));
             int level = Integer.parseInt(request.getParameter("level"));
 
             Employee emp = new Employee(personnel, "", name, surname, "Gauteng MMS", level, email, active);
