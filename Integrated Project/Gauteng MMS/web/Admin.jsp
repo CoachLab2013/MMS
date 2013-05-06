@@ -53,7 +53,10 @@
             String main1 = "";
             String addUserTab = "";
             String currentUserTab = "";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
             if (null != session.getAttribute("result")) {
                 userResult = session.getAttribute("result").toString();
                 if (null != session.getAttribute("tab")) {
@@ -64,6 +67,10 @@
                 addUserTab = "";
                 currentUserTab = "active";
             }
+<<<<<<< HEAD
+=======
+            String main2 = "";
+>>>>>>> origin/master
 
             String main2 = "";
             //Veriables to determine which tab to open
