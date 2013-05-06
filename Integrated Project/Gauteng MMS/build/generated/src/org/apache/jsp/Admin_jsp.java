@@ -110,7 +110,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             }
 
             String main2 = "";
-
+            //Veriables to determine which tab to open
             String inst = "";
             String analysis = "";
             String relationship = "";

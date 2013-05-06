@@ -98,7 +98,7 @@ public class EditUser extends HttpServlet {
             sess.setAttribute("personnel", found.getPersonnelNumber().trim());
             sess.setAttribute("level", found.getAccess());
             sess.setAttribute("active", found.isActive());
-            sess.setAttribute("result", "" );
+            sess.setAttribute("Eresult", "" );
             response.sendRedirect("EditAdmin.jsp");
 
         } catch (SQLException ex) {
@@ -167,7 +167,7 @@ public class EditUser extends HttpServlet {
                 sess.setAttribute("personnel", personnel);
                 sess.setAttribute("level", level);
                 sess.setAttribute("active",active);
-                sess.setAttribute("result", "Employee has been successfuly edited");
+                sess.setAttribute("Eresult", "Employee has been successfuly edited");
                 response.sendRedirect("EditAdmin.jsp");
 
             } else {
@@ -179,7 +179,7 @@ public class EditUser extends HttpServlet {
                 sess.setAttribute("personnel", personnel);
                 sess.setAttribute("level", level);
                 sess.setAttribute("active",active);
-                sess.setAttribute("result", "Edit was not successful: because " + result);
+                sess.setAttribute("Eresult", "Edit was not successful: because " + result);
                 response.sendRedirect("EditAdmin.jsp");
 
             }

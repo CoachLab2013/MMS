@@ -44,7 +44,7 @@
                   personnel = (String) session.getAttribute("personnel");
                   level = Integer.parseInt(session.getAttribute("level").toString());
                   active = (Boolean) session.getAttribute("active");
-                  editResult = session.getAttribute("result").toString();
+                  editResult = session.getAttribute("Eresult").toString();
                   Supervisor = " ";
                   fpsOfficer = " ";
                   Pathologist = " ";

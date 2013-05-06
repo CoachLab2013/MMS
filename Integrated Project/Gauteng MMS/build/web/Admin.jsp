@@ -66,7 +66,7 @@
             }
 
             String main2 = "";
-
+            //Veriables to determine which tab to open
             String inst = "";
             String analysis = "";
             String relationship = "";
