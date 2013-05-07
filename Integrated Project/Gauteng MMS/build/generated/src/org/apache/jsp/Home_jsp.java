@@ -99,6 +99,8 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div>\r\n");
       out.write("                <div id=\"BodyFile\" class=\"tab-pane \"> \r\n");
       out.write("                    <div align=\"center\"><h2>Body File </h2> </div>\r\n");
+      out.write("                    ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "BodyFileTabContent.jsp", out, false);
       out.write("\r\n");
       out.write("                </div>           \r\n");
       out.write("            </div>\r\n");

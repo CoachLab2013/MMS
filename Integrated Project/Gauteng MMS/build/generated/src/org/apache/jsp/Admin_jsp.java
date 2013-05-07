@@ -97,7 +97,8 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String main1 = "";
             String addUserTab = "";
             String currentUserTab = "";
-
+ 
+            //checks which tab to open
             if (null != session.getAttribute("result")) {
                 userResult = session.getAttribute("result").toString();
                 if (null != session.getAttribute("tab")) {
@@ -108,9 +109,9 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                 addUserTab = "";
                 currentUserTab = "active";
             }
-
-            String main2 = "";
+            
             //Veriables to determine which tab to open
+            String main2 = "";  
             String inst = "";
             String analysis = "";
             String relationship = "";

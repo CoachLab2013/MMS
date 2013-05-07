@@ -2,7 +2,7 @@
   /**
    * this is the class that will connect to the database and do the adding to the database
    */
-   package database;
+  package database;
    import java.sql.*;
 import java.util.ArrayList;
    public class AuditTrailDb extends DatabaseConnector
