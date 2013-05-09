@@ -97,9 +97,8 @@ public class EditUser extends HttpServlet {
             id = found.getAccess();
             sess.setAttribute("personnel", found.getPersonnelNumber().trim());
             sess.setAttribute("level", found.getAccess());
-            //JOptionPane.showMessageDialog(null,  found.getAccess());
             sess.setAttribute("active", found.isActive());
-            sess.setAttribute("result", "" );
+            sess.setAttribute("Eresult", "" );
             response.sendRedirect("EditAdmin.jsp");
 
         } catch (SQLException ex) {
@@ -149,7 +148,7 @@ public class EditUser extends HttpServlet {
             String personnel = request.getParameter("personnelNumber");
             String email = request.getParameter("email");
 
-            boolean active = Boolean.valueOf(request.getParameter("Active"));
+            boolean active = Boolean.valueOf(request.getParameter("active"));
             int level = Integer.parseInt(request.getParameter("level"));
 
             Employee emp = new Employee(personnel, "", name, surname, "Gauteng MMS", level, email, active);
@@ -168,7 +167,7 @@ public class EditUser extends HttpServlet {
                 sess.setAttribute("personnel", personnel);
                 sess.setAttribute("level", level);
                 sess.setAttribute("active",active);
-                sess.setAttribute("result", "Employee has been successfuly edited");
+                sess.setAttribute("Eresult", "Employee has been successfuly edited");
                 response.sendRedirect("EditAdmin.jsp");
 
             } else {
@@ -180,7 +179,7 @@ public class EditUser extends HttpServlet {
                 sess.setAttribute("personnel", personnel);
                 sess.setAttribute("level", level);
                 sess.setAttribute("active",active);
-                sess.setAttribute("result", "Edit was not successful: because " + result);
+                sess.setAttribute("Eresult", "Edit was not successful: because " + result);
                 response.sendRedirect("EditAdmin.jsp");
 
             }
