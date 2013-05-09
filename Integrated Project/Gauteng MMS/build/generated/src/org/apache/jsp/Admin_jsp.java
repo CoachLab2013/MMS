@@ -139,14 +139,14 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
 
                     if (session.getAttribute("tab").equals("insti")) {
                         inst = "active";
-                        instiResult = session.getAttribute("result").toString();
+                        instiResult = session.getAttribute("insti").toString();
 
                     } else if (session.getAttribute("tab").equals("analysis")) {
                         analysis = "active";
-                        analysisResult = session.getAttribute("result").toString();
+                        analysisResult = session.getAttribute("analysisResult").toString();
 
                     } else if (session.getAttribute("tab").equals("property")) {
-                        propertyResult = session.getAttribute("result").toString();
+                        propertyResult = session.getAttribute("propertyResult").toString();
                         property = "active";
                     } else if (session.getAttribute("tab").equals("vehi")) {
                         vehicleResult = session.getAttribute("result").toString();
@@ -155,41 +155,45 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                         rankResult = session.getAttribute("result").toString();
                         rank = "active";
                     } else if (session.getAttribute("tab").equals("gender")) {
-                        genderResult = session.getAttribute("result").toString();
+                        genderResult = session.getAttribute("genderResult").toString();
                         gender = "active";
                     } else if (session.getAttribute("tab").equals("occu")) {
-                        occupationResult = session.getAttribute("result").toString();
+                        occupationResult = session.getAttribute("occupationResult").toString();
                         occu = "active";
                     } else if (session.getAttribute("tab").equals("race")) {
-                        raceResult = session.getAttribute("result").toString();
+                        raceResult = session.getAttribute("raceResult").toString();
                         race = "active";
                     } else if (session.getAttribute("tab").equals("marital")) {
-                        maritalResult = session.getAttribute("result").toString();
+                        maritalResult = session.getAttribute("maritalResult").toString();
                         marital = "active";
                     } else if (session.getAttribute("tab").equals("organisation")) {
                         oraganisationResult = session.getAttribute("result").toString();
                         organisation = "active";
                     } else if (session.getAttribute("tab").equals("province")) {
-                        provinceResult = session.getAttribute("result").toString();
+                        provinceResult = session.getAttribute("provinceResult").toString();
                         province = "active";
                     } else if (session.getAttribute("tab").equals("icd10")) {
-                        iCD10Result = session.getAttribute("result").toString();
+                        iCD10Result = session.getAttribute("iCD10Result").toString();
                         icd10 = "active";
                     } else if (session.getAttribute("tab").equals("manner")) {
-                        mannerResult = session.getAttribute("result").toString();
+                        mannerResult = session.getAttribute("mannerResult").toString();
                         manner = "active";
                     } else if (session.getAttribute("tab").equals("sample")) {
 
-                        sampleResult = session.getAttribute("result").toString();
+                        sampleResult = session.getAttribute("sampleResult").toString();
                         sample = "active";
 
                     } else if (session.getAttribute("tab").equals("status")) {
-                        statusResult = session.getAttribute("result").toString();
+                        statusResult = session.getAttribute("statusResult").toString();
                         status = "active";
                     } else if (session.getAttribute("tab").equals("relationship")) {
-                        relationshipResult = session.getAttribute("result").toString();
+                        relationshipResult = session.getAttribute("relationshipResult").toString();
                         relationship = "active";
-                    }
+                    }else  if (session.getAttribute("tab").equals("Adduser")) {
+                        addUserTab = "active";
+                        userResult = session.getAttribute("relationshipResult").toString();
+                    }  
+
 
                 } else {
                     userResult = "";
@@ -212,15 +216,9 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
 
                     main1 = "active";
 
+                    currentUserTab = "active";
 
-
-                    if (session.getAttribute("tab").equals("Adduser")) {
-                        addUserTab = "active";
-                        userResult = session.getAttribute("result").toString();
-                    } else {
-
-                        currentUserTab = "active";
-                    }
+                   
 
                 }
             } catch (Exception ex) {
