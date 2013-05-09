@@ -38,9 +38,21 @@ public class BodyDb extends DatabaseConnector{
     //DATABASE METHODS
     @Override
     public String add(){
-         try 
+        try 
         {
-            statement.executeUpdate("INSERT INTO Body (deathRegisterNumber, gender, race, assignedTo, nameOfDeceased, surnameOfDeceased, placeOfBirth, dateOfBirth, ageOnDateFound, maritalStatus, occupation, citizen, maidenName, identifiedDateTime, estimatedAgeYear, estimatedAgeMonth, ID, passport, bodyStatus, dateBodyReceived, bodyReleased, Incident_incidentLogNumber, bodyType, dateBodyReleased ) VALUES (' "+ body.getDeathRegisterNumber() + "','"+ body.getGender() +"','"+ body.getRace() +"','"+ body.getAssignedTo() +"','"+ body.getNameOfDeceased() +"','"+ body.getSurnameOfDeceased() +"','"+ body.getPlaceOfBirth() +"','"+ body.getDateOfBirth() +"','"+ body.getAgeOnDateFound() +"','"+ body.getMaritalStatus() +"','"+ body.getOccupation()+"','"+ body.getCitizen()+"','"+ body.getMaidenName() +"','"+ body.getIdentifiedDateTime() +"','"+ body.getEstimatedAgeYear() +"','"+ body.getEstimatedAgeMonth() +"','"+ body.getID() +"','"+ body.getPassport() +"','"+ body.isBodyStatus() +"','"+ body.getDateBodyReceived() +"','"+ body.isBodyReleased() +"','"+ body.getIncident().getIncidentLogNumber() +"','"+ body.getBodyType() +"','"+ body.getDateBodyReleased() +"')");
+            statement.executeUpdate("INSERT INTO Body (idDeathRegisterNumber, gender, race, assignedTo, nameOfDeceased, surnameOfDeceased, placeOfBirth, dateOfBirth, ageOnDateFound, maritalStatus, occupation, citizen, maidenName, identifiedDateTime, estimatedAgeYear, estimatedAgeMonth, ID, passport, bodyStatus, dateBodyReceived, bodyReleased, Incident_incidentLogNumber, bodyType, dateBodyReleased,bodyReleasedTo) VALUES (' "
+                    + body.getDeathRegisterNumber() + "','"+ body.getGender() +"','"
+                    + body.getRace() +"','"+ body.getAssignedTo() +"','"
+                    + body.getNameOfDeceased() +"','"+ body.getSurnameOfDeceased() +"','"
+                    + body.getPlaceOfBirth() +"','"+ body.getDateOfBirth() +"','"
+                    + body.getAgeOnDateFound() +"','"+ body.getMaritalStatus() +"','"
+                    + body.getOccupation()+"','"+ body.getCitizen()+"','"+ body.getMaidenName() +"','"
+                    + body.getIdentifiedDateTime() +"','"+ body.getEstimatedAgeYear() +"','"
+                    + body.getEstimatedAgeMonth() +"','"+ body.getID() +"','"
+                    + body.getPassport() +"',"+ body.isBodyStatus() +",'"
+                    + body.getDateBodyReceived() +"',"+ body.isBodyReleased() +",'"
+                    + body.getIncident().getIncidentLogNumber() +"','"+ body.getBodyType() 
+                    +"','"+ body.getDateBodyReleased()+"','"+ body.getBodyReleasedTo() +"')");
             statement.close();
             connection.close(); 
         } 
@@ -52,15 +64,65 @@ public class BodyDb extends DatabaseConnector{
         {
             return "error" + ex.getMessage();
         }
-        return "added body to body table";
+        return "successful";
         
     }
-    
+    public String addBodyAddress()
+    {
+        try 
+        {
+            statement.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+            statement.executeUpdate("INSERT INTO BodyAddress (street,suburb,city,postalCode,province,region,magisterialDistrict,building,Body_idDeathRegisterNumber) VALUES ('" 
+                    + body.getBodyAddress().getStreet() + "','" 
+                    + body.getBodyAddress().getSuburb() +"','" + body.getBodyAddress().getCity() + "','"
+                    + body.getBodyAddress().getPostCode() + "','" + body.getBodyAddress().getProvince() + "','"
+                    + body.getBodyAddress().getRegion() + "','" + body.getBodyAddress().getMagisterialDistrict() +"','" + body.getBodyAddress().getBuilding() + "','"+  body.getDeathRegisterNumber()+ "');");
+            statement.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+            statement.close();
+            connection.close(); 
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "successful";
+    }
+    public String addBodyAtMotuary()
+    {
+        try
+        {
+        //converting to a bodyAtMortuary object
+            BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
+            statement.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
+            statement.executeUpdate("INSERT INTO AtMortuary (bodyReceivedFromPerNumber,bodyHandOverFromPerNumber,Body_idDeathRegisterNumber) VALUES ('" 
+            + bodyAtMort.getBodyReceivedFromPerNum() + "','" + bodyAtMort.getBodyHandOverFromPerNum() + "','"+  body.getDeathRegisterNumber() + "');");
+            statement.executeUpdate("SET FOREIGN_KEY_CHECKS=1;");
+            statement.close();
+            connection.close(); 
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "successful";
+    }
+   /* public String addBodyAtMotuary()
+    {
+        
+    }*/
     @Override
     public String read(){
         try 
         {
-            statement.executeQuery("SELECT * FROM Body WHERE deathRegisterNumber = '"+ body.getDeathRegisterNumber() +"';");
+            statement.executeQuery("SELECT * FROM Body WHERE idDeathRegisterNumber = '"+ body.getDeathRegisterNumber() +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             body.setAgeOnDateFound(resultSet.getInt("ageOnDateFound"));
@@ -86,10 +148,11 @@ public class BodyDb extends DatabaseConnector{
             body.setPlaceOfBirth(resultSet.getString("placeOfBirth"));
             body.setRace(resultSet.getString("race"));
             body.setSurnameOfDeceased(resultSet.getString("surnameOfDeceased"));
+            body.setBodyReleaseTo(resultSet.getString("bodyReleasedTo"));
             IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
+            incidentDb.init();
             incidentDb.read();
             body.setIncident(incidentDb.getIncident());
-            
             statement.close();
             connection.close();
         } 
@@ -97,7 +160,7 @@ public class BodyDb extends DatabaseConnector{
         {
             return "fail " + ex.getMessage();
         }
-        return "read from organization table successful";
+        return "successful";
         
     }
     

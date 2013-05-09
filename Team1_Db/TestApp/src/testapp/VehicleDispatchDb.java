@@ -83,7 +83,8 @@ public class VehicleDispatchDb extends DatabaseConnector {
             String reason = resultSet2.getString("reason");
             int bodyCount = resultSet2.getInt("bodyCount");
             boolean status = resultSet2.getBoolean("status");
-            vehicleDispatch.setIncident(new Incident(incidentLogNumber, referenceNumber, numberOfBodies, dateOfIncident, timeOfIncident, circumstanceOfDeath, placeBodyFound, specialCircumstances, reason, bodyCount, status));
+            String dateIncidentClosed = resultSet2.getString("dateIncidentClosed");
+            vehicleDispatch.setIncident(new Incident(incidentLogNumber, referenceNumber, numberOfBodies, dateOfIncident, timeOfIncident, circumstanceOfDeath, placeBodyFound, specialCircumstances, reason, bodyCount, status,dateIncidentClosed));
             statement.close();
             connection.close();
         } 

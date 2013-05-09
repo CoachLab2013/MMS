@@ -19,12 +19,12 @@ public class BodyAtScene /*extends Body*/
     private String placeOfDeath;
     private String dateTimeBodyFound;
     private BodyAtMortuary body;
-
+    private Member[] members;
     //CONSTRUCTORS
     public BodyAtScene(BodyAtMortuary body) {
         this.body = body;
     }
-    public BodyAtScene(String sceneIncidentOccured, String sceneDateTime, boolean pathOnScene, String allegedInjuryDateTime, String allegedDeathDateTime, String externalCircumstanceOfInjury, String placeOfDeath, String dateTimeBodyFound, BodyAtMortuary body) {
+    public BodyAtScene(String sceneIncidentOccured, String sceneDateTime, boolean pathOnScene, String allegedInjuryDateTime, String allegedDeathDateTime, String externalCircumstanceOfInjury, String placeOfDeath, String dateTimeBodyFound, BodyAtMortuary body,Member[] members) {
         this.sceneIncidentOccured = sceneIncidentOccured;
         this.sceneDateTime = sceneDateTime;
         this.pathOnScene = pathOnScene;
@@ -34,8 +34,17 @@ public class BodyAtScene /*extends Body*/
         this.placeOfDeath = placeOfDeath;
         this.dateTimeBodyFound = dateTimeBodyFound;
         this.body = body;
+        this.members = members;
     }
 
+    public Member getMember(int index)
+    {
+        return members[index];
+    }
+    public void setMembers(Member[] members)
+    {
+        this.members = members;
+    }
     /**
      * @return the sceneIncidentOccured
      */
