@@ -4,75 +4,42 @@
     Author     : hollard
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet"  href="bootstrap/css/table.css"> 
     </head>
     <body>  
         <legend>Incidents> Open Incidents</legend>
             <form name="Deceased details" method="post" action="Deceased Address.jsp" class="form-horizontal" >
-        
-         <table border="1">
-<tr>
-	<td width="100">Incident</td>
-        <td width="100">Case Number</td>
-	<td width="100">Date</td>
-	<td width="100">Time</td>
-	<td width="150">Circumstances of death</td>
-	<td width="150">Place where body was found</td>
-         <td width="150">Saps/IR number Reference Number</td>
-	<td width="100">Number of bodies</td>
-	<td width="100">Status</td>
-
-</tr>
-<tr>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-        <td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-
-</tr>
-<tr>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-        <td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-</tr>
-<tr>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-        <td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-</tr>
-<tr>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-        <td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-</tr>
+             <%
+                //Tools t = new Tools();
+                //out.println(t.makeOpenIncidentsTable());
+             %>
+<table class="displaytable">
+	<th class="tableheading">Header 1</th>
+	<th class="tableheading">Header 2</th>
+	<th class="tableheading">Header 3</th>
+	<tr class="tablerow">
+		<td class="tablecell">Row 1 Col 1</td>
+		<td class="tablecell">Row 1 Col 2</td>
+		<td class="tablecell">Row 1 Col 3</td>
+	</tr>
+	<tr class="tablerow">
+		<td class="tablecell">Row 2 Col 1</td>
+		<td class="tablecell">Row 2 Col 2</td>
+		<td class="tablecell">Row 2 Col 3</td>
+	</tr>
+	<tr class="tablerow">
+		<td class="tablecell">Row 3 Col 1</td>
+		<td class="tablecell">Row 3 Col 2</td>
+		<td class="tablecell">Row 3 Col 3</td>
+	</tr>
 </table>
+             
         <br>        
 
 

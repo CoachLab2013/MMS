@@ -17,22 +17,20 @@ public class Tools {
      * constructor for an instance of Tools
      */
     public Tools(){
-        dbdetail = new DbDetail("localhost","/mydb","asheen","password"); 
+        dbdetail = new DbDetail("localhost","/mydb","root","password"); 
     }
     //end constructor
     
-   /* public String adduser(){
+    public String adduser(){
         Employee e = new Employee("11111111","password","User","UserSurname","Admin",4,"user1@user.com",true);
         Employee e2 = new Employee("12345678","123456","User2","UserSurname2","Pathologist",3,"user2@user.com",true);
         EmployeeDb db1 = new EmployeeDb(e,dbdetail);
         db1.init();
         EmployeeDb db2 = new EmployeeDb(e2,dbdetail);
         db2.init();
-        String s = db2.add();
-        db2.add();
-        
-        return s;
-    }*/
+        db1.add();
+        return(db2.add());
+    }
     
     /**
      * Try to log in a user, if the login is successful then return true, otherwise return false
@@ -195,5 +193,48 @@ public class Tools {
         out = out + "</select>";
         return out;
     }
+    
+    /**
+     * This will create a table with all the open incidents from the database
+     */
+    public String makeOpenIncidentsTable(){
+        IncidentDb indb = new IncidentDb(dbdetail);
+        indb.init();
+        try{
+            ArrayList<Incident> openincidents = indb.openIncidentList();
+            
+           String table = "<table>"
+                    +"<th >FPS Incident Log Number</th>"
+                    +"<th >SAPS/ IR number reference number</th>"
+                    +"<th >Date</th>"
+                    +"<th >Time</th>"
+                    +"<th >Number of bodies</th>"
+                    +"<th >Number of bodies recieved</th>"
+                    +"<th >Place Body was found</th>"
+                    +"<th >Circumstances of death</th>"
+                    +"<th >Special Circumstances</th>";
+            int size = openincidents.size();
+            for(int i=0;i<size;i++){
+                Incident inc = openincidents.get(i);
+                table = table +"<tr > <td >"+  inc.getIncidentLogNumber() +"</td>"
+                        + "<td >" + inc.getReferenceNumber() +"</td>"
+                        +"<td >" + inc.getDateOfIncident() + "</td>"
+                        +"<td >" + inc.getTimeOfIncident() + "</td>"
+                        +"<td >" + Integer.toString(inc.getNumberOfBodies()) + "</td>"
+                        +"<td >" + Integer.toString(inc.getBodyCount()) + "</td>"
+                        +"<td >" + inc.getPlaceBodyFound() + "</td>"
+                        +"<td >" + inc.getCircumstanceOfDeath() + "</td>"
+                        +"<td >" + inc.getSpecialCircumstances() + "</td>"
+                        + "</tr>"; 
+            }
+            table = table + "</table>";
+            
+            return table;
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }
+    }
+    // end makeOPenIncidentsTable
 }
 //end Tools class

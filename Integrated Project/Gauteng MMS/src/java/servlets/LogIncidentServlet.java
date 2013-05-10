@@ -55,7 +55,7 @@ public class LogIncidentServlet extends HttpServlet {
         incident.setSpecialCircumstances(request.getParameter("specialcircumstance"));
         incident.setStatus(true);
         
-        DbDetail dbdetail = new DbDetail("localhost","/mydb","asheen","password");
+        DbDetail dbdetail = new DbDetail("localhost","/mydb","root","password");
         IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
         incidentdb.init();
         incidentdb.add();
