@@ -4,6 +4,7 @@
     Author     : Administrator
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,8 +24,8 @@
                 vertical-align: top; 
             }
         </style>
-        <script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script language="javascript" type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
         <script src="js/DispatchVehicleScript.js"></script>
     </head>
 
@@ -32,7 +33,8 @@
     <legend>Incidents> Log Incident> Dispatch Vehicle</legend>
     <%
         if (session.getAttribute("incidentlogged") != null) {
-            out.print("<label class='success'>" + session.getAttribute("incidentlogged") + "</label>");
+            out.print("<script src='js/SetFocus.js'></script>");
+            out.print("<label class='success' id='success'>" + session.getAttribute("incidentlogged") + "</label>");
             session.removeAttribute("incidentlogged");
         }
     %>
@@ -49,20 +51,17 @@
         </table>
     </form>
     
-    <form id="vehicleform" name="vehicleform" method="post" action="" hidden="true">
+    <form id="vehicleform" name="vehicleform" method="post" action="DispatchVehicleServlet" hidden="true">
         <table>
             <tr>
-                <td>Select Vehicle:</td><td> <select name="vehicle"  id="vehicle">
-                        <option selected="selected">Select</option>
-                        <option>vehicle 1</option>
-                        <option>vehicle 2</option>
-                        <option>vehicle 3</option>
-                        <option>vehicle 4</option>
-                        <option>vehicle 5</option>
-                        <option>vehicle 6</option>
-                    </select></td>
+                <td>Select Vehicle:</td><td>
+                <% 
+                    Tools t = new Tools();
+                    out.print(t.makeReferenceList("vehicle","registrationNumber"));
+                %>
+                </td>
             </tr>
-            <tr><td></td><td><input type="submit" value="Dsipatch Vehicle" /><input type="reset" value="Cancel" id="vehiclecancel" /></td>
+            <tr><td></td><td><input type="submit" id="dispatch" value="Dsipatch Vehicle" /><input type="reset" value="Cancel" id="vehiclecancel" /></td>
             </tr>
         </table>
     </form>  

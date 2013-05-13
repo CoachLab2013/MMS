@@ -4,87 +4,68 @@
     Author     : hollard
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/OpenIncidentScript.js"></script>
+        <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
     </head>
     <body>  
-        <legend>Incidents> Open Incidents</legend>
-            <form name="Deceased details" method="post" action="Deceased Address.jsp" class="form-horizontal" >
-        
-         <table border="1">
-<tr>
-	<td width="100">Incident</td>
-        <td width="100">Case Number</td>
-	<td width="100">Date</td>
-	<td width="100">Time</td>
-	<td width="150">Circumstances of death</td>
-	<td width="150">Place where body was found</td>
-         <td width="150">Saps/IR number Reference Number</td>
-	<td width="100">Number of bodies</td>
-	<td width="100">Status</td>
+    <legend>Incidents> Open Incidents</legend>
+    <form name="Deceased details" method="post" action="Deceased Address.jsp" class="form-horizontal" >
+        <%
+            Tools t = new Tools();
+            out.println(t.makeOpenIncidentsTable("opentable"));
+        %>
 
-</tr>
-<tr>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-        <td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-
-</tr>
-<tr>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-        <td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-</tr>
-<tr>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-        <td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-</tr>
-<tr>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-        <td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100" height="30"></td>
-	<td width="100"height="30"></td>
-</tr>
-</table>
         <br>        
 
 
-<table>
-    <tr>
-        <td width="200"></td>
-        <td width="10"><input type="button" value="Edit" onClick="Edit();"></td>
-        <td width="300" align="center"><input type="button" value="Close Incident" onClick="closeIncident()"> </td>
-    </tr>
-</table> 
-        
-        
-            </form>
-    </body>
+        <table>
+            <tr>
+                <td width="200"></td>
+                <td width="10"><input type="button" value="Edit" id="edit"></td>
+                <td width="300" align="center"><input type="button" value="Close Incident" id="close"> </td>
+            </tr>
+
+
+        </table> 
+        <br>
+        <br>
+    </form>
+    <form id="closeincident" hidden="true">
+        <table>
+
+            <th>Close Incident</th>
+            <tr>
+                <td>
+                    FPS Incident Log Number: 
+                </td>
+                <td>
+                    <input type="text" id="selectedincident" readonly="true">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Reason for closing incident:
+                </td>
+                <td>
+                    <textarea cols="50" rows="3" name="closereason" id="closereason"> </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <input id="closeincident" type="submit" value="Close Incident">
+                    <input id="cancelcloseincident" type="reset" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
 </html>

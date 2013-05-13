@@ -38,13 +38,44 @@ $(document).ready(function(){
     
     $("#vehiclecancel").click(function(){
         $("label.error").hide();
+        goHome();
     });
     
     $("#yesdispatch").on("click",function(){
         $("#vehicleform").show();
+        $("#success").hide();
+        $("#dispatchform").hide();
         return false;
     });
     
+    $("#nodispatch").on("click",function(){
+        goHome();
+        
+    });
+    
+    $("#dispatch").on("click",function(){
+        if($("#vehicleform").valid()){
+           $("#vehicleform").submit(); 
+        }
+    });
+    
+    function goHome(){
+       //set focus on Open Incidents tab 
+       $("#LogIncidentTab").removeClass("active");
+       $("#OpenIncidentsTab").addClass("active");
+       $("#LogIncident").removeClass("tab-pane active");
+       $("#LogIncident").addClass("tab-pane");
+       $("#OpenIncidents").removeClass("tab-pane");
+       $("#OpenIncidents").addClass("tab-pane active");
+       
+       //reset focus on incident details tab under Log Incident Tab
+       $("#DispatchVehicleTab").removeClass("active");
+       $("#IncidentDetailsTab").addClass("active");
+       $("#DispatchVehicle").removeClass("tab-pane active");
+       $("#DispatchVehicle").addClass("tab-pane");
+       $("#IncidentDetails").addClass("tab-pane active");
+       $("#IncidentDetails").removeClass("tab-pane");
+    }
     
 });
 
