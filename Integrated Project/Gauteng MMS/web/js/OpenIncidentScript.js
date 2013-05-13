@@ -7,15 +7,13 @@ $(document).ready(function(){
     $("#opentable").click();
     
     $("#close").on("click", function(){
-      /*  if($("#selectedincident").val()==""){
+        if($("#selectedincident").val()==""){
             alert("Please select an incident.");
         }
-        else{*/
+        else{
             $("#closeincident").show();
             $("#closereason").focus();
-        //}
-        
-        
+        }
     });
     
     $("#opentable tr").click(function(){

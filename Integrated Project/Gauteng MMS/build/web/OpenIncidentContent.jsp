@@ -36,7 +36,7 @@
         <br>
         <br>
     </form>
-    <form id="closeincident" hidden="true">
+    <form id="closeincident" hidden="true" action="CloseIncidentServlet">
         <table>
 
             <th>Close Incident</th>
@@ -45,7 +45,7 @@
                     FPS Incident Log Number: 
                 </td>
                 <td>
-                    <input type="text" id="selectedincident" readonly="true">
+                    <input type="text" id="selectedincident" name="selectedincident" readonly="true">
                 </td>
             </tr>
             <tr>

@@ -38,6 +38,7 @@ $(document).ready(function(){
     
     $("#vehiclecancel").click(function(){
         $("label.error").hide();
+        $("#vehicleform").hide();
         goHome();
     });
     
@@ -49,6 +50,8 @@ $(document).ready(function(){
     });
     
     $("#nodispatch").on("click",function(){
+        $("#success").hide();
+        $("#dispatchform").hide();
         goHome();
         
     });
@@ -60,6 +63,16 @@ $(document).ready(function(){
     });
     
     function goHome(){
+       
+       
+       //reset focus on incident details tab under Log Incident Tab
+       $("#DispatchVehicleTab").removeClass("active");
+       $("#IncidentDetailsTab").addClass("active");
+       $("#DispatchVehicle").removeClass("tab-pane active");
+       $("#DispatchVehicle").addClass("tab-pane");
+       $("#IncidentDetails").removeClass("tab-pane");
+       $("#IncidentDetails").addClass("tab-pane active");
+       
        //set focus on Open Incidents tab 
        $("#LogIncidentTab").removeClass("active");
        $("#OpenIncidentsTab").addClass("active");
@@ -67,15 +80,6 @@ $(document).ready(function(){
        $("#LogIncident").addClass("tab-pane");
        $("#OpenIncidents").removeClass("tab-pane");
        $("#OpenIncidents").addClass("tab-pane active");
-       
-       //reset focus on incident details tab under Log Incident Tab
-       $("#DispatchVehicleTab").removeClass("active");
-       $("#IncidentDetailsTab").addClass("active");
-      /* $("#DispatchVehicle").removeClass("tab-pane active");
-       $("#DispatchVehicle").addClass("tab-pane");
-       $("#IncidentDetails").removeClass("tab-pane");
-       $("#IncidentDetails").addClass("tab-pane active");
-       */
     }
     
 });
