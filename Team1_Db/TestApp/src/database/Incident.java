@@ -38,6 +38,7 @@ public Incident()
  reason = "";
  bodyCount = 0;
  status = false;
+ dateIncidentClosed = "";
 }
 public Incident(String inIncidentLogNumber)
 {
@@ -52,6 +53,21 @@ public Incident(String inIncidentLogNumber)
  reason = "";
  bodyCount = 0;
  status = false;
+ dateIncidentClosed = "";
+}
+public Incident(String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances,String reason,int bodyCount,boolean status)
+{
+this. incidentLogNumber = incidentLogNumber;
+this. referenceNumber = referenceNumber;
+this. numberOfBodies = numberOfBodies;
+this. dateOfIncident = dateOfIncident;
+this. timeOfIncident = timeOfIncident;
+this. circumstanceOfDeath = circumstanceOfDeath;
+this. placeBodyFound = placeBodyFound;
+this. specialCircumstances = specialCircumstances;
+this.reason = reason;
+this.bodyCount = bodyCount;
+this.status = status;
 }
 public Incident(String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances,String reason,int bodyCount,boolean status,String dateIncidentClosed)
 {
