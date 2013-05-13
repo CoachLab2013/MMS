@@ -197,34 +197,35 @@ public class Tools {
     /**
      * This will create a table with all the open incidents from the database
      */
-    public String makeOpenIncidentsTable(){
+    public String makeOpenIncidentsTable(String id){
         IncidentDb indb = new IncidentDb(dbdetail);
         indb.init();
         try{
             ArrayList<Incident> openincidents = indb.openIncidentList();
             
-           String table = "<table>"
-                    +"<th >FPS Incident Log Number</th>"
-                    +"<th >SAPS/ IR number reference number</th>"
-                    +"<th >Date</th>"
-                    +"<th >Time</th>"
-                    +"<th >Number of bodies</th>"
-                    +"<th >Number of bodies recieved</th>"
-                    +"<th >Place Body was found</th>"
-                    +"<th >Circumstances of death</th>"
-                    +"<th >Special Circumstances</th>";
+           String table = "<table class='tabledisplay' id='" + id+"'>"
+                    +"<th class='tableheading'>FPS Incident Log Number</th>"
+                    +"<th class='tableheading'>SAPS/ IR number reference number</th>"
+                    +"<th class='tableheading'>Date</th>"
+                    +"<th class='tableheading'>Time</th>"
+                    +"<th class='tableheading'>Number of bodies</th>"
+                    +"<th class='tableheading'>Number of bodies recieved</th>"
+                    +"<th class='tableheading'>Place Body was found</th>"
+                    +"<th class='tableheading'>Circumstances of death</th>"
+                    +"<th class='tableheading'>Special Circumstances</th>";
             int size = openincidents.size();
             for(int i=0;i<size;i++){
                 Incident inc = openincidents.get(i);
-                table = table +"<tr > <td >"+  inc.getIncidentLogNumber() +"</td>"
-                        + "<td >" + inc.getReferenceNumber() +"</td>"
-                        +"<td >" + inc.getDateOfIncident() + "</td>"
-                        +"<td >" + inc.getTimeOfIncident() + "</td>"
-                        +"<td >" + Integer.toString(inc.getNumberOfBodies()) + "</td>"
-                        +"<td >" + Integer.toString(inc.getBodyCount()) + "</td>"
-                        +"<td >" + inc.getPlaceBodyFound() + "</td>"
-                        +"<td >" + inc.getCircumstanceOfDeath() + "</td>"
-                        +"<td >" + inc.getSpecialCircumstances() + "</td>"
+                table = table +"<tr class='tablerow' lognumber='"+inc.getIncidentLogNumber()+"'>"
+                        +"<td>"+  inc.getIncidentLogNumber() +"</td>"
+                        + "<td class='tablecell'>" + inc.getReferenceNumber() +"</td>"
+                        +"<td class='tablecell'>" + inc.getDateOfIncident() + "</td>"
+                        +"<td class='tablecell'>" + inc.getTimeOfIncident() + "</td>"
+                        +"<td class='tablecell'>" + Integer.toString(inc.getNumberOfBodies()) + "</td>"
+                        +"<td class='tablecell'>" + Integer.toString(inc.getBodyCount()) + "</td>"
+                        +"<td class='tablecell'>" + inc.getPlaceBodyFound() + "</td>"
+                        +"<td class='tablecell'>" + inc.getCircumstanceOfDeath() + "</td>"
+                        +"<td class='tablecell'>" + inc.getSpecialCircumstances() + "</td>"
                         + "</tr>"; 
             }
             table = table + "</table>";
