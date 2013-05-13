@@ -1,4 +1,3 @@
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -68,10 +67,10 @@ public class IncidentDb extends DatabaseConnector
              return count;
     }
     
-    public void closeIncident(String inIncidentLogNumber) throws SQLException{
+    public void closeIncident(String inIncidentLogNumber, String inDateIncidentClosed) throws SQLException{
         try 
         {                                                                                                                                                                                                                                                                                                                                                                                         
-            statement.executeUpdate("UPDATE incident SET status = false WHERE incidentLogNumber = '"+ inIncidentLogNumber +"';" );
+            statement.executeUpdate("UPDATE incident SET status = false, dateIncidentClosed = '"+ inDateIncidentClosed +"' WHERE incidentLogNumber = '"+ inIncidentLogNumber +"';" );
             statement.close();
             connection.close();
         } 

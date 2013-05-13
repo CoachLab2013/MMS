@@ -71,10 +71,11 @@ $(document).ready(function(){
        //reset focus on incident details tab under Log Incident Tab
        $("#DispatchVehicleTab").removeClass("active");
        $("#IncidentDetailsTab").addClass("active");
-       $("#DispatchVehicle").removeClass("tab-pane active");
+      /* $("#DispatchVehicle").removeClass("tab-pane active");
        $("#DispatchVehicle").addClass("tab-pane");
-       $("#IncidentDetails").addClass("tab-pane active");
        $("#IncidentDetails").removeClass("tab-pane");
+       $("#IncidentDetails").addClass("tab-pane active");
+       */
     }
     
 });

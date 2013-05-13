@@ -7,13 +7,13 @@ $(document).ready(function(){
     $("#opentable").click();
     
     $("#close").on("click", function(){
-        if($("#selectedincident").val()==""){
+      /*  if($("#selectedincident").val()==""){
             alert("Please select an incident.");
         }
-        else{
+        else{*/
             $("#closeincident").show();
             $("#closereason").focus();
-        }
+        //}
         
         
     });
@@ -30,6 +30,7 @@ $(document).ready(function(){
         $("#closeincident").hide();
         $(".selectedtablerow").addClass("tablerow");
         $(".selectedtablerow").removeClass("selectedtablerow");
+        $("label.error").hide();
     });
     
     $("#closeincident").validate({
