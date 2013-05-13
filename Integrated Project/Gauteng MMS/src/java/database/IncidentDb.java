@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -12,6 +13,8 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -85,7 +88,7 @@ public class IncidentDb extends DatabaseConnector
         
           try  
         {  //
-            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " VALUES"
+            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound,dateIncidentClosed)" + " VALUES"
                                     +" ('" 
                                     + incident.getIncidentLogNumber() + "','" 
                                     + incident.getReferenceNumber()+ "','"
@@ -97,7 +100,8 @@ public class IncidentDb extends DatabaseConnector
                                     + incident.isOpen() + ",'"
                                     + incident.getReason()+ "',"
                                     + incident.getBodyCount() + ",'"
-                                    + incident.getPlaceBodyFound() + "'"
+                                    + incident.getPlaceBodyFound() + "','"
+                                    + incident.getDateIncidentClosed() + "'"
                                     + ")");
             statement.close(); //status , reason , bodyCountb 
             connection.close(); //deathCall
@@ -121,7 +125,7 @@ public class IncidentDb extends DatabaseConnector
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
-                incidentList.add(new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status")));
+                incidentList.add(new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"),resultSet.getString("dateIncidentClosed")));
             }
             statement.close();
             connection.close();
@@ -142,7 +146,7 @@ public class IncidentDb extends DatabaseConnector
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
-                incidentList.add(new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status")));
+                incidentList.add(new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"),resultSet.getString("dateIncidentClosed")));
             }
             statement.close();
             connection.close();
@@ -156,7 +160,15 @@ public class IncidentDb extends DatabaseConnector
     @Override
     public String read() 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try 
+        {
+            incident = findIncident(incident.getIncidentLogNumber()); //To change body of generated methods, choose Tools | Templates.
+        } 
+        catch (SQLException ex) 
+        {
+           return "failed " + ex.getMessage();
+        }
+        return "successful";
     }
     public Incident findIncident(String inIncidentLogNumber) throws SQLException{
         Incident found;
@@ -165,7 +177,7 @@ public class IncidentDb extends DatabaseConnector
             statement.executeQuery("SELECT * FROM incident WERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
-            found = new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"));
+            found = new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"),resultSet.getString("dateIncidentClosed"));
             statement.close();
             connection.close();
         } 
@@ -198,4 +210,4 @@ public class IncidentDb extends DatabaseConnector
         return "SHOULD NOT BE ABLE TO DELETE AN INCIDENT UNLESS YOU HAVE HIGH ACCESS";
     }
     
-} 
+}

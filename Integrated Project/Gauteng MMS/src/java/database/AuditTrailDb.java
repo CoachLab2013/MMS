@@ -2,7 +2,7 @@
   /**
    * this is the class that will connect to the database and do the adding to the database
    */
-  package database;
+   package database;
    import java.sql.*;
 import java.util.ArrayList;
    public class AuditTrailDb extends DatabaseConnector
@@ -57,7 +57,7 @@ import java.util.ArrayList;
       
          try   
          { 
-            statement.executeUpdate("INSERT INTO audittrail (date,time,eventType,eventMessge,currentUser, eventLocation)" + " VALUES"
+            statement.executeUpdate("INSERT INTO audittrail (date,time,eventType,eventMessage,currentUser, eventLocation)" + " VALUES"
                                     +"('" 
                                     +auditTrail.getDate() + "', '" 
                                     + auditTrail.getTime() + "', '"
