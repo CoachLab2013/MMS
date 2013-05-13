@@ -4,7 +4,7 @@
     Author     : Sandile
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+ <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,37 +23,56 @@
     <body>
         <%
             //Java code
+                 String name = "";
+                String surnme = "";
+                String email = "";
+                String personnel ="";
+                int level = 0;
+                Boolean active = false;
+                String editResult ="";
+                String Supervisor = " ";
+                String fpsOfficer = " ";
+                String Pathologist = " ";
+                String Administrator = " ";
 
-            String name =  (String) session.getAttribute("name");
-            String surnme =  (String) session.getAttribute("surname");
-            String email = (String) session.getAttribute("email");
-            String personnel =  (String) session.getAttribute("personnel");
-            int level = Integer.parseInt( session.getAttribute("level").toString());
-            Boolean active =  (Boolean) session.getAttribute("active");
-            String editResult = session.getAttribute("result").toString();
-            String Supervisor=" ";
-            String fpsOfficer=" "; 
-            String Pathologist =" ";
-            String Administrator =" ";
-            
-            String Afalse="";
-            String Atrue="";
-           if (level==1){
-               Supervisor="selected";
-            }else if(level==2){
-             fpsOfficer="selected"; 
-            }else if(level==3){
-                Pathologist="selected"; 
-            }else if(level==4){
-                 Administrator="selected"; 
+                String Afalse = "";
+                String Atrue = "";
+            try {
+                  name = (String) session.getAttribute("name");
+                  surnme = (String) session.getAttribute("surname");
+                  email = (String) session.getAttribute("email");
+                  personnel = (String) session.getAttribute("personnel");
+                  level = Integer.parseInt(session.getAttribute("level").toString());
+                  active = (Boolean) session.getAttribute("active");
+                  editResult = session.getAttribute("Eresult").toString();
+                  Supervisor = " ";
+                  fpsOfficer = " ";
+                  Pathologist = " ";
+                  Administrator = " ";
+
+                  Afalse = "";
+                  Atrue = "";
+                if (level == 1) {
+                    Supervisor = "selected";
+                } else if (level == 2) {
+                    fpsOfficer = "selected";
+                } else if (level == 3) {
+                    Pathologist = "selected";
+                } else if (level == 4) {
+                    Administrator = "selected";
+                }
+
+                if (active) {
+                    Atrue = "selected";
+                } else if (!active) {
+                    Afalse = "selected";
+                }
+            } catch (NullPointerException ex) {
+                //Log out
+                
+                 response.sendRedirect("Login.jsp");
             }
-           
-            if (active){
-               Atrue="selected";
-            }else if(!active){
-             Afalse="selected"; 
-            }
-%>
+        %>
 
         <div align="center"><h2>Edit User  </h2> </div>  
 
@@ -63,6 +82,7 @@
                 <input type="text" name="form" value="EditUser" style="visibility: hidden" />
                 <fieldset>
                     <legend>User Personal Details</legend>
+                    <label   > <% out.println(String.valueOf(editResult));%> </label>
                     <div class="control-group ">
 
                         <label  class="control-label" for="firstName">Full Name(s):</label> 
@@ -91,7 +111,7 @@
                 <fieldset>
                     <legend>User Employment Details</legend>
                     <div class="control-group  ">
-                        <label  class="control-label" for="personnelNumber">Personnel Number:</label>
+                        <label  class="control-label" for="personnelNumber">Persal Number:</label>
                         <div class="controls error">
                             <input type="text" maxlength="8" readonly name="personnelNumber" value=<%= personnel%> id="personnelNumber"  />
                         </div>
@@ -107,7 +127,7 @@
                                 <option <% out.println(String.valueOf(fpsOfficer));%>   value="2">FPS Officer</option>
                                 <option <% out.println(String.valueOf(Pathologist));%>   value="3">Pathologist</option>
                                 <option <% out.println(String.valueOf(Administrator));%>  value="4">Administrator</option>
-       
+
                                 </option>
 
                             </select>
@@ -123,7 +143,7 @@
                                 <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
                                 <option <% out.println(String.valueOf(Afalse));%> value="false">False</option>
                                 <option <% out.println(String.valueOf(Atrue));%>value="true">True</option>
-                            
+
                             </select>
                         </div>
                     </div>
@@ -132,7 +152,7 @@
                 <br/> <br/>                                 
                 <div class="offset4">
                     <input type="submit"  class="btn btn-primary" type="button" value="Save Changes" /> 
-                    <label  > <% out.println(String.valueOf(editResult));%> </label>
+
                 </div>
 
                 <br/> <br/> 

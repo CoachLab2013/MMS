@@ -10,11 +10,11 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
-  private static java.util.List<String> _jspx_dependants;
+  private static java.util.Vector _jspx_dependants;
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
-  public java.util.List<String> getDependants() {
+  public Object getDependants() {
     return _jspx_dependants;
   }
 
@@ -58,11 +58,11 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                vertical-align: top; \r\n");
       out.write("            }\r\n");
       out.write("        </style>\r\n");
-      out.write("        <script language=\"javascript\" type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js\"></script>\r\n");
-      out.write("        <script language=\"javascript\" type=\"text/javascript\" src=\"http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js\"></script>\r\n");
-      out.write("        <script src=\"js/SetFocus.js\"></script>\r\n");
+      out.write("        <script language=\"javascript\" type=\"text/javascript\" src=\"js/jquery-1.9.1.js\"></script>\r\n");
+      out.write("        <script language=\"javascript\" type=\"text/javascript\" src=\"js/jquery.validate.min.js\"></script>\r\n");
+      out.write("        <!-- <script src=\"js/SetFocus.js\"></script> !-->\r\n");
       out.write("\r\n");
-      out.write("        <link type=\"text/css\" rel=\"stylesheet\"  href=\"bootstrap/css/bootstrap.css\">           \r\n");
+      out.write("        <link type=\"text/css\" rel=\"stylesheet\"  href=\"bootstrap/css/bootstrap.css\">   \r\n");
       out.write("        <script  src=\"bootstrap/js/bootstrap-tabs.js\"></script>\r\n");
       out.write("        <title>Gauteng Mortuary Management System</title>\r\n");
       out.write("    </head>\r\n");
@@ -99,6 +99,8 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div>\r\n");
       out.write("                <div id=\"BodyFile\" class=\"tab-pane \"> \r\n");
       out.write("                    <div align=\"center\"><h2>Body File </h2> </div>\r\n");
+      out.write("                    ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "BodyFileTabContent.jsp", out, false);
       out.write("\r\n");
       out.write("                </div>           \r\n");
       out.write("            </div>\r\n");

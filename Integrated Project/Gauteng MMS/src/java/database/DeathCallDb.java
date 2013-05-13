@@ -86,7 +86,7 @@ public class DeathCallDb extends DatabaseConnector
 	  the class below will load all the death call details an arraylist 
 	  */
     
-     public  ArrayList<DeathCall> deathCalllList()
+     public  ArrayList<DeathCall> deathCallList()
       {
          ArrayList<DeathCall> list = new ArrayList<DeathCall>();
          try 
@@ -96,18 +96,19 @@ public class DeathCallDb extends DatabaseConnector
                while(resultSet.next())
                {
                   DeathCall dCall= new DeathCall();
-                  IncidentDb incidentDb = new IncidentDb(dbDetail);
-                  incidentDb.read();
-                  dCall.setIncident(incidentDb.getIncident());
                   dCall.setTimeOfCall(resultSet.getString("timeOfCall"));
                   dCall.setDateOfCall(resultSet.getString("dateOfCall"));
-                  dCall.setNumberOfCaller(resultSet.getString("numberOfCalleer"));
+                  dCall.setNumberOfCaller(resultSet.getString("numberOfCaller"));
                   dCall.setInstitution(resultSet.getString("institution"));
                   dCall.setSceneAddress(resultSet.getString("sceneAddress"));
                   dCall.setProvince(resultSet.getString("province"));
 		  dCall.setRegion(resultSet.getString("region"));
 		  dCall.setSceneConditions(resultSet.getString("sceneConditions"));
                   dCall.setNameOfCaller(resultSet.getString("nameOfCaller"));
+                  IncidentDb incidentDb = new IncidentDb(deathCall.getIncident(), dbDetail);
+                  incidentDb.init();
+                  incidentDb.read();
+                  dCall.setIncident(incidentDb.getIncident());
                   list.add(dCall);
               }
             statement.close();

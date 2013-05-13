@@ -24,7 +24,7 @@ public abstract class Body
     protected String citizen;
     protected String maidenName;
     protected String identifiedDateTime;
-    //protected BodyAddress bodyAddress;
+    protected BodyAddress bodyAddress;
     protected int estimatedAgeYear;
     protected int estimatedAgeMonth;
     protected String ID;
@@ -35,7 +35,7 @@ public abstract class Body
     protected Incident incident;
     protected String bodyType;
     protected String dateBodyReleased;
-    
+    protected String bodyReleasedTo;
     public Body()
     {
         
@@ -44,7 +44,7 @@ public abstract class Body
     {
         this.deathRegisterNumber = deathRegisterNumber;
     }
-    public Body(String deathRegisterNumber,String gender,String race,String assignedTo,String nameOfDeceased,String surnameOfDeceased,String placeOfBirth,String dateOfBirth,int ageOnDateFound,String martitalStatus,String occupation,String citizen,String maidenName,String inIdentifiedDateTime,BodyAddress bodyAddress, int estimatedAgeYear, int estimatedAgeMonth, String ID, String passport, boolean bodyStatus, String dateBodyReceived, boolean bodyReleased, Incident incident, String bodyType, String dateBodyReleased)
+    public Body(String deathRegisterNumber,String gender,String race,String assignedTo,String nameOfDeceased,String surnameOfDeceased,String placeOfBirth,String dateOfBirth,int ageOnDateFound,String martitalStatus,String occupation,String citizen,String maidenName,String inIdentifiedDateTime,BodyAddress bodyAddress, int estimatedAgeYear, int estimatedAgeMonth, String ID, String passport, boolean bodyStatus, String dateBodyReceived, boolean bodyReleased, Incident incident, String bodyType, String dateBodyReleased,String bodyReleasedTo)
     {
         this.deathRegisterNumber = deathRegisterNumber;
         this.gender = gender;
@@ -60,7 +60,7 @@ public abstract class Body
         this.citizen = citizen;
         this.maidenName = maidenName;
         this.identifiedDateTime = inIdentifiedDateTime;
-        //this.bodyAddress = bodyAddress;
+        this.bodyAddress = bodyAddress;
         this.estimatedAgeYear = estimatedAgeYear;
         this.estimatedAgeMonth = estimatedAgeMonth;
         this.ID = ID;
@@ -71,9 +71,18 @@ public abstract class Body
         this.incident = incident;
         this.bodyType = bodyType;
         this.dateBodyReleased = dateBodyReleased;
+        this.bodyReleasedTo = bodyReleasedTo;
     }
 
     //GET METHODS
+    public String getBodyReleasedTo()
+    {
+        return bodyReleasedTo;
+    }
+    public BodyAddress getBodyAddress()
+    {
+        return bodyAddress;
+    }
     /**
      * @return the deathRegisterNumber
      */
@@ -424,6 +433,18 @@ public abstract class Body
      */
     public void setDateBodyReleased(String dateBodyReleased) {
         this.dateBodyReleased = dateBodyReleased;
+    }
+    /**
+     * 
+     * @param bodyAddress
+     */
+    public void setBodyAddress(BodyAddress bodyAddress)
+    {
+        this.bodyAddress = bodyAddress;
+    }
+    public void setBodyReleaseTo(String bodyReleasedTo)
+    {
+        this.bodyReleasedTo = bodyReleasedTo;
     }
     
     

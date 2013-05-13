@@ -174,11 +174,11 @@ public class ReferenceListDb extends DatabaseConnector
         ArrayList<String> reflist = new ArrayList<String>();
         try 
         {
-            statement.executeQuery("SELECT type FROM "+ tableName+ ";");
+            statement.executeQuery("select "+field2 + " from "+ tableName+ ";");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
-                reflist.add(resultSet.getString("type"));
+                reflist.add(resultSet.getString(field2));
             }
             statement.close();
             connection.close();

@@ -70,7 +70,6 @@ public class IncidentMessageDb extends DatabaseConnector
             }
             statement.close();
             connection.close();
-            
         } 
         catch (SQLException ex) 
         {

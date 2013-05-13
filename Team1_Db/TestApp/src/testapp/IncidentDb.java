@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -12,6 +16,11 @@ package testapp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+import java.util.logging.Level;
+import java.util.logging.Logger;
+>>>>>>> origin/master
 
 /**
  *
@@ -51,7 +60,11 @@ public class IncidentDb extends DatabaseConnector
         int count = 0;
         try 
         {
+<<<<<<< HEAD
             statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE incidentLogNumber LIKE '%" + inDate + "';");
+=======
+            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE status=true AND dateOfIncident = '" + inDate + "';");
+>>>>>>> origin/master
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             count = resultSet.getInt("countOpenIncidents");
@@ -85,7 +98,11 @@ public class IncidentDb extends DatabaseConnector
         
           try  
         {  //
+<<<<<<< HEAD
             statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " VALUES"
+=======
+            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound,dateIncidentClosed)" + " VALUES"
+>>>>>>> origin/master
                                     +" ('" 
                                     + incident.getIncidentLogNumber() + "','" 
                                     + incident.getReferenceNumber()+ "','"
@@ -97,7 +114,12 @@ public class IncidentDb extends DatabaseConnector
                                     + incident.isOpen() + ",'"
                                     + incident.getReason()+ "',"
                                     + incident.getBodyCount() + ",'"
+<<<<<<< HEAD
                                     + incident.getPlaceBodyFound() + "'"
+=======
+                                    + incident.getPlaceBodyFound() + "','"
+                                    + incident.getDateIncidentClosed() + "'"
+>>>>>>> origin/master
                                     + ")");
             statement.close(); //status , reason , bodyCountb 
             connection.close(); //deathCall
@@ -121,7 +143,11 @@ public class IncidentDb extends DatabaseConnector
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
+<<<<<<< HEAD
                 incidentList.add(new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status")));
+=======
+                incidentList.add(new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"),resultSet.getString("dateIncidentClosed")));
+>>>>>>> origin/master
             }
             statement.close();
             connection.close();
@@ -142,7 +168,11 @@ public class IncidentDb extends DatabaseConnector
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
+<<<<<<< HEAD
                 incidentList.add(new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status")));
+=======
+                incidentList.add(new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"),resultSet.getString("dateIncidentClosed")));
+>>>>>>> origin/master
             }
             statement.close();
             connection.close();
@@ -158,6 +188,7 @@ public class IncidentDb extends DatabaseConnector
     {
         try 
         {
+<<<<<<< HEAD
             statement.executeQuery("SELECT * FROM Incident WHERE incidentLogNumber = '"+ incident.getIncidentLogNumber() +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
@@ -182,13 +213,28 @@ public class IncidentDb extends DatabaseConnector
         return "read successful";
     }
     /*public Incident findIncident(String inIncidentLogNumber) throws SQLException{
+=======
+            incident = findIncident(incident.getIncidentLogNumber()); //To change body of generated methods, choose Tools | Templates.
+        } 
+        catch (SQLException ex) 
+        {
+           return "failed " + ex.getMessage();
+        }
+        return "successful";
+    }
+    public Incident findIncident(String inIncidentLogNumber) throws SQLException{
+>>>>>>> origin/master
         Incident found;
         try 
         {
             statement.executeQuery("SELECT * FROM incident WERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
+<<<<<<< HEAD
             found = new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"));
+=======
+            found = new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"),resultSet.getString("dateIncidentClosed"));
+>>>>>>> origin/master
             statement.close();
             connection.close();
         } 
@@ -197,7 +243,11 @@ public class IncidentDb extends DatabaseConnector
             throw new SQLException(ex.getMessage());
         }
         return found;
+<<<<<<< HEAD
     }*/
+=======
+    }
+>>>>>>> origin/master
     //incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound
     @Override
     public String edit()//WILL NEED TO PASS PRIMARY KEY FOR WHERE CLAUSE unless we assume we cannot edit primary
