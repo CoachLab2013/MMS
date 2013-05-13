@@ -21,6 +21,10 @@ public class BodyFile
     {
         
     }
+     public BodyFile(String deathRegisterNumber)
+     {
+         this.deathRegisterNumber = deathRegisterNumber;
+     }
     public BodyFile(String dateFileOpened,boolean bodyFileStatus,boolean allSamplesRecevied,boolean bodyIdentified,boolean postMortemComplete,String dateFileClosed,String deathRegisterNumber)
     {
         this.dateFileOpened = dateFileOpened;

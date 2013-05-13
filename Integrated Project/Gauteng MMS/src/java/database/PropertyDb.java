@@ -7,7 +7,6 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import testapp.Witness;
 
 /**
  *
@@ -123,7 +122,34 @@ public class PropertyDb extends DatabaseConnector
     @Override
     public String edit() 
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            statement.executeUpdate("UPDATE property SET " 
+                                    + "description='" + property.getDescription() + "',"
+                                    + "date='" + property.getDate() + "',"
+                                    + "type='" + property.getType() +  "',"
+                                    + "sealType='" + property.getSealType() + "',"
+                                    + "takenBy='" + property.getTakenBy() +  "',"
+                                    + "witness1_name='" + property.getWitness(0).getName() + "',"
+                                    + "witness1_surname='" + property.getWitness(0).getSurname() + "',"
+                                    + "witness2_name='" + property.getWitness(1).getName() + "',"
+                                    + "witness2_surname='" + property.getWitness(1).getSurname() + "',"
+                                    + "SAPS_name='" + property.getSAPS_name() +  "',"
+                                    + "SAPS_surname='" + property.getSAPS_surname() +  "',"
+                                    + "SAPS_taken=" + property.isTakenBySAPS() +  ","
+                                    + "released=" + property.isReleased() +  " WHERE Body_idDeathRegisterNumber='" + property.getDeathRegisterNumber() + "' AND sealNumber='" +property.getSealNumber()  + "';");
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "successful";
     }
 
     @Override

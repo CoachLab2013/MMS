@@ -31,6 +31,22 @@ $(document).ready(function(){
         $(".selectedtablerow").addClass("tablerow");
         $(".selectedtablerow").removeClass("selectedtablerow");
     });
+    
+    $("#closeincident").validate({
+        rules:{
+            closereason:{
+              required: true
+          }//end rules for condition
+          
+        },//end of rules
+        
+        messages:{
+            closereason:{
+              required: "Please give a reason for closing the incident."
+          }
+            
+        }//end of messages
+    });
 
 });
 

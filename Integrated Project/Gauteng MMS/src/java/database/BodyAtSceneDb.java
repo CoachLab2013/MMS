@@ -7,8 +7,6 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -55,12 +53,37 @@ public class BodyAtSceneDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeUpdate("INSERT INTO `mydb`.`member` (name,surname,rank,personnelNumber,organization,contactNumber,AtScene_Body_idDeathRegisterNumber) VALUES('" 
+            statement.executeUpdate("INSERT INTO member (name,surname,rank,personnelNumber,organization,contactNumber,AtScene_Body_idDeathRegisterNumber) VALUES('" 
                     + member.getName() + "','" 
-                    + member.getSurname()+"'," +member.getRank() +",'" +member.getPersonnelNumber() + "','"
+                    + member.getSurname()+"','" +member.getRank() +"','" +member.getPersonnelNumber() + "','"
                     + member.getOrganization() + "','" + member.getContactNumber() + "','" + bodyAtScene.getBody().getDeathRegisterNumber() + "');");
             statement.close();
             connection.close(); 
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "successful";
+    }
+    public String editMember(Member member)
+    {
+        try
+        {
+            statement.executeUpdate("UPDATE member SET "
+                    + "name='" + member.getName() + "',"
+                    + "surname='" + member.getSurname() + "',"
+                    + "rank='" + member.getRank() + "',"
+                    + "personnelNumber='" + member.getPersonnelNumber() + "',"
+                    + "organization='" + member.getOrganization() + "',"
+                    + "contactNumber='" + member.getContactNumber() + "'"
+                    +" WHERE AtScene_Body_idDeathRegisterNumber='"+ bodyAtScene.getBody().getDeathRegisterNumber()+"' AND contactNumber='" + member.getContactNumber() + "';");
+            statement.close();
+            connection.close();
         } 
         catch (SQLException ex) 
         {
@@ -143,7 +166,31 @@ public class BodyAtSceneDb extends DatabaseConnector
     @Override
     public String edit() 
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            statement.executeUpdate("UPDATE atscene SET "
+                  +"sceneIncidentOccured='" + bodyAtScene.getSceneIncidentOccured() + "',"
+                  +"sceneDateTime='" + bodyAtScene.getSceneDateTime() + "',"
+                  +"pathOnScene=" + bodyAtScene.isPathOnScene() + ","
+                  +"allegedInjuryDateTime='" + bodyAtScene.getAllegedInjuryDateTime() + "',"
+                  +"allegedDeathDateTime='" + bodyAtScene.getAllegedDeathDateTime() + "',"
+                  +"externalCircumstanceOfInjury='" + bodyAtScene.getExternalCircumstanceOfInjury() + "',"
+                  +"placeOfDeath='" + bodyAtScene.getPlaceOfDeath() + "',"
+                  +"dateTimeBodyFound='" + bodyAtScene.getDateTimeBodyFound() + "'"
+                  +" WHERE Body_idDeathRegisterNumber='"+ bodyAtScene.getBody().getDeathRegisterNumber() + "';");
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "successful";
+
     }
 
     @Override

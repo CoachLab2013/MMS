@@ -238,5 +238,11 @@ public class Tools {
         }
     }
     // end makeOPenIncidentsTable
+    
+    public String getDateTime(){
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        return timestamp;
+    }
+    //end getDateTime
 }
 //end Tools class

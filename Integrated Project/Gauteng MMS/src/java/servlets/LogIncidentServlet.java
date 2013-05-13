@@ -58,7 +58,7 @@ public class LogIncidentServlet extends HttpServlet {
         DbDetail dbdetail = new DbDetail("localhost","/mydb","root","password");
         IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
         incidentdb.init();
-        incidentdb.add();
+        out.print(incidentdb.add());
         
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String[] datetime = timestamp.split(" ");

@@ -2,14 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package testapp;
+package database;
 
 /**
  *
  * @author Cypril
  */
-public class Kin 
-{
+public class Kin {
 
     private String passport;
     private String name;
@@ -67,7 +66,7 @@ public class Kin
     }
 
     public String getAddress() {
-        return name;
+        return address;
     }
 
     public String getWorkAddress() {
@@ -104,9 +103,9 @@ public class Kin
        this.contactNumber=contactNumber;
     }
  
-    public void setAddress(String name) {
-        this.name = name;
-    }
+    public void setAddress(String address) {
+        this.address = address;
+    } 
 
     public void setWorkAddress(String workAddress) {
       this.workAddress = workAddress;

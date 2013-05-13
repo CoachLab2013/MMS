@@ -35,6 +35,7 @@ public Incident()
  circumstanceOfDeath="";
  placeBodyFound="";
  specialCircumstances="";
+ dateIncidentClosed="2013-05-13";
  reason = "";
  bodyCount = 0;
  status = false;

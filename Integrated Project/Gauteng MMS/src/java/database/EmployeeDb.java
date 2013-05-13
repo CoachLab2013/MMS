@@ -2,8 +2,6 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -98,7 +96,7 @@ public class EmployeeDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeQuery("select name,surname,rank,email,access from employee where password='" + employee.getPassword() + "' and personnelNumber='" + employee.getPersonnelNumber() + "' and active=1;");
+            statement.executeQuery("SELECT name,surname,rank,email,access from employee where password='" + employee.getPassword() + "' and personnelNumber='" + employee.getPersonnelNumber() + "' and active=1;");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             employee.setName(resultSet.getString("name"));
@@ -124,7 +122,7 @@ public class EmployeeDb extends DatabaseConnector
         ArrayList<Employee> list = new ArrayList<Employee>();
         try 
         {
-            statement.executeQuery("select personnelNumber,name,surname,rank,email,active from employee,access;");
+            statement.executeQuery("SELECT personnelNumber,name,surname,rank,email,active from employee,access;");
             Employee emp = null;
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
@@ -153,7 +151,7 @@ public class EmployeeDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeUpdate("update employee set name='"+employee.getName()
+            statement.executeUpdate("UPDATE employee SET name='"+employee.getName()
             + "' ,surname='" +employee.getSurname() 
             + "' ,rank='"+employee.getRank()
             + "' ,email='"+employee.getEmail() 

@@ -7,8 +7,6 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -93,6 +91,33 @@ public class BodyDb extends DatabaseConnector{
         }
         return "successful";
     }
+    public String editBodyAddresss()
+    {
+        try
+        {
+            statement.executeUpdate("UPDATE bodyaddress SET "
+                                    +"building='" + body.getBodyAddress().getBuilding() + "',"
+                                    +"street='" + body.getBodyAddress().getStreet() + "',"
+                                    +"suburb='" + body.getBodyAddress().getSuburb() + "',"
+                                    +"city='" + body.getBodyAddress().getCity() + "',"
+                                    +"postalCode='" + body.getBodyAddress().getPostCode() + "',"
+                                    +"province='" + body.getBodyAddress().getProvince() + "',"
+                                    +"region='" + body.getBodyAddress().getRegion() + "',"
+                                    +"magisterialDistrict='" + body.getBodyAddress().getMagisterialDistrict() + "'"
+                                    +" WHERE Body_idDeathRegisterNumber='"+ body.getDeathRegisterNumber() + "';");
+            statement.close();
+            connection.close(); 
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "successful";
+    }
     public String addBodyAtMotuary()
     {
         try
@@ -114,10 +139,28 @@ public class BodyDb extends DatabaseConnector{
         }
         return "successful";
     }
-   /* public String addBodyAtMotuary()
+   public String editBodyAtMotuary()
     {
-        
-    }*/
+        try
+        {
+            BodyAtMortuary bodyAt = (BodyAtMortuary)body;
+            statement.executeUpdate("UPDATE atmortuary SET "
+                                    + "bodyReceivedFromPerNumber='" + bodyAt.getBodyReceivedFromPerNum() + "',"
+                                    + "bodyHandOverFromPerNumber='" + bodyAt.getBodyHandOverFromPerNum() + "'"
+                                    + " WHERE Body_idDeathRegisterNumber='" + bodyAt.getDeathRegisterNumber() + "';");
+            statement.close();
+            connection.close(); 
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "successful";
+    }
     @Override
     public String read(){
         try 
@@ -217,7 +260,45 @@ public class BodyDb extends DatabaseConnector{
     @Override
     public String edit()
     {
-        return null;
+        try
+        {
+            statement.executeUpdate("UPDATE body SET "
+                    + "gender='" + body.getGender()+ "',"
+                    + "race='" +body.getRace() + "',"
+                    + "assignedTo='" + body.getAssignedTo() + "',"
+                    + "nameOfDeceased='" + body.getNameOfDeceased() + "',"
+                    + "surnameOfDeceased='" + body.getSurnameOfDeceased() + "',"
+                    + "placeOfBirth='" + body.getPlaceOfBirth() + "',"
+                    + "dateOfBirth='" + body.getDateOfBirth() + "',"
+                    + "ageOnDateFound='" + body.getAgeOnDateFound() + "',"
+                    + "maritalStatus='" + body.getMaritalStatus() + "',"
+                    + "occupation='" + body.getOccupation() + "',"
+                    + "citizen='" + body.getCitizen() + "',"
+                    + "maidenName='" + body.getMaidenName() + "',"
+                    + "identifiedDateTime='" + body.getIdentifiedDateTime() + "',"
+                    + "estimatedAgeYear=" + body.getEstimatedAgeYear() + "," 
+                    + "estimatedAgeMonth=" + body.getEstimatedAgeMonth() + ","
+                    + "ID='" + body.getID() + "',"
+                    + "passport='" + body.getPassport() + "',"
+                    + "bodyStatus=" + body.isBodyStatus() + ","
+                    + "dateBodyReceived='" + body.getDateBodyReceived() + "',"
+                    + "bodyReleased=" + body.isBodyReleased() + ","
+                    + "bodyType='" + body.getBodyType() + "',"
+                    + "dateBodyReleased='" + body.getDateBodyReleased() + "',"
+                    + "bodyReleasedTo='" + body.getBodyReleasedTo() + "'"
+                    + "WHERE idDeathRegisterNumber='"+ body.getDeathRegisterNumber() + "' AND Incident_incidentLogNumber='" + body.getIncident().getIncidentLogNumber() +"';");
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "successful";
         
     }
     
