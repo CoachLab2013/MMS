@@ -11,7 +11,6 @@ package database;
  */
 public class VehicleDispatch {
     private String notificationDateTime;
-    private String departureDateTime;
     //private String dispatchMessage;
     private Vehicle vehicle;
     private Incident incident;
@@ -19,14 +18,12 @@ public class VehicleDispatch {
     //CONSTUCTORS
     public VehicleDispatch(){
         this.notificationDateTime = "";
-        this.departureDateTime = "";
         this.vehicle = new Vehicle();
         this.incident = new Incident();
     }
     
-    public VehicleDispatch(String inNotificationDateTime, String inDepartureDateTime, String inDispatchMessage, Vehicle inVehicle, Incident inIncident ){
+    public VehicleDispatch(String inNotificationDateTime, String inDispatchMessage, Vehicle inVehicle, Incident inIncident ){
         this.notificationDateTime = inNotificationDateTime;
-        this.departureDateTime = inDepartureDateTime;
         this.vehicle = inVehicle;
         this.incident = inIncident;
     }
@@ -36,9 +33,9 @@ public class VehicleDispatch {
         return this.notificationDateTime;
     }
     
-    public String getDepartureDateTime(){
+/*    public String getDepartureDateTime(){
         return this.departureDateTime;
-    }
+    }*/
     
     public Vehicle getVehicle(){
         return this.vehicle;
@@ -53,9 +50,9 @@ public class VehicleDispatch {
         this.notificationDateTime = inNotificationDateTime;
     }
     
-    public void setDepartureDateTime(String inDepartureDateTime){
+/*    public void setDepartureDateTime(String inDepartureDateTime){
         this.departureDateTime = inDepartureDateTime;
-    }
+    }*/
     
     public void setVehicle(Vehicle inVehicle){
         this.vehicle = inVehicle;
