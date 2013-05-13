@@ -66,7 +66,7 @@ public class EmployeeDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeUpdate("insert into employee (password,personnelNumber,name,surname,rank,access,email,active)" + " values"
+            statement.executeUpdate("INSERT INTO Employee (password,personnelNumber,name,surname,rank,access,email,active)" + " values"
                                     +"('" 
                                     +employee.getPassword() + "','" 
                                     + employee.getPersonnelNumber() + "','"
@@ -124,7 +124,7 @@ public class EmployeeDb extends DatabaseConnector
         ArrayList<Employee> list = new ArrayList<Employee>();
         try 
         {
-            statement.executeQuery("select personnelNumber,name,surname,rank,email,active from employee;");
+            statement.executeQuery("select personnelNumber,name,surname,rank,email,active from employee,access;");
             Employee emp = null;
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
@@ -136,6 +136,7 @@ public class EmployeeDb extends DatabaseConnector
                 emp.setRank(resultSet.getString("rank"));
                 emp.setEmail(resultSet.getString("email"));
                 emp.setActive(resultSet.getBoolean("active"));
+                emp.setAccess(resultSet.getInt("active"));
                 list.add(emp);
             }
             statement.close();

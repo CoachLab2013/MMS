@@ -103,13 +103,13 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
           out.write("                <img src=\"Images/logo.jpg\" width=\"150\" height=\"150\">\r\n");
           out.write("            </div>\r\n");
           out.write("            \r\n");
-          out.write("            <form name=\"login\" method=\"post\" action=\"LogInServlet\" class=\"form-horizontal\" id=\"loginform\" >\r\n");
+          out.write("            <form name=\"loginform\" method=\"post\" action=\"LogInServlet\" class=\"form-horizontal\" id=\"loginform\" >\r\n");
           out.write("               \r\n");
           out.write("                <div class=\"offset5  span7 \">\r\n");
           out.write("                    <fieldset class=\"fieldset\">\r\n");
           out.write("                        <legend class=\"legend\"> Login</legend>\r\n");
           out.write("                        <div class=\"control-group\">\r\n");
-          out.write("                            <label class=\"control-label\" for=\"personelnumber\">Personnel Number</label> \r\n");
+          out.write("                            <label class=\"control-label\" for=\"personelnumber\">Persal Number</label> \r\n");
           out.write("                            <div class=\"controls\">\r\n");
           out.write("                                <input type=\"text\" name=\"personnelnumber\" id=\"persnnlnum\"/> \r\n");
           out.write("                            </div>\r\n");

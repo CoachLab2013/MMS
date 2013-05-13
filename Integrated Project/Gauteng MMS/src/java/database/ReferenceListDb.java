@@ -26,6 +26,15 @@ public class ReferenceListDb extends DatabaseConnector
         field2 = "";
         id = 0;
     }
+    public ReferenceListDb(DbDetail dbDetail,String inTableName)
+    {
+        super(dbDetail);
+        data = "";
+        tableName = inTableName;
+        field1 = "";
+        field2 = "";
+        id = 0;
+    }
     public ReferenceListDb(String tableName,String field1,String field2,String data, DbDetail dbDetail)
     {
         super(dbDetail);
@@ -33,15 +42,6 @@ public class ReferenceListDb extends DatabaseConnector
         this.tableName = tableName;
         this.field1 = field1;
         this.field2 = field2;
-    }
-    public ReferenceListDb(String tableName,String field1,String field2,String data,int id, DbDetail dbDetail)
-    {
-        super(dbDetail);
-        this.data = data;
-        this.tableName = tableName;
-        this.field1 = field1;
-        this.field2 = field2;
-        this.id = id;
     }
     //tableName, field1, field2
     /**
@@ -185,7 +185,7 @@ public class ReferenceListDb extends DatabaseConnector
         } 
         catch (SQLException ex) 
         {
-            throw new SQLException(ex.getMessage()+" "+field2 +" "+tableName);
+            throw new SQLException(ex.getMessage());
         }
         return reflist;
     }

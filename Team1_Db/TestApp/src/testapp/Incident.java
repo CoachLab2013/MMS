@@ -21,6 +21,7 @@ private String circumstanceOfDeath;
 private String placeBodyFound;
 private String specialCircumstances;
 private String reason;
+private String dateIncidentClosed;
 private int bodyCount;
 private boolean status;
 
@@ -38,7 +39,21 @@ public Incident()
  bodyCount = 0;
  status = false;
 }
-public Incident(String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances,String reason,int bodyCount,boolean status)
+public Incident(String inIncidentLogNumber)
+{
+ incidentLogNumber= inIncidentLogNumber;
+ referenceNumber="";
+ numberOfBodies=0;
+ dateOfIncident="";
+ timeOfIncident="";
+ circumstanceOfDeath="";
+ placeBodyFound="";
+ specialCircumstances="";
+ reason = "";
+ bodyCount = 0;
+ status = false;
+}
+public Incident(String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances,String reason,int bodyCount,boolean status,String dateIncidentClosed)
 {
 this. incidentLogNumber = incidentLogNumber;
 this. referenceNumber = referenceNumber;
@@ -51,6 +66,7 @@ this. specialCircumstances = specialCircumstances;
 this.reason = reason;
 this.bodyCount = bodyCount;
 this.status = status;
+this.dateIncidentClosed = dateIncidentClosed;
 }
 //GET METHODS
 public String getIncidentLogNumber()
@@ -105,7 +121,10 @@ public boolean isOpen()
 {
     return status;
 }
-
+public String getDateIncidentClosed()
+{
+    return dateIncidentClosed;
+}
 //SET METHODS
 public void setIncidentLogNumber(String incidentLogNumber)
 {
@@ -150,5 +169,9 @@ public void setBodyCount(int bodyCount)
 public void setStatus(boolean status)
 {
     this.status = status;
+}
+public void setDateIncidentClosed(String dateIncidentClosed)
+{
+    this.dateIncidentClosed = dateIncidentClosed;
 }
 }

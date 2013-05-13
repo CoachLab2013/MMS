@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Chester
+ * @author 
  */
 public class IncidentMessageDb extends DatabaseConnector
 {
@@ -63,9 +63,10 @@ public class IncidentMessageDb extends DatabaseConnector
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
-                IncidentDb incidentDb = new IncidentDb(dbDetail);
-                Incident incident = incidentDb.findIncident(resultSet.getString("Incident_incidentLogNumber"));
-                msglist.add(new IncidentMessage(resultSet.getString("date"), resultSet.getString("time"), resultSet.getString("mannerOfDeath"), resultSet.getString("nameOfDeceased"), resultSet.getBoolean("vip"), resultSet.getBoolean("status"), incident));
+                IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")),dbDetail);
+                incidentDb.read();
+                //Incident incident = incidentDb.findIncident(resultSet.getString("Incident_incidentLogNumber"));
+                msglist.add(new IncidentMessage(resultSet.getString("date"), resultSet.getString("time"), resultSet.getString("mannerOfDeath"), resultSet.getString("nameOfDeceased"), resultSet.getBoolean("vip"), resultSet.getBoolean("status"), incidentDb.getIncident()));
             }
             statement.close();
             connection.close();

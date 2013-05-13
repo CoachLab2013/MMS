@@ -38,6 +38,20 @@ public Incident()
  bodyCount = 0;
  status = false;
 }
+public Incident(String inIncidentLogNumber)
+{
+ incidentLogNumber= inIncidentLogNumber;
+ referenceNumber="";
+ numberOfBodies=0;
+ dateOfIncident="";
+ timeOfIncident="";
+ circumstanceOfDeath="";
+ placeBodyFound="";
+ specialCircumstances="";
+ reason = "";
+ bodyCount = 0;
+ status = false;
+}
 public Incident(String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances,String reason,int bodyCount,boolean status)
 {
 this. incidentLogNumber = incidentLogNumber;
@@ -52,7 +66,7 @@ this.reason = reason;
 this.bodyCount = bodyCount;
 this.status = status;
 }
-
+//GET METHODS
 public String getIncidentLogNumber()
 {
     return incidentLogNumber;
@@ -105,6 +119,8 @@ public boolean isOpen()
 {
     return status;
 }
+
+//SET METHODS
 public void setIncidentLogNumber(String incidentLogNumber)
 {
     this.incidentLogNumber = incidentLogNumber;
@@ -117,9 +133,7 @@ public void setNumberOfBodies(int numberOfBodies)
 {
     this.numberOfBodies = numberOfBodies;
 }
-
 public void setDateOfIncident(String dateOfIncident)
-
 {
     this.dateOfIncident = dateOfIncident;
 }

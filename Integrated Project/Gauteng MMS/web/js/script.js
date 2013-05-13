@@ -45,14 +45,16 @@ $(document).ready(function(){
                 textOnly:true
 	      },
 	      personnelNumber: {
-	        minlength: 2,
+	          
+              minlength: 8,
+                number:true,            
 	        required: true
 	      },
               level:{
                   
                   required: true
                       },
-              Active:{
+              active:{
                   
                   required: true
                       }
@@ -78,5 +80,59 @@ $(document).ready(function(){
                      
 	  });
 
-        
+        $('#EditUser').validate({
+	    rules: {
+                
+              
+	      firstName: {
+	        minlength: 2,
+	        required: true,
+               textOnly:true
+	      },
+	      email: {
+	        required: true,
+	        email: true
+                
+                 
+	      },
+	      surname: {
+	      	minlength: 2,
+	        required: true,
+                textOnly:true
+	      },
+	      personnelNumber: {
+	        minlength: 8,
+                number:true,            
+	        required: true
+	      },
+              level:{
+                  
+                  required: true
+                      },
+              active:{
+                  
+                  required: true
+                      }
+             
+              
+	    },  
+                    messages: {
+             txtTextOnly: {
+                  required: "* Required"
+               }
+           },
+
+         
+                   
+			highlight: function(element) {
+				$(element).closest('.control-group').removeClass('success').addClass('error');
+			},
+			success: function(element) {
+				element
+				.text('OK!').addClass('valid')
+				.closest('.control-group').removeClass('error').addClass('success');
+			}
+                     
+	  });
+
 }); // end document.ready

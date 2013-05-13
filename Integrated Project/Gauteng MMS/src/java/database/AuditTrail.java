@@ -1,4 +1,4 @@
-package testapp;
+package database;
 /**
  *
  * @author Itumeleng Moraka
@@ -16,6 +16,7 @@ package testapp;
       private String eventType;
       private String eventMessage;
       private String currentUser;
+      private String eventLocation;
    
       public AuditTrail()
       {
@@ -24,6 +25,7 @@ package testapp;
          eventType="";
          eventMessage="";
          currentUser=""; 
+         eventLocation="";
       }
     /**
      *  
@@ -34,13 +36,14 @@ package testapp;
      * @param currentUser  , this is the user who will be using the system
      */
     
-      public AuditTrail(String date , String time , String eventType , String eventMessage , String currentUser)
+      public AuditTrail(String inDate , String inTime , String inEventType , String inEventMessage , String inCurrentUser, String inEventLocation)
       {
-         this.date = date;
-         this.time = time;
-         this.eventType = eventType;
-         this.eventMessage = eventMessage;
-         this.currentUser = currentUser;   
+         this.date = inDate;
+         this.time = inTime;
+         this.eventType = inEventType;
+         this.eventMessage = inEventMessage;
+         this.currentUser = inCurrentUser;
+         this.eventLocation = inEventLocation;
       }
     
     /**
@@ -73,14 +76,14 @@ package testapp;
     * @param set the time when the user was logged into the system.
     */
     
-      public void SetTime(String time)
+      public void setTime(String time)
       {
          this.time = time;
       }
    
    /**
     * 
-    * @return the event that happend while the user was using the system
+    * @return the event that happened while the user was using the system
     */
       public String getEventType()
       {
@@ -101,7 +104,7 @@ package testapp;
    * @return the message of the event
    */
    
-      String getEventMessage()
+      public String getEventMessage()
       {
          return eventMessage;
       }
@@ -120,7 +123,7 @@ package testapp;
    * @return the user 
    */
    
-      String getCurrentUser()
+      public String getCurrentUser()
       {
          return currentUser;
       }
@@ -134,16 +137,12 @@ package testapp;
          this.currentUser = currentUser;
       }
       
-   	//DatabaseConnector(String username,String password,String url,String dbName)
+      public String getEventLocation(){
+          return this.eventLocation;
+      }
       
-      public  String add()
-      {
-         return "";
+      public void setEventLocation(String inEventLocation){
+          this.eventLocation = inEventLocation;
       }
-      public  String read()
-      {
-         return "";
-      }
-   
      
    }
