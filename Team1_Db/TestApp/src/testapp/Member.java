@@ -12,7 +12,7 @@ public class Member
 {
     private String name;
     private String surname;
-    private int rank;
+    private String rank;
     private String personnelNumber;
     private String organization;
     private String contactNumber;
@@ -21,7 +21,7 @@ public class Member
     {
         
     }
-    public Member(String name,String surname,int rank,String personnelNumber,String organization,String contactNumber,String deathRegisterNumber)
+    public Member(String name,String surname,String rank,String personnelNumber,String organization,String contactNumber,String deathRegisterNumber)
     {
         this.name = name;
         this.surname = surname;
@@ -39,7 +39,7 @@ public class Member
     {
         return surname;
     }
-    public int getRank()
+    public String getRank()
     {
         return rank;
     }
@@ -58,5 +58,33 @@ public class Member
     public String getDeathRegisterNumber()
     {
         return deathRegisterNumber;
+    }
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+    public void setSurname(String surname)
+    {
+        this.surname = surname;
+    }
+    public void setRank(String rank)
+    {
+        this.rank = rank;
+    }
+    public void setPersonnelNumber(String personnelNumber)
+    {
+       this.personnelNumber = personnelNumber;
+    }
+    public void setOrganization(String organization)
+    {
+        this.organization = organization;
+    }
+    public void setContactNumber(String contactNumber)
+    {
+        this.contactNumber = contactNumber;
+    }
+    public void setDeathRegisterNumber(String deathRegisterNumber)
+    {
+        this.deathRegisterNumber = deathRegisterNumber;
     }
 }

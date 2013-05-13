@@ -162,7 +162,7 @@ public class TestApp {
         //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
         //Incident inci = new  Incident("002201301","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",3,true,"2013-04-06");
         //IncidentDb inciDb = new IncidentDb(inci,dbDetail);
-        //inciDb.init();
+       // inciDb.init();
 
         //adding an incident
         //System.out.println(inciDb.add());
@@ -196,15 +196,39 @@ public class TestApp {
         //END OF INCIDENT MESSAGE
         
         //BODYFILE
-        BodyAtMortuary body = new BodyAtMortuary("john", "smith", "099888591","male", "6", "3", "23", "2","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("a", "b","c","d", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
-        BodyDb bDb = new BodyDb(dbDetail,body);
+        //BodyAtMortuary body = new BodyAtMortuary("john", "smith", "099888592","male", "6", "3", "23", "2","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("a", "b","c","d", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
+        //BodyDb bDb = new BodyDb(dbDetail,new BodyAtMortuary());
+       // bDb.init();
+        //System.out.println(bDb.read());
         //bDb.init();
-        //System.out.println(bDb.add());
-       
-        bDb.init();
-        System.out.println(bDb.addBodyAddress());
-        bDb.init();
-        System.out.println(bDb.addBodyAtMotuary());
+        //ArrayList<BodyAtMortuary> list = bDb.getBodies();
+        //System.out.println(list.get(0).getDeathRegisterNumber());
+        //Witness[] wits = {new Witness("chester", "cobus"),new Witness("daniel", "cobus")};
+        //Property p = new Property("333333", "money", "2013-05-10", "cash", "plastic", "chresd", wits, "john", "smith", true,"099888592", false);
+        PropertyDb proDb = new PropertyDb(dbDetail);
+        proDb.init();
+        ArrayList<Property> list = proDb.properties();
+        for(int i = 0;i < list.size(); ++i)
+        {
+            System.out.println(list.get(i).getSealNumber());
+        }
+        //System.out.println(proDb.read());
+       // System.out.println(proDb.getProperty().getDate());
+        //BodyAtScene bodyAtScene = new BodyAtScene("abc", "2013-04-23", true, "2013-04-23", "2013-04-23", "ss", "dd","2013-04-23", (BodyAtMortuary)bDb.getBody());
+        //BodyAtSceneDb atDb = new BodyAtSceneDb(dbDetail, bodyAtScene);
+        //atDb.init();
+        //System.out.println(atDb.read());
+        //System.out.println(atDb.getBodyAtScene().getPlaceOfDeath());
+        //System.out.println(atDb.add());
+        //atDb.init();
+        //System.out.println(atDb.addMember(new Member("chester", "cobus", "officer","02020292","org","oe", "099888591")));
+        //bDb.init();
+        //System.out.println(bDb.addBodyAddress());
+        //bDb.init();
+        //System.out.println(bDb.addBodyAtMotuary());
+         
+            
+        
         //ENDBODYFILE
     }
 }

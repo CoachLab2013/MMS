@@ -13,6 +13,8 @@ package testapp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -158,7 +160,15 @@ public class IncidentDb extends DatabaseConnector
     @Override
     public String read() 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try 
+        {
+            incident = findIncident(incident.getIncidentLogNumber()); //To change body of generated methods, choose Tools | Templates.
+        } 
+        catch (SQLException ex) 
+        {
+           return "failed " + ex.getMessage();
+        }
+        return "successful";
     }
     public Incident findIncident(String inIncidentLogNumber) throws SQLException{
         Incident found;
