@@ -22,7 +22,7 @@ public class VehicleDispatch {
         this.incident = new Incident();
     }
     
-    public VehicleDispatch(String inNotificationDateTime, String inDispatchMessage, Vehicle inVehicle, Incident inIncident ){
+    public VehicleDispatch(String inNotificationDateTime, Vehicle inVehicle, Incident inIncident ){
         this.notificationDateTime = inNotificationDateTime;
         this.vehicle = inVehicle;
         this.incident = inIncident;
