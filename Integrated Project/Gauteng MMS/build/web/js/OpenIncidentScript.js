@@ -4,12 +4,15 @@
  */
 
 $(document).ready(function(){
+    $("#opentable").click();
+    
     $("#close").on("click", function(){
         if($("#selectedincident").val()==""){
             alert("Please select an incident.");
         }
         else{
             $("#closeincident").show();
+            $("#closereason").focus();
         }
         
         
@@ -22,6 +25,13 @@ $(document).ready(function(){
         $(this).addClass("selectedtablerow");
        $("#selectedincident").val($(this).attr("lognumber")); 
     });
+    
+    $("#cancelcloseincident").on("click",function(){
+        $("#closeincident").hide();
+        $(".selectedtablerow").addClass("tablerow");
+        $(".selectedtablerow").removeClass("selectedtablerow");
+    });
+
 });
 
 

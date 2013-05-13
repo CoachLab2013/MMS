@@ -167,8 +167,9 @@ public class Tools {
      * @param listname  name of the table containing the list elements
      * @return returns the contents of a reference list from the database or an error
      */
-    public ArrayList<String> getReferenceList(String listname){
+    public ArrayList<String> getReferenceList(String listname, String field){
         ReferenceListDb refdb = new ReferenceListDb(dbdetail,listname);
+        refdb.setField2(field);
         refdb.init();
         try{
             return refdb.referenceList();
@@ -181,9 +182,9 @@ public class Tools {
     }
     //end getReferenceList
     
-    public String makeReferenceList(String listname){
+    public String makeReferenceList(String listname, String field){
         ArrayList<String> list = new ArrayList<String>();
-        list = this.getReferenceList(listname);
+        list = this.getReferenceList(listname, field);
         String out = "<select name='"+listname+"' id='"+listname+"'>";
         out = out+ "<option selected='slected'>Select</option>";
         int size = list.size();

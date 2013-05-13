@@ -93,7 +93,7 @@
                 <td> Special Circumstances:</td> 
                 <td>
                     <% 
-                           out.println(t.makeReferenceList("specialcircumstance"));
+                           out.println(t.makeReferenceList("specialcircumstance","type"));
                     %>
                 </td>
             </tr>

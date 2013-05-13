@@ -57,7 +57,7 @@
                 <td>Select Vehicle:</td><td>
                 <% 
                     Tools t = new Tools();
-                    out.print(t.makeReferenceList("vehicle"));
+                    out.print(t.makeReferenceList("vehicle","registrationNumber"));
                 %>
                 </td>
             </tr>
