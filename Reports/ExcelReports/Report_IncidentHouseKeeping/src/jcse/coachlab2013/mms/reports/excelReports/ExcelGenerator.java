@@ -28,11 +28,13 @@ public class ExcelGenerator {
     Sheet sheet;
     CreationHelper helper;
 
-    public ExcelGenerator(int rows, int columns, String title) {
+    public ExcelGenerator(int row, int column, String title) {
         System.out.println("Processing ...");
         wb = new XSSFWorkbook();
         sheet = wb.createSheet();
         helper = wb.getCreationHelper();
+         int rows = row+10;
+        int columns = 2*column-1;
         createSpreadsheet(rows, columns);
         createHeader(columns, title);
         createTable(rows, columns);

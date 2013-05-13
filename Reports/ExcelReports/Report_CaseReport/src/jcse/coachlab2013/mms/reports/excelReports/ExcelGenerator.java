@@ -27,12 +27,15 @@ public class ExcelGenerator {
     Workbook wb;
     Sheet sheet;
     CreationHelper helper;
-
-    public ExcelGenerator(int rows, int columns, String title) {
+    
+public ExcelGenerator(int row, int column, String title) {
         System.out.println("Processing ...");
         wb = new XSSFWorkbook();
         sheet = wb.createSheet();
         helper = wb.getCreationHelper();
+        int rows = row+10;
+        int columns = 2*column-1;
+       
         createSpreadsheet(rows, columns);
         createHeader(columns, title);
         createTable(rows, columns);
@@ -180,7 +183,7 @@ public class ExcelGenerator {
 
 
 
-        for (int i = 0; i <= rows + 2; i++) {
+        for (int i = 0; i <= rows + 7; i++) {
             sheet.createRow(i);
             for (int j = 0; j <= columns; j++) {
                 sheet.getRow(i).createCell(j);
