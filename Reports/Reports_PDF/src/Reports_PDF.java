@@ -7,6 +7,7 @@ import jcse.coachlab2013.mms.reports.bodiesbyorganisation.Report_BodiesByOrganis
 import jcse.coachlab2013.mms.reports.facilitystorage.Report_FacilityStorage;
 import jcse.coachlab2013.mms.reports.mannerofdeath.Report_MannerOfDeath;
 import jcse.coachlab2013.mms.reports.turnaroundonresults.Report_TurnAroundOnResults;
+import jcse.coachlab2013.mms.reports.specificbody.Report_SpecificBody;
 
 /**
  *
@@ -25,6 +26,7 @@ public class Reports_PDF {
         new Report_MannerOfDeath("./test_report4.pdf", new DatabaseConnector(DbDetail.staticDBDetail).init()).createReport();
         new Report_MannerOfDeathStatistics("./test_report5.pdf", new DatabaseConnector(DbDetail.staticDBDetail).init()).createReport();
         new Report_UnidentifiedBodiesStatistics("./test_report6.pdf", new DatabaseConnector(DbDetail.staticDBDetail).init()).createReport();
-        new Report_TurnAroundOnResults("./test_report7.pdf", new DatabaseConnector(DbDetail.staticDBDetail).init()).createReport();        
+        new Report_TurnAroundOnResults("./test_report7.pdf", new DatabaseConnector(DbDetail.staticDBDetail).init()).createReport();
+        new Report_SpecificBody("./test_report.pdf", new DatabaseConnector(DbDetail.staticDBDetail).init()).createReport();
     }
 }
