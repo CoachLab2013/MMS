@@ -4,6 +4,8 @@
  */
 package database;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author Bandile
@@ -23,7 +25,24 @@ public class PostMortemDb extends DatabaseConnector
     @Override
     public String add() 
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try  
+        {  //
+            statement.executeUpdate("INSERT INTO PostMortem (labNumber,icd10,chiefFind,causeOfDeath,status,approved,DHA1663number,Body_idDeathRegisterNumber)" + " VALUES ('" 
+                                    + postMortem.getLabNumber() + "','" + postMortem.getIcd10() + "','" + postMortem.getChiefFind() + "','" 
+                                    + postMortem.getCauseOfDeath() + "','"
+                                    + "')");
+            statement.close(); //status , reason , bodyCountb 
+            connection.close(); //deathCall
+        } 
+        catch (SQLException ex)  
+        {
+            return "failed "+ex.getMessage(); 
+        }
+        catch (Exception ex)
+        {
+            return "failed "+ex.getMessage();
+        }
+        return "successful";
     }
 
     @Override

@@ -49,6 +49,7 @@ public class IncidentDb extends DatabaseConnector
          }
          
     //DATABSE METHODS
+  
     public String IncreaseBodyCount(){
         int newBodyCount = incident.getBodyCount() + 1;
         if (newBodyCount < incident.getNumberOfBodies()){
@@ -98,7 +99,7 @@ public class IncidentDb extends DatabaseConnector
     {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
-          try  
+        try  
         {  //
             statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " VALUES"
                                     +" ('" 
@@ -185,7 +186,7 @@ public class IncidentDb extends DatabaseConnector
         Incident found;
         try 
         {
-            statement.executeQuery("SELECT * FROM incident WERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
+            statement.executeQuery("SELECT * FROM incident WHERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             found = new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"),resultSet.getString("dateIncidentClosed"));
