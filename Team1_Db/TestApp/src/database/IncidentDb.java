@@ -49,11 +49,14 @@ public class IncidentDb extends DatabaseConnector
          }
          
     //DATABSE METHODS
+    public void IncreaseBodyCount(Incident inIncident){
+        Whil
+    }
     public int countOpenIncidents(String inDate) throws SQLException{
         int count = 0;
         try 
         {
-            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE status=true AND dateOfIncident = '" + inDate + "';");
+            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE status=true AND incidentLogNumber LIKE '%" + inDate + "';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             count = resultSet.getInt("countOpenIncidents");
@@ -87,7 +90,7 @@ public class IncidentDb extends DatabaseConnector
         
           try  
         {  //
-            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound,dateIncidentClosed)" + " VALUES"
+            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " VALUES"
                                     +" ('" 
                                     + incident.getIncidentLogNumber() + "','" 
                                     + incident.getReferenceNumber()+ "','"
@@ -99,8 +102,7 @@ public class IncidentDb extends DatabaseConnector
                                     + incident.isOpen() + ",'"
                                     + incident.getReason()+ "',"
                                     + incident.getBodyCount() + ",'"
-                                    + incident.getPlaceBodyFound() + "','"
-                                    + incident.getDateIncidentClosed() + "'"
+                                    + incident.getPlaceBodyFound() + "'"
                                     + ")");
             statement.close(); //status , reason , bodyCountb 
             connection.close(); //deathCall
@@ -120,7 +122,7 @@ public class IncidentDb extends DatabaseConnector
         ArrayList<Incident> incidentList = new ArrayList<Incident>();
         try 
         {
-            statement.executeQuery("SELECT * FROM incident;");
+            statement.executeQuery("SELECT * FROM Incident;");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
