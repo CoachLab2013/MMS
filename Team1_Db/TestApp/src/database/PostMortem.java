@@ -40,7 +40,7 @@ public class PostMortem {
     }
 
     /**
-     * @return the icd10
+     * @return the ICD10
      */
     public String getIcd10() {
         return icd10;

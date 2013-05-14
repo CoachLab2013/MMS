@@ -49,8 +49,18 @@ public class IncidentDb extends DatabaseConnector
          }
          
     //DATABSE METHODS
-    public void IncreaseBodyCount(Incident inIncident){
-        Whil
+    public String IncreaseBodyCount(){
+        int newBodyCount = incident.getBodyCount() + 1;
+        if (newBodyCount < incident.getNumberOfBodies()){
+            incident.setBodyCount(newBodyCount);
+            return edit();
+        }else if(newBodyCount == incident.getNumberOfBodies() ){
+            incident.setBodyCount(newBodyCount);
+            incident.setStatus(false);
+            return edit();
+        }else{
+            return "WE HAVE RECIEVED ALL THE BODIES FOR THIS INCIDENT";
+        }
     }
     public int countOpenIncidents(String inDate) throws SQLException{
         int count = 0;
