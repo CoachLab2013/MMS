@@ -4,6 +4,7 @@
     Author     : Sandile
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page import="database.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -27,6 +28,9 @@
         <title>Gauteng Mortuary Management System</title>
     </head>
     <body>
+        <% //Tools t = new Tools();
+        //t.adduser();  
+%>
 
         <p>
 
