@@ -49,6 +49,7 @@ public class IncidentDb extends DatabaseConnector
          }
          
     //DATABSE METHODS
+  
     public String IncreaseBodyCount(){
         int newBodyCount = incident.getBodyCount() + 1;
         if (newBodyCount < incident.getNumberOfBodies()){
@@ -98,7 +99,7 @@ public class IncidentDb extends DatabaseConnector
     {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
-          try  
+        try  
         {  //
             statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " VALUES"
                                     +" ('" 
