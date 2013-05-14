@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class BodyDb extends DatabaseConnector{
     private Body body;
-    private DbDetail dbDetail;
+    
     //CONSTRUCTORS
     public BodyDb(DbDetail dbDetail){
         super(dbDetail);

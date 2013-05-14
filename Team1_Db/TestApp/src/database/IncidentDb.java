@@ -49,7 +49,6 @@ public class IncidentDb extends DatabaseConnector
          }
          
     //DATABSE METHODS
-  
     public String IncreaseBodyCount(){
         int newBodyCount = incident.getBodyCount() + 1;
         if (newBodyCount < incident.getNumberOfBodies()){
