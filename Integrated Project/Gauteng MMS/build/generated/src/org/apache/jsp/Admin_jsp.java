@@ -3,6 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import AssistiveClasses.SetDbDetail;
+import servlets.Tools;
 import database.EmployeeDb;
 import java.util.ArrayList;
 import database.Employee;
@@ -55,6 +57,8 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("    <head>        \r\n");
@@ -97,7 +101,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String main1 = "";
             String addUserTab = "";
             String currentUserTab = "";
- 
+
             //checks which tab to open
             if (null != session.getAttribute("result")) {
                 userResult = session.getAttribute("result").toString();
@@ -109,9 +113,9 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                 addUserTab = "";
                 currentUserTab = "active";
             }
-            
+
             //Veriables to determine which tab to open
-            String main2 = "";  
+            String main2 = "";
             String inst = "";
             String analysis = "";
             String relationship = "";
@@ -189,10 +193,10 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     } else if (session.getAttribute("tab").equals("relationship")) {
                         relationshipResult = session.getAttribute("relationshipResult").toString();
                         relationship = "active";
-                    }else  if (session.getAttribute("tab").equals("Adduser")) {
+                    } else if (session.getAttribute("tab").equals("Adduser")) {
                         addUserTab = "active";
                         userResult = session.getAttribute("relationshipResult").toString();
-                    }  
+                    }
 
 
                 } else {
@@ -218,84 +222,84 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
 
                     currentUserTab = "active";
 
-                   
+
 
                 }
             } catch (Exception ex) {
                 currentUserTab = "active";
                 main1 = "active";
             }
-            DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
-
+            SetDbDetail dbset = new SetDbDetail();
+            
             //Code to fill users table
-            EmployeeDb emplo = new EmployeeDb(dbDetail);
+            EmployeeDb emplo = new EmployeeDb(dbset.getDbdetail());
             emplo.init();
             ArrayList<Employee> employeeList = emplo.employeeList();
 
             //Code to populate list boxes in tabs
 
             //For institution list box
-            ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
-            emp.init();
+            ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbset.getDbdetail());
+            emp.init(); 
             ArrayList<String> institutionList = emp.referenceList();
 
             //For analysis list box
-            emp = new ReferenceListDb("analysis", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("analysis", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> analysisList = emp.referenceList();
 
             //For rank list box
-            emp = new ReferenceListDb("rank", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("rank", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> rankList = emp.referenceList();
 
             //For gender list box
-            emp = new ReferenceListDb("gender", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("gender", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> genderList = emp.referenceList();
 
             //For occupation list box
-            emp = new ReferenceListDb("occupation", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("occupation", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> occupationList = emp.referenceList();
 
             //For race list box
-            emp = new ReferenceListDb("race", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("race", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> raceList = emp.referenceList();
 
             //For maritalstatus list box
-            emp = new ReferenceListDb("maritalstatus", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("maritalstatus", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> maritalstatusList = emp.referenceList();
 
             //For province list box
-            emp = new ReferenceListDb("province", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("province", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> provinceList = emp.referenceList();
 
             //For icd10 list box
-            emp = new ReferenceListDb("icd10", "e", "code", "e", dbDetail);
+            emp = new ReferenceListDb("icd10", "e", "code", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> icd10List = emp.referenceList();
 
             //For mannerofdeath list box
-            emp = new ReferenceListDb("mannerofdeath", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("mannerofdeath", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> mannerofdeathList = emp.referenceList();
 
             //For sample list box
-            emp = new ReferenceListDb("sample", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("sample", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> sampleList = emp.referenceList();
 
             //For bodystatus list box
-            emp = new ReferenceListDb("bodystatus", "e", "state", "e", dbDetail);
+            emp = new ReferenceListDb("bodystatus", "e", "state", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> bodystatusList = emp.referenceList();
 
             //For relationship list box
-            emp = new ReferenceListDb("relationship", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("relationship", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> relationshipList = emp.referenceList();
 
@@ -320,9 +324,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
              emp.init();
              ArrayList<String> institutionList = emp.referenceList();
              */
-
-
-        
+             
       out.write("\r\n");
       out.write("\r\n");
       out.write("        <p>\r\n");
@@ -372,7 +374,7 @@ out.println(String.valueOf(currentUserTab));
       out.write("\r\n");
       out.write("                                <table border=\"1\" class=\"bordered-table\">\r\n");
       out.write("                                    <tr>\r\n");
-      out.write("                                        <th width=\"150\"><H4>Name</H4></th>\r\n");
+      out.write("                                    <th width=\"150\"><H4>Name</H4></th>\r\n");
       out.write("                                    <th width=\"150\"><H4>Surname</H4></th>\r\n");
       out.write("                                    <th width=\"150\"><H4>Persal number</H4></th>\r\n");
       out.write("                                    <th width=\"150\"><H4>Email Address <H4></th>\r\n");
@@ -443,7 +445,7 @@ out.println(String.valueOf(addUserTab));
       out.write("                                                                <input type=\"text\" name=\"form\" value=\"AddUser\" style=\"visibility: hidden\" />\r\n");
       out.write("                                                                <fieldset>\r\n");
       out.write("                                                                    <legend>User Personal Details</legend>\r\n");
-      out.write("                                                                         <label  > ");
+      out.write("                                                                    <label  > ");
  out.println(String.valueOf(userResult));
       out.write(" </label>\r\n");
       out.write("                                                                    <div class=\"control-group   error\">\r\n");
@@ -473,8 +475,8 @@ out.println(String.valueOf(addUserTab));
       out.write("\r\n");
       out.write("                                                                <fieldset>\r\n");
       out.write("                                                                    <legend>User Employment Details</legend>\r\n");
-      out.write("                                                                   \r\n");
-      out.write("                                                               \r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("                                                                    <div class=\"control-group error \">\r\n");
       out.write("                                                                        <label  class=\"control-label\" for=\"personnelNumber\">Persal Number:</label>\r\n");
       out.write("                                                                        <div class=\"controls\">\r\n");

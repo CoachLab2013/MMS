@@ -17,7 +17,7 @@ public class Tools {
      * constructor for an instance of Tools
      */
     public Tools(){
-        dbdetail = new DbDetail("localhost","/mydb","asheen","password"); 
+        dbdetail = new DbDetail("localhost","/mydb","root","msandas777"); 
     }
     //end constructor
     

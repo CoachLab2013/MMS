@@ -5,6 +5,8 @@
  
 --%>
 
+<%@page import="AssistiveClasses.SetDbDetail"%>
+<%@page import="servlets.Tools"%>
 <%@page import="database.EmployeeDb"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="database.Employee"%>
@@ -53,7 +55,7 @@
             String main1 = "";
             String addUserTab = "";
             String currentUserTab = "";
- 
+
             //checks which tab to open
             if (null != session.getAttribute("result")) {
                 userResult = session.getAttribute("result").toString();
@@ -65,9 +67,9 @@
                 addUserTab = "";
                 currentUserTab = "active";
             }
-            
+
             //Veriables to determine which tab to open
-            String main2 = "";  
+            String main2 = "";
             String inst = "";
             String analysis = "";
             String relationship = "";
@@ -145,10 +147,10 @@
                     } else if (session.getAttribute("tab").equals("relationship")) {
                         relationshipResult = session.getAttribute("relationshipResult").toString();
                         relationship = "active";
-                    }else  if (session.getAttribute("tab").equals("Adduser")) {
+                    } else if (session.getAttribute("tab").equals("Adduser")) {
                         addUserTab = "active";
                         userResult = session.getAttribute("relationshipResult").toString();
-                    }  
+                    }
 
 
                 } else {
@@ -174,84 +176,84 @@
 
                     currentUserTab = "active";
 
-                   
+
 
                 }
             } catch (Exception ex) {
                 currentUserTab = "active";
                 main1 = "active";
             }
-            DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
-
+            SetDbDetail dbset = new SetDbDetail();
+            
             //Code to fill users table
-            EmployeeDb emplo = new EmployeeDb(dbDetail);
+            EmployeeDb emplo = new EmployeeDb(dbset.getDbdetail());
             emplo.init();
             ArrayList<Employee> employeeList = emplo.employeeList();
 
             //Code to populate list boxes in tabs
 
             //For institution list box
-            ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
-            emp.init();
+            ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbset.getDbdetail());
+            emp.init(); 
             ArrayList<String> institutionList = emp.referenceList();
 
             //For analysis list box
-            emp = new ReferenceListDb("analysis", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("analysis", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> analysisList = emp.referenceList();
 
             //For rank list box
-            emp = new ReferenceListDb("rank", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("rank", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> rankList = emp.referenceList();
 
             //For gender list box
-            emp = new ReferenceListDb("gender", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("gender", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> genderList = emp.referenceList();
 
             //For occupation list box
-            emp = new ReferenceListDb("occupation", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("occupation", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> occupationList = emp.referenceList();
 
             //For race list box
-            emp = new ReferenceListDb("race", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("race", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> raceList = emp.referenceList();
 
             //For maritalstatus list box
-            emp = new ReferenceListDb("maritalstatus", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("maritalstatus", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> maritalstatusList = emp.referenceList();
 
             //For province list box
-            emp = new ReferenceListDb("province", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("province", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> provinceList = emp.referenceList();
 
             //For icd10 list box
-            emp = new ReferenceListDb("icd10", "e", "code", "e", dbDetail);
+            emp = new ReferenceListDb("icd10", "e", "code", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> icd10List = emp.referenceList();
 
             //For mannerofdeath list box
-            emp = new ReferenceListDb("mannerofdeath", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("mannerofdeath", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> mannerofdeathList = emp.referenceList();
 
             //For sample list box
-            emp = new ReferenceListDb("sample", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("sample", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> sampleList = emp.referenceList();
 
             //For bodystatus list box
-            emp = new ReferenceListDb("bodystatus", "e", "state", "e", dbDetail);
+            emp = new ReferenceListDb("bodystatus", "e", "state", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> bodystatusList = emp.referenceList();
 
             //For relationship list box
-            emp = new ReferenceListDb("relationship", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("relationship", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> relationshipList = emp.referenceList();
 
@@ -276,9 +278,7 @@
              emp.init();
              ArrayList<String> institutionList = emp.referenceList();
              */
-
-
-        %>
+             %>
 
         <p>
             <span style="float: left">Welcome Mrs Admin </span>
@@ -310,7 +310,7 @@
                                 <%--  Current user content --%>
                                 <table border="1" class="bordered-table">
                                     <tr>
-                                        <th width="150"><H4>Name</H4></th>
+                                    <th width="150"><H4>Name</H4></th>
                                     <th width="150"><H4>Surname</H4></th>
                                     <th width="150"><H4>Persal number</H4></th>
                                     <th width="150"><H4>Email Address <H4></th>
@@ -352,7 +352,7 @@
                                                                 <input type="text" name="form" value="AddUser" style="visibility: hidden" />
                                                                 <fieldset>
                                                                     <legend>User Personal Details</legend>
-                                                                         <label  > <% out.println(String.valueOf(userResult));%> </label>
+                                                                    <label  > <% out.println(String.valueOf(userResult));%> </label>
                                                                     <div class="control-group   error">
 
                                                                         <label  class="control-label"   for="firstName">Full Name(s):</label> 
@@ -380,8 +380,8 @@
 
                                                                 <fieldset>
                                                                     <legend>User Employment Details</legend>
-                                                                   
-                                                               
+
+
                                                                     <div class="control-group error ">
                                                                         <label  class="control-label" for="personnelNumber">Persal Number:</label>
                                                                         <div class="controls">

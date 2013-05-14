@@ -21,6 +21,7 @@ private String circumstanceOfDeath;
 private String placeBodyFound;
 private String specialCircumstances;
 private String reason;
+private String dateIncidentClosed;
 private int bodyCount;
 private boolean status;
 
@@ -37,6 +38,7 @@ public Incident()
  reason = "";
  bodyCount = 0;
  status = false;
+ dateIncidentClosed = "";
 }
 public Incident(String inIncidentLogNumber)
 {
@@ -51,6 +53,7 @@ public Incident(String inIncidentLogNumber)
  reason = "";
  bodyCount = 0;
  status = false;
+ dateIncidentClosed = "";
 }
 public Incident(String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances,String reason,int bodyCount,boolean status)
 {
@@ -65,6 +68,21 @@ this. specialCircumstances = specialCircumstances;
 this.reason = reason;
 this.bodyCount = bodyCount;
 this.status = status;
+}
+public Incident(String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances,String reason,int bodyCount,boolean status,String dateIncidentClosed)
+{
+this. incidentLogNumber = incidentLogNumber;
+this. referenceNumber = referenceNumber;
+this. numberOfBodies = numberOfBodies;
+this. dateOfIncident = dateOfIncident;
+this. timeOfIncident = timeOfIncident;
+this. circumstanceOfDeath = circumstanceOfDeath;
+this. placeBodyFound = placeBodyFound;
+this. specialCircumstances = specialCircumstances;
+this.reason = reason;
+this.bodyCount = bodyCount;
+this.status = status;
+this.dateIncidentClosed = dateIncidentClosed;
 }
 //GET METHODS
 public String getIncidentLogNumber()
@@ -119,7 +137,10 @@ public boolean isOpen()
 {
     return status;
 }
-
+public String getDateIncidentClosed()
+{
+    return dateIncidentClosed;
+}
 //SET METHODS
 public void setIncidentLogNumber(String incidentLogNumber)
 {
@@ -164,5 +185,9 @@ public void setBodyCount(int bodyCount)
 public void setStatus(boolean status)
 {
     this.status = status;
+}
+public void setDateIncidentClosed(String dateIncidentClosed)
+{
+    this.dateIncidentClosed = dateIncidentClosed;
 }
 }

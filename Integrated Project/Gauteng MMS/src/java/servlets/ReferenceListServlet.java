@@ -4,6 +4,7 @@
  */
 package servlets;
 
+import AssistiveClasses.ClassSendMailTLS;
 import database.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -88,11 +89,13 @@ public class ReferenceListServlet extends HttpServlet {
 
             String personnel = request.getParameter("personnelNumber");
             String password = random(8);
+           
             String name = request.getParameter("firstName");
             String surname = request.getParameter("surname");
             //String rank = request.getParameter("rank");
             String email = request.getParameter("email");
-
+            ClassSendMailTLS sendmail = new ClassSendMailTLS();
+            sendmail.sendMail(email.trim(), "You password for the Gauteng MMS system is \n  "+ password);
             boolean active = Boolean.valueOf(request.getParameter("active"));
             int level = Integer.parseInt(request.getParameter("level"));
 
