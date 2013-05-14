@@ -88,7 +88,8 @@ public class Tools {
         String datenum = timestamp2.split(" ")[0];
         try{
             int incidentnum = incidentdb.countOpenIncidents(datenum)+1;
-            String lognumber = Integer.toString(incidentnum) + datenum;
+            String formated_num = String.format("%03d", incidentnum); 
+            String lognumber =  formated_num+ datenum;
             return lognumber;
         }
         catch(Exception e){

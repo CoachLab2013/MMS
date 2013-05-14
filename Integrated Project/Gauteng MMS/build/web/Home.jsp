@@ -29,7 +29,8 @@
     </head>
     <body>
         <% //Tools t = new Tools();
-        //t.adduser();  %>
+        //t.adduser();  
+%>
 
         <p>
 

@@ -72,6 +72,7 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        ");
  //Tools t = new Tools();
         //t.adduser();  
+
       out.write("\r\n");
       out.write("\r\n");
       out.write("        <p>\r\n");
