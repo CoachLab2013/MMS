@@ -61,6 +61,21 @@ public class BodyFileDb extends DatabaseConnector
         }
         return "successful";
     }
+    public String linkBody(String deathRegisterNumber)
+    {
+        try 
+        {                       //passport , name , surname,relationWithDeceased,contactNumber,address,workAddress,ID,Body_IdDeathRegisterNumber
+            statement.executeUpdate("UPDATE bodylink SET BodyFile_Body_idDeathRegisterNumber1='"
+                    + deathRegisterNumber+ "' WHERE Body_idDeathRegisterNumber='" + bodyFile.getDeathRegisterNumber() + "';");
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        return "successful";
+    }
     public ArrayList<BodyFile> BodyFileList() throws SQLException
     {
         ArrayList<BodyFile> list = new ArrayList<BodyFile>();
