@@ -44,7 +44,7 @@ public class CloseIncidentServlet extends HttpServlet {
         try{
             Tools t = new Tools();
             String date = t.getDateTime().split(" ")[0];
-            idb.closeIncident(fpslognumber,date);
+            idb.closeIncident(fpslognumber,date, reason);
             response.sendRedirect("Home.jsp");
         }
         catch(Exception e){

@@ -244,5 +244,10 @@ public class Tools {
         return timestamp;
     }
     //end getDateTime
+    
+    public String getIncidentDetail(String lognumber){
+        return lognumber;
+    }
+    //
 }
 //end Tools class

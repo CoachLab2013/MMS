@@ -83,7 +83,8 @@ public class LogIncidentServlet extends HttpServlet {
         HttpSession sess = request.getSession();
         sess.setAttribute("incidentlogged", "Incident created succesully");
         sess.setAttribute("incident", incident);
-        response.sendRedirect("Home.jsp");
+        sess.setAttribute("lognumber",request.getParameter("fpsnumber") );
+       // response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
