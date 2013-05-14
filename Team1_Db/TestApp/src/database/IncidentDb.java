@@ -185,7 +185,7 @@ public class IncidentDb extends DatabaseConnector
         Incident found;
         try 
         {
-            statement.executeQuery("SELECT * FROM incident WERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
+            statement.executeQuery("SELECT * FROM incident WHERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             found = new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"),resultSet.getString("dateIncidentClosed"));
