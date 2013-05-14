@@ -4,7 +4,9 @@
  */
 package servlets;
 
-import database.*;
+import database.DbDetail;
+import database.Incident;
+import database.IncidentDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Asheen
  */
-@WebServlet(name = "DispatchVehicleServlet", urlPatterns = {"/DispatchVehicleServlet"})
-public class DispatchVehicleServlet extends HttpServlet {
+@WebServlet(name = "GetIncidentServlet", urlPatterns = {"/GetIncidentServlet"})
+public class GetIncidentServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -35,20 +37,22 @@ public class DispatchVehicleServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        Tools t = new Tools();
+        Incident incident = t.getIncidentDetail(request.getParameter("selected_edit_incident"));
         HttpSession sess = request.getSession();
-        String lognumber = sess.getAttribute("lognumber").toString();
-        Tools t  = new Tools();
-       
-       Vehicle vehicle = new Vehicle(request.getParameter("vehicle"));
-       Incident inc = new Incident(lognumber);
-       VehicleDispatch vehicledispatch = new VehicleDispatch(t.getDateTime(),vehicle,inc);
-       DbDetail dbdetail = new DbDetail("localhost","/mydb","root","password");
-       VehicleDispatchDb vdb = new VehicleDispatchDb(dbdetail,vehicledispatch);
-       vdb.init();
-       vdb.add();
-       String personnelnumber = sess.getAttribute("personnelnumber").toString();
-       t.makeAuditTrail("Dispatch Vehicle", "Dispatched vehicle "+ request.getParameter("vehicle"), personnelnumber, "Log Incident Tab");
-       response.sendRedirect("Home.jsp");
+        sess.setAttribute("lognumber",incident.getIncidentLogNumber());
+        sess.setAttribute("circumstance_of_death",incident.getCircumstanceOfDeath());
+        String[] date = incident.getDateOfIncident().split("-");
+        sess.setAttribute("year",date[0]);
+        sess.setAttribute("month",date[1]);
+        sess.setAttribute("day",date[2]);
+        sess.setAttribute("place_found",incident.getPlaceBodyFound());
+        sess.setAttribute("sap_reference_number",incident.getReferenceNumber());
+        sess.setAttribute("special_circumstances",incident.getSpecialCircumstances());
+        sess.setAttribute("time",incident.getTimeOfIncident());
+        sess.setAttribute("number_of_bodies",incident.getNumberOfBodies());
+        sess.setAttribute("bodies_recieved",incident.getBodyCount());
+        sess.setAttribute("go_to_editincident", true);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

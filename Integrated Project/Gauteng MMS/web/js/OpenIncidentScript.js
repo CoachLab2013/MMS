@@ -15,13 +15,14 @@ $(document).ready(function(){
             $("#closereason").focus();
         }
     });
-    
+ 
     $("#opentable tr").click(function(){
         $(".selectedtablerow").addClass("tablerow");
         $(".selectedtablerow").removeClass("selectedtablerow");
         $(this).removeClass("tablerow");
         $(this).addClass("selectedtablerow");
-       $("#selectedincident").val($(this).attr("lognumber")); 
+       $("#selectedincident").val($(this).attr("lognumber"));
+       $("#selected_edit_incident").val($(this).attr("lognumber"));
     });
     
     $("#cancelcloseincident").on("click",function(){
@@ -46,6 +47,25 @@ $(document).ready(function(){
             
         }//end of messages
     });
+    
+    $("#editincidentbutton").on("click",function(){
+        if($("#selectedincident").val()==""){
+            alert("Please select an incident.");
+        }
+        else{
+            $("#cancelcloseincident").click();
+            $("#editincidentform").submit();
+           /* //set focus on Open Incidents tab 
+            $("#OpenIncidentsTab").removeClass("active");
+            $("#EditIncidentTab").addClass("active");
+            
+            $("#OpenIncidents").removeClass("tab-pane active");
+            $("#OpenIncidents").addClass("tab-pane");
+            $("#EditIncident").removeClass("tab-pane");
+            $("#EditIncident").addClass("tab-pane active");*/
+        }
+    });
+    
 
 });
 

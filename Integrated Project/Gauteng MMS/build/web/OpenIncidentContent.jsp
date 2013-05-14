@@ -27,7 +27,7 @@
         <table>
             <tr>
                 <td width="200"></td>
-                <td width="10"><input type="button" value="Edit" id="edit"></td>
+                <td width="10"><input type="button" value="Edit" id="editincidentbutton"></td>
                 <td width="300" align="center"><input type="button" value="Close Incident" id="close"> </td>
             </tr>
 
@@ -67,5 +67,8 @@
             </tr>
         </table>
     </form>
+        <form id="editincidentform" hidden="true" action="GetIncidentServlet">
+            <input type="text" id="selected_edit_incident" name="selected_edit_incident">
+        </form>
 </body>
 </html>

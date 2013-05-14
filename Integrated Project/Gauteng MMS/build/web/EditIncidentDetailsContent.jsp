@@ -16,7 +16,7 @@
             </style>
 <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
- <script src="js/IncidentDetailsScript.js"></script>
+ <script src="js/EditIncidentDetailsScript.js"></script>
     </head>
     <body>
         <legend>Incidents> Edit Incident> Incident Details</legend>

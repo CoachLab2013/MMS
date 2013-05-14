@@ -246,8 +246,16 @@ public class Tools {
     }
     //end getDateTime
     
-    public String getIncidentDetail(String lognumber){
-        return lognumber;
+    public Incident getIncidentDetail(String lognumber){
+       IncidentDb idb = new IncidentDb(dbdetail);
+       idb.init();
+       try{
+           Incident incident = idb.findIncident(lognumber);
+           return incident;
+       }
+       catch(Exception e){
+           return null;
+       }
     }
     //
 }

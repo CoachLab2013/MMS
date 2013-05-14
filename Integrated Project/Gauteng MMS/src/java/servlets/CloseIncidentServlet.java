@@ -46,6 +46,9 @@ public class CloseIncidentServlet extends HttpServlet {
             String date = t.getDateTime().split(" ")[0];
             idb.closeIncident(fpslognumber,date, reason);
             response.sendRedirect("Home.jsp");
+            HttpSession sess = request.getSession();
+            String personnelnumber = sess.getAttribute("personnelnumber").toString();
+            t.makeAuditTrail("Closed Incident", "Closed incident "+ request.getParameter("selectedincident"), personnelnumber, "Open Incidents Tab");
         }
         catch(Exception e){
             out.println("ERROR: "+e.getMessage());

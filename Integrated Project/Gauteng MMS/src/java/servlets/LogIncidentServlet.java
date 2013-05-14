@@ -84,7 +84,10 @@ public class LogIncidentServlet extends HttpServlet {
         sess.setAttribute("incidentlogged", "Incident created succesully");
         sess.setAttribute("incident", incident);
         sess.setAttribute("lognumber",request.getParameter("fpsnumber"));
-        //response.sendRedirect("Home.jsp");
+        String personnelnumber = sess.getAttribute("personnelnumber").toString();
+        Tools t = new Tools();
+        t.makeAuditTrail("Log Incident", "Created new incident "+request.getParameter("fpsnumber"), personnelnumber, "Log Incident Tab");
+        response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
