@@ -49,6 +49,9 @@ public class IncidentDb extends DatabaseConnector
          }
          
     //DATABSE METHODS
+    public void IncreaseBodyCount(Incident inIncident){
+        Whil
+    }
     public int countOpenIncidents(String inDate) throws SQLException{
         int count = 0;
         try 
