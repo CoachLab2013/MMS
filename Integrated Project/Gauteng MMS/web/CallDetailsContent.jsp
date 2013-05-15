@@ -24,7 +24,7 @@
     </head>
     <body>
         <legend>Incidents> Log Incident> Call Details</legend>
-        <form name="callform" id="callform" method="post" action="LogIncidentServlet">
+        <form name="callform" id="callform" method="post" action="LogIncidentServlet" hidden="true">
     
             <table>
                 <tr>     

@@ -49,11 +49,25 @@ public class IncidentDb extends DatabaseConnector
          }
          
     //DATABSE METHODS
+  
+    public String IncreaseBodyCount(){
+        int newBodyCount = incident.getBodyCount() + 1;
+        if (newBodyCount < incident.getNumberOfBodies()){
+            incident.setBodyCount(newBodyCount);
+            return edit();
+        }else if(newBodyCount == incident.getNumberOfBodies() ){
+            incident.setBodyCount(newBodyCount);
+            incident.setStatus(false);
+            return edit();
+        }else{
+            return "WE HAVE RECIEVED ALL THE BODIES FOR THIS INCIDENT";
+        }
+    }
     public int countOpenIncidents(String inDate) throws SQLException{
         int count = 0;
         try 
         {
-            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE status=true AND dateOfIncident = '" + inDate + "';");
+            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE status=true AND incidentLogNumber LIKE '%" + inDate + "';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             count = resultSet.getInt("countOpenIncidents");
@@ -85,9 +99,9 @@ public class IncidentDb extends DatabaseConnector
     {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
-          try  
+        try  
         {  //
-            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound,dateIncidentClosed)" + " VALUES"
+            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " VALUES"
                                     +" ('" 
                                     + incident.getIncidentLogNumber() + "','" 
                                     + incident.getReferenceNumber()+ "','"
@@ -99,8 +113,7 @@ public class IncidentDb extends DatabaseConnector
                                     + incident.isOpen() + ",'"
                                     + incident.getReason()+ "',"
                                     + incident.getBodyCount() + ",'"
-                                    + incident.getPlaceBodyFound() + "','"
-                                    + incident.getDateIncidentClosed() + "'"
+                                    + incident.getPlaceBodyFound() + "'"
                                     + ")");
             statement.close(); //status , reason , bodyCountb 
             connection.close(); //deathCall
@@ -120,7 +133,7 @@ public class IncidentDb extends DatabaseConnector
         ArrayList<Incident> incidentList = new ArrayList<Incident>();
         try 
         {
-            statement.executeQuery("SELECT * FROM incident;");
+            statement.executeQuery("SELECT * FROM Incident;");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
@@ -173,7 +186,7 @@ public class IncidentDb extends DatabaseConnector
         Incident found;
         try 
         {
-            statement.executeQuery("SELECT * FROM incident WERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
+            statement.executeQuery("SELECT * FROM incident WHERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             found = new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"),resultSet.getString("dateIncidentClosed"));
