@@ -23,7 +23,19 @@ public final class DatabaseAccessor_AuditTrail extends Template_DatabaseAccessor
         
         try {
             
-            preparedStatement = connection.prepareStatement("SELECT * FROM `test_db`.`dim_date`;");            
+            preparedStatement = connection.prepareStatement("SELECT \n" +
+                "`reporting_EventDate`.`dateStamp` AS `Date`,\n" +
+                "`reporting_EventType`.`typeDescription` AS `Event Type`,\n" +
+                "`reporting_EventLocation`.`locationName` AS `Event Location`,\n" +
+                "`reporting_Employee`.`employeeName` AS `User`,\n" +
+                "`reporting_Event`.`eventMessage` AS `Event Message`\n" +
+                "\n" +
+                "FROM `reporting database`.`fact_audittrail` AS `reporting_AuditTrail`\n" +
+                "	LEFT JOIN `reporting database`.`dim_event` AS `reporting_Event` ON `reporting_Event`.`event_SK` = `reporting_AuditTrail`.`FK_Event_SK`\n" +
+                "	LEFT JOIN `reporting database`.`dim_date` AS `reporting_EventDate` ON `reporting_EventDate`.`date_SK` = `reporting_AuditTrail`.`FK_DateOccured_SK`\n" +
+                "	LEFT JOIN `reporting database`.`dim_employee` AS `reporting_Employee` ON `reporting_Employee`.`employee_SK` = `reporting_AuditTrail`.`FK_Employee_SK`\n" +
+                "	LEFT JOIN `reporting database`.`dim_eventtype` AS `reporting_EventType` ON `reporting_EventType`.`type_SK` = `reporting_AuditTrail`.`FK_EventType_SK`\n" +
+                "	LEFT JOIN `reporting database`.`dim_eventlocation` AS `reporting_EventLocation` ON `reporting_EventLocation`.`location_SK` = `reporting_AuditTrail`.`FK_EventLocation_SK`;");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

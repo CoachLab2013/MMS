@@ -24,7 +24,7 @@ public final class Report_BodiesByOrganisation extends Template_Report {
         
         source = "./build/classes/jcse/coachlab2013/mms/reports/bodiesbyorganisation/Report_BodiesByOrganisation.jrxml";
         
-        parameters.put("ReportTitle", ""); 
+        parameters.put("ReportTitle", "Bodies by Organisation Report"); 
                 
         reportData = new DatabaseAccessor_BodiesByOrganisation(connection).read();
     }

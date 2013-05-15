@@ -22,7 +22,7 @@ public final class Report_UnidentifiedBodiesStatistics extends Template_Report {
         
         source = "./build/classes/jcse/coachlab2013/mms/reports/Statistics_UnidentifiedBodies/Report_UnidentifiedBodiesStatistics.jrxml";
         
-        parameters.put("ReportTitle", ""); 
+        parameters.put("ReportTitle", "Unidentified Bodies Statistics"); 
                 
         reportData = new DatabaseAccessor_UnidentifiedBodiesStatistics(connection).read();
     }
