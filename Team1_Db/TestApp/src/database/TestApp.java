@@ -1,7 +1,10 @@
 package database;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -9,7 +12,7 @@ import java.util.ArrayList;
  */
 public class TestApp {
 
-    public static DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "hello");
+    public static DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "password123");
 
     /**
      * @param args the command line arguments
@@ -160,9 +163,15 @@ public class TestApp {
 
         //TESTING INCIDENT
         //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
+<<<<<<< HEAD
         Incident inci = new  Incident("002201301","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",3,true,"2013-04-06");
         IncidentDb inciDb = new IncidentDb(inci,dbDetail);
        //inciDb.init();
+=======
+        Incident inci = new  Incident("120130407","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",4,true);
+        IncidentDb inciDb = new IncidentDb(inci,dbDetail);
+        inciDb.init();
+>>>>>>> origin/master
 
         //adding an incident
         //System.out.println(inciDb.add());
@@ -178,13 +187,16 @@ public class TestApp {
         //System.out.println(inciDb.edit());
         //delete incidents
 
-
         //counting open incidents
         //System.out.println(inciDb.countOpenIncidents("20130424"));
+        
+        //increase body count
+        System.out.println(inciDb.IncreaseBodyCount());
+        
         //END OF INCIDENT STUFF
 
         //TEST INCIDENT MESSAGE
-        /*IncidentMessage msg = new IncidentMessage("2013-04-17","11:29:00","Stabbed","John",false,false);
+         /*IncidentMessage msg = new IncidentMessage("2013-04-17","11:29:00","Stabbed","John",false,false);
          IncidentMessageDb db = new IncidentMessageDb(msg, dbDetail);
          db.init();
          //System.out.println(db.add());
@@ -197,8 +209,12 @@ public class TestApp {
         
         //BODYFILE
         //add a body details
+<<<<<<< HEAD
         
         BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
+=======
+        /*BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
+>>>>>>> origin/master
         BodyDb bDb = new BodyDb(dbDetail,body);
         bDb.init();
         //System.out.println(bDb.);
@@ -267,9 +283,15 @@ public class TestApp {
             //System.out.println(flist.get(i).getDateFileOpened() + " " +  flist.get(i).isBodyIdentified());
         //}
         //editing a body file to update its values
+<<<<<<< HEAD
         //db = new BodyFileDb(dbDetail, new BodyFile("2013-05-14", false, false, false, false,"2013-05-14", "099888592"));
         //db.init();
         //System.out.println(db.edit());
+=======
+        db = new BodyFileDb(dbDetail, new BodyFile("2013-05-14", false, false, false, false,"2013-05-14", "099888592"));
+        db.init();
+        System.out.println(db.edit());*/
+>>>>>>> origin/master
         //ENDBODYFILE
         
         
