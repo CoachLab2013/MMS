@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportTemplateLandscape" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
 	<property name="ireport.zoom" value="1.7715610000000017"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
-	<field name="analysisType" class="java.lang.String"/>
-	<field name="averageTurnAroundTime" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -14,7 +12,7 @@
 		<band height="141" splitType="Stretch">
 			<image>
 				<reportElement uuid="e28ca0ab-e448-4ccc-8b97-9102dbd6a9cf" x="0" y="0" width="400" height="90"/>
-				<imageExpression><![CDATA["Logo.png"]]></imageExpression>
+				<imageExpression><![CDATA[".\\Logo.png"]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement uuid="b17de317-b63a-4080-aaef-d4bc34a974cc" x="400" y="0" width="362" height="90"/>
@@ -52,17 +50,26 @@
 			</line>
 		</band>
 	</pageHeader>
+	<columnHeader>
+		<band height="77" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement uuid="37e39b56-f39b-433a-96a5-8ec3c2b94da5" x="613" y="0" width="98" height="54"/>
+				<reportElement key="textFieldCurrentPage" uuid="37e39b56-f39b-433a-96a5-8ec3c2b94da5" x="613" y="0" width="98" height="54"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="bc6ba8df-3f2a-40c3-91cd-1242148b3877" x="711" y="0" width="51" height="54"/>
+				<reportElement key="textFieldNumberOfPages" uuid="bc6ba8df-3f2a-40c3-91cd-1242148b3877" x="711" y="0" width="51" height="54"/>
 				<textElement verticalAlignment="Bottom">
 					<font size="12"/>
 				</textElement>
@@ -74,26 +81,6 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="226" splitType="Stretch">
-			<barChart>
-				<chart>
-					<reportElement uuid="c986b64d-e34e-4816-8485-5778fb2361bf" x="0" y="0" width="762" height="226"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend/>
-				</chart>
-				<categoryDataset>
-					<categorySeries>
-						<seriesExpression><![CDATA["Average Turn Around Time"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{analysisType}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{averageTurnAroundTime}]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<barPlot>
-					<plot/>
-					<itemLabel/>
-				</barPlot>
-			</barChart>
-		</band>
+		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>
