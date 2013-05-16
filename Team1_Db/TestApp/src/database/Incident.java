@@ -68,6 +68,7 @@ this. specialCircumstances = specialCircumstances;
 this.reason = reason;
 this.bodyCount = bodyCount;
 this.status = status;
+this.dateIncidentClosed = null;
 }
 public Incident(String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances,String reason,int bodyCount,boolean status,String dateIncidentClosed)
 {
