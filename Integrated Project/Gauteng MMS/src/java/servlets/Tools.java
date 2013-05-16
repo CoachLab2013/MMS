@@ -88,7 +88,8 @@ public class Tools {
         String datenum = timestamp2.split(" ")[0];
         try{
             int incidentnum = incidentdb.countOpenIncidents(datenum)+1;
-            String lognumber = Integer.toString(incidentnum) + datenum;
+            String formated_num = String.format("%03d", incidentnum); 
+            String lognumber =  formated_num+ datenum;
             return lognumber;
         }
         catch(Exception e){
@@ -238,5 +239,24 @@ public class Tools {
         }
     }
     // end makeOPenIncidentsTable
+    
+    public String getDateTime(){
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        return timestamp;
+    }
+    //end getDateTime
+    
+    public Incident getIncidentDetail(String lognumber){
+       IncidentDb idb = new IncidentDb(dbdetail);
+       idb.init();
+       try{
+           Incident incident = idb.findIncident(lognumber);
+           return incident;
+       }
+       catch(Exception e){
+           return null;
+       }
+    }
+    //
 }
 //end Tools class

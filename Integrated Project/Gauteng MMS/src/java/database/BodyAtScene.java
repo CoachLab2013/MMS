@@ -19,7 +19,6 @@ public class BodyAtScene /*extends Body*/
     private String placeOfDeath;
     private String dateTimeBodyFound;
     private BodyAtMortuary body;
-
     //CONSTRUCTORS
     public BodyAtScene(BodyAtMortuary body) {
         this.body = body;
@@ -35,7 +34,6 @@ public class BodyAtScene /*extends Body*/
         this.dateTimeBodyFound = dateTimeBodyFound;
         this.body = body;
     }
-
     /**
      * @return the sceneIncidentOccured
      */

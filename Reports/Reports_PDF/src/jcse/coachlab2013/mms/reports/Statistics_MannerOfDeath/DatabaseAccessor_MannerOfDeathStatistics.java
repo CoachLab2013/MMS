@@ -23,7 +23,12 @@ public class DatabaseAccessor_MannerOfDeathStatistics extends Template_DatabaseA
         
         try {
             
-            preparedStatement = connection.prepareStatement("");            
+            preparedStatement = connection.prepareStatement("SELECT `dim_mannerofdeath`.`deathType` AS `typeOfDeath`, sum(countBody) AS `numberOfDeaths`\n" +
+                "FROM `reporting database`.`fact_body`\n" +
+                "\n" +
+                "LEFT JOIN `reporting database`.`dim_mannerofdeath` ON `dim_mannerofdeath`.`mannerofdeath_SK` = `reporting database`.`fact_body`.`FK_MannerOfDeath_SK`\n" +
+                "\n" +
+                "GROUP BY `dim_mannerofdeath`.`deathType`;");
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

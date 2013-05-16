@@ -5,9 +5,13 @@
 package jcse.coachlab2013.mms.reports.OutstandingResults;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.ExcelGenerator;
 import jcse.coachlab2013.mms.reports.Template_Report;
+import jcse.coachlab2013.mms.reports.UnidentifiedBodies.Report_UnidentifiedBodies;
 
 /**
  *
@@ -30,17 +34,15 @@ public final class Report_OutstandingResults extends Template_Report {
     
     @Override
     public void createReport() {
-        
         ArrayList<String> headings = new ArrayList<>();
-        headings.add("a");
-        headings.add("b");
-        headings.add("c");
-        headings.add("d");
-        headings.add("e");
-        headings.add("f");
-        headings.add("g");
-          
-        ExcelGenerator excel = new ExcelGenerator("Testing!!!", headings, reportData);
+        try {
+            for (int i = 1; i <= reportData.getMetaData().getColumnCount(); i++) {
+                headings.add(reportData.getMetaData().getColumnLabel(i));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Report_OutstandingResults.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ExcelGenerator excel = new ExcelGenerator("Outstanding Results Report", headings, reportData);
         excel.printReport(destination);
         
     }    
