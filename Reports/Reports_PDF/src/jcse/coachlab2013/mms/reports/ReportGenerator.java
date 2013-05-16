@@ -84,7 +84,7 @@ public class ReportGenerator {
     public void savePDF (String fileDestination) {
         
         try {     
-            JasperExportManager.exportReportToPdfFile(mainPrint, fileDestination);
+            JasperExportManager.exportReportToPdfFile(mainPrint, fileDestination + ".pdf");
             
         } catch (JRException ex) {            
             Logger.getLogger(ReportGenerator.class.getName()).log(Level.SEVERE, null, ex);            

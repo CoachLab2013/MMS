@@ -11,7 +11,7 @@ import jcse.coachlab2013.mms.reports.Template_DatabaseAccessor;
  *
  * @author James Mashiyane Coachlab 2013
  */
-public class DatabaseAccessor_SpecificBody extends Template_DatabaseAccessor{
+public class DatabaseAccessor_SpecificBody extends Template_DatabaseAccessor {
                 
     public DatabaseAccessor_SpecificBody(Connection connection){
         super(connection);
@@ -28,10 +28,8 @@ public class DatabaseAccessor_SpecificBody extends Template_DatabaseAccessor{
             
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseAccessor_SpecificBody.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            
-            return tempSet;
-            
+        } finally {            
+            return tempSet;            
         }
     }     
 }

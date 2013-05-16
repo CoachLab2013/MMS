@@ -22,7 +22,7 @@ public final class Report_MannerOfDeathStatistics extends Template_Report {
         
         source = "./build/classes/jcse/coachlab2013/mms/reports/Statistics_MannerOfDeath/Report_MannerOfDeathStatistics.jrxml";
         
-        parameters.put("ReportTitle", ""); 
+        parameters.put("ReportTitle", "Manner of Death Statistics Report"); 
                 
         reportData = new DatabaseAccessor_MannerOfDeathStatistics(connection).read();
     }
