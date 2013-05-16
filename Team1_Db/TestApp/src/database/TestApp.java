@@ -299,6 +299,27 @@ public class TestApp {
         //System.out.println(postDb.edit());
         //System.out.println(postDb.getPostMortem().getLabRecord().getNumberOfSamples());
         //System.out.println(postDb.getPostMortem().getDHA1663number());
+        
+        
+        //ForensicSample fsample = new forensicSample("1234","1","reas","sealTy","brolN","tyAna", "insti","speacialIn",true,"1" ,"2010-10-07","200-01-02");
+        //ForensicSampleDb fdb = new forensicSampleDb(fsample, dbdtail);
+        //fdb.init();
+         
+       //System.out.println(fdb.edit());
+       /*
+        try {
+          
+            ArrayList<forensicSample> list = fdb.KinList();
+            for (int i =0; i <list.size(); i++)
+            {
+            System.out.println(list.get(i).getBrokenSealNumber()+ " " +list.get(i).getReason()+" "+list.get(i).getTypeOfAnalysis()+" "+list.get(i).getLabNumber());
+            }
+                
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+           // Logger.getLogger(testKinMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        * */
         //ENDPOST MORTEM
     }
 }
