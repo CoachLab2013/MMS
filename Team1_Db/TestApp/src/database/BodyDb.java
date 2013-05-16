@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class BodyDb extends DatabaseConnector{
     private Body body;
-    private DbDetail dbDetail;
+    
     //CONSTRUCTORS
     public BodyDb(DbDetail dbDetail){
         super(dbDetail);
@@ -208,6 +208,84 @@ public class BodyDb extends DatabaseConnector{
         return "successful";
         
     }
+    public String readBodyAddress()
+    {
+        try
+        {
+            statement.executeQuery("SELECT * FROM bodyaddress WHERE Body_idDeathRegisterNumber='" + body.getDeathRegisterNumber()+"';");
+            ResultSet rSet = statement.getResultSet();
+            rSet.next();
+            BodyAddress address = new BodyAddress();
+            address.setStreet(rSet.getString("street"));
+            address.setSuburb(rSet.getString("suburb"));
+            address.setCity(rSet.getString("city"));
+            address.setPostCode(rSet.getString("postalCode"));
+            address.setProvince(rSet.getString("province"));
+            address.setRegion(rSet.getString("region"));
+            address.setMagisterialDistrict(rSet.getString("magisterialDistrict"));
+            address.setBuilding(rSet.getString("building"));
+            body.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
+            body.setBodyAddress(address);
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "successful";
+        
+    }
+    public String readBodyAtMortuary()
+    {
+        try
+        {
+            statement.executeQuery("SELECT * FROM bodyAtMortuary WHERE Body_idDeathRegisterNumber='" + body.getDeathRegisterNumber()+"';");
+            ResultSet rSet = statement.getResultSet();
+            rSet.next();
+            BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
+            bodyAtMort.setBodyHandOverFromPerNum(rSet.getString("bodyHandOverFromPerNumber"));
+            bodyAtMort.setBodyReceivedFromPerNum(rSet.getString("bodyReceivedFromPerNumber"));
+            bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
+            body = bodyAtMort;
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "successful";
+    }
+    private BodyAtMortuary getBodyAtMortuary() throws SQLException
+    {
+        init();
+        statement.executeQuery("SELECT * FROM AtMortuary WHERE Body_idDeathRegisterNumber='" + body.getDeathRegisterNumber()+"';");
+        ResultSet rSet = statement.getResultSet();
+        rSet.next();
+        BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
+        bodyAtMort.setBodyHandOverFromPerNum(rSet.getString("bodyHandOverFromPerNumber"));
+        bodyAtMort.setBodyReceivedFromPerNum(rSet.getString("bodyReceivedFromPerNumber"));
+        bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
+        statement.close();
+        connection.close();
+        return bodyAtMort;
+    }
+    private BodyAddress getBodyAddress() throws SQLException
+    {
+        init();
+        statement.executeQuery("SELECT * FROM bodyAddress WHERE Body_idDeathRegisterNumber='" + body.getDeathRegisterNumber()+"';");
+        ResultSet rSet = statement.getResultSet();
+        rSet.next();
+        BodyAddress address = new BodyAddress();
+        address.setStreet(rSet.getString("street"));
+        address.setSuburb(rSet.getString("suburb"));
+        address.setCity(rSet.getString("city"));
+        address.setPostCode(rSet.getString("postalCode"));
+        address.setProvince(rSet.getString("province"));
+        address.setRegion(rSet.getString("region"));
+        address.setMagisterialDistrict(rSet.getString("magisterialDistrict"));
+        address.setBuilding(rSet.getString("building"));
+        statement.close();
+        connection.close();
+        return address;
+    }
     public ArrayList<BodyAtMortuary> getBodies() throws SQLException
     {
         ArrayList list = new ArrayList<BodyAtMortuary>();
@@ -242,6 +320,11 @@ public class BodyDb extends DatabaseConnector{
                     bodyAtMort.setRace(resultSet.getString("race"));
                     bodyAtMort.setSurnameOfDeceased(resultSet.getString("surnameOfDeceased"));
                     bodyAtMort.setBodyReleaseTo(resultSet.getString("bodyReleasedTo"));
+                    bodyAtMort.setBodyAddress(getBodyAddress());
+                    BodyAtMortuary mort = getBodyAtMortuary();
+                    mort.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
+                    bodyAtMort.setBodyHandOverFromPerNum(mort.getBodyHandOverFromPerNum());
+                    bodyAtMort.setBodyReceivedFromPerNum(mort.getBodyReceivedFromPerNum());
                     IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
                     incidentDb.init();
                     incidentDb.read();
