@@ -5,8 +5,12 @@
 package jcse.coachlab2013.mms.reports.UnidentifiedBodies;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.ExcelGenerator;
+import jcse.coachlab2013.mms.reports.IncidentHousekeeping.Report_IncidentHouseKeeping;
 import jcse.coachlab2013.mms.reports.Template_Report;
 
 /**
@@ -30,17 +34,15 @@ public final class Report_UnidentifiedBodies extends Template_Report {
     
     @Override
     public void createReport() {
-        
         ArrayList<String> headings = new ArrayList<>();
-        headings.add("a");
-        headings.add("b");
-        headings.add("c");
-        headings.add("d");
-        headings.add("e");
-        headings.add("f");
-        headings.add("g");
-          
-        ExcelGenerator excel = new ExcelGenerator("Testing!!!", headings, reportData);
+        try {
+            for (int i = 1; i <= reportData.getMetaData().getColumnCount(); i++) {
+                headings.add(reportData.getMetaData().getColumnLabel(i));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Report_UnidentifiedBodies.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ExcelGenerator excel = new ExcelGenerator("Unidentified Bodies Report", headings, reportData);
         excel.printReport(destination);
         
     }    

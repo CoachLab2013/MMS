@@ -245,6 +245,7 @@ public class ExcelGenerator {
         style.setBorderTop(CellStyle.BORDER_MEDIUM);
         style.setBorderRight(CellStyle.BORDER_THIN);
         style.setBorderLeft(CellStyle.BORDER_THIN);
+        style.setWrapText(true);
         style.setFont(font);
         
         for (int j = 0; j < columns; j++) {
