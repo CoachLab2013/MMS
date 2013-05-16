@@ -55,7 +55,7 @@
                         <tr>
                         <td> Province:         </td><td>
                             <% 
-                        out.println(t.makeReferenceList("province","type"));
+                        //out.println(t.makeReferenceList("province","type"));
                             %>
                             
                         </td>
@@ -64,7 +64,7 @@
                         <tr>
                     <td>  Region:</td><td>
                         <% 
-                            out.println(t.makeReferenceList("region","type"));
+                           // out.println(t.makeReferenceList("region","type"));
                         %>
                     </td>
                         </tr>

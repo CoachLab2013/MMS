@@ -22,6 +22,17 @@ $(document).ready(function(){
         }
     });
     
+    if($("#go_to_editincident").val()=="true"){
+         //set focus on Open Incidents tab 
+            $("#OpenIncidentsTab").removeClass("active");
+            $("#EditIncidentTab").addClass("active");
+            
+            $("#OpenIncidents").removeClass("tab-pane active");
+            $("#OpenIncidents").addClass("tab-pane");
+            $("#EditIncident").removeClass("tab-pane");
+            $("#EditIncident").addClass("tab-pane active");
+    }
+    
 
 });
 

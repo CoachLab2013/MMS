@@ -3,7 +3,6 @@
     Created on : 18 Apr 2013, 10:51:49 AM
     Author     : Administrator
 --%>
-
 <%@page import="servlets.Tools"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
@@ -56,8 +55,8 @@
                     </select>
  
                     <% 
-                           out.print(t.makeMonth("detailmonth")+" ");
-                           out.print(t.makeDay("detailday"));
+                           out.print(t.makeMonth("detailmonth",-1)+" ");
+                           out.print(t.makeDay("detailday",-1));
                     %>
                 </td>
              </tr>
@@ -83,9 +82,11 @@
                     </select>
                 </td>        
             </tr>
+            
             <tr>
                 <td> Place where body was found:</td> <td><textarea cols="50" rows="3" name="placefound" id="placefound"> </textarea></td>
             </tr>
+            
             <tr>
                 <td> Circumstances of death:</td> <td><textarea cols="50" rows="3" name="circumstancesofdeath" id="circumstancesofdeath"> </textarea></td>
             </tr>
@@ -93,14 +94,12 @@
                 <td> Special Circumstances:</td> 
                 <td>
                     <% 
-                           out.println(t.makeReferenceList("specialcircumstance","type"));
+                          out.println(t.makeReferenceList("specialcircumstance","type",""));
                     %>
                 </td>
             </tr>
             <tr>
-                <td>
-                <br> <br>  <td>    <input type="submit" value="Continue" id="incidentcontinue" /> <input type="reset" value="Cancel" id="incidentcancel" /><td></td>
-                </td>  
+                <br> <br>  <td>    <input type="submit" value="Continue" id="incidentcontinue" /> <input type="reset" value="Cancel" id="incidentcancel" /></td>
             </tr>
         </table>
         </form>

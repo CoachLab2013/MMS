@@ -53,6 +53,7 @@ public class GetIncidentServlet extends HttpServlet {
         sess.setAttribute("number_of_bodies",incident.getNumberOfBodies());
         sess.setAttribute("bodies_recieved",incident.getBodyCount());
         sess.setAttribute("go_to_editincident", true);
+        response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
