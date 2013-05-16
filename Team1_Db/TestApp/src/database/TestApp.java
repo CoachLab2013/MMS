@@ -200,8 +200,11 @@ public class TestApp {
         
         BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
         BodyDb bDb = new BodyDb(dbDetail,body);
-        //bDb.init();
-        //System.out.println(bDb.add());
+        bDb.init();
+        //System.out.println(bDb.);
+        ArrayList<BodyAtMortuary> list = bDb.getBodies();
+        System.out.println(list.get(0).getDeathRegisterNumber());;
+        
         //editing
         //System.out.println(bDb.editBodyAtMotuary());
         //System.out.println(bDb.editBodyAddresss());
@@ -217,7 +220,7 @@ public class TestApp {
         BodyAtScene bodyAtScene = new BodyAtScene("jhb", "2013-04-23", true, "2013-04-30", "2013-04-30", "ss", "dd","2013-04-23", (BodyAtMortuary)bDb.getBody());
         BodyAtSceneDb atDb = new BodyAtSceneDb(dbDetail, bodyAtScene);
         //atDb.init();
-        //System.out.println(atDb.edit());
+        //System.out.println(atDb.);
         
         //System.out.println(atDb.read());
         //System.out.println(atDb.getBodyAtScene().getPlaceOfDeath());
