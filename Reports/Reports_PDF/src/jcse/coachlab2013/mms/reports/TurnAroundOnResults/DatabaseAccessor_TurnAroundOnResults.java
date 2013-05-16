@@ -23,7 +23,12 @@ public class DatabaseAccessor_TurnAroundOnResults extends Template_DatabaseAcces
         
         try {
             
-            preparedStatement = connection.prepareStatement("");            
+            preparedStatement = connection.prepareStatement("select dim_sample.analysisType as analysisType, \n" +
+"fact_sample.durationOutstanding as averageTurnAroundTime\n" +
+"from\n" +
+"`reporting database`.dim_sample left join\n" +
+"`reporting database`.fact_sample on \n" +
+"FK_Sample_SK=sample_SK");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

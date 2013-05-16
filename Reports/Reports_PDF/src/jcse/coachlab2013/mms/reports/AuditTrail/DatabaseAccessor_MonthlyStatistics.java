@@ -23,7 +23,15 @@ public class DatabaseAccessor_MonthlyStatistics extends Template_DatabaseAccesso
         
         try {
             
-            preparedStatement = connection.prepareStatement("");            
+            preparedStatement = connection.prepareStatement("SELECT DAY(`reporting_EventDate`.`datestamp`) AS `date`,\n" +
+                "SUM(`reporting_AuditTrail`.`countEvent`) AS `numberOfEvents`,\n" +
+                "SUM(`reporting_AuditTrail`.`countWarning`) AS `numberOfWarnings`,\n" +
+                "SUM(`reporting_AuditTrail`.`countError`) AS `numberOfErrors`\n" +
+                "\n" +
+                "FROM `reporting database`.`fact_audittrail`	AS `reporting_AuditTrail`\n" +
+                "	LEFT JOIN `reporting database`.`dim_date` AS `reporting_EventDate` ON `reporting_EventDate`.`date_SK` = `reporting_AuditTrail`.`FK_DateOccured_SK`\n" +
+                "		WHERE `reporting_EventDate`.`CalenderMonthKey` = MONTH(NOW())\n" +
+                "		GROUP BY DAY(`reporting_EventDate`.`datestamp`);");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

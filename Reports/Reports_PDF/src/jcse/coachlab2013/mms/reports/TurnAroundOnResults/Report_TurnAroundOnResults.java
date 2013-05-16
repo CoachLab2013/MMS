@@ -22,7 +22,7 @@ public final class Report_TurnAroundOnResults extends Template_Report {
         
         source = "./build/classes/jcse/coachlab2013/mms/reports/turnaroundonresults/Report_TurnAroundOnResults.jrxml";
         
-        parameters.put("ReportTitle", ""); 
+        parameters.put("ReportTitle", "Lab Results Turn Around Time"); 
                 
         reportData = new DatabaseAccessor_TurnAroundOnResults(connection).read();
     }

@@ -27,7 +27,14 @@ public class DatabaseAccessor_MannerOfDeath extends Template_DatabaseAccessor{
         
         try {
             
-            preparedStatement = connection.prepareStatement("");            
+            preparedStatement = connection.prepareStatement("select fact_body.countBody as numberOfDeaths, \n" +
+"dim_gender.genderDescription as gender, \n" +
+"dim_age.ageBand as bodyAge\n" +
+"from `reporting database`.fact_body\n" +
+"left join `reporting database`.dim_gender \n" +
+"on fact_body.FK_Gender_SK = dim_gender.gender_SK\n" +
+"left join `reporting database`.dim_age \n" +
+"on fact_body.FK_Age_SK = dim_age.age_SK");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

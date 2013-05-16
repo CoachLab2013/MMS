@@ -26,7 +26,7 @@ public final class Report_AuditTrail extends Template_Report {
         sourceArray.add("./build/classes/jcse/coachlab2013/mms/reports/audittrail/Report_EmployeeStatistics.jrxml");
         sourceArray.add("./build/classes/jcse/coachlab2013/mms/reports/audittrail/Report_LocationStatistics.jrxml");
        
-        parameters.put("ReportTitle", ""); 
+        parameters.put("ReportTitle", "Audit Trail - Statistics Report"); 
         
         parameterArray = new ArrayList<>();
         parameterArray.add(parameters);
@@ -34,9 +34,9 @@ public final class Report_AuditTrail extends Template_Report {
         parameterArray.add(parameters);
         
         reportDataArray = new ArrayList<>();
+        reportDataArray.add(new DatabaseAccessor_MonthlyStatistics(connection).read());
         reportDataArray.add(new DatabaseAccessor_EmployeeStatistics(connection).read());
         reportDataArray.add(new DatabaseAccessor_LocationStatistics(connection).read());
-        reportDataArray.add(new DatabaseAccessor_MonthlyStatistics(connection).read());
     }
     
     @Override
