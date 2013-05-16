@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /MMS_Project_DatabaseClasses/build/
 /MMS_Project_DatabaseClasses/dist/
 =======
@@ -36,3 +37,6 @@
 /Reports/ExcelReports/Report_CaseReport/build/
 /Reports/ExcelReports/PSP/nbproject/private/
 /Reports/Reports_Excel/dist/
+=======
+/Team1_Db/TestApp/dist/
+>>>>>>> origin/HEAD
