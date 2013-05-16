@@ -8,7 +8,9 @@
 	<parameter name="TotalBins" class="java.lang.Integer"/>
 	<parameter name="avgIntake" class="java.lang.Double"/>
 	<parameter name="avgOutput" class="java.lang.Double"/>
-	<parameter name="timeTillFull" class="java.lang.Integer"/>
+	<parameter name="timeTillFull" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
 	<field name="binsUsed" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -88,9 +90,9 @@
 				<valueDataset>
 					<valueExpression><![CDATA[$F{binsUsed}]]></valueExpression>
 				</valueDataset>
-				<meterPlot shape="pie" units="Body Bins Utilised" tickInterval="10.0" meterColor="#FFFFFF" needleColor="#FFFFFF" tickColor="#404040">
+				<meterPlot shape="pie" units="Body Bins Utilised" tickInterval="10.0" meterColor="#999999" needleColor="#000000" tickColor="#404040">
 					<plot/>
-					<valueDisplay color="#000000" mask=""/>
+					<valueDisplay color="#000000"/>
 					<dataRange>
 						<lowExpression><![CDATA[new Integer (00)]]></lowExpression>
 						<highExpression><![CDATA[$P{TotalBins}]]></highExpression>
@@ -158,12 +160,12 @@
 					</textElement>
 					<text><![CDATA[Estimated Time Till Full:]]></text>
 				</staticText>
-				<textField>
+				<textField evaluationTime="Report">
 					<reportElement uuid="ab6e14cc-286c-4cb1-a418-96f4d4ac2c5b" x="125" y="0" width="100" height="16"/>
 					<textElement>
 						<font isItalic="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{timeTillFull}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($P{TotalBins} - $F{binsUsed})/($P{avgIntake} - $P{avgOutput})]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

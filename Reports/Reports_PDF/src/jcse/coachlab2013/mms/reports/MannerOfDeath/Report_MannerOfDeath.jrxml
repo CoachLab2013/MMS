@@ -5,6 +5,7 @@
 	<property name="ireport.y" value="0"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
+	<field name="gender" class="java.lang.String"/>
 	<field name="bodyAge" class="java.lang.String"/>
 	<field name="numberOfDeaths" class="java.lang.Integer"/>
 	<background>
@@ -14,7 +15,7 @@
 		<band height="141" splitType="Stretch">
 			<image>
 				<reportElement uuid="e28ca0ab-e448-4ccc-8b97-9102dbd6a9cf" x="0" y="0" width="400" height="90"/>
-				<imageExpression><![CDATA[".\\Logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["Logo.png"]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement uuid="b17de317-b63a-4080-aaef-d4bc34a974cc" x="400" y="0" width="362" height="90"/>
@@ -87,12 +88,7 @@
 				</chart>
 				<categoryDataset>
 					<categorySeries>
-						<seriesExpression><![CDATA["Male"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{bodyAge}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{numberOfDeaths}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Female"]]></seriesExpression>
+						<seriesExpression><![CDATA[$F{gender}]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{bodyAge}]]></categoryExpression>
 						<valueExpression><![CDATA[$F{numberOfDeaths}]]></valueExpression>
 					</categorySeries>

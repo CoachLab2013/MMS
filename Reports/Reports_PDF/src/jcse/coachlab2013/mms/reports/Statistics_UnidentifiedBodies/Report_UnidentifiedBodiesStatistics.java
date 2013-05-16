@@ -1,8 +1,12 @@
 package jcse.coachlab2013.mms.reports.Statistics_UnidentifiedBodies;
 
+import java.io.IOException;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.ReportGenerator;
 import jcse.coachlab2013.mms.reports.Template_Report;
+import jcse.coachlab2013.mms.reports.BodiesByOrganisation.Report_BodiesByOrganisation;
 
 /**
  *
@@ -20,8 +24,11 @@ public final class Report_UnidentifiedBodiesStatistics extends Template_Report {
     @Override
     protected void formatData() {
         
-        source = "./build/classes/jcse/coachlab2013/mms/reports/Statistics_UnidentifiedBodies/Report_UnidentifiedBodiesStatistics.jrxml";
-        
+        try {
+            source = getClass().getResource("/jcse/coachlab2013/mms/reports/Statistics_UnidentifiedBodies/Report_UnidentifiedBodiesStatistics.jrxml").openStream();
+        } catch (IOException ex) {
+            Logger.getLogger(Report_BodiesByOrganisation.class.getName()).log(Level.SEVERE, null, ex);
+        }
         parameters.put("ReportTitle", "Unidentified Bodies Statistics"); 
                 
         reportData = new DatabaseAccessor_UnidentifiedBodiesStatistics(connection).read();

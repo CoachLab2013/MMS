@@ -1,7 +1,9 @@
-package jcse.coachlab2013.mms.reports.bodiesbyorganisation;
+package jcse.coachlab2013.mms.reports.BodiesByOrganisation;
 
+import java.io.IOException;
 import java.sql.Connection;
-import jcse.coachlab2013.mms.reports.BodiesByOrganisation.DatabaseAccessor_BodiesByOrganisation;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.ReportGenerator;
 import jcse.coachlab2013.mms.reports.Template_Report;
 
@@ -21,8 +23,11 @@ public final class Report_BodiesByOrganisation extends Template_Report {
     
     @Override
     protected void formatData() {
-        
-        source = "./build/classes/jcse/coachlab2013/mms/reports/bodiesbyorganisation/Report_BodiesByOrganisation.jrxml";
+        try {
+            source = getClass().getResource("/jcse/coachlab2013/mms/reports/BodiesByOrganisation/Report_BodiesByOrganisation.jrxml").openStream();
+        } catch (IOException ex) {
+            Logger.getLogger(Report_BodiesByOrganisation.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         parameters.put("ReportTitle", "Bodies by Organisation Report"); 
                 

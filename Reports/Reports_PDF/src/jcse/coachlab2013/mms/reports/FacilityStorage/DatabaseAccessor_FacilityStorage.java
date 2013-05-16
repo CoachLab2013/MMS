@@ -1,4 +1,4 @@
-package jcse.coachlab2013.mms.reports.facilitystorage;
+package jcse.coachlab2013.mms.reports.FacilityStorage;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,7 +23,10 @@ public class DatabaseAccessor_FacilityStorage extends Template_DatabaseAccessor{
         
         try {
             
-            preparedStatement = connection.prepareStatement("SELECT 145 AS `binsUsed`;");            
+            preparedStatement = connection.prepareStatement("SELECT \n" +
+                "	IFNULL(SUM(`reporting_Body`.`countBody`), 0) AS `binsUsed` \n" +
+                "		FROM `reporting database`.`fact_body` AS `reporting_Body`\n" +
+                "			WHERE FK_DateReleased_SK = '19000101';");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

@@ -1,5 +1,6 @@
 package jcse.coachlab2013.mms.reports;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -12,8 +13,8 @@ import java.util.Map;
  */
 public abstract class Template_Report {
     
-    protected String source;
-    protected ArrayList<String> sourceArray;
+    protected InputStream source;
+    protected ArrayList<InputStream> sourceArray;
     
     protected String destination;
     protected Connection connection;
