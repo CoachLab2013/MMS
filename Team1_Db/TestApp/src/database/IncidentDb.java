@@ -11,7 +11,10 @@ package database;
 //happness
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,6 +61,9 @@ public class IncidentDb extends DatabaseConnector
         }else if(newBodyCount == incident.getNumberOfBodies() ){
             incident.setBodyCount(newBodyCount);
             incident.setStatus(false);
+            DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date today = new Date();
+            incident.setDateIncidentClosed(databaseDateFormat.format(today));
             return edit();
         }else{
             return "WE HAVE RECIEVED ALL THE BODIES FOR THIS INCIDENT";
@@ -204,10 +210,17 @@ public class IncidentDb extends DatabaseConnector
     public String edit()//WILL NEED TO PASS PRIMARY KEY FOR WHERE CLAUSE unless we assume we cannot edit primary
     {
         try 
-        {                                                                                                                                                                                                                                                                                                                                                                                         
-            statement.executeUpdate("UPDATE Incident SET referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"', status="+ incident.isOpen() +" WHERE incidentLogNumber= '" + incident.getIncidentLogNumber() + "';" );
-            statement.close();
-            connection.close();
+        {   
+            if (incident.getDateIncidentClosed() == null){
+                statement.executeUpdate("UPDATE Incident SET referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"', status="+ incident.isOpen() +" WHERE incidentLogNumber= '" + incident.getIncidentLogNumber() + "';" );
+                statement.close();
+                connection.close();
+            }else{
+                statement.executeUpdate("UPDATE Incident SET referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"', status="+ incident.isOpen() +", dateIncidentClosed= '" + incident.getDateIncidentClosed() + "' WHERE incidentLogNumber= '" + incident.getIncidentLogNumber() + "';" );
+                statement.close();
+                connection.close();
+            }
+            
         } 
         catch (SQLException ex) 
         {
