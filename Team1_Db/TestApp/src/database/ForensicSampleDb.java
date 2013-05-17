@@ -67,7 +67,7 @@ public class ForensicSampleDb extends DatabaseConnector {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public ArrayList<ForensicSample> KinList() throws SQLException {
+    public ArrayList<ForensicSample> forensicSampleList() throws SQLException {
         ArrayList<ForensicSample> list = new ArrayList();
         try {
             statement.executeQuery("SELECT sealNumber,deathRegisterNumber, reason,sealType,brokenSealNumber,typeOfAnalysis,institution,specialInstructions,received ,labNumber ,dateSent ,dateReceived FROM forensicsample;");
