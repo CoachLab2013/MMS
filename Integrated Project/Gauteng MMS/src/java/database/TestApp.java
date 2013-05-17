@@ -1,7 +1,10 @@
 package database;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -14,7 +17,7 @@ public class TestApp {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, Exception {
         //TESTING EMPLOYEE STUFF
         //Employee emp = new Employee("12388678","1214", "john","smith", "manager", 1, "200935415@student.uj.ac.za",true);
         //DatabaseConnector empDb = new EmployeeDb(emp,dbDetail);
@@ -160,9 +163,11 @@ public class TestApp {
 
         //TESTING INCIDENT
         //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
-        //Incident inci = new  Incident("002201301","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",3,true,"2013-04-06");
-        //IncidentDb inciDb = new IncidentDb(inci,dbDetail);
-       // inciDb.init();
+
+        Incident inci = new  Incident("002201301","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",0,true,"2013-04-06");
+        IncidentDb inciDb = new IncidentDb(inci,dbDetail);
+        inciDb.init();
+
 
         //adding an incident
         //System.out.println(inciDb.add());
@@ -178,13 +183,16 @@ public class TestApp {
         //System.out.println(inciDb.edit());
         //delete incidents
 
-
         //counting open incidents
         //System.out.println(inciDb.countOpenIncidents("20130424"));
+        
+        //increase body count
+        System.out.println(inciDb.IncreaseBodyCount());
+        
         //END OF INCIDENT STUFF
 
         //TEST INCIDENT MESSAGE
-        /*IncidentMessage msg = new IncidentMessage("2013-04-17","11:29:00","Stabbed","John",false,false);
+         /*IncidentMessage msg = new IncidentMessage("2013-04-17","11:29:00","Stabbed","John",false,false);
          IncidentMessageDb db = new IncidentMessageDb(msg, dbDetail);
          db.init();
          //System.out.println(db.add());
@@ -197,10 +205,18 @@ public class TestApp {
         
         //BODYFILE
         //add a body details
+
+        
         BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
+
+        /*BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
+>>>>>>> origin/master
         BodyDb bDb = new BodyDb(dbDetail,body);
         bDb.init();
-        //System.out.println(bDb.add()));
+        //System.out.println(bDb.);
+        ArrayList<BodyAtMortuary> list = bDb.getBodies();
+        System.out.println(list.get(0).getDeathRegisterNumber());;
+        
         //editing
         //System.out.println(bDb.editBodyAtMotuary());
         //System.out.println(bDb.editBodyAddresss());
@@ -216,12 +232,12 @@ public class TestApp {
         BodyAtScene bodyAtScene = new BodyAtScene("jhb", "2013-04-23", true, "2013-04-30", "2013-04-30", "ss", "dd","2013-04-23", (BodyAtMortuary)bDb.getBody());
         BodyAtSceneDb atDb = new BodyAtSceneDb(dbDetail, bodyAtScene);
         //atDb.init();
-        //System.out.println(atDb.edit());
+        //System.out.println(atDb.);
         
         //System.out.println(atDb.read());
         //System.out.println(atDb.getBodyAtScene().getPlaceOfDeath());
-        atDb.init();
-        System.out.println(atDb.editMember(new Member("daniel", "cobus", "officer","02020292","organ","oe", "099888592")) +"1");
+        //atDb.init();
+        //System.out.println(atDb.editMember(new Member("daniel", "cobus", "officer","02020292","organ","oe", "099888592")) +"1");
         //bDb.init();
         //System.out.println(bDb.addBodyAddress());
         //bDb.init();
@@ -244,28 +260,66 @@ public class TestApp {
         //System.out.println(proDb.getProperty().getDate());
         
         //adding a body file
-        BodyFile file = new BodyFile("2013-05-13", true, true, true, true,"2013-05-13", "099888592");
-        BodyFileDb db = new BodyFileDb(dbDetail, file);
-        db.init();
+        //BodyFile file = new BodyFile("2013-05-13", true, true, true, true,"2013-05-13", "099888592");
+       // BodyFileDb db = new BodyFileDb(dbDetail, file);
+       // db.init();
         //System.out.println(db.add());
         // reading from bodty file 
-        file = new BodyFile("099888592"); // have to pass through a death register number
-        db = new BodyFileDb(dbDetail, file);
-        db.init();
-        System.out.println(db.read());
-        System.out.println(db.getBodyFile().getDateFileClosed());
+        //file = new BodyFile("099888592"); // have to pass through a death register number
+        //db = new BodyFileDb(dbDetail, file);
+        //db.init();
+        //System.out.println(db.read());
+        //System.out.println(db.getBodyFile().getDateFileClosed());
         //list of body files 
-        db = new BodyFileDb(dbDetail);
-        db.init();
-        ArrayList<BodyFile> flist = db.BodyFileList();
-        for(int i = 0; i < flist.size();i++)
-        {
-            System.out.println(flist.get(i).getDateFileOpened() + " " +  flist.get(i).isBodyIdentified());
-        }
+        //db = new BodyFileDb(dbDetail);
+        //db.init();
+        //ArrayList<BodyFile> flist = db.BodyFileList();
+        //for(int i = 0; i < flist.size();i++)
+        //{
+            //System.out.println(flist.get(i).getDateFileOpened() + " " +  flist.get(i).isBodyIdentified());
+        //}
         //editing a body file to update its values
+<<<<<<< HEAD
+        //db = new BodyFileDb(dbDetail, new BodyFile("2013-05-14", false, false, false, false,"2013-05-14", "099888592"));
+        //db.init();
+        //System.out.println(db.edit());
+=======
         db = new BodyFileDb(dbDetail, new BodyFile("2013-05-14", false, false, false, false,"2013-05-14", "099888592"));
         db.init();
-        System.out.println(db.edit());
+        System.out.println(db.edit());*/
+
         //ENDBODYFILE
+        
+        
+        //POST MORTEM
+        PostMortemDb  postDb = new PostMortemDb(dbDetail);
+        postDb.init();
+        postDb.setPostMortem(new PostMortem("908","f","g","gy",true,true,"ff",new BodyAtMortuary("099888592"),new LabRecord(false, 6, 0)));
+        System.out.print(postDb.IncreaseSampleCount());
+        //System.out.println(postDb.edit());
+        //System.out.println(postDb.getPostMortem().getLabRecord().getNumberOfSamples());
+        //System.out.println(postDb.getPostMortem().getDHA1663number());
+        
+        
+        //ForensicSample fsample = new forensicSample("1234","1","reas","sealTy","brolN","tyAna", "insti","speacialIn",true,"1" ,"2010-10-07","200-01-02");
+        //ForensicSampleDb fdb = new forensicSampleDb(fsample, dbdtail);
+        //fdb.init();
+         
+       //System.out.println(fdb.edit());
+       /*
+        try {
+          
+            ArrayList<forensicSample> list = fdb.KinList();
+            for (int i =0; i <list.size(); i++)
+            {
+            System.out.println(list.get(i).getBrokenSealNumber()+ " " +list.get(i).getReason()+" "+list.get(i).getTypeOfAnalysis()+" "+list.get(i).getLabNumber());
+            }
+                
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+           // Logger.getLogger(testKinMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        * */
+        //ENDPOST MORTEM
     }
 }

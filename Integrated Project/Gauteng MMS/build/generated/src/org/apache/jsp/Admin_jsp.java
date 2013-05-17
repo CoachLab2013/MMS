@@ -71,7 +71,9 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <script src=\"js/jquery-1.7.1.min.js\"></script>\r\n");
       out.write("        <script src=\"js/jquery.validate.min.js\"></script>\r\n");
       out.write("        <script src=\"js/script.js\"></script>\r\n");
-      out.write("        <link  type=\"text/css\" href=\"CSS files/style.css\" rel=\"stylesheet\">\r\n");
+      out.write("        <link  type=\"text/css\" href=\"bootstrap/css/bootstrap.css\" rel=\"stylesheet\">\r\n");
+      out.write("        <link type=\"text/css\" rel=\"stylesheet\" href=\"bootstrap/css/tablecss.css\"\r\n");
+      out.write("    <div class=\"head\"><img src=\"Images/logo2.jpg\">\r\n");
       out.write("        <title>MMS Administration</title>\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>  \r\n");
@@ -156,7 +158,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                         vehicleResult = session.getAttribute("result").toString();
                         vehi = "active";
                     } else if (session.getAttribute("tab").equals("rank")) {
-                        rankResult = session.getAttribute("result").toString();
+                        rankResult = session.getAttribute("rankResult").toString();
                         rank = "active";
                     } else if (session.getAttribute("tab").equals("gender")) {
                         genderResult = session.getAttribute("genderResult").toString();
@@ -170,10 +172,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     } else if (session.getAttribute("tab").equals("marital")) {
                         maritalResult = session.getAttribute("maritalResult").toString();
                         marital = "active";
-                    } else if (session.getAttribute("tab").equals("organisation")) {
-                        oraganisationResult = session.getAttribute("result").toString();
-                        organisation = "active";
-                    } else if (session.getAttribute("tab").equals("province")) {
+                    }   else if (session.getAttribute("tab").equals("province")) {
                         provinceResult = session.getAttribute("provinceResult").toString();
                         province = "active";
                     } else if (session.getAttribute("tab").equals("icd10")) {
@@ -210,7 +209,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     occupationResult = "";
                     raceResult = "";
                     maritalResult = "";
-                    oraganisationResult = "";
+                    
                     provinceResult = "";
                     iCD10Result = "";
                     mannerResult = "";
@@ -327,12 +326,9 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
              
       out.write("\r\n");
       out.write("\r\n");
-      out.write("        <p>\r\n");
-      out.write("            <span style=\"float: left\">Welcome Mrs Admin </span>\r\n");
-      out.write("            <span style=\"float: right\">Logout  .</span>\r\n");
-      out.write("        </p>\r\n");
-      out.write("        <div align=\"center\"><h1><img src=\"Images/logo.jpg\" width=\"75\" height=\"75\"> Gauteng MMS Administration</h1></div>\r\n");
-      out.write("\r\n");
+      out.write("       \r\n");
+      out.write("      \r\n");
+      out.write("    \r\n");
       out.write("        ");
       out.write("\r\n");
       out.write("        <div class=\"tabbable\">\r\n");
@@ -350,7 +346,7 @@ out.println(String.valueOf(main2));
       out.write("                <div id=\"User\" class=\"tab-pane ");
 out.println(String.valueOf(main1));
       out.write(" \">  \r\n");
-      out.write("                    <div align=\"center\"><h2>Users </h2> </div>\r\n");
+      out.write("              \r\n");
       out.write("                    ");
       out.write("\r\n");
       out.write("                    <div class=\"tabbable\">\r\n");
@@ -573,9 +569,7 @@ out.println(String.valueOf(race));
       out.write("                                                                <li class=\"");
 out.println(String.valueOf(marital));
       out.write("\"><a href=\"#mStatus\" data-toggle=\"tab\">Marital Status</a></li>\r\n");
-      out.write("                                                                <li class=\"");
-out.println(String.valueOf(organisation));
-      out.write("\"><a href=\"#org\" data-toggle=\"tab\">Organisation</a></li>\r\n");
+      out.write("                                                                \r\n");
       out.write("                                                                <li class=\"");
 out.println(String.valueOf(province));
       out.write("\"><a href=\"#province\" data-toggle=\"tab\">Province</a></li>\r\n");
@@ -1250,7 +1244,7 @@ out.println(String.valueOf(relationship));
       out.write(" \r\n");
       out.write("                                                                    <div  class=\"offset3\">\r\n");
       out.write("                                                                        <label  > ");
- out.println(String.valueOf(userResult));
+ out.println(String.valueOf(relationshipResult));
       out.write("</label>\r\n");
       out.write("                                                                    </div>\r\n");
       out.write("                                                                    <br/>\r\n");

@@ -122,11 +122,7 @@ public class EmployeeDb extends DatabaseConnector
         ArrayList<Employee> list = new ArrayList<Employee>();
         try 
         {
-<<<<<<< HEAD
             statement.executeQuery("SELECT personnelNumber,name,surname,rank,email,active,access from employee;");
-=======
-            statement.executeQuery("SELECT personnelNumber,name,surname,rank,email,active from employee,access;");
->>>>>>> origin/master
             Employee emp = null;
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
@@ -138,7 +134,7 @@ public class EmployeeDb extends DatabaseConnector
                 emp.setRank(resultSet.getString("rank"));
                 emp.setEmail(resultSet.getString("email"));
                 emp.setActive(resultSet.getBoolean("active"));
-                emp.setAccess(resultSet.getInt("active"));
+                emp.setAccess(resultSet.getInt("access"));
                 list.add(emp);
             }
             statement.close();
@@ -146,7 +142,7 @@ public class EmployeeDb extends DatabaseConnector
         } 
         catch (SQLException ex) 
         {
-           throw new SQLException(ex.getMessage()+" "+list.size() );
+           throw new SQLException(ex.getMessage());
         }
         return list;
     }

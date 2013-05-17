@@ -11,7 +11,10 @@ package database;
 //happness
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,6 +52,22 @@ public class IncidentDb extends DatabaseConnector
          }
          
     //DATABSE METHODS
+    public String IncreaseBodyCount(){
+        int newBodyCount = incident.getBodyCount() + 1;
+        if (newBodyCount < incident.getNumberOfBodies()){
+            incident.setBodyCount(newBodyCount);
+            return edit();
+        }else if(newBodyCount == incident.getNumberOfBodies() ){
+            incident.setBodyCount(newBodyCount);
+            incident.setStatus(false);
+            DateFormat databaseDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date today = new Date();
+            incident.setDateIncidentClosed(databaseDateFormat.format(today));
+            return edit();
+        }else{
+            return "WE HAVE RECIEVED ALL THE BODIES FOR THIS INCIDENT";
+        }
+    }
     public int countOpenIncidents(String inDate) throws SQLException{
         int count = 0;
         try 
@@ -85,9 +104,9 @@ public class IncidentDb extends DatabaseConnector
     {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
-          try  
+        try  
         {  //
-            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound,dateIncidentClosed)" + " VALUES"
+            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " VALUES"
                                     +" ('" 
                                     + incident.getIncidentLogNumber() + "','" 
                                     + incident.getReferenceNumber()+ "','"
@@ -99,8 +118,7 @@ public class IncidentDb extends DatabaseConnector
                                     + incident.isOpen() + ",'"
                                     + incident.getReason()+ "',"
                                     + incident.getBodyCount() + ",'"
-                                    + incident.getPlaceBodyFound() + "','"
-                                    + incident.getDateIncidentClosed() + "'"
+                                    + incident.getPlaceBodyFound() + "'"
                                     + ")");
             statement.close(); //status , reason , bodyCountb 
             connection.close(); //deathCall
@@ -191,10 +209,17 @@ public class IncidentDb extends DatabaseConnector
     public String edit()//WILL NEED TO PASS PRIMARY KEY FOR WHERE CLAUSE unless we assume we cannot edit primary
     {
         try 
-        {                                                                                                                                                                                                                                                                                                                                                                                         
-            statement.executeUpdate("UPDATE Incident SET referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"', status="+ incident.isOpen() +" WHERE incidentLogNumber= '" + incident.getIncidentLogNumber() + "';" );
-            statement.close();
-            connection.close();
+        {   
+            if (incident.getDateIncidentClosed() == null){
+                statement.executeUpdate("UPDATE Incident SET referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"', status="+ incident.isOpen() +" WHERE incidentLogNumber= '" + incident.getIncidentLogNumber() + "';" );
+                statement.close();
+                connection.close();
+            }else{
+                statement.executeUpdate("UPDATE Incident SET referenceNumber='"+incident.getReferenceNumber() +"',numberOfBodies=" +incident.getNumberOfBodies()+",dateOfIncident='" +incident.getDateOfIncident()+"',timeOfIncident='"+incident.getTimeOfIncident() +"',circumstanceOfDeath='" + incident.getCircumstanceOfDeath()+"',specialCircumstances='" +incident.getSpecialCircumstances()+"',reason='" + incident.getReason() + "',bodyCount="+incident.getBodyCount()+",placeBodyFound='"+incident.getPlaceBodyFound()+"', status="+ incident.isOpen() +", dateIncidentClosed= '" + incident.getDateIncidentClosed() + "' WHERE incidentLogNumber= '" + incident.getIncidentLogNumber() + "';" );
+                statement.close();
+                connection.close();
+            }
+            
         } 
         catch (SQLException ex) 
         {

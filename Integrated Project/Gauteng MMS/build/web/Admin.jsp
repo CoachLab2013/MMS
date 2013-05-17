@@ -26,7 +26,9 @@
         <script src="js/jquery-1.7.1.min.js"></script>
         <script src="js/jquery.validate.min.js"></script>
         <script src="js/script.js"></script>
-        <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
+        <link  type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="bootstrap/css/tablecss.css"
+    <div class="head"><img src="Images/logo2.jpg">
         <title>MMS Administration</title>
     </head>
     <body>  
@@ -277,12 +279,9 @@
              */
              %>
 
-        <p>
-            <span style="float: left">Welcome Mrs Admin </span>
-            <span style="float: right">Logout  .</span>
-        </p>
-        <div align="center"><h1><img src="Images/logo.jpg" width="75" height="75"> Gauteng MMS Administration</h1></div>
-
+       
+      
+    
         <%-- starting of main tabs --%>
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
@@ -292,7 +291,7 @@
             <%-- contents of main tabs --%>
             <div class="tab-content" >
                 <div id="User" class="tab-pane <%out.println(String.valueOf(main1));%> ">  
-                    <div align="center"><h2>Users </h2> </div>
+              
                     <%-- Users tab content --%>
                     <div class="tabbable">
                         <%-- Users tab has 2 tabs, and they are the following --%>
