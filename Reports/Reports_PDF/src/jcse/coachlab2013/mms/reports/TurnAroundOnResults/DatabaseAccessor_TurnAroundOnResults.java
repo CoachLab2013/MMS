@@ -1,4 +1,4 @@
-package jcse.coachlab2013.mms.reports.turnaroundonresults;
+package jcse.coachlab2013.mms.reports.TurnAroundOnResults;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,12 +23,12 @@ public class DatabaseAccessor_TurnAroundOnResults extends Template_DatabaseAcces
         
         try {
             
-            preparedStatement = connection.prepareStatement("select dim_sample.analysisType as analysisType, \n" +
-"fact_sample.durationOutstanding as averageTurnAroundTime\n" +
-"from\n" +
-"`reporting database`.dim_sample left join\n" +
-"`reporting database`.fact_sample on \n" +
-"FK_Sample_SK=sample_SK");            
+            preparedStatement = connection.prepareStatement("SELECT \n" +
+                "	`dim_sample`.`analysisType`  AS `analysisType`, \n" +
+                "	AVG(`durationOutstanding`) AS `averageTurnAroundTime`\n" +
+                "		FROM `reporting database`.`fact_sample`\n" +
+                "			LEFT JOIN `reporting database`.`dim_sample` ON `dim_sample`.`sample_SK` = `reporting database`.`fact_sample`.`FK_Sample_SK`\n" +
+                "			GROUP BY `dim_sample`.`analysisType`;");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

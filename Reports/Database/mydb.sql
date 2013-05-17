@@ -173,6 +173,7 @@ CREATE TABLE `body` (
 
 LOCK TABLES `body` WRITE;
 /*!40000 ALTER TABLE `body` DISABLE KEYS */;
+INSERT INTO `body` VALUES ('099888592','female','0','3','00','00','3333','2013-04-23',20,'4444333222','4442000','44432ddd','22kfdkd','2013-04-23 00:00:00',20,6,'gg','ggrer','\0','2013-06-03 00:00:00','\0','002201301','44dddd33221','2013-06-03 00:00:00','2013-06-03');
 /*!40000 ALTER TABLE `body` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,7 +484,8 @@ CREATE TABLE `employee` (
   `email` varchar(80) NOT NULL,
   `access` int(11) NOT NULL,
   `active` bit(1) NOT NULL,
-  PRIMARY KEY (`password`,`personnelNumber`)
+  PRIMARY KEY (`password`,`personnelNumber`),
+  UNIQUE KEY `personnelNumber_UNIQUE` (`personnelNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -634,7 +636,7 @@ DROP TABLE IF EXISTS `incident`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `incident` (
-  `incidentLogNumber` varchar(9) NOT NULL,
+  `incidentLogNumber` varchar(11) NOT NULL,
   `referenceNumber` varchar(9) NOT NULL,
   `numberOfBodies` int(11) NOT NULL,
   `dateOfIncident` date NOT NULL,
@@ -645,7 +647,7 @@ CREATE TABLE `incident` (
   `reason` longtext NOT NULL,
   `bodyCount` int(11) NOT NULL,
   `placeBodyFound` varchar(45) NOT NULL,
-  `dateIncidentClosed` date NOT NULL,
+  `dateIncidentClosed` date DEFAULT NULL,
   PRIMARY KEY (`incidentLogNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -656,6 +658,7 @@ CREATE TABLE `incident` (
 
 LOCK TABLES `incident` WRITE;
 /*!40000 ALTER TABLE `incident` DISABLE KEYS */;
+INSERT INTO `incident` VALUES ('002201301','REF',4,'2013-04-06','11:50:30','rap stabbing','had beef with Rick Ross','','Burger King',3,'vegas',NULL);
 /*!40000 ALTER TABLE `incident` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -754,13 +757,15 @@ DROP TABLE IF EXISTS `labrecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `labrecord` (
-  `receivedAllSamples` bit(1) NOT NULL,
+  `receivedAllSamples` bit(1) DEFAULT NULL,
   `labNumber` varchar(45) NOT NULL,
   `idLabRecord` int(11) NOT NULL AUTO_INCREMENT,
+  `numberOfSamples` int(11) DEFAULT NULL,
+  `sampleCounter` int(11) DEFAULT NULL,
   PRIMARY KEY (`idLabRecord`),
   KEY `fk_LabRecord_PostMortem1_idx` (`labNumber`),
   CONSTRAINT `fk_LabRecord_PostMortem1` FOREIGN KEY (`labNumber`) REFERENCES `postmortem` (`labNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -769,6 +774,7 @@ CREATE TABLE `labrecord` (
 
 LOCK TABLES `labrecord` WRITE;
 /*!40000 ALTER TABLE `labrecord` DISABLE KEYS */;
+INSERT INTO `labrecord` VALUES ('\0','908',2,6,0);
 /*!40000 ALTER TABLE `labrecord` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1001,6 +1007,7 @@ CREATE TABLE `postmortem` (
 
 LOCK TABLES `postmortem` WRITE;
 /*!40000 ALTER TABLE `postmortem` DISABLE KEYS */;
+INSERT INTO `postmortem` VALUES ('908','323','sdrfsdfsd','cdaa','\0','\0','e3ww','099888592');
 /*!40000 ALTER TABLE `postmortem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1013,7 +1020,7 @@ DROP TABLE IF EXISTS `property`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `property` (
   `sealNumber` varchar(45) NOT NULL,
-  `description` blob NOT NULL,
+  `description` longtext NOT NULL,
   `date` date NOT NULL,
   `type` varchar(45) NOT NULL,
   `sealType` varchar(45) NOT NULL,
@@ -1026,9 +1033,8 @@ CREATE TABLE `property` (
   `SAPS_surname` varchar(45) NOT NULL,
   `SAPS_taken` bit(1) NOT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
-  `idPropery` int(11) NOT NULL AUTO_INCREMENT,
   `released` bit(1) DEFAULT NULL,
-  PRIMARY KEY (`idPropery`),
+  PRIMARY KEY (`sealNumber`),
   KEY `fk_Property_Body1_idx` (`Body_idDeathRegisterNumber`),
   CONSTRAINT `fk_Property_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1331,7 +1337,6 @@ DROP TABLE IF EXISTS `vehicledispatch`;
 CREATE TABLE `vehicledispatch` (
   `Incident_incidentLogNumber` varchar(45) NOT NULL,
   `notificationDateTime` datetime NOT NULL,
-  `departureDateTime` datetime NOT NULL,
   `Vehicle_registrationNumber` varchar(11) NOT NULL,
   `idVehicleDispatch` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idVehicleDispatch`),
@@ -1375,10 +1380,6 @@ LOCK TABLES `vehiclerecord` WRITE;
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'mydb'
---
-
---
 -- Dumping routines for database 'mydb'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1391,4 +1392,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-10 18:10:48
+-- Dump completed on 2013-05-16 16:51:00

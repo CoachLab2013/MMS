@@ -1,8 +1,11 @@
 package jcse.coachlab2013.mms.reports.AuditTrail;
 
+import java.io.IOException;
 import java.sql.Connection;
 import jcse.coachlab2013.mms.reports.ReportGenerator;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.Template_Report;
 
 /**
@@ -20,12 +23,15 @@ public final class Report_AuditTrail extends Template_Report {
     
     @Override
     protected void formatData() {
-        
-        sourceArray = new ArrayList<>();
-        sourceArray.add("./build/classes/jcse/coachlab2013/mms/reports/audittrail/Report_MonthlyStatistics.jrxml");
-        sourceArray.add("./build/classes/jcse/coachlab2013/mms/reports/audittrail/Report_EmployeeStatistics.jrxml");
-        sourceArray.add("./build/classes/jcse/coachlab2013/mms/reports/audittrail/Report_LocationStatistics.jrxml");
+        try {
+        sourceArray = new ArrayList<>();        
+        sourceArray.add(getClass().getResource("/jcse/coachlab2013/mms/reports/AuditTrail/Report_MonthlyStatistics.jrxml").openStream());
+        sourceArray.add(getClass().getResource("/jcse/coachlab2013/mms/reports/AuditTrail/Report_EmployeeStatistics.jrxml").openStream());
+        sourceArray.add(getClass().getResource("/jcse/coachlab2013/mms/reports/AuditTrail/Report_LocationStatistics.jrxml").openStream());
        
+        } catch (IOException ex) {
+            Logger.getLogger(Report_AuditTrail.class.getName()).log(Level.SEVERE, null, ex);
+        }
         parameters.put("ReportTitle", "Audit Trail - Statistics Report"); 
         
         parameterArray = new ArrayList<>();
@@ -41,8 +47,8 @@ public final class Report_AuditTrail extends Template_Report {
     
     @Override
     public void createReport() {
-        
         ReportGenerator rg = new ReportGenerator(sourceArray, parameterArray, reportDataArray);
-        rg.savePDF(destination); 
-    }  
-}
+        rg.savePDF(destination);         
+    }
+}  
+
