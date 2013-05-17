@@ -53,7 +53,7 @@ public class IncidentDb extends DatabaseConnector
         int count = 0;
         try 
         {
-            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE status=true AND dateOfIncident = '" + inDate + "';");
+            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE status=true AND incidentLogNumber LIKE '%" + inDate + "';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             count = resultSet.getInt("countOpenIncidents");
@@ -120,7 +120,7 @@ public class IncidentDb extends DatabaseConnector
         ArrayList<Incident> incidentList = new ArrayList<Incident>();
         try 
         {
-            statement.executeQuery("SELECT * FROM incident;");
+            statement.executeQuery("SELECT * FROM Incident;");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
@@ -173,7 +173,7 @@ public class IncidentDb extends DatabaseConnector
         Incident found;
         try 
         {
-            statement.executeQuery("SELECT * FROM incident WERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
+            statement.executeQuery("SELECT * FROM incident WHERE incidentLogNumber ='"+ inIncidentLogNumber +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             found = new Incident(resultSet.getString("incidentLogNumber"),resultSet.getString("referenceNumber"),resultSet.getInt("numberOfBodies"),resultSet.getString("dateOfIncident"),resultSet.getString("timeOfIncident"),resultSet.getString("circumstanceOfDeath"),resultSet.getString("placeBodyFound"),resultSet.getString("specialCircumstances"),resultSet.getString("reason"),resultSet.getInt("bodyCount"),resultSet.getBoolean("status"),resultSet.getString("dateIncidentClosed"));

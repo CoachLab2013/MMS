@@ -122,7 +122,11 @@ public class EmployeeDb extends DatabaseConnector
         ArrayList<Employee> list = new ArrayList<Employee>();
         try 
         {
+<<<<<<< HEAD
             statement.executeQuery("SELECT personnelNumber,name,surname,rank,email,active,access from employee;");
+=======
+            statement.executeQuery("SELECT personnelNumber,name,surname,rank,email,active from employee,access;");
+>>>>>>> origin/master
             Employee emp = null;
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())

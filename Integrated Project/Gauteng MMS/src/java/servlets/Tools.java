@@ -17,22 +17,24 @@ public class Tools {
      * constructor for an instance of Tools
      */
     public Tools(){
+<<<<<<< HEAD
         dbdetail = new DbDetail("localhost","/mydb","root","msandas777"); 
+=======
+        dbdetail = new DbDetail("localhost","/mydb","root","password"); 
+>>>>>>> origin/master
     }
     //end constructor
     
-   /* public String adduser(){
+    public String adduser(){
         Employee e = new Employee("11111111","password","User","UserSurname","Admin",4,"user1@user.com",true);
         Employee e2 = new Employee("12345678","123456","User2","UserSurname2","Pathologist",3,"user2@user.com",true);
         EmployeeDb db1 = new EmployeeDb(e,dbdetail);
         db1.init();
         EmployeeDb db2 = new EmployeeDb(e2,dbdetail);
         db2.init();
-        String s = db2.add();
-        db2.add();
-        
-        return s;
-    }*/
+        db1.add();
+        return(db2.add());
+    }
     
     /**
      * Try to log in a user, if the login is successful then return true, otherwise return false
@@ -90,7 +92,8 @@ public class Tools {
         String datenum = timestamp2.split(" ")[0];
         try{
             int incidentnum = incidentdb.countOpenIncidents(datenum)+1;
-            String lognumber = Integer.toString(incidentnum) + datenum;
+            String formated_num = String.format("%03d", incidentnum); 
+            String lognumber =  formated_num+ datenum;
             return lognumber;
         }
         catch(Exception e){
@@ -169,8 +172,9 @@ public class Tools {
      * @param listname  name of the table containing the list elements
      * @return returns the contents of a reference list from the database or an error
      */
-    public ArrayList<String> getReferenceList(String listname){
+    public ArrayList<String> getReferenceList(String listname, String field){
         ReferenceListDb refdb = new ReferenceListDb(dbdetail,listname);
+        refdb.setField2(field);
         refdb.init();
         try{
             return refdb.referenceList();
@@ -183,9 +187,9 @@ public class Tools {
     }
     //end getReferenceList
     
-    public String makeReferenceList(String listname){
+    public String makeReferenceList(String listname, String field){
         ArrayList<String> list = new ArrayList<String>();
-        list = this.getReferenceList(listname);
+        list = this.getReferenceList(listname, field);
         String out = "<select name='"+listname+"' id='"+listname+"'>";
         out = out+ "<option selected='slected'>Select</option>";
         int size = list.size();
@@ -195,5 +199,68 @@ public class Tools {
         out = out + "</select>";
         return out;
     }
+    
+    /**
+     * This will create a table with all the open incidents from the database
+     */
+    public String makeOpenIncidentsTable(String id){
+        IncidentDb indb = new IncidentDb(dbdetail);
+        indb.init();
+        try{
+            ArrayList<Incident> openincidents = indb.openIncidentList();
+            
+           String table = "<table class='tabledisplay' id='" + id+"'>"
+                    +"<th class='tableheading'>FPS Incident Log Number</th>"
+                    +"<th class='tableheading'>SAPS/ IR number reference number</th>"
+                    +"<th class='tableheading'>Date</th>"
+                    +"<th class='tableheading'>Time</th>"
+                    +"<th class='tableheading'>Number of bodies</th>"
+                    +"<th class='tableheading'>Number of bodies recieved</th>"
+                    +"<th class='tableheading'>Place Body was found</th>"
+                    +"<th class='tableheading'>Circumstances of death</th>"
+                    +"<th class='tableheading'>Special Circumstances</th>";
+            int size = openincidents.size();
+            for(int i=0;i<size;i++){
+                Incident inc = openincidents.get(i);
+                table = table +"<tr class='tablerow' lognumber='"+inc.getIncidentLogNumber()+"'>"
+                        +"<td>"+  inc.getIncidentLogNumber() +"</td>"
+                        + "<td class='tablecell'>" + inc.getReferenceNumber() +"</td>"
+                        +"<td class='tablecell'>" + inc.getDateOfIncident() + "</td>"
+                        +"<td class='tablecell'>" + inc.getTimeOfIncident() + "</td>"
+                        +"<td class='tablecell'>" + Integer.toString(inc.getNumberOfBodies()) + "</td>"
+                        +"<td class='tablecell'>" + Integer.toString(inc.getBodyCount()) + "</td>"
+                        +"<td class='tablecell'>" + inc.getPlaceBodyFound() + "</td>"
+                        +"<td class='tablecell'>" + inc.getCircumstanceOfDeath() + "</td>"
+                        +"<td class='tablecell'>" + inc.getSpecialCircumstances() + "</td>"
+                        + "</tr>"; 
+            }
+            table = table + "</table>";
+            
+            return table;
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }
+    }
+    // end makeOPenIncidentsTable
+    
+    public String getDateTime(){
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        return timestamp;
+    }
+    //end getDateTime
+    
+    public Incident getIncidentDetail(String lognumber){
+       IncidentDb idb = new IncidentDb(dbdetail);
+       idb.init();
+       try{
+           Incident incident = idb.findIncident(lognumber);
+           return incident;
+       }
+       catch(Exception e){
+           return null;
+       }
+    }
+    //
 }
 //end Tools class

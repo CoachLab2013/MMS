@@ -39,6 +39,7 @@ public class LogInServlet extends HttpServlet {
             String personnelnumber = request.getParameter("personnelnumber");
             String password = request.getParameter("password");
             HttpSession sess = request.getSession();
+            sess.setAttribute("personnelnumber", personnelnumber);
             int access = t.logIn(personnelnumber, password, sess);
             if(access == -1){
                 sess.setAttribute("loginerror", "Unidentified user, incident has been logged.");

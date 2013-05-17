@@ -189,6 +189,7 @@ $(document).ready(function(){
             $("#IncidentDetails").addClass("tab-pane");
             $("#CallDetails").addClass("tab-pane active");
             $("#CallDetailsTab").addClass("active");
+            $("#callform").show();
         }
         return false;
     });

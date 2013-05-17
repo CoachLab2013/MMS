@@ -1,19 +1,19 @@
 package jcse.coachlab2013.mms.reports;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPrintPage;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.fill.JRTemplatePrintText;
 
 /**
@@ -34,11 +34,11 @@ public class ReportGenerator {
      * @param reportParameters Map<Key, Value> for any additional parameters passed to the report
      * @param reportData Collection of beanDataObjects used to populate report
      */
-    public ReportGenerator(String sourceJRXML, Map reportParameters, Collection reportData)
+    public ReportGenerator(String sourceJRXML, Map reportParameters, ResultSet reportData)
     {           
         try {
             report = JasperCompileManager.compileReport(sourceJRXML);
-            mainPrint = JasperFillManager.fillReport(report, reportParameters, new JRBeanCollectionDataSource(reportData));
+            mainPrint = JasperFillManager.fillReport(report, reportParameters, new JRResultSetDataSource(reportData));
         
         } catch (JRException ex) {
             Logger.getLogger(ReportGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,18 +53,18 @@ public class ReportGenerator {
      * @param reportParameters List of Map<Key, Value> for any additional parameters passed to the reports
      * @param reportData List of Collections of beanDataObjects used to populate reports
      */
-    public ReportGenerator(ArrayList<String> sourceJRXML, ArrayList<Map> reportParameters, ArrayList<Collection> reportData)
+    public ReportGenerator(ArrayList<String> sourceJRXML, ArrayList<Map> reportParameters, ArrayList<ResultSet> reportData)
     {          
         if (sourceJRXML.size() == reportParameters.size() && sourceJRXML.size() == reportData.size()) {
             try {
 
                 report = JasperCompileManager.compileReport(sourceJRXML.get(0));
-                mainPrint = JasperFillManager.fillReport(report, reportParameters.get(0), new JRBeanCollectionDataSource(reportData.get(0)));
+                mainPrint = JasperFillManager.fillReport(report, reportParameters.get(0), new JRResultSetDataSource(reportData.get(0)));
 
                 for (int i = 1; i < sourceJRXML.size(); i++) {
 
                     report = JasperCompileManager.compileReport(sourceJRXML.get(i));
-                    JasperPrint tempPrint = JasperFillManager.fillReport(report, reportParameters.get(i), new JRBeanCollectionDataSource(reportData.get(i)));
+                    JasperPrint tempPrint = JasperFillManager.fillReport(report, reportParameters.get(i), new JRResultSetDataSource(reportData.get(i)));
                                         
                     for (JRPrintPage page : tempPrint.getPages()) {
                     mainPrint.addPage(page);
