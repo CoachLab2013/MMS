@@ -23,6 +23,7 @@ public class DatabaseAccessor_SpecificBody extends Template_DatabaseAccessor {
         
         try {
             
+            
             preparedStatement = connection.prepareStatement("");            
             tempSet = preparedStatement.executeQuery();
             
