@@ -14,14 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Asheen
  */
-@WebServlet(name = "GetIncidentServlet", urlPatterns = {"/GetIncidentServlet"})
-public class GetIncidentServlet extends HttpServlet {
+@WebServlet(name = "SaveIncidentDetails", urlPatterns = {"/SaveIncidentDetails"})
+public class SaveIncidentDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -37,25 +36,26 @@ public class GetIncidentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
+        Incident incident = new Incident();
+        incident.setIncidentLogNumber(request.getParameter("editfpsnumber"));
+        incident.setReferenceNumber(request.getParameter("editSAPSnumber"));
         Tools t = new Tools();
-        Incident incident = t.getIncidentDetail(request.getParameter("selected_edit_incident"));
-        HttpSession sess = request.getSession();
-        sess.setAttribute("lognumber",incident.getIncidentLogNumber());
-        sess.setAttribute("circumstance_of_death",incident.getCircumstanceOfDeath());
-        String[] date = incident.getDateOfIncident().split("-");
-        sess.setAttribute("year",date[0]);
-        sess.setAttribute("month",date[1]);
-        sess.setAttribute("day",date[2]);
-        sess.setAttribute("place_found",incident.getPlaceBodyFound());
-        sess.setAttribute("sap_reference_number",incident.getReferenceNumber());
-        sess.setAttribute("special_circumstances",incident.getSpecialCircumstances());
-        String[] time = incident.getTimeOfIncident().split(":");
-        sess.setAttribute("hour",time[0]);
-        sess.setAttribute("minute",time[1]);
-        sess.setAttribute("number_of_bodies",incident.getNumberOfBodies());
-        sess.setAttribute("bodies_recieved",incident.getBodyCount());
-        sess.setAttribute("go_to_editincident", true);
-        response.sendRedirect("Home.jsp");
+        String month = Integer.toString(t.getMonthNumber(request.getParameter("edit_incident_month").toString()));
+        String date = request.getParameter("editdetailyear")+"-"+month+"-"+request.getParameter("edit_incident_day");
+        incident.setDateOfIncident(date);
+        String time = request.getParameter("edit_incident_hour") +":"+ request.getParameter("edit_incident_minute") + ":00";
+        incident.setTimeOfIncident(time);
+        incident.setNumberOfBodies(Integer.parseInt(request.getParameter("editnumberofbodies" )));
+        incident.setPlaceBodyFound(request.getParameter("editplacefound"));
+        incident.setCircumstanceOfDeath(request.getParameter("editcircumstancesofdeath"));
+        incident.setSpecialCircumstances(request.getParameter("specialcircumstance"));
+        incident.setStatus(true);
+        
+        DbDetail dbdetail = new DbDetail("localhost","/mydb","root","password");
+        IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
+        incidentdb.init();
+        out.println(incidentdb.edit());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

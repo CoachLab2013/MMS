@@ -158,7 +158,7 @@ public class PostMortemDb extends DatabaseConnector
         statement.close(); 
         connection.close(); 
     }
-    public String IncreaseSampleCount()
+    public String increaseSampleCount()
     {
         newSampleCount = postMortem.getLabRecord().getSampleCount() + 1;
         if (newSampleCount < postMortem.getLabRecord().getNumberOfSamples())
