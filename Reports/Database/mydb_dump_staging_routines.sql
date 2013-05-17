@@ -38,7 +38,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CALL_Procedures`(OUT ex INT)
 BEGIN
 	
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
-	BEGIN SET ex = -1; END;
+	BEGIN SET ex = -2; END;
 	SET ex = 0;
 
 	call mydb_dump_staging.Truncate_tables;
@@ -83,7 +83,6 @@ BEGIN
 	call mydb_dump_staging.Extract_seal;
 	call mydb_dump_staging.Extract_specialcircumstance;
 	call mydb_dump_staging.Extract_vehicle;
-
 	call mydb_dump_staging.Extract_vehicledispatch;
 
 END ;;
@@ -454,12 +453,10 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodystatus`()
 BEGIN
 
-
 INSERT INTO `mydb_dump_staging`.`bodystatus`
-(`idBodyStatus`,
-`state`)
+(`idBodyStatus`, `state`)
 SELECT *
-		FROM mydb.bodystatus;
+		FROM `mydb`.`bodystatus`;
 
 
 
@@ -823,7 +820,9 @@ BEGIN
 INSERT INTO `mydb_dump_staging`.`labrecord`
 (`receivedAllSamples`,
 `labNumber`,
-`idLabRecord`)
+`idLabRecord`,
+`numberOfSamples`,
+`sampleCounter`)
 
 SELECT *
 		FROM mydb.labrecord;
@@ -1072,10 +1071,9 @@ INSERT INTO `mydb_dump_staging`.`property`
 `SAPS_surname`,
 `SAPS_taken`,
 `Body_idDeathRegisterNumber`,
-`idPropery`,
 `released`)
 SELECT *
-		FROM mydb.property;
+		FROM `mydb`.`property`;
 
 
 
@@ -1350,7 +1348,6 @@ BEGIN
 INSERT INTO `mydb_dump_staging`.`vehicledispatch`
 (`Incident_incidentLogNumber`,
 `notificationDateTime`,
-`departureDateTime`,
 `Vehicle_registrationNumber`,
 `idVehicleDispatch`)
 SELECT *
@@ -1436,4 +1433,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-10 18:11:36
+-- Dump completed on 2013-05-16 16:52:05

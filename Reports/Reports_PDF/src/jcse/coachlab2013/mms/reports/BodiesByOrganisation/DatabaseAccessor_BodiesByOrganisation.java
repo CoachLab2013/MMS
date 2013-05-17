@@ -23,7 +23,7 @@ public class DatabaseAccessor_BodiesByOrganisation extends Template_DatabaseAcce
         
         try {
             
-            preparedStatement = connection.prepareStatement("Select `dim_organisation`.`organisationType`  AS `organisationName`, sum(`countBody`) AS `numberOfBodies`\n" +
+            preparedStatement = connection.prepareStatement("Select `dim_organisation`.`organisationType`  AS `organisationName`, SUM(`countBody`) AS `numberOfBodies`\n" +
                 "FROM `reporting database`.`fact_body`\n" +
                 "LEFT JOIN `reporting database`.`dim_organisation` ON `dim_organisation`.`organisation_SK` = `reporting database`.`fact_body`.`FK_Organisation_SK`\n" +
                 "GROUP BY `dim_organisation`.`organisationType`;");
