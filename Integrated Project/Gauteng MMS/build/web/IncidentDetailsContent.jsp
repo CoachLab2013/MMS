@@ -4,7 +4,6 @@
     Author : Administrator
 --%>
 
-<!--
 <%@page import="servlets.Tools"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
@@ -43,7 +42,7 @@
                 <td> Incident date:</td>
                 <td>
                     <select name="detailyear" id="detailyear">
-                        <option selected="selected">Year</option>>
+                        <option selected="selected">Year</option>
                         <%
                            String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
                            String[] datetime = timestamp.split(" ");
@@ -66,8 +65,8 @@
                 <td> Incident time:</td>
                 <td>
                     <%
-                           out.print(t.makeHour("detailhour")+" ");
-                           out.print(t.makeMinute("detailminute"));
+                           out.print(t.makeHour("detailhour",-1)+" ");
+                           out.print(t.makeMinute("detailminute",-1));
                     %>
                 </td>
              </tr>
@@ -106,4 +105,3 @@
         </form>
     </body>
 </html>
-!-->

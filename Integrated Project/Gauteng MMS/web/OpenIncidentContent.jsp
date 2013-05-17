@@ -15,8 +15,7 @@
     </head>
     <body>  
     <legend>Incidents> Open Incidents</legend>
-</html>
-    <!--
+
     <form name="Deceased details" method="post" action="Deceased Address.jsp" class="form-horizontal" >
         <%
             Tools t = new Tools();

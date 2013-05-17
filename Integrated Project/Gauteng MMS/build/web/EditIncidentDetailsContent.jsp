@@ -21,14 +21,12 @@
     <body>
         <%
             if(session.getAttribute("go_to_editincident")!=null){
-                out.print("<input type=hidden class='go_to_editincident' id='go_to_editincident' value=" + session.getAttribute("go_to_editincident") +">");
-                session.removeAttribute("go_to_editincident");
+                out.print("<input type=hidden class='go_to_editincident' id='go_to_editincident' value=" + session.getAttribute("go_to_editincident") +">");               
             }
         %>
         <legend>Incidents> Edit Incident> Incident Details</legend>
-        <!--
 
-        <form id="editdetailform"  name="editdetailform" class="form-horizontal" method="post" action="EditIncidentDetailsServlet">
+        <form id="editdetailform"  name="editdetailform" class="form-horizontal" method="post" action="SaveIncidentDetails">
         <table>
             <tr>
                 <td>FPS Incident Log Number:  </td> <td><input type="text" id="editfpsnumber" name="editfpsnumber" readonly="true" 
@@ -42,46 +40,66 @@
                 <td>  SAPS\ IR number reference number:</td> <td> <input type="text" name="editSAPSnumber" id ="editSAPSnumber"
                                                                          <%
                                                                          out.println("value ="+ session.getAttribute("sap_reference_number"));
+                                                                         session.removeAttribute("sap_reference_number");
                                                                          %>
                                                                          /> </td>
              </tr>
-             <tr>     
-                <td> Incident date:</td>  
-                <td> 
-                    <select name="editdetailyear" id="editdetailyear">
-                        <% 
-                            Tools t = new Tools();
-                           String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+             <tr>
+                 <td>
+                     Incident Date:
+                 </td>
+                 <td>
+                     <select name="editdetailyear" id="editdetailyear">
+                        <%
+                           Tools t = new Tools();
+                           String timestamp = t.getDateTime();
                            String[] datetime = timestamp.split(" ");
                            String date[] = datetime[0].split("-");
                            String year = date[0];
                            int currentyear = Integer.parseInt(year);
                            String lastyear = Integer.toString(currentyear-1);
-                           if(session.getAttribute("year").toString().equals(lastyear)){
+                           if(lastyear.equals(session.getAttribute("year"))){
                                out.println("<option selected='selected'>"+lastyear+"</option>");
                                out.println("<option>"+year+"</option>");
                            }
                            else{
-                                out.println("<option>"+lastyear+"</option>");
-                                out.println("<option selected='selected'>"+year+"</option>");
+                               out.println("<option>"+lastyear+"</option>");
+                               out.println("<option selected='selected'>"+year+"</option>");
                            }
+                           session.removeAttribute("year");
                         %>
                     </select>
- 
-                    <% 
-                           out.print(t.makeMonth("editdetailmonth", Integer.parseInt(session.getAttribute("month").toString()))+" ");
-                           out.print(t.makeDay("editdetailday", Integer.parseInt(session.getAttribute("day").toString())));
+                    <%
+                    if(session.getAttribute("go_to_editincident")!=null){
+                        int month_num = Integer.parseInt(session.getAttribute("month").toString());
+                        out.println(t.makeMonth("edit_incident_month",month_num));
+                        int day_num = Integer.parseInt(session.getAttribute("day").toString());
+                        out.println(t.makeDay("edit_incident_day",day_num));
+                        session.removeAttribute("month");
+                        session.removeAttribute("day");
+                    }
+                    
                     %>
-                </td>
+                 </td>
              </tr>
-             <tr>       
-                <td> Incident time:</td> 
-                <td>
-                    <% 
-                           out.print(t.makeHour("editdetailhour")+" ");
-                           out.print(t.makeMinute("editdetailminute"));
+             
+             <tr>
+                 <td>
+                     Incident Time:
+                 </td>
+                 <td>
+                     <%
+                    if(session.getAttribute("go_to_editincident")!=null){
+                        int hour_num = Integer.parseInt(session.getAttribute("hour").toString());
+                        out.println(t.makeHour("edit_incident_hour",hour_num));
+                        int minute_num = Integer.parseInt(session.getAttribute("minute").toString());
+                        out.println(t.makeMinute("edit_incident_minute",minute_num));
+                        session.removeAttribute("hour");
+                        session.removeAttribute("minute");
+                    }
+                    
                     %>
-                </td>
+                 </td>
              </tr>
              <tr> 
                 <td> Number of bodies:</td> 
@@ -91,38 +109,54 @@
                            for(int i=1;i<101;i++){
                                if(i==session.getAttribute("number_of_bodies")){
                                    out.println("<option selected='selected'>"+i+"</option>");
-                               }
-                               else{
+                              }
+                              else{
                                    out.println("<option>"+i+"</option>");
-                               }
-                           }
+                              }
+                          }
+                           session.removeAttribute("number_of_bodies");
                         %>
                     </select>
                 </td>        
             </tr>
             <tr>
-                <td> Place where body was found:</td> <td><textarea cols="50" rows="3" name="editplacefound" id="editplacefound" align="top"><%
-                                                                    out.print(session.getAttribute("place_found"));
-                                                                    %></textarea></td>
-            </tr>
-            <tr>
-                <td> Circumstances of death:</td> <td><textarea cols="50" rows="3" name="editcircumstancesofdeath" id="editcircumstancesofdeath"><%
-                                                                    out.print(session.getAttribute("circumstance_of_death"));
-                                                                    %>
-                    </textarea></td>
-            </tr>
-            <tr>
-                <td> Special Circumstances:</td> 
                 <td>
-                    <% 
-                           out.println(t.makeReferenceList("editspecialcircumstance","type",""));
-                    %>
+                    Place where body was found:
+                </td>
+                <td> 
+                    <textarea cols="50" rows="3" name="editplacefound" id="editplacefound"><%out.println(session.getAttribute("place_found"));
+                    session.removeAttribute("place_found");
+                    %></textarea>
                 </td>
             </tr>
             <tr>
                 <td>
-                <br> <br>  <td>    <input type="submit" value="Save" id="editincidentcontinue" /> <input type="reset" value="Cancel" id="editincidentcancel" /><td></td>
-                </td>  
+                    Circumstances of death:
+                </td>
+                <td>
+                    <textarea cols="50" rows="3" name="editcircumstancesofdeath" id="editcircumstancesofdeath"><%out.println(session.getAttribute("circumstance_of_death"));
+                    session.removeAttribute("circumstance_of_death");
+                    %></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Special Circumstances:
+                </td>
+                <td>
+                    <%
+                    if(session.getAttribute("go_to_editincident")!=null){
+                        out.println(t.makeReferenceList("specialcircumstance","type",session.getAttribute("special_circumstances").toString()));
+                        session.removeAttribute("special_circumstances");
+                        session.removeAttribute("go_to_editincident");                        
+                   }
+                    
+                    %>
+                </td>
+            </tr>   
+            <tr>
+                <td>
+                <br> <br> </td><td> <input type="submit" value="Save" id="incidentsave" /> <input type="reset" value="Cancel" id="editincidentcancel" /></td>
             </tr>
         </table>
         </form>

@@ -139,6 +139,15 @@ public class Tools {
         return out;
     }
     
+    public int getMonthNumber(String month){
+        String[] months = {"January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        int index = 0;
+        while(!(months[index].equals(month)) & (index<12)){
+            index ++;
+        }
+        return index+1;
+    }
+    
     public String makeDay(String name, int day_num){
         String out = "<select id="+name+" name="+name+">";
         if(day_num==-1){
@@ -156,21 +165,35 @@ public class Tools {
         return out;
     }
     
-    public String makeHour(String name){
+    public String makeHour(String name, int hour_num){
         String out = "<select name=" + name+" id=" +name+">";
-        out = out + "<option selected='selected'>Hour</option>";
+        if(hour_num==-1){
+            out = out + "<option selected='selected'>Hour</option>";
+        }
         for(int i=0;i<24;i++){
-            out = out + "<option>"+Integer.toString(i)+"</option>";
+            if(hour_num==i){
+                out = out + "<option selected='selected'>"+Integer.toString(i)+"</option>";
+            }
+            else{
+                out = out + "<option>"+Integer.toString(i)+"</option>";
+            }
         }
         out =  out + "</select>";
         return out;
     }
     
-    public String makeMinute(String name){
+    public String makeMinute(String name, int min_num){
         String out = "<select name=" + name+" id=" +name+">";
-        out = out + "<option selected='selected'>Minute</option>";
-        for(int i=0;i<50;i++){
-            out = out + "<option>"+Integer.toString(i)+"</option>";
+        if(min_num==-1){
+            out = out + "<option selected='selected'>Minute</option>";
+        }        
+        for(int i=0;i<60;i++){
+            if(min_num==i){
+                out = out + "<option selected='selected'>"+Integer.toString(i)+"</option>";
+            }
+            else{
+                out = out + "<option>"+Integer.toString(i)+"</option>";
+            }
         }
         out =  out + "</select>";
         return out;
@@ -200,11 +223,18 @@ public class Tools {
         ArrayList<String> list = new ArrayList<String>();
         list = this.getReferenceList(listname, field);
         String out = "<select name='"+listname+"' id='"+listname+"'>";
-        out = out+ "<option selected='slected'>Select</option>";
+        if(selected.equals("")){
+            out = out+ "<option selected='slected'>Select</option>";
+        }
         int size = list.size();
         for(int i=0;i<size;i++){
             String element = list.get(i);
+            if(element.equals(selected)){
+                out= out + "<option selected='selected'>"+element+"</option>";
+            }
+            else{
             out= out + "<option>"+element+"</option>";
+        }
         }
         out = out + "</select>";
         return out;

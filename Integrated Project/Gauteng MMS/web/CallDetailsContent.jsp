@@ -3,7 +3,6 @@
     Created on : 18 Apr 2013, 11:14:40 AM
     Author     : Administrator
 --%>
-<!--
 <%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,8 +30,8 @@
                     <td>  Time of Call:  </td><td>
                     <%
                         Tools t = new Tools();
-                        out.print(t.makeHour("callhour") +" ");
-                        out.print(t.makeMinute("callminute"));
+                        out.print(t.makeHour("callhour",-1) +" ");
+                        out.print(t.makeMinute("callminute",-1));
                     %>
                     </td>
 
@@ -55,7 +54,7 @@
                         <tr>
                         <td> Province:         </td><td>
                             <% 
-                        //out.println(t.makeReferenceList("province","type"));
+                            out.println(t.makeReferenceList("province","type",""));
                             %>
                             
                         </td>
@@ -64,7 +63,7 @@
                         <tr>
                     <td>  Region:</td><td>
                         <% 
-                           // out.println(t.makeReferenceList("region","type"));
+                           out.println(t.makeReferenceList("region","type",""));
                         %>
                     </td>
                         </tr>
@@ -80,4 +79,3 @@
 </body>
         
 </html>
-!-->
