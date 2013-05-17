@@ -88,6 +88,29 @@ public class AddBodyFile extends HttpServlet {
         SetDbDetail dbSet = new SetDbDetail();
         BodyAtMortuary  body = new BodyAtMortuary();
 
+        //Getting data for Members at scene
+                request.getParameter("Rname");
+                request.getParameter("Rsurname");
+                request.getParameter("organisation");
+                
+                request.getParameter("Sname");
+                request.getParameter("Ssurname");
+                request.getParameter("Scell");
+                request.getParameter("Srank");
+                
+                request.getParameter("Fname");
+                request.getParameter("Fsurname");
+                request.getParameter("Fpersal");
+                request.getParameter("Fcell");
+                request.getParameter("Frank");
+                
+                request.getParameter("atScene");
+                request.getParameter("Pname");
+                request.getParameter("deathRegister");
+                request.getParameter("deathRegister");
+                
+
+        
         //Getting data for Body Table
         String deathRegNumber = request.getParameter("deathRegister");
         String bodyGender = request.getParameter("BMgender");
@@ -108,7 +131,7 @@ public class AddBodyFile extends HttpServlet {
 
       
        
-       body.setDeathRegisterNumber(deathRegNumber);
+        body.setDeathRegisterNumber(deathRegNumber);
         body.setGender(bodyGender);
         body.setRace(bodyRace);
         body.setNameOfDeceased(bodyName);
@@ -124,32 +147,16 @@ public class AddBodyFile extends HttpServlet {
         BodyDb bodydb = new BodyDb(dbSet.getDbdetail(), body);
         bodydb.init();
         String BodySaveresults = bodydb.add();
-         out.println("<!DOCTYPE html>");
+           out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet AddBody     File</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet  NULLLLL " + BodySaveresults+ "</h1>");
+            out.println("<h1>Servlet   " + BodySaveresults+ "</h1>");
             out.println("</body>");
             out.println("</html>");
-        /*
-        if (BodySaveresults.equals("successful")) {
-                //if save is successful, return a message to page
-                HttpSession sess = request.getSession();
-                sess.setAttribute("main", "user");
-                sess.setAttribute("tab", "Adduser");
-                sess.setAttribute("Bodyresult", "The Body File has been successfuly saved to database");
-                response.sendRedirect("Home.jsp");
-
-            } else {
-                //if save is not successful
-                HttpSession sess = request.getSession();
-                 
-                sess.setAttribute("Bodyresult", "The Body File did not save because " + BodySaveresults);
-                response.sendRedirect("Home.jsp");
-
-            }*/
+        
 
         }catch(NullPointerException ex){
            

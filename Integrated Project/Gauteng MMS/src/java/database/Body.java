@@ -38,7 +38,32 @@ public abstract class Body
     protected String bodyReleasedTo;
     public Body()
     {
-        
+        this.deathRegisterNumber = "";
+        this.gender = "";
+        this.race = "";
+        this.assignedTo = "";
+        this.nameOfDeceased = "";
+        this.surnameOfDeceased = "";
+        this.placeOfBirth = "";
+        this.dateOfBirth = "0000-00-00";
+        this.ageOnDateFound = 0;
+        this.maritalStatus = "";
+        this.occupation = "";
+        this.citizen = "";
+        this.maidenName = "";
+        this.identifiedDateTime = "0000-00-00";
+        this.bodyAddress = new BodyAddress();
+        this.estimatedAgeYear = 0;
+        this.estimatedAgeMonth = 0;
+        this.ID = "";
+        this.passport = "";
+        this.bodyStatus =false;
+        this.dateBodyReceived = "0000-00-00";
+        this.bodyReleased = false;
+        this.incident = new Incident();
+        this.bodyType = "";
+        this.dateBodyReleased = "0000-00-00";
+        this.bodyReleasedTo = "";
     }
     public Body(String deathRegisterNumber)
     {

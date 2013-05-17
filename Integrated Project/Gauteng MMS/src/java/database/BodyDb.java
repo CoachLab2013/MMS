@@ -60,7 +60,7 @@ public class BodyDb extends DatabaseConnector{
         } 
         catch (SQLException ex) 
         {
-            return "failed " + ex.getMessage();
+            return "failed " + ex.getMessage()+" "+body.getSurnameOfDeceased()+" "+body.getDeathRegisterNumber() + "','"+ body.getGender()+" "+body.getDateOfBirth();
         }
         catch (Exception ex)
         {

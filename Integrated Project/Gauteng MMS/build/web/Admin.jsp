@@ -110,7 +110,7 @@
                         vehicleResult = session.getAttribute("result").toString();
                         vehi = "active";
                     } else if (session.getAttribute("tab").equals("rank")) {
-                        rankResult = session.getAttribute("result").toString();
+                        rankResult = session.getAttribute("rankResult").toString();
                         rank = "active";
                     } else if (session.getAttribute("tab").equals("gender")) {
                         genderResult = session.getAttribute("genderResult").toString();
@@ -124,10 +124,7 @@
                     } else if (session.getAttribute("tab").equals("marital")) {
                         maritalResult = session.getAttribute("maritalResult").toString();
                         marital = "active";
-                    } else if (session.getAttribute("tab").equals("organisation")) {
-                        oraganisationResult = session.getAttribute("result").toString();
-                        organisation = "active";
-                    } else if (session.getAttribute("tab").equals("province")) {
+                    }   else if (session.getAttribute("tab").equals("province")) {
                         provinceResult = session.getAttribute("provinceResult").toString();
                         province = "active";
                     } else if (session.getAttribute("tab").equals("icd10")) {
@@ -164,7 +161,7 @@
                     occupationResult = "";
                     raceResult = "";
                     maritalResult = "";
-                    oraganisationResult = "";
+                    
                     provinceResult = "";
                     iCD10Result = "";
                     mannerResult = "";
@@ -449,7 +446,7 @@
                                                                 <li class="<%out.println(String.valueOf(occu));%>"><a href="#occupation" data-toggle="tab">Occupation</a></li>
                                                                 <li class="<%out.println(String.valueOf(race));%>"><a href="#race" data-toggle="tab">Race</a></li>
                                                                 <li class="<%out.println(String.valueOf(marital));%>"><a href="#mStatus" data-toggle="tab">Marital Status</a></li>
-                                                                <li class="<%out.println(String.valueOf(organisation));%>"><a href="#org" data-toggle="tab">Organisation</a></li>
+                                                                
                                                                 <li class="<%out.println(String.valueOf(province));%>"><a href="#province" data-toggle="tab">Province</a></li>
                                                                 <li class="<%out.println(String.valueOf(icd10));%>"><a href="#icd10Codes" data-toggle="tab">ICD10 Codes</a></li>
                                                                 <li class="<%out.println(String.valueOf(manner));%>"><a href="#mDeath" data-toggle="tab">Manner of Death</a></li>
@@ -957,7 +954,7 @@
                                                                     </div> 
                                                                     <%--Display save result --%> 
                                                                     <div  class="offset3">
-                                                                        <label  > <% out.println(String.valueOf(userResult));%></label>
+                                                                        <label  > <% out.println(String.valueOf(relationshipResult));%></label>
                                                                     </div>
                                                                     <br/>
                                                                     <br/>
