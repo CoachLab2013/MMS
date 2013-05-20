@@ -54,8 +54,8 @@ public class LogIncidentServlet extends HttpServlet {
         incident.setCircumstanceOfDeath(request.getParameter("circumstancesofdeath"));
         incident.setSpecialCircumstances(request.getParameter("specialcircumstance"));
         incident.setStatus(true);
-        
-        DbDetail dbdetail = new DbDetail("localhost","/mydb","root","password");
+        Tools t = new Tools();
+        DbDetail dbdetail = t.getDbdetail();
         IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
         incidentdb.init();
         incidentdb.add();
@@ -85,7 +85,6 @@ public class LogIncidentServlet extends HttpServlet {
         sess.setAttribute("incident", incident);
         sess.setAttribute("lognumber",request.getParameter("fpsnumber"));
         String personnelnumber = sess.getAttribute("personnelnumber").toString();
-        Tools t = new Tools();
         t.makeAuditTrail("Log Incident", "Created new incident "+request.getParameter("fpsnumber"), personnelnumber, "Log Incident Tab");
         response.sendRedirect("Home.jsp");
     }

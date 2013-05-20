@@ -13,17 +13,17 @@ import java.util.ArrayList;
  *
  * @author Cypril
  */
-public class KinDB extends DatabaseConnector {
+public class KinDb extends DatabaseConnector {
 
     private Kin kin;
 
-    public KinDB(Kin kin, DbDetail dbDetail) {
+    public KinDb(Kin kin, DbDetail dbDetail) {
         super(dbDetail);
         this.kin = kin;
 
     }
 
-    public KinDB(DbDetail dbDetail) {
+    public KinDb(DbDetail dbDetail) {
         super(dbDetail);
         kin = null;
 

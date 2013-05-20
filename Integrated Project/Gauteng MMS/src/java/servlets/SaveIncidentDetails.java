@@ -52,7 +52,7 @@ public class SaveIncidentDetails extends HttpServlet {
         incident.setSpecialCircumstances(request.getParameter("specialcircumstance"));
         incident.setStatus(true);
         
-        DbDetail dbdetail = new DbDetail("localhost","/mydb","root","password");
+        DbDetail dbdetail = t.getDbdetail();
         IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
         incidentdb.init();
         out.println(incidentdb.edit());

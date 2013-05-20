@@ -22,7 +22,6 @@
  <script src="js/CallDetailsScript.js"></script>
     </head>
     <body>
-<<<<<<< HEAD
         <legend>Incidents> Edit Incident> Call Details</legend>
         <form name="callform" id="callform" method="post" action="LogIncidentServlet">
     
