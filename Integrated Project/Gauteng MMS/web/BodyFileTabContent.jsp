@@ -4,6 +4,7 @@
     Author     : Lady
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page import="database.ReferenceListDb"%>
 <%@page import="database.Incident"%>
 <%@page import="java.util.ArrayList"%>
@@ -74,8 +75,11 @@
 
                                 <div class="control-group">
                                     <label class="control-label" for="inncidentNum">Incident Number</label> 
-                                    <div class="controls">
-                                        <select id="inncidentNum" name="inncidentNum">   
+                                    <div class="controls"> <%
+                                                            Tools t = new Tools();
+                                                            out.print(t.makeReferenceList("Incident", "incidentLogNumber", ""));
+                                                            %>
+                                       <%-- <select id="inncidentNum" name="inncidentNum">   
                                             <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
 
                                             <%
@@ -88,7 +92,7 @@
                                             %>
 
 
-                                        </select>
+                                        </select> --%> 
                                     </div>
                                 </div> 
 
