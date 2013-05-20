@@ -74,10 +74,10 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="289" splitType="Stretch">
+		<band height="313" splitType="Stretch">
 			<pieChart>
 				<chart>
-					<reportElement uuid="5b40376e-8a79-480e-9e81-18d49b1001d2" x="0" y="17" width="762" height="271"/>
+					<reportElement uuid="5b40376e-8a79-480e-9e81-18d49b1001d2" x="0" y="11" width="762" height="290"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
