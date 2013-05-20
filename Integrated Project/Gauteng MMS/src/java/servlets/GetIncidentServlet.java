@@ -5,6 +5,7 @@
 package servlets;
 
 import database.DbDetail;
+import database.DeathCall;
 import database.Incident;
 import database.IncidentDb;
 import java.io.IOException;
@@ -55,6 +56,17 @@ public class GetIncidentServlet extends HttpServlet {
         sess.setAttribute("number_of_bodies",incident.getNumberOfBodies());
         sess.setAttribute("bodies_recieved",incident.getBodyCount());
         
+        DeathCall call = t.getDeathCall(incident); 
+        String[] call_time = call.getTimeOfCall().split(":");
+        sess.setAttribute("call_hour",call_time[0]);
+        sess.setAttribute("call_minute",call_time[1]);
+        sess.setAttribute("call_number",call.getNumberOfCaller() );        
+        sess.setAttribute("call_name", call.getNameOfCaller());
+        sess.setAttribute("call_institution",call.getInstitution());
+        sess.setAttribute("call_address",call.getSceneAddress());
+        sess.setAttribute("call_province",call.getProvince());
+        sess.setAttribute("call_region",call.getRegion());
+        sess.setAttribute("call_condition", call.getSceneConditions());
         
         sess.setAttribute("go_to_editincident", true);
         response.sendRedirect("Home.jsp");

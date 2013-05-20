@@ -17,6 +17,7 @@ public class DeathCallDb extends DatabaseConnector
 {
      private DeathCall deathCall;
      private DbDetail dbDetail;
+     
         public DeathCallDb(DeathCall deathCall , DbDetail dbDetail)
       {
          super(dbDetail);
@@ -33,10 +34,6 @@ public class DeathCallDb extends DatabaseConnector
       
       }
 
-         public DeathCall getAuditTrail()
-      {
-         return deathCall;
-      }
       
       public void  deathCallDb(DeathCall deathCall)
       {
@@ -54,16 +51,16 @@ public class DeathCallDb extends DatabaseConnector
         { 
             statement.executeUpdate("INSERT INTO Deathcall(Incident_incidentLogNumber, dateOfCall, timeOfCall, numberOfCaller, institution, sceneAddress, province, region, sceneConditions, nameOfCaller)" + " VALUES"
                                     +" ('" 
-                                    + deathCall.getIncident().getIncidentLogNumber() + "','" 
-                                    + deathCall.getDateOfCall() + "','" 
-                                    + deathCall.getTimeOfCall() + "','" 
-                                    + deathCall.getNumberOfCaller()+ "','"
-                                    + deathCall.getInstitution() +"','"
-                                    + deathCall.getSceneAddress() + "','"
-                                    + deathCall.getProvince() + "','"
-                                    + deathCall.getRegion() + "','"
-                                    + deathCall.getSceneConditions()+ "','"
-                                    + deathCall.getNameOfCaller()+"')");
+                                    + getDeathCall().getIncident().getIncidentLogNumber() + "','" 
+                                    + getDeathCall().getDateOfCall() + "','" 
+                                    + getDeathCall().getTimeOfCall() + "','" 
+                                    + getDeathCall().getNumberOfCaller()+ "','"
+                                    + getDeathCall().getInstitution() +"','"
+                                    + getDeathCall().getSceneAddress() + "','"
+                                    + getDeathCall().getProvince() + "','"
+                                    + getDeathCall().getRegion() + "','"
+                                    + getDeathCall().getSceneConditions()+ "','"
+                                    + getDeathCall().getNameOfCaller()+"')");
             statement.close();
             connection.close(); //deathCall
         } 
@@ -105,7 +102,7 @@ public class DeathCallDb extends DatabaseConnector
 		  dCall.setRegion(resultSet.getString("region"));
 		  dCall.setSceneConditions(resultSet.getString("sceneConditions"));
                   dCall.setNameOfCaller(resultSet.getString("nameOfCaller"));
-                  IncidentDb incidentDb = new IncidentDb(deathCall.getIncident(), dbDetail);
+                  IncidentDb incidentDb = new IncidentDb(getDeathCall().getIncident(), dbDetail);
                   incidentDb.init();
                   incidentDb.read();
                   dCall.setIncident(incidentDb.getIncident());
@@ -127,7 +124,7 @@ public class DeathCallDb extends DatabaseConnector
     {
         try
         {
-            statement.executeQuery("SELECT * FROM deathcall WHERE Incident_incidentLogNumber='" + deathCall.getIncident() + "';" );
+            statement.executeQuery("SELECT * FROM deathcall WHERE Incident_incidentLogNumber='" + getDeathCall().getIncident().getIncidentLogNumber() + "';" );
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             DeathCall dCall= new DeathCall();
@@ -140,10 +137,11 @@ public class DeathCallDb extends DatabaseConnector
             dCall.setRegion(resultSet.getString("region"));
             dCall.setSceneConditions(resultSet.getString("sceneConditions"));
             dCall.setNameOfCaller(resultSet.getString("nameOfCaller"));
-            IncidentDb incidentDb = new IncidentDb(deathCall.getIncident(), dbDetail);
+            IncidentDb incidentDb = new IncidentDb(getDeathCall().getIncident(), dbDetail);
             incidentDb.init();
             incidentDb.read();
             dCall.setIncident(incidentDb.getIncident()); //To change body of generated methods, choose Tools | Templates.
+            deathCall = dCall;
         } 
         catch (SQLException ex)  
         {
@@ -168,7 +166,7 @@ public class DeathCallDb extends DatabaseConnector
      {
         try 
         {
-            statement.executeUpdate("UPDATE DeathCall SET timeOfCall='" + deathCall.getTimeOfCall() + "', dateOfCall='" + deathCall.getDateOfCall() +"', numberOfCaller='"+ deathCall.getNumberOfCaller() +"', institution='"+ deathCall.getInstitution() +"', sceneAddress='"+ deathCall.getSceneAddress() +"', province='"+ deathCall.getProvince() +"', region='"+ deathCall.getRegion() +"', sceneConditions='"+ deathCall.getSceneConditions() +"', nameOfCaller='"+ deathCall.getNameOfCaller() +"' WHERE Incident_incidentLogNumber = '"+ deathCall.getIncident().getIncidentLogNumber() +"';" );
+            statement.executeUpdate("UPDATE DeathCall SET timeOfCall='" + getDeathCall().getTimeOfCall() + "', dateOfCall='" + getDeathCall().getDateOfCall() +"', numberOfCaller='"+ getDeathCall().getNumberOfCaller() +"', institution='"+ getDeathCall().getInstitution() +"', sceneAddress='"+ getDeathCall().getSceneAddress() +"', province='"+ getDeathCall().getProvince() +"', region='"+ getDeathCall().getRegion() +"', sceneConditions='"+ getDeathCall().getSceneConditions() +"', nameOfCaller='"+ getDeathCall().getNameOfCaller() +"' WHERE Incident_incidentLogNumber = '"+ getDeathCall().getIncident().getIncidentLogNumber() +"';" );
             statement.close();
             connection.close();
         } 
@@ -178,5 +176,12 @@ public class DeathCallDb extends DatabaseConnector
         }
         return "successful";
      }
+
+    /**
+     * @return the deathCall
+     */
+    public DeathCall getDeathCall() {
+        return deathCall;
+    }
     
 }

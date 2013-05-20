@@ -42,21 +42,21 @@ $(document).ready(function(){
         goHome();
     });
     
-    $("#yesdispatch").on("click",function(){
+    $("#yesdispatch").click(function(){
         $("#vehicleform").show();
         $("#success").hide();
         $("#dispatchform").hide();
         return false;
     });
     
-    $("#nodispatch").on("click",function(){
+    $("#nodispatch").click(function(){
         $("#success").hide();
         $("#dispatchform").hide();
         goHome();
         
     });
     
-    $("#dispatch").on("click",function(){
+    $("#dispatch").click(function(){
         if($("#vehicleform").valid()){
            $("#vehicleform").submit(); 
         }

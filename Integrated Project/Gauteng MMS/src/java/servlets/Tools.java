@@ -301,6 +301,15 @@ public class Tools {
            return null;
        }
     }
+    
+    public DeathCall getDeathCall(Incident inc){
+        DeathCall call = new DeathCall(inc);
+        DeathCallDb calldb = new DeathCallDb(call,dbdetail);
+        calldb.init();
+        calldb.read();
+        call = calldb.getDeathCall();
+        return call;
+    }
     //
 
     /**
