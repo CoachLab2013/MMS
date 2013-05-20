@@ -42,7 +42,7 @@
                   surnme = (String) session.getAttribute("surname");
                   email = (String) session.getAttribute("email");
                   personnel = (String) session.getAttribute("personnel");
-                  level = Integer.parseInt(session.getAttribute("level").toString());
+                  level = Integer.parseInt(session.getAttribute("level").toString().trim());
                   active = (Boolean) session.getAttribute("active");
                   editResult = session.getAttribute("Eresult").toString();
                   Supervisor = " ";
@@ -126,8 +126,7 @@
                                 <option <% out.println(String.valueOf(Supervisor));%>  value="1">Supervisor</option>
                                 <option <% out.println(String.valueOf(fpsOfficer));%>   value="2">FPS Officer</option>
                                 <option <% out.println(String.valueOf(Pathologist));%>   value="3">Pathologist</option>
-                                <option <% out.println(String.valueOf(Administrator));%>  value="4">Administrator</option>
-
+                                <option <% out.println(String.valueOf(Administrator));%>  value="4">Administrator</option>                               
                                 </option>
 
                             </select>

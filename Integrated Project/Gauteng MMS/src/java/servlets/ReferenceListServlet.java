@@ -4,6 +4,7 @@
  */
 package servlets;
 
+import AssistiveClasses.ClassSendMailTLS;
 import database.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -88,12 +89,14 @@ public class ReferenceListServlet extends HttpServlet {
 
             String personnel = request.getParameter("personnelNumber");
             String password = random(8);
+           
             String name = request.getParameter("firstName");
             String surname = request.getParameter("surname");
             //String rank = request.getParameter("rank");
             String email = request.getParameter("email");
-
-            boolean active = Boolean.valueOf(request.getParameter("Active"));
+            ClassSendMailTLS sendmail = new ClassSendMailTLS();
+            sendmail.sendMail(email.trim(), "You password for the Gauteng MMS system is \n  "+ password);
+            boolean active = Boolean.valueOf(request.getParameter("active"));
             int level = Integer.parseInt(request.getParameter("level"));
 
 
@@ -134,14 +137,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "insti");
-                sess.setAttribute("result", "Institution has been successfuly saved to database");
+                sess.setAttribute("insti", "Institution has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "insti");
-                sess.setAttribute("result", "Institution did not save: because " + result);
+                sess.setAttribute("insti", "Institution did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -158,14 +161,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "analysis");
-                sess.setAttribute("result", "Analysis Type has been successfuly saved to database");
+                sess.setAttribute("analysisResult", "Analysis Type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "analysis");
-                sess.setAttribute("result",  "Analysis Type did not save: because " + result);
+                sess.setAttribute("analysisResult",  "Analysis Type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -183,14 +186,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "rank");
-                sess.setAttribute("result", "Rank type has been successfuly saved to database");
+                sess.setAttribute("rankResult", "Rank type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "rank");
-                sess.setAttribute("result",  "Rank type did not save: because " + result);
+                sess.setAttribute("rankResult",  "Rank type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -209,14 +212,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "gender");
-                sess.setAttribute("result", "Gender type has been successfuly saved to database");
+                sess.setAttribute("genderResult", "Gender type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "gender");
-                sess.setAttribute("result",  "Gender type did not save: because " + result);
+                sess.setAttribute("genderResult",  "Gender type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -235,14 +238,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "occu");
-                sess.setAttribute("result", "Occupation Category has been successfuly saved to database");
+                sess.setAttribute("occupationResult", "Occupation Category has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "occu");
-                sess.setAttribute("result",  "Occupation Category did not save: because " + result);
+                sess.setAttribute("occupationResult",  "Occupation Category did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -261,14 +264,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "race");
-                sess.setAttribute("result", "Race type has been successfuly saved to database");
+                sess.setAttribute("raceResult", "Race type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "race");
-                sess.setAttribute("result",  "Race type did not save: because " + result);
+                sess.setAttribute("raceResult",  "Race type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -287,14 +290,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "marital");
-                sess.setAttribute("result", "Marital Status type has been successfuly saved to database");
+                sess.setAttribute("maritalResult", "Marital Status type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "marital");
-                sess.setAttribute("result",  "Marital Status type did not save: because " + result);
+                sess.setAttribute("maritalResult",  "Marital Status type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -313,14 +316,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "province");
-                sess.setAttribute("result", " The Province has been successfuly saved to database");
+                sess.setAttribute("provinceResult", " The Province has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "province");
-                sess.setAttribute("result",  "The Province did not save: because " + result);
+                sess.setAttribute("provinceResult",  "The Province did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -339,14 +342,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "icd10");
-                sess.setAttribute("result", "The ICD10 code has been successfuly saved to database");
+                sess.setAttribute("iCD10Result", "The ICD10 code has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "icd10");
-                sess.setAttribute("result",  "The ICD10 code did not save: because " + result);
+                sess.setAttribute("iCD10Result",  "The ICD10 code did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -365,14 +368,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "manner");
-                sess.setAttribute("result", "The manner of death has been successfuly saved to database");
+                sess.setAttribute("mannerResult", "The manner of death has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "manner");
-                sess.setAttribute("result",  "The manner of death did not save: because " + result);
+                sess.setAttribute("mannerResult",  "The manner of death did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -391,14 +394,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "sample");
-                sess.setAttribute("result", "Sample type has been successfuly saved to database");
+                sess.setAttribute("sampleResult", "Sample type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "sample");
-                sess.setAttribute("result",  "Sample type did not save: because " + result);
+                sess.setAttribute("sampleResult",  "Sample type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -417,14 +420,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "status");
-                sess.setAttribute("result", "Status Category has been successfuly saved to database");
+                sess.setAttribute("statusResult", "Status Category has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "status");
-                sess.setAttribute("result",  "Status category type did not save: because " + result);
+                sess.setAttribute("statusResult",  "Status category type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
@@ -442,14 +445,14 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "relationship");
-                sess.setAttribute("result", "Relationship type has been successfuly saved to database");
+                sess.setAttribute("relationshipResult", "Relationship type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "relationship");
-                sess.setAttribute("result",  "Relationship type did not save: because " + result);
+                sess.setAttribute("relationshipResult",  "Relationship type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
