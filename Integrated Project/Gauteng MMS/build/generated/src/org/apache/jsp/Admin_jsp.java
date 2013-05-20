@@ -92,7 +92,6 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String occupationResult = "";
             String raceResult = "";
             String maritalResult = "";
-            String oraganisationResult = "";
             String provinceResult = "";
             String iCD10Result = "";
             String mannerResult = "";
@@ -155,7 +154,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                         propertyResult = session.getAttribute("propertyResult").toString();
                         property = "active";
                     } else if (session.getAttribute("tab").equals("vehi")) {
-                        vehicleResult = session.getAttribute("result").toString();
+                        vehicleResult = session.getAttribute("vehicleResult").toString();
                         vehi = "active";
                     } else if (session.getAttribute("tab").equals("rank")) {
                         rankResult = session.getAttribute("rankResult").toString();
@@ -172,7 +171,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     } else if (session.getAttribute("tab").equals("marital")) {
                         maritalResult = session.getAttribute("maritalResult").toString();
                         marital = "active";
-                    }   else if (session.getAttribute("tab").equals("province")) {
+                    } else if (session.getAttribute("tab").equals("province")) {
                         provinceResult = session.getAttribute("provinceResult").toString();
                         province = "active";
                     } else if (session.getAttribute("tab").equals("icd10")) {
@@ -209,7 +208,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     occupationResult = "";
                     raceResult = "";
                     maritalResult = "";
-                    
+
                     provinceResult = "";
                     iCD10Result = "";
                     mannerResult = "";
@@ -229,7 +228,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                 main1 = "active";
             }
             SetDbDetail dbset = new SetDbDetail();
-            
+
             //Code to fill users table
             EmployeeDb emplo = new EmployeeDb(dbset.getDbdetail());
             emplo.init();
@@ -239,13 +238,23 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
 
             //For institution list box
             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbset.getDbdetail());
-            emp.init(); 
+            emp.init();
             ArrayList<String> institutionList = emp.referenceList();
 
             //For analysis list box
             emp = new ReferenceListDb("analysis", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> analysisList = emp.referenceList();
+
+            //For property list box
+            emp = new ReferenceListDb("propertytype", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> PropertyList = emp.referenceList();
+
+            //For Vehicles list box
+            emp = new ReferenceListDb("vehicle", "e", "registrationNumber", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> vehicleList = emp.referenceList();
 
             //For rank list box
             emp = new ReferenceListDb("rank", "e", "type", "e", dbset.getDbdetail());
@@ -303,15 +312,12 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             ArrayList<String> relationshipList = emp.referenceList();
 
             /*
-             //For institution list box
-             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
-             emp.init();
-             ArrayList<String> institutionList = emp.referenceList();
+             //
             
              //For institution list box
              ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
              emp.init();
-             ArrayList<String> institutionList = emp.referenceList();
+             ArrayList<String> vehicleList = emp.referenceList();
             
              //For institution list box
              ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
@@ -323,12 +329,12 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
              emp.init();
              ArrayList<String> institutionList = emp.referenceList();
              */
-             
+        
       out.write("\r\n");
       out.write("\r\n");
-      out.write("       \r\n");
-      out.write("      \r\n");
-      out.write("    \r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("        ");
       out.write("\r\n");
       out.write("        <div class=\"tabbable\">\r\n");
@@ -346,7 +352,7 @@ out.println(String.valueOf(main2));
       out.write("                <div id=\"User\" class=\"tab-pane ");
 out.println(String.valueOf(main1));
       out.write(" \">  \r\n");
-      out.write("              \r\n");
+      out.write("\r\n");
       out.write("                    ");
       out.write("\r\n");
       out.write("                    <div class=\"tabbable\">\r\n");
@@ -365,12 +371,12 @@ out.println(String.valueOf(addUserTab));
       out.write("                            <div id=\"cUser\" class=\"tab-pane ");
 out.println(String.valueOf(currentUserTab));
       out.write("\">  \r\n");
-      out.write("                                <div align=\"center\"><h2>Users </h2> </div>\r\n");
+      out.write("                                <legend>Users</legend>\r\n");
       out.write("                                ");
       out.write("\r\n");
       out.write("                                <table border=\"1\" class=\"bordered-table\">\r\n");
       out.write("                                    <tr>\r\n");
-      out.write("                                    <th width=\"150\"><H4>Name</H4></th>\r\n");
+      out.write("                                        <th width=\"150\"><H4>Name</H4></th>\r\n");
       out.write("                                    <th width=\"150\"><H4>Surname</H4></th>\r\n");
       out.write("                                    <th width=\"150\"><H4>Persal number</H4></th>\r\n");
       out.write("                                    <th width=\"150\"><H4>Email Address <H4></th>\r\n");
@@ -433,7 +439,7 @@ out.println(String.valueOf(addUserTab));
       out.write(" \">  \r\n");
       out.write("                                                        ");
       out.write("\r\n");
-      out.write("                                                        <div align=\"center\"><h2>Add User </h2> </div>  \r\n");
+      out.write("                                                        <legend>Add User</legend>\r\n");
       out.write("\r\n");
       out.write("                                                        <form name=\"AddUser\" id=\"AddUser\" method=\"post\" action=\"ReferenceListServlet\" class=\"form-horizontal\">\r\n");
       out.write("\r\n");
@@ -536,7 +542,7 @@ out.println(String.valueOf(main2));
       out.write(" \"> \r\n");
       out.write("                                                        ");
       out.write("\r\n");
-      out.write("                                                        <div align=\"center\"><h2>Reference Lists </h2> </div> \r\n");
+      out.write("                                                        <legend>References Lists</legend>\r\n");
       out.write("                                                        <div class=\"tabbable\">\r\n");
       out.write("                                                            ");
       out.write("\r\n");
@@ -569,7 +575,7 @@ out.println(String.valueOf(race));
       out.write("                                                                <li class=\"");
 out.println(String.valueOf(marital));
       out.write("\"><a href=\"#mStatus\" data-toggle=\"tab\">Marital Status</a></li>\r\n");
-      out.write("                                                                \r\n");
+      out.write("\r\n");
       out.write("                                                                <li class=\"");
 out.println(String.valueOf(province));
       out.write("\"><a href=\"#province\" data-toggle=\"tab\">Province</a></li>\r\n");
@@ -690,13 +696,95 @@ out.println(String.valueOf(analysis));
       out.write("                                                                <div id=\"prop\" class=\"tab-pane ");
 out.println(String.valueOf(property));
       out.write(" \"> \r\n");
-      out.write("                                                                    <div align=\"center\"><h2>Property</h2> </div>                   \r\n");
+      out.write("                                                                    <div align=\"center\"><h2>Property</h2> </div>        \r\n");
+      out.write("                                                                    <div class=\"offset2 \">\r\n");
+      out.write("                                                                        <form name=\"AddProperty\" id=\"AddProperty\" method=\"post\" action=\"ReferenceListServlet\"  >\r\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddProperty\" style=\"visibility: hidden\" />\r\n");
+      out.write("                                                                            <div class=\"control-group form-horizontal\">\r\n");
+      out.write("                                                                                <label class=\"control-label\" for=\"txtProperty\">Property type name:</label>\r\n");
+      out.write("                                                                                <div class=\"controls\">\r\n");
+      out.write("                                                                                    <input type=\"text\" id=\"txtProperty\" name=\"txtProperty\"   />\r\n");
+      out.write("                                                                                    <input type=\"submit\" value=\"Add Property Type\" name=\"cmdProperty\" />\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <br/>  </div>\r\n");
+      out.write("                                                                        </form>\r\n");
+      out.write("                                                                        <div class=\"controls offset2\" >\r\n");
+      out.write("                                                                            <label class=\"control-label\" for=\"PropertyList\">Current Property Type(s):</label>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <select id=\"PropertyList\" name=\"PropertyList\" size=\"5\">\r\n");
+      out.write("                                                                                ");
+
+                                                                                    for (int i = 0; i < PropertyList.size(); i++) {
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                                <option>");
+ out.print(PropertyList.get(i));
+      out.write(" </option>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                ");
+
+                                                                                    }
+                                                                                
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("                                                                            </select>\r\n");
+      out.write("                                                                        </div>\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                    ");
+      out.write(" \r\n");
+      out.write("                                                                    <div  class=\"offset3\">\r\n");
+      out.write("                                                                        <label  > ");
+ out.println(String.valueOf(propertyResult));
+      out.write("</label>\r\n");
+      out.write("                                                                    </div>\r\n");
       out.write("                                                                </div>\r\n");
       out.write("\r\n");
       out.write("                                                                <div id=\"vehicles\" class=\"tab-pane ");
 out.println(String.valueOf(vehi));
       out.write(" \"> \r\n");
-      out.write("                                                                    <div align=\"center\"><h2>Vehicles</h2> </div>                   \r\n");
+      out.write("                                                                    <div align=\"center\"><h2>Vehicles</h2> </div> \r\n");
+      out.write("                                                                    <div class=\"offset2 \">\r\n");
+      out.write("                                                                        <form name=\"AddRank\" id=\"AddVehicle\" method=\"post\" action=\"ReferenceListServlet\"  >\r\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddVehicle\" style=\"visibility: hidden\" />\r\n");
+      out.write("                                                                            <div class=\"control-group form-horizontal\">\r\n");
+      out.write("                                                                                <label class=\"control-label\" for=\"txtVehicle\">Vehicle Registration Number:</label>\r\n");
+      out.write("                                                                                <div class=\"controls\">\r\n");
+      out.write("                                                                                    <input type=\"text\" id=\"txtVehicle\" name=\"txtVehicle\"   />\r\n");
+      out.write("                                                                                    <input type=\"submit\" value=\"Add Vehicle\" name=\"cmdVehicle\" />\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <br/>  </div>\r\n");
+      out.write("                                                                        </form>\r\n");
+      out.write("                                                                        <div class=\"controls offset2\" >\r\n");
+      out.write("                                                                            <label class=\"control-label\" for=\"VehicleList\">Current Vehicle(s)</label>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <select id=\"VehicleList\" name=\"VehicleList\" size=\"5\">\r\n");
+      out.write("                                                                                ");
+
+                                                                                    for (int i = 0; i < vehicleList.size(); i++) {
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                                <option>");
+ out.print(vehicleList.get(i));
+      out.write(" </option>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                ");
+
+                                                                                    }
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                            </select>\r\n");
+      out.write("                                                                        </div>\r\n");
+      out.write("                                                                    </div> \r\n");
+      out.write("                                                                    ");
+      out.write(" \r\n");
+      out.write("                                                                    <div  class=\"offset3\">\r\n");
+      out.write("                                                                        <label  > ");
+ out.println(String.valueOf(vehicleResult));
+      out.write("</label>\r\n");
+      out.write("                                                                    </div>\r\n");
       out.write("                                                                </div>\r\n");
       out.write("\r\n");
       out.write("                                                                <div id=\"rank\" class=\"tab-pane ");
