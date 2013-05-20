@@ -16,12 +16,13 @@ public class PostMortem {
     private boolean status;
     private boolean approved;
     private String DHA1663number;
+    private LabRecord labRecord;
     private Body body;
 
     public PostMortem() {
     }
 
-    public PostMortem(String labNumber, String icd10, String chiefFind, String causeOfDeath, boolean status, boolean approved, String DHA1663number, Body body) {
+    public PostMortem(String labNumber, String icd10, String chiefFind, String causeOfDeath, boolean status, boolean approved, String DHA1663number, Body body, LabRecord labRecord) {
         this.labNumber = labNumber;
         this.icd10 = icd10;
         this.chiefFind = chiefFind;
@@ -30,6 +31,7 @@ public class PostMortem {
         this.approved = approved;
         this.DHA1663number = DHA1663number;
         this.body = body;
+        this.labRecord = labRecord;
     }
 
     /**
@@ -40,7 +42,7 @@ public class PostMortem {
     }
 
     /**
-     * @return the icd10
+     * @return the ICD10
      */
     public String getIcd10() {
         return icd10;
@@ -142,5 +144,21 @@ public class PostMortem {
      */
     public void setBody(Body body) {
         this.body = body;
+    }
+    /**
+     * 
+     * @return LabRecord
+     */
+    public LabRecord getLabRecord()
+    {
+        return labRecord;
+    }
+    /**
+     * 
+     * @param labRecord of a specific post mortem
+     */
+    public void setLabRecord(LabRecord labRecord)
+    {
+        this.labRecord = labRecord;
     }
 }

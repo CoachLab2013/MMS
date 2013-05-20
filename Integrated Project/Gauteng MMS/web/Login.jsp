@@ -32,16 +32,14 @@
             <script src="bootstrap/js/bootstrap.min.js"></script>
             <link type="text/css" rel="stylesheet"  href="CSS/Design.css"> 
             <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css"> 
+             <div class="head"><img src="Images/logo2.jpg">
         </head>
-        <body>
-            <h1 align="center">Gauteng Mortuary Management System</h1>
-            <div align="center">
-                <img src="Images/logo.jpg" width="150" height="150">
-            </div>
+        
+        <body style=" height:600px">           
             
             <form name="loginform" method="post" action="LogInServlet" class="form-horizontal" id="loginform" >
                
-                <div class="offset5  span7 ">
+                <div class="offset3  span7 ">
                     <fieldset class="fieldset">
                         <legend class="legend"> Login</legend>
                         <div class="control-group">
@@ -57,7 +55,7 @@
                             </div>
                         </div>
                         <div class="offset2 ">
-                            <input type="submit" class="btn" value="Login" /> <br><br>
+                            <input type="submit" class="btn" value="Login" /> <br/><br/>
                             <%
                                     if(null != session.getAttribute("loginerror")){
                                     out.println("<label class='error'>"+session.getAttribute("loginerror")+"</label>");

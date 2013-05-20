@@ -3,7 +3,7 @@
     Created on : 19 Apr 2013, 12:32:17 PM
     Author     : Administrator
 --%>
-
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,68 +22,65 @@
  <script src="js/CallDetailsScript.js"></script>
     </head>
     <body>
+<<<<<<< HEAD
         <legend>Incidents> Edit Incident> Call Details</legend>
-        <form name="callform" id="callform" method="post" action="">
-      
-          
-                <table>
-                    <tr>     
-                        <td>  Time of Call:  </td><td><jsp:include page="Time.jsp" /><br></td>
-                      
+        <form name="callform" id="callform" method="post" action="LogIncidentServlet">
+    
+            <table>
+                <tr>     
+                    <td>  Time of Call:  </td><td>
+                    <%
+                        Tools t = new Tools();
+                        out.print(t.makeHour("callhour",-1) +" ");
+                        out.print(t.makeMinute("callminute",-1));
+                    %>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>  Caller's Phone Number:  </td><td> <input type="text" name="phonenumber" id="phonenumber"/><br></td>
+                </tr> 
+                    <tr>
+
+                        <td> Name of Caller:   </td><td>       <input type="text" name="name" id="name"/><br></td>
+
                     </tr>
                     <tr>
-                        <td>  Caller's Phone Number:  </td><td> <input type="text" name="phonenumber" id="phonenumber"/><br></td>
-                    </tr> 
+                        <td> Name of institution: </td><td>    <input type="text" name="institution" id="institution" /><br></td>
+                    </tr>
                         <tr>
-                       
-                            <td> Name of Caller:   </td><td>       <input type="text" name="name" id="name"/><br></td>
-                        
+                        <td> Scene Address:     </td><td><textarea cols="50" rows="3" name="address" id="address"> </textarea><br></td>
+
                         </tr>
                         <tr>
-                            <td> Name of institution: </td><td>    <input type="text" name="institution" id="institution" /><br></td>
-                        </tr>
-                            <tr>
-                            <td> Scene Address:     </td><td><textarea cols="50" rows="3" name="address" id="address"> </textarea><br></td>
-                     
-                            </tr>
-                            <tr>
-                            <td> Provinces:         </td><td>      <select name="province" id="province"><br>
-             
-              <option slected="selected">Select</option>
-              <option></option>
-              <option></option>
-              <option></option>
-              <option></option>
-              <option></option>
-              <option></option>
-              <option></option>
-              <option></option>
-          </select><br>
-        
-                            </tr>
-                            <tr>
-                        <td>  Region:</td><td><select name="region" id="region"><br>
-             <option selected="selected">Select</option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-         </select><br>
-                            </tr>
+                        <td> Province:         </td><td>
+                            <% 
+                            out.println(t.makeReferenceList("province","type",""));
+                            %>
                             
-                            <tr>
-                        <td>  Scene condition: </td><td><textarea cols="50" rows="3" name="condition" id="condition"> </textarea><br></td>
-                            </tr>
-                            <tr>
-                                <td> <td>  <input type="submit" value="Create Incident" name="create call details" /><br></td></td>
-          
-                            </tr>
-            </table>
-            </form>
-    </body
+                        </td>
+
+                        </tr>
+                        <tr>
+                    <td>  Region:</td><td>
+                        <% 
+                           out.println(t.makeReferenceList("region","type",""));
+                        %>
+                    </td>
+                        </tr>
+
+                        <tr>
+                    <td>  Scene condition: </td><td><textarea cols="50" rows="3" name="condition" id="condition"> </textarea><br></td>
+                        </tr>
+                        <tr>
+                            <td></td> <td>  <input type="submit" value="Create Incident" name="createincident" id="createincident" /> <input type="reset" value="Cancel" id="callcancel" /><br></td>
+                        </tr>
+        </table>
+    </form>
+=======
+        <legend>Edit Call Details</legend>
+>>>>>>> origin/master
+
+</body>
         
 </html>
