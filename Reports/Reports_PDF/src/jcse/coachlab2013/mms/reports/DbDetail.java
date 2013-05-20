@@ -7,7 +7,7 @@ package jcse.coachlab2013.mms.reports;
 public class DbDetail 
 {
     
-    public static DbDetail staticDBDetail = new DbDetail("localhost", "/", "root", "root");
+    public static DbDetail staticDBDetail = new DbDetail("localhost", "/", "reportuser", "root");
     
     private String url;
     private String dbName;
