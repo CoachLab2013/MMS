@@ -67,6 +67,7 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link type=\"text/css\" rel=\"stylesheet\"  href=\"bootstrap/css/bootstrap.css\">   \r\n");
       out.write("        <script  src=\"bootstrap/js/bootstrap-tabs.js\"></script>\r\n");
       out.write("        <title>Gauteng Mortuary Management System</title>\r\n");
+      out.write("        <div class=\"head\"><img src=\"Images/logo2.jpg\">\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
       out.write("        ");
@@ -77,11 +78,7 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("        <p>\r\n");
       out.write("\r\n");
-      out.write("            <span style=\"float: left\">Welcome ");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${employee.getName()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write(' ');
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${employee.getSurname()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-      out.write("</span>\r\n");
+      out.write("            \r\n");
       out.write("            <span style=\"float: right\">Logout</span>\r\n");
       out.write("        </p>\r\n");
       out.write("        ");
@@ -91,7 +88,7 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
             }
         
       out.write("\r\n");
-      out.write("        <div align=\"center\"><h1> <img src=\"Images/logo.jpg\" width=\"75\" height=\"75\"> Gauteng Mortuary Management System</h1></div>\r\n");
+      out.write("       \r\n");
       out.write("        <div class=\"tabbable\">\r\n");
       out.write("            <ul class=\"nav nav-tabs \" data-tabs=\"tabs\">\r\n");
       out.write("                <li id=\"IncidentTab\" class=\"active\"><a href=\"#Incident\" data-toggle=\"tab\">Incidents</a> </li>\r\n");

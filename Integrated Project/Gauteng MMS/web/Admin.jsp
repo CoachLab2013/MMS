@@ -302,7 +302,7 @@
 
                         <div class="tab-content" >
                             <div id="cUser" class="tab-pane <%out.println(String.valueOf(currentUserTab));%>">  
-                                <div align="center"><h2>Users </h2> </div>
+                                 <legend>Users</legend>
                                 <%--  Current user content --%>
                                 <table border="1" class="bordered-table">
                                     <tr>
@@ -340,7 +340,7 @@
                                                     </div>
                                                     <div id="aUser" class="tab-pane <%out.println(String.valueOf(addUserTab));%> ">  
                                                         <%--  Add user content --%>
-                                                        <div align="center"><h2>Add User </h2> </div>  
+                                                        <legend>Add User</legend>
 
                                                         <form name="AddUser" id="AddUser" method="post" action="ReferenceListServlet" class="form-horizontal">
 
@@ -431,7 +431,7 @@
                                                     </div>
                                                     <div id="RefList" class="tab-pane <%out.println(String.valueOf(main2));%> "> 
                                                         <%-- Content of reference list tab --%>
-                                                        <div align="center"><h2>Reference Lists </h2> </div> 
+                                                         <legend>References Lists</legend>
                                                         <div class="tabbable">
                                                             <%-- reference list  tab has 20 tabs, and they are the following --%>
                                                             <ul class="nav nav-tabs " data-tabs="tabs">

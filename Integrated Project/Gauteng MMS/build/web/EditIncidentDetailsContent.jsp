@@ -24,7 +24,7 @@
                 out.print("<input type=hidden class='go_to_editincident' id='go_to_editincident' value=" + session.getAttribute("go_to_editincident") +">");               
             }
         %>
-        <legend>Incidents> Edit Incident> Incident Details</legend>
+        <legend>Edit Incident Details</legend>
 
         <form id="editdetailform"  name="editdetailform" class="form-horizontal" method="post" action="SaveIncidentDetails">
         <table>

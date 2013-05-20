@@ -25,7 +25,7 @@
  <script src="js/IncidentDetailsScript.js"></script>
     </head>
     <body>
-        <legend>Incidents> Log Incident> Incident Details</legend>
+        <legend>Incident Details</legend>
         <form id="detailform" name="detailform" class="form-horizontal" method="post" action="LogIncidentServlet">
         <table>
             <tr>

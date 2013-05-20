@@ -21,7 +21,7 @@
  <script src="js/CallDetailsScript.js"></script>
     </head>
     <body>
-        <legend>Incidents> Edit Incident> Call Details</legend>
+        <legend>Edit Call Details</legend>
 
 </body>
         
