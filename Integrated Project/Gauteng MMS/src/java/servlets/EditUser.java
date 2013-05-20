@@ -99,6 +99,7 @@ public class EditUser extends HttpServlet {
             sess.setAttribute("level", found.getAccess());
             sess.setAttribute("active", found.isActive());
             sess.setAttribute("Eresult", "" );
+            
             response.sendRedirect("EditAdmin.jsp");
 
         } catch (SQLException ex) {

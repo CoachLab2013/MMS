@@ -1,10 +1,6 @@
 package database;
 
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -295,17 +291,16 @@ public class TestApp {
         PostMortemDb  postDb = new PostMortemDb(dbDetail);
         postDb.init();
         postDb.setPostMortem(new PostMortem("908","f","g","gy",true,true,"ff",new BodyAtMortuary("099888592"),new LabRecord(false, 6, 0)));
-        System.out.print(postDb.IncreaseSampleCount());
+        System.out.print(postDb.increaseSampleCount());
         //System.out.println(postDb.edit());
         //System.out.println(postDb.getPostMortem().getLabRecord().getNumberOfSamples());
         //System.out.println(postDb.getPostMortem().getDHA1663number());
         
         
-        //ForensicSample fsample = new forensicSample("1234","1","reas","sealTy","brolN","tyAna", "insti","speacialIn",true,"1" ,"2010-10-07","200-01-02");
-        //ForensicSampleDb fdb = new forensicSampleDb(fsample, dbdtail);
-        //fdb.init();
-         
-       //System.out.println(fdb.edit());
+        ForensicSample fsample = new ForensicSample("1234","099888592","reas","xxxx","brolN","tyAna", "insti","speacialIn",true,"908" ,"2010-10-07","200-01-02");
+        ForensicSampleDb fdb = new ForensicSampleDb(fsample,dbDetail);
+        fdb.init();
+        System.out.println(fdb.add());
        /*
         try {
           

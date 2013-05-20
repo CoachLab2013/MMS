@@ -5,6 +5,8 @@
  
 --%>
 
+<%@page import="AssistiveClasses.SetDbDetail"%>
+<%@page import="servlets.Tools"%>
 <%@page import="database.EmployeeDb"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="database.Employee"%>
@@ -24,7 +26,9 @@
         <script src="js/jquery-1.7.1.min.js"></script>
         <script src="js/jquery.validate.min.js"></script>
         <script src="js/script.js"></script>
-        <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
+        <link  type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="bootstrap/css/tablecss.css"
+    <div class="head"><img src="Images/logo2.jpg">
         <title>MMS Administration</title>
     </head>
     <body>  
@@ -53,7 +57,7 @@
             String main1 = "";
             String addUserTab = "";
             String currentUserTab = "";
- 
+
             //checks which tab to open
             if (null != session.getAttribute("result")) {
                 userResult = session.getAttribute("result").toString();
@@ -65,9 +69,9 @@
                 addUserTab = "";
                 currentUserTab = "active";
             }
-            
+
             //Veriables to determine which tab to open
-            String main2 = "";  
+            String main2 = "";
             String inst = "";
             String analysis = "";
             String relationship = "";
@@ -95,57 +99,58 @@
 
                     if (session.getAttribute("tab").equals("insti")) {
                         inst = "active";
-                        instiResult = session.getAttribute("result").toString();
+                        instiResult = session.getAttribute("insti").toString();
 
                     } else if (session.getAttribute("tab").equals("analysis")) {
                         analysis = "active";
-                        analysisResult = session.getAttribute("result").toString();
+                        analysisResult = session.getAttribute("analysisResult").toString();
 
                     } else if (session.getAttribute("tab").equals("property")) {
-                        propertyResult = session.getAttribute("result").toString();
+                        propertyResult = session.getAttribute("propertyResult").toString();
                         property = "active";
                     } else if (session.getAttribute("tab").equals("vehi")) {
                         vehicleResult = session.getAttribute("result").toString();
                         vehi = "active";
                     } else if (session.getAttribute("tab").equals("rank")) {
-                        rankResult = session.getAttribute("result").toString();
+                        rankResult = session.getAttribute("rankResult").toString();
                         rank = "active";
                     } else if (session.getAttribute("tab").equals("gender")) {
-                        genderResult = session.getAttribute("result").toString();
+                        genderResult = session.getAttribute("genderResult").toString();
                         gender = "active";
                     } else if (session.getAttribute("tab").equals("occu")) {
-                        occupationResult = session.getAttribute("result").toString();
+                        occupationResult = session.getAttribute("occupationResult").toString();
                         occu = "active";
                     } else if (session.getAttribute("tab").equals("race")) {
-                        raceResult = session.getAttribute("result").toString();
+                        raceResult = session.getAttribute("raceResult").toString();
                         race = "active";
                     } else if (session.getAttribute("tab").equals("marital")) {
-                        maritalResult = session.getAttribute("result").toString();
+                        maritalResult = session.getAttribute("maritalResult").toString();
                         marital = "active";
-                    } else if (session.getAttribute("tab").equals("organisation")) {
-                        oraganisationResult = session.getAttribute("result").toString();
-                        organisation = "active";
-                    } else if (session.getAttribute("tab").equals("province")) {
-                        provinceResult = session.getAttribute("result").toString();
+                    }   else if (session.getAttribute("tab").equals("province")) {
+                        provinceResult = session.getAttribute("provinceResult").toString();
                         province = "active";
                     } else if (session.getAttribute("tab").equals("icd10")) {
-                        iCD10Result = session.getAttribute("result").toString();
+                        iCD10Result = session.getAttribute("iCD10Result").toString();
                         icd10 = "active";
                     } else if (session.getAttribute("tab").equals("manner")) {
-                        mannerResult = session.getAttribute("result").toString();
+                        mannerResult = session.getAttribute("mannerResult").toString();
                         manner = "active";
                     } else if (session.getAttribute("tab").equals("sample")) {
 
-                        sampleResult = session.getAttribute("result").toString();
+                        sampleResult = session.getAttribute("sampleResult").toString();
                         sample = "active";
 
                     } else if (session.getAttribute("tab").equals("status")) {
-                        statusResult = session.getAttribute("result").toString();
+                        statusResult = session.getAttribute("statusResult").toString();
                         status = "active";
                     } else if (session.getAttribute("tab").equals("relationship")) {
-                        relationshipResult = session.getAttribute("result").toString();
+                        relationshipResult = session.getAttribute("relationshipResult").toString();
                         relationship = "active";
+                    } else if (session.getAttribute("tab").equals("Adduser")) {
+                        addUserTab = "active";
+                        userResult = session.getAttribute("relationshipResult").toString();
                     }
+
 
                 } else {
                     userResult = "";
@@ -158,7 +163,7 @@
                     occupationResult = "";
                     raceResult = "";
                     maritalResult = "";
-                    oraganisationResult = "";
+                    
                     provinceResult = "";
                     iCD10Result = "";
                     mannerResult = "";
@@ -168,92 +173,86 @@
 
                     main1 = "active";
 
+                    currentUserTab = "active";
 
 
-                    if (session.getAttribute("tab").equals("Adduser")) {
-                        addUserTab = "active";
-                        userResult = session.getAttribute("result").toString();
-                    } else {
-
-                        currentUserTab = "active";
-                    }
 
                 }
             } catch (Exception ex) {
                 currentUserTab = "active";
                 main1 = "active";
             }
-            DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
-
+            SetDbDetail dbset = new SetDbDetail();
+            
             //Code to fill users table
-            EmployeeDb emplo = new EmployeeDb(dbDetail);
+            EmployeeDb emplo = new EmployeeDb(dbset.getDbdetail());
             emplo.init();
             ArrayList<Employee> employeeList = emplo.employeeList();
 
             //Code to populate list boxes in tabs
 
             //For institution list box
-            ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
-            emp.init();
+            ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbset.getDbdetail());
+            emp.init(); 
             ArrayList<String> institutionList = emp.referenceList();
 
             //For analysis list box
-            emp = new ReferenceListDb("analysis", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("analysis", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> analysisList = emp.referenceList();
 
             //For rank list box
-            emp = new ReferenceListDb("rank", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("rank", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> rankList = emp.referenceList();
 
             //For gender list box
-            emp = new ReferenceListDb("gender", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("gender", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> genderList = emp.referenceList();
 
             //For occupation list box
-            emp = new ReferenceListDb("occupation", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("occupation", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> occupationList = emp.referenceList();
 
             //For race list box
-            emp = new ReferenceListDb("race", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("race", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> raceList = emp.referenceList();
 
             //For maritalstatus list box
-            emp = new ReferenceListDb("maritalstatus", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("maritalstatus", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> maritalstatusList = emp.referenceList();
 
             //For province list box
-            emp = new ReferenceListDb("province", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("province", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> provinceList = emp.referenceList();
 
             //For icd10 list box
-            emp = new ReferenceListDb("icd10", "e", "code", "e", dbDetail);
+            emp = new ReferenceListDb("icd10", "e", "code", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> icd10List = emp.referenceList();
 
             //For mannerofdeath list box
-            emp = new ReferenceListDb("mannerofdeath", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("mannerofdeath", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> mannerofdeathList = emp.referenceList();
 
             //For sample list box
-            emp = new ReferenceListDb("sample", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("sample", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> sampleList = emp.referenceList();
 
             //For bodystatus list box
-            emp = new ReferenceListDb("bodystatus", "e", "state", "e", dbDetail);
+            emp = new ReferenceListDb("bodystatus", "e", "state", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> bodystatusList = emp.referenceList();
 
             //For relationship list box
-            emp = new ReferenceListDb("relationship", "e", "type", "e", dbDetail);
+            emp = new ReferenceListDb("relationship", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> relationshipList = emp.referenceList();
 
@@ -278,16 +277,11 @@
              emp.init();
              ArrayList<String> institutionList = emp.referenceList();
              */
+             %>
 
-
-        %>
-
-        <p>
-            <span style="float: left">Welcome Mrs Admin </span>
-            <span style="float: right">Logout  .</span>
-        </p>
-        <div align="center"><h1><img src="Images/logo.jpg" width="75" height="75"> Gauteng MMS Administration</h1></div>
-
+       
+      
+    
         <%-- starting of main tabs --%>
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
@@ -297,7 +291,7 @@
             <%-- contents of main tabs --%>
             <div class="tab-content" >
                 <div id="User" class="tab-pane <%out.println(String.valueOf(main1));%> ">  
-                    <div align="center"><h2>Users </h2> </div>
+              
                     <%-- Users tab content --%>
                     <div class="tabbable">
                         <%-- Users tab has 2 tabs, and they are the following --%>
@@ -308,11 +302,11 @@
 
                         <div class="tab-content" >
                             <div id="cUser" class="tab-pane <%out.println(String.valueOf(currentUserTab));%>">  
-                                <div align="center"><h2>Users </h2> </div>
+                                 <legend>Users</legend>
                                 <%--  Current user content --%>
                                 <table border="1" class="bordered-table">
                                     <tr>
-                                        <th width="150"><H4>Name</H4></th>
+                                    <th width="150"><H4>Name</H4></th>
                                     <th width="150"><H4>Surname</H4></th>
                                     <th width="150"><H4>Persal number</H4></th>
                                     <th width="150"><H4>Email Address <H4></th>
@@ -346,7 +340,7 @@
                                                     </div>
                                                     <div id="aUser" class="tab-pane <%out.println(String.valueOf(addUserTab));%> ">  
                                                         <%--  Add user content --%>
-                                                        <div align="center"><h2>Add User </h2> </div>  
+                                                        <legend>Add User</legend>
 
                                                         <form name="AddUser" id="AddUser" method="post" action="ReferenceListServlet" class="form-horizontal">
 
@@ -354,7 +348,7 @@
                                                                 <input type="text" name="form" value="AddUser" style="visibility: hidden" />
                                                                 <fieldset>
                                                                     <legend>User Personal Details</legend>
-                                                                         <label  > <% out.println(String.valueOf(userResult));%> </label>
+                                                                    <label  > <% out.println(String.valueOf(userResult));%> </label>
                                                                     <div class="control-group   error">
 
                                                                         <label  class="control-label"   for="firstName">Full Name(s):</label> 
@@ -382,8 +376,8 @@
 
                                                                 <fieldset>
                                                                     <legend>User Employment Details</legend>
-                                                                   
-                                                               
+
+
                                                                     <div class="control-group error ">
                                                                         <label  class="control-label" for="personnelNumber">Persal Number:</label>
                                                                         <div class="controls">
@@ -437,7 +431,7 @@
                                                     </div>
                                                     <div id="RefList" class="tab-pane <%out.println(String.valueOf(main2));%> "> 
                                                         <%-- Content of reference list tab --%>
-                                                        <div align="center"><h2>Reference Lists </h2> </div> 
+                                                         <legend>References Lists</legend>
                                                         <div class="tabbable">
                                                             <%-- reference list  tab has 20 tabs, and they are the following --%>
                                                             <ul class="nav nav-tabs " data-tabs="tabs">
@@ -451,7 +445,7 @@
                                                                 <li class="<%out.println(String.valueOf(occu));%>"><a href="#occupation" data-toggle="tab">Occupation</a></li>
                                                                 <li class="<%out.println(String.valueOf(race));%>"><a href="#race" data-toggle="tab">Race</a></li>
                                                                 <li class="<%out.println(String.valueOf(marital));%>"><a href="#mStatus" data-toggle="tab">Marital Status</a></li>
-                                                                <li class="<%out.println(String.valueOf(organisation));%>"><a href="#org" data-toggle="tab">Organisation</a></li>
+                                                                
                                                                 <li class="<%out.println(String.valueOf(province));%>"><a href="#province" data-toggle="tab">Province</a></li>
                                                                 <li class="<%out.println(String.valueOf(icd10));%>"><a href="#icd10Codes" data-toggle="tab">ICD10 Codes</a></li>
                                                                 <li class="<%out.println(String.valueOf(manner));%>"><a href="#mDeath" data-toggle="tab">Manner of Death</a></li>
@@ -959,7 +953,7 @@
                                                                     </div> 
                                                                     <%--Display save result --%> 
                                                                     <div  class="offset3">
-                                                                        <label  > <% out.println(String.valueOf(userResult));%></label>
+                                                                        <label  > <% out.println(String.valueOf(relationshipResult));%></label>
                                                                     </div>
                                                                     <br/>
                                                                     <br/>

@@ -3,9 +3,9 @@
     Created on : Apr 16, 2013, 10:27:53 PM
     Author     : hollard
 --%>
-
 <%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +14,8 @@
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
     </head>
     <body>  
-    <legend>Incidents> Open Incidents</legend>
+    <legend>Open Incidents</legend>
+
     <form name="Deceased details" method="post" action="Deceased Address.jsp" class="form-horizontal" >
         <%
             Tools t = new Tools();

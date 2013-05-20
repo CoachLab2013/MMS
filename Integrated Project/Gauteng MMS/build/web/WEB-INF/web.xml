@@ -25,6 +25,10 @@
         <servlet-name>EditUser</servlet-name>
         <servlet-class>servlets.EditUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddBodyFile</servlet-name>
+        <servlet-class>servlets.AddBodyFile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -44,6 +48,10 @@
     <servlet-mapping>
         <servlet-name>EditUser</servlet-name>
         <url-pattern>/EditUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBodyFile</servlet-name>
+        <url-pattern>/AddBodyFile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
