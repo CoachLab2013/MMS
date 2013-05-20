@@ -42,7 +42,7 @@ public class DispatchVehicleServlet extends HttpServlet {
        Vehicle vehicle = new Vehicle(request.getParameter("vehicle"));
        Incident inc = new Incident(lognumber);
        VehicleDispatch vehicledispatch = new VehicleDispatch(t.getDateTime(),vehicle,inc);
-       DbDetail dbdetail = new DbDetail("localhost","/mydb","root","password");
+       DbDetail dbdetail = t.getDbdetail();
        VehicleDispatchDb vdb = new VehicleDispatchDb(dbdetail,vehicledispatch);
        vdb.init();
        vdb.add();

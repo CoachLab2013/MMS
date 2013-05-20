@@ -5,6 +5,7 @@
 package AssistiveClasses;
 
 import database.DbDetail;
+import servlets.Tools;
 
 /**
  *
@@ -22,6 +23,7 @@ public class SetDbDetail {
     }
 
     public SetDbDetail() {
-        dbdetail= new DbDetail("localhost", "/mydb", "root", "msandas777");
+        Tools t = new Tools();
+        dbdetail= t.getDbdetail();
     }
 }

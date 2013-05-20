@@ -33,7 +33,7 @@
                 </div>   
                 
                 <div id="DeaceasedAddress" class="tab-pane ">
-                    <h1>Hello3</h1>
+                    <jsp:include page="DeceasedAddressContent.jsp"/>
                 </div>
                 
                 <div id="Releaseproperty" class="tab-pane ">
