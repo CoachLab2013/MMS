@@ -54,6 +54,8 @@ public class GetIncidentServlet extends HttpServlet {
         sess.setAttribute("minute",time[1]);
         sess.setAttribute("number_of_bodies",incident.getNumberOfBodies());
         sess.setAttribute("bodies_recieved",incident.getBodyCount());
+        
+        
         sess.setAttribute("go_to_editincident", true);
         response.sendRedirect("Home.jsp");
     }
