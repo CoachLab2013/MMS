@@ -29,9 +29,11 @@
         <div class="head"><img src="Images/logo2.jpg">
     </head>
     <body>
-        <% //Tools t = new Tools();
+        <% 
+        
+        //Tools t = new Tools();
         //t.adduser();  
-%>
+        %>
 
         <p>
 
