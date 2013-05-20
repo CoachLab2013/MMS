@@ -14,7 +14,7 @@
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
     </head>
     <body>  
-    <legend>Incidents> Open Incidents</legend>
+    <legend>Open Incidents</legend>
 
     <form name="Deceased details" method="post" action="Deceased Address.jsp" class="form-horizontal" >
         <%

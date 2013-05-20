@@ -30,7 +30,7 @@
     </head>
 
     <body>
-    <legend>Incidents> Log Incident> Dispatch Vehicle</legend>
+    <legend>Dispatch Vehicle</legend>
     <%
         if (session.getAttribute("incidentlogged") != null) {
             out.print("<script src='js/SetFocus.js'></script>");

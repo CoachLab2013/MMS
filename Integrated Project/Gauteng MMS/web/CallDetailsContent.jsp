@@ -22,7 +22,7 @@
  <script src="js/CallDetailsScript.js"></script>
     </head>
     <body>
-        <legend>Incidents> Log Incident> Call Details</legend>
+        <legend>Call Details</legend>
         <form name="callform" id="callform" method="post" action="LogIncidentServlet" hidden="true">
     
             <table>

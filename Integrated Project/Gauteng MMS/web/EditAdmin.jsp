@@ -20,7 +20,7 @@
         <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
         <title>Edit User</title>
     </head>
-    <body>
+    <body style="height:650px">
         <%
             //Java code
                  String name = "";

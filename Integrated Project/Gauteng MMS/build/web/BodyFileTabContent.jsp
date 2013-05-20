@@ -52,9 +52,7 @@
             emp = new ReferenceListDb("race", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> raceList = emp.referenceList();
-
-
-
+ 
         %>
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
