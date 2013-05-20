@@ -13,7 +13,7 @@ $(document).ready(function(){
        
        //set focus on LogIncidentTab
        $("#OpenIncidentsTab").removeClass("active");
-       $("#LogIncidentTab").addClass("active")
+       $("#LogIncidentTab").addClass("active");
        $("#OpenIncidents").removeClass("tab-pane active");
        $("#OpenIncidents").addClass("tab-pane");
        $("#LogIncident").removeClass("tab-pane");
