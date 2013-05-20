@@ -59,10 +59,10 @@ $(document).ready(function(){
                 time: "detailhour detailminute"
         },
         errorPlacement: function(error, element) {
-            if ((element.attr("name") == "detailyear") || (element.attr("name") == "detailmonth") || (element.attr("name") == "detailday")){
+            if ((element.attr("name") === "detailyear") || (element.attr("name") === "detailmonth") || (element.attr("name") === "detailday")){
                 error.insertAfter("#detailday");
             } 
-            else if((element.attr("name") == "detailhour") || (element.attr("name") == "detailminute")){
+            else if((element.attr("name") === "detailhour") || (element.attr("name") === "detailminute")){
                 error.insertAfter("#detailminute");
             }
             else {
@@ -132,14 +132,14 @@ $(document).ready(function(){
         var day = $("#detailday").val();
         var nummonth = $("option:selected","#detailmonth").attr("num");
         var date = new Date();
-       if((month=="April")|| (month=="June") || (month=="September") || (month=="November")){
+       if((month==="April")|| (month==="June") || (month==="September") || (month==="November")){
             if(day >30){
                 return !value;
             }
             return value;    
         }
-        else if(month == "February"){
-            if((year%4) ==0){
+        else if(month === "February"){
+            if((year%4) ===0){
                 if(day>29){
                     return !value;
                 }
@@ -152,7 +152,7 @@ $(document).ready(function(){
             }
             return value;
         }
-        if((year == date.getFullYear())&& (nummonth==(date.getMonth()+1)) && (day>date.getDate())){
+        if((year === date.getFullYear())&& (nummonth===(date.getMonth()+1)) && (day>date.getDate())){
             return !value;
         }
         
@@ -167,13 +167,13 @@ $(document).ready(function(){
         var year = $("#detailyear").val();
         var month = $("option:selected","#detailmonth").attr("num");
         var day = $("#detailday").val();
-        if((year == (date.getFullYear()))  && (month == (date.getMonth()+1)) &&(day == date.getDate()) ){
+        if((year === (date.getFullYear()))  && (month === (date.getMonth()+1)) &&(day === date.getDate()) ){
             var hour = $("#detailhour").val();
             var min = $("#detailminute").val();
             if(hour > date.getHours()){
                 return !value;
             }
-            else if((hour == date.getHours()) && (min > date.getMinutes())){
+            else if((hour === date.getHours()) && (min > date.getMinutes())){
                 return !value;
             }
         }
@@ -181,7 +181,7 @@ $(document).ready(function(){
     });
     
     
-    $("#incidentcontinue").on("click",function(){
+    $("#incidentcontinue").click(function(){
         if($("#detailform").valid()){
             $("#IncidentDetailsTab").removeClass("active");
             $("#IncidentDetails").removeClass("tab-pane active");

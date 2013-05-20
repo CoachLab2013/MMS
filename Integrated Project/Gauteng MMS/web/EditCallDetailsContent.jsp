@@ -30,6 +30,7 @@
                     <td>  Time of Call:  </td><td>
                     <%
                         Tools t = new Tools();
+                        //int call_hour = 
                         out.print(t.makeHour("callhour",-1) +" ");
                         out.print(t.makeMinute("callminute",-1));
                     %>

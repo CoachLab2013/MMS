@@ -4,8 +4,8 @@
  */
 
 $(document).ready(function(){
-    $("#editincidentbutton").on("click",function(){
-        if($("#selectedincident").val()==""){
+    $("#editincidentbutton").click(function(){
+        if($("#selectedincident").val()===""){
             alert("Please select an incident.");
         }
         else{
@@ -22,7 +22,7 @@ $(document).ready(function(){
         }
     });
     
-   if($("#go_to_editincident").val()=="true"){
+   if($("#go_to_editincident").val()==="true"){
          //set focus on Open Incidents tab 
             $("#OpenIncidentsTab").removeClass("active");
             $("#EditIncidentTab").addClass("active");
