@@ -26,6 +26,7 @@
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">   
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
         <title>Gauteng Mortuary Management System</title>
+        <div class="head"><img src="Images/logo2.jpg">
     </head>
     <body>
         <% //Tools t = new Tools();
@@ -34,7 +35,7 @@
 
         <p>
 
-            <span style="float: left">Welcome ${employee.getName()} ${employee.getSurname()}</span>
+            
             <span style="float: right">Logout</span>
         </p>
         <%
@@ -42,7 +43,7 @@
                 out.println("<input name='incidentlogged' id='incidentlogged' type=hidden value=true>");
             }
         %>
-        <div align="center"><h1> <img src="Images/logo.jpg" width="75" height="75"> Gauteng Mortuary Management System</h1></div>
+       
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
                 <li id="IncidentTab" class="active"><a href="#Incident" data-toggle="tab">Incidents</a> </li>

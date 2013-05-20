@@ -49,10 +49,13 @@ public class GetIncidentServlet extends HttpServlet {
         sess.setAttribute("place_found",incident.getPlaceBodyFound());
         sess.setAttribute("sap_reference_number",incident.getReferenceNumber());
         sess.setAttribute("special_circumstances",incident.getSpecialCircumstances());
-        sess.setAttribute("time",incident.getTimeOfIncident());
+        String[] time = incident.getTimeOfIncident().split(":");
+        sess.setAttribute("hour",time[0]);
+        sess.setAttribute("minute",time[1]);
         sess.setAttribute("number_of_bodies",incident.getNumberOfBodies());
         sess.setAttribute("bodies_recieved",incident.getBodyCount());
         sess.setAttribute("go_to_editincident", true);
+        response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

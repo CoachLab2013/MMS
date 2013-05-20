@@ -16,7 +16,7 @@ and open the template in the editor.
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
                 <li id ="OpenIncidentsTab" class="active"><a href="#OpenIncidents" data-toggle="tab">Open Incidents</a> </li>
-                <li id="LogIncidentTab"><a href="#LogIncident" data-toggle="tab">Log Incident</a></li>   
+                <li id="LogIncidentTab"><a href="#LogIncident" data-toggle="tab">Log Incident</a></li> 
                 <li id="EditIncidentTab"><a href="#EditIncident" data-toggle="tab">Edit Incident</a></li> 
             </ul>
             <div class="tab-content" >
@@ -25,7 +25,7 @@ and open the template in the editor.
                 </div>
                 <div id="LogIncident" class="tab-pane" name="logincident"> 
                      <jsp:include page="LogIncidentTabContent.jsp" />
-                </div>   
+                </div> 
                 <div id="EditIncident" class="tab-pane" name="editincident"> 
                     <jsp:include page="EditIncidentTabContent.jsp" />
                 </div> 
