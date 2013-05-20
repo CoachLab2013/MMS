@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
 	<property name="ireport.zoom" value="0.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -53,9 +53,6 @@
 			</line>
 		</band>
 	</pageHeader>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="60" splitType="Stretch">
 			<textField>
@@ -78,10 +75,10 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="200" splitType="Stretch">
+		<band height="313" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="0cccd6d8-06c4-4c03-862b-7b5f32bda79f" positionType="FixRelativeToBottom" x="112" y="42" width="555" height="142"/>
+					<reportElement uuid="0cccd6d8-06c4-4c03-862b-7b5f32bda79f" positionType="FixRelativeToBottom" x="0" y="11" width="762" height="290"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>

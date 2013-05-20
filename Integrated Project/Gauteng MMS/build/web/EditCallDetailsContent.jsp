@@ -76,9 +76,6 @@
                         </tr>
         </table>
     </form>
-=======
-        <legend>Edit Call Details</legend>
->>>>>>> origin/master
 
 </body>
         

@@ -960,7 +960,8 @@
                     <jsp:include page="EditBodyFileTabContent.jsp"/>
                 </div>
 
-                <div id="LinkBodyFiles" class="tab-pane ">    
+                <div id="LinkBodyFiles" class="tab-pane ">
+                    <jsp:include page="LinkBodyContent.jsp"/>
                 </div>
 
             </div>

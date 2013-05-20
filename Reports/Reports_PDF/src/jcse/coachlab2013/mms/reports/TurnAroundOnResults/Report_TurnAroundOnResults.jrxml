@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
 	<property name="ireport.zoom" value="1.7715610000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="96"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
 	<field name="analysisType" class="java.lang.String"/>
@@ -74,10 +74,10 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="226" splitType="Stretch">
+		<band height="313" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="c986b64d-e34e-4816-8485-5778fb2361bf" x="0" y="0" width="762" height="226"/>
+					<reportElement uuid="c986b64d-e34e-4816-8485-5778fb2361bf" x="0" y="11" width="762" height="290"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>

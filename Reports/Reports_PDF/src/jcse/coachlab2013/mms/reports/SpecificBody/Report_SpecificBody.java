@@ -1,6 +1,9 @@
-package jcse.coachlab2013.mms.reports.specificbody;
+package jcse.coachlab2013.mms.reports.SpecificBody;
 
+import java.io.IOException;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.ReportGenerator;
 import jcse.coachlab2013.mms.reports.Template_Report;
 
@@ -19,8 +22,11 @@ public final class Report_SpecificBody extends Template_Report {
     
     @Override
     protected void formatData() {
-        
-        source = "./build/classes/jcse/coachlab2013/mms/reports/facilitystorage/Report_SpecificBody.jrxml";
+        try {
+            source = getClass().getResource("/jcse/coachlab2013/mms/reports/SpecificBody/Report_SpecificBody.jrxml").openStream();
+        } catch (IOException ex) {
+            Logger.getLogger(Report_SpecificBody.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         parameters.put("ReportTitle", ""); 
         parameters.put("Incident Number:", "");
