@@ -224,7 +224,7 @@ public class ExcelGenerator {
         for (int i = 10; i < rows - 2; i++) {
             for (int j = 0; j < columns; j++) {                                   
                 Cell cell = sheet.getRow(i).getCell(j);
-                cell.setCellStyle(style);
+                cell.setCellStyle(style);                
             }
         }
         
