@@ -490,12 +490,14 @@
                                                 <legend class="legend"><h4>Scene details:</h4></legend>
                                                 <div class="control-group">
                                                     <label class="control-label" for="SceneO">Scene where incident occured:</label> 
-                                                    <div class="controls">
-                                                        <select id="SceneO" name="SceneO">                            
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("SceneType", "type", ""));
+                                                            %>
+                                                        <%-- <select id="SceneO" name="SceneO">                            
                                                             <option>home</option>
                                                             <option>park</option>
                                                             <option>flat</option>
-                                                        </select>
+                                                        </select> --%>
                                                     </div>
                                                 </div> 
 
@@ -508,12 +510,14 @@
 
                                                 <div class="control-group">
                                                     <label class="control-label" for="Cause">External cause or circumstance of injury:</label> 
-                                                    <div class="controls">
-                                                        <select id="Cause" name="Cause">                            
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("ExternalCircumstance", "type", ""));
+                                                            %>
+                                                        <%--<select id="Cause" name="Cause">                            
                                                             <option>Shot</option>
                                                             <option>Fell</option>
                                                             <option>Coding</option>
-                                                        </select>
+                                                        </select> --%>
                                                     </div>
                                                 </div>
 
@@ -666,7 +670,7 @@
                                                                     for (var i = 0; i < rowCount; i++) {
                                                                         var row = table.rows[i];
                                                                         var chkbox = row.cells[0].childNodes[0];
-                                                                        if (null != chkbox && true == chkbox.checked) {
+                                                                        if (null !== chkbox && true === chkbox.checked) {
                                                                             table.deleteRow(i);
                                                                             rowCount--;
                                                                             i--;
