@@ -4,6 +4,7 @@
     Author     : Lady
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page import="database.ReferenceListDb"%>
 <%@page import="database.Incident"%>
 <%@page import="java.util.ArrayList"%>
@@ -74,8 +75,11 @@
 
                                 <div class="control-group">
                                     <label class="control-label" for="inncidentNum">Incident Number</label> 
-                                    <div class="controls">
-                                        <select id="inncidentNum" name="inncidentNum">   
+                                    <div class="controls"> <%
+                                                            Tools t = new Tools();
+                                                            out.print(t.makeReferenceList("Incident", "incidentLogNumber", ""));
+                                                            %>
+                                       <%-- <select id="inncidentNum" name="inncidentNum">   
                                             <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
 
                                             <%
@@ -88,7 +92,7 @@
                                             %>
 
 
-                                        </select>
+                                        </select> --%> 
                                     </div>
                                 </div> 
 
@@ -125,9 +129,12 @@
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label" for="organisation">Institution</label> 
-                                                    <div class="controls">
-                                                        <select id="organisation" name="organisation">                         
-                                                            <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Institution", "type", ""));
+                                                            %>
+                                                            <%--<select id="organisation" name="organisation">                         
+                                                            <option value=""> 
+                                                            <% out.println(String.valueOf("-Please Select-"));%></option>
 
                                                             <%
                                                                 for (int i = 0; i < institutionList.size(); i++) {
@@ -136,7 +143,7 @@
 
                                                             <%
                                                                 }
-                                                            %>
+%> --%>
 
 
 
@@ -219,8 +226,8 @@
                                                     <label class="control-label" for="atScene">Was pathologist at scene</label> 
                                                     <div class="controls">
                                                         <select id="atScene" name="atScene">                            
-                                                            <option>Yes</option>
                                                             <option>No</option>
+                                                            <option>Yes</option>
                                                         </select>
                                                     </div>
                                                 </div> 
@@ -252,12 +259,14 @@
 
                                                 <div class="control-group">
                                                     <label class="control-label" for="BodyClass">Body Classification</label> 
-                                                    <div class="controls">
-                                                        <select id="BodyClass" name="BodyClass">                            
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("BodyPart", "type", ""));
+                                                            %>
+                                                        <%--<select id="BodyClass" name="BodyClass">                            
                                                             <option>Head</option>
                                                             <option>Eye</option>
                                                             <option>Body</option>
-                                                        </select>
+                                                        </select>--%>
                                                     </div>
                                                 </div> 
 
@@ -297,9 +306,10 @@
 
                                                 <div class="control-group">
                                                     <label class="control-label" for="Brace">Race</label> 
-                                                    <div class="controls">
-                                                        <select id="Brace" name="Brace">                            
-                                                            <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Race", "type", ""));
+                                                            %>                      
+                                                            <%--<select id="Brace" name="Brace"><option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
                                                             <%
                                                                 for (int i = 0; i < raceList.size(); i++) {
                                                             %>
@@ -307,14 +317,16 @@
 
                                                             <%
                                                                 }
-                                                            %>
+                                                            %> --%>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label" for="Bgender">Gender</label> 
-                                                    <div class="controls">
-                                                        <select id="Bgender" name="Bgender">                            
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Gender", "type", ""));
+                                                            %>
+                                                        <%--<select id="Bgender" name="Bgender">                            
                                                             <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
                                                             <%
                                                                 for (int i = 0; i < genderList.size(); i++) {
@@ -323,7 +335,7 @@
 
                                                             <%
                                                                 }
-                                                            %>
+                                                            %> --%>
 
                                                         </select>
                                                     </div>
@@ -478,12 +490,14 @@
                                                 <legend class="legend"><h4>Scene details:</h4></legend>
                                                 <div class="control-group">
                                                     <label class="control-label" for="SceneO">Scene where incident occured:</label> 
-                                                    <div class="controls">
-                                                        <select id="SceneO" name="SceneO">                            
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("SceneType", "type", ""));
+                                                            %>
+                                                        <%-- <select id="SceneO" name="SceneO">                            
                                                             <option>home</option>
                                                             <option>park</option>
                                                             <option>flat</option>
-                                                        </select>
+                                                        </select> --%>
                                                     </div>
                                                 </div> 
 
@@ -496,12 +510,14 @@
 
                                                 <div class="control-group">
                                                     <label class="control-label" for="Cause">External cause or circumstance of injury:</label> 
-                                                    <div class="controls">
-                                                        <select id="Cause" name="Cause">                            
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("ExternalCircumstance", "type", ""));
+                                                            %>
+                                                        <%--<select id="Cause" name="Cause">                            
                                                             <option>Shot</option>
                                                             <option>Fell</option>
                                                             <option>Coding</option>
-                                                        </select>
+                                                        </select> --%>
                                                     </div>
                                                 </div>
 
@@ -654,7 +670,7 @@
                                                                     for (var i = 0; i < rowCount; i++) {
                                                                         var row = table.rows[i];
                                                                         var chkbox = row.cells[0].childNodes[0];
-                                                                        if (null != chkbox && true == chkbox.checked) {
+                                                                        if (null !== chkbox && true === chkbox.checked) {
                                                                             table.deleteRow(i);
                                                                             rowCount--;
                                                                             i--;
