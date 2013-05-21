@@ -23,38 +23,50 @@
     </head>
     <body>
         <legend>Incidents> Edit Incident> Call Details</legend>
-        <form name="callform" id="callform" method="post" action="LogIncidentServlet">
+        <form name="edit_callform" id="edit_callform" method="post" action="">
     
             <table>
                 <tr>     
                     <td>  Time of Call:  </td><td>
                     <%
                         Tools t = new Tools();
-                        out.print(t.makeHour("callhour",-1) +" ");
-                        out.print(t.makeMinute("callminute",-1));
+                        if(session.getAttribute("go_to_editincident")!=null){
+                            int call_hour = Integer.parseInt(session.getAttribute("call_hour").toString());
+                            int call_minute = Integer.parseInt(session.getAttribute("call_minute").toString());
+                            out.print(t.makeHour("edit_callhour",call_hour) +" ");
+                            out.print(t.makeMinute("edit_callminute",call_minute));                             
+                        }
+                        
                     %>
                     </td>
 
                 </tr>
                 <tr>
-                    <td>  Caller's Phone Number:  </td><td> <input type="text" name="phonenumber" id="phonenumber"/><br></td>
+                    <td>  Caller's Phone Number:  </td><td> <input type="text" name="edit_phonenumber" id="edit_phonenumber" 
+                                                                   value=<%out.println(session.getAttribute("call_number")); %>/><br></td>
                 </tr> 
                     <tr>
 
-                        <td> Name of Caller:   </td><td>       <input type="text" name="name" id="name"/><br></td>
+                        <td> Name of Caller:   </td><td>       <input type="text" name="edit_callname" id="edit_callname"
+                                                                      value="<%out.println(session.getAttribute("call_name")); %>"/><br></td>
 
                     </tr>
                     <tr>
-                        <td> Name of institution: </td><td>    <input type="text" name="institution" id="institution" /><br></td>
+                        <td> Name of institution: </td><td>    <input type="text" name="edit_callinstitution" id="edit_callinstitution" 
+                                                                      value=<%out.println(session.getAttribute("call_institution")); %>/><br></td>
                     </tr>
                         <tr>
-                        <td> Scene Address:     </td><td><textarea cols="50" rows="3" name="address" id="address"> </textarea><br></td>
+                        <td> Scene Address:     </td><td><textarea cols="50" rows="3" name="edit_calladdress" id="edit_calladdress"><%out.println(session.getAttribute("call_address")); %></textarea><br></td>
 
                         </tr>
                         <tr>
                         <td> Province:         </td><td>
                             <% 
-                            out.println(t.makeReferenceList("province","type",""));
+                            if(session.getAttribute("go_to_editincident")!=null){
+                                String province = session.getAttribute("call_province").toString();
+                               out.println(t.makeReferenceList("province","type",province));
+                           }
+                            
                             %>
                             
                         </td>
@@ -63,16 +75,20 @@
                         <tr>
                     <td>  Region:</td><td>
                         <% 
-                           out.println(t.makeReferenceList("region","type",""));
+                           if(session.getAttribute("go_to_editincident")!=null){
+                               String region = session.getAttribute("call_region").toString();
+                           out.println(t.makeReferenceList("region","type",region));
+                           }
+                           
                         %>
                     </td>
                         </tr>
 
                         <tr>
-                    <td>  Scene condition: </td><td><textarea cols="50" rows="3" name="condition" id="condition"> </textarea><br></td>
+                    <td>  Scene condition: </td><td><textarea cols="50" rows="3" name="edit_callcondition" id="edit_callcondition"><%out.println(session.getAttribute("call_condition")); %></textarea><br></td>
                         </tr>
                         <tr>
-                            <td></td> <td>  <input type="submit" value="Create Incident" name="createincident" id="createincident" /> <input type="reset" value="Cancel" id="callcancel" /><br></td>
+                            <td></td> <td>  <input type="submit" value="Save" name="edit_savecall" id="edit_savecall" /> <input type="reset" value="Cancel" id="edit_callcancel" /><br></td>
                         </tr>
         </table>
     </form>

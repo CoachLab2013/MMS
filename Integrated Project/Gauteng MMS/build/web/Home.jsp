@@ -21,7 +21,6 @@
         </style>
         <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
-        <!-- <script src="js/SetFocus.js"></script> !-->
 
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">   
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
@@ -38,7 +37,7 @@
         <p>
 
             
-            <span style="float: right">Logout</span>
+            <span style="float: right"><a href="/Gauteng_MMS">Logout</a></span>
         </p>
         <%
             if (session.getAttribute("incidentlogged") != null) {

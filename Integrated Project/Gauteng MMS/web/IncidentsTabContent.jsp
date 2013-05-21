@@ -24,7 +24,7 @@ and open the template in the editor.
                     <jsp:include page="OpenIncidentContent.jsp" />                            
                 </div>
                 <div id="LogIncident" class="tab-pane" name="logincident"> 
-                     <jsp:include page="LogIncidentTabContent.jsp" />
+                    <jsp:include page="LogIncidentTabContent.jsp" />
                 </div> 
                 <div id="EditIncident" class="tab-pane" name="editincident"> 
                     <jsp:include page="EditIncidentTabContent.jsp" />

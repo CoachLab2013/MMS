@@ -6,8 +6,8 @@
 $(document).ready(function(){
     $("#opentable").click();
     
-    $("#close").on("click", function(){
-        if($("#selectedincident").val()==""){
+    $("#close").click(function(){
+        if($("#selectedincident").val()===""){
             alert("Please select an incident.");
         }
         else{
@@ -25,7 +25,7 @@ $(document).ready(function(){
        $("#selected_edit_incident").val($(this).attr("lognumber"));
     });
     
-    $("#cancelcloseincident").on("click",function(){
+    $("#cancelcloseincident").click(function(){
         $("#closeincident").hide();
         $(".selectedtablerow").addClass("tablerow");
         $(".selectedtablerow").removeClass("selectedtablerow");
@@ -48,8 +48,8 @@ $(document).ready(function(){
         }//end of messages
     });
     
-    $("#editincidentbutton").on("click",function(){
-        if($("#selectedincident").val()==""){
+    $("#editincidentbutton").click(function(){
+        if($("#selectedincident").val()===""){
             alert("Please select an incident.");
         }
         else{

@@ -33,7 +33,7 @@ public class DeathCallDb extends DatabaseConnector
       
       }
 
-         public DeathCall getAuditTrail()
+      public DeathCall getDeathCall()
       {
          return deathCall;
       }
@@ -127,7 +127,7 @@ public class DeathCallDb extends DatabaseConnector
     {
         try
         {
-            statement.executeQuery("SELECT * FROM deathcall WHERE Incident_incidentLogNumber='" + deathCall.getIncident() + "';" );
+            statement.executeQuery("SELECT * FROM deathcall WHERE Incident_incidentLogNumber='" + deathCall.getIncident().getIncidentLogNumber() + "';" );
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             DeathCall dCall= new DeathCall();
@@ -143,7 +143,8 @@ public class DeathCallDb extends DatabaseConnector
             IncidentDb incidentDb = new IncidentDb(deathCall.getIncident(), dbDetail);
             incidentDb.init();
             incidentDb.read();
-            dCall.setIncident(incidentDb.getIncident()); //To change body of generated methods, choose Tools | Templates.
+            dCall.setIncident(incidentDb.getIncident()); 
+            deathCall = dCall;
         } 
         catch (SQLException ex)  
         {

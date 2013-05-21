@@ -4,7 +4,7 @@
  */
 $(document).ready(function() {
 
-    $("#BodyFileNext").on("click", function() {
+    $("#BodyFileNext").click(function() {
         if ($("#callform").valid()) {
             $("#scene").removeClass("active");
             $("#atScene").removeClass("tab-pane active");
