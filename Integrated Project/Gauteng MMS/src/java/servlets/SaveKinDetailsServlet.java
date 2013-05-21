@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 package servlets;
-
+import database.DbDetail;
+import database.Kin;
+import database.KinDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,10 +17,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Administrator
+ * @author Chester
  */
-@WebServlet(name = "LogInServlet", urlPatterns = {"/LogInServlet"})
-public class LogInServlet extends HttpServlet {
+@WebServlet(name = "SaveKinDetailsServlet", urlPatterns = {"/SaveKinDetailsServlet"})
+public class SaveKinDetailsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -34,33 +36,32 @@ public class LogInServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
-            Tools t = new Tools();
-            String personnelnumber = request.getParameter("personnelnumber");
-            String password = request.getParameter("password");
-            HttpSession sess = request.getSession();
-            sess.setAttribute("personnelnumber", personnelnumber);
-            
-            int access = t.logIn(personnelnumber, password, sess);
-           
-            if(access == -1){
-                sess.setAttribute("loginerror", "Invalid persal number and/or password");
-                response.sendRedirect("/Gauteng_MMS/");
-            }
-            else{
-                sess.setAttribute("loggedin", true);
-                if (access == 4){
-                    response.sendRedirect("Admin.jsp");
-                }
-                else{
-                    response.sendRedirect("Home.jsp");
-                }
-                
-            }             
-            
-        } finally {            
-            out.close();
+        Kin kin = new Kin();
+        kin.setName(request.getParameter("KinName"));
+        kin.setSurname(request.getParameter("KinSurname"));
+        String kinIdType = request.getParameter("identificationtype");
+        if(kinIdType.contains("ID"))
+        {
+            kin.setID(request.getParameter("KinIDNumber"));
         }
+        else if(kinIdType.contains("Passport"))
+        {
+            kin.setPassport(request.getParameter("KinIDNumber"));
+        }
+        kin.setRelationWithDeceased(request.getParameter("KinRelationship"));
+        kin.setContactNumber(request.getParameter("KinContact"));
+        kin.setAddress(request.getParameter("KinRes"));
+        kin.setWorkAddress(request.getParameter("KinWork"));
+        kin.setBody_idDeathRegisterNumber("099888592");
+        Tools t = new Tools();
+        DbDetail dbdetail = t.getDbdetail();
+        KinDb kinDb = new KinDb(kin, dbdetail);
+        kinDb.init();
+        kinDb.add();
+        HttpSession sess = request.getSession();
+        sess.setAttribute("kinDetail", "Kin details added successfully");
+        response.sendRedirect("Home.jsp");
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
