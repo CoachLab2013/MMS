@@ -82,6 +82,24 @@ $(document).ready(function(){
        $("#OpenIncidents").addClass("tab-pane active");
     }
     
+    if($("#success").attr("info")==='success'){
+        $("#OpenIncidentsTab").removeClass("active");
+       $("#LogIncidentTab").addClass("active");
+       $("#OpenIncidents").removeClass("tab-pane active");
+       $("#OpenIncidents").addClass("tab-pane");
+       $("#LogIncident").removeClass("tab-pane");
+       $("#LogIncident").addClass("tab-pane active");
+       
+       //set focus on Dispatch Vehicle tab
+       $("#IncidentDetailsTab").removeClass("active");
+       $("#DispatchVehicleTab").addClass("active");
+       $("#IncidentDetails").removeClass("tab-pane active");
+       $("#IncidentDetails").addClass("tab-pane");
+       $("#DispatchVehicle").removeClass("tab-pane");
+       $("#DispatchVehicle").addClass("tab-pane active");
+       $("#dispatchform").show();
+    }
+    
 });
 
 

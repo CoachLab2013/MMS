@@ -8,18 +8,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script language="javascript" type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
-<script src="js/SetFocus.js"></script>
-
-<link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
-<script  src="bootstrap/js/bootstrap-tabs.js"></script>
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
+
+        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
+        <script  src="bootstrap/js/bootstrap-tabs.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
     <body>
         <div id="NewBodyFiles" class="tab-pane ">
             <%--new body file content --%>

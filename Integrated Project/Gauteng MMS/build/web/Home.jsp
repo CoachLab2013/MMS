@@ -37,7 +37,7 @@
         <p>
 
             
-            <span style="float: right">Logout</span>
+            <span style="float: right"><a href="/Gauteng_MMS">Logout</a></span>
         </p>
         <%
             if (session.getAttribute("incidentlogged") != null) {
