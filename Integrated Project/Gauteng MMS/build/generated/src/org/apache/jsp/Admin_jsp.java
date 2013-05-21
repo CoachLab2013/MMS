@@ -63,7 +63,8 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>\r\n");
       out.write("    <head>        \r\n");
       out.write("\r\n");
-      out.write("        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js\"></script>\r\n");
+      out.write("        <script language=\"javascript\" type=\"text/javascript\" src=\"js/jquery-1.9.1.js\"></script>\r\n");
+      out.write("        <script language=\"javascript\" type=\"text/javascript\" src=\"js/jquery.validate.min.js\"></script>\r\n");
       out.write("        <link type=\"text/css\" rel=\"stylesheet\"  href=\"bootstrap/css/bootstrap.css\">           \r\n");
       out.write("        <script src=\"bootstrap/js/bootstrap-tabs.js\"></script>\r\n");
       out.write("        <script src=\"bootstrap/js/bootstrap.min.js\"></script>\r\n");
