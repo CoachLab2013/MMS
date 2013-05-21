@@ -198,7 +198,6 @@ public class ReferenceListServlet extends HttpServlet {
                 sess.setAttribute("tab", "property");
                 sess.setAttribute("rankResult",  "Property type did not save because " + result);
                 response.sendRedirect("Admin.jsp");
-
             }
 
 
