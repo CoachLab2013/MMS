@@ -38,7 +38,7 @@ public Incident()
  reason = "";
  bodyCount = 0;
  status = false;
- dateIncidentClosed = "";
+ dateIncidentClosed = null;
 }
 public Incident(String inIncidentLogNumber)
 {
