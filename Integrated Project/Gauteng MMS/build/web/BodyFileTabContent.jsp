@@ -35,7 +35,7 @@
 
     <body>
 
-        <%
+        <%--
             SetDbDetail dbset = new SetDbDetail();
             IncidentDb incidents = new IncidentDb(dbset.getDbdetail());
             incidents.init();
@@ -54,7 +54,7 @@
             emp.init();
             ArrayList<String> raceList = emp.referenceList();
  
-        %>
+        --%>
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
                 <li class="active"><a href="#OpenBodyFiles" data-toggle="tab">Open Body Files</a> </li>
@@ -116,15 +116,15 @@
                                             <fieldset class="fieldset">
                                                 <legend class="legend"><h4>Body received from:</h4></legend>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Rname">Name</label> 
+                                                    <label class="control-label" for="receivedBodyFromName">Name</label> 
                                                     <div class="controls">
-                                                        <input type="text" name="Rname" id="Rname"/> 
+                                                        <input type="text" name="receivedBodyFromName" id="receivedBodyFromName"/> 
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Rsurname">Surname</label>
+                                                    <label class="control-label" for="receivedBodyFromSurname">Surname</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Rsurname" id="Rsurname"/> 
+                                                        <input type="text" name="receivedBodyFromSurname" id="receivedFromBodySurname"/> 
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
@@ -156,28 +156,28 @@
                                             <fieldset class="fieldset">
                                                 <legend class="legend"><h4>SAPS member handing over the body:</h4></legend>
                                                 <div class="control-group error">
-                                                    <label class="control-label" for="Sname">Name</label> 
+                                                    <label class="control-label" for="SAPSmemberBodyName">Name</label> 
                                                     <div class="controls">
-                                                        <input type="text" name="Sname" id="Sname"/> 
+                                                        <input type="text" name="SAPSmemberBodyName" id="SAPSmemberBodyName"/> 
                                                     </div>
                                                 </div>
                                                 <div class="control-group error">
-                                                    <label class="control-label" for="Ssurname">Surname</label>
+                                                    <label class="control-label" for="SAPSmemberBodySurname">Surname</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Ssurname" id="Ssurname"/> 
+                                                        <input type="text" name="SAPSmemberBodySurname" id="SAPSmemberBodySurname"/> 
                                                     </div>
                                                 </div>
                                                 <div class="control-group error">
-                                                    <label class="control-label" for="Scell">Cell phone number</label>
+                                                    <label class="control-label" for="SAPSmemberBodyCell">Cell phone number</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Scell" id="Scell"/> 
+                                                        <input type="text" name="SAPSmemberBodyCell" id="SAPSmemberBodyCell"/> 
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group error">
-                                                    <label class="control-label" for="Srank">Rank</label>
+                                                    <label class="control-label" for="SAPSmemberBodyRank">Rank</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Srank" id="Srank"/> 
+                                                        <input type="text" name="SAPSmemberBodyRank" id="SAPSmemberBodyRank"/> 
                                                     </div>
                                                 </div>
 
@@ -186,34 +186,34 @@
                                             <fieldset class="fieldset">
                                                 <legend class="legend"><h4>FPS member receiving body:</h4></legend>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Fname">Name</label> 
+                                                    <label class="control-label" for="FPSmemberBodyName">Name</label> 
                                                     <div class="controls">
-                                                        <input type="text" name="Fname" id="Fname"/> 
+                                                        <input type="text" name="FPSmemberBodyName" id="FPSmemberBodyName"/> 
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Fsurname">Surname</label>
+                                                    <label class="control-label" for="FPSmemberBodySurname">Surname</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Fsurname" id="Fsurname"/> 
+                                                        <input type="text" name="FPSmemberBodySurname" id="FPSmemberBodySurname"/> 
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Fpersal">Persal number</label>
+                                                    <label class="control-label" for="FPSmemberBodyPersal">Persal number</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Fpersal" id="Fpersal"/> 
+                                                        <input type="text" name="FPSmemberBodyPersal" id="FPSmemberBodyPersal"/> 
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Fcell">Cell phone number</label>
+                                                    <label class="control-label" for="FPSmemberBodyCell">Cell phone number</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Fcell" id="Fcell"/> 
+                                                        <input type="text" name="FPSmemberBodyCell" id="FPSmemberBodyCell"/> 
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Frank">Rank</label>
+                                                    <label class="control-label" for="FPSmemberBodyRank">Rank</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Frank" id="Frank"/> 
+                                                        <input type="text" name="FPSmemberBodyRank" id="FPSmemberBodyRank"/> 
                                                     </div>
                                                 </div>
 
@@ -232,23 +232,23 @@
                                                     </div>
                                                 </div> 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Pname">Name</label> 
+                                                    <label class="control-label" for="pathologistBodyName">Name</label> 
                                                     <div class="controls">
-                                                        <input type="text" name="Pname" id="Pname"/> 
+                                                        <input type="text" name="pathologistBodyName" id="pathologistBodyName"/> 
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Psurname">Surname</label>
+                                                    <label class="control-label" for="pathologistBodySurname">Surname</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Psurname" id="Psurname"/> 
+                                                        <input type="text" name="pathologistBodySurname" id="pathologistBodySurname"/> 
                                                     </div>
                                                 </div>
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Prank">Rank</label>
+                                                    <label class="control-label" for="pathologistBodyRank">Rank</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Prank" id="Prank"/> 
+                                                        <input type="text" name="pathologistBodyRank" id="pathologistBodyRank"/> 
                                                     </div>
                                                 </div>
 
@@ -258,7 +258,7 @@
                                                 <legend class="legend"><h4>Body details:</h4></legend>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="BodyClass">Body Classification</label> 
+                                                    <label class="control-label" for="BodyPart">Body Classification</label> 
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("BodyPart", "type", ""));
                                                             %>
@@ -271,41 +271,41 @@
                                                 </div> 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Bname">Name</label> 
+                                                    <label class="control-label" for="bodyName">Name</label> 
                                                     <div class="controls">
-                                                        <input type="text" name="Bname" id="Bname"/> 
+                                                        <input type="text" name="bodyName" id="bodyName"/> 
                                                     </div>
 
 
 
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Bsurname">Surname</label>
+                                                    <label class="control-label" for="bodySurname">Surname</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Bsurname" id="Bsurname"/> 
+                                                        <input type="text" name="bodySurname" id="bodySurname"/> 
                                                     </div>
                                                 </div>
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Bid">ID number</label>
+                                                    <label class="control-label" for="bodyID">ID number</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Bid" id="Bid"/> 
+                                                        <input type="text" name="bodyID" id="bodyID"/> 
                                                     </div>
                                                 </div>
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Baddress">Address</label>
+                                                    <label class="control-label" for="bodyAddress">Address</label>
                                                     <div class="controls">
 
-                                                        <textarea cols="50" rows="3" id="Baddress" name="Baddress"> </textarea>
+                                                        <textarea cols="50" rows="3" id="bodyAddress" name="bodyAddress"> </textarea>
 
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Brace">Race</label> 
+                                                    <label class="control-label" for="bodyRace">Race</label> 
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("Race", "type", ""));
                                                             %>                      
@@ -322,7 +322,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Bgender">Gender</label> 
+                                                    <label class="control-label" for="bodyGender">Gender</label> 
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("Gender", "type", ""));
                                                             %>
@@ -342,9 +342,9 @@
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Bage">Age estimate</label>
+                                                    <label class="control-label" for="bodyAge">Age estimate</label>
                                                     <div class="controls">
-                                                        <input type="text" name="Bage" id="Bage"/> 
+                                                        <input type="text" name="bodyAge" id="bodyAge"/> 
                                                     </div>
                                                 </div>
 
@@ -354,9 +354,9 @@
                                                 <legend class="legend"><h4>Date and time body found:</h4></legend>
 
                                                 <div class="control-group error">
-                                                    <label class="control-label" for="Fdate">Date</label> 
+                                                    <label class="control-label" for="bodyFoundDate">Date</label> 
 
-                                                    <div class="input-append date " id="datepicker" name="Fdate" >
+                                                    <div class="input-append date " id="datepicker" name="bodyFoundDate" >
 
                                                         <input size="16" id="FoundDate" name="FoundDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-calendar"></i></span> 
@@ -365,9 +365,9 @@
                                                 </div>
 
                                                 <div class="control-group error">
-                                                    <label class="control-label" for="Ftime">Time  </label> 
+                                                    <label class="control-label" for="bodyFoundTime">Time  </label> 
 
-                                                    <div class="input-append date " id="timepicker" name="Ftime" >
+                                                    <div class="input-append date " id="timepicker" name="bodyFoundTime" >
 
                                                         <input size="16" id="FoundTime" name="FoundTime" data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
@@ -382,9 +382,9 @@
                                                 <legend class="legend"><h4>Alleged date and time of injury:</h4></legend>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Idate">Date</label> 
+                                                    <label class="control-label" for="allegedInjuryDate">Date</label> 
 
-                                                    <div class="input-append date " id="datepicker2" name="Idate" >
+                                                    <div class="input-append date " id="datepicker2" name="allegedInjuryDate" >
 
                                                         <input size="16" id="InjuryDate" name="InjuryDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-calendar"></i></span> 
@@ -393,9 +393,9 @@
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Ltime">Time</label> 
+                                                    <label class="control-label" for="allegedInjuryTime">Time</label> 
 
-                                                    <div class="input-append date " id="timepicker2" name="Ltime">
+                                                    <div class="input-append date " id="timepicker2" name="allegedInjuryTime">
 
                                                         <input size="16" id="InjuryTime" name="InjuryTime" data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
@@ -408,9 +408,9 @@
                                                 <legend class="legend"><h4>Alleged date and time of death:</h4></legend>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Ddate">Date</label> 
+                                                    <label class="control-label" for="allegedDeathDate">Date</label> 
 
-                                                    <div class="input-append date " id="datepicker3" name="Ddate" >
+                                                    <div class="input-append date " id="datepicker3" name="allegedDeathDate" >
 
                                                         <input size="16" id="DeathDate" name="DeathDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-calendar"></i></span> 
@@ -419,9 +419,9 @@
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Dtime">Time  </label> 
+                                                    <label class="control-label" for="allegedDeathtime">Time  </label> 
 
-                                                    <div class="input-append date " id="timepicker3" name="Dtime" >
+                                                    <div class="input-append date " id="timepicker3" name="allegedDeathtime" >
 
                                                         <input size="16" id="DeathTime" name="DeathTime" data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
@@ -435,22 +435,22 @@
                                                 <legend class="legend"><h4>Date and time of FPS receiving the body at scene:</h4></legend>
 
                                                 <div class="control-group error">
-                                                    <label class="control-label" for="Rdate">Date  </label> 
+                                                    <label class="control-label" for="FPSbodyReceiveSceneDate">Date  </label> 
 
-                                                    <div class="input-append date " id="datepicker4" name="Rdate" >
+                                                    <div class="input-append date " id="datepicker4" name="FPSbodyReceiveSceneDate" >
 
-                                                        <input size="16" id="ReceivedSDate" name="ReceivedSDate data-format="yyyy-MM-dd" type="text" value="" readonly>
+                                                        <input size="16" id="ReceivedSDate" name="ReceivedSceneDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                                <span class="add-on"><i class="icon-calendar"></i></span> 
 
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group error">
-                                                    <label class="control-label" for="Rtime">Time  </label> 
+                                                    <label class="control-label" for="FPSbodyReceiveSceneTime">Time  </label> 
 
-                                                    <div class="input-append date " id="timepicker4" name="Rtime" >
+                                                    <div class="input-append date " id="timepicker4" name="FPSbodyReceiveSceneTime" >
 
-                                                        <input size="16"  id="ReceivedSTime" name="ReceivedSTime" data-format="hh:mm" type="text" value="" readonly>
+                                                        <input size="16"  id="ReceivedSTime" name="ReceivedSceneTime" data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
 
                                                     </div>
@@ -462,22 +462,22 @@
                                                 <legend class="legend"><h4>Date and time of FPS receiving the body at facility:</h4></legend>
 
                                                 <div class="control-group error">
-                                                    <label class="control-label" for="Facidate">Date  </label> 
+                                                    <label class="control-label" for="FPSbodyReceiveFacilitydate">Date  </label> 
 
-                                                    <div class="input-append date " id="datepicker5" name="Facidate" >
+                                                    <div class="input-append date " id="datepicker5" name="FPSbodyReceiveFacilityDate" >
 
-                                                        <input size="16" id="ReceivedFDate" name="ReceivedFDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
+                                                        <input size="16" id="ReceivedFDate" name="ReceivedFacilityDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-calendar"></i></span> 
 
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group error">
-                                                    <label class="control-label" for="Facitime">Time  </label> 
+                                                    <label class="control-label" for="FPSbodyReceiveFacilityTime">Time  </label> 
 
-                                                    <div class="input-append date " id="timepicker5" name="Facitime" >
+                                                    <div class="input-append date " id="timepicker5" name="FPSbodyReceiveFacilityTime" >
 
-                                                        <input size="16" id="ReceivedFTime" name="ReceivedFTime"  data-format="hh:mm" type="text" value="" readonly>
+                                                        <input size="16" id="ReceivedFTime" name="ReceivedFacilityTime"  data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
 
                                                     </div>
@@ -489,7 +489,7 @@
                                             <fieldset class="fieldset">     
                                                 <legend class="legend"><h4>Scene details:</h4></legend>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="SceneO">Scene where incident occured:</label> 
+                                                    <label class="control-label" for="SceneType">Scene where incident occured:</label> 
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("SceneType", "type", ""));
                                                             %>
