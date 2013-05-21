@@ -73,7 +73,8 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <script src=\"js/jquery.validate.min.js\"></script>\r\n");
       out.write("        <script src=\"js/script.js\"></script>\r\n");
       out.write("        <link  type=\"text/css\" href=\"bootstrap/css/bootstrap.css\" rel=\"stylesheet\">\r\n");
-      out.write("        <link type=\"text/css\" rel=\"stylesheet\" href=\"bootstrap/css/tablecss.css\"\r\n");
+      out.write("        <link type=\"text/css\" rel=\"stylesheet\" href=\"bootstrap/css/tablecss.css\">\r\n");
+      out.write("        <script src=\"js/EditReferenceList.js\"></script>\r\n");
       out.write("    <div class=\"head\"><img src=\"Images/logo2.jpg\">\r\n");
       out.write("        <title>MMS Administration</title>\r\n");
       out.write("    </head>\r\n");
@@ -99,7 +100,8 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String sampleResult = "";
             String statusResult = "";
             String relationshipResult = "";
-            String bodyClassResult = "";
+            String bodyPartResult = "";
+            String specialCurResult = "";
 
             String main1 = "";
             String addUserTab = "";
@@ -109,8 +111,11 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             if (null != session.getAttribute("result")) {
                 userResult = session.getAttribute("result").toString();
                 if (null != session.getAttribute("tab")) {
-                    addUserTab = session.getAttribute("tab").toString();
-                    currentUserTab = "";
+                    if (session.getAttribute("tab").toString().equals("Adduser")) {
+                        addUserTab = "active";
+                        currentUserTab = "";
+                    }
+
                 }
             } else {
                 addUserTab = "";
@@ -122,13 +127,12 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String inst = "";
             String analysis = "";
             String relationship = "";
-            String bodyClass = "";
+            String bodyPart = "";
             String status = "";
             String sample = "";
             String manner = "";
             String icd10 = "";
             String province = "";
-            String organisation = "";
             String marital = "";
             String race = "";
             String occu = "";
@@ -195,12 +199,12 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     } else if (session.getAttribute("tab").equals("relationship")) {
                         relationshipResult = session.getAttribute("relationshipResult").toString();
                         relationship = "active";
-                    } else if (session.getAttribute("tab").equals("BodyClass")) {
-                        bodyClass = "active";
-                        bodyClassResult = session.getAttribute("BodyClassResult").toString();
-                    } else if (session.getAttribute("tab").equals("")) {
-                        bodyClass = "active";
-                        bodyClassResult = session.getAttribute("BodyClassResult").toString();
+                    } else if (session.getAttribute("tab").equals("bodyPart")) {
+                        bodyPart = "active";
+                        bodyPartResult = session.getAttribute("bodyPartResult").toString();
+                    } else if (session.getAttribute("tab").equals("specialCur")) {
+                        specialCur = "active";
+                        specialCurResult = session.getAttribute("specialCurResult").toString();
                     } else if (session.getAttribute("tab").equals("Adduser")) {
                         addUserTab = "active";
                         userResult = session.getAttribute("relationshipResult").toString();
@@ -225,6 +229,8 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     sampleResult = "";
                     statusResult = "";
                     relationshipResult = "";
+                    specialCurResult = "";
+                    bodyPartResult = "";
 
                     main1 = "active";
 
@@ -320,14 +326,22 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             emp = new ReferenceListDb("relationship", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> relationshipList = emp.referenceList();
-
+            
+            //For special Body class list box
+            emp = new ReferenceListDb("bodypart", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> bodyPartList = emp.referenceList();
+            
+            //For special circumstance list box
+            emp = new ReferenceListDb("specialcircumstance", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> specialCurList = emp.referenceList();
+            
+           
             /*
              //
             
-             //For institution list box
-             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
-             emp.init();
-             ArrayList<String> vehicleList = emp.referenceList();
+             
             
              //For institution list box
              ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
@@ -603,11 +617,11 @@ out.println(String.valueOf(status));
 out.println(String.valueOf(relationship));
       out.write("\"><a href=\"#relationship\" data-toggle=\"tab\">Relationship</a></li>\r\n");
       out.write("                                                                <li class=\"");
-out.println(String.valueOf(bodyClass));
-      out.write("\"><a href=\"#bodyClass\" data-toggle=\"tab\">Body Classification</a></li>\r\n");
+out.println(String.valueOf(bodyPart));
+      out.write("\"><a href=\"#bodyPart\" data-toggle=\"tab\">Body Part</a></li>\r\n");
       out.write("                                                                <li class=\"");
 out.println(String.valueOf(specialCur));
-      out.write("\"><a href=\"#specialCur\" data-toggle=\"tab\">Body Classification</a></li>\r\n");
+      out.write("\"><a href=\"#specialCur\" data-toggle=\"tab\">Special Circumstance</a></li>\r\n");
       out.write("                                                            </ul>\r\n");
       out.write("                                                            <div class=\"tab-content\" >\r\n");
       out.write("                                                                <div id=\"inst\" class=\"tab-pane ");
@@ -645,9 +659,9 @@ out.println(String.valueOf(inst));
                                                                                     }
                                                                                 
       out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("                                                                            </select>\r\n");
+      out.write("                                                                           </select>\r\n");
+      out.write("                                                                           <input type=\"button\" onclick=\"editReferenceList('Insitution',InsitutionList)\" value=\"Edit Institution\" id=\"cmdEditInsitutions\" name=\"cmdEditInsitution\" />\r\n");
+      out.write("                                                                              \r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div>     \r\n");
       out.write("                                                                    <div  class=\"offset3\">\r\n");
@@ -1344,35 +1358,35 @@ out.println(String.valueOf(relationship));
       out.write("                                                                    <br/>\r\n");
       out.write("                                                                    <br/>\r\n");
       out.write("                                                                </div>\r\n");
-      out.write("                                                                <div id=\"bodyClass\" class=\"tab-pane ");
-out.println(String.valueOf(bodyClass));
+      out.write("                                                                <div id=\"bodyPart\" class=\"tab-pane ");
+out.println(String.valueOf(bodyPart));
       out.write(" \"> \r\n");
-      out.write("                                                                    <div align=\"center\"><h2>Body Classification </h2> </div>   \r\n");
+      out.write("                                                                    <div align=\"center\"><h2>Body Part </h2> </div>   \r\n");
       out.write("                                                                    ");
       out.write("\r\n");
       out.write("                                                                    <div class=\"offset2 \">\r\n");
-      out.write("                                                                        <form name=\"AddRelationship\" id=\"AddRelationship\" method=\"post\" action=\"ReferenceListServlet\"  >\r\n");
-      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddRelationship\" style=\"visibility: hidden\" />\r\n");
+      out.write("                                                                        <form name=\"AddBodyPart\" id=\"AddBodyPart\" method=\"post\" action=\"ReferenceListServlet\"  >\r\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddBodyPart\" style=\"visibility: hidden\" />\r\n");
       out.write("                                                                            <div class=\"control-group form-horizontal\">\r\n");
-      out.write("                                                                                <label class=\"control-label\" for=\"txtRelationship\">Relationship Type:</label>\r\n");
+      out.write("                                                                                <label class=\"control-label\" for=\"txtBodyPart\">Body Part Type:</label>\r\n");
       out.write("                                                                                <div class=\"controls\">\r\n");
-      out.write("                                                                                    <input type=\"text\" id=\"txtRelationship\" name=\"txtRelationship\"   />\r\n");
-      out.write("                                                                                    <input type=\"submit\" value=\"Add Relationship Type\" name=\"cmdRelationship\" />\r\n");
+      out.write("                                                                                    <input type=\"text\" id=\"txtBodyPart\" name=\"txtBodyPart\"   />\r\n");
+      out.write("                                                                                    <input type=\"submit\" value=\"Add Blody Part Type\" name=\"cmdBodyPart\" />\r\n");
       out.write("                                                                                </div>\r\n");
       out.write("\r\n");
       out.write("                                                                                <br/>  </div>\r\n");
       out.write("                                                                        </form>\r\n");
       out.write("                                                                        <div class=\"controls offset2\" >\r\n");
-      out.write("                                                                            <label class=\"control-label\" for=\"RelationshipList\">Current Relationship Type(s):</label>\r\n");
+      out.write("                                                                            <label class=\"control-label\" for=\"BodyClassList\">Current Body Part Type(s):</label>\r\n");
       out.write("\r\n");
-      out.write("                                                                            <select id=\"RelationshipList\" name=\"RelationshipList\" size=\"5\">\r\n");
+      out.write("                                                                            <select id=\"BodyClassList\" name=\"BodyClassList\" size=\"5\">\r\n");
       out.write("                                                                                ");
 
-                                                                                    for (int i = 0; i < relationshipList.size(); i++) {
+                                                                                    for (int i = 0; i < bodyPartList.size(); i++) {
                                                                                 
       out.write("\r\n");
       out.write("                                                                                <option>");
- out.print(relationshipList.get(i));
+ out.print(bodyPartList.get(i));
       out.write(" </option>\r\n");
       out.write("\r\n");
       out.write("                                                                                ");
@@ -1387,7 +1401,56 @@ out.println(String.valueOf(bodyClass));
       out.write(" \r\n");
       out.write("                                                                    <div  class=\"offset3\">\r\n");
       out.write("                                                                        <label  > ");
- out.println(String.valueOf(relationshipResult));
+ out.println(String.valueOf(bodyPartResult));
+      out.write("</label>\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                    <br/>\r\n");
+      out.write("                                                                    <br/>\r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("                                                                <div id=\"specialCur\" class=\"tab-pane ");
+out.println(String.valueOf(specialCur));
+      out.write(" \"> \r\n");
+      out.write("                                                                    <div align=\"center\"><h2>Special Circumstances</h2> </div>   \r\n");
+      out.write("                                                                    ");
+      out.write("\r\n");
+      out.write("                                                                    <div class=\"offset2 \">\r\n");
+      out.write("                                                                        <form name=\"AddSpecialCur\" id=\"AddSpecialCur\" method=\"post\" action=\"ReferenceListServlet\"  >\r\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddSpecialCur\" style=\"visibility: hidden\" />\r\n");
+      out.write("                                                                            <div class=\"control-group form-horizontal\">\r\n");
+      out.write("                                                                                <label class=\"control-label\" for=\"txtSpecialCur\">Special Circumstance Type:</label>\r\n");
+      out.write("                                                                                <div class=\"controls\">\r\n");
+      out.write("                                                                                    <input type=\"text\" id=\"txtSpecialCur\" name=\"txtSpecialCur\"   />\r\n");
+      out.write("                                                                                    <input type=\"submit\" value=\"Add Special Circumstance Type\" name=\"cmdSpecialCur\" />\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <br/>  </div>\r\n");
+      out.write("                                                                        </form>\r\n");
+      out.write("                                                                        <div class=\"controls offset2\" >\r\n");
+      out.write("                                                                            <label class=\"control-label\" for=\"SpecialCurList\">Special Circumstance Type(s):</label>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <select id=\"BodyClassList\" name=\"SpecialCurList\" size=\"5\">\r\n");
+      out.write("                                                                                ");
+
+                                                                                    for (int i = 0; i < specialCurList.size(); i++) {
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                                <option>");
+ out.print(specialCurList.get(i));
+      out.write(" </option>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                ");
+
+                                                                                    }
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                            </select>\r\n");
+      out.write("                                                                        </div>\r\n");
+      out.write("                                                                    </div> \r\n");
+      out.write("                                                                    ");
+      out.write(" \r\n");
+      out.write("                                                                    <div  class=\"offset3\">\r\n");
+      out.write("                                                                        <label  > ");
+ out.println(String.valueOf(specialCurResult));
       out.write("</label>\r\n");
       out.write("                                                                    </div>\r\n");
       out.write("                                                                    <br/>\r\n");

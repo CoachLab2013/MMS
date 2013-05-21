@@ -28,7 +28,8 @@
         <script src="js/jquery.validate.min.js"></script>
         <script src="js/script.js"></script>
         <link  type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="bootstrap/css/tablecss.css"
+        <link type="text/css" rel="stylesheet" href="bootstrap/css/tablecss.css">
+        <script src="js/EditReferenceList.js"></script>
     <div class="head"><img src="Images/logo2.jpg">
         <title>MMS Administration</title>
     </head>
@@ -510,9 +511,9 @@
                                                                                 <%
                                                                                     }
                                                                                 %>
-
-
-                                                                            </select>
+                                                                           </select>
+                                                                           <input type="button" onclick="editReferenceList('Insitution','InsitutionList')" value="Edit Institution" id="cmdEditInsitutions" name="cmdEditInsitution" />
+                                                                              
                                                                         </div>
                                                                     </div>     
                                                                     <div  class="offset3">
