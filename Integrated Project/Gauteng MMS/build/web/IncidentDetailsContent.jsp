@@ -42,7 +42,6 @@
                 <td> Incident date:</td>
                 <td>
                     <select name="detailyear" id="detailyear">
-                        <option selected="selected">Year</option>
                         <%
                            String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
                            String[] datetime = timestamp.split(" ");
@@ -50,8 +49,8 @@
                            String year = date[0];
                            int currentyear = Integer.parseInt(year);
                            String lastyear = Integer.toString(currentyear-1);
+                           out.println("<option selected='selected'>"+year+"</option>");
                            out.println("<option>"+lastyear+"</option>");
-                           out.println("<option>"+year+"</option>");
                         %>
                     </select>
  

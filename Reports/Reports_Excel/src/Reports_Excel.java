@@ -1,4 +1,8 @@
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -26,14 +30,16 @@ public class Reports_Excel {
         try
         {
             try (Connection connection = new DatabaseConnector(DbDetail.staticDBDetail).init()) {
-                new Report_AuditTrail("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Audit Trail", connection).createReport();
-                new Report_ClosedBodyFile("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Body File - Open", connection).createReport();
-                new Report_ClosedBodyFile("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Body File - Closed", connection).createReport();
-                new Report_IncidentHouseKeeping("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Incident Housekeeping", connection).createReport();
-                new Report_OutstandingResults("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Outstanding Results", connection).createReport();
-                new Report_UnidentifiedBodies("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Unidentified Bodies", connection).createReport();
-            }
-        } catch (SQLException ex) {
+                
+                Files.createDirectories(Paths.get("./Reports/Excel"));
+                new Report_AuditTrail("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Audit Trail", connection).createReport();
+                new Report_ClosedBodyFile("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Body File - Open", connection).createReport();
+                new Report_ClosedBodyFile("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Body File - Closed", connection).createReport();
+                new Report_IncidentHouseKeeping("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Incident Housekeeping", connection).createReport();
+                new Report_OutstandingResults("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Outstanding Results", connection).createReport();
+                new Report_UnidentifiedBodies("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies", connection).createReport();
+            } 
+        } catch (SQLException | IOException ex) {
             Logger.getLogger(Reports_Excel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
