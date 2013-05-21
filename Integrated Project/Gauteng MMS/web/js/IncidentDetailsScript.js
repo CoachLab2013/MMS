@@ -185,8 +185,8 @@ $(document).ready(function(){
         if($("#detailform").valid()){
             $("#IncidentDetailsTab").removeClass("active");
             $("#IncidentDetails").removeClass("tab-pane active");
-            $("#CallDetails").removeClass("tab-pane");
             $("#IncidentDetails").addClass("tab-pane");
+            $("#CallDetails").removeClass("tab-pane");            
             $("#CallDetails").addClass("tab-pane active");
             $("#CallDetailsTab").addClass("active");
             $("#callform").show();
