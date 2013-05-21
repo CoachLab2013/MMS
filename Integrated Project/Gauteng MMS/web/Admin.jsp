@@ -18,7 +18,8 @@
 <html>
     <head>        
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
         <script src="bootstrap/js/bootstrap-tabs.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>

@@ -249,7 +249,7 @@ $(document).ready(function() {
             },
             
             Srank: {
-                required: true,
+                required: true
                  
             }
          
