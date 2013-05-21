@@ -5,6 +5,7 @@
 package servlets;
 
 import AssistiveClasses.ClassSendMailTLS;
+import AssistiveClasses.SetDbDetail;
 import database.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -80,7 +81,9 @@ public class ReferenceListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //database connection
-        DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
+         SetDbDetail DBdet = new SetDbDetail();
+        
+        DbDetail dbDetail = DBdet.getDbdetail();;
         String result = "";
 
         //if it comes from add user form
@@ -91,8 +94,7 @@ public class ReferenceListServlet extends HttpServlet {
             String password = random(8);
            
             String name = request.getParameter("firstName");
-            String surname = request.getParameter("surname");
-            //String rank = request.getParameter("rank");
+            String surname = request.getParameter("surname"); 
             String email = request.getParameter("email");
             ClassSendMailTLS sendmail = new ClassSendMailTLS();
             sendmail.sendMail(email.trim(), "You password for the Gauteng MMS system is \n  "+ password);
@@ -174,7 +176,59 @@ public class ReferenceListServlet extends HttpServlet {
             }
 
 
-        }else if (request.getParameter("form").equals("AddRank")) {
+        }else if (request.getParameter("form").equals("AddProperty")) {
+            
+                //Get infor from text box
+            String rankName = request.getParameter("txtProperty");
+
+            ReferenceListDb emp = new ReferenceListDb("propertytype", "idPropertyType", "type", rankName, dbDetail);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "property");
+                sess.setAttribute("propertyResult", "Property type has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "property");
+                sess.setAttribute("rankResult",  "Property type did not save because " + result);
+                response.sendRedirect("Admin.jsp");
+            }
+
+
+        }else if (request.getParameter("form").equals("AddVehicle")) {
+            
+                //Get infor from text box
+            String vehicleReNum = request.getParameter("txtVehicle");
+
+            ReferenceListDb emp = new ReferenceListDb("vehicle", "e", "registrationNumber", vehicleReNum, dbDetail);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "vehi");
+                sess.setAttribute("vehicleResult", "Vehicle registration number has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "vehi");
+                sess.setAttribute("vehicleResult",  "Vehicle registration number did not save because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+
+        }else if (request.getParameter("form").equals("AddRank")){
+          
                 //Get infor from text box
             String rankName = request.getParameter("txtRank");
 
@@ -182,7 +236,7 @@ public class ReferenceListServlet extends HttpServlet {
             emp.init();
             result = emp.add().trim();
             //if save is successful, return a message to page
-            if (result.equals("successful")) {
+            if (result.equals("successful")){
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "rank");

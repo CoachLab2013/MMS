@@ -18,7 +18,7 @@ public class Tools {
      */
     public Tools(){
  
-        dbdetail = new DbDetail("localhost","/mydb","root","hello"); 
+        dbdetail = new DbDetail("localhost","/mydb","root","password"); 
  
     }
     //end constructor
@@ -302,6 +302,15 @@ public class Tools {
        catch(Exception e){
            return null;
        }
+    }
+    
+    public DeathCall getDeathCall(Incident inc){
+        DeathCall call = new DeathCall(inc);
+        DeathCallDb calldb = new DeathCallDb(call,dbdetail);
+        calldb.init();
+        calldb.read();
+        call = calldb.getDeathCall();
+        return call;
     }
     //
 

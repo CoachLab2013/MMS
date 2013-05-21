@@ -18,7 +18,8 @@
 <html>
     <head>        
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
         <script src="bootstrap/js/bootstrap-tabs.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -46,13 +47,13 @@
             String occupationResult = "";
             String raceResult = "";
             String maritalResult = "";
-            String oraganisationResult = "";
             String provinceResult = "";
             String iCD10Result = "";
             String mannerResult = "";
             String sampleResult = "";
             String statusResult = "";
             String relationshipResult = "";
+            String bodyClassResult = "";
 
             String main1 = "";
             String addUserTab = "";
@@ -75,6 +76,7 @@
             String inst = "";
             String analysis = "";
             String relationship = "";
+            String bodyClass = "";
             String status = "";
             String sample = "";
             String manner = "";
@@ -88,6 +90,7 @@
             String rank = "";
             String vehi = "";
             String property = "";
+            String specialCur = "";
 
 
 
@@ -109,7 +112,7 @@
                         propertyResult = session.getAttribute("propertyResult").toString();
                         property = "active";
                     } else if (session.getAttribute("tab").equals("vehi")) {
-                        vehicleResult = session.getAttribute("result").toString();
+                        vehicleResult = session.getAttribute("vehicleResult").toString();
                         vehi = "active";
                     } else if (session.getAttribute("tab").equals("rank")) {
                         rankResult = session.getAttribute("rankResult").toString();
@@ -126,7 +129,7 @@
                     } else if (session.getAttribute("tab").equals("marital")) {
                         maritalResult = session.getAttribute("maritalResult").toString();
                         marital = "active";
-                    }   else if (session.getAttribute("tab").equals("province")) {
+                    } else if (session.getAttribute("tab").equals("province")) {
                         provinceResult = session.getAttribute("provinceResult").toString();
                         province = "active";
                     } else if (session.getAttribute("tab").equals("icd10")) {
@@ -146,6 +149,12 @@
                     } else if (session.getAttribute("tab").equals("relationship")) {
                         relationshipResult = session.getAttribute("relationshipResult").toString();
                         relationship = "active";
+                    } else if (session.getAttribute("tab").equals("BodyClass")) {
+                        bodyClass = "active";
+                        bodyClassResult = session.getAttribute("BodyClassResult").toString();
+                    } else if (session.getAttribute("tab").equals("")) {
+                        bodyClass = "active";
+                        bodyClassResult = session.getAttribute("BodyClassResult").toString();
                     } else if (session.getAttribute("tab").equals("Adduser")) {
                         addUserTab = "active";
                         userResult = session.getAttribute("relationshipResult").toString();
@@ -163,7 +172,7 @@
                     occupationResult = "";
                     raceResult = "";
                     maritalResult = "";
-                    
+
                     provinceResult = "";
                     iCD10Result = "";
                     mannerResult = "";
@@ -183,7 +192,7 @@
                 main1 = "active";
             }
             SetDbDetail dbset = new SetDbDetail();
-            
+
             //Code to fill users table
             EmployeeDb emplo = new EmployeeDb(dbset.getDbdetail());
             emplo.init();
@@ -193,13 +202,23 @@
 
             //For institution list box
             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbset.getDbdetail());
-            emp.init(); 
+            emp.init();
             ArrayList<String> institutionList = emp.referenceList();
 
             //For analysis list box
             emp = new ReferenceListDb("analysis", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> analysisList = emp.referenceList();
+
+            //For property list box
+            emp = new ReferenceListDb("propertytype", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> PropertyList = emp.referenceList();
+
+            //For Vehicles list box
+            emp = new ReferenceListDb("vehicle", "e", "registrationNumber", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> vehicleList = emp.referenceList();
 
             //For rank list box
             emp = new ReferenceListDb("rank", "e", "type", "e", dbset.getDbdetail());
@@ -257,15 +276,12 @@
             ArrayList<String> relationshipList = emp.referenceList();
 
             /*
-             //For institution list box
-             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
-             emp.init();
-             ArrayList<String> institutionList = emp.referenceList();
+             //
             
              //For institution list box
              ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
              emp.init();
-             ArrayList<String> institutionList = emp.referenceList();
+             ArrayList<String> vehicleList = emp.referenceList();
             
              //For institution list box
              ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
@@ -277,11 +293,11 @@
              emp.init();
              ArrayList<String> institutionList = emp.referenceList();
              */
-             %>
+        %>
 
-       
-      
-    
+
+
+
         <%-- starting of main tabs --%>
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
@@ -291,7 +307,7 @@
             <%-- contents of main tabs --%>
             <div class="tab-content" >
                 <div id="User" class="tab-pane <%out.println(String.valueOf(main1));%> ">  
-              
+
                     <%-- Users tab content --%>
                     <div class="tabbable">
                         <%-- Users tab has 2 tabs, and they are the following --%>
@@ -302,11 +318,11 @@
 
                         <div class="tab-content" >
                             <div id="cUser" class="tab-pane <%out.println(String.valueOf(currentUserTab));%>">  
-                                 <legend>Users</legend>
+                                <legend>Users</legend>
                                 <%--  Current user content --%>
                                 <table border="1" class="bordered-table">
                                     <tr>
-                                    <th width="150"><H4>Name</H4></th>
+                                        <th width="150"><H4>Name</H4></th>
                                     <th width="150"><H4>Surname</H4></th>
                                     <th width="150"><H4>Persal number</H4></th>
                                     <th width="150"><H4>Email Address <H4></th>
@@ -431,7 +447,7 @@
                                                     </div>
                                                     <div id="RefList" class="tab-pane <%out.println(String.valueOf(main2));%> "> 
                                                         <%-- Content of reference list tab --%>
-                                                         <legend>References Lists</legend>
+                                                        <legend>References Lists</legend>
                                                         <div class="tabbable">
                                                             <%-- reference list  tab has 20 tabs, and they are the following --%>
                                                             <ul class="nav nav-tabs " data-tabs="tabs">
@@ -444,15 +460,14 @@
                                                                 <li class="<%out.println(String.valueOf(gender));%>"><a href="#gender" data-toggle="tab">Gender</a></li>
                                                                 <li class="<%out.println(String.valueOf(occu));%>"><a href="#occupation" data-toggle="tab">Occupation</a></li>
                                                                 <li class="<%out.println(String.valueOf(race));%>"><a href="#race" data-toggle="tab">Race</a></li>
-                                                                <li class="<%out.println(String.valueOf(marital));%>"><a href="#mStatus" data-toggle="tab">Marital Status</a></li>
-                                                                
-                                                                <li class="<%out.println(String.valueOf(province));%>"><a href="#province" data-toggle="tab">Province</a></li>
+                                                                <li class="<%out.println(String.valueOf(marital));%>"><a href="#mStatus" data-toggle="tab">Marital Status</a></li> <li class="<%out.println(String.valueOf(province));%>"><a href="#province" data-toggle="tab">Province</a></li>
                                                                 <li class="<%out.println(String.valueOf(icd10));%>"><a href="#icd10Codes" data-toggle="tab">ICD10 Codes</a></li>
                                                                 <li class="<%out.println(String.valueOf(manner));%>"><a href="#mDeath" data-toggle="tab">Manner of Death</a></li>
                                                                 <li class="<%out.println(String.valueOf(sample));%>"><a href="#sType" data-toggle="tab">Sample Type</a></li>
                                                                 <li class="<%out.println(String.valueOf(status));%>"><a href="#status" data-toggle="tab">Status</a></li>
                                                                 <li class="<%out.println(String.valueOf(relationship));%>"><a href="#relationship" data-toggle="tab">Relationship</a></li>
-
+                                                                <li class="<%out.println(String.valueOf(bodyClass));%>"><a href="#bodyClass" data-toggle="tab">Body Classification</a></li>
+                                                                <li class="<%out.println(String.valueOf(specialCur));%>"><a href="#specialCur" data-toggle="tab">Body Classification</a></li>
                                                             </ul>
                                                             <div class="tab-content" >
                                                                 <div id="inst" class="tab-pane <%out.println(String.valueOf(inst));%>">  
@@ -531,11 +546,75 @@
                                                                 </div>
 
                                                                 <div id="prop" class="tab-pane <%out.println(String.valueOf(property));%> "> 
-                                                                    <div align="center"><h2>Property</h2> </div>                   
+                                                                    <div align="center"><h2>Property</h2> </div>        
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddProperty" id="AddProperty" method="post" action="ReferenceListServlet">
+                                                                            <input type="text" name="form" value="AddProperty" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtProperty">Property type name:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtProperty" name="txtProperty"   />
+                                                                                    <input type="submit" value="Add Property Type" name="cmdProperty" />
+                                                                                </div>
+
+                                                                                <br/>  </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="PropertyList">Current Property Type(s):</label>
+
+                                                                            <select id="PropertyList" name="PropertyList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < PropertyList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(PropertyList.get(i));%> </option>
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label  > <% out.println(String.valueOf(propertyResult));%></label>
+                                                                    </div>
                                                                 </div>
 
                                                                 <div id="vehicles" class="tab-pane <%out.println(String.valueOf(vehi));%> "> 
-                                                                    <div align="center"><h2>Vehicles</h2> </div>                   
+                                                                    <div align="center"><h2>Vehicles</h2> </div> 
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddRank" id="AddVehicle" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddVehicle" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtVehicle">Vehicle Registration Number:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtVehicle" name="txtVehicle"   />
+                                                                                    <input type="submit" value="Add Vehicle" name="cmdVehicle" />
+                                                                                </div>
+
+                                                                                <br/>  </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="VehicleList">Current Vehicle(s)</label>
+
+                                                                            <select id="VehicleList" name="VehicleList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < vehicleList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(vehicleList.get(i));%> </option>
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label  > <% out.println(String.valueOf(vehicleResult));%></label>
+                                                                    </div>
                                                                 </div>
 
                                                                 <div id="rank" class="tab-pane <%out.println(String.valueOf(rank));%>"> 
@@ -724,11 +803,6 @@
                                                                     </div>
                                                                     <br/>
                                                                     <br/>
-                                                                </div>
-
-                                                                <div id="org" class="tab-pane <%out.println(String.valueOf(organisation));%> "> 
-                                                                    <div align="center"><h2> Organisation </h2> </div>
-
                                                                 </div>
 
                                                                 <div  id="province" class="tab-pane <%out.println(String.valueOf(province));%>"> 
@@ -923,6 +997,43 @@
 
                                                                 <div id="relationship" class="tab-pane <%out.println(String.valueOf(relationship));%> "> 
                                                                     <div align="center"><h2>Relationship</h2> </div>   
+                                                                    <%--content for Relationship reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddRelationship" id="AddRelationship" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddRelationship" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtRelationship">Relationship Type:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtRelationship" name="txtRelationship"   />
+                                                                                    <input type="submit" value="Add Relationship Type" name="cmdRelationship" />
+                                                                                </div>
+
+                                                                                <br/>  </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="RelationshipList">Current Relationship Type(s):</label>
+
+                                                                            <select id="RelationshipList" name="RelationshipList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < relationshipList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(relationshipList.get(i));%> </option>
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label  > <% out.println(String.valueOf(relationshipResult));%></label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
+                                                                <div id="bodyClass" class="tab-pane <%out.println(String.valueOf(bodyClass));%> "> 
+                                                                    <div align="center"><h2>Body Classification </h2> </div>   
                                                                     <%--content for Relationship reference list--%>
                                                                     <div class="offset2 ">
                                                                         <form name="AddRelationship" id="AddRelationship" method="post" action="ReferenceListServlet"  >
