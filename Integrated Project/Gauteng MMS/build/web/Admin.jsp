@@ -53,7 +53,8 @@
             String sampleResult = "";
             String statusResult = "";
             String relationshipResult = "";
-            String bodyClassResult = "";
+            String bodyPartResult = "";
+            String specialCurResult = "";
 
             String main1 = "";
             String addUserTab = "";
@@ -63,8 +64,11 @@
             if (null != session.getAttribute("result")) {
                 userResult = session.getAttribute("result").toString();
                 if (null != session.getAttribute("tab")) {
-                    addUserTab = session.getAttribute("tab").toString();
-                    currentUserTab = "";
+                    if (session.getAttribute("tab").toString().equals("Adduser")) {
+                        addUserTab = "active";
+                        currentUserTab = "";
+                    }
+
                 }
             } else {
                 addUserTab = "";
@@ -76,13 +80,12 @@
             String inst = "";
             String analysis = "";
             String relationship = "";
-            String bodyClass = "";
+            String bodyPart = "";
             String status = "";
             String sample = "";
             String manner = "";
             String icd10 = "";
             String province = "";
-            String organisation = "";
             String marital = "";
             String race = "";
             String occu = "";
@@ -149,12 +152,12 @@
                     } else if (session.getAttribute("tab").equals("relationship")) {
                         relationshipResult = session.getAttribute("relationshipResult").toString();
                         relationship = "active";
-                    } else if (session.getAttribute("tab").equals("BodyClass")) {
-                        bodyClass = "active";
-                        bodyClassResult = session.getAttribute("BodyClassResult").toString();
-                    } else if (session.getAttribute("tab").equals("")) {
-                        bodyClass = "active";
-                        bodyClassResult = session.getAttribute("BodyClassResult").toString();
+                    } else if (session.getAttribute("tab").equals("bodyPart")) {
+                        bodyPart = "active";
+                        bodyPartResult = session.getAttribute("bodyPartResult").toString();
+                    } else if (session.getAttribute("tab").equals("specialCur")) {
+                        specialCur = "active";
+                        specialCurResult = session.getAttribute("specialCurResult").toString();
                     } else if (session.getAttribute("tab").equals("Adduser")) {
                         addUserTab = "active";
                         userResult = session.getAttribute("relationshipResult").toString();
@@ -179,6 +182,8 @@
                     sampleResult = "";
                     statusResult = "";
                     relationshipResult = "";
+                    specialCurResult = "";
+                    bodyPartResult = "";
 
                     main1 = "active";
 
@@ -274,14 +279,22 @@
             emp = new ReferenceListDb("relationship", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> relationshipList = emp.referenceList();
-
+            
+            //For special Body class list box
+            emp = new ReferenceListDb("bodypart", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> bodyPartList = emp.referenceList();
+            
+            //For special circumstance list box
+            emp = new ReferenceListDb("specialcircumstance", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> specialCurList = emp.referenceList();
+            
+           
             /*
              //
             
-             //For institution list box
-             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
-             emp.init();
-             ArrayList<String> vehicleList = emp.referenceList();
+             
             
              //For institution list box
              ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
@@ -466,8 +479,8 @@
                                                                 <li class="<%out.println(String.valueOf(sample));%>"><a href="#sType" data-toggle="tab">Sample Type</a></li>
                                                                 <li class="<%out.println(String.valueOf(status));%>"><a href="#status" data-toggle="tab">Status</a></li>
                                                                 <li class="<%out.println(String.valueOf(relationship));%>"><a href="#relationship" data-toggle="tab">Relationship</a></li>
-                                                                <li class="<%out.println(String.valueOf(bodyClass));%>"><a href="#bodyClass" data-toggle="tab">Body Classification</a></li>
-                                                                <li class="<%out.println(String.valueOf(specialCur));%>"><a href="#specialCur" data-toggle="tab">Body Classification</a></li>
+                                                                <li class="<%out.println(String.valueOf(bodyPart));%>"><a href="#bodyPart" data-toggle="tab">Body Part</a></li>
+                                                                <li class="<%out.println(String.valueOf(specialCur));%>"><a href="#specialCur" data-toggle="tab">Special Circumstance</a></li>
                                                             </ul>
                                                             <div class="tab-content" >
                                                                 <div id="inst" class="tab-pane <%out.println(String.valueOf(inst));%>">  
@@ -1032,29 +1045,29 @@
                                                                     <br/>
                                                                     <br/>
                                                                 </div>
-                                                                <div id="bodyClass" class="tab-pane <%out.println(String.valueOf(bodyClass));%> "> 
-                                                                    <div align="center"><h2>Body Classification </h2> </div>   
-                                                                    <%--content for Relationship reference list--%>
+                                                                <div id="bodyPart" class="tab-pane <%out.println(String.valueOf(bodyPart));%> "> 
+                                                                    <div align="center"><h2>Body Part </h2> </div>   
+                                                                    <%--content for Body Part reference list--%>
                                                                     <div class="offset2 ">
-                                                                        <form name="AddRelationship" id="AddRelationship" method="post" action="ReferenceListServlet"  >
-                                                                            <input type="text" name="form" value="AddRelationship" style="visibility: hidden" />
+                                                                        <form name="AddBodyPart" id="AddBodyPart" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddBodyPart" style="visibility: hidden" />
                                                                             <div class="control-group form-horizontal">
-                                                                                <label class="control-label" for="txtRelationship">Relationship Type:</label>
+                                                                                <label class="control-label" for="txtBodyPart">Body Part Type:</label>
                                                                                 <div class="controls">
-                                                                                    <input type="text" id="txtRelationship" name="txtRelationship"   />
-                                                                                    <input type="submit" value="Add Relationship Type" name="cmdRelationship" />
+                                                                                    <input type="text" id="txtBodyPart" name="txtBodyPart"   />
+                                                                                    <input type="submit" value="Add Blody Part Type" name="cmdBodyPart" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
                                                                         </form>
                                                                         <div class="controls offset2" >
-                                                                            <label class="control-label" for="RelationshipList">Current Relationship Type(s):</label>
+                                                                            <label class="control-label" for="BodyClassList">Current Body Part Type(s):</label>
 
-                                                                            <select id="RelationshipList" name="RelationshipList" size="5">
+                                                                            <select id="BodyClassList" name="BodyClassList" size="5">
                                                                                 <%
-                                                                                    for (int i = 0; i < relationshipList.size(); i++) {
+                                                                                    for (int i = 0; i < bodyPartList.size(); i++) {
                                                                                 %>
-                                                                                <option><% out.print(relationshipList.get(i));%> </option>
+                                                                                <option><% out.print(bodyPartList.get(i));%> </option>
 
                                                                                 <%
                                                                                     }
@@ -1064,7 +1077,44 @@
                                                                     </div> 
                                                                     <%--Display save result --%> 
                                                                     <div  class="offset3">
-                                                                        <label  > <% out.println(String.valueOf(relationshipResult));%></label>
+                                                                        <label  > <% out.println(String.valueOf(bodyPartResult));%></label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
+                                                                <div id="specialCur" class="tab-pane <%out.println(String.valueOf(specialCur));%> "> 
+                                                                    <div align="center"><h2>Special Circumstances</h2> </div>   
+                                                                    <%--content for Special Circumstance reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddSpecialCur" id="AddSpecialCur" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddSpecialCur" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtSpecialCur">Special Circumstance Type:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtSpecialCur" name="txtSpecialCur"   />
+                                                                                    <input type="submit" value="Add Special Circumstance Type" name="cmdSpecialCur" />
+                                                                                </div>
+
+                                                                                <br/>  </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="SpecialCurList">Special Circumstance Type(s):</label>
+
+                                                                            <select id="BodyClassList" name="SpecialCurList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < specialCurList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(specialCurList.get(i));%> </option>
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label  > <% out.println(String.valueOf(specialCurResult));%></label>
                                                                     </div>
                                                                     <br/>
                                                                     <br/>

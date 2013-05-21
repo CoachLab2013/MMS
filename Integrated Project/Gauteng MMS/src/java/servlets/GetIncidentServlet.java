@@ -40,6 +40,7 @@ public class GetIncidentServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Tools t = new Tools();
         Incident incident = t.getIncidentDetail(request.getParameter("selected_edit_incident"));
+        
         HttpSession sess = request.getSession();
         sess.setAttribute("lognumber",incident.getIncidentLogNumber());
         sess.setAttribute("circumstance_of_death",incident.getCircumstanceOfDeath());
