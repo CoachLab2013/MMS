@@ -129,9 +129,12 @@
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label" for="organisation">Institution</label> 
-                                                    <div class="controls">
-                                                        <select id="organisation" name="organisation">                         
-                                                            <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Institution", "type", ""));
+                                                            %>
+                                                            <%--<select id="organisation" name="organisation">                         
+                                                            <option value=""> 
+                                                            <% out.println(String.valueOf("-Please Select-"));%></option>
 
                                                             <%
                                                                 for (int i = 0; i < institutionList.size(); i++) {
@@ -140,7 +143,7 @@
 
                                                             <%
                                                                 }
-                                                            %>
+%> --%>
 
 
 
@@ -223,8 +226,8 @@
                                                     <label class="control-label" for="atScene">Was pathologist at scene</label> 
                                                     <div class="controls">
                                                         <select id="atScene" name="atScene">                            
-                                                            <option>Yes</option>
                                                             <option>No</option>
+                                                            <option>Yes</option>
                                                         </select>
                                                     </div>
                                                 </div> 
@@ -256,12 +259,14 @@
 
                                                 <div class="control-group">
                                                     <label class="control-label" for="BodyClass">Body Classification</label> 
-                                                    <div class="controls">
-                                                        <select id="BodyClass" name="BodyClass">                            
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("BodyPart", "type", ""));
+                                                            %>
+                                                        <%--<select id="BodyClass" name="BodyClass">                            
                                                             <option>Head</option>
                                                             <option>Eye</option>
                                                             <option>Body</option>
-                                                        </select>
+                                                        </select>--%>
                                                     </div>
                                                 </div> 
 
@@ -301,9 +306,10 @@
 
                                                 <div class="control-group">
                                                     <label class="control-label" for="Brace">Race</label> 
-                                                    <div class="controls">
-                                                        <select id="Brace" name="Brace">                            
-                                                            <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Race", "type", ""));
+                                                            %>                      
+                                                            <%--<select id="Brace" name="Brace"><option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
                                                             <%
                                                                 for (int i = 0; i < raceList.size(); i++) {
                                                             %>
@@ -311,14 +317,16 @@
 
                                                             <%
                                                                 }
-                                                            %>
+                                                            %> --%>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label" for="Bgender">Gender</label> 
-                                                    <div class="controls">
-                                                        <select id="Bgender" name="Bgender">                            
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Gender", "type", ""));
+                                                            %>
+                                                        <%--<select id="Bgender" name="Bgender">                            
                                                             <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
                                                             <%
                                                                 for (int i = 0; i < genderList.size(); i++) {
@@ -327,7 +335,7 @@
 
                                                             <%
                                                                 }
-                                                            %>
+                                                            %> --%>
 
                                                         </select>
                                                     </div>
