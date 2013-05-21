@@ -83,8 +83,8 @@ public class Kin {
     }
 
     // setters 
-    public void setPassport(String password) {
-       this. passport = password;
+    public void setPassport(String passport) {
+       this. passport = passport;
     }
 
     public void setName(String name) {
