@@ -98,6 +98,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String sampleResult = "";
             String statusResult = "";
             String relationshipResult = "";
+            String bodyClassResult = "";
 
             String main1 = "";
             String addUserTab = "";
@@ -120,6 +121,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String inst = "";
             String analysis = "";
             String relationship = "";
+            String bodyClass = "";
             String status = "";
             String sample = "";
             String manner = "";
@@ -133,6 +135,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String rank = "";
             String vehi = "";
             String property = "";
+            String specialCur = "";
 
 
 
@@ -191,6 +194,12 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     } else if (session.getAttribute("tab").equals("relationship")) {
                         relationshipResult = session.getAttribute("relationshipResult").toString();
                         relationship = "active";
+                    } else if (session.getAttribute("tab").equals("BodyClass")) {
+                        bodyClass = "active";
+                        bodyClassResult = session.getAttribute("BodyClassResult").toString();
+                    } else if (session.getAttribute("tab").equals("")) {
+                        bodyClass = "active";
+                        bodyClassResult = session.getAttribute("BodyClassResult").toString();
                     } else if (session.getAttribute("tab").equals("Adduser")) {
                         addUserTab = "active";
                         userResult = session.getAttribute("relationshipResult").toString();
@@ -574,9 +583,7 @@ out.println(String.valueOf(race));
       out.write("\"><a href=\"#race\" data-toggle=\"tab\">Race</a></li>\r\n");
       out.write("                                                                <li class=\"");
 out.println(String.valueOf(marital));
-      out.write("\"><a href=\"#mStatus\" data-toggle=\"tab\">Marital Status</a></li>\r\n");
-      out.write("\r\n");
-      out.write("                                                                <li class=\"");
+      out.write("\"><a href=\"#mStatus\" data-toggle=\"tab\">Marital Status</a></li> <li class=\"");
 out.println(String.valueOf(province));
       out.write("\"><a href=\"#province\" data-toggle=\"tab\">Province</a></li>\r\n");
       out.write("                                                                <li class=\"");
@@ -594,7 +601,12 @@ out.println(String.valueOf(status));
       out.write("                                                                <li class=\"");
 out.println(String.valueOf(relationship));
       out.write("\"><a href=\"#relationship\" data-toggle=\"tab\">Relationship</a></li>\r\n");
-      out.write("\r\n");
+      out.write("                                                                <li class=\"");
+out.println(String.valueOf(bodyClass));
+      out.write("\"><a href=\"#bodyClass\" data-toggle=\"tab\">Body Classification</a></li>\r\n");
+      out.write("                                                                <li class=\"");
+out.println(String.valueOf(specialCur));
+      out.write("\"><a href=\"#specialCur\" data-toggle=\"tab\">Body Classification</a></li>\r\n");
       out.write("                                                            </ul>\r\n");
       out.write("                                                            <div class=\"tab-content\" >\r\n");
       out.write("                                                                <div id=\"inst\" class=\"tab-pane ");
@@ -698,7 +710,7 @@ out.println(String.valueOf(property));
       out.write(" \"> \r\n");
       out.write("                                                                    <div align=\"center\"><h2>Property</h2> </div>        \r\n");
       out.write("                                                                    <div class=\"offset2 \">\r\n");
-      out.write("                                                                        <form name=\"AddProperty\" id=\"AddProperty\" method=\"post\" action=\"ReferenceListServlet\"  >\r\n");
+      out.write("                                                                        <form name=\"AddProperty\" id=\"AddProperty\" method=\"post\" action=\"ReferenceListServlet\">\r\n");
       out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddProperty\" style=\"visibility: hidden\" />\r\n");
       out.write("                                                                            <div class=\"control-group form-horizontal\">\r\n");
       out.write("                                                                                <label class=\"control-label\" for=\"txtProperty\">Property type name:</label>\r\n");
@@ -1032,13 +1044,6 @@ out.println(String.valueOf(marital));
       out.write("                                                                    <br/>\r\n");
       out.write("                                                                </div>\r\n");
       out.write("\r\n");
-      out.write("                                                                <div id=\"org\" class=\"tab-pane ");
-out.println(String.valueOf(organisation));
-      out.write(" \"> \r\n");
-      out.write("                                                                    <div align=\"center\"><h2> Organisation </h2> </div>\r\n");
-      out.write("\r\n");
-      out.write("                                                                </div>\r\n");
-      out.write("\r\n");
       out.write("                                                                <div  id=\"province\" class=\"tab-pane ");
 out.println(String.valueOf(province));
       out.write("\"> \r\n");
@@ -1293,6 +1298,55 @@ out.println(String.valueOf(status));
 out.println(String.valueOf(relationship));
       out.write(" \"> \r\n");
       out.write("                                                                    <div align=\"center\"><h2>Relationship</h2> </div>   \r\n");
+      out.write("                                                                    ");
+      out.write("\r\n");
+      out.write("                                                                    <div class=\"offset2 \">\r\n");
+      out.write("                                                                        <form name=\"AddRelationship\" id=\"AddRelationship\" method=\"post\" action=\"ReferenceListServlet\"  >\r\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddRelationship\" style=\"visibility: hidden\" />\r\n");
+      out.write("                                                                            <div class=\"control-group form-horizontal\">\r\n");
+      out.write("                                                                                <label class=\"control-label\" for=\"txtRelationship\">Relationship Type:</label>\r\n");
+      out.write("                                                                                <div class=\"controls\">\r\n");
+      out.write("                                                                                    <input type=\"text\" id=\"txtRelationship\" name=\"txtRelationship\"   />\r\n");
+      out.write("                                                                                    <input type=\"submit\" value=\"Add Relationship Type\" name=\"cmdRelationship\" />\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <br/>  </div>\r\n");
+      out.write("                                                                        </form>\r\n");
+      out.write("                                                                        <div class=\"controls offset2\" >\r\n");
+      out.write("                                                                            <label class=\"control-label\" for=\"RelationshipList\">Current Relationship Type(s):</label>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <select id=\"RelationshipList\" name=\"RelationshipList\" size=\"5\">\r\n");
+      out.write("                                                                                ");
+
+                                                                                    for (int i = 0; i < relationshipList.size(); i++) {
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                                <option>");
+ out.print(relationshipList.get(i));
+      out.write(" </option>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                ");
+
+                                                                                    }
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                            </select>\r\n");
+      out.write("                                                                        </div>\r\n");
+      out.write("                                                                    </div> \r\n");
+      out.write("                                                                    ");
+      out.write(" \r\n");
+      out.write("                                                                    <div  class=\"offset3\">\r\n");
+      out.write("                                                                        <label  > ");
+ out.println(String.valueOf(relationshipResult));
+      out.write("</label>\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                    <br/>\r\n");
+      out.write("                                                                    <br/>\r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("                                                                <div id=\"bodyClass\" class=\"tab-pane ");
+out.println(String.valueOf(bodyClass));
+      out.write(" \"> \r\n");
+      out.write("                                                                    <div align=\"center\"><h2>Body Classification </h2> </div>   \r\n");
       out.write("                                                                    ");
       out.write("\r\n");
       out.write("                                                                    <div class=\"offset2 \">\r\n");

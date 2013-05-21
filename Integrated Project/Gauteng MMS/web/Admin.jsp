@@ -89,6 +89,7 @@
             String rank = "";
             String vehi = "";
             String property = "";
+            String specialCur = "";
 
 
 
@@ -148,6 +149,9 @@
                         relationshipResult = session.getAttribute("relationshipResult").toString();
                         relationship = "active";
                     } else if (session.getAttribute("tab").equals("BodyClass")) {
+                        bodyClass = "active";
+                        bodyClassResult = session.getAttribute("BodyClassResult").toString();
+                    } else if (session.getAttribute("tab").equals("")) {
                         bodyClass = "active";
                         bodyClassResult = session.getAttribute("BodyClassResult").toString();
                     } else if (session.getAttribute("tab").equals("Adduser")) {
