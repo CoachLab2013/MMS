@@ -33,7 +33,7 @@ $(document).ready(function(){
      * in the drop down list
      */
     $.validator.addMethod("valueNotEquals", function(value, element, arg){
-        return arg != value;
+        return arg !== value;
     }, "Value must not equal arg.");
     
     $("#vehiclecancel").click(function(){
