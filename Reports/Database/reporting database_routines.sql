@@ -18,31 +18,6 @@ USE `reporting database`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping events for database 'reporting database'
---
-/*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
-/*!50106 DROP EVENT IF EXISTS `RUN_ETL` */;
-DELIMITER ;;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
-/*!50003 SET character_set_client  = utf8 */ ;;
-/*!50003 SET character_set_results = utf8 */ ;;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;;
-/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
-/*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`root`@`localhost`*/ /*!50106 EVENT `RUN_ETL` ON SCHEDULE EVERY 1 DAY STARTS '2013-06-01 03:00:00' ON COMPLETION NOT PRESERVE ENABLE DO CALL	`reporting database`.`Transform_CALL_Procedures` */ ;;
-/*!50003 SET time_zone             = @saved_time_zone */ ;;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;;
-/*!50003 SET character_set_results = @saved_cs_results */ ;;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;;
-DELIMITER ;
-/*!50106 SET TIME_ZONE= @save_time_zone */ ;
-
---
 -- Dumping routines for database 'reporting database'
 --
 /*!50003 DROP FUNCTION IF EXISTS `getDateKey` */;
@@ -78,23 +53,24 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_CALL_Procedures`()
 BEGIN
 	
 	SET @ex = 0;
+	SET @msg = '';
 
-	CALL `mydb_DUMP_staging`.`call_procedures`(@ex);
+	CALL `mydb_DUMP_staging`.`call_procedures`(@ex, @msg);
 	
 	IF @ex = 0 THEN
 
 		CALL `reporting database`.`Transform_TRUNCATE_Dims`;
-		CALL `reporting database`.`Transform_LOAD_Dims`(@ex);
+		CALL `reporting database`.`Transform_LOAD_Dims`(@ex, @msg);
 		
 		IF @ex = 0 THEN
 			
 			CALL `reporting database`.`Transform_TRUNCATE_Facts`;
-			CALL `reporting database`.`Transform_LOAD_Facts`(@ex);
+			CALL `reporting database`.`Transform_LOAD_Facts`(@ex, @msg);
 
 		END IF;
 	END IF;
 
-	SELECT @ex;
+	SELECT @ex, @msg;
 	
 END ;;
 DELIMITER ;
@@ -112,8 +88,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Age`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Age`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Age'; END;
+	SET msg = '';
+
 	
 	REPLACE INTO `reporting database`.`dim_age` (`age_SK`, `actualAge`, `ageBand`, `dateInserted`)
 	VALUES (-1, -1, 'unknown', NOW());
@@ -158,8 +139,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Body`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Body`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Body'; END;
+	SET msg = '';
 
 	SET SQL_SAFE_UPDATES = 0;
 		REPLACE INTO `reporting database`.`dim_body` (`body_SK`, `deathRegisterNumber_BK`, `name`, `identificationNumber`, `releasedTo`, `dateInserted`)
@@ -172,6 +157,22 @@ BEGIN
 				LEFT JOIN `reporting database`.`dim_body` AS `etl_Body` ON `etl_Body`.`deathRegisterNumber_BK` = `staging_Body`.`idDeathRegisterNumber`
 					WHERE ISNULL(`etl_Body`.`body_SK`);
 
+	INSERT INTO `reporting database`.`dim_body` (`body_SK`, `deathRegisterNumber_BK`, `name`, `identificationNumber`, `releasedTo`, `dateInserted`)
+		SELECT `body_SK`, `staging_Body`.`idDeathRegisterNumber`, `staging_Body`.`nameOfDeceased`, `staging_Body`.`ID`, `staging_Body`.`bodyReleasedTo`, NOW()
+			FROM `mydb_DUMP_Staging`.`body` AS `staging_Body`
+				LEFT JOIN `reporting database`.`dim_body` AS `etl_Body` ON `etl_Body`.`deathRegisterNumber_BK` = `staging_Body`.`idDeathRegisterNumber`
+					WHERE 
+					`staging_Body`.`idDeathRegisterNumber` != `etl_Body`.`deathRegisterNumber_BK` OR
+					`staging_Body`.`nameOfDeceased` != `etl_Body`.`name` OR
+					`staging_Body`.`ID` != `etl_Body`.`identificationNumber` OR
+					`staging_Body`.`bodyReleasedTo` != `etl_Body`.`releasedTo`
+	ON DUPLICATE KEY UPDATE 
+	`body_SK` = `etl_Body`.`body_SK`,
+	`deathRegisterNumber_BK`=`staging_Body`.`idDeathRegisterNumber`, 
+	`name`=`staging_Body`.`nameOfDeceased`, 
+	`identificationNumber`=`staging_Body`.`ID`, 
+	`releasedTo`=`staging_Body`.`bodyReleasedTo`,
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -188,8 +189,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_BodyStatus`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_BodyStatus`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_BodyStatus'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_bodystatus` (`bodyStatus_SK`,`bodyStatus_BK`, `bodyStatusDescription`, `dateInserted`)
 		VALUES (2, 1, 'identified', NOW()), (1, 0, 'unidentified', NOW()), (-1, -1, 'unknown', NOW());
@@ -210,8 +215,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Caller`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Caller`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Caller'; END;
+	SET msg = '';
+
 
 	REPLACE INTO `reporting database`.`dim_caller` (`caller_SK`, `callerName`, `callerContact`, `dateInserted`)
 			VALUES (-1, 'unknown', 'unknown', NOW());
@@ -221,6 +231,19 @@ BEGIN
 			FROM `mydb_DUMP_Staging`.`deathcall` AS `staging_DeathCall`
 				LEFT JOIN `reporting database`.`dim_caller` AS `etl_Caller` ON `etl_Caller`.`callerName` = `staging_DeathCall`.`nameOfCaller`
 					WHERE ISNULL(`etl_Caller`.`caller_SK`);
+
+	INSERT INTO `reporting database`.`dim_caller` (`caller_SK`, `callerName`, `callerContact`, `dateInserted`)
+		SELECT `caller_SK`, `staging_DeathCall`.`nameOfCaller`, `staging_DeathCall`.`numberOfCaller`, NOW()
+			FROM `mydb_DUMP_Staging`.`deathcall` AS `staging_DeathCall`
+				LEFT JOIN `reporting database`.`dim_caller` AS `etl_Caller` ON `etl_Caller`.`callerName` = `staging_DeathCall`.`nameOfCaller`
+					WHERE 
+					`staging_DeathCall`.`nameOfCaller` != `etl_Caller`.`callerName` OR
+					`staging_DeathCall`.`numberOfCaller` != `etl_Caller`.`callerContact`
+	ON DUPLICATE KEY UPDATE 
+	`caller_SK` = `etl_Caller`.`caller_SK`,
+	`callerName`=`staging_DeathCall`.`nameOfCaller`, 
+	`callerContact`=`staging_DeathCall`.`numberOfCaller`,
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -237,9 +260,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Date`(`dateStart` DATE, `dateEnd` DATETIME)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Date`(`dateStart` DATE, `dateEnd` DATETIME,OUT msg VARCHAR(45))
 BEGIN
-	
+
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Date'; END;
+	SET msg = '';
 	REPLACE INTO `reporting database`.`dim_date`(
 		`date_SK`, 
 		`dateStamp`, 
@@ -298,8 +325,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Employee`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Employee`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Employee'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_employee` (`employee_SK`, `persalNumber`, `employeeName`, `dateInserted`)
 			VALUES (-1, -1, 'unknown', NOW());
@@ -310,6 +341,18 @@ BEGIN
 				LEFT JOIN `reporting database`.`dim_employee` AS `etl_Employee` ON `etl_Employee`.`persalNumber` = `staging_Employee`.`personnelNumber`
 					WHERE ISNULL(`etl_Employee`.`employee_SK`);
 
+	INSERT INTO `reporting database`.`dim_employee` (`employee_SK`, `persalNumber`, `employeeName`, `dateInserted`)
+		SELECT `employee_SK`, `staging_Employee`.`personnelNumber`, `staging_Employee`.`name`, NOW()
+			FROM `mydb_DUMP_Staging`.`employee` AS `staging_Employee`
+				LEFT JOIN `reporting database`.`dim_employee` AS `etl_Employee` ON `etl_Employee`.`persalNumber` = `staging_Employee`.`personnelNumber`
+					WHERE 
+					`etl_Employee`.`persalNumber` != `staging_Employee`.`personnelNumber` OR
+					`etl_Employee`.`employeeName` != `staging_Employee`.`name` 
+	ON DUPLICATE KEY UPDATE 
+	`employee_SK` = `etl_Employee`.`employee_SK`,
+	`persalNumber`=`staging_Employee`.`personnelNumber`, 
+	`employeeName`=`staging_Employee`.`name`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -326,8 +369,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Event`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Event`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Event'; END;
+	SET msg = '';
+
 
 	REPLACE INTO `reporting database`.`dim_event` (`event_SK`, `eventID_BK`, `eventMessage`, `dateInserted`)
 		VALUES (-1, -1, 'unknown', NOW());
@@ -338,6 +386,18 @@ BEGIN
 				LEFT JOIN `reporting database`.`dim_event` AS `etl_Event` ON `etl_Event`.`eventID_BK` = `staging_AuditTrail`.`idAuditTrail`
 					WHERE ISNULL(`etl_Event`.`event_SK`);
 
+	INSERT INTO `reporting database`.`dim_event` (`event_SK`, `eventID_BK`, `eventMessage`, `dateInserted`)
+		SELECT `event_SK`, `staging_AuditTrail`.`idAuditTrail`, `staging_AuditTrail`.`eventMessage`, NOW()
+			FROM `mydb_DUMP_Staging`.`audittrail` AS `staging_AuditTrail`
+				LEFT JOIN `reporting database`.`dim_event` AS `etl_Event` ON `etl_Event`.`eventID_BK` = `staging_AuditTrail`.`idAuditTrail`
+					WHERE 
+					`etl_Event`.`eventID_BK` != `staging_AuditTrail`.`idAuditTrail` OR
+					`etl_Event`.`eventMessage` != `staging_AuditTrail`.`eventMessage` 
+	ON DUPLICATE KEY UPDATE 
+	`event_SK` = `etl_Event`.`event_SK`,
+	`eventID_BK`=`staging_AuditTrail`.`idAuditTrail`, 
+	`eventMessage`=`staging_AuditTrail`.`eventMessage`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -354,8 +414,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_EventLocation`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_EventLocation`(OUT msg VARCHAR(45))
 BEGIN
+
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_EventLocation'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_eventlocation` (`location_SK`, `locationName`, `dateInserted`)
 		VALUES (-1, 'unknown', NOW());
@@ -366,6 +431,16 @@ BEGIN
 				LEFT JOIN `reporting database`.`dim_eventlocation` AS `etl_EventLocation` ON `etl_EventLocation`.`locationName` = `staging_AuditTrail`.`eventLocation`
 					WHERE ISNULL(`etl_EventLocation`.`location_SK`);
 
+	INSERT INTO `reporting database`.`dim_eventlocation` (`location_SK`,`locationName`, `dateInserted`)
+		SELECT `location_SK`, `staging_AuditTrail`.`eventLocation`, NOW()
+			FROM `mydb_DUMP_Staging`.`audittrail` AS `staging_AuditTrail`
+				LEFT JOIN `reporting database`.`dim_eventlocation` AS `etl_EventLocation` ON `etl_EventLocation`.`locationName` = `staging_AuditTrail`.`eventLocation`
+					WHERE 
+					`etl_EventLocation`.`locationName` != `staging_AuditTrail`.`eventLocation` 
+	ON DUPLICATE KEY UPDATE 
+	`location_SK` =`etl_EventLocation`.`location_SK`,
+	`locationName`=`staging_AuditTrail`.`eventLocation`,
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -382,8 +457,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_EventType`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_EventType`(OUT msg VARCHAR(45))
 BEGIN
+
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_EventType'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_eventtype` (`type_SK`, `typeDescription`, `dateInserted`)
 		VALUES (-1, 'unknown', NOW());
@@ -394,6 +474,16 @@ BEGIN
 				LEFT JOIN `reporting database`.`dim_eventtype` AS `etl_EventType` ON `etl_EventType`.`typeDescription` = `staging_AuditTrail`.`eventType`
 					WHERE ISNULL(`etl_EventType`.`type_SK`);
 
+	INSERT INTO `reporting database`.`dim_eventtype` (`type_SK`, `typeDescription`, `dateInserted`)
+	SELECT `type_SK`, `staging_AuditTrail`.`eventType`, NOW()
+		FROM `mydb_DUMP_Staging`.`audittrail` AS `staging_AuditTrail`
+			LEFT JOIN `reporting database`.`dim_eventtype` AS `etl_EventType` ON `etl_EventType`.`typeDescription` = `staging_AuditTrail`.`eventType`
+				WHERE 
+				`etl_EventType`.`typeDescription` != `staging_AuditTrail`.`eventType` 
+	ON DUPLICATE KEY UPDATE 
+	`type_SK` =`etl_EventType`.`type_SK`,
+	`typeDescription`=`staging_AuditTrail`.`eventType`,
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -410,8 +500,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Facility`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Facility`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Facility'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_facility` (`facility_SK`, `facilityID_BK`, `facilityTotalStorageCapacity`, `facilityName`, `dateInserted`)
 		VALUES (-1, -1, -1, 'unknown', NOW());
@@ -422,6 +516,20 @@ BEGIN
 				LEFT JOIN `reporting database`.`dim_facility` AS `etl_Facility` ON `etl_Facility`.`facilityID_BK` = `staging_BodyStorage`.`idBodyStorage`
 					WHERE ISNULL(`etl_Facility`.`facility_SK`);
 
+	INSERT INTO `reporting database`.`dim_facility` (`facility_SK`, `facilityID_BK`, `facilityTotalStorageCapacity`, `facilityName`, `dateInserted`)
+		SELECT `facility_SK`, `staging_BodyStorage`.`idBodyStorage`, `staging_BodyStorage`.`numberOfBins`, `staging_BodyStorage`.`nameOfMortuary`, NOW()
+			FROM `mydb_DUMP_Staging`.`bodystorage` AS `staging_BodyStorage`
+				LEFT JOIN `reporting database`.`dim_facility` AS `etl_Facility` ON `etl_Facility`.`facilityID_BK` = `staging_BodyStorage`.`idBodyStorage`
+					WHERE 
+					`etl_Facility`.`facilityID_BK` != `staging_BodyStorage`.`idBodyStorage` OR
+					`etl_Facility`.`facilityTotalStorageCapacity` != `staging_BodyStorage`.`numberOfBins` OR
+					`etl_Facility`.`facilityName` != `staging_BodyStorage`.`nameOfMortuary`
+	ON DUPLICATE KEY UPDATE 
+	`facility_SK` = `etl_Facility`.`facility_SK`,
+	`facilityID_BK`=`staging_BodyStorage`.`idBodyStorage`, 
+	`facilityTotalStorageCapacity`=`staging_BodyStorage`.`numberOfBins`, 
+	`facilityName`=`staging_BodyStorage`.`nameOfMortuary`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -438,12 +546,32 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Gender`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Gender`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Gender'; END;
+	SET msg = '';
 	
 	REPLACE INTO `reporting database`.`dim_gender` (`gender_SK`, `genderDescription`, `dateInserted`)
-		VALUES (1, 'female', NOW()), (2, 'male', NOW()), (-1, 'unknown', NOW());
+		VALUES (-1, 'unknown', NOW());
 
+	INSERT INTO `reporting database`.`dim_gender` (`genderDescription`, `dateInserted`)
+		SELECT DISTINCT `type`, NOW()
+			FROM `mydb_DUMP_Staging`.`gender` AS `staging_Gender`
+				LEFT JOIN `reporting database`.`dim_gender` AS `etl_Gender` ON `etl_Gender`.`genderDescription` = `staging_Gender`.`type`
+					WHERE ISNULL(`etl_Gender`.`gender_SK`);
+
+	INSERT INTO `reporting database`.`dim_gender` (`gender_SK`, `genderDescription`, `dateInserted`)
+		SELECT `gender_SK`, `staging_Gender`.`type`, NOW()
+		FROM `mydb_DUMP_Staging`.`gender` AS `staging_Gender`
+			LEFT JOIN `reporting database`.`dim_gender` AS `etl_Gender` ON `etl_Gender`.`genderDescription` = `staging_Gender`.`type`
+					WHERE 
+					`etl_Gender`.`genderDescription` != `staging_Gender`.`type` 
+	ON DUPLICATE KEY UPDATE 
+	`gender_SK` = `etl_Gender`.`gender_SK`,
+	`genderDescription`=`staging_Gender`.`type`,  
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -460,8 +588,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Incident`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Incident`(OUT msg VARCHAR(45))
 BEGIN
+
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Incident'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_incident` (`incident_SK`, `incidentNumber_BK`, `SAPSReference`, `specialCircumstance`, `dateInserted`)
 		VALUES (-1, 'unknown', 'unknown', 'unknown', NOW());
@@ -472,6 +605,20 @@ BEGIN
 				LEFT JOIN `reporting database`.`dim_incident` AS `etl_Incident` ON `etl_Incident`.`incidentNumber_BK` = `staging_Incident`.`incidentLogNumber`
 					WHERE ISNULL(`etl_Incident`.`incident_SK`);
 
+	INSERT INTO `reporting database`.`dim_incident` (`incident_SK`, `incidentNumber_BK`, `SAPSReference`, `specialCircumstance`, `dateInserted`)
+		SELECT `incident_SK`, `staging_Incident`.`incidentLogNumber`, `staging_Incident`.`referenceNumber`, `staging_Incident`.`specialCircumstances`, NOW()
+		FROM `mydb_DUMP_Staging`.`incident` AS `staging_Incident`
+				LEFT JOIN `reporting database`.`dim_incident` AS `etl_Incident` ON `etl_Incident`.`incidentNumber_BK` = `staging_Incident`.`incidentLogNumber`
+					WHERE 
+					`etl_Incident`.`incidentNumber_BK` != `staging_Incident`.`incidentLogNumber` OR
+					`etl_Incident`.`SAPSReference` != `staging_Incident`.`referenceNumber` OR
+					`etl_Incident`.`specialCircumstance` != `staging_Incident`.`specialCircumstances`
+	ON DUPLICATE KEY UPDATE 
+	`incident_SK` = `etl_Incident`.`incident_SK`,
+	`incidentNumber_BK`=`staging_Incident`.`incidentLogNumber`, 
+	`SAPSReference`=`staging_Incident`.`referenceNumber`, 
+	`specialCircumstance`=`staging_Incident`.`specialCircumstances`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -488,8 +635,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Kin`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Kin`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Kin'; END;
+	SET msg = '';
+
 
 	REPLACE INTO `reporting database`.`dim_kin` (`kin_SK`, `kinIdentificationNumber_BK`, `kinName`, `kinContact`, `dateInserted`)
 		VALUES (-1, 'unknown', 'unknown', 'unknown', NOW());
@@ -500,6 +652,20 @@ BEGIN
 				LEFT JOIN `reporting database`.`dim_kin` AS `etl_Kin` ON `etl_Kin`.`kinIdentificationNumber_BK` = IFNULL(`staging_Kin`.`ID`,`staging_Kin`.`passport`)
 					WHERE ISNULL(`etl_Kin`.`kin_SK`);
 
+	INSERT INTO `reporting database`.`dim_kin` (`kin_SK`, `kinIdentificationNumber_BK`, `kinName`, `kinContact`, `dateInserted`)
+		SELECT `kin_SK`, IFNULL(`staging_Kin`.`ID`,`staging_Kin`.`passport`), `staging_Kin`.`name`, `staging_Kin`.`contactNumber`, NOW()
+			FROM `mydb_DUMP_Staging`.`kin` AS `staging_Kin`
+				LEFT JOIN `reporting database`.`dim_kin` AS `etl_Kin` ON `etl_Kin`.`kinIdentificationNumber_BK` = IFNULL(`staging_Kin`.`ID`,`staging_Kin`.`passport`)
+					WHERE 
+					`etl_Kin`.`kinIdentificationNumber_BK` != IFNULL(`staging_Kin`.`ID`,`staging_Kin`.`passport`) OR
+					`etl_Kin`.`kinName` != `staging_Kin`.`name` OR
+					`etl_Kin`.`kinContact` != `staging_Kin`.`contactNumber`
+	ON DUPLICATE KEY UPDATE 
+	`kin_SK` = `etl_Kin`.`kin_SK`,
+	`kinIdentificationNumber_BK`=IFNULL(`staging_Kin`.`ID`,`staging_Kin`.`passport`), 
+	`kinName`=`staging_Kin`.`name`, 
+	`kinContact`=`staging_Kin`.`contactNumber`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -516,8 +682,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Location`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Location`(OUT msg VARCHAR(45))
 BEGIN
+
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Location'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_location` (`location_SK`, `locationName`, `dateInserted`)
 		VALUES (-1, 'unknown', NOW());
@@ -528,6 +699,15 @@ BEGIN
 				LEFT JOIN `reporting database`.`dim_location` AS `etl_Location` ON `etl_Location`.`locationName` = `staging_AtScene`.`placeOfDeath`
 					WHERE ISNULL(`etl_Location`.`location_SK`);
 
+	INSERT INTO `reporting database`.`dim_location` (`location_SK`, `locationName`, `dateInserted`)
+		SELECT `location_SK`, `staging_AtScene`.`placeOfDeath`, NOW()
+			FROM `mydb_DUMP_Staging`.`atscene` AS `staging_AtScene`
+				LEFT JOIN `reporting database`.`dim_location` AS `etl_Location` ON `etl_Location`.`locationName` = `staging_AtScene`.`placeOfDeath`
+					WHERE `etl_Location`.`locationName` != `staging_AtScene`.`placeOfDeath` 
+	ON DUPLICATE KEY UPDATE 
+	`location_SK` = `etl_Location`.`location_SK`,
+	`locationName`=`staging_AtScene`.`placeOfDeath`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -544,8 +724,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_MannerOfDeath`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_MannerOfDeath`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_MannerOfDeath'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_mannerofdeath` (`mannerOfDeath_SK`, `deathType`, `ICD10`, `dateInserted`)
 		VALUES (-1, 'unknown', 'unknown', NOW());
@@ -556,6 +740,18 @@ BEGIN
 				LEFT JOIN `reporting database`.`dim_mannerofdeath` AS `etl_MannerOfDeath` ON `etl_MannerOfDeath`.`deathType` = `staging_PostMortem`.`causeOfDeath`
 					WHERE ISNULL(`etl_MannerOfDeath`.`mannerOfDeath_SK`);
 
+	INSERT INTO `reporting database`.`dim_mannerofdeath` (`mannerOfDeath_SK`, `deathType`, `ICD10`, `dateInserted`)
+		SELECT `mannerOfDeath_SK`, `staging_PostMortem`.`causeOfDeath`, `staging_PostMortem`.`icd10`, NOW()
+			FROM `mydb_DUMP_Staging`.`postmortem` AS `staging_PostMortem`
+				LEFT JOIN `reporting database`.`dim_mannerofdeath` AS `etl_MannerOfDeath` ON `etl_MannerOfDeath`.`deathType` = `staging_PostMortem`.`causeOfDeath`
+					WHERE 
+					`etl_MannerOfDeath`.`deathType` != `staging_PostMortem`.`causeOfDeath` OR 
+					`etl_MannerOfDeath`.`ICD10` != `staging_PostMortem`.`icd10`
+	ON DUPLICATE KEY UPDATE 
+	`mannerOfDeath_SK` = `etl_MannerOfDeath`.`mannerOfDeath_SK`,
+	`deathType`=`staging_PostMortem`.`causeOfDeath`, 
+	`ICD10`=`staging_PostMortem`.`icd10`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -572,8 +768,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Organisation`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Organisation`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Organisation'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_organisation` (`organisation_SK`, `organisationType`, `organisationName`, `dateInserted`)
 		VALUES (-1, 'unknown', 'unknown', NOW());
@@ -583,6 +783,19 @@ BEGIN
 			FROM `mydb_DUMP_Staging`.`organization` AS `staging_Organisation`
 				LEFT JOIN `reporting database`.`dim_organisation` AS `etl_Organisation` ON `etl_Organisation`.`organisationName` = `staging_Organisation`.`name`
 					WHERE ISNULL(`etl_Organisation`.`organisation_SK`);
+
+	INSERT INTO `reporting database`.`dim_organisation` (`organisation_SK`, `organisationType`, `organisationName`, `dateInserted`)
+		SELECT `organisation_SK`, `staging_Organisation`.`OrganizationType_type`, `staging_Organisation`.`name`, NOW()
+			FROM `mydb_DUMP_Staging`.`organization` AS `staging_Organisation`
+				LEFT JOIN `reporting database`.`dim_organisation` AS `etl_Organisation` ON `etl_Organisation`.`organisationName` = `staging_Organisation`.`name`
+					WHERE 
+					`etl_Organisation`.`organisationType` != `staging_Organisation`.`OrganizationType_type` OR
+					`etl_Organisation`.`organisationName` != `staging_Organisation`.`name`
+	ON DUPLICATE KEY UPDATE 
+	`organisation_SK` = `etl_Organisation`.`organisation_SK`,
+	`organisationType`=`staging_Organisation`.`OrganizationType_type`, 
+	`organisationName`=`staging_Organisation`.`name`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -599,8 +812,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_PostMortem`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_PostMortem`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_PostMortem'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_postmortem` (`postMortem_SK`, `postMortemID_BK`, `PostMortemDescription`, `dateInserted`)
 		VALUES (-1, 'unknown', 'unknown', NOW());
@@ -610,6 +827,19 @@ BEGIN
 			FROM `mydb_DUMP_Staging`.`postmortem` AS `staging_PostMortem`
 				LEFT JOIN `reporting database`.`dim_postmortem` AS `etl_PostMortem` ON `etl_PostMortem`.`postMortemID_BK` = `staging_PostMortem`.`labNumber`
 					WHERE ISNULL(`etl_PostMortem`.`postMortem_SK`);
+
+	INSERT INTO `reporting database`.`dim_postmortem` (`postMortem_SK`, `postMortemID_BK`, `PostMortemDescription`, `dateInserted`)
+		SELECT `postMortem_SK`, `staging_PostMortem`.`labNumber`, `staging_PostMortem`.`causeOfDeath`, NOW()
+			FROM `mydb_DUMP_Staging`.`postmortem` AS `staging_PostMortem`
+				LEFT JOIN `reporting database`.`dim_postmortem` AS `etl_PostMortem` ON `etl_PostMortem`.`postMortemID_BK` = `staging_PostMortem`.`labNumber`
+					WHERE 
+					`etl_PostMortem`.`postMortemID_BK` != `staging_PostMortem`.`labNumber` OR
+					`etl_PostMortem`.`PostMortemDescription` != `staging_PostMortem`.`causeOfDeath` 
+	ON DUPLICATE KEY UPDATE 
+	`postMortem_SK` = `etl_PostMortem`.`postMortem_SK`,
+	`postMortemID_BK`=`staging_PostMortem`.`labNumber`, 
+	`PostMortemDescription`=`staging_PostMortem`.`causeOfDeath`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -626,8 +856,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Property`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Property`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Property'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_property` (`property_SK`,`propertyID_BK`, `propertyType`, `propertyDescription`, `dateInserted`)
 		VALUES (-1, -1, 'unknown', 'unknown', NOW());
@@ -638,6 +872,20 @@ BEGIN
 			LEFT JOIN `reporting database`.`dim_property` AS `etl_Property` ON `etl_Property`.`propertyID_BK` = `staging_Property`.`SealNumber`
 					WHERE ISNULL(`etl_Property`.`property_SK`);
 
+	INSERT INTO `reporting database`.`dim_property` (`property_SK`, `propertyID_BK`, `propertyType`, `propertyDescription`, `dateInserted`)
+		SELECT `property_SK`, `staging_Property`.`SealNumber`, `staging_Property`.`type`, `staging_Property`.`description`, NOW()
+			FROM `mydb_DUMP_Staging`.`property` AS `staging_Property`
+			LEFT JOIN `reporting database`.`dim_property` AS `etl_Property` ON `etl_Property`.`propertyID_BK` = `staging_Property`.`SealNumber`
+					WHERE 
+					`etl_Property`.`propertyID_BK` != `staging_Property`.`SealNumber` OR
+					`etl_Property`.`propertyType` != `staging_Property`.`type` OR
+					`etl_Property`.`propertyDescription` != `staging_Property`.`description`
+	ON DUPLICATE KEY UPDATE 
+	`property_SK` = `etl_Property`.`property_SK`,
+	`propertyID_BK`=`staging_Property`.`SealNumber`, 
+	`propertyType`=`staging_Property`.`type`, 
+	`propertyDescription`=`staging_Property`.`description`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -654,8 +902,11 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Sample`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Sample`(OUT msg VARCHAR(45))
 BEGIN
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Sample'; END;
+	SET msg = '';
 
 	REPLACE INTO `reporting database`.`dim_sample` (`sample_SK`, `sampleReference`, `sampleLabReference`, `analysisType`, `dateInserted`)
 		VALUES (-1, -1, 'unknown', 'unknown', NOW());
@@ -665,6 +916,21 @@ BEGIN
 			FROM `mydb_DUMP_Staging`.`forensicsample` AS `staging_ForensicSample`
 			LEFT JOIN `reporting database`.`dim_sample` AS `etl_Sample` ON `etl_Sample`.`sampleReference` = `staging_ForensicSample`.`sealNumber`
 				WHERE ISNULL(`etl_Sample`.`sample_SK`);
+
+	INSERT INTO `reporting database`.`dim_sample` (`sample_SK`, `sampleReference`, `sampleLabReference`, `analysisType`, `dateInserted`)
+		SELECT `sample_SK`, `staging_ForensicSample`.`sealNumber`, `staging_ForensicSample`.`labNumber`, `staging_ForensicSample`.`typeOfAnalysis`, NOW()
+			FROM `mydb_DUMP_Staging`.`forensicsample` AS `staging_ForensicSample`
+				LEFT JOIN `reporting database`.`dim_sample` AS `etl_Sample` ON `etl_Sample`.`sampleReference` = `staging_ForensicSample`.`sealNumber`
+					WHERE 
+					`etl_Sample`.`sampleReference` != `staging_ForensicSample`.`sealNumber` OR
+					`etl_Sample`.`sampleLabReference` != `staging_ForensicSample`.`labNumber` OR
+					`etl_Sample`.`analysisType` != `staging_ForensicSample`.`typeOfAnalysis`
+	ON DUPLICATE KEY UPDATE 
+	`sample_SK` = `etl_Sample`.`sample_SK`,
+	`sampleReference`=`staging_ForensicSample`.`sealNumber`, 
+	`sampleLabReference`=`staging_ForensicSample`.`labNumber`, 
+	`analysisType`=`staging_ForensicSample`.`typeOfAnalysis`, 
+	`dateInserted`=NOW();
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -681,9 +947,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Status`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_DIM_Status`(OUT msg VARCHAR(45))
 BEGIN
-	
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_DIM_Status'; END;
+	SET msg = '';	
+
 	REPLACE INTO `reporting database`.`dim_status` (`status_SK`, `Status_BK`, `statusDescription`, `dateInserted`)
 		VALUES (2, 1, 'true', NOW()), (1, 0, 'false', NOW()), (-1, -1, 'unknown', NOW());
 
@@ -703,9 +972,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_FACT_AuditTrail`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_FACT_AuditTrail`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_FACT_AuditTrail'; END;
+	SET msg = '';
 INSERT INTO `reporting database`.`fact_audittrail`(
 	`countEvent`, 
 	`countWarning`,
@@ -751,8 +1023,11 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_FACT_Body`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_FACT_Body`(OUT msg VARCHAR(45))
 BEGIN
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_FACT_Body'; END;
+	SET msg = '';
 
 INSERT INTO `reporting database`.`fact_body` (
 	`countBody`, 
@@ -764,7 +1039,7 @@ INSERT INTO `reporting database`.`fact_body` (
 	`FK_Gender_SK`, 
 	`FK_Age_SK`, 
 	`FK_MannerOfDeath_SK`, 
-	`FK_Location`, 
+	`FK_Location_SK`, 
 	`FK_PostMortem_SK`, 
 	`Fk_BodyStatus_SK`, 
 	`FK_DateReceived_SK`, 
@@ -829,9 +1104,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_FACT_Incident`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_FACT_Incident`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_FACT_Incident'; END;
+	SET msg = '';
 INSERT INTO `reporting database`.`fact_incident`(
 	`countBody`, 
 	`incidentDuration`, 
@@ -883,8 +1161,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_FACT_Property`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_FACT_Property`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_FACT_Property'; END;
+	SET msg = '';
 
 INSERT INTO `reporting database`.`fact_property`(
 	`countProperty`, 
@@ -917,8 +1199,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_FACT_Sample`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_FACT_Sample`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Transform_FACT_Sample'; END;
+	SET msg = '';
 
 INSERT INTO `reporting database`.`fact_sample`(
 	`countSample`, 
@@ -964,33 +1250,33 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_LOAD_Dims`(OUT ex INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_LOAD_Dims`(OUT ex INT,OUT msg VARCHAR(45))
 BEGIN
 
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN SET ex = -2; END;
-	SET ex = 0;
+	SET ex = 0; SET msg = 'CAll procedures are successful';
 
-	CALL `reporting database`.`Transform_DIM_Age`;
-	CALL `reporting database`.`Transform_DIM_Body`;
-	CALL `reporting database`.`Transform_DIM_BodyStatus`;
-	CALL `reporting database`.`Transform_DIM_Caller`;
-	CALL `reporting database`.`Transform_DIM_Date`('2013-01-01', ADDDATE(NOW(), INTERVAL 1 YEAR));
-	CALL `reporting database`.`Transform_DIM_Employee`;
-	CALL `reporting database`.`Transform_DIM_Event`;
-	CALL `reporting database`.`Transform_DIM_EventLocation`;
-	CALL `reporting database`.`Transform_DIM_EventType`;
-	CALL `reporting database`.`Transform_DIM_Facility`;
-	CALL `reporting database`.`Transform_DIM_Gender`;
-	CALL `reporting database`.`Transform_DIM_Incident`;
-	CALL `reporting database`.`Transform_DIM_Kin`;
-	CALL `reporting database`.`Transform_DIM_Location`;
-	CALL `reporting database`.`Transform_DIM_MannerOfDeath`;
-	CALL `reporting database`.`Transform_DIM_Organisation`;
-	CALL `reporting database`.`Transform_DIM_PostMortem`;
-	CALL `reporting database`.`Transform_DIM_Property`;
-	CALL `reporting database`.`Transform_DIM_Sample`;
-	CALL `reporting database`.`Transform_DIM_Status`;
+	CALL `reporting database`.`Transform_DIM_Age`(msg);
+	CALL `reporting database`.`Transform_DIM_Body`(msg);
+	CALL `reporting database`.`Transform_DIM_BodyStatus`(msg);
+	CALL `reporting database`.`Transform_DIM_Caller`(msg);
+	CALL `reporting database`.`Transform_DIM_Date`('2013-01-01', ADDDATE(NOW(), INTERVAL 1 YEAR),msg);
+	CALL `reporting database`.`Transform_DIM_Employee`(msg);
+	CALL `reporting database`.`Transform_DIM_Event`(msg);
+	CALL `reporting database`.`Transform_DIM_EventLocation`(msg);
+	CALL `reporting database`.`Transform_DIM_EventType`(msg);
+	CALL `reporting database`.`Transform_DIM_Facility`(msg);
+	CALL `reporting database`.`Transform_DIM_Gender`(msg);
+	CALL `reporting database`.`Transform_DIM_Incident`(msg);
+	CALL `reporting database`.`Transform_DIM_Kin`(msg);
+	CALL `reporting database`.`Transform_DIM_Location`(msg);
+	CALL `reporting database`.`Transform_DIM_MannerOfDeath`(msg);
+	CALL `reporting database`.`Transform_DIM_Organisation`(msg);
+	CALL `reporting database`.`Transform_DIM_PostMortem`(msg);
+	CALL `reporting database`.`Transform_DIM_Property`(msg);
+	CALL `reporting database`.`Transform_DIM_Sample`(msg);
+	CALL `reporting database`.`Transform_DIM_Status`(msg);
 
 END ;;
 DELIMITER ;
@@ -1008,18 +1294,18 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_LOAD_Facts`(OUT ex INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Transform_LOAD_Facts`(OUT ex INT, OUT msg VARCHAR(45))
 BEGIN
 
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN SET ex = -3; END;
-	SET ex = 0;
+	SET ex = 0; SET msg = 'Transform Load facts are successful';
 
-	CALL `reporting database`.`Transform_FACT_AuditTrail`;
-	CALL `reporting database`.`Transform_FACT_Body`;
-	CALL `reporting database`.`Transform_FACT_Incident`;	
-	CALL `reporting database`.`Transform_FACT_Property`;
-	CALL `reporting database`.`Transform_FACT_Sample`;
+	CALL `reporting database`.`Transform_FACT_AuditTrail`(msg);
+	CALL `reporting database`.`Transform_FACT_Body`(msg);
+	CALL `reporting database`.`Transform_FACT_Incident`(msg);	
+	CALL `reporting database`.`Transform_FACT_Property`(msg);
+	CALL `reporting database`.`Transform_FACT_Sample`(msg);
 
 END ;;
 DELIMITER ;
@@ -1045,24 +1331,24 @@ BEGIN
 		TRUNCATE `reporting database`.`dim_age`;
 		TRUNCATE `reporting database`.`dim_bodystatus`;
 		TRUNCATE `reporting database`.`dim_date`;
-		TRUNCATE `reporting database`.`dim_gender`;
 		TRUNCATE `reporting database`.`dim_status`;
 
-		TRUNCATE `reporting database`.`dim_body`;
-		TRUNCATE `reporting database`.`dim_caller`;
-		TRUNCATE `reporting database`.`dim_employee`;
-		TRUNCATE `reporting database`.`dim_event`;
-		TRUNCATE `reporting database`.`dim_eventlocation`;
-		TRUNCATE `reporting database`.`dim_eventtype`;
-		TRUNCATE `reporting database`.`dim_facility`;
-		TRUNCATE `reporting database`.`dim_incident`;
-		TRUNCATE `reporting database`.`dim_kin`;
-		TRUNCATE `reporting database`.`dim_location`;
-		TRUNCATE `reporting database`.`dim_mannerofdeath`;
-		TRUNCATE `reporting database`.`dim_organisation`;
-		TRUNCATE `reporting database`.`dim_postmortem`;
-		TRUNCATE `reporting database`.`dim_property`;
-		TRUNCATE `reporting database`.`dim_sample`;
+		#TRUNCATE `reporting database`.`dim_body`;
+		#TRUNCATE `reporting database`.`dim_caller`;
+		#TRUNCATE `reporting database`.`dim_employee`;
+		#TRUNCATE `reporting database`.`dim_event`;
+		#TRUNCATE `reporting database`.`dim_eventlocation`;
+		#TRUNCATE `reporting database`.`dim_eventtype`;
+		#TRUNCATE `reporting database`.`dim_facility`;
+		#TRUNCATE `reporting database`.`dim_gender`;
+		#TRUNCATE `reporting database`.`dim_incident`;
+		#TRUNCATE `reporting database`.`dim_kin`;
+		#TRUNCATE `reporting database`.`dim_location`;
+		#TRUNCATE `reporting database`.`dim_mannerofdeath`;
+		#TRUNCATE `reporting database`.`dim_organisation`;
+		#TRUNCATE `reporting database`.`dim_postmortem`;
+		#TRUNCATE `reporting database`.`dim_property`;
+		#TRUNCATE `reporting database`.`dim_sample`;
 		
 	SET FOREIGN_KEY_CHECKS = 1;
 
@@ -1111,4 +1397,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-16 16:52:06
+-- Dump completed on 2013-05-21 12:28:05
