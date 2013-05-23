@@ -121,17 +121,19 @@ $(document).ready(function(){
      */
     $.validator.addMethod("valueNotEquals", function(value, element, arg){
         return arg != value;
-    }, "Value must not equal arg.");
+    });
     
     /**
      * Custom rule to check valid date
      */
     $.validator.addMethod("validdate",function(value){
+        alert("hello");
         var year = $("#detailyear").val();
         var month = $("#detailmonth").val();
         var day = $("#detailday").val();
         var nummonth = $("option:selected","#detailmonth").attr("num");
         var date = new Date();
+        
        if((month==="April")|| (month==="June") || (month==="September") || (month==="November")){
             if(day >30){
                 return !value;
@@ -143,9 +145,7 @@ $(document).ready(function(){
                 if(day>29){
                     return !value;
                 }
-                else{
-                    return value;
-                }
+                return value;
             }
             else if(day > 28){
                 return !value;
@@ -155,9 +155,12 @@ $(document).ready(function(){
         if((year === date.getFullYear())&& (nummonth===(date.getMonth()+1)) && (day>date.getDate())){
             return !value;
         }
+        if((year === date.getFullYear()) && (nummonth > (date.getMonth()+1))){
+            return !value;
+        }
         
         return value;
-    },"must be a valid date");
+    });
     
     /**
      * check for a valid time

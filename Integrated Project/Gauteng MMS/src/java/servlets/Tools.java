@@ -149,7 +149,7 @@ public class Tools {
     }
     
     public String makeDay(String name, int day_num){
-        String out = "<select id="+name+" name="+name+">";
+        String out = "<select id='"+name+"' name='"+name+"'>";
         if(day_num==-1){
          out = out + "<option selected='selected'>Day</option>";   
         }
