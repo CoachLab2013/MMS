@@ -17,17 +17,17 @@ $(document).ready(function(){
             
             detailyear:{
               valueNotEquals: "Year",
-              validdate : true
+              checkdate : true
           },//end rule for year
           
           detailmonth:{
               valueNotEquals: "Month",
-              validdate: true
+              checkdate: true
           },//end rule for month
           
           detailday:{
               valueNotEquals: "Day",
-              validdate: true
+              checkdate: true
           },//end rule for day
           
           detailhour:{
@@ -74,17 +74,17 @@ $(document).ready(function(){
           
           detailyear:{
               valueNotEquals: "Invalid date.",
-              validdate: "Invalid date."
+              checkdate: "Invalid date."
           },//end message for year
           
           detailmonth:{
               valueNotEquals: "Invalid date.",
-              validdate: "Invalid date."
+              checkdate: "Invalid date."
           },//end message for month
           
           detailday:{
               valueNotEquals: "Invalid date.",
-              validdate: "Invalid date."
+              checkdate: "Invalid date."
           },//end message for day
           
           detailhour:{
@@ -126,8 +126,7 @@ $(document).ready(function(){
     /**
      * Custom rule to check valid date
      */
-    $.validator.addMethod("validdate",function(value){
-        alert("hello");
+    $.validator.addMethod("checkdate",function(value){
         var year = $("#detailyear").val();
         var month = $("#detailmonth").val();
         var day = $("#detailday").val();
@@ -140,7 +139,7 @@ $(document).ready(function(){
             }
             return value;    
         }
-        else if(month === "February"){
+        else if(month === "February"){         
             if((year%4) ===0){
                 if(day>29){
                     return !value;
@@ -160,6 +159,7 @@ $(document).ready(function(){
         }
         
         return value;
+        
     });
     
     /**
