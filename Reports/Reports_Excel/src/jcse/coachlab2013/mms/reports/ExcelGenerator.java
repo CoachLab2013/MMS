@@ -30,11 +30,15 @@ import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- *
- * @author Amazing
+ * @author      Mubien Nackoda <coachlab@jcse.org.za>
+ * @since       2012-05-20          (the version of the package this class was first added to)
  */
 public class ExcelGenerator {
-
+    
+/**
+ * initializing the type Workbook called wb, the type Sheet called sheet
+ * and the type CreationHelper helper
+ */
     Workbook wb;
     Sheet sheet;
     CreationHelper helper;
@@ -45,6 +49,12 @@ public class ExcelGenerator {
     int tableColumns = 0;
     int tableRows = 0;
     
+/**
+ * The method ExcelGenerator, generates the excel workbook and sheet
+ * @param title title of the report
+ * @param tableHeaders headers on the table
+ * @param tableData table data
+ */    
     public ExcelGenerator(String title, ArrayList<String> tableHeaders, ResultSet tableData) {
                         
         wb = new XSSFWorkbook();  
@@ -72,6 +82,11 @@ public class ExcelGenerator {
          
     }
     
+/**
+ * The method gets the number of cells on the excel sheet
+ * @param tableHeaders headers of the table
+ * @param tableData table data
+ */    
     private void getNumRowsCols(ArrayList<String> tableHeaders, ResultSet tableData) 
     {
         try {
@@ -87,6 +102,9 @@ public class ExcelGenerator {
         }
     }
     
+/**
+ * The method createSpreadsheet creates the excel spread sheet
+ */    
     private void createSpreadsheet() {
         
         for (int i = 0; i < rows; i++) {
@@ -114,14 +132,20 @@ public class ExcelGenerator {
             }
         }
     }
-
+    
+/**
+ * The method createHeader creates the table headers
+ */
     private void createHeader() {
         createLogo();
         printDate();
         createBorders();
         printForensicTitle();
     }
-
+    
+/**
+ * The method createLoge puts the Gauteng Logo on the spread sheet
+ */
     private void createLogo() {
         InputStream logo;
 
@@ -143,7 +167,10 @@ public class ExcelGenerator {
             Logger.getLogger(ExcelGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+/**
+ * The method printDate writes todays date on the excel spread sheet
+ */
     private void printDate() {
         sheet.addMergedRegion(new CellRangeAddress(5, 5, columns - 4, columns - 1));
         
@@ -161,7 +188,10 @@ public class ExcelGenerator {
         celldate.setCellValue(new Date());
         celldate.setCellStyle(cellstyle);
     }
-
+    
+/**
+ * The method createBorders creates the borders on the excel spread sheet
+ */
     private void createBorders() {
         CellStyle cellStyle = wb.createCellStyle();
         cellStyle.setBorderBottom(CellStyle.BORDER_MEDIUM);
@@ -173,7 +203,9 @@ public class ExcelGenerator {
             cellboard.setCellStyle(cellStyle);
         }
     }
-
+/**
+ * Printing the report title
+ */
     private void printForensicTitle() {
         sheet.addMergedRegion(new CellRangeAddress(4, 4, columns - 4, columns - 1));
         
@@ -191,7 +223,10 @@ public class ExcelGenerator {
         cell.setCellValue("Forensic Pathology Service");
         cell.setCellStyle(cellstyle);
     }
-
+/**
+ * The method creates the title
+ * @param title 
+ */
     private void createTitle(String title) {
         sheet.addMergedRegion(new CellRangeAddress(7, 8, 0, columns - 1));
         Cell cell = sheet.getRow(7).getCell(0);
@@ -206,7 +241,9 @@ public class ExcelGenerator {
         cellStyle.setFont(font);
         cell.setCellStyle(cellStyle);
     }
-
+/**
+ * Creation of the table on the spread sheet
+ */
     private void createTable() {
         
         Font font = wb.createFont();
@@ -230,7 +267,9 @@ public class ExcelGenerator {
         
         createTableHeader();
     }
-
+/**
+ * Creation of the table header
+ */
     private void createTableHeader() {
              
         Font font = wb.createFont();
@@ -245,6 +284,7 @@ public class ExcelGenerator {
         style.setBorderTop(CellStyle.BORDER_MEDIUM);
         style.setBorderRight(CellStyle.BORDER_THIN);
         style.setBorderLeft(CellStyle.BORDER_THIN);
+        style.setWrapText(true);
         style.setFont(font);
         
         for (int j = 0; j < columns; j++) {
@@ -252,6 +292,9 @@ public class ExcelGenerator {
             cell.setCellStyle(style);
         }
     }
+/**
+ * Creates the Page number 
+ */ 
     
     private void createPageNumber() {
         
@@ -260,6 +303,10 @@ public class ExcelGenerator {
 
     } 
     
+/**
+ * The method setTableHeaders sets the headers of the tables as a String
+ * @param tableHeaders 
+ */    
     private void setTableHeaders(ArrayList<String> tableHeaders)
     {
         for(String s: tableHeaders)
@@ -268,6 +315,10 @@ public class ExcelGenerator {
         }
     }
     
+/**
+ * The method sets the content of the table form the ResultSet
+ * @param tableData 
+ */    
     private void setTableContent(ResultSet tableData) {
         try {
             ResultSetMetaData tableMetaData = tableData.getMetaData();
@@ -288,6 +339,10 @@ public class ExcelGenerator {
         
     }
     
+/**
+ * The method out put the report title 
+ * @param title 
+ */    
     public void printReport(String title) {
         
         FileOutputStream fileOut;
