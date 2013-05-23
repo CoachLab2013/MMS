@@ -19,16 +19,15 @@
             </style>
 <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
-<<<<<<< HEAD
+
  <script src="js/KinDetailScript.js"></script>
-=======
- <script src="js/KinDetailsScript.js"></script>
->>>>>>> origin/master
     </head>
     <body>
          <%
-            if(session.getAttribute("kinDetail")!=null){
-                out.print("<input type=hidden class='go_to_deceasedDetails' id='go_to_deceasedDetails' value=" + session.getAttribute("kinDetail") +">");               
+            if(session.getAttribute("kinDetail")!= null)
+            {
+                out.print("<input type=hidden class='go_to_deceasedDetails' id='go_to_deceasedDetails' value=" + session.getAttribute("kinDetail") +">");  
+                session.removeAttribute("kinDetail");
             }
         %>
         <legend>Body File> Edit Body File> Body Identification> Kin/Informant Details </legend>

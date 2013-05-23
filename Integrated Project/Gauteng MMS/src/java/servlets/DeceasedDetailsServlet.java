@@ -3,6 +3,10 @@
  * and open the template in the editor.
  */
 package servlets;
+
+import database.Body;
+import database.BodyAtMortuary;
+import database.BodyDb;
 import database.DbDetail;
 import database.Kin;
 import database.KinDb;
@@ -19,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Chester
  */
-@WebServlet(name = "SaveKinDetailsServlet", urlPatterns = {"/SaveKinDetailsServlet"})
-public class SaveKinDetailsServlet extends HttpServlet {
+@WebServlet(name = "DeceasedDetailsServlet", urlPatterns = {"/DeceasedDetailsServlet"})
+public class DeceasedDetailsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -35,34 +39,22 @@ public class SaveKinDetailsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        Kin kin = new Kin();
-        kin.setName(request.getParameter("KinName"));
-        kin.setSurname(request.getParameter("KinSurname"));
-        String kinIdType = request.getParameter("identificationtype");
-        if(kinIdType.contains("ID"))
-        {
-            kin.setID(request.getParameter("KinIDNumber"));
-        }
-        else if(kinIdType.contains("Passport"))
-        {
-            kin.setPassport(request.getParameter("KinIDNumber"));
-        }
-        kin.setRelationWithDeceased(request.getParameter("KinRelationship"));
-        kin.setContactNumber(request.getParameter("KinContact"));
-        kin.setAddress(request.getParameter("KinRes"));
-        kin.setWorkAddress(request.getParameter("KinWork"));
-        kin.setBody_idDeathRegisterNumber("099888592");
+        Body body = new BodyAtMortuary();
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
-        KinDb kinDb = new KinDb(kin, dbdetail);
-        kinDb.init();
-        String success = kinDb.add();
+        BodyDb bodyDb = new BodyDb(dbdetail, body);
+        bodyDb.init();
+        bodyDb.read();
+        body = bodyDb.getBody();
+        
+        //request.getParameter("DeceasedName"));
+        
+        
+        
         HttpSession sess = request.getSession();
-        sess.setAttribute("kinDetail", true);
+        sess.setAttribute("deceasedDetail", "Kin details added successfully");
         response.sendRedirect("Home.jsp");
-        out.close();
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
