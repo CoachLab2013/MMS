@@ -128,7 +128,7 @@ public class Tools {
         if(month_num==-1){
             out = out + "<option selected='selected'>Month</option>";
         }
-        String[] months = {"January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         for(int i=1;i<13;i++){
             if(i==month_num){
                 out = out + "<option selected='selected' num="+i+">"+months[i-1]+"</option>";

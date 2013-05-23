@@ -6,6 +6,7 @@ package servlets;
 
 import database.DatabaseConnector;
 import database.DbDetail;
+import AssistiveClasses.SetDbDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -74,7 +75,8 @@ public class EditUser extends HttpServlet {
         int id = 00;
         try {
             employeeID = request.getParameter("Id");
-            DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
+            SetDbDetail DBdet = new SetDbDetail();
+            DbDetail dbDetail = DBdet.getDbdetail();
 
             //Get all employees
             EmployeeDb emplo = new EmployeeDb(dbDetail);
@@ -115,7 +117,7 @@ public class EditUser extends HttpServlet {
                 out.println("<title>Servlet EditUser</title>");
                 out.println("</head>");
                 out.println("<body>");
-                out.println("<h1>Servlet EditUser at hi ih " + id + "</h1>");
+                out.println("<h1>Servlet Error: Not connected to database </h1>");
                 out.println("</body>");
                 out.println("</html>");
             } finally {

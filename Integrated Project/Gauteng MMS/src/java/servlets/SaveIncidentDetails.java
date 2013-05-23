@@ -54,7 +54,7 @@ public class SaveIncidentDetails extends HttpServlet {
         IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
         incidentdb.init();
         incidentdb.edit();
-        
+        response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

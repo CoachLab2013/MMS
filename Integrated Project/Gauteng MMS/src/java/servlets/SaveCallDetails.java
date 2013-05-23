@@ -53,9 +53,9 @@ public class SaveCallDetails extends HttpServlet {
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
         DeathCallDb calldb = new DeathCallDb(dcall,dbdetail);
-        calldb.init();
-        
-        out.print(calldb.edit());
+        calldb.init();        
+        calldb.edit();
+        response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
