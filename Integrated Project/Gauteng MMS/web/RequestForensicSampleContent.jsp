@@ -4,6 +4,9 @@
     Author     : Lady
 --%>
 
+
+<%@page import="servlets.Tools"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,26 +25,35 @@
  <script src="js/RequestForensicSampleScript.js"></script>
     </head>
     <body>
+                
         <legend>Body File> Edit Body File> Post Mortem> Request Forensic Sample</legend>
         <form name="requestform" id="requestform" method="post" action="">
                 <table>
                     <tr>     
-                        <td>Type of analysis:  </td> <td> <select name="typeofanalysis">
-                        <option>Select</option>
-                        <option>Lady</option>
-                    </select> </td>
+                        <td>Type of analysis:  </td> 
+                        <td> 
+                            
+                            <%
+                                out.println(new Tools().makeReferenceList("analysis","type",""));
+                            %>
+                             
+                        </td>
                       
                     </tr>
                     
                     <tr>
-                        <td>Institution:</td> <td> <select name="institution">
-                                <option>Select</option>
-                                <option>Lady</option>
-                            </select> </td>
+                        <td>Institution:</td> 
+                        <td> 
+                            
+                            <%
+                                out.println(new Tools().makeReferenceList("institution","type",""));
+                            %>
+                            
+                        </td>
                     </tr> 
                         <tr>
                        
-                            <td> Seal number:</td>  <td>  <select name="seal">
+                            <td> Seal Number:</td>  <td>  <select name="seal">
                                 <option>Select</option>
                                 <option></option>
                             </select> </td>
@@ -49,16 +61,16 @@
                         </tr>
                         
                             <tr>
-                            <td> Special instructions:  </td><td><textarea cols="50" rows="3" name="special" value=""> </textarea><br></td>
+                            <td> Special Instructions:  </td><td><textarea cols="50" rows="3" name="special" value=""> </textarea><br></td>
                      
                             </tr>
                             
                             <tr>
-                                <td> Employee name:</td> <td> <br> <input type="text" name="employeename" value="" /></td>
+                                <td> Employee Name:</td> <td> <br> <input type="text" name="employeename" value="" /></td>
                             </tr>
                             
                             <tr>
-                                <td> Employee surname:</td> <td> <br> <input type="text" name="employeesurname" value=""/> </td>
+                                <td> Employee Surname:</td> <td> <br> <input type="text" name="employeesurname" value=""/> </td>
                             </tr>
                             
                             
