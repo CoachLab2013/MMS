@@ -19,11 +19,10 @@
             </style>
 <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
- <script src="js/CallDetailsScript.js"></script>
     </head>
     <body>
         <legend>Incidents> Edit Incident> Call Details</legend>
-        <form name="edit_callform" id="edit_callform" method="post" action="">
+        <form name="edit_callform" id="edit_callform" method="post" action="SaveCallDetails">
     
             <table>
                 <tr>     
@@ -43,7 +42,8 @@
                 </tr>
                 <tr>
                     <td>  Caller's Phone Number:  </td><td> <input type="text" name="edit_phonenumber" id="edit_phonenumber" 
-                                                                   value=<%out.println(session.getAttribute("call_number")); %>/><br></td>
+                                                                   value=<%out.println(session.getAttribute("call_number")); %>/><br>
+                    </td>
                 </tr> 
                     <tr>
 
@@ -91,6 +91,7 @@
                             <td></td> <td>  <input type="submit" value="Save" name="edit_savecall" id="edit_savecall" /> <input type="reset" value="Cancel" id="edit_callcancel" /><br></td>
                         </tr>
         </table>
+                    <input type="text" name="edit_lognumber" id ="edit_lognumber"  readonly="true" hidden=""<% out.println("value="+session.getAttribute("lognumber"));%>/>
     </form>
 
 </body>
