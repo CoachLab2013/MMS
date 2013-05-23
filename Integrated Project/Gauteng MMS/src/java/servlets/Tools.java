@@ -18,7 +18,7 @@ public class Tools {
      */
     public Tools(){
  
-        dbdetail = new DbDetail("localhost","/mydb","root","password"); 
+        dbdetail = new DbDetail("localhost","/mydb","root","200918139"); 
  
     }
     //end constructor
@@ -245,11 +245,11 @@ public class Tools {
     /**
      * This will create a table with all the open incidents from the database
      */
-    public String makeOpenIncidentsTable(String id){
+    public String makeOpenIncidentsTable(String id){ //change
         IncidentDb indb = new IncidentDb(getDbdetail());
         indb.init();
         try{
-            ArrayList<Incident> openincidents = indb.openIncidentList();
+            ArrayList<Incident> openincidents = indb.openIncidentList(); //change
             
            String table = "<table class='tabledisplay' id='" + id+"'>"
                     +"<th class='tableheading'>FPS Incident Log Number</th>"
@@ -258,22 +258,64 @@ public class Tools {
                     +"<th class='tableheading'>Time</th>"
                     +"<th class='tableheading'>Number of bodies</th>"
                     +"<th class='tableheading'>Number of bodies recieved</th>"
-                    +"<th class='tableheading'>Place Body was found</th>"
+                    +"<th class='tableheading'>Place Body was found</th>"    //headings
                     +"<th class='tableheading'>Circumstances of death</th>"
                     +"<th class='tableheading'>Special Circumstances</th>";
             int size = openincidents.size();
-            for(int i=0;i<size;i++){
+       /*     for(int i=0;i<size;i++){
                 Incident inc = openincidents.get(i);
                 table = table +"<tr class='tablerow' lognumber='"+inc.getIncidentLogNumber()+"'>"
                         +"<td>"+  inc.getIncidentLogNumber() +"</td>"
                         + "<td class='tablecell'>" + inc.getReferenceNumber() +"</td>"
-                        +"<td class='tablecell'>" + inc.getDateOfIncident() + "</td>"
+                        +"<td class='tablecell'>" + inc.getDateOfIncident() + "</td>"      //data
                         +"<td class='tablecell'>" + inc.getTimeOfIncident() + "</td>"
                         +"<td class='tablecell'>" + Integer.toString(inc.getNumberOfBodies()) + "</td>"
                         +"<td class='tablecell'>" + Integer.toString(inc.getBodyCount()) + "</td>"
                         +"<td class='tablecell'>" + inc.getPlaceBodyFound() + "</td>"
                         +"<td class='tablecell'>" + inc.getCircumstanceOfDeath() + "</td>"
                         +"<td class='tablecell'>" + inc.getSpecialCircumstances() + "</td>"
+                        + "</tr>"; 
+            }  */
+            table = table + "</table>";
+            
+            return table;
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }
+    }
+    // end makeOPenIncidentsTable
+    
+    
+    
+    
+    
+    
+        /**
+     * This will create a table with all the open incidents from the database
+     */
+   /* public String bodyRelease(String id){ //change
+        BodyDb body = new BodyDb(getDbdetail());
+        body.init();
+        try{
+            ArrayList<BodyAtMortuary> bodylist = body.getBodies(); //change
+           
+           String table = "<table class='tabledisplay1' id = '" + id+"' name="+id+">"
+                    +"<th class='tableheading'>Death Register Number</th>"
+                    +"<th class='tableheading'>Name</th>"
+                    +"<th class='tableheading'>Surname</th>"
+                    +"<th class='tableheading'>ID/Passport number</th>"
+                    +"<th class='tableheading'>Deceased Identification Status</th>";
+                  
+            int size = bodylist.size();
+            for(int i=0;i<size;i++){
+                BodyAtMortuary bdy = bodylist.get(i);
+                table = table +"<tr class='tablerow' idNumber='"+bdy.getDeathRegisterNumber()+"'>"
+                        +"<td>"+  bdy.getDeathRegisterNumber() +"</td>"
+                        + "<td class='tablecell'>" + bdy.getNameOfDeceased() +"</td>"
+                        +"<td class='tablecell'>" + bdy.getSurnameOfDeceased() + "</td>"      //data
+                        +"<td class='tablecell'>" + Integer.parseInt(bdy.getID()) + "</td>"
+                        +"<td class='tablecell'>" + bdy.isBodyStatus() + "</td>"                       
                         + "</tr>"; 
             }
             table = table + "</table>";
@@ -284,7 +326,57 @@ public class Tools {
             return e.getMessage();
         }
     }
+    // end makeOPenIncidentsTable */
+    
+     
+      public String bodyRelease(String id){ //change
+     
+       // BodyFile bf = new BodyFile(id);
+        BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
+        bdyDb.init();
+        try{
+           
+           // Body bodyReleaseList = bdyDb.getBody(); //change
+           
+            ArrayList <BodyAtMortuary> bodylist = bdyDb.getBodies(); //change
+            
+           String table = "<table class='tabledisplay' id='" + id +"'>"
+                    +"<th class='tableheading'>Deah Register Number</th>"
+                    +"<th class='tableheading'>Name of deceased</th>"
+                    +"<th class='tableheading'>Surname of deceased</th>";
+           
+            int size = bodylist.size();
+            for(int i=0;i<size;i++){
+               BodyAtMortuary inc = bodylist.get(i);
+                table = table +"<tr class='tablerow' lognumber='"+inc.getBodyType()+"'>"
+                        +"<td>"+  inc.getCitizen() +"</td>"
+                        + "<td class='tablecell'>" + inc.getGender() +"</td>"
+                        + "<td class='tablecell'>" + inc.getNameOfDeceased() +"</td>"   //data
+                       
+                        + "</tr>"; 
+            }  
+            table = table + "</table>";
+            
+            return table;
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }
+    }
     // end makeOPenIncidentsTable
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     public String getDateTime(){
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
