@@ -386,7 +386,7 @@
 
                                                     <div class="input-append date " id="datepicker2" name="allegedInjuryDate" >
 
-                                                        <input size="16" id="InjuryDate" name="InjuryDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
+                                                        <input size="16" id="InjuryDate" name="inAllegedInjuryDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-calendar"></i></span> 
 
                                                     </div>
@@ -397,7 +397,7 @@
 
                                                     <div class="input-append date " id="timepicker2" name="allegedInjuryTime">
 
-                                                        <input size="16" id="InjuryTime" name="InjuryTime" data-format="hh:mm" type="text" value="" readonly>
+                                                        <input size="16" id="InjuryTime" name="inAllegedInjuryTime" data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
 
                                                     </div>
@@ -412,7 +412,7 @@
 
                                                     <div class="input-append date " id="datepicker3" name="allegedDeathDate" >
 
-                                                        <input size="16" id="DeathDate" name="DeathDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
+                                                        <input size="16" id="DeathDate" name="inAllegedDeathDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-calendar"></i></span> 
 
                                                     </div>
@@ -423,7 +423,7 @@
 
                                                     <div class="input-append date " id="timepicker3" name="allegedDeathtime" >
 
-                                                        <input size="16" id="DeathTime" name="DeathTime" data-format="hh:mm" type="text" value="" readonly>
+                                                        <input size="16" id="DeathTime" name="inAllegedDeathTime" data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
 
                                                     </div>
@@ -509,7 +509,7 @@
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="Cause">External cause or circumstance of injury:</label> 
+                                                    <label class="control-label" for="ExternalCircumstance">External cause or circumstance of injury:</label> 
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("ExternalCircumstance", "type", ""));
                                                             %>
@@ -527,45 +527,45 @@
                                                 <legend class="legend"><h4>Property/Evidence:</h4></legend>
 
                                                 <fieldset class="fieldset offset1">     
-                                                    <legend class="legend"><h5>Taken/ handed over by SAPS:</h5></legend>
+                                                    <legend class="legend"><h5>Taken/handed over by SAPS:</h5></legend>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="SAPSdescr">Description</label> 
+                                                        <label class="control-label" for="SAPSpropertyDescr">Description</label> 
                                                         <div class="controls">
-                                                            <textarea cols="50" rows="3" id="SAPSdescr" name="SAPSdescr"> </textarea>
+                                                            <textarea cols="50" rows="3" id="SAPSdescr" name="SAPSpropertyDescr"> </textarea>
                                                         </div>
                                                     </div>
 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="SAPSname">SAPS member name:</label> 
+                                                        <label class="control-label" for="SAPSpropertyName">SAPS member name:</label> 
                                                         <div class="controls">
-                                                            <input type="text" name="SAPSname" id="SAPSname"/> 
+                                                            <input type="text" name="SAPSpropertyName" id="SAPSname"/> 
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="SAPSsurname">SAPS member surname:</label> 
+                                                        <label class="control-label" for="SAPSpropertySurname">SAPS member surname:</label> 
                                                         <div class="controls">
-                                                            <input type="text" name="SAPSsurname" id="SAPSsurname"/> 
+                                                            <input type="text" name="SAPSpropertySurname" id="SAPSsurname"/> 
                                                         </div>
                                                     </div>
 
                                                     <div class="offset4">
-                                                        <input   class="btn btn-primary" onclick="displayResult('sapsTable', 'SAPSdescr', 'SAPSname', 'SAPSsurname')" type="button" value="Add Item" /> 
+                                                        <input   class="btn btn-primary" onclick="displayResult('SAPSpropertyTable', 'SAPSpropertyDescr', 'SAPSpropertyName', 'SAPSpropertySurname')" type="button" value="Add Item" /> 
                                                         <%--Display save result --%> 
                                                     </div>
                                                     <br/> <br/>
-                                                    <table id="sapsTable" border="1">
+                                                    <table id="SAPSpropertyTable" border="1">
                                                         <tr>
                                                             <th width="60">select</th>
-                                                            <th width="150"> Description </th>
-                                                            <th width="150">SAPS Name </th>
-                                                            <th width="150">SAPS Surname </th>
+                                                            <th width="150">Description</th>
+                                                            <th width="150">SAPS Name</th>
+                                                            <th width="150">SAPS Surname</th>
 
                                                         </tr>
 
                                                     </table>
                                                     <br/>
                                                     <div class="offset5">
-                                                        <input   class="btn btn-primary" onclick=" deleteRow('sapsTable')" type="button" value="Delete" /> 
+                                                        <input   class="btn btn-primary" onclick=" deleteRow('SAPSpropertyTable')" type="button" value="Delete" /> 
                                                         <%--Display save result --%> 
                                                     </div>
 
@@ -748,7 +748,7 @@
                                                 </fieldset>
                                                 <br/> <br/>
                                                 <fieldset class="fieldset offset1">     
-                                                    <legend class="legend"><h5>Taken/ handed over by FPS officer</h5></legend>
+                                                    <legend class="legend"><h5>Taken/handed over by FPS officer</h5></legend>
                                                     <div class="control-group">
                                                         <label class="control-label" for="FPSdescr">Description</label> 
                                                         <div class="controls">
