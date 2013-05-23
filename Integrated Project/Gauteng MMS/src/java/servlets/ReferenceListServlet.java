@@ -4,6 +4,8 @@
  */
 package servlets;
 
+import AssistiveClasses.ClassSendMailTLS;
+import AssistiveClasses.SetDbDetail;
 import database.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -79,7 +81,9 @@ public class ReferenceListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //database connection
-        DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
+        SetDbDetail DBdet = new SetDbDetail();
+
+        DbDetail dbDetail = DBdet.getDbdetail();;
         String result = "";
 
         //if it comes from add user form
@@ -88,12 +92,13 @@ public class ReferenceListServlet extends HttpServlet {
 
             String personnel = request.getParameter("personnelNumber");
             String password = random(8);
+
             String name = request.getParameter("firstName");
             String surname = request.getParameter("surname");
-            //String rank = request.getParameter("rank");
             String email = request.getParameter("email");
-
-            boolean active = Boolean.valueOf(request.getParameter("Active"));
+            ClassSendMailTLS sendmail = new ClassSendMailTLS();
+            sendmail.sendMail(email.trim(), "You password for the Gauteng MMS system is \n  " + password);
+            boolean active = Boolean.valueOf(request.getParameter("active"));
             int level = Integer.parseInt(request.getParameter("level"));
 
 
@@ -134,20 +139,20 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "insti");
-                sess.setAttribute("result", "Institution has been successfuly saved to database");
+                sess.setAttribute("insti", "Institution has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "insti");
-                sess.setAttribute("result", "Institution did not save: because " + result);
+                sess.setAttribute("insti", "Institution did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
         } else if (request.getParameter("form").equals("AddAnalysis")) {
-                //Get infor from text box
+            //Get infor from text box
             String analysisName = request.getParameter("txtAnalysis");
 
             ReferenceListDb emp = new ReferenceListDb("analysis", "idAnalysis", "type", analysisName, dbDetail);
@@ -158,21 +163,73 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "analysis");
-                sess.setAttribute("result", "Analysis Type has been successfuly saved to database");
+                sess.setAttribute("analysisResult", "Analysis Type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "analysis");
-                sess.setAttribute("result",  "Analysis Type did not save: because " + result);
+                sess.setAttribute("analysisResult", "Analysis Type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddRank")) {
-                //Get infor from text box
+        } else if (request.getParameter("form").equals("AddProperty")) {
+
+            //Get infor from text box
+            String rankName = request.getParameter("txtProperty");
+
+            ReferenceListDb emp = new ReferenceListDb("propertytype", "idPropertyType", "type", rankName, dbDetail);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "property");
+                sess.setAttribute("propertyResult", "Property type has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "property");
+                sess.setAttribute("rankResult", "Property type did not save because " + result);
+                response.sendRedirect("Admin.jsp");
+            }
+
+
+        } else if (request.getParameter("form").equals("AddVehicle")) {
+
+            //Get infor from text box
+            String vehicleReNum = request.getParameter("txtVehicle");
+
+            ReferenceListDb emp = new ReferenceListDb("vehicle", "e", "registrationNumber", vehicleReNum, dbDetail);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "vehi");
+                sess.setAttribute("vehicleResult", "Vehicle registration number has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "vehi");
+                sess.setAttribute("vehicleResult", "Vehicle registration number did not save because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+
+        } else if (request.getParameter("form").equals("AddRank")) {
+
+            //Get infor from text box
             String rankName = request.getParameter("txtRank");
 
             ReferenceListDb emp = new ReferenceListDb("rank", "idRank", "type", rankName, dbDetail);
@@ -183,21 +240,21 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "rank");
-                sess.setAttribute("result", "Rank type has been successfuly saved to database");
+                sess.setAttribute("rankResult", "Rank type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "rank");
-                sess.setAttribute("result",  "Rank type did not save: because " + result);
+                sess.setAttribute("rankResult", "Rank type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddGender")) {
-               //Code to store Gender to database
+        } else if (request.getParameter("form").equals("AddGender")) {
+            //Code to store Gender to database
             //Get infor from text box
             String genderName = request.getParameter("txtGender");
 
@@ -209,22 +266,22 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "gender");
-                sess.setAttribute("result", "Gender type has been successfuly saved to database");
+                sess.setAttribute("genderResult", "Gender type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "gender");
-                sess.setAttribute("result",  "Gender type did not save: because " + result);
+                sess.setAttribute("genderResult", "Gender type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddOccu")) {
-               //Code to store Occupation type to database
-                //Get infor from text box
+        } else if (request.getParameter("form").equals("AddOccu")) {
+            //Code to store Occupation type to database
+            //Get infor from text box
             String occuName = request.getParameter("txtOccu");
 
             ReferenceListDb emp = new ReferenceListDb("occupation", "idOccupation", "type", occuName, dbDetail);
@@ -235,21 +292,21 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "occu");
-                sess.setAttribute("result", "Occupation Category has been successfuly saved to database");
+                sess.setAttribute("occupationResult", "Occupation Category has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "occu");
-                sess.setAttribute("result",  "Occupation Category did not save: because " + result);
+                sess.setAttribute("occupationResult", "Occupation Category did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddRace")) {
-                 //Code to store Race type to database
+        } else if (request.getParameter("form").equals("AddRace")) {
+            //Code to store Race type to database
             //Get infor from text box
             String raceName = request.getParameter("txtRace");
 
@@ -261,21 +318,21 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "race");
-                sess.setAttribute("result", "Race type has been successfuly saved to database");
+                sess.setAttribute("raceResult", "Race type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "race");
-                sess.setAttribute("result",  "Race type did not save: because " + result);
+                sess.setAttribute("raceResult", "Race type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddMarital")) {
-                //Code to store Marital Status type to database   
+        } else if (request.getParameter("form").equals("AddMarital")) {
+            //Code to store Marital Status type to database   
             //Get infor from text box
             String MaritalName = request.getParameter("txtMarital");
 
@@ -287,21 +344,21 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "marital");
-                sess.setAttribute("result", "Marital Status type has been successfuly saved to database");
+                sess.setAttribute("maritalResult", "Marital Status type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "marital");
-                sess.setAttribute("result",  "Marital Status type did not save: because " + result);
+                sess.setAttribute("maritalResult", "Marital Status type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddProvince")) {
-                 //Code to add province to database 
+        } else if (request.getParameter("form").equals("AddProvince")) {
+            //Code to add province to database 
             //Get infor from text box
             String provinceName = request.getParameter("txtProvince");
 
@@ -313,21 +370,21 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "province");
-                sess.setAttribute("result", " The Province has been successfuly saved to database");
+                sess.setAttribute("provinceResult", " The Province has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "province");
-                sess.setAttribute("result",  "The Province did not save: because " + result);
+                sess.setAttribute("provinceResult", "The Province did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddICD10")) {
-                 //Code to store IDC10 codes to database 
+        } else if (request.getParameter("form").equals("AddICD10")) {
+            //Code to store IDC10 codes to database 
             //Get infor from text box
             String icd10Name = request.getParameter("txtICD10");
 
@@ -339,21 +396,21 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "icd10");
-                sess.setAttribute("result", "The ICD10 code has been successfuly saved to database");
+                sess.setAttribute("iCD10Result", "The ICD10 code has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "icd10");
-                sess.setAttribute("result",  "The ICD10 code did not save: because " + result);
+                sess.setAttribute("iCD10Result", "The ICD10 code did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddManner")) {
-                //Code to store Manner of death to database 
+        } else if (request.getParameter("form").equals("AddManner")) {
+            //Code to store Manner of death to database 
             //Get infor from text box
             String mannerName = request.getParameter("txtManner");
 
@@ -365,22 +422,22 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "manner");
-                sess.setAttribute("result", "The manner of death has been successfuly saved to database");
+                sess.setAttribute("mannerResult", "The manner of death has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "manner");
-                sess.setAttribute("result",  "The manner of death did not save: because " + result);
+                sess.setAttribute("mannerResult", "The manner of death did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddSample")) {
-             //Code to store Sanple types to database 
-                //Get infor from text box
+        } else if (request.getParameter("form").equals("AddSample")) {
+            //Code to store Sanple types to database 
+            //Get infor from text box
             String sampleName = request.getParameter("txtSample");
 
             ReferenceListDb emp = new ReferenceListDb("sample", "idSample", "type", sampleName, dbDetail);
@@ -391,20 +448,20 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "sample");
-                sess.setAttribute("result", "Sample type has been successfuly saved to database");
+                sess.setAttribute("sampleResult", "Sample type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "sample");
-                sess.setAttribute("result",  "Sample type did not save: because " + result);
+                sess.setAttribute("sampleResult", "Sample type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddStatus")) {   
+        } else if (request.getParameter("form").equals("AddStatus")) {
             //Code to add body status category to database    
             //Get infor from text box
             String statusName = request.getParameter("txtStatus");
@@ -417,21 +474,21 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "status");
-                sess.setAttribute("result", "Status Category has been successfuly saved to database");
+                sess.setAttribute("statusResult", "Status Category has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "status");
-                sess.setAttribute("result",  "Status category type did not save: because " + result);
+                sess.setAttribute("statusResult", "Status category type did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        }else if (request.getParameter("form").equals("AddRelationship")) {
-                //Get infor from text box
+        } else if (request.getParameter("form").equals("AddRelationship")) {
+            //Get infor from text box
             String relationshipName = request.getParameter("txtRelationship");
 
             ReferenceListDb emp = new ReferenceListDb("relationship", "idRelationship", "type", relationshipName, dbDetail);
@@ -442,14 +499,64 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "relationship");
-                sess.setAttribute("result", "Relationship type has been successfuly saved to database");
+                sess.setAttribute("relationshipResult", "Relationship type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "relationship");
-                sess.setAttribute("result",  "Relationship type did not save: because " + result);
+                sess.setAttribute("relationshipResult", "Relationship type did not save: because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+
+        } else if (request.getParameter("form").equals("AddBodyPart")) {
+            //Get infor from text box
+            String bodyPartName = request.getParameter("txtBodyPart");
+
+            ReferenceListDb emp = new ReferenceListDb("bodypart", "id", "type", bodyPartName, dbDetail);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "bodyPart");
+                sess.setAttribute("bodyPartResult", "Body part type has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "bodyPart");
+                sess.setAttribute("bodyPartResult", "Body part type did not save because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+
+        } else if (request.getParameter("form").equals("AddSpecialCur")) {
+            //Get infor from text box
+            String specialCurName = request.getParameter("txtSpecialCur");
+
+            ReferenceListDb emp = new ReferenceListDb("specialcircumstance", "idSpecialCircumstance", "type", specialCurName, dbDetail);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "specialCur");
+                sess.setAttribute("specialCurResult", "Special circumstance type has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "specialCur");
+                sess.setAttribute("specialCurResult", "Special circumstance type did not save because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }

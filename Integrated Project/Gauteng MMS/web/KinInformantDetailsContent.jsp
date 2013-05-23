@@ -17,50 +17,60 @@
                     vertical-align: top; 
                 }
             </style>
-<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script language="javascript" type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
+<<<<<<< HEAD
+ <script src="js/KinDetailScript.js"></script>
+=======
  <script src="js/KinDetailsScript.js"></script>
+>>>>>>> origin/master
     </head>
     <body>
+         <%
+            if(session.getAttribute("kinDetail")!=null){
+                out.print("<input type=hidden class='go_to_deceasedDetails' id='go_to_deceasedDetails' value=" + session.getAttribute("kinDetail") +">");               
+            }
+        %>
         <legend>Body File> Edit Body File> Body Identification> Kin/Informant Details </legend>
-        <form name="Kinform" id="Kinform" method="post" action="">
+        <form name="Kinform" id="Kinform" method="post" action="SaveKinDetailsServlet">
       
           
                 <table>
                     <tr>     
-                        <td>Name:  </td> <td><input type="text" name="KinName"  /></td>  
+                        <td>Name:  </td> <td><input type="text" name="KinName" id ="kinName"  /></td>  
                     </tr>
                     
                     <tr>
-                        <td>Surname:</td> <td> <input type="text" name="KinSurname" value="" /> </td>
+                        <td>Surname:</td> <td> <input type="text" name="KinSurname" value="" id ="kinSurname"  /> </td>
                     </tr> 
                     
                     <tr>     
-                        <td>Identification type:  </td> <td> <select name="identificationtype">
+                        <td>Identification type:  </td> <td> <select name="identificationtype" id="kinIdType">
                         <option>Select</option>
-                        <option>Lady</option>
+                        <option>ID</option>
+                        <option>Passport</option>
                     </select> </td>
                       
                     </tr>
                         
                     <tr>
-                         <td> Identification Number:</td>  <td> <input type="text" name="KinIDNumber" value="" /></td>                       
+                         <td> Identification Number:</td>  <td> <input type="text" name="KinIDNumber" value="" id="kinIdNumber" /></td>                       
                      </tr>
                         
                         <tr>
-                            <td> Relationship to deceased:</td> <td> <input type="text" name="KinRelationship" value="" /></td>
+                            <td> Relationship to deceased:</td> <td> <input type="text" name="KinRelationship" value="" id="kinRelationDeceased" /></td>
                         </tr>
                         
                         <tr>
-                            <td> Contact number:</td> <td> <input type="text" name="KinContact" value="" /></td>
+                            <td> Contact number:</td> <td> <input type="text" name="KinContact" value="" id ="kinContactNumber"/></td>
                         </tr>
                         
                             <tr>
-                            <td> Residential Address:     </td><td><textarea cols="50" rows="3" name="KinRes" id=""> </textarea><br></td>
+                            <td> Residential Address:     </td><td><textarea cols="50" rows="3" name="KinRes" id="kinAddress"> </textarea><br></td>
                             </tr>
                             
                             <tr>
-                            <td> Work Address:     </td><td><textarea cols="50" rows="3" name="KinWork" id=""> </textarea><br></td>
+                            <td> Work Address:     </td><td><textarea cols="50" rows="3" name="KinWork" id="kinWorkAddress"> </textarea><br></td>
                             </tr>
                           
                             <tr>

@@ -33,7 +33,7 @@ public class DeathCallDb extends DatabaseConnector
       
       }
 
-         public DeathCall getAuditTrail()
+      public DeathCall getDeathCall()
       {
          return deathCall;
       }
@@ -125,7 +125,36 @@ public class DeathCallDb extends DatabaseConnector
     @Override
     public String read() 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try
+        {
+            statement.executeQuery("SELECT * FROM deathcall WHERE Incident_incidentLogNumber='" + deathCall.getIncident().getIncidentLogNumber() + "';" );
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            DeathCall dCall= new DeathCall();
+            dCall.setTimeOfCall(resultSet.getString("timeOfCall"));
+            dCall.setDateOfCall(resultSet.getString("dateOfCall"));
+            dCall.setNumberOfCaller(resultSet.getString("numberOfCaller"));
+            dCall.setInstitution(resultSet.getString("institution"));
+            dCall.setSceneAddress(resultSet.getString("sceneAddress"));
+            dCall.setProvince(resultSet.getString("province"));
+            dCall.setRegion(resultSet.getString("region"));
+            dCall.setSceneConditions(resultSet.getString("sceneConditions"));
+            dCall.setNameOfCaller(resultSet.getString("nameOfCaller"));
+            IncidentDb incidentDb = new IncidentDb(deathCall.getIncident(), dbDetail);
+            incidentDb.init();
+            incidentDb.read();
+            dCall.setIncident(incidentDb.getIncident()); 
+            deathCall = dCall;
+        } 
+        catch (SQLException ex)  
+        {
+            return "failed "+ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "failed "+ex.getMessage();
+        }
+        return "successful";
     }
     
     // code below added by bandile because netbeans is complaining
@@ -138,9 +167,9 @@ public class DeathCallDb extends DatabaseConnector
      @Override
      public String edit()
      {
-          try 
+        try 
         {
-            statement.executeUpdate("UPDATE DeathCall SET timeOfCall='" + deathCall.getTimeOfCall() + "', dateOfCall='" + deathCall.getDateOfCall() +"', numberOfCaller='"+ deathCall.getNumberOfCaller() +"', institution='"+ deathCall.getInstitution() +"', sceneAddress='"+ deathCall.getSceneAddress() +"', province='"+ deathCall.getProvince() +"', region='"+ deathCall.getRegion() +"', sceneConditions='"+ deathCall.getSceneConditions() +"', nameOfCaller='"+ deathCall.getNameOfCaller() +"' WHERE Incident_incidentLogNumber = '"+ deathCall.getIncident().getIncidentLogNumber() +"';" );
+            statement.executeUpdate("UPDATE DeathCall SET timeOfCall='" + deathCall.getTimeOfCall()  +"', numberOfCaller='"+ deathCall.getNumberOfCaller() +"', institution='"+ deathCall.getInstitution() +"', sceneAddress='"+ deathCall.getSceneAddress() +"', province='"+ deathCall.getProvince() +"', region='"+ deathCall.getRegion() +"', sceneConditions='"+ deathCall.getSceneConditions() +"', nameOfCaller='"+ deathCall.getNameOfCaller() +"' WHERE Incident_incidentLogNumber = '"+ deathCall.getIncident().getIncidentLogNumber() +"';" );
             statement.close();
             connection.close();
         } 
@@ -148,7 +177,7 @@ public class DeathCallDb extends DatabaseConnector
         {
             return "fail " + ex.getMessage();
         }
-        return "Update Successful";
+        return "successful";
      }
     
 }

@@ -69,6 +69,7 @@ html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
+      background-color:#C0C0C0;     
 }
 
 a:focus {
@@ -222,12 +223,22 @@ textarea {
 }
 
 body {
-  margin: 0;
+  margin: auto;
+  margin-top:2%;
+  margin-bottom:2%;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  background-color: #ffffff;
+  background-color: white;
+  padding-left:3%;
+  padding-right:3%;
+  padding-bottom: 3%;
+  padding-top:2%;
+  width: 80%;
+  min-height: 550 px;
+  border-radius:20px;
+      
 }
 
 a {
@@ -731,9 +742,12 @@ a.text-success:focus {
 .text-center {
   text-align: center;
 }
+.head{background-color:  white;  
+    
+}
 
 h1,
-h2,
+h2
 h3,
 h4,
 h5,
@@ -3943,16 +3957,21 @@ input[type="submit"].btn.btn-mini {
   margin-bottom: 20px;
   margin-left: 0;
   list-style: none;
+  
 }
 
 .nav > li > a {
   display: block;
+  color: #003399;
+      background-color:#eeeeee;
+      height:12px;
+      
 }
 
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #B6B698;
 }
 
 .nav > li > a > img {
@@ -4076,9 +4095,9 @@ input[type="submit"].btn.btn-mini {
 .nav-tabs > .active > a,
 .nav-tabs > .active > a:hover,
 .nav-tabs > .active > a:focus {
-  color: #555555;
+  color: white;
   cursor: default;
-  background-color: #ffffff;
+  background-color: #003399;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
 }

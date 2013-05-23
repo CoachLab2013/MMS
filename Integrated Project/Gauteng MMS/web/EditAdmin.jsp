@@ -9,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
         <script src="bootstrap/js/bootstrap-tabs.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -20,7 +21,7 @@
         <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
         <title>Edit User</title>
     </head>
-    <body>
+    <body style="height:650px">
         <%
             //Java code
                  String name = "";
@@ -42,7 +43,7 @@
                   surnme = (String) session.getAttribute("surname");
                   email = (String) session.getAttribute("email");
                   personnel = (String) session.getAttribute("personnel");
-                  level = Integer.parseInt(session.getAttribute("level").toString());
+                  level = Integer.parseInt(session.getAttribute("level").toString().trim());
                   active = (Boolean) session.getAttribute("active");
                   editResult = session.getAttribute("Eresult").toString();
                   Supervisor = " ";
@@ -126,8 +127,7 @@
                                 <option <% out.println(String.valueOf(Supervisor));%>  value="1">Supervisor</option>
                                 <option <% out.println(String.valueOf(fpsOfficer));%>   value="2">FPS Officer</option>
                                 <option <% out.println(String.valueOf(Pathologist));%>   value="3">Pathologist</option>
-                                <option <% out.println(String.valueOf(Administrator));%>  value="4">Administrator</option>
-
+                                <option <% out.println(String.valueOf(Administrator));%>  value="4">Administrator</option>                               
                                 </option>
 
                             </select>

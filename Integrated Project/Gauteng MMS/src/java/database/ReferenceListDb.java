@@ -155,7 +155,7 @@ public class ReferenceListDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeUpdate("update " + tableName + " set " + field2 + "='" + data + "' where " + field1 + "=" + id +";" );
+            statement.executeUpdate("update " + tableName + " set " + field2 + "='" + data + "' where " + field2 + "='" + data +"';" );
             statement.close();
             connection.close();
         } 
@@ -198,13 +198,8 @@ public class ReferenceListDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeQuery("select count(*) as num from " +tableName +";");
-            ResultSet resultSet = statement.getResultSet();
-            resultSet.next();
-            int count = resultSet.getInt(1);
-            System.out.println(count);
-            statement.executeUpdate("delete from " +tableName +" where " + field1 + "="+count+";" );
-            System.out.println(field1);
+            statement.executeUpdate("delete from " +tableName +" where " + field2 + "='"+data+"';" );
+    
             statement.close();
             connection.close();
         } 

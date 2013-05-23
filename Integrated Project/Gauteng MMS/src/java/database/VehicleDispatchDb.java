@@ -40,7 +40,7 @@ public class VehicleDispatchDb extends DatabaseConnector {
     public String add(){
         try 
         {
-            statement.executeUpdate("INSERT INTO VehicleDispatch (notificationDateTime, departureDateTime, Incident_incidentLogNumber, Vehicle_registrationNumber) VALUES ('" + this.vehicleDispatch.getNotificationDateTime() + "', '" + this.vehicleDispatch.getDepartureDateTime() +"', '" + this.vehicleDispatch.getIncident().getIncidentLogNumber() + "', '" + this.vehicleDispatch.getVehicle().getRegistrationNumber() +"';)");
+            statement.executeUpdate("INSERT INTO VehicleDispatch (notificationDateTime, Incident_incidentLogNumber, Vehicle_registrationNumber) VALUES ('" + this.vehicleDispatch.getNotificationDateTime() + "', '" + this.vehicleDispatch.getIncident().getIncidentLogNumber() + "', '" + this.vehicleDispatch.getVehicle().getRegistrationNumber() +"')");
             statement.close();
             connection.close(); 
         } 
@@ -63,7 +63,6 @@ public class VehicleDispatchDb extends DatabaseConnector {
             statement.executeQuery("SELECT * FROM VehicleDispatch;" /*WHERE Something= criteria*/);
             ResultSet resultSet = statement.getResultSet(); 
             resultSet.next();
-            vehicleDispatch.setDepartureDateTime(resultSet.getString("departureDateTime"));
             vehicleDispatch.setNotificationDateTime(resultSet.getString("notificationDateTime"));
             vehicleRegistration = resultSet.getString("Vehicle_registrationNumber");
             incidentLogNumber = resultSet.getString("Incident_incidentLogNumber");
@@ -83,7 +82,8 @@ public class VehicleDispatchDb extends DatabaseConnector {
             String reason = resultSet2.getString("reason");
             int bodyCount = resultSet2.getInt("bodyCount");
             boolean status = resultSet2.getBoolean("status");
-            vehicleDispatch.setIncident(new Incident(incidentLogNumber, referenceNumber, numberOfBodies, dateOfIncident, timeOfIncident, circumstanceOfDeath, placeBodyFound, specialCircumstances, reason, bodyCount, status));
+            String dateIncidentClosed = resultSet2.getString("dateIncidentClosed");
+            vehicleDispatch.setIncident(new Incident(incidentLogNumber, referenceNumber, numberOfBodies, dateOfIncident, timeOfIncident, circumstanceOfDeath, placeBodyFound, specialCircumstances, reason, bodyCount, status,dateIncidentClosed));
             statement.close();
             connection.close();
         } 
@@ -100,7 +100,7 @@ public class VehicleDispatchDb extends DatabaseConnector {
     public String edit(){//!!!!!NEED TO PASS PRIMARY KEY VALUE!!!!!
         try 
         {
-            statement.executeUpdate("UPDATE VehicleDispatch SET departureDateTime='" + vehicleDispatch.getDepartureDateTime() + "', notificationDateTime='" + vehicleDispatch.getNotificationDateTime() +"', Vehicle_registrationNumber='" + vehicleDispatch.getVehicle().getRegistrationNumber() + "', Incident_incidentLogNumber = '"+vehicleDispatch.getIncident().getIncidentLogNumber()+"' WHERE Incident_incidentLogNumber = '" + vehicleDispatch.getIncident().getIncidentLogNumber() + "';" );
+            statement.executeUpdate("UPDATE VehicleDispatch SET notificationDateTime='" + vehicleDispatch.getNotificationDateTime() +"', Vehicle_registrationNumber='" + vehicleDispatch.getVehicle().getRegistrationNumber() + "', Incident_incidentLogNumber = '"+vehicleDispatch.getIncident().getIncidentLogNumber()+"' WHERE Incident_incidentLogNumber = '" + vehicleDispatch.getIncident().getIncidentLogNumber() + "';" );
             statement.close();
             connection.close();
         } 

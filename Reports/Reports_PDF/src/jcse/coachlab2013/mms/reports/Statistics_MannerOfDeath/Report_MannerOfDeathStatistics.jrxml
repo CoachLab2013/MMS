@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
-	<property name="ireport.zoom" value="0.5"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
@@ -14,7 +14,7 @@
 		<band height="141" splitType="Stretch">
 			<image>
 				<reportElement uuid="e28ca0ab-e448-4ccc-8b97-9102dbd6a9cf" x="0" y="0" width="400" height="90"/>
-				<imageExpression><![CDATA[".\\Logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["Logo.png"]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement uuid="b17de317-b63a-4080-aaef-d4bc34a974cc" x="400" y="0" width="362" height="90"/>
@@ -52,9 +52,6 @@
 			</line>
 		</band>
 	</pageHeader>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
@@ -77,10 +74,10 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="207" splitType="Stretch">
+		<band height="313" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="f664a569-9cb3-4c40-a4b1-0ef84a8d5ad7" positionType="FixRelativeToBottom" x="0" y="0" width="555" height="207" isRemoveLineWhenBlank="true"/>
+					<reportElement uuid="f664a569-9cb3-4c40-a4b1-0ef84a8d5ad7" positionType="FixRelativeToBottom" x="0" y="11" width="762" height="290" isRemoveLineWhenBlank="true"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend position="Bottom"/>

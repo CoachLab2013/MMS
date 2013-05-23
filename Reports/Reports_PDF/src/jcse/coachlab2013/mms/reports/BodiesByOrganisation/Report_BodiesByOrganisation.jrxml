@@ -14,7 +14,7 @@
 		<band height="141" splitType="Stretch">
 			<image>
 				<reportElement uuid="e28ca0ab-e448-4ccc-8b97-9102dbd6a9cf" x="0" y="0" width="400" height="90"/>
-				<imageExpression><![CDATA["./Logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["Logo.png"]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement uuid="b17de317-b63a-4080-aaef-d4bc34a974cc" x="400" y="0" width="362" height="90"/>
@@ -74,10 +74,10 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="289" splitType="Stretch">
+		<band height="313" splitType="Stretch">
 			<pieChart>
 				<chart>
-					<reportElement uuid="5b40376e-8a79-480e-9e81-18d49b1001d2" x="0" y="17" width="762" height="271"/>
+					<reportElement uuid="5b40376e-8a79-480e-9e81-18d49b1001d2" x="0" y="11" width="762" height="290"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>

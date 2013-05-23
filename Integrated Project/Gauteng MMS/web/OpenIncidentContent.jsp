@@ -3,9 +3,9 @@
     Created on : Apr 16, 2013, 10:27:53 PM
     Author     : hollard
 --%>
-
 <%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +14,8 @@
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
     </head>
     <body>  
-    <legend>Incidents> Open Incidents</legend>
+    <legend>Open Incidents</legend>
+
     <form name="Deceased details" method="post" action="Deceased Address.jsp" class="form-horizontal" >
         <%
             Tools t = new Tools();
@@ -27,7 +28,7 @@
         <table>
             <tr>
                 <td width="200"></td>
-                <td width="10"><input type="button" value="Edit" id="edit"></td>
+                <td width="10"><input type="button" value="Edit" id="editincidentbutton"></td>
                 <td width="300" align="center"><input type="button" value="Close Incident" id="close"> </td>
             </tr>
 
@@ -36,7 +37,7 @@
         <br>
         <br>
     </form>
-    <form id="closeincident" hidden="true">
+    <form id="closeincident" hidden="true" action="CloseIncidentServlet">
         <table>
 
             <th>Close Incident</th>
@@ -45,7 +46,7 @@
                     FPS Incident Log Number: 
                 </td>
                 <td>
-                    <input type="text" id="selectedincident" readonly="true">
+                    <input type="text" id="selectedincident" name="selectedincident" readonly="true">
                 </td>
             </tr>
             <tr>
@@ -67,5 +68,8 @@
             </tr>
         </table>
     </form>
+        <form id="editincidentform" hidden="true" action="GetIncidentServlet">
+            <input type="text" id="selected_edit_incident" name="selected_edit_incident">
+        </form>
 </body>
 </html>

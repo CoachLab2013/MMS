@@ -54,11 +54,11 @@ public class LogIncidentServlet extends HttpServlet {
         incident.setCircumstanceOfDeath(request.getParameter("circumstancesofdeath"));
         incident.setSpecialCircumstances(request.getParameter("specialcircumstance"));
         incident.setStatus(true);
-        
-        DbDetail dbdetail = new DbDetail("localhost","/mydb","root","password");
+        Tools t = new Tools();
+        DbDetail dbdetail = t.getDbdetail();
         IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
         incidentdb.init();
-        incidentdb.add();
+        out.println(incidentdb.add());
         
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String[] datetime = timestamp.split(" ");
@@ -83,6 +83,9 @@ public class LogIncidentServlet extends HttpServlet {
         HttpSession sess = request.getSession();
         sess.setAttribute("incidentlogged", "Incident created succesully");
         sess.setAttribute("incident", incident);
+        sess.setAttribute("lognumber",request.getParameter("fpsnumber"));
+        String personnelnumber = sess.getAttribute("personnelnumber").toString();
+        t.makeAuditTrail("Log Incident", "Created new incident "+request.getParameter("fpsnumber"), personnelnumber, "Log Incident Tab");
         response.sendRedirect("Home.jsp");
     }
 

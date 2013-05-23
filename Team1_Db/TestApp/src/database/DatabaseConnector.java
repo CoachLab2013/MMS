@@ -14,25 +14,19 @@ public abstract class DatabaseConnector
 {
     private static final String CONNECTIONSTRING = "jdbc:mysql://";
     private static final String DBCONNECTOR = "com.mysql.jdbc.Driver";
-    private String url;
-    private String dbName;
-    private String username;
-    private String password;
+    protected DbDetail dbDetail;
     protected Connection connection;
     protected Statement statement;
     public DatabaseConnector(DbDetail dbDetail)
     {
-        this.username = dbDetail.getUsername();
-        this.password = dbDetail.getPassword();
-        this.url = dbDetail.getUrl();
-        this.dbName = dbDetail.getDbName();
+        this.dbDetail = dbDetail;
     }
     public boolean init()
     {
         try 
         {
             Class.forName(DBCONNECTOR).newInstance();
-            connection = DriverManager.getConnection(CONNECTIONSTRING+url+dbName,username,password);
+            connection = DriverManager.getConnection(CONNECTIONSTRING+dbDetail.getUrl()+dbDetail.getDbName(),dbDetail.getUsername(),dbDetail.getPassword());
             statement = connection.createStatement();
         } 
         catch (Exception ex) 

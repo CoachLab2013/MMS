@@ -18,10 +18,6 @@ USE `mydb_dump_staging`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping events for database 'mydb_dump_staging'
---
-
---
 -- Dumping routines for database 'mydb_dump_staging'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `CALL_Procedures` */;
@@ -34,57 +30,66 @@ USE `mydb_dump_staging`;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CALL_Procedures`(OUT ex INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CALL_Procedures`(OUT ex INT, OUT msg VARCHAR(45))
 BEGIN
 	
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
-	BEGIN SET ex = -1; END;
-	SET ex = 0;
+	BEGIN SET ex = -2; END;
+	SET ex = 0; SET msg = 'CAll procedures are successful';
 
 	call mydb_dump_staging.Truncate_tables;
 
-	call mydb_dump_staging.Extract_atscene;
-	call mydb_dump_staging.Extract_analysis;
-	call mydb_dump_staging.Extract_atmortuary;
-	call mydb_dump_staging.Extract_audittrail;
-	call mydb_dump_staging.Extract_body;
-	call mydb_dump_staging.Extract_bodyaddress;
-	call mydb_dump_staging.Extract_bodyfile;
-	call mydb_dump_staging.Extract_bodylink;
-	call mydb_dump_staging.Extract_bodypart;
-	call mydb_dump_staging.Extract_bodyreleaseplace;
-	call mydb_dump_staging.Extract_bodyreleasestatus;
-	call mydb_dump_staging.Extract_bodystatus;
-	call mydb_dump_staging.Extract_deathcall;
-	call mydb_dump_staging.Extract_dutyroster;
-	call mydb_dump_staging.Extract_employee;
-	call mydb_dump_staging.Extract_forensicsample;
-	call mydb_dump_staging.Extract_gender;
-	call mydb_dump_staging.Extract_icd10;
-	call mydb_dump_staging.Extract_incident;
-	call mydb_dump_staging.Extract_incidentmessage;
-	call mydb_dump_staging.Extract_institution;
-	call mydb_dump_staging.Extract_kin;
-	call mydb_dump_staging.Extract_labrecord;
-	call mydb_dump_staging.Extract_mannerofdeath;
-	call mydb_dump_staging.Extract_maritalstatus;
-	call mydb_dump_staging.Extract_member;
-	call mydb_dump_staging.Extract_occupation;
-	call mydb_dump_staging.Extract_organization;
-	call mydb_dump_staging.Extract_organizationtype;
-	call mydb_dump_staging.Extract_postmortem;
-	call mydb_dump_staging.Extract_property;
-	call mydb_dump_staging.Extract_province;
-	call mydb_dump_staging.Extract_race;
-	call mydb_dump_staging.Extract_rank;
-	call mydb_dump_staging.Extract_region;
-	call mydb_dump_staging.Extract_relationship;
-	call mydb_dump_staging.Extract_sample;
-	call mydb_dump_staging.Extract_seal;
-	call mydb_dump_staging.Extract_specialcircumstance;
-	call mydb_dump_staging.Extract_vehicle;
-
-	call mydb_dump_staging.Extract_vehicledispatch;
+	call mydb_dump_staging.Extract_atscene(msg);
+	call mydb_dump_staging.Extract_analysis(msg);
+	call mydb_dump_staging.Extract_atmortuary(msg);
+	call mydb_dump_staging.Extract_audittrail(msg);
+	call mydb_dump_staging.Extract_body(msg);
+	call mydb_dump_staging.Extract_bodyaddress(msg);
+	call mydb_dump_staging.Extract_bodyfile(msg);
+	call mydb_dump_staging.Extract_bodylink(msg);
+	call mydb_dump_staging.Extract_bodypart(msg);
+	call mydb_dump_staging.Extract_bodyreleaseplace(msg);
+	call mydb_dump_staging.Extract_bodyreleasestatus(msg);
+	call mydb_dump_staging.Extract_bodystatus(msg);
+	#call mydb_dump_staging.Extract_bodystorage(msg);
+	call mydb_dump_staging.Extract_deathcall(msg);
+	call mydb_dump_staging.Extract_dutyroster(msg);
+	#call mydb_dump_staging.Extract_driver(msg);
+	call mydb_dump_staging.Extract_employee(msg);
+	#call mydb_dump_staging.Extract_externalcircumstance(msg);
+	call mydb_dump_staging.Extract_forensicsample(msg);
+	call mydb_dump_staging.Extract_gender(msg);
+	#call mydb_dump_staging.Extract_hospital(msg);
+	call mydb_dump_staging.Extract_icd10(msg);
+	call mydb_dump_staging.Extract_incident(msg);
+	call mydb_dump_staging.Extract_incidentmessage(msg);
+	call mydb_dump_staging.Extract_institution(msg);
+	call mydb_dump_staging.Extract_kin(msg);
+	call mydb_dump_staging.Extract_labrecord(msg);
+	call mydb_dump_staging.Extract_mannerofdeath(msg);
+	call mydb_dump_staging.Extract_maritalstatus(msg);
+	call mydb_dump_staging.Extract_member(msg);
+	call mydb_dump_staging.Extract_occupation(msg);
+	call mydb_dump_staging.Extract_organization(msg);
+	call mydb_dump_staging.Extract_organizationtype(msg);
+	#call mydb_dump_staging.Extract_pathologyunit(msg);
+	call mydb_dump_staging.Extract_postmortem(msg);
+	#call mydb_dump_staging.Extract_policestation(msg);
+	call mydb_dump_staging.Extract_property(msg);
+	#call mydb_dump_staging.Extract_propertytype(msg);
+	call mydb_dump_staging.Extract_province(msg);
+	call mydb_dump_staging.Extract_race(msg);
+	call mydb_dump_staging.Extract_rank(msg);
+	call mydb_dump_staging.Extract_region(msg);
+	call mydb_dump_staging.Extract_relationship(msg);
+	#call mydb_dump_staging.Extract_samplelab(msg);
+	call mydb_dump_staging.Extract_sample(msg);
+	#call mydb_dump_staging.Extract_scenetype(msg);
+	call mydb_dump_staging.Extract_seal(msg);
+	call mydb_dump_staging.Extract_specialcircumstance(msg);
+	call mydb_dump_staging.Extract_vehicle(msg);
+	call mydb_dump_staging.Extract_vehicledispatch(msg);
+	#call mydb_dump_staging.Extract_vehiclerecord(msg);
 
 END ;;
 DELIMITER ;
@@ -102,9 +107,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_analysis`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_analysis`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_analysis'; END;
+	SET  msg = '';
 
 
 
@@ -130,10 +138,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_atmortuary`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_atmortuary`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_atmortuary'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`atmortuary`
 (`bodyReceivedFromPerNumber`,
@@ -159,8 +169,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_atscene`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_atscene`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_atscene'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`atscene`
 (`sceneIncidentOccured`,
@@ -194,9 +208,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_audittrail`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_audittrail`(OUT msg VARCHAR(45))
 BEGIN
 
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_audittrail'; END;
+	SET msg = '';
 
 
 INSERT INTO `mydb_dump_staging`.`audittrail`
@@ -226,8 +244,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_body`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_body`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_body'; END;
+	SET  msg = '';
 
 INSERT INTO `mydb_dump_staging`.`body`
 (`idDeathRegisterNumber`,
@@ -275,8 +297,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyaddress`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyaddress`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodyaddress'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`bodyaddress`
 (`building`,
@@ -308,10 +334,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyfile`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyfile`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodyfile'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`bodyfile`
 (`dateFileOpened`,
@@ -341,9 +369,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodylink`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodylink`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodylink'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`bodylink`
 (`idBodyLink`,
@@ -368,9 +399,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodypart`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodypart`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodypart'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`bodypart`
 (`idBodyPart`,
@@ -395,10 +429,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyreleaseplace`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyreleaseplace`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodyreleaseplace'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`bodyreleaseplace`
 (`idBodyReleasePlace`,
@@ -423,9 +459,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyreleasestatus`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyreleasestatus`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodyreleasestatus'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`bodyreleasestatus`
 (`idBodyReleaseStatus`,
@@ -451,16 +490,49 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodystatus`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodystatus`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodystatus'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`bodystatus`
-(`idBodyStatus`,
-`state`)
+(`idBodyStatus`, `state`)
 SELECT *
-		FROM mydb.bodystatus;
+		FROM `mydb`.`bodystatus`;
 
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_bodystorage` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodystorage`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodystorage'; END;
+	SET msg = '';
+
+INSERT INTO `mydb`.`bodystorage`
+(`idBodyStorage`,
+`numberOfBins`,
+`nameOfMortuary`)
+SELECT * FROM mydb.bodystorage;
 
 
 
@@ -480,9 +552,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_deathcall`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_deathcall`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_deathcall'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`deathcall`
 (`Incident_incidentLogNumber`,
@@ -508,6 +583,36 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_driver` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_driver`(OUT msg VARCHAR(45))
+BEGIN
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_driver'; END;
+	SET msg = '';
+
+INSERT INTO `mydb`.`driver`
+(`idDriver`,
+`name`,
+`surname`)
+select * from mydb.driver;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Extract_dutyroster` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -518,9 +623,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_dutyroster`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_dutyroster`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_dutyroster'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`dutyroster`
 (`idDutyRoster`,
@@ -551,9 +659,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_employee`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_employee`(OUT msg VARCHAR(45))
 BEGIN
 
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_employee'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`employee`
 (`password`,
@@ -575,6 +687,36 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_externalcircumstance` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_externalcircumstance`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_externalcircumstance'; END;
+	SET msg = '';
+
+INSERT INTO `mydb`.`externalcircumstance`
+(`idExternalCircumstance`,
+`type`)
+select * from mydb.externalcircumstance;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Extract_forensicsample` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -585,8 +727,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_forensicsample`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_forensicsample`(OUT msg VARCHAR(45))
 BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_forensicsample'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`forensicsample`
 (`sealNumber`,
@@ -622,16 +768,47 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_gender`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_gender`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_gender'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`gender`
 (`idGender`,
 `type`)
 SELECT *
 		FROM mydb.gender;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_hospital` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_hospital`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_hospital'; END;
+	SET msg = '';
+INSERT INTO `mydb`.`hospital`
+(`name`,
+`contactNumber`,
+`Organization_idOrganization`)
+select * from mydb.hospital;
 
 
 END ;;
@@ -650,9 +827,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_icd10`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_icd10`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_icd10'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`icd10`
 (`idICD10`,
@@ -679,9 +859,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_incident`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_incident`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_incident'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`incident`
 (`incidentLogNumber`,
@@ -718,9 +901,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_incidentmessage`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_incidentmessage`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_incidentmessage'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`incidentmessage`
 (`date`,
@@ -752,9 +938,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_institution`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_institution`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_institution'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`institution`
 (`idInstitution`,
@@ -780,9 +969,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_kin`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_kin`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_kin'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`kin`
 (`passport`,
@@ -816,14 +1008,19 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_labrecord`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_labrecord`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_labrecord'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`labrecord`
 (`receivedAllSamples`,
 `labNumber`,
-`idLabRecord`)
+`idLabRecord`,
+`numberOfSamples`,
+`sampleCounter`)
 
 SELECT *
 		FROM mydb.labrecord;
@@ -846,9 +1043,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_mannerofdeath`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_mannerofdeath`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_mannerofdeath'; END;
+	SET msg = '';
 
 
 INSERT INTO `mydb_dump_staging`.`mannerofdeath`
@@ -874,9 +1074,11 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_maritalstatus`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_maritalstatus`(OUT msg VARCHAR(45))
 BEGIN
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_maritalstatus'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`maritalstatus`
 (`idMartalStatus`,
@@ -901,9 +1103,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_member`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_member`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_member'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`member`
 (`name`,
@@ -935,9 +1140,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_occupation`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_occupation`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_occupation'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`occupation`
 (`idOccupation`,
@@ -963,10 +1171,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_organization`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_organization`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_organization'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`organization`
 (`idOrganization`,
@@ -994,15 +1204,77 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_organizationtype`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_organizationtype`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_organizationtype'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`organizationtype`
 (`type`)
 SELECT *
 		FROM mydb.organizationtype;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_pathologyunit` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_pathologyunit`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_pathologyunit'; END;
+	SET msg = '';
+
+INSERT INTO `mydb`.`pathologyunit`
+(`name`,
+`contactNumber`,
+`Organization_idOrganization`)
+Select * from mydb.pathologyunit;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_policestation` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_policestation`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_policestation'; END;
+	SET msg = '';
+
+INSERT INTO `mydb`.`policestation`
+(`name`,
+`contactNumber`,
+`Organization_idOrganization`)
+
+Select * from mydb.policestation;
+
 
 END ;;
 DELIMITER ;
@@ -1020,9 +1292,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_postmortem`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_postmortem`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_postmortem'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`postmortem`
 (`labNumber`,
@@ -1052,10 +1327,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_property`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_property`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_property'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`property`
 (`sealNumber`,
@@ -1072,12 +1349,38 @@ INSERT INTO `mydb_dump_staging`.`property`
 `SAPS_surname`,
 `SAPS_taken`,
 `Body_idDeathRegisterNumber`,
-`idPropery`,
 `released`)
 SELECT *
-		FROM mydb.property;
+		FROM `mydb`.`property`;
 
 
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_propertytype` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_propertytype`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_scenetype'; END;
+	SET msg = '';
+INSERT INTO `mydb`.`propertytype`
+(`idPropertyType`,
+`type`)
+SELECT * FROM mydb.propertytype;
 
 END ;;
 DELIMITER ;
@@ -1095,9 +1398,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_province`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_province`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_province'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`province`
 (`idProvince`,
@@ -1122,10 +1428,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_race`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_race`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_race'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`race`
 (`idRace`,
@@ -1150,10 +1458,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_rank`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_rank`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_rank'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`rank`
 (`idRank`,
@@ -1179,10 +1489,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_region`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_region`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_region'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`region`
 (`idRegion`,
@@ -1207,10 +1519,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_relationship`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_relationship`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_relationship'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`relationship`
 (`idRelationship`,
@@ -1235,10 +1549,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_sample`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_sample`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_sample'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`sample`
 (`idSample`,
@@ -1246,6 +1562,64 @@ INSERT INTO `mydb_dump_staging`.`sample`
 SELECT *
 		FROM mydb.sample;
 
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_samplelab` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_samplelab`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_samplelab'; END;
+	SET msg = '';
+
+INSERT INTO `mydb`.`samlpelab`
+(`name`,
+`contactNumber`,
+`Organization_idOrganization`)
+SELECT * FROM mydb.samlpelab;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_scenetype` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_scenetype`(OUT msg VARCHAR(45))
+BEGIN
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_scenetype'; END;
+	SET msg = '';
+
+INSERT INTO `mydb`.`scenetype`
+(`idSceneType`,
+`type`)
+SELECT * FROM mydb.scenetype;
 
 
 END ;;
@@ -1264,9 +1638,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_seal`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_seal`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_seal'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`seal`
 (`idSeal`,
@@ -1290,9 +1667,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_specialcircumstance`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_specialcircumstance`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_specialcircumstance'; END;
+	SET msg = '';
 
 
 INSERT INTO `mydb_dump_staging`.`specialcircumstance`
@@ -1317,10 +1697,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_vehicle`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_vehicle`(OUT msg VARCHAR(45))
 BEGIN
 
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_vehicle'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`vehicle`
 (`registrationNumber`)
@@ -1343,18 +1725,50 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_vehicledispatch`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_vehicledispatch`(OUT msg VARCHAR(45))
 BEGIN
 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_vehicledispatch'; END;
+	SET msg = '';
 
 INSERT INTO `mydb_dump_staging`.`vehicledispatch`
 (`Incident_incidentLogNumber`,
 `notificationDateTime`,
-`departureDateTime`,
 `Vehicle_registrationNumber`,
 `idVehicleDispatch`)
 SELECT *
 		FROM mydb.vehicledispatch;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_vehiclerecord` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_vehiclerecord`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_vehiclerecord'; END;
+	SET msg = '';
+
+INSERT INTO `mydb`.`vehiclerecord`
+(`idVehicle`,
+`type`)
+SELECT * FROM mydb.vehiclerecord;
+
 
 
 END ;;
@@ -1436,4 +1850,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-10 18:11:36
+-- Dump completed on 2013-05-21 12:28:19
