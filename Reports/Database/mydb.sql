@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `mydb`;
--- MySQL dump 10.13  Distrib 5.6.11, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.10, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mydb
 -- ------------------------------------------------------
--- Server version	5.6.11
+-- Server version	5.6.10
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,7 +25,8 @@ DROP TABLE IF EXISTS `analysis`;
 CREATE TABLE `analysis` (
   `idAnalysis` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idAnalysis`)
+  PRIMARY KEY (`idAnalysis`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,7 +54,7 @@ CREATE TABLE `atmortuary` (
   PRIMARY KEY (`idAtMortuary`),
   KEY `fk_AtMortuary_Body1_idx` (`Body_idDeathRegisterNumber`),
   CONSTRAINT `fk_AtMortuary_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +63,7 @@ CREATE TABLE `atmortuary` (
 
 LOCK TABLES `atmortuary` WRITE;
 /*!40000 ALTER TABLE `atmortuary` DISABLE KEYS */;
+INSERT INTO `atmortuary` VALUES ('peter','john','099888592',1);
 /*!40000 ALTER TABLE `atmortuary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +116,7 @@ CREATE TABLE `audittrail` (
   `currentUser` varchar(10) NOT NULL,
   `eventLocation` varchar(45) NOT NULL,
   PRIMARY KEY (`idAuditTrail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +125,7 @@ CREATE TABLE `audittrail` (
 
 LOCK TABLES `audittrail` WRITE;
 /*!40000 ALTER TABLE `audittrail` DISABLE KEYS */;
+INSERT INTO `audittrail` VALUES (1,'2013-05-20','09:42:30','Log In','Successfull log in','12345678','Log In Screen'),(2,'2013-05-20','11:12:17','Log In','Successfull log in','12345678','Log In Screen'),(3,'2013-05-20','11:32:46','Log In','Successfull log in','12345678','Log In Screen'),(4,'2013-05-20','12:22:02','Log In','Successfull log in','12345678','Log In Screen'),(5,'2013-05-20','12:36:17','Log In','Successfull log in','12345678','Log In Screen'),(6,'2013-05-20','12:49:22','Log In','Successfull log in','12345678','Log In Screen');
 /*!40000 ALTER TABLE `audittrail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,30 +138,30 @@ DROP TABLE IF EXISTS `body`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `body` (
   `idDeathRegisterNumber` varchar(45) NOT NULL,
-  `gender` varchar(45) NOT NULL,
-  `race` varchar(45) NOT NULL,
-  `assignedTo` varchar(45) NOT NULL,
-  `nameOfDeceased` varchar(45) NOT NULL,
-  `surnameOfDeceased` varchar(45) NOT NULL,
-  `placeOfBirth` varchar(45) NOT NULL,
-  `dateOfBirth` date NOT NULL,
-  `ageOnDateFound` int(11) NOT NULL,
-  `maritalStatus` varchar(45) NOT NULL,
-  `occupation` varchar(45) NOT NULL,
-  `citizen` varchar(45) NOT NULL,
-  `maidenName` varchar(45) NOT NULL,
-  `identifiedDateTime` datetime NOT NULL,
-  `estimatedAgeYear` int(11) NOT NULL,
-  `estimatedAgeMonth` int(11) NOT NULL,
-  `ID` varchar(13) NOT NULL,
-  `passport` varchar(45) NOT NULL,
-  `bodyStatus` bit(1) NOT NULL,
-  `dateBodyReceived` datetime NOT NULL,
-  `bodyReleased` bit(1) NOT NULL,
+  `gender` varchar(45) DEFAULT NULL,
+  `race` varchar(45) DEFAULT NULL,
+  `assignedTo` varchar(45) DEFAULT NULL,
+  `nameOfDeceased` varchar(45) DEFAULT NULL,
+  `surnameOfDeceased` varchar(45) DEFAULT NULL,
+  `placeOfBirth` varchar(45) DEFAULT NULL,
+  `dateOfBirth` date DEFAULT NULL,
+  `ageOnDateFound` int(11) DEFAULT NULL,
+  `maritalStatus` varchar(45) DEFAULT NULL,
+  `occupation` varchar(45) DEFAULT NULL,
+  `citizen` varchar(45) DEFAULT NULL,
+  `maidenName` varchar(45) DEFAULT NULL,
+  `identifiedDateTime` datetime DEFAULT NULL,
+  `estimatedAgeYear` int(11) DEFAULT NULL,
+  `estimatedAgeMonth` int(11) DEFAULT NULL,
+  `ID` varchar(13) DEFAULT NULL,
+  `passport` varchar(45) DEFAULT NULL,
+  `bodyStatus` bit(1) DEFAULT NULL,
+  `dateBodyReceived` datetime DEFAULT NULL,
+  `bodyReleased` bit(1) DEFAULT NULL,
   `Incident_incidentLogNumber` varchar(45) NOT NULL,
-  `bodyType` varchar(45) NOT NULL,
-  `dateBodyReleased` datetime NOT NULL,
-  `bodyReleasedTo` varchar(45) NOT NULL,
+  `bodyType` varchar(45) DEFAULT NULL,
+  `dateBodyReleased` datetime DEFAULT NULL,
+  `bodyReleasedTo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idDeathRegisterNumber`),
   KEY `fk_Body_Incident1_idx` (`Incident_incidentLogNumber`),
   CONSTRAINT `fk_Body_Incident1` FOREIGN KEY (`Incident_incidentLogNumber`) REFERENCES `incident` (`incidentLogNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -198,7 +199,7 @@ CREATE TABLE `bodyaddress` (
   PRIMARY KEY (`idBodyAddress`),
   KEY `fk_BodyAddress_Body1_idx` (`Body_idDeathRegisterNumber`),
   CONSTRAINT `fk_BodyAddress_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,6 +208,7 @@ CREATE TABLE `bodyaddress` (
 
 LOCK TABLES `bodyaddress` WRITE;
 /*!40000 ALTER TABLE `bodyaddress` DISABLE KEYS */;
+INSERT INTO `bodyaddress` VALUES ('D','D','D','D','e','f','g','h','099888592',1);
 /*!40000 ALTER TABLE `bodyaddress` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,7 +278,8 @@ DROP TABLE IF EXISTS `bodypart`;
 CREATE TABLE `bodypart` (
   `idBodyPart` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idBodyPart`)
+  PRIMARY KEY (`idBodyPart`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -299,7 +302,8 @@ DROP TABLE IF EXISTS `bodyreleaseplace`;
 CREATE TABLE `bodyreleaseplace` (
   `idBodyReleasePlace` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idBodyReleasePlace`)
+  PRIMARY KEY (`idBodyReleasePlace`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -322,7 +326,8 @@ DROP TABLE IF EXISTS `bodyreleasestatus`;
 CREATE TABLE `bodyreleasestatus` (
   `idBodyReleaseStatus` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idBodyReleaseStatus`)
+  PRIMARY KEY (`idBodyReleaseStatus`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -345,7 +350,8 @@ DROP TABLE IF EXISTS `bodystatus`;
 CREATE TABLE `bodystatus` (
   `idBodyStatus` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(45) NOT NULL,
-  PRIMARY KEY (`idBodyStatus`)
+  PRIMARY KEY (`idBodyStatus`),
+  UNIQUE KEY `state_UNIQUE` (`state`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -369,7 +375,8 @@ CREATE TABLE `bodystorage` (
   `idBodyStorage` int(11) NOT NULL AUTO_INCREMENT,
   `numberOfBins` int(11) NOT NULL,
   `nameOfMortuary` varchar(45) NOT NULL,
-  PRIMARY KEY (`idBodyStorage`)
+  PRIMARY KEY (`idBodyStorage`),
+  UNIQUE KEY `nameOfMortuary_UNIQUE` (`nameOfMortuary`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -440,35 +447,6 @@ LOCK TABLES `driver` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `dutyroster`
---
-
-DROP TABLE IF EXISTS `dutyroster`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `dutyroster` (
-  `idDutyRoster` int(11) NOT NULL,
-  `startTime` datetime NOT NULL,
-  `endTime` datetime NOT NULL,
-  `role` varchar(45) NOT NULL,
-  `Employee_password` varchar(128) NOT NULL,
-  `Employee_personnelNumber` varchar(10) NOT NULL,
-  PRIMARY KEY (`idDutyRoster`),
-  KEY `fk_DutyRoster_Employee_idx` (`Employee_password`,`Employee_personnelNumber`),
-  CONSTRAINT `fk_DutyRoster_Employee` FOREIGN KEY (`Employee_password`, `Employee_personnelNumber`) REFERENCES `employee` (`password`, `personnelNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `dutyroster`
---
-
-LOCK TABLES `dutyroster` WRITE;
-/*!40000 ALTER TABLE `dutyroster` DISABLE KEYS */;
-/*!40000 ALTER TABLE `dutyroster` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `employee`
 --
 
@@ -495,6 +473,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES ('b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86','11111111','User','UserSurname','Admin','user1@user.com',4,''),('ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413','12345678','User2','UserSurname2','Pathologist','user2@user.com',3,'');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,7 +487,8 @@ DROP TABLE IF EXISTS `externalcircumstance`;
 CREATE TABLE `externalcircumstance` (
   `idExternalCircumstance` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) NOT NULL,
-  PRIMARY KEY (`idExternalCircumstance`)
+  PRIMARY KEY (`idExternalCircumstance`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -553,6 +533,7 @@ CREATE TABLE `forensicsample` (
 
 LOCK TABLES `forensicsample` WRITE;
 /*!40000 ALTER TABLE `forensicsample` DISABLE KEYS */;
+INSERT INTO `forensicsample` VALUES ('1234','099888592','reas','xxxx','brolN','tyAna','insti','speacialIn','','908','2010-10-07','0200-01-02');
 /*!40000 ALTER TABLE `forensicsample` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,7 +547,8 @@ DROP TABLE IF EXISTS `gender`;
 CREATE TABLE `gender` (
   `idGender` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idGender`)
+  PRIMARY KEY (`idGender`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -591,6 +573,7 @@ CREATE TABLE `hospital` (
   `contactNumber` varchar(10) NOT NULL,
   `Organization_idOrganization` int(11) NOT NULL,
   PRIMARY KEY (`Organization_idOrganization`),
+  UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `fk_Hospital_Organization1_idx` (`Organization_idOrganization`),
   CONSTRAINT `fk_Hospital_Organization1` FOREIGN KEY (`Organization_idOrganization`) REFERENCES `organization` (`idOrganization`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -615,7 +598,8 @@ DROP TABLE IF EXISTS `icd10`;
 CREATE TABLE `icd10` (
   `idICD10` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(5) NOT NULL,
-  PRIMARY KEY (`idICD10`)
+  PRIMARY KEY (`idICD10`),
+  UNIQUE KEY `code_UNIQUE` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -658,7 +642,7 @@ CREATE TABLE `incident` (
 
 LOCK TABLES `incident` WRITE;
 /*!40000 ALTER TABLE `incident` DISABLE KEYS */;
-INSERT INTO `incident` VALUES ('002201301','REF',4,'2013-04-06','11:50:30','rap stabbing','had beef with Rick Ross','','Burger King',3,'vegas',NULL);
+INSERT INTO `incident` VALUES ('002201301','REF',4,'2013-04-06','11:50:30','rap stabbing','had beef with Rick Ross','','Burger King',1,'vegas','2013-04-06');
 /*!40000 ALTER TABLE `incident` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -703,7 +687,8 @@ DROP TABLE IF EXISTS `institution`;
 CREATE TABLE `institution` (
   `idInstitution` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idInstitution`)
+  PRIMARY KEY (`idInstitution`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -737,7 +722,7 @@ CREATE TABLE `kin` (
   PRIMARY KEY (`idKin`),
   KEY `fk_Kin_Body1_idx` (`Body_idDeathRegisterNumber`),
   CONSTRAINT `fk_Kin_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -746,6 +731,7 @@ CREATE TABLE `kin` (
 
 LOCK TABLES `kin` WRITE;
 /*!40000 ALTER TABLE `kin` DISABLE KEYS */;
+INSERT INTO `kin` VALUES ('9005265229088','Chester','Cobus','Brother','0824400299',' 595 Gerald','  595 Gerald','','099888592',1);
 /*!40000 ALTER TABLE `kin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -774,7 +760,7 @@ CREATE TABLE `labrecord` (
 
 LOCK TABLES `labrecord` WRITE;
 /*!40000 ALTER TABLE `labrecord` DISABLE KEYS */;
-INSERT INTO `labrecord` VALUES ('\0','908',2,6,0);
+INSERT INTO `labrecord` VALUES ('\0','908',2,6,1);
 /*!40000 ALTER TABLE `labrecord` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -788,7 +774,8 @@ DROP TABLE IF EXISTS `mannerofdeath`;
 CREATE TABLE `mannerofdeath` (
   `idMannerOfDeath` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(90) NOT NULL,
-  PRIMARY KEY (`idMannerOfDeath`)
+  PRIMARY KEY (`idMannerOfDeath`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -811,7 +798,8 @@ DROP TABLE IF EXISTS `maritalstatus`;
 CREATE TABLE `maritalstatus` (
   `idMartalStatus` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idMartalStatus`)
+  PRIMARY KEY (`idMartalStatus`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -865,7 +853,8 @@ DROP TABLE IF EXISTS `occupation`;
 CREATE TABLE `occupation` (
   `idOccupation` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idOccupation`)
+  PRIMARY KEY (`idOccupation`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -891,6 +880,7 @@ CREATE TABLE `organization` (
   `contactNumber` varchar(45) NOT NULL,
   `OrganizationType_type` varchar(45) NOT NULL,
   PRIMARY KEY (`idOrganization`),
+  UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `fk_Organization_OrganizationType1_idx` (`OrganizationType_type`),
   CONSTRAINT `fk_Organization_OrganizationType1` FOREIGN KEY (`OrganizationType_type`) REFERENCES `organizationtype` (`type`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1007,7 +997,7 @@ CREATE TABLE `postmortem` (
 
 LOCK TABLES `postmortem` WRITE;
 /*!40000 ALTER TABLE `postmortem` DISABLE KEYS */;
-INSERT INTO `postmortem` VALUES ('908','323','sdrfsdfsd','cdaa','\0','\0','e3ww','099888592');
+INSERT INTO `postmortem` VALUES ('908','f','g','gy','','','ff','099888592');
 /*!40000 ALTER TABLE `postmortem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1059,7 +1049,8 @@ DROP TABLE IF EXISTS `propertytype`;
 CREATE TABLE `propertytype` (
   `idPropertyType` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idPropertyType`)
+  PRIMARY KEY (`idPropertyType`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1082,8 +1073,9 @@ DROP TABLE IF EXISTS `province`;
 CREATE TABLE `province` (
   `idProvince` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idProvince`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idProvince`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1092,6 +1084,7 @@ CREATE TABLE `province` (
 
 LOCK TABLES `province` WRITE;
 /*!40000 ALTER TABLE `province` DISABLE KEYS */;
+INSERT INTO `province` VALUES (2,'Freestate'),(1,'Gauteng');
 /*!40000 ALTER TABLE `province` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1105,7 +1098,8 @@ DROP TABLE IF EXISTS `race`;
 CREATE TABLE `race` (
   `idRace` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idRace`)
+  PRIMARY KEY (`idRace`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1128,7 +1122,8 @@ DROP TABLE IF EXISTS `rank`;
 CREATE TABLE `rank` (
   `idRank` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idRank`)
+  PRIMARY KEY (`idRank`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1151,8 +1146,9 @@ DROP TABLE IF EXISTS `region`;
 CREATE TABLE `region` (
   `idRegion` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idRegion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idRegion`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1161,6 +1157,7 @@ CREATE TABLE `region` (
 
 LOCK TABLES `region` WRITE;
 /*!40000 ALTER TABLE `region` DISABLE KEYS */;
+INSERT INTO `region` VALUES (1,'Region 1'),(2,'Region 2');
 /*!40000 ALTER TABLE `region` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1174,7 +1171,8 @@ DROP TABLE IF EXISTS `relationship`;
 CREATE TABLE `relationship` (
   `idRelationship` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idRelationship`)
+  PRIMARY KEY (`idRelationship`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1188,32 +1186,6 @@ LOCK TABLES `relationship` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `samlpelab`
---
-
-DROP TABLE IF EXISTS `samlpelab`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `samlpelab` (
-  `name` varchar(45) NOT NULL,
-  `contactNumber` varchar(45) NOT NULL,
-  `Organization_idOrganization` int(11) NOT NULL,
-  PRIMARY KEY (`Organization_idOrganization`),
-  KEY `fk_SamlpeLab_Organization1_idx` (`Organization_idOrganization`),
-  CONSTRAINT `fk_SamlpeLab_Organization1` FOREIGN KEY (`Organization_idOrganization`) REFERENCES `organization` (`idOrganization`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `samlpelab`
---
-
-LOCK TABLES `samlpelab` WRITE;
-/*!40000 ALTER TABLE `samlpelab` DISABLE KEYS */;
-/*!40000 ALTER TABLE `samlpelab` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `sample`
 --
 
@@ -1223,7 +1195,8 @@ DROP TABLE IF EXISTS `sample`;
 CREATE TABLE `sample` (
   `idSample` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idSample`)
+  PRIMARY KEY (`idSample`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1237,6 +1210,33 @@ LOCK TABLES `sample` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `samplelab`
+--
+
+DROP TABLE IF EXISTS `samplelab`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `samplelab` (
+  `name` varchar(45) NOT NULL,
+  `contactNumber` varchar(45) NOT NULL,
+  `Organization_idOrganization` int(11) NOT NULL,
+  PRIMARY KEY (`Organization_idOrganization`),
+  UNIQUE KEY `name_UNIQUE` (`name`),
+  KEY `fk_SamlpeLab_Organization1_idx` (`Organization_idOrganization`),
+  CONSTRAINT `fk_SamlpeLab_Organization1` FOREIGN KEY (`Organization_idOrganization`) REFERENCES `organization` (`idOrganization`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `samplelab`
+--
+
+LOCK TABLES `samplelab` WRITE;
+/*!40000 ALTER TABLE `samplelab` DISABLE KEYS */;
+/*!40000 ALTER TABLE `samplelab` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `scenetype`
 --
 
@@ -1246,7 +1246,8 @@ DROP TABLE IF EXISTS `scenetype`;
 CREATE TABLE `scenetype` (
   `idSceneType` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) NOT NULL,
-  PRIMARY KEY (`idSceneType`)
+  PRIMARY KEY (`idSceneType`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1269,7 +1270,8 @@ DROP TABLE IF EXISTS `seal`;
 CREATE TABLE `seal` (
   `idSeal` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idSeal`)
+  PRIMARY KEY (`idSeal`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1292,8 +1294,9 @@ DROP TABLE IF EXISTS `specialcircumstance`;
 CREATE TABLE `specialcircumstance` (
   `idSpecialCircumstance` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idSpecialCircumstance`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idSpecialCircumstance`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1302,6 +1305,7 @@ CREATE TABLE `specialcircumstance` (
 
 LOCK TABLES `specialcircumstance` WRITE;
 /*!40000 ALTER TABLE `specialcircumstance` DISABLE KEYS */;
+INSERT INTO `specialcircumstance` VALUES (1,'Accident'),(2,'None');
 /*!40000 ALTER TABLE `specialcircumstance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1314,7 +1318,8 @@ DROP TABLE IF EXISTS `vehicle`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vehicle` (
   `registrationNumber` varchar(11) NOT NULL,
-  PRIMARY KEY (`registrationNumber`)
+  PRIMARY KEY (`registrationNumber`),
+  UNIQUE KEY `registrationNumber_UNIQUE` (`registrationNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1340,6 +1345,7 @@ CREATE TABLE `vehicledispatch` (
   `Vehicle_registrationNumber` varchar(11) NOT NULL,
   `idVehicleDispatch` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idVehicleDispatch`),
+  UNIQUE KEY `Vehicle_registrationNumber_UNIQUE` (`Vehicle_registrationNumber`),
   KEY `fk_VehicleDispatch_Incident1_idx` (`Incident_incidentLogNumber`),
   KEY `fk_VehicleDispatch_Vehicle1_idx` (`Vehicle_registrationNumber`),
   CONSTRAINT `fk_VehicleDispatch_Incident1` FOREIGN KEY (`Incident_incidentLogNumber`) REFERENCES `incident` (`incidentLogNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -1366,7 +1372,8 @@ DROP TABLE IF EXISTS `vehiclerecord`;
 CREATE TABLE `vehiclerecord` (
   `idVehicle` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idVehicle`)
+  PRIMARY KEY (`idVehicle`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1392,4 +1399,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-16 16:51:00
+-- Dump completed on 2013-05-21 10:46:39
