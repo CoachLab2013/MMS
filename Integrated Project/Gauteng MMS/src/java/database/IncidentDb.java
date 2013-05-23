@@ -159,7 +159,7 @@ public class IncidentDb extends DatabaseConnector
         ArrayList<Incident> incidentList = new ArrayList<Incident>();
         try 
         {
-            statement.executeQuery("SELECT * FROM incident WHERE status = 1;");
+            statement.executeQuery("SELECT * FROM incident WHERE status = 1 ORDER BY SUBSTRING(incidentLogNumber,4,8) DESC, SUBSTRING(incidentLogNumber, 1, 3) DESC;");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
