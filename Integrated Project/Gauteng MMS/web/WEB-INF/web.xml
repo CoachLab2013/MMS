@@ -30,17 +30,16 @@
         <servlet-class>servlets.AddBodyFile</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>RegisterForensicSampleServlet</servlet-name>
         <servlet-class>servlets.RegisterForensicSampleServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RequestForensicSampleServlet</servlet-name>
         <servlet-class>servlets.RequestForensicSampleServlet</servlet-class>
-=======
+</servlet>
+    <servlet>
         <servlet-name>EditReferenceListServlet</servlet-name>
         <servlet-class>servlets.EditReferenceListServlet</servlet-class>
->>>>>>> origin/master
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -67,17 +66,16 @@
         <url-pattern>/AddBodyFile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>RegisterForensicSampleServlet</servlet-name>
         <url-pattern>/RegisterForensicSampleServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RequestForensicSampleServlet</servlet-name>
         <url-pattern>/RequestForensicSampleServlet</url-pattern>
-=======
+            </servlet-mapping>
+<servlet-mapping>
         <servlet-name>EditReferenceListServlet</servlet-name>
         <url-pattern>/EditReferenceListServlet</url-pattern>
->>>>>>> origin/master
     </servlet-mapping>
     <session-config>
         <session-timeout>

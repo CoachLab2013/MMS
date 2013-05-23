@@ -39,7 +39,7 @@
                 </div>
                 
                 <div id="LabRecords" class="tab-pane ">
-                    <h1>Hello5</h1>
+                    <jsp:include page="LabRecordContent.jsp" />
                 </div>
                 
                 <div id="Property" class="tab-pane ">

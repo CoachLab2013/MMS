@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                         <td>  ICD codes:</td><td><select name="ICDcode" id="ICDcode"><br>
-             <option selected="selected">Select</option
+             <option selected="selected">Choose chapter</option>
              <option></option>
              <option></option>
              <option></option>
@@ -47,7 +47,30 @@
              <option></option>
              <option></option>
              <option></option>
-         </select><br>
+         </select>
+                            <select name="Diagnosis1">
+                                <option>selected="selected">Select</option>
+                                <option></option>
+                                <option></option>
+                            </select>   
+                            <select name="diagnosis2">
+                                <option>selected="selected">Select</option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                            </select>
+                            
+                            <select name="diagnosis2">
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                            </select>
+                            
+                        </td>
+                            <br>
                             </tr>
                             <tr>
                                 <td> <td>  <input type="submit" value="Done" name="postfindingsdone" /><br></td></td>

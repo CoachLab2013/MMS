@@ -1,6 +1,5 @@
 /**
- * validation for the property
- *  tab
+ * validation for the request forensic sample tab
  */
 
 /**
@@ -8,13 +7,13 @@
  * This ensures that the document if fully loaded before the script is executed
  */
 
-$(document).ready(function() {
+$(document).ready(function(){
     /**
      * validation for the request form
      */
-    $("#propertyform").validate({
-        rules: {
-            year: {
+    $("#Labform").validate({
+        rules:{
+             year: {
                 valueNotEquals: "Year",
                 validdate: true
             }, //end rule for year
@@ -29,22 +28,9 @@ $(document).ready(function() {
                 validdate: true
             }, //end rule for day
 
-            TypeProperty: {
+            Samplesealnumber: {
                 valueNotEquals: "Select"
             }, //end rule of institution
-
-            Seaumber: {
-                valueNotEquals: "Select"
-            }, //end rule of type of seal number
-
-
-            descriptions: {
-                required: true
-            }, //end rules for description
-
-            taken: {
-                required: true
-            }//end rules for name
 
 
         }, //end rules
@@ -66,21 +52,10 @@ $(document).ready(function() {
                 validdate: "Invalid date."
             }, //end message for day
 
-            TypeProperty: {
-                valueNotEquals: "Please select a Type of Property."
+            Samplesealnumber: {
+                valueNotEquals: "Please select a Sample seal number."
             }, //end message for type of property
 
-            Seaumber: {
-                valueNotEquals: "Please select a Seal Number."
-            }, //end message for seal number 
-
-            descriptions: {
-                required: "Please enter in the Property description."
-            }, //end messages for description
-
-            taken: {
-                required: "Please enter in the Person the property is taken by."
-            }//end message for person taken by
 
         }//end of messages
 
@@ -125,5 +100,3 @@ $(document).ready(function() {
     }, "must be a valid date");
 
 });
-
-
