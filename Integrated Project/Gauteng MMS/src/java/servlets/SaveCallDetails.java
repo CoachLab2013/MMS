@@ -4,7 +4,10 @@
  */
 package servlets;
 
-import database.*;
+import database.DbDetail;
+import database.DeathCall;
+import database.DeathCallDb;
+import database.Incident;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Asheen
  */
-@WebServlet(name = "SaveIncidentDetails", urlPatterns = {"/SaveIncidentDetails"})
-public class SaveIncidentDetails extends HttpServlet {
+@WebServlet(name = "SaveCallDetails", urlPatterns = {"/SaveCallDetails"})
+public class SaveCallDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -35,25 +38,23 @@ public class SaveIncidentDetails extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        Incident incident = new Incident();
-        incident.setIncidentLogNumber(request.getParameter("editfpsnumber"));
-        incident.setReferenceNumber(request.getParameter("editSAPSnumber"));
+        DeathCall dcall = new DeathCall();
+        String calltime = request.getParameter("edit_callhour") + ":" + request.getParameter("edit_callminute")+ ":00"; 
+        dcall.setTimeOfCall(calltime);
+        dcall.setNumberOfCaller(request.getParameter("edit_phonenumber"));
+        dcall.setNameOfCaller(request.getParameter("edit_callname"));
+        dcall.setInstitution(request.getParameter("edit_callinstitution"));
+        dcall.setSceneAddress(request.getParameter("edit_calladdress"));        
+        dcall.setProvince(request.getParameter("province"));
+        dcall.setRegion(request.getParameter("region"));
+        dcall.setSceneConditions(request.getParameter("edit_callcondition"));
+        Incident inc = new Incident(request.getParameter("edit_lognumber"));
+        dcall.setIncident(inc);
         Tools t = new Tools();
-        String month = Integer.toString(t.getMonthNumber(request.getParameter("edit_incident_month").toString()));
-        String date = request.getParameter("editdetailyear")+"-"+month+"-"+request.getParameter("edit_incident_day");
-        incident.setDateOfIncident(date);
-        String time = request.getParameter("edit_incident_hour") +":"+ request.getParameter("edit_incident_minute") + ":00";
-        incident.setTimeOfIncident(time);
-        incident.setNumberOfBodies(Integer.parseInt(request.getParameter("editnumberofbodies" )));
-        incident.setPlaceBodyFound(request.getParameter("editplacefound"));
-        incident.setCircumstanceOfDeath(request.getParameter("editcircumstancesofdeath"));
-        incident.setSpecialCircumstances(request.getParameter("specialcircumstance"));
-        incident.setStatus(true);
-        
         DbDetail dbdetail = t.getDbdetail();
-        IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
-        incidentdb.init();
-        incidentdb.edit();
+        DeathCallDb calldb = new DeathCallDb(dcall,dbdetail);
+        calldb.init();        
+        calldb.edit();
         response.sendRedirect("Home.jsp");
     }
 

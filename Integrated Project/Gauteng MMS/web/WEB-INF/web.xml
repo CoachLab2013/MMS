@@ -30,8 +30,12 @@
         <servlet-class>servlets.AddBodyFile</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PostMortemServlet</servlet-name>
+        <servlet-name>RegisterForensicSampleServlet</servlet-name>
         <servlet-class>servlets.RegisterForensicSampleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RequestForensicSampleServlet</servlet-name>
+        <servlet-class>servlets.RequestForensicSampleServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -58,8 +62,12 @@
         <url-pattern>/AddBodyFile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PostMortemServlet</servlet-name>
-        <url-pattern>/PostMortemServlet</url-pattern>
+        <servlet-name>RegisterForensicSampleServlet</servlet-name>
+        <url-pattern>/RegisterForensicSampleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestForensicSampleServlet</servlet-name>
+        <url-pattern>/RequestForensicSampleServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

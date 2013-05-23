@@ -4,6 +4,7 @@
     Author     : Lady
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -38,7 +39,13 @@
                         
                         </tr>
                         <tr>
-                            <td> Lab Reference Number:</td> <td> <input type="text" name="LabReferenceNumber" value="" /></td>
+                            <td> Lab Reference Number:</td> 
+                            <%--  Foreign Key Constraint with LabRecord table  --%>
+                            <td> 
+                                <%
+                                    out.println(new Tools().makeReferenceList("LabRecord","labNumber",""));
+                                %>                                
+                            </td>
                         </tr>
                             <tr>
                             <td> Reason for Sample:     </td><td><textarea cols="50" rows="3" name="Reasonseal" id=""> </textarea><br></td>

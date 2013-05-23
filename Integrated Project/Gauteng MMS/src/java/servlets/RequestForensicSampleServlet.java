@@ -4,21 +4,21 @@
  */
 package servlets;
 
-import database.*;
+import AssistiveClasses.SetDbDetail;
+import database.ForensicSample;
+import database.ForensicSampleDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Asheen
+ * @author Mubien Nakhooda Coachlab 2013
  */
-@WebServlet(name = "SaveIncidentDetails", urlPatterns = {"/SaveIncidentDetails"})
-public class SaveIncidentDetails extends HttpServlet {
+public class RequestForensicSampleServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -33,27 +33,19 @@ public class SaveIncidentDetails extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         
-        Incident incident = new Incident();
-        incident.setIncidentLogNumber(request.getParameter("editfpsnumber"));
-        incident.setReferenceNumber(request.getParameter("editSAPSnumber"));
-        Tools t = new Tools();
-        String month = Integer.toString(t.getMonthNumber(request.getParameter("edit_incident_month").toString()));
-        String date = request.getParameter("editdetailyear")+"-"+month+"-"+request.getParameter("edit_incident_day");
-        incident.setDateOfIncident(date);
-        String time = request.getParameter("edit_incident_hour") +":"+ request.getParameter("edit_incident_minute") + ":00";
-        incident.setTimeOfIncident(time);
-        incident.setNumberOfBodies(Integer.parseInt(request.getParameter("editnumberofbodies" )));
-        incident.setPlaceBodyFound(request.getParameter("editplacefound"));
-        incident.setCircumstanceOfDeath(request.getParameter("editcircumstancesofdeath"));
-        incident.setSpecialCircumstances(request.getParameter("specialcircumstance"));
-        incident.setStatus(true);
+        SetDbDetail dbSet = new SetDbDetail();
         
-        DbDetail dbdetail = t.getDbdetail();
-        IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
-        incidentdb.init();
-        incidentdb.edit();
+        ForensicSampleDb sampleDB = new ForensicSampleDb(dbSet.getDbdetail());
+        sampleDB.init();
+        System.out.println("Fetch Sample Correct: " + sampleDB.read(request.getParameter("seal")));
+        
+        sampleDB.getforensicSample().setTypeOfAnalysis(request.getParameter("analysis"));
+        sampleDB.getforensicSample().setInstitution(request.getParameter("institution"));
+        sampleDB.getforensicSample().setSpeacialInstructions(request.getParameter("special"));
+        
+        System.out.println("Edit Sample Correct: " + sampleDB.edit());
+        
         response.sendRedirect("Home.jsp");
     }
 

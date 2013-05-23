@@ -5,6 +5,9 @@
 --%>
 
 
+<%@page import="database.ForensicSample"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="database.ForensicSampleDb"%>
 <%@page import="servlets.Tools"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,7 +30,7 @@
     <body>
                 
         <legend>Body File> Edit Body File> Post Mortem> Request Forensic Sample</legend>
-        <form name="requestform" id="requestform" method="post" action="">
+        <form name="requestform" id="requestform" method="post" action="RequestForensicSampleServlet">
                 <table>
                     <tr>     
                         <td>Type of analysis:  </td> 
@@ -53,24 +56,40 @@
                     </tr> 
                         <tr>
                        
-                            <td> Seal Number:</td>  <td>  <select name="seal">
-                                <option>Select</option>
-                                <option></option>
-                            </select> </td>
+                            <td> Seal Number:</td>  
+                            <td>                                 
+                                <%
+                                    ArrayList<ForensicSample> list = new ArrayList();
+                                    ForensicSampleDb sampleRefList = new ForensicSampleDb(new Tools().getDbdetail());
+                                    sampleRefList.init();   
+                                    list = sampleRefList.SampleList("deathRegisterNumber", "099888592");
+                                    String output = "<select name='seal' id='seal'>";
+
+                                    output = output+ "<option selected='slected'>Select</option>";
+
+                                    int size = list.size();
+                                    for (int i=0; i<size; i++) 
+                                    {
+                                        output= output + "<option>" + list.get(i).getSealNumber() + "</option>";                              
+                                    }
+                                    output = output + "</select>";
+                                    out.println(output);
+                                %>                      
+                            </td>
                         
                         </tr>
                         
                             <tr>
-                            <td> Special Instructions:  </td><td><textarea cols="50" rows="3" name="special" value=""> </textarea><br></td>
+                            <td> Special Instructions:  </td><td><textarea cols="50" rows="3" id="special" name="special" value=""> </textarea><br></td>
                      
                             </tr>
                             
                             <tr>
-                                <td> Employee Name:</td> <td> <br> <input type="text" name="employeename" value="" /></td>
+                                <td> Employee Name:</td> <td> <br> <input type="text" id="employeename" name="employeename" value="" /></td>
                             </tr>
                             
                             <tr>
-                                <td> Employee Surname:</td> <td> <br> <input type="text" name="employeesurname" value=""/> </td>
+                                <td> Employee Surname:</td> <td> <br> <input type="text" id="employeesurname" name="employeesurname" value=""/> </td>
                             </tr>
                             
                             

@@ -4,13 +4,17 @@
  */
 package servlets;
 
+import AssistiveClasses.SetDbDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import database.ForensicSampleDb;
+import database.ForensicSample;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 /**
  *
  * @author Mubien Nakhooda Coachlab 2013
@@ -31,21 +35,27 @@ public class RegisterForensicSampleServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
                  
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PostMortemServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>" + request.getParameter("InitialSealnumber") + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
-        }
+        SetDbDetail dbSet = new SetDbDetail();
+        ForensicSample sample = new ForensicSample(
+                request.getParameter("InitialSealnumber"),
+                request.getParameter("DeathRegisternumber"),
+                request.getParameter("Reasonseal"), 
+                "", //sealType
+                request.getParameter("NewSealNumber"), //brokenSealNumber
+                "", //typeOfAnalysis
+                "", //institution
+                "", //speacialInstructions
+                false,
+                request.getParameter("LabRecord"),
+                new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()), //dateSent
+                new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) //dateReceived
+                );
+        
+        ForensicSampleDb sampleDB = new ForensicSampleDb(sample, dbSet.getDbdetail());
+        sampleDB.init();    
+        System.out.println(sampleDB.add());
+       
+        response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
