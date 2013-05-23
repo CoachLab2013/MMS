@@ -1,5 +1,6 @@
 package jcse.coachlab2013.mms.reports;
 
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,11 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.fill.JRTemplatePrintText;
+import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 
 /**
- *
- * @author Mubien Nakhooda Coachlab 2013
- * 
- * Class is used to compile reports from a .jrxml file to a .pdf document
+ * @author      Mubien Nackoda <coachlab@jcse.org.za>
+ * @since       2012-05-20          (the version of the package this class was first added to)
  */
 public class ReportGenerator {
         
@@ -32,12 +32,13 @@ public class ReportGenerator {
      * 
      * @param sourceJRXML path to the .jrxml file used to compile report
      * @param reportParameters Map<Key, Value> for any additional parameters passed to the report
-     * @param reportData Collection of beanDataObjects used to populate report
+     * @param reportData ResultSet used to populate report
      */
-    public ReportGenerator(String sourceJRXML, Map reportParameters, ResultSet reportData)
+    public ReportGenerator(InputStream sourceJRXML, Map reportParameters, ResultSet reportData)
     {           
         try {
             report = JasperCompileManager.compileReport(sourceJRXML);
+            report.setWhenNoDataType(WhenNoDataTypeEnum.ALL_SECTIONS_NO_DETAIL);
             mainPrint = JasperFillManager.fillReport(report, reportParameters, new JRResultSetDataSource(reportData));
         
         } catch (JRException ex) {
@@ -51,14 +52,15 @@ public class ReportGenerator {
      * 
      * @param sourceJRXML List of paths to the .jrxml file used to compile reports
      * @param reportParameters List of Map<Key, Value> for any additional parameters passed to the reports
-     * @param reportData List of Collections of beanDataObjects used to populate reports
+     * @param reportData List of ResultSet used to populate reports
      */
-    public ReportGenerator(ArrayList<String> sourceJRXML, ArrayList<Map> reportParameters, ArrayList<ResultSet> reportData)
+    public ReportGenerator(ArrayList<InputStream> sourceJRXML, ArrayList<Map> reportParameters, ArrayList<ResultSet> reportData)
     {          
         if (sourceJRXML.size() == reportParameters.size() && sourceJRXML.size() == reportData.size()) {
             try {
 
                 report = JasperCompileManager.compileReport(sourceJRXML.get(0));
+                report.setWhenNoDataType(WhenNoDataTypeEnum.ALL_SECTIONS_NO_DETAIL);
                 mainPrint = JasperFillManager.fillReport(report, reportParameters.get(0), new JRResultSetDataSource(reportData.get(0)));
 
                 for (int i = 1; i < sourceJRXML.size(); i++) {
@@ -84,7 +86,10 @@ public class ReportGenerator {
     public void savePDF (String fileDestination) {
         
         try {     
-            JasperExportManager.exportReportToPdfFile(mainPrint, fileDestination);
+            String path = System.getProperty("java.class.path").substring(0, System.getProperty("java.class.path").lastIndexOf("\\") + 1);
+            //Used when running in netbeans, before compile comment out the line below
+            path ="";
+            JasperExportManager.exportReportToPdfFile(mainPrint, path + fileDestination + ".pdf");
             
         } catch (JRException ex) {            
             Logger.getLogger(ReportGenerator.class.getName()).log(Level.SEVERE, null, ex);            

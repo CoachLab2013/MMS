@@ -1,5 +1,6 @@
 package jcse.coachlab2013.mms.reports;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -7,13 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
- * @author Mubien Nakhooda Coachlab 2013
+ * @author      Mubien Nackoda <coachlab@jcse.org.za>
+ * @since       2012-05-20          (the version of the package this class was first added to)
  */
 public abstract class Template_Report {
     
-    protected String source;
-    protected ArrayList<String> sourceArray;
+    protected InputStream source;
+    protected ArrayList<InputStream> sourceArray;
     
     protected String destination;
     protected Connection connection;
