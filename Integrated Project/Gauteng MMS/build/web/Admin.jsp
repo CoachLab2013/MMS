@@ -28,7 +28,8 @@
         <script src="js/jquery.validate.min.js"></script>
         <script src="js/script.js"></script>
         <link  type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="bootstrap/css/tablecss.css"
+        <link type="text/css" rel="stylesheet" href="bootstrap/css/tablecss.css">
+        <script src="js/EditReferenceList.js"></script>
     <div class="head"><img src="Images/logo2.jpg">
         <title>MMS Administration</title>
     </head>
@@ -279,18 +280,18 @@
             emp = new ReferenceListDb("relationship", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> relationshipList = emp.referenceList();
-            
+
             //For special Body class list box
             emp = new ReferenceListDb("bodypart", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> bodyPartList = emp.referenceList();
-            
+
             //For special circumstance list box
             emp = new ReferenceListDb("specialcircumstance", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> specialCurList = emp.referenceList();
-            
-           
+
+
             /*
              //
             
@@ -510,9 +511,13 @@
                                                                                 <%
                                                                                     }
                                                                                 %>
-
-
                                                                             </select>
+                                                                            <br/>
+                                                                            <form name="formname" action="EditReferenceListServlet" method="post">
+                                                                                <input type="hidden" id="item" name="item">
+                                                                            </form>
+                                                                            <input type="button" onclick="editReferenceList('Insitution', 'InsitutionList')" value="Edit Institution" id="cmdEditInsitutions" name="cmdEditInsitution" />
+
                                                                         </div>
                                                                     </div>     
                                                                     <div  class="offset3">
@@ -548,6 +553,9 @@
                                                                                 %>
 
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('analysis', 'AnalysisList')" value="Edit analysis type" id="cmdEditAnalysis" name="cmdEditAnalysis" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -587,6 +595,9 @@
 
 
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('propertytype', 'PropertyList')" value="Edit property type" id="cmdEditProperty" name="cmdEditProperty" />
+
                                                                         </div>
                                                                     </div>
                                                                     <%--Display save result --%> 
@@ -598,7 +609,7 @@
                                                                 <div id="vehicles" class="tab-pane <%out.println(String.valueOf(vehi));%> "> 
                                                                     <div align="center"><h2>Vehicles</h2> </div> 
                                                                     <div class="offset2 ">
-                                                                        <form name="AddRank" id="AddVehicle" method="post" action="ReferenceListServlet"  >
+                                                                        <form name="AddVehicle" id="AddVehicle" method="post" action="ReferenceListServlet"  >
                                                                             <input type="text" name="form" value="AddVehicle" style="visibility: hidden" />
                                                                             <div class="control-group form-horizontal">
                                                                                 <label class="control-label" for="txtVehicle">Vehicle Registration Number:</label>
@@ -622,6 +633,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('vehicle', 'VehicleList')" value="Edit Vehicle number" id="cmdEditVehicle" name="cmdEditVehicle" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -657,6 +671,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('rank', 'RankList')" value="Edit Rank" id="cmdEditRank" name="cmdEditRank" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -695,6 +712,8 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('gender', 'GenderList')" value="Edit Gender" id="cmdEditGender" name="cmdEditGender" />
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -732,6 +751,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('occupation', 'OccuList')" value="Edit Occupation type" id="cmdEditOccupation" name="cmdEditOccupation" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -770,6 +792,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('race', 'RaceList')" value="Edit Race type" id="cmdEditRace" name="cmdEditRace" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -808,6 +833,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('maritalstatus', 'MaritalList')" value="Edit Marital Status type" id="cmdEditMarital" name="cmdEditMarital" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -846,6 +874,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('province', 'ProvinceList')" value="Edit Marital Province" id="cmdEditProvince" name="cmdEditProvince" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -922,6 +953,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('mannerofdeath', 'MannerList')" value="Edit Manner of Death" id="cmdEditManner" name="cmdEditManner" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -960,6 +994,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('sample', 'SampleList')" value="Edit Sample type" id="cmdEditSample" name="cmdEditSample" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -998,6 +1035,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('bodystatus', 'StatusList')" value="Edit Body Status" id="cmdEditBodystatus" name="cmdEditBodystatus" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -1036,6 +1076,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('relationship', 'RelationshipList')" value="Edit Relationship type" id="cmdEditRelationship" name="cmdEditRelationship" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -1073,6 +1116,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('bodypart', 'BodyClassList')" value="Edit Body Part type" id="cmdEditBodyPart" name="cmdEditBodyPart" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -1110,6 +1156,9 @@
                                                                                     }
                                                                                 %>
                                                                             </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('specialcircumstance', 'SpecialCurList')" value="Edit Special Circumstance" id="cmdEditSpecialCur" name="cmdEditSpecialCur" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 

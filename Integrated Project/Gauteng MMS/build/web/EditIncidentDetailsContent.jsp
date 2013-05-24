@@ -106,9 +106,7 @@
                 <td>
                     <select name="editnumberofbodies" id="editnumberofbodies" >
                         <%
-                        if(session.getAttribute("go_to_editincident")!=null){
-                            int start = Integer.parseInt(session.getAttribute("bodies_recieved").toString());
-                           for(int i=start;i<101;i++){
+                           for(int i=1;i<101;i++){
                                if(i==session.getAttribute("number_of_bodies")){
                                    out.println("<option selected='selected'>"+i+"</option>");
                               }
@@ -117,9 +115,6 @@
                               }
                           }
                            session.removeAttribute("number_of_bodies");
-                           session.removeAttribute("bodies_recieved");
-                        }
-                           
                         %>
                     </select>
                 </td>        

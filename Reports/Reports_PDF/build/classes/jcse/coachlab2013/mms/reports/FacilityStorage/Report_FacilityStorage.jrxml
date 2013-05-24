@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
+	<property name="ireport.zoom" value="1.7715610000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Heading 1" fontSize="16" isBold="true"/>
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<parameter name="TotalBins" class="java.lang.Integer"/>
+	<parameter name="avgIntake" class="java.lang.Double"/>
+	<parameter name="avgOutput" class="java.lang.Double"/>
+	<parameter name="timeTillFull" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<field name="binsUsed" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="141" splitType="Stretch">
+			<image>
+				<reportElement uuid="e28ca0ab-e448-4ccc-8b97-9102dbd6a9cf" x="0" y="0" width="400" height="90"/>
+				<imageExpression><![CDATA["Logo.png"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement uuid="b17de317-b63a-4080-aaef-d4bc34a974cc" x="400" y="0" width="362" height="90"/>
+				<staticText>
+					<reportElement uuid="6c469fa2-58f2-44dd-867d-52b6869633c1" style="Heading 1" x="0" y="61" width="362" height="15" forecolor="#A79155"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="10" isBold="true" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[FORENSIC PATHOLOGY SERVICE]]></text>
+				</staticText>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="c65a1836-afd8-4f8f-8d16-0ae7d99dbd55" x="0" y="76" width="362" height="14" forecolor="#444444"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true" isItalic="false"/>
+						<paragraph spacingBefore="-5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement uuid="52cdc383-7077-4b37-a11b-881cf0073355" x="125" y="58" width="637" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#004696"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="59bdf692-cafe-4ecf-948d-221c10ad8f18" x="0" y="90" width="762" height="51"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ReportTitle}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="ce9f76ea-4b9f-48a5-884f-62397689f982" x="0" y="140" width="762" height="1" forecolor="#444444"/>
+			</line>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement uuid="37e39b56-f39b-433a-96a5-8ec3c2b94da5" x="613" y="0" width="98" height="54"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="bc6ba8df-3f2a-40c3-91cd-1242148b3877" x="711" y="0" width="51" height="54"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="79815529-9ad4-4453-8f21-0f0cc2921c13" x="0" y="0" width="762" height="1" forecolor="#444444"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="179" splitType="Stretch">
+			<meterChart>
+				<chart isShowLegend="true">
+					<reportElement uuid="fd249f3d-b1f3-4448-810e-f3a0bb1dcc53" x="0" y="0" width="762" height="179"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend position="Bottom"/>
+				</chart>
+				<valueDataset>
+					<valueExpression><![CDATA[$F{binsUsed}]]></valueExpression>
+				</valueDataset>
+				<meterPlot shape="pie" units="Body Bins Utilised" tickInterval="10.0" meterColor="#999999" needleColor="#000000" tickColor="#404040">
+					<plot/>
+					<valueDisplay color="#000000"/>
+					<dataRange>
+						<lowExpression><![CDATA[new Integer (00)]]></lowExpression>
+						<highExpression><![CDATA[$P{TotalBins}]]></highExpression>
+					</dataRange>
+					<meterInterval label="High Availablity" color="#33FF33" alpha="0.8">
+						<dataRange>
+							<lowExpression><![CDATA[new Integer (00)]]></lowExpression>
+							<highExpression><![CDATA[$P{TotalBins} / 4]]></highExpression>
+						</dataRange>
+					</meterInterval>
+					<meterInterval label="Stable Availablity" color="#6666FF" alpha="0.8">
+						<dataRange>
+							<lowExpression><![CDATA[$P{TotalBins} / 4]]></lowExpression>
+							<highExpression><![CDATA[$P{TotalBins} * 3 / 4]]></highExpression>
+						</dataRange>
+					</meterInterval>
+					<meterInterval label="Low Availablity" color="#FF3333" alpha="0.8">
+						<dataRange>
+							<lowExpression><![CDATA[$P{TotalBins} * 3 / 4]]></lowExpression>
+							<highExpression><![CDATA[$P{TotalBins}]]></highExpression>
+						</dataRange>
+					</meterInterval>
+				</meterPlot>
+			</meterChart>
+			<frame>
+				<reportElement uuid="60c7dc92-0b93-476d-b36f-8f2bfc6c2754" x="12" y="11" width="225" height="16"/>
+				<staticText>
+					<reportElement uuid="6918f700-fe23-4703-ab0c-b363e1d6c059" x="0" y="0" width="113" height="16"/>
+					<textElement>
+						<font isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Average Daily Intake:]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="722054d7-05af-46d1-975c-8bd6f7d5bd97" x="113" y="0" width="112" height="16"/>
+					<textElement>
+						<font isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{avgIntake}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="265623c8-c5b3-41d5-9396-5f837561b038" x="12" y="27" width="225" height="16"/>
+				<staticText>
+					<reportElement uuid="349a8b2c-75e3-45bf-8441-e45e0b09a12d" x="2" y="0" width="111" height="16"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Average Daily Output:]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="595fe844-ca28-44b9-9c1c-b02df4ce75e2" x="113" y="0" width="112" height="16"/>
+					<textElement>
+						<font isBold="false" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{avgOutput}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement uuid="9b2befcd-a7d4-442d-9d44-d38113e30cc5" x="14" y="43" width="225" height="16"/>
+				<staticText>
+					<reportElement uuid="425b146d-cf31-4bba-b0f7-74b4bfde3cc5" x="0" y="0" width="125" height="16"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Estimated Time Till Full:]]></text>
+				</staticText>
+				<textField evaluationTime="Report">
+					<reportElement uuid="ab6e14cc-286c-4cb1-a418-96f4d4ac2c5b" x="125" y="0" width="100" height="16"/>
+					<textElement>
+						<font isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($P{TotalBins} - $F{binsUsed})/($P{avgIntake} - $P{avgOutput})]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>
