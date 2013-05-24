@@ -5,21 +5,39 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Team 1 CoachLab 2013 Mortuary Manage Managemet System (Chester)
+ * @author      Mubien Nackoda <coachlab@jcse.org.za>
+ * @since       2012-05-20          (the version of the package this class was first added to)
  */
+
+
 public class DatabaseConnector 
 {
+/**
+ * This gives the connection string
+ * and the database connector
+ */    
     private static final String CONNECTIONSTRING = "jdbc:mysql://";
     private static final String DBCONNECTOR = "com.mysql.jdbc.Driver";
-    
+/**
+ * 
+ */    
     private String url;
     private String dbName;
     private String username;
     private String password;
+/**
+ * The method gives the type of the connection which is Connection
+ * and is called connection
+ * @type Connection 
+ */
     
     private Connection connection = null;
-    
+/**
+ * The public method DatabaseConnector sets up the database name, 
+ * the url, the username, and the password for the database                         
+ * @param  dbDetail sets up the access to the database.
+ * 
+ */
     public DatabaseConnector(DbDetail dbDetail)
     {
         this.username = dbDetail.getUsername();
@@ -27,7 +45,10 @@ public class DatabaseConnector
         this.url = dbDetail.getUrl();
         this.dbName = dbDetail.getDbName();
     }
-    
+/**
+ * The method Connection creates the connection to the database and returns it
+ * @return connection  
+ */
     public Connection init()
     {
         try 
