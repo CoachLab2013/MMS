@@ -33,6 +33,10 @@
         <servlet-name>EditReferenceListServlet</servlet-name>
         <servlet-class>servlets.EditReferenceListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteReferenceListServlet</servlet-name>
+        <servlet-class>servlets.DeleteReferenceListServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>EditReferenceListServlet</servlet-name>
         <url-pattern>/EditReferenceListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteReferenceListServlet</servlet-name>
+        <url-pattern>/DeleteReferenceListServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -4,12 +4,8 @@
  */
 package servlets;
 
-import AssistiveClasses.ClassSendMailTLS;
 import AssistiveClasses.SetDbDetail;
-import database.DatabaseConnector;
 import database.DbDetail;
-import database.Employee;
-import database.EmployeeDb;
 import database.ReferenceListDb;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Sandile
  */
-public class EditReferenceListServlet extends HttpServlet {
+public class DeleteReferenceListServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -44,10 +40,10 @@ public class EditReferenceListServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditReferenceListServlet</title>");
+            out.println("<title>Servlet DeleteReferenceListServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditReferenceListServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteReferenceListServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -81,254 +77,244 @@ public class EditReferenceListServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         //this is the new item being edited 
-        String item = request.getParameter("item");
-        String Olditem = request.getParameter("Olditem");
+        String Olditem = request.getParameter("item1");
         String result = "";
         SetDbDetail DBdet = new SetDbDetail();
         DbDetail dbDetail = DBdet.getDbdetail();
 
 
-        if (request.getParameter("table").equals("Insitution")) {
+        if (request.getParameter("table1").equals("Insitution")) {
 
             ReferenceListDb emp = new ReferenceListDb("institution", "idInstitution", "type", Olditem, dbDetail);
-            emp.setNewData(item);
+
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "insti");
-                sess.setAttribute("insti", "Institution has been successfuly edited to database ");
+                sess.setAttribute("insti", "Institution has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "insti");
-                sess.setAttribute("insti", "Institution did not edit because " + result);
+                sess.setAttribute("insti", "Institution delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
             }
 
-        } else if (request.getParameter("table").equals("analysis")) {
+        } else if (request.getParameter("table1").equals("analysis")) {
 
             ReferenceListDb emp = new ReferenceListDb("analysis", "idAnalysis", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "analysis");
-                sess.setAttribute("analysisResult", "Analysis Type has been successfuly edited");
+                sess.setAttribute("analysisResult", "Analysis Type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "analysis");
-                sess.setAttribute("analysisResult", "Analysis Type did not edit because " + result);
+                sess.setAttribute("analysisResult", "Analysis Type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("propertytype")) {
+        } else if (request.getParameter("table1").equals("propertytype")) {
 
             ReferenceListDb emp = new ReferenceListDb("propertytype", "idPropertyType", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "property");
-                sess.setAttribute("propertyResult", "Property type has been successfuly edited");
+                sess.setAttribute("propertyResult", "Property type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "property");
-                sess.setAttribute("rankResult", "Property type did not edit because " + result);
+                sess.setAttribute("rankResult", "Property type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
             }
 
 
-        } else if (request.getParameter("table").equals("vehicle")) {
+        } else if (request.getParameter("table1").equals("vehicle")) {
 
             ReferenceListDb emp = new ReferenceListDb("vehicle", "e", "registrationNumber", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "vehi");
-                sess.setAttribute("vehicleResult", "Vehicle registration number has been successfuly edited");
+                sess.setAttribute("vehicleResult", "Vehicle registration number has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "vehi");
-                sess.setAttribute("vehicleResult", "Vehicle registration number did not edit because " + result);
+                sess.setAttribute("vehicleResult", "Vehicle registration number delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("rank")) {
+        } else if (request.getParameter("table1").equals("rank")) {
 
             ReferenceListDb emp = new ReferenceListDb("rank", "idRank", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "rank");
-                sess.setAttribute("rankResult", "Rank type has been successfuly edited");
+                sess.setAttribute("rankResult", "Rank type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "rank");
-                sess.setAttribute("rankResult", "Rank type did not edit because " + result);
+                sess.setAttribute("rankResult", "Rank type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("gender")) {
+        } else if (request.getParameter("table1").equals("gender")) {
 
             ReferenceListDb emp = new ReferenceListDb("gender", "idGender", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "gender");
-                sess.setAttribute("genderResult", "Gender type has been successfuly edited");
+                sess.setAttribute("genderResult", "Gender type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "gender");
-                sess.setAttribute("genderResult", "Gender type did not edit: because " + result);
+                sess.setAttribute("genderResult", "Gender type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("occupation")) {
+        } else if (request.getParameter("table1").equals("occupation")) {
 
             ReferenceListDb emp = new ReferenceListDb("occupation", "idOccupation", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "occu");
-                sess.setAttribute("occupationResult", "Occupation Category has been successfuly edited");
+                sess.setAttribute("occupationResult", "Occupation Category has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "occu");
-                sess.setAttribute("occupationResult", "Occupation Category did not edit: because " + result);
+                sess.setAttribute("occupationResult", "Occupation Category delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("race")) {
+        } else if (request.getParameter("table1").equals("race")) {
 
             ReferenceListDb emp = new ReferenceListDb("race", "idRace", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "race");
-                sess.setAttribute("raceResult", "Race type has been successfuly edited");
+                sess.setAttribute("raceResult", "Race type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "race");
-                sess.setAttribute("raceResult", "Race type did not edit: because " + result);
+                sess.setAttribute("raceResult", "Race type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("maritalstatus")) {
+        } else if (request.getParameter("table1").equals("maritalstatus")) {
 
             ReferenceListDb emp = new ReferenceListDb("maritalstatus", "idMartalStatus", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "marital");
-                sess.setAttribute("maritalResult", "Marital Status type has been successfuly edited");
+                sess.setAttribute("maritalResult", "Marital Status type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "marital");
-                sess.setAttribute("maritalResult", "Marital Status type did not edit: because " + result);
+                sess.setAttribute("maritalResult", "Marital Status type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("province")) {
+        } else if (request.getParameter("table1").equals("province")) {
 
             ReferenceListDb emp = new ReferenceListDb("province", "idProvince", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "province");
-                sess.setAttribute("provinceResult", " The Province has been successfuly edited");
+                sess.setAttribute("provinceResult", " The Province has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "province");
-                sess.setAttribute("provinceResult", "The Province did not edit: because " + result);
+                sess.setAttribute("provinceResult", "The Province delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("AddICD10")) {
+        } else if (request.getParameter("table1").equals("AddICD10")) {
 
             ReferenceListDb emp = new ReferenceListDb("icd10", "idICD10", "code", "--", dbDetail);
             emp.init();
@@ -351,153 +337,145 @@ public class EditReferenceListServlet extends HttpServlet {
             }
 
 
-        } else if (request.getParameter("table").equals("mannerofdeath")) {
+        } else if (request.getParameter("table1").equals("mannerofdeath")) {
 
             ReferenceListDb emp = new ReferenceListDb("mannerofdeath", "idMannerOfDeath", "type", Olditem, dbDetail);
             emp.init();
-            emp.setNewData(item);
-            emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "manner");
-                sess.setAttribute("mannerResult", "The manner of death has been successfuly edited");
+                sess.setAttribute("mannerResult", "The manner of death has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "manner");
-                sess.setAttribute("mannerResult", "The manner of death did not edit: because " + result);
+                sess.setAttribute("mannerResult", "The manner of death delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("sample")) {
+        } else if (request.getParameter("table1").equals("sample")) {
 
             ReferenceListDb emp = new ReferenceListDb("sample", "idSample", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "sample");
-                sess.setAttribute("sampleResult", "Sample type has been successfuly edited");
+                sess.setAttribute("sampleResult", "Sample type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "sample");
-                sess.setAttribute("sampleResult", "Sample type did not edit because " + result);
+                sess.setAttribute("sampleResult", "Sample type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("bodystatus")) {
+        } else if (request.getParameter("table1").equals("bodystatus")) {
 
             ReferenceListDb emp = new ReferenceListDb("bodystatus", "idBodyStatus", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "status");
-                sess.setAttribute("statusResult", "Status Category has been successfuly edited");
+                sess.setAttribute("statusResult", "Status Category has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "status");
-                sess.setAttribute("statusResult", "Status category type did not edit: because " + result);
+                sess.setAttribute("statusResult", "Status category type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("relationship")) {
+        } else if (request.getParameter("table1").equals("relationship")) {
 
             ReferenceListDb emp = new ReferenceListDb("relationship", "idRelationship", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "relationship");
-                sess.setAttribute("relationshipResult", "Relationship type has been successfuly edited");
+                sess.setAttribute("relationshipResult", "Relationship type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "relationship");
-                sess.setAttribute("relationshipResult", "Relationship type did not edit because " + result);
+                sess.setAttribute("relationshipResult", "Relationship type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("bodypart")) {
+        } else if (request.getParameter("table1").equals("bodypart")) {
 
             ReferenceListDb emp = new ReferenceListDb("bodypart", "id", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "bodyPart");
-                sess.setAttribute("bodyPartResult", "Body part type has been successfuly edited");
+                sess.setAttribute("bodyPartResult", "Body part type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "bodyPart");
-                sess.setAttribute("bodyPartResult", "Body part type did not edit because " + result);
+                sess.setAttribute("bodyPartResult", "Body part type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
-        } else if (request.getParameter("table").equals("specialcircumstance")) {
+        } else if (request.getParameter("table1").equals("specialcircumstance")) {
 
             ReferenceListDb emp = new ReferenceListDb("specialcircumstance", "idSpecialCircumstance", "type", Olditem, dbDetail);
-            emp.setNewData(item);
             emp.init();
-            result = emp.edit().trim();
+            result = emp.delete().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "specialCur");
-                sess.setAttribute("specialCurResult", "Special circumstance type has been successfuly edited to database");
+                sess.setAttribute("specialCurResult", "Special circumstance type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "specialCur");
-                sess.setAttribute("specialCurResult", "Special circumstance type did not edit because " + result);
+                sess.setAttribute("specialCurResult", "Special circumstance type delete failed because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
 
         }
-
 
     }
 
