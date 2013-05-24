@@ -179,14 +179,18 @@ $(document).ready(function(){
         var year = $("#detailyear").val();
         var month = $("option:selected","#detailmonth").attr("num");
         var day = $("#detailday").val();
-        if((year == (date.getFullYear()))  && (month == (date.getMonth()+1)) &&(day == date.getDate()) ){
-            var hour = $("#detailhour").val();
-            var min = $("#detailminute").val();
-            if(hour > date.getHours()){
-                return !value;
-            }
-            else if((hour == date.getHours()) && (min > date.getMinutes())){
-                return !value;
+        if(year == (date.getFullYear())){
+            if(month == (date.getMonth()+1)){
+                if(day == date.getDate()){
+                    var hour = $("#detailhour").val();
+                    var min = $("#detailminute").val();
+                    if(hour > date.getHours()){
+                        return !value;
+                    }
+                    else if((hour == date.getHours()) && (min > date.getMinutes())){
+                        return !value;
+                    }
+                }
             }
         }
         return value;
