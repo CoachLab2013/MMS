@@ -223,9 +223,9 @@
                                                 <legend class="legend"><h4>Pathologist at scene:</h4></legend>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="atScene">Was pathologist at scene</label> 
+                                                    <label class="control-label" for="pathologistAtScene">Was pathologist at scene</label> 
                                                     <div class="controls">
-                                                        <select id="atScene" name="atScene">                            
+                                                        <select id="pathologistAtScene" name="pathologistAtScene">                            
                                                             <option>No</option>
                                                             <option>Yes</option>
                                                         </select>
