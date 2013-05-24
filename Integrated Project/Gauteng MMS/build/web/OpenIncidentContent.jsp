@@ -16,7 +16,7 @@
     <body>  
     <legend>Open Incidents</legend>
 
-    <form name="Deceased details" method="post" action="Deceased Address.jsp" class="form-horizontal" >
+    
         <%
             Tools t = new Tools();
             out.println(t.makeOpenIncidentsTable("opentable"));
@@ -31,12 +31,17 @@
                 <td width="10"><input type="button" value="Edit" id="editincidentbutton"></td>
                 <td width="300" align="center"><input type="button" value="Close Incident" id="close"> </td>
             </tr>
-
+            <tr>
+                <td>
+                    <form id="noincident" hidden="true">
+                    <label hidden id="label_noincident" class="error" >Please select an incident</label>
+                    </form>
+                </td>
+            </tr>
 
         </table> 
         <br>
-        <br>
-    </form>
+        
     <form id="closeincident" hidden="true" action="CloseIncidentServlet">
         <table>
 

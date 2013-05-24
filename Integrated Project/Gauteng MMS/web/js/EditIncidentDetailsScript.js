@@ -6,7 +6,8 @@
 $(document).ready(function(){
     $("#editincidentbutton").click(function(){
         if($("#selectedincident").val()===""){
-            alert("Please select an incident.");
+            $("#noincident").show();
+            $("#label_noincident").show();
         }
         else{
             $("#cancelcloseincident").click();
@@ -216,6 +217,26 @@ $(document).ready(function(){
             }
         }
         return value;
+    });
+    
+    $("#editincidentcancel").click(function(){
+        $("label.error").hide();
+        //reset focus on edit incident details tab
+       $("#EditCallDetailsTab").removeClass("active");
+       $("#EditIncidentDetailsTab").addClass("active");
+       
+       $("#EditCallDetails").removeClass("tab-pane active");
+       $("#EditCallDetails").addClass("tab-pane");
+       $("#EditIncidentDetails").removeClass("tab-pane");
+       $("#EditIncidentDetails").addClass("tab-pane active");
+       
+       //set focus on Open Incidents tab 
+       $("#EditIncidentTab").removeClass("active");
+       $("#OpenIncidentsTab").addClass("active");
+       $("#EditIncident").removeClass("tab-pane active");
+       $("#EditIncident").addClass("tab-pane");
+       $("#OpenIncidents").removeClass("tab-pane");
+       $("#OpenIncidents").addClass("tab-pane active");
     });
 
 });

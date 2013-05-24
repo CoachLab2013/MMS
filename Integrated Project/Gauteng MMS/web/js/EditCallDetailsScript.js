@@ -138,18 +138,19 @@ $(document).ready(function(){
     $("#edit_callcancel").click(function(){
         $("label.error").hide();
         //reset focus on edit incident details tab
-       $("#DispatchVehicleTab").removeClass("active");
-       $("#IncidentDetailsTab").addClass("active");
-       $("#DispatchVehicle").removeClass("tab-pane active");
-       $("#DispatchVehicle").addClass("tab-pane");
-       $("#IncidentDetails").removeClass("tab-pane");
-       $("#IncidentDetails").addClass("tab-pane active");
+       $("#EditCallDetailsTab").removeClass("active");
+       $("#EditIncidentDetailsTab").addClass("active");
+       
+       $("#EditCallDetails").removeClass("tab-pane active");
+       $("#EditCallDetails").addClass("tab-pane");
+       $("#EditIncidentDetails").removeClass("tab-pane");
+       $("#EditIncidentDetails").addClass("tab-pane active");
        
        //set focus on Open Incidents tab 
-       $("#LogIncidentTab").removeClass("active");
+       $("#EditIncidentTab").removeClass("active");
        $("#OpenIncidentsTab").addClass("active");
-       $("#LogIncident").removeClass("tab-pane active");
-       $("#LogIncident").addClass("tab-pane");
+       $("#EditIncident").removeClass("tab-pane active");
+       $("#EditIncident").addClass("tab-pane");
        $("#OpenIncidents").removeClass("tab-pane");
        $("#OpenIncidents").addClass("tab-pane active");
     });

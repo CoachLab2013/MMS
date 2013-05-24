@@ -22,7 +22,7 @@
  <script src="js/EditCallDetailsScript.js"></script>
     </head>
     <body>
-        <legend>Incidents> Edit Incident> Call Details</legend>
+        <legend>Edit Call Details</legend>
         <form name="edit_callform" id="edit_callform" method="post" action="">
     
             <table>
