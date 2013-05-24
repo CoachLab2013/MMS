@@ -11,53 +11,53 @@ $(document).ready(function(){
     /**
      * validation for the login form
      */
-    $("#callform").validate({
+    $("#edit_callform").validate({
         rules:{
             
-          callhour:{
+          edit_callhour:{
               valueNotEquals: "Hour",
               validcalltime: true
           },//end rule for hour
           
-          callminute:{
+          edit_callminute:{
               valueNotEquals: "Minute",
               validcalltime: true
           },//end rule for minute*/
           
-          phonenumber:{
+          edit_phonenumber:{
               required: true,
               number: true,
               minlength: 10,
               maxlength: 10
-          },//end rules for phonenumber
+          },//end rules for edit_phonenumber
           
-          name:{
+          edit_callname:{
               required:true
-          },//end rules for name
+          },//end rules for edit_callname
           
-          address:{
+          edit_calladdress:{
               required: true
-          },//end rules for address
+          },//end rules for edit_calladdress
           
-          province:{
+          call_province:{
               valueNotEquals: "Select"
-          },//end rules for province
+          },//end rules for call_province
           
-          region:{
+          call_region:{
               valueNotEquals: "Select"
-          },//end rules for region
+          },//end rules for call_region
           
-          condition:{
+          edit_callcondition:{
               required: true
-          }//end rules for condition
+          }//end rules for edit_callcondition
             
         },//end of rules
         groups: {
-                calltime: "callhour callminute"
+                calltime: "edit_callhour edit_callminute"
         },
         errorPlacement: function(error, element) {
-            if((element.attr("name") == "callhour") || (element.attr("name") == "callminute")){
-                error.insertAfter("#callminute");
+            if((element.attr("name") == "edit_callhour") || (element.attr("name") == "edit_callminute")){
+                error.insertAfter("#edit_callminute");
             }
             else {
                 error.insertAfter(element);
@@ -66,42 +66,42 @@ $(document).ready(function(){
         
         messages:{
           
-         callhour:{
+         edit_callhour:{
               valueNotEquals: "Invalid time.",
               validcalltime : "Invalid time."
           },//end message for hour
           
-          callminute:{
+          edit_callminute:{
               valueNotEquals: "Invalid time.",
               validcalltime : "Invalid time."
           },//end message for minute
           
-          phonenumber:{
+          edit_phonenumber:{
               required: "Please enter in a phone number.",
               number: "A phone number must consist of 10 numeric digits.",
               minlength: "Phone number must be 10 digits long.",
               maxlength: "Phone number must be 10 digits long."
           },//end messages for phone number
           
-          name:{
+          edit_callname:{
             required: "Please enter in the caller's name."  
-          },//end message for name
+          },//end message for edit_callname
           
-          address:{
+          edit_calladdress:{
               required: "Please enter in the scene address."
-          },//end messages for address
+          },//end messages for edit_calladdress
           
-          province:{
+          call_province:{
               valueNotEquals: "Please select a province."
-          },//end message for province
+          },//end message for call_province
           
-          region:{
+          call_region:{
               valueNotEquals: "Please select a region."
-          },//end message for region
+          },//end message for call_region
           
-          condition:{
+          edit_callcondition:{
               required: "Please enter in the scene condition."
-          }//end message for condition
+          }//end message for edit_callcondition
            
         }//end of messages
         
@@ -121,65 +121,38 @@ $(document).ready(function(){
      */
     $.validator.addMethod("validcalltime",function(value){
         var date = new Date();
-        var hour = $("#callhour").val();
-        var min = $("#callminute").val();
+        var hour = $("#edit_callhour").val();
+        var min = $("#edit_callminute").val();
         if(hour > date.getHours()){
             return !value;
         }
-        else if((hour == date.getHours()) && (min > date.getMinutes())){
-            return !value;
+        else if(hour == date.getHours()){
+            if(min > date.getMinutes()){
+                return !value;
+            }            
         }
         return value;
         
     });
     
-     $("#callform").submit(function(){
-       if($("#callform").valid()){
-            addinfo("fpsnumber",$("#fpsnumber"));
-            addinfo("SAPSnumber",$( "#SAPSnumber"));
-            addinfo("detailyear",$("#detailyear"));
-            var form = document.forms["callform"];
-            var el = document.createElement("input");
-            el.type = "hidden";
-            el.name = "detailmonth";
-            el.value = $("option:selected","#detailmonth").attr("num");
-            form.appendChild(el);
-            addinfo("detailday",$("#detailday"));
-            addinfo("detailhour",$("#detailhour"));
-            addinfo("detailminute",$("#detailminute"));
-            addinfo("numberofbodies",$("#numberofbodies"));
-            addinfo("placefound",$("#placefound"));
-            addinfo("circumstancesofdeath",$("#circumstancesofdeath"));
-            addinfo("specialcircumstance",$("#specialcircumstance"));
-            $("#callform").submit();
-        }
-        return false;
-    });
-    
-  function addinfo(name,element)
-{
-   var form = document.forms["callform"];
-   // form.action = 'put your url here';
-   var el = document.createElement("input");
-   el.type = "hidden";
-   el.name = name;
-   el.value = element.val();
-   form.appendChild(el);
-}
-    
-   /* $("#createincident").on("click",function(){
-        
-        //alert($().val());
-        //document.$("#callform").submit();
-        //mergeForms("detailform","callform");
-        //getIncidentDetails();
-        v
-        
-    });*/
-     
-    
-    $("#callcancel").click(function(){
+    $("#edit_callcancel").click(function(){
         $("label.error").hide();
+        //reset focus on edit incident details tab
+       $("#EditCallDetailsTab").removeClass("active");
+       $("#EditIncidentDetailsTab").addClass("active");
+       
+       $("#EditCallDetails").removeClass("tab-pane active");
+       $("#EditCallDetails").addClass("tab-pane");
+       $("#EditIncidentDetails").removeClass("tab-pane");
+       $("#EditIncidentDetails").addClass("tab-pane active");
+       
+       //set focus on Open Incidents tab 
+       $("#EditIncidentTab").removeClass("active");
+       $("#OpenIncidentsTab").addClass("active");
+       $("#EditIncident").removeClass("tab-pane active");
+       $("#EditIncident").addClass("tab-pane");
+       $("#OpenIncidents").removeClass("tab-pane");
+       $("#OpenIncidents").addClass("tab-pane active");
     });
     
 }); 
