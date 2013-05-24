@@ -133,11 +133,19 @@ $(document).ready(function(){
         var nummonth = $("option:selected","#detailmonth").attr("num");
         var date = new Date();
         
-        if((year == date.getFullYear())&& (nummonth==(date.getMonth()+1)) && (day>date.getDate())){  
-            return !value;
+        if(year == date.getFullYear()){  
+            if(nummonth==(date.getMonth()+1)){
+                if(day>date.getDate()){
+                    return !value;
+                }
+            }
+            
         }
-        if((year == date.getFullYear()) && (nummonth > (date.getMonth()+1))){
-            return !value;
+        if(year == date.getFullYear()){
+            if(nummonth > (date.getMonth()+1)){
+                return !value;
+            }
+            
         }
         
         if((month=="April")|| (month=="June") || (month=="September") || (month=="November")){
