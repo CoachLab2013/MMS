@@ -32,40 +32,41 @@ $(document).ready(function(){
             $("#EditIncident").removeClass("tab-pane");
             $("#EditIncident").addClass("tab-pane active");
     }
-    
-    $("#detailform").validate({
+   
+ 
+    $("#editdetailform").validate({
         rules:{
             
-            detailyear:{
+            editdetailyear:{
               valueNotEquals: "Year",
               checkdate : true
           },//end rule for year
           
-          detailmonth:{
+          edit_incident_month:{
               valueNotEquals: "Month",
               checkdate: true
           },//end rule for month
           
-          detailday:{
+          edit_incident_day:{
               valueNotEquals: "Day",
               checkdate: true
           },//end rule for day
           
-          detailhour:{
+          edit_incident_hour:{
               valueNotEquals: "Hour",
               validtime: true
           },//end rule for hour
           
-          detailminute:{
+          edit_incident_minute:{
               valueNotEquals: "Minute",
               validtime: true
           },//end rule for minute
             
-            numberofbodies:{
+            editnumberofbodies:{
               valueNotEquals: "Select"
           },//end rule for number of bodies
           
-            placefound:{
+            editplacefound:{
                 required: true
             },//end rules for place found
             
@@ -76,15 +77,15 @@ $(document).ready(function(){
         },//end of rules
         
                groups: {
-                date: "detailyear detailmonth detailday",
-                time: "detailhour detailminute"
+                date: "editdetailyear edit_incident_month edit_incident_day",
+                time: "edit_incident_hour edit_incident_minute"
         },
         errorPlacement: function(error, element) {
-            if ((element.attr("name") == "detailyear") || (element.attr("name") == "detailmonth") || (element.attr("name") == "detailday")){
-                error.insertAfter("#detailday");
+            if ((element.attr("name") == "editdetailyear") || (element.attr("name") == "edit_incident_month") || (element.attr("name") == "edit_incident_day")){
+                error.insertAfter("#edit_incident_day");
             } 
-            else if((element.attr("name") == "detailhour") || (element.attr("name") == "detailminute")){
-                error.insertAfter("#detailminute");
+            else if((element.attr("name") == "edit_incident_hour") || (element.attr("name") == "edit_incident_minute")){
+                error.insertAfter("#edit_incident_minute");
             }
             else {
                 error.insertAfter(element);
@@ -93,37 +94,37 @@ $(document).ready(function(){
         
         messages:{
           
-          detailyear:{
+          editdetailyear:{
               valueNotEquals: "Invalid date.",
               checkdate: "Invalid date."
           },//end message for year
           
-          detailmonth:{
+          edit_incident_month:{
               valueNotEquals: "Invalid date.",
               checkdate: "Invalid date."
           },//end message for month
           
-          detailday:{
+          edit_incident_day:{
               valueNotEquals: "Invalid date.",
               checkdate: "Invalid date."
           },//end message for day
           
-          detailhour:{
+          edit_incident_hour:{
               valueNotEquals: "Invalid time.",
               validtime : "Invalid time."
           },//end message for hour
           
-          detailminute:{
+          edit_incident_minute:{
               valueNotEquals: "Invalid time.",
               validtime : "Invalid time."
           },//end message for minute
           
           
-          numberofbodies:{
+          editnumberofbodies:{
               valueNotEquals: "Please select the number of bodies."
           },//end message for number of bodies
           
-          placefound:{
+          editplacefound:{
                 required: "Please specify the address where the body was found."
             },//end messages for place found
             
@@ -148,10 +149,10 @@ $(document).ready(function(){
      * Custom rule to check valid date
      */
     $.validator.addMethod("checkdate",function(value){
-        var year = $("#detailyear").val();
-        var month = $("#detailmonth").val();
-        var day = $("#detailday").val();
-        var nummonth = $("option:selected","#detailmonth").attr("num");
+        var year = $("#editdetailyear").val();
+        var month = $("#edit_incident_month").val();
+        var day = $("#edit_incident_day").val();
+        var nummonth = $("option:selected","#edit_incident_month").attr("num");
         var date = new Date();
         
         if(year == date.getFullYear()){  
@@ -197,14 +198,14 @@ $(document).ready(function(){
      */
     $.validator.addMethod("validtime",function(value){
         var date = new Date();
-        var year = $("#detailyear").val();
-        var month = $("option:selected","#detailmonth").attr("num");
-        var day = $("#detailday").val();
+        var year = $("#editdetailyear").val();
+        var month = $("option:selected","#edit_incident_month").attr("num");
+        var day = $("#edit_incident_day").val();
         if(year == (date.getFullYear())){
             if(month == (date.getMonth()+1)){
                 if(day == date.getDate()){
-                    var hour = $("#detailhour").val();
-                    var min = $("#detailminute").val();
+                    var hour = $("#edit_incident_hour").val();
+                    var min = $("#edit_incident_minute").val();
                     if(hour > date.getHours()){
                         return !value;
                     }
@@ -216,9 +217,6 @@ $(document).ready(function(){
         }
         return value;
     });
-    
-    
-    
 
 });
 
