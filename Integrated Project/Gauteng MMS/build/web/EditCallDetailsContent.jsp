@@ -44,15 +44,11 @@
 
                 </tr>
                 <tr>
-                    <td>  Caller's Phone Number:  </td><td> <input type="text" name="edit_phonenumber" id="edit_phonenumber" 
-<<<<<<< HEAD
+                    <td>  Caller's Phone Number:  </td><td> <input type="text" name="edit_phonenumber" id="edit_phonenumber"
                                                                    value=<%out.println(session.getAttribute("call_number")); 
                                                                    session.removeAttribute("call_number");
                                                                    %>/><br>
                     </td>
-=======
-                                                                   value=<%out.println(session.getAttribute("call_number")); %>/><br></td>
->>>>>>> origin/master
                 </tr> 
                     <tr>
 
@@ -110,12 +106,9 @@
                             <td></td> <td>  <input type="submit" value="Save" name="edit_savecall" id="edit_savecall" /> <input type="reset" value="Cancel" id="edit_callcancel" /><br></td>
                         </tr>
         </table>
-<<<<<<< HEAD
                     <input type="hidden" name="edit_lognumber" id ="edit_lognumber"  readonly="true" <% out.println("value="+session.getAttribute("lognumber"));
                                                                                                             session.removeAttribute("lognumber");
                                                                                                         %>/>
-=======
->>>>>>> origin/master
     </form>
 
 </body>
