@@ -320,9 +320,10 @@ public class BodyDb extends DatabaseConnector{
                     bodyAtMort.setRace(resultSet.getString("race"));
                     bodyAtMort.setSurnameOfDeceased(resultSet.getString("surnameOfDeceased"));
                     bodyAtMort.setBodyReleaseTo(resultSet.getString("bodyReleasedTo"));
+                    bodyAtMort.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
+                    setBody(bodyAtMort);
                     bodyAtMort.setBodyAddress(getBodyAddress());
                     BodyAtMortuary mort = getBodyAtMortuary();
-                    mort.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
                     bodyAtMort.setBodyHandOverFromPerNum(mort.getBodyHandOverFromPerNum());
                     bodyAtMort.setBodyReceivedFromPerNum(mort.getBodyReceivedFromPerNum());
                     IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);

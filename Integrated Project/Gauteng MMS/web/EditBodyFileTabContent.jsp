@@ -17,10 +17,10 @@
     <body>
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
-                <li id="tabIncidentInformation"  class="active"><a href="#IncidentInformation" data-toggle="tab">Incident Information</a> </li>
-                <li id="tabBodyIdentification"><a href="#BodyIdentification" data-toggle="tab">Body Identification</a></li>   
-                <li id="tabPostMortem"><a href="#PostMortem" data-toggle="tab">Post Mortem</a></li>
-                <li id="tabReleaseBody"><a href="#ReleaseBody" data-toggle="tab">Release Body</a></li>
+                <li class="active"><a href="#IncidentInformation" data-toggle="tab">Incident Information</a> </li>
+                <li><a href="#BodyIdentification" data-toggle="tab">Body Identification</a></li>   
+                <li><a href="#PostMortem" data-toggle="tab">Post Mortem</a></li>
+                <li><a href="#ReleaseBody" data-toggle="tab">Release Body</a></li>
             </ul>
             
             <div class="tab-content" >
@@ -35,8 +35,8 @@
                     <jsp:include page="PostMortemTabContent.jsp"/>
                 </div> 
                 
-                <div id="ReleaseBody" class="tab-pane "> 
-                    
+                <div id="ReleaseBody" class="tab-pane ">
+                    <jsp:include page="ReleaseBodyContent.jsp"/>
                 </div> 
                 
             </div>

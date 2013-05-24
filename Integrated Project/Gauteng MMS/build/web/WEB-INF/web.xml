@@ -29,10 +29,6 @@
         <servlet-name>AddBodyFile</servlet-name>
         <servlet-class>servlets.AddBodyFile</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>EditReferenceListServlet</servlet-name>
-        <servlet-class>servlets.EditReferenceListServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -56,10 +52,6 @@
     <servlet-mapping>
         <servlet-name>AddBodyFile</servlet-name>
         <url-pattern>/AddBodyFile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditReferenceListServlet</servlet-name>
-        <url-pattern>/EditReferenceListServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

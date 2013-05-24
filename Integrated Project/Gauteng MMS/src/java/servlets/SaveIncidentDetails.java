@@ -4,7 +4,9 @@
  */
 package servlets;
 
-import database.*;
+import database.DbDetail;
+import database.Incident;
+import database.IncidentDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -53,8 +55,7 @@ public class SaveIncidentDetails extends HttpServlet {
         DbDetail dbdetail = t.getDbdetail();
         IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
         incidentdb.init();
-        incidentdb.edit();
-        response.sendRedirect("Home.jsp");
+        out.println(incidentdb.edit());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

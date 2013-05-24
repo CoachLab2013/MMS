@@ -18,10 +18,10 @@
        <body>
            <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
-                <li id ="tabKinInformantDetails" class="active"><a href="#KinInformantDetails" data-toggle="tab">Kin/Informant Details</a> </li>
-                <li id ="tabDeceasedDetails"><a href="#DeceasedDetails" data-toggle="tab">Deceased Details</a></li>   
-                <li id ="tabDeaceasedAddress"><a href="#DeaceasedAddress" data-toggle="tab">Deceased Address Details</a></li>
-                <li id ="tabReleaseproperty"><a href="#Releaseproperty" data-toggle="tab">Release Property</a></li>
+                <li class="active"><a href="#KinInformantDetails" data-toggle="tab">Kin/Informant Details</a> </li>
+                <li><a href="#DeceasedDetails" data-toggle="tab">Deceased Details</a></li>   
+                <li><a href="#DeaceasedAddress" data-toggle="tab">Deceased Address Details</a></li>
+                <li><a href="#Releaseproperty" data-toggle="tab">Release Property</a></li>
             </ul>
             <div class="tab-content" >
                 <div id="KinInformantDetails" class="tab-pane active"> 
