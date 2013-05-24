@@ -19,6 +19,10 @@ public class BodyAtScene /*extends Body*/
     private String placeOfDeath;
     private String dateTimeBodyFound;
     private BodyAtMortuary body;
+    private Member SAPSmember;
+    private Member FPSmember;
+    private Member pathologistAtScene;
+    private Member Receivedfrom;
     //CONSTRUCTORS
     public BodyAtScene(BodyAtMortuary body) {
         this.body = body;
@@ -159,4 +163,61 @@ public class BodyAtScene /*extends Body*/
     public void setBody(BodyAtMortuary body) {
         this.body = body;
     }
+
+    /**
+     * @return the SAPSmember
+     */
+    public Member getSAPSmember() {
+        return SAPSmember;
+    }
+
+    /**
+     * @return the FPSmember
+     */
+    public Member getFPSmember() {
+        return FPSmember;
+    }
+
+    /**
+     * @return the pathologistAtScene
+     */
+    public Member getPathologistAtScene() {
+        return pathologistAtScene;
+    }
+
+    /**
+     * @return the Receivedfrom
+     */
+    public Member getReceivedfrom() {
+        return Receivedfrom;
+    }
+
+    /**
+     * @param SAPSmember the SAPSmember to set
+     */
+    public void setSAPSmember(Member SAPSmember) {
+        this.SAPSmember = SAPSmember;
+    }
+
+    /**
+     * @param FPSmember the FPSmember to set
+     */
+    public void setFPSmember(Member FPSmember) {
+        this.FPSmember = FPSmember;
+    }
+
+    /**
+     * @param pathologistAtScene the pathologistAtScene to set
+     */
+    public void setPathologistAtScene(Member pathologistAtScene) {
+        this.pathologistAtScene = pathologistAtScene;
+    }
+
+    /**
+     * @param Receivedfrom the Receivedfrom to set
+     */
+    public void setReceivedfrom(Member Receivedfrom) {
+        this.Receivedfrom = Receivedfrom;
+    }
+    
 }

@@ -4,6 +4,10 @@
  */
 package servlets;
 
+import database.BodyAddress;
+import database.BodyAtMortuary;
+import database.BodyAtScene;
+import database.Member;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -34,6 +38,77 @@ public class AtSceneServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
+        BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary("INSERT DEATH REGISTER NUMBER"));
+        
+        bodyAtScene.setDateTimeBodyFound(null);
+        bodyAtScene.setAllegedInjuryDateTime(null);
+        bodyAtScene.setAllegedDeathDateTime(null);
+        bodyAtScene.setSceneDateTime(null);
+        bodyAtScene.setSceneIncidentOccured(null);
+        bodyAtScene.setPlaceOfDeath(null);
+        bodyAtScene.setExternalCircumstanceOfInjury(null);
+        bodyAtScene.setPathOnScene(true);
+        
+        //build body received from
+            Member receivedFrom = new Member();
+            receivedFrom.setName(null);
+            receivedFrom.setSurname(null);
+            receivedFrom.setOrganization(null);
+            receivedFrom.setDeathRegisterNumber(null);
+        //end of building received from
+        
+        //SAPS member
+            Member SAPSmemeber = new Member();
+            SAPSmemeber.setName(null);
+            SAPSmemeber.setSurname(null);
+            SAPSmemeber.setContactNumber(null);
+            SAPSmemeber.setOrganization(null); //SAPS
+            SAPSmemeber.setRank(null);
+            SAPSmemeber.setDeathRegisterNumber(null);
+        // end of SAPS member
+        
+        //FPSmemeber
+            Member FPSmemeber = new Member();
+            FPSmemeber.setName(null);
+            FPSmemeber.setSurname(null);
+            FPSmemeber.setPersonnelNumber(null);
+            FPSmemeber.setContactNumber(null); //SAPS
+            FPSmemeber.setRank(null);
+            FPSmemeber.setDeathRegisterNumber(null);
+        //end of FPS member
+            
+        //Pathologist on scene
+            Member pathologistOnScene = new Member();
+            pathologistOnScene.setName(null);
+            pathologistOnScene.setSurname(null);
+            pathologistOnScene.setPersonnelNumber(null);
+            pathologistOnScene.setContactNumber(null); //SAPS
+            pathologistOnScene.setRank(null);
+            pathologistOnScene.setDeathRegisterNumber(null);
+         //end of Pathologist on scene
+            
+         
+        //Body Details
+        bodyAtScene.getBody().setBodyType(null);
+        bodyAtScene.getBody().setNameOfDeceased(null);
+        bodyAtScene.getBody().setSurnameOfDeceased(null);
+        bodyAtScene.getBody().setID(null);
+        //building body address
+            BodyAddress bodyAddress = new BodyAddress();
+            bodyAddress.setBuilding(null);
+            bodyAddress.setStreet(null);
+            bodyAddress.setSuburb(null);
+            bodyAddress.setCity(null);
+            bodyAddress.setPostCode(null);
+            bodyAddress.setProvince(null);
+            bodyAddress.setRegion(null);
+            bodyAddress.setMagisterialDistrict(null);
+        //end of building body
+        bodyAtScene.getBody().setBodyAddress(bodyAddress);
+        bodyAtScene.getBody().setRace(null);
+        bodyAtScene.getBody().setGender(null);
+        bodyAtScene.getBody().setEstimatedAgeYear(estimatedAgeYear);
+        //end of Body details
         
         /*try {
             /* TODO output your page here. You may use following sample code. 
