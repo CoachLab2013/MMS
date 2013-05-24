@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class TestApp {
 
-    public static DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "hello");
+    public static DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "200918139");
 
     /**
      * @param args the command line arguments
@@ -164,9 +164,9 @@ public class TestApp {
         //TESTING INCIDENT
         //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
 
-        Incident inci = new  Incident("002201301","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",0,true,"2013-04-06");
-        IncidentDb inciDb = new IncidentDb(inci,dbDetail);
-        inciDb.init();
+       // Incident inci = new  Incident("002201301","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",0,true,"2013-04-06");
+       // IncidentDb inciDb = new IncidentDb(inci,dbDetail);
+       // inciDb.init();
 
 
         //adding an incident
@@ -187,7 +187,7 @@ public class TestApp {
         //System.out.println(inciDb.countOpenIncidents("20130424"));
         
         //increase body count
-        System.out.println(inciDb.IncreaseBodyCount());
+        //System.out.println(inciDb.IncreaseBodyCount());
         
         //END OF INCIDENT STUFF
 
@@ -207,17 +207,17 @@ public class TestApp {
         //add a body details
 
         
-        BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
+        //BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
 
-        /*BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
->>>>>>> origin/master
+        BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
+//>>>>>>> origin/master
         BodyDb bDb = new BodyDb(dbDetail,body);
         bDb.init();
         //System.out.println(bDb.);
         ArrayList<BodyAtMortuary> list = bDb.getBodies();
-        System.out.println(list.get(0).getDeathRegisterNumber());;
+        System.out.println(list.get(0).getDeathRegisterNumber()+" "+list.get(0).assignedTo);;
         
-        //editing
+        //editing  
         //System.out.println(bDb.editBodyAtMotuary());
         //System.out.println(bDb.editBodyAddresss());
         //System.out.println(bDb.edit());
@@ -229,8 +229,8 @@ public class TestApp {
         //System.out.println(list.get(0).getDeathRegisterNumber());
         
         //adding body at scene details
-        BodyAtScene bodyAtScene = new BodyAtScene("jhb", "2013-04-23", true, "2013-04-30", "2013-04-30", "ss", "dd","2013-04-23", (BodyAtMortuary)bDb.getBody());
-        BodyAtSceneDb atDb = new BodyAtSceneDb(dbDetail, bodyAtScene);
+        //BodyAtScene bodyAtScene = new BodyAtScene("jhb", "2013-04-23", true, "2013-04-30", "2013-04-30", "ss", "dd","2013-04-23", (BodyAtMortuary)bDb.getBody());
+       // BodyAtSceneDb atDb = new BodyAtSceneDb(dbDetail, bodyAtScene);
         //atDb.init();
         //System.out.println(atDb.);
         
@@ -279,23 +279,23 @@ public class TestApp {
             //System.out.println(flist.get(i).getDateFileOpened() + " " +  flist.get(i).isBodyIdentified());
         //}
         //editing a body file to update its values
-<<<<<<< HEAD
+//<<<<<<< HEAD
         //db = new BodyFileDb(dbDetail, new BodyFile("2013-05-14", false, false, false, false,"2013-05-14", "099888592"));
         //db.init();
         //System.out.println(db.edit());
-=======
-        db = new BodyFileDb(dbDetail, new BodyFile("2013-05-14", false, false, false, false,"2013-05-14", "099888592"));
-        db.init();
-        System.out.println(db.edit());*/
+//=======
+      //  db = new BodyFileDb(dbDetail, new BodyFile("2013-05-14", false, false, false, false,"2013-05-14", "099888592"));
+       // db.init();
+       // System.out.println(db.edit());*/
 
         //ENDBODYFILE
         
         
         //POST MORTEM
-        PostMortemDb  postDb = new PostMortemDb(dbDetail);
-        postDb.init();
-        postDb.setPostMortem(new PostMortem("908","f","g","gy",true,true,"ff",new BodyAtMortuary("099888592"),new LabRecord(false, 6, 0)));
-        System.out.print(postDb.IncreaseSampleCount());
+      //  PostMortemDb  postDb = new PostMortemDb(dbDetail);
+      //  postDb.init();
+       // postDb.setPostMortem(new PostMortem("908","f","g","gy",true,true,"ff",new BodyAtMortuary("099888592"),new LabRecord(false, 6, 0)));
+       // System.out.print(postDb.IncreaseSampleCount());
         //System.out.println(postDb.edit());
         //System.out.println(postDb.getPostMortem().getLabRecord().getNumberOfSamples());
         //System.out.println(postDb.getPostMortem().getDHA1663number());

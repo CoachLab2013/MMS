@@ -19,26 +19,51 @@
             </style>
 <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
- <script src="js/PostMortemFindingsContentScript.js"></script>
+ <script src="js/CallDetailsScript.js"></script>
     </head>
     <body>
-        <form name="Findingsform" id="Findingsform" method="post" action="">
+        <legend>Body File> Edit Body file> Post Mortem> Post Mortem Findings</legend>
+        <form name="callform" id="callform" method="post" action="">
       
           
                 <table>
+                    <tr>     
+                        <td>  Time of Call:  </td><td><jsp:include page="Time.jsp" /><br></td>
+                      
+                    </tr>
                     <tr>
-                    <td> Cause of Death:     </td><td><textarea cols="50" rows="3" name="findingsdeath" id="findingsdeath"> </textarea><br></td>
-                     </tr>
-                    <tr>
-                        <td> DHA 1663 Number:  </td><td> <input type="text" name="findingsnumber" id="findingsnumber"/><br></td>
+                        <td>  Caller's Phone Number:  </td><td> <input type="text" name="phonenumber" id="phonenumber"/><br></td>
                     </tr> 
+                        <tr>
+                       
+                            <td> Name of Caller:   </td><td>       <input type="text" name="name" id="name"/><br></td>
+                        
+                        </tr>
+                        <tr>
+                            <td> Name of institution: </td><td>    <input type="text" name="institution" id="institution" /><br></td>
+                        </tr>
                             <tr>
-                            <td> Chief post mortem:     </td><td><textarea cols="50" rows="3" name="findingsmortem" id="findingsmortem"> </textarea><br></td>
+                            <td> Scene Address:     </td><td><textarea cols="50" rows="3" name="address" id="address"> </textarea><br></td>
                      
                             </tr>
                             <tr>
-                        <td>  ICD codes:</td><td><select name="ICDcode" id="ICDcode"><br>
-             <option selected="selected">Select</option
+                            <td> Provinces:         </td><td>      <select name="province" id="province"><br>
+             
+              <option slected="selected">Select</option>
+              <option></option>
+              <option></option>
+              <option></option>
+              <option></option>
+              <option></option>
+              <option></option>
+              <option></option>
+              <option></option>
+          </select><br>
+        
+                            </tr>
+                            <tr>
+                        <td>  Region:</td><td><select name="region" id="region"><br>
+             <option selected="selected">Select</option>
              <option></option>
              <option></option>
              <option></option>
@@ -49,8 +74,12 @@
              <option></option>
          </select><br>
                             </tr>
+                            
                             <tr>
-                                <td> <td>  <input type="submit" value="Done" name="postfindingsdone" /><br></td></td>
+                        <td>  Scene condition: </td><td><textarea cols="50" rows="3" name="condition" id="condition"> </textarea><br></td>
+                            </tr>
+                            <tr>
+                                <td> <td>  <input type="submit" value="Create Incident" name="create call details" /><br></td></td>
           
                             </tr>
             </table>

@@ -33,6 +33,7 @@ $(document).ready(function(){
             $("#EditIncident").addClass("tab-pane active");
     }
     
+<<<<<<< HEAD
     
      $("#detailform").validate({
         rules:{
@@ -205,6 +206,8 @@ $(document).ready(function(){
         }
         return value;
     });
+=======
+>>>>>>> origin/master
 
 });
 

@@ -57,9 +57,9 @@ public class SaveKinDetailsServlet extends HttpServlet {
         DbDetail dbdetail = t.getDbdetail();
         KinDb kinDb = new KinDb(kin, dbdetail);
         kinDb.init();
-        kinDb.add();
+        String success = kinDb.add();
         HttpSession sess = request.getSession();
-        sess.setAttribute("kinDetail", "Kin details added successfully");
+        sess.setAttribute("kinDetail", true);
         response.sendRedirect("Home.jsp");
         out.close();
     }

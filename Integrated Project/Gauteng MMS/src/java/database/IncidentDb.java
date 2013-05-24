@@ -72,7 +72,7 @@ public class IncidentDb extends DatabaseConnector
         int count = 0;
         try 
         {
-            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE incidentLogNumber LIKE '%" + inDate + "';");
+            statement.executeQuery("SELECT COUNT(*) as countOpenIncidents FROM Incident WHERE status=true AND incidentLogNumber LIKE '%" + inDate + "';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
             count = resultSet.getInt("countOpenIncidents");
@@ -159,7 +159,7 @@ public class IncidentDb extends DatabaseConnector
         ArrayList<Incident> incidentList = new ArrayList<Incident>();
         try 
         {
-            statement.executeQuery("SELECT * FROM incident WHERE status = 1 ORDER BY SUBSTRING(incidentLogNumber,4,8) DESC, SUBSTRING(incidentLogNumber, 1, 3) DESC;");
+            statement.executeQuery("SELECT * FROM incident WHERE status = 1;");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
