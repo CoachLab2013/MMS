@@ -17,7 +17,9 @@ public class Tools {
      * constructor for an instance of Tools
      */
     public Tools(){
-        dbdetail = new DbDetail("localhost","/mydb","root","root"); 
+ 
+        dbdetail = new DbDetail("localhost","/mydb","root","password123");
+
     }
     //end constructor
     
@@ -283,42 +285,6 @@ public class Tools {
         }
     }
     // end makeOPenIncidentsTable
-    
-    /**
-     * This will create a table with all registered samples for that deathRegisterNumber
-     */
-    public String makeRegisteredSampleTable(String id){
-        ForensicSampleDb forensicsampleDb = new ForensicSampleDb(getDbdetail());
-        forensicsampleDb.init();
-        try{
-            ArrayList<ForensicSample> registeredSamples = forensicsampleDb.SampleList("deathRegisterNumber", "099888592");
-            
-           String table = "<table class='tabledisplay' id='" + id +"'>"
-                    +"<th class='tableheading'>Initial Seal Number</th>"
-                    +"<th class='tableheading'>New Seal Number</th>"
-                    +"<th class='tableheading'>Death Register Number</th>"
-                    +"<th class='tableheading'>Lab Reference Number</th>"
-                    +"<th class='tableheading'>Reason for Sample</th>";
-            int size = registeredSamples.size();
-            for(int i=0; i<size; i++){
-                ForensicSample sample = registeredSamples.get(i);
-                table +="<tr class='tablerow' sealnumber='"+ sample.getSealNumber() +"'>"
-                        +"<td id='trSealNumber'>"+  sample.getSealNumber() +"</td>"
-                        +"<td class='tablecell' id='trBrokenSeal'>" + sample.getBrokenSealNumber()+ "</td>"
-                        + "<td class='tablecell' id='trDeathNumber'>" + sample.getDeathRegisterNumber() +"</td>"
-                        + "<td class='tablecell' id='trLabNumber'>" + sample.getLabNumber()+"</td>"
-                        +"<td class='tablecell' id='trReason'>" + sample.getReason()+ "</td>"
-                        + "</tr>"; 
-            }
-            table = table + "</table>";
-            
-            return table;
-        }
-        catch(Exception e){
-            return e.getMessage();
-        }
-    }
-    // end makeRegisteredSampleTable
     
     public String getDateTime(){
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
