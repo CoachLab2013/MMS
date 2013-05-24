@@ -169,7 +169,7 @@ public class DeathCallDb extends DatabaseConnector
      {
         try 
         {
-            statement.executeUpdate("UPDATE DeathCall SET timeOfCall='" + deathCall.getTimeOfCall()  +"', numberOfCaller='"+ deathCall.getNumberOfCaller() +"', institution='"+ deathCall.getInstitution() +"', sceneAddress='"+ deathCall.getSceneAddress() +"', province='"+ deathCall.getProvince() +"', region='"+ deathCall.getRegion() +"', sceneConditions='"+ deathCall.getSceneConditions() +"', nameOfCaller='"+ deathCall.getNameOfCaller() +"' WHERE Incident_incidentLogNumber = '"+ deathCall.getIncident().getIncidentLogNumber() +"';" );
+            statement.executeUpdate("UPDATE DeathCall SET timeOfCall='" + deathCall.getTimeOfCall() + "', dateOfCall='" + deathCall.getDateOfCall() +"', numberOfCaller='"+ deathCall.getNumberOfCaller() +"', institution='"+ deathCall.getInstitution() +"', sceneAddress='"+ deathCall.getSceneAddress() +"', province='"+ deathCall.getProvince() +"', region='"+ deathCall.getRegion() +"', sceneConditions='"+ deathCall.getSceneConditions() +"', nameOfCaller='"+ deathCall.getNameOfCaller() +"' WHERE Incident_incidentLogNumber = '"+ deathCall.getIncident().getIncidentLogNumber() +"';" );
             statement.close();
             connection.close();
         } 
