@@ -35,8 +35,8 @@
                     <jsp:include page="PostMortemTabContent.jsp"/>
                 </div> 
                 
-                <div id="ReleaseBody" class="tab-pane "> 
-                    
+                <div id="ReleaseBody" class="tab-pane ">
+                    <jsp:include page="ReleaseBodyContent.jsp"/>
                 </div> 
                 
             </div>

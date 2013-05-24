@@ -342,17 +342,20 @@ public class Tools {
             
            String table = "<table class='tabledisplay' id='" + id +"'>"
                     +"<th class='tableheading'>Deah Register Number</th>"
-                    +"<th class='tableheading'>Name of deceased</th>"
-                    +"<th class='tableheading'>Surname of deceased</th>";
+                    +"<th class='tableheading'>Name</th>"
+                    +"<th class='tableheading'>Surname</th>"
+                    +"<th class='tableheading'>ID/Passport number</th>"
+                    +"<th class='tableheading'>body status</th>";
            
             int size = bodylist.size();
             for(int i=0;i<size;i++){
                BodyAtMortuary inc = bodylist.get(i);
-                table = table +"<tr class='tablerow' lognumber='"+inc.getBodyType()+"'>"
-                        +"<td>"+  inc.getCitizen() +"</td>"
-                        + "<td class='tablecell'>" + inc.getGender() +"</td>"
-                        + "<td class='tablecell'>" + inc.getNameOfDeceased() +"</td>"   //data
-                       
+                table = table +"<tr class='tablerow' lognumber='"+inc.getDeathRegisterNumber()+"'>"
+                        +"<td>"+  inc.getDeathRegisterNumber() +"</td>"
+                        + "<td class='tablecell'>" + inc.getNameOfDeceased() +"</td>"
+                        + "<td class='tablecell'>" + inc.getSurnameOfDeceased() +"</td>"
+                        + "<td class='tablecell'>" + inc.getID() +"</td>"   //data
+                        + "<td class='tablecell'>" + inc.isBodyStatus() +"</td>"
                         + "</tr>"; 
             }  
             table = table + "</table>";
