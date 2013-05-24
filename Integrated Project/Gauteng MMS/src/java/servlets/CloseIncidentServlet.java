@@ -38,11 +38,12 @@ public class CloseIncidentServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String fpslognumber = request.getParameter("selectedincident");
         String reason = request.getParameter("closereason");
-        DbDetail dbdetail = new DbDetail("localhost","/mydb","root","password"); 
+        Tools t = new Tools();
+        DbDetail dbdetail = t.getDbdetail();
         IncidentDb idb = new IncidentDb(dbdetail);
         idb.init();
         try{
-            Tools t = new Tools();
+            
             String date = t.getDateTime().split(" ")[0];
             idb.closeIncident(fpslognumber,date, reason);
             response.sendRedirect("Home.jsp");

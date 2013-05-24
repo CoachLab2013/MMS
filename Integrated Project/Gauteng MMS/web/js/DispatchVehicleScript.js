@@ -33,7 +33,7 @@ $(document).ready(function(){
      * in the drop down list
      */
     $.validator.addMethod("valueNotEquals", function(value, element, arg){
-        return arg != value;
+        return arg !== value;
     }, "Value must not equal arg.");
     
     $("#vehiclecancel").click(function(){
@@ -42,21 +42,21 @@ $(document).ready(function(){
         goHome();
     });
     
-    $("#yesdispatch").on("click",function(){
+    $("#yesdispatch").click(function(){
         $("#vehicleform").show();
         $("#success").hide();
         $("#dispatchform").hide();
         return false;
     });
     
-    $("#nodispatch").on("click",function(){
+    $("#nodispatch").click(function(){
         $("#success").hide();
         $("#dispatchform").hide();
         goHome();
         
     });
     
-    $("#dispatch").on("click",function(){
+    $("#dispatch").click(function(){
         if($("#vehicleform").valid()){
            $("#vehicleform").submit(); 
         }
@@ -80,6 +80,24 @@ $(document).ready(function(){
        $("#LogIncident").addClass("tab-pane");
        $("#OpenIncidents").removeClass("tab-pane");
        $("#OpenIncidents").addClass("tab-pane active");
+    }
+    
+    if($("#success").attr("info")==='success'){
+        $("#OpenIncidentsTab").removeClass("active");
+       $("#LogIncidentTab").addClass("active");
+       $("#OpenIncidents").removeClass("tab-pane active");
+       $("#OpenIncidents").addClass("tab-pane");
+       $("#LogIncident").removeClass("tab-pane");
+       $("#LogIncident").addClass("tab-pane active");
+       
+       //set focus on Dispatch Vehicle tab
+       $("#IncidentDetailsTab").removeClass("active");
+       $("#DispatchVehicleTab").addClass("active");
+       $("#IncidentDetails").removeClass("tab-pane active");
+       $("#IncidentDetails").addClass("tab-pane");
+       $("#DispatchVehicle").removeClass("tab-pane");
+       $("#DispatchVehicle").addClass("tab-pane active");
+       $("#dispatchform").show();
     }
     
 });

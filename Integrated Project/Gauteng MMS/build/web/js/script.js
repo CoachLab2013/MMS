@@ -91,6 +91,25 @@ $(document).ready(function() {
         }
 
     });
+    
+    $('#AddProperty').validate({
+        rules: {
+            txtProperty: {
+                required: true
+            }
+
+        }
+
+    });
+      $('#AddVehicle').validate({
+        rules: {
+            txtVehicle: {
+                required: true
+            }
+
+        }
+
+    });
 
     $('#AddRank').validate({
         rules: {
@@ -190,9 +209,30 @@ $(document).ready(function() {
         }
 
     });
+    
     $('#AddRelationship').validate({
         rules: {
             txtRelationship: {
+                required: true
+            }
+
+        }
+
+    });
+    
+      $('#AddBodyPart').validate({
+        rules: {
+            txtBodyPart: {
+                required: true
+            }
+
+        }
+
+    });
+    
+     $('#AddSpecialCur').validate({
+        rules: {
+            txtSpecialCur: {
                 required: true
             }
 
@@ -249,7 +289,7 @@ $(document).ready(function() {
             },
             
             Srank: {
-                required: true,
+                required: true
                  
             }
          

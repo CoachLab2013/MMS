@@ -18,17 +18,17 @@ public class Tools {
      */
     public Tools(){
  
-        dbdetail = new DbDetail("localhost","/mydb","root","msandas777"); 
- 
+        dbdetail = new DbDetail("localhost","/mydb","root","hello");
+
     }
     //end constructor
     
     public String adduser(){
         Employee e = new Employee("11111111","password","User","UserSurname","Admin",4,"user1@user.com",true);
         Employee e2 = new Employee("12345678","123456","User2","UserSurname2","Pathologist",3,"user2@user.com",true);
-        EmployeeDb db1 = new EmployeeDb(e,dbdetail);
+        EmployeeDb db1 = new EmployeeDb(e, getDbdetail());
         db1.init();
-        EmployeeDb db2 = new EmployeeDb(e2,dbdetail);
+        EmployeeDb db2 = new EmployeeDb(e2, getDbdetail());
         db2.init();
         db1.add();
         return(db2.add());
@@ -43,7 +43,7 @@ public class Tools {
     public int logIn(String personnelnumber, String password, HttpSession sess){
             //check the database for this user
             Employee emp = new Employee(personnelnumber, password);
-            EmployeeDb empdb = new EmployeeDb(emp,dbdetail);
+            EmployeeDb empdb = new EmployeeDb(emp, getDbdetail());
             empdb.init();
             String status = empdb.read();
             if(status.contains("fail")){
@@ -69,7 +69,7 @@ public class Tools {
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String[] datetime = timestamp.split(" ");
         AuditTrail adt = new AuditTrail(datetime[0],datetime[1],eventtype,eventmessage,user, location);
-        AuditTrailDb adb = new AuditTrailDb(adt,dbdetail);
+        AuditTrailDb adb = new AuditTrailDb(adt, getDbdetail());
         adb.init();
         adb.add(); 
     }
@@ -82,7 +82,7 @@ public class Tools {
      */
     public String getIncidentLogNumber(){
         Incident incident = new Incident();
-        IncidentDb incidentdb = new IncidentDb(incident,dbdetail);
+        IncidentDb incidentdb = new IncidentDb(incident, getDbdetail());
         incidentdb.init();
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String[] datetime = timestamp.split(" ");
@@ -128,7 +128,7 @@ public class Tools {
         if(month_num==-1){
             out = out + "<option selected='selected'>Month</option>";
         }
-        String[] months = {"January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         for(int i=1;i<13;i++){
             if(i==month_num){
                 out = out + "<option selected='selected' num="+i+">"+months[i-1]+"</option>";
@@ -207,7 +207,7 @@ public class Tools {
      * @return returns the contents of a reference list from the database or an error
      */
     public ArrayList<String> getReferenceList(String listname, String field){
-        ReferenceListDb refdb = new ReferenceListDb(dbdetail,listname);
+        ReferenceListDb refdb = new ReferenceListDb(getDbdetail(),listname);
         refdb.setField2(field);
         refdb.init();
         try{
@@ -246,7 +246,7 @@ public class Tools {
      * This will create a table with all the open incidents from the database
      */
     public String makeOpenIncidentsTable(String id){
-        IncidentDb indb = new IncidentDb(dbdetail);
+        IncidentDb indb = new IncidentDb(getDbdetail());
         indb.init();
         try{
             ArrayList<Incident> openincidents = indb.openIncidentList();
@@ -293,7 +293,7 @@ public class Tools {
     //end getDateTime
     
     public Incident getIncidentDetail(String lognumber){
-       IncidentDb idb = new IncidentDb(dbdetail);
+       IncidentDb idb = new IncidentDb(getDbdetail());
        idb.init();
        try{
            Incident incident = idb.findIncident(lognumber);
@@ -303,6 +303,22 @@ public class Tools {
            return null;
        }
     }
+    
+    public DeathCall getDeathCall(Incident inc){
+        DeathCall call = new DeathCall(inc);
+        DeathCallDb calldb = new DeathCallDb(call,dbdetail);
+        calldb.init();
+        calldb.read();
+        call = calldb.getDeathCall();
+        return call;
+    }
     //
+
+    /**
+     * @return the dbdetail
+     */
+    public DbDetail getDbdetail() {
+        return dbdetail;
+    }
 }
 //end Tools class

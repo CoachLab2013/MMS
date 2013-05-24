@@ -63,7 +63,8 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>\r\n");
       out.write("    <head>        \r\n");
       out.write("\r\n");
-      out.write("        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js\"></script>\r\n");
+      out.write("        <script language=\"javascript\" type=\"text/javascript\" src=\"js/jquery-1.9.1.js\"></script>\r\n");
+      out.write("        <script language=\"javascript\" type=\"text/javascript\" src=\"js/jquery.validate.min.js\"></script>\r\n");
       out.write("        <link type=\"text/css\" rel=\"stylesheet\"  href=\"bootstrap/css/bootstrap.css\">           \r\n");
       out.write("        <script src=\"bootstrap/js/bootstrap-tabs.js\"></script>\r\n");
       out.write("        <script src=\"bootstrap/js/bootstrap.min.js\"></script>\r\n");
@@ -72,7 +73,8 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <script src=\"js/jquery.validate.min.js\"></script>\r\n");
       out.write("        <script src=\"js/script.js\"></script>\r\n");
       out.write("        <link  type=\"text/css\" href=\"bootstrap/css/bootstrap.css\" rel=\"stylesheet\">\r\n");
-      out.write("        <link type=\"text/css\" rel=\"stylesheet\" href=\"bootstrap/css/tablecss.css\"\r\n");
+      out.write("        <link type=\"text/css\" rel=\"stylesheet\" href=\"bootstrap/css/tablecss.css\">\r\n");
+      out.write("        <script src=\"js/EditReferenceList.js\"></script>\r\n");
       out.write("    <div class=\"head\"><img src=\"Images/logo2.jpg\">\r\n");
       out.write("        <title>MMS Administration</title>\r\n");
       out.write("    </head>\r\n");
@@ -92,13 +94,14 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String occupationResult = "";
             String raceResult = "";
             String maritalResult = "";
-            String oraganisationResult = "";
             String provinceResult = "";
             String iCD10Result = "";
             String mannerResult = "";
             String sampleResult = "";
             String statusResult = "";
             String relationshipResult = "";
+            String bodyPartResult = "";
+            String specialCurResult = "";
 
             String main1 = "";
             String addUserTab = "";
@@ -108,8 +111,11 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             if (null != session.getAttribute("result")) {
                 userResult = session.getAttribute("result").toString();
                 if (null != session.getAttribute("tab")) {
-                    addUserTab = session.getAttribute("tab").toString();
-                    currentUserTab = "";
+                    if (session.getAttribute("tab").toString().equals("Adduser")) {
+                        addUserTab = "active";
+                        currentUserTab = "";
+                    }
+
                 }
             } else {
                 addUserTab = "";
@@ -121,12 +127,12 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String inst = "";
             String analysis = "";
             String relationship = "";
+            String bodyPart = "";
             String status = "";
             String sample = "";
             String manner = "";
             String icd10 = "";
             String province = "";
-            String organisation = "";
             String marital = "";
             String race = "";
             String occu = "";
@@ -134,6 +140,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             String rank = "";
             String vehi = "";
             String property = "";
+            String specialCur = "";
 
 
 
@@ -155,7 +162,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                         propertyResult = session.getAttribute("propertyResult").toString();
                         property = "active";
                     } else if (session.getAttribute("tab").equals("vehi")) {
-                        vehicleResult = session.getAttribute("result").toString();
+                        vehicleResult = session.getAttribute("vehicleResult").toString();
                         vehi = "active";
                     } else if (session.getAttribute("tab").equals("rank")) {
                         rankResult = session.getAttribute("rankResult").toString();
@@ -172,7 +179,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     } else if (session.getAttribute("tab").equals("marital")) {
                         maritalResult = session.getAttribute("maritalResult").toString();
                         marital = "active";
-                    }   else if (session.getAttribute("tab").equals("province")) {
+                    } else if (session.getAttribute("tab").equals("province")) {
                         provinceResult = session.getAttribute("provinceResult").toString();
                         province = "active";
                     } else if (session.getAttribute("tab").equals("icd10")) {
@@ -192,6 +199,12 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     } else if (session.getAttribute("tab").equals("relationship")) {
                         relationshipResult = session.getAttribute("relationshipResult").toString();
                         relationship = "active";
+                    } else if (session.getAttribute("tab").equals("bodyPart")) {
+                        bodyPart = "active";
+                        bodyPartResult = session.getAttribute("bodyPartResult").toString();
+                    } else if (session.getAttribute("tab").equals("specialCur")) {
+                        specialCur = "active";
+                        specialCurResult = session.getAttribute("specialCurResult").toString();
                     } else if (session.getAttribute("tab").equals("Adduser")) {
                         addUserTab = "active";
                         userResult = session.getAttribute("relationshipResult").toString();
@@ -209,13 +222,15 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                     occupationResult = "";
                     raceResult = "";
                     maritalResult = "";
-                    
+
                     provinceResult = "";
                     iCD10Result = "";
                     mannerResult = "";
                     sampleResult = "";
                     statusResult = "";
                     relationshipResult = "";
+                    specialCurResult = "";
+                    bodyPartResult = "";
 
                     main1 = "active";
 
@@ -229,7 +244,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
                 main1 = "active";
             }
             SetDbDetail dbset = new SetDbDetail();
-            
+
             //Code to fill users table
             EmployeeDb emplo = new EmployeeDb(dbset.getDbdetail());
             emplo.init();
@@ -239,13 +254,23 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
 
             //For institution list box
             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbset.getDbdetail());
-            emp.init(); 
+            emp.init();
             ArrayList<String> institutionList = emp.referenceList();
 
             //For analysis list box
             emp = new ReferenceListDb("analysis", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> analysisList = emp.referenceList();
+
+            //For property list box
+            emp = new ReferenceListDb("propertytype", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> PropertyList = emp.referenceList();
+
+            //For Vehicles list box
+            emp = new ReferenceListDb("vehicle", "e", "registrationNumber", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> vehicleList = emp.referenceList();
 
             //For rank list box
             emp = new ReferenceListDb("rank", "e", "type", "e", dbset.getDbdetail());
@@ -302,16 +327,21 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
             emp.init();
             ArrayList<String> relationshipList = emp.referenceList();
 
+            //For special Body class list box
+            emp = new ReferenceListDb("bodypart", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> bodyPartList = emp.referenceList();
+
+            //For special circumstance list box
+            emp = new ReferenceListDb("specialcircumstance", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> specialCurList = emp.referenceList();
+
+
             /*
-             //For institution list box
-             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
-             emp.init();
-             ArrayList<String> institutionList = emp.referenceList();
+             //
             
-             //For institution list box
-             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
-             emp.init();
-             ArrayList<String> institutionList = emp.referenceList();
+             
             
              //For institution list box
              ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
@@ -323,12 +353,12 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
              emp.init();
              ArrayList<String> institutionList = emp.referenceList();
              */
-             
+        
       out.write("\r\n");
       out.write("\r\n");
-      out.write("       \r\n");
-      out.write("      \r\n");
-      out.write("    \r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("        ");
       out.write("\r\n");
       out.write("        <div class=\"tabbable\">\r\n");
@@ -346,7 +376,7 @@ out.println(String.valueOf(main2));
       out.write("                <div id=\"User\" class=\"tab-pane ");
 out.println(String.valueOf(main1));
       out.write(" \">  \r\n");
-      out.write("              \r\n");
+      out.write("\r\n");
       out.write("                    ");
       out.write("\r\n");
       out.write("                    <div class=\"tabbable\">\r\n");
@@ -365,12 +395,12 @@ out.println(String.valueOf(addUserTab));
       out.write("                            <div id=\"cUser\" class=\"tab-pane ");
 out.println(String.valueOf(currentUserTab));
       out.write("\">  \r\n");
-      out.write("                                <div align=\"center\"><h2>Users </h2> </div>\r\n");
+      out.write("                                <legend>Users</legend>\r\n");
       out.write("                                ");
       out.write("\r\n");
       out.write("                                <table border=\"1\" class=\"bordered-table\">\r\n");
       out.write("                                    <tr>\r\n");
-      out.write("                                    <th width=\"150\"><H4>Name</H4></th>\r\n");
+      out.write("                                        <th width=\"150\"><H4>Name</H4></th>\r\n");
       out.write("                                    <th width=\"150\"><H4>Surname</H4></th>\r\n");
       out.write("                                    <th width=\"150\"><H4>Persal number</H4></th>\r\n");
       out.write("                                    <th width=\"150\"><H4>Email Address <H4></th>\r\n");
@@ -433,7 +463,7 @@ out.println(String.valueOf(addUserTab));
       out.write(" \">  \r\n");
       out.write("                                                        ");
       out.write("\r\n");
-      out.write("                                                        <div align=\"center\"><h2>Add User </h2> </div>  \r\n");
+      out.write("                                                        <legend>Add User</legend>\r\n");
       out.write("\r\n");
       out.write("                                                        <form name=\"AddUser\" id=\"AddUser\" method=\"post\" action=\"ReferenceListServlet\" class=\"form-horizontal\">\r\n");
       out.write("\r\n");
@@ -536,7 +566,7 @@ out.println(String.valueOf(main2));
       out.write(" \"> \r\n");
       out.write("                                                        ");
       out.write("\r\n");
-      out.write("                                                        <div align=\"center\"><h2>Reference Lists </h2> </div> \r\n");
+      out.write("                                                        <legend>References Lists</legend>\r\n");
       out.write("                                                        <div class=\"tabbable\">\r\n");
       out.write("                                                            ");
       out.write("\r\n");
@@ -568,9 +598,7 @@ out.println(String.valueOf(race));
       out.write("\"><a href=\"#race\" data-toggle=\"tab\">Race</a></li>\r\n");
       out.write("                                                                <li class=\"");
 out.println(String.valueOf(marital));
-      out.write("\"><a href=\"#mStatus\" data-toggle=\"tab\">Marital Status</a></li>\r\n");
-      out.write("                                                                \r\n");
-      out.write("                                                                <li class=\"");
+      out.write("\"><a href=\"#mStatus\" data-toggle=\"tab\">Marital Status</a></li> <li class=\"");
 out.println(String.valueOf(province));
       out.write("\"><a href=\"#province\" data-toggle=\"tab\">Province</a></li>\r\n");
       out.write("                                                                <li class=\"");
@@ -588,7 +616,12 @@ out.println(String.valueOf(status));
       out.write("                                                                <li class=\"");
 out.println(String.valueOf(relationship));
       out.write("\"><a href=\"#relationship\" data-toggle=\"tab\">Relationship</a></li>\r\n");
-      out.write("\r\n");
+      out.write("                                                                <li class=\"");
+out.println(String.valueOf(bodyPart));
+      out.write("\"><a href=\"#bodyPart\" data-toggle=\"tab\">Body Part</a></li>\r\n");
+      out.write("                                                                <li class=\"");
+out.println(String.valueOf(specialCur));
+      out.write("\"><a href=\"#specialCur\" data-toggle=\"tab\">Special Circumstance</a></li>\r\n");
       out.write("                                                            </ul>\r\n");
       out.write("                                                            <div class=\"tab-content\" >\r\n");
       out.write("                                                                <div id=\"inst\" class=\"tab-pane ");
@@ -626,9 +659,10 @@ out.println(String.valueOf(inst));
                                                                                     }
                                                                                 
       out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('Insitution', 'InsitutionList')\" value=\"Edit Institution\" id=\"cmdEditInsitutions\" name=\"cmdEditInsitution\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div>     \r\n");
       out.write("                                                                    <div  class=\"offset3\">\r\n");
@@ -674,6 +708,9 @@ out.println(String.valueOf(analysis));
       out.write("\r\n");
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('analysis', 'AnalysisList')\" value=\"Edit analysis type\" id=\"cmdEditAnalysis\" name=\"cmdEditAnalysis\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -690,13 +727,101 @@ out.println(String.valueOf(analysis));
       out.write("                                                                <div id=\"prop\" class=\"tab-pane ");
 out.println(String.valueOf(property));
       out.write(" \"> \r\n");
-      out.write("                                                                    <div align=\"center\"><h2>Property</h2> </div>                   \r\n");
+      out.write("                                                                    <div align=\"center\"><h2>Property</h2> </div>        \r\n");
+      out.write("                                                                    <div class=\"offset2 \">\r\n");
+      out.write("                                                                        <form name=\"AddProperty\" id=\"AddProperty\" method=\"post\" action=\"ReferenceListServlet\">\r\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddProperty\" style=\"visibility: hidden\" />\r\n");
+      out.write("                                                                            <div class=\"control-group form-horizontal\">\r\n");
+      out.write("                                                                                <label class=\"control-label\" for=\"txtProperty\">Property type name:</label>\r\n");
+      out.write("                                                                                <div class=\"controls\">\r\n");
+      out.write("                                                                                    <input type=\"text\" id=\"txtProperty\" name=\"txtProperty\"   />\r\n");
+      out.write("                                                                                    <input type=\"submit\" value=\"Add Property Type\" name=\"cmdProperty\" />\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <br/>  </div>\r\n");
+      out.write("                                                                        </form>\r\n");
+      out.write("                                                                        <div class=\"controls offset2\" >\r\n");
+      out.write("                                                                            <label class=\"control-label\" for=\"PropertyList\">Current Property Type(s):</label>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <select id=\"PropertyList\" name=\"PropertyList\" size=\"5\">\r\n");
+      out.write("                                                                                ");
+
+                                                                                    for (int i = 0; i < PropertyList.size(); i++) {
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                                <option>");
+ out.print(PropertyList.get(i));
+      out.write(" </option>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                ");
+
+                                                                                    }
+                                                                                
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('propertytype', 'PropertyList')\" value=\"Edit property type\" id=\"cmdEditProperty\" name=\"cmdEditProperty\" />\r\n");
+      out.write("\r\n");
+      out.write("                                                                        </div>\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                    ");
+      out.write(" \r\n");
+      out.write("                                                                    <div  class=\"offset3\">\r\n");
+      out.write("                                                                        <label  > ");
+ out.println(String.valueOf(propertyResult));
+      out.write("</label>\r\n");
+      out.write("                                                                    </div>\r\n");
       out.write("                                                                </div>\r\n");
       out.write("\r\n");
       out.write("                                                                <div id=\"vehicles\" class=\"tab-pane ");
 out.println(String.valueOf(vehi));
       out.write(" \"> \r\n");
-      out.write("                                                                    <div align=\"center\"><h2>Vehicles</h2> </div>                   \r\n");
+      out.write("                                                                    <div align=\"center\"><h2>Vehicles</h2> </div> \r\n");
+      out.write("                                                                    <div class=\"offset2 \">\r\n");
+      out.write("                                                                        <form name=\"AddVehicle\" id=\"AddVehicle\" method=\"post\" action=\"ReferenceListServlet\"  >\r\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddVehicle\" style=\"visibility: hidden\" />\r\n");
+      out.write("                                                                            <div class=\"control-group form-horizontal\">\r\n");
+      out.write("                                                                                <label class=\"control-label\" for=\"txtVehicle\">Vehicle Registration Number:</label>\r\n");
+      out.write("                                                                                <div class=\"controls\">\r\n");
+      out.write("                                                                                    <input type=\"text\" id=\"txtVehicle\" name=\"txtVehicle\"   />\r\n");
+      out.write("                                                                                    <input type=\"submit\" value=\"Add Vehicle\" name=\"cmdVehicle\" />\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <br/>  </div>\r\n");
+      out.write("                                                                        </form>\r\n");
+      out.write("                                                                        <div class=\"controls offset2\" >\r\n");
+      out.write("                                                                            <label class=\"control-label\" for=\"VehicleList\">Current Vehicle(s)</label>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <select id=\"VehicleList\" name=\"VehicleList\" size=\"5\">\r\n");
+      out.write("                                                                                ");
+
+                                                                                    for (int i = 0; i < vehicleList.size(); i++) {
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                                <option>");
+ out.print(vehicleList.get(i));
+      out.write(" </option>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                ");
+
+                                                                                    }
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('vehicle', 'VehicleList')\" value=\"Edit Vehicle number\" id=\"cmdEditVehicle\" name=\"cmdEditVehicle\" />\r\n");
+      out.write("\r\n");
+      out.write("                                                                        </div>\r\n");
+      out.write("                                                                    </div> \r\n");
+      out.write("                                                                    ");
+      out.write(" \r\n");
+      out.write("                                                                    <div  class=\"offset3\">\r\n");
+      out.write("                                                                        <label  > ");
+ out.println(String.valueOf(vehicleResult));
+      out.write("</label>\r\n");
+      out.write("                                                                    </div>\r\n");
       out.write("                                                                </div>\r\n");
       out.write("\r\n");
       out.write("                                                                <div id=\"rank\" class=\"tab-pane ");
@@ -734,6 +859,9 @@ out.println(String.valueOf(rank));
                                                                                 
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('rank', 'RankList')\" value=\"Edit Rank\" id=\"cmdEditRank\" name=\"cmdEditRank\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -783,6 +911,8 @@ out.println(String.valueOf(gender));
                                                                                 
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('gender', 'GenderList')\" value=\"Edit Gender\" id=\"cmdEditGender\" name=\"cmdEditGender\" />\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -831,6 +961,9 @@ out.println(String.valueOf(occu));
                                                                                 
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('occupation', 'OccuList')\" value=\"Edit Occupation type\" id=\"cmdEditOccupation\" name=\"cmdEditOccupation\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -881,6 +1014,9 @@ out.println(String.valueOf(race));
                                                                                 
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('race', 'RaceList')\" value=\"Edit Race type\" id=\"cmdEditRace\" name=\"cmdEditRace\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -931,6 +1067,9 @@ out.println(String.valueOf(marital));
                                                                                 
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('maritalstatus', 'MaritalList')\" value=\"Edit Marital Status type\" id=\"cmdEditMarital\" name=\"cmdEditMarital\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -942,13 +1081,6 @@ out.println(String.valueOf(marital));
       out.write("                                                                    </div>\r\n");
       out.write("                                                                    <br/>\r\n");
       out.write("                                                                    <br/>\r\n");
-      out.write("                                                                </div>\r\n");
-      out.write("\r\n");
-      out.write("                                                                <div id=\"org\" class=\"tab-pane ");
-out.println(String.valueOf(organisation));
-      out.write(" \"> \r\n");
-      out.write("                                                                    <div align=\"center\"><h2> Organisation </h2> </div>\r\n");
-      out.write("\r\n");
       out.write("                                                                </div>\r\n");
       out.write("\r\n");
       out.write("                                                                <div  id=\"province\" class=\"tab-pane ");
@@ -988,6 +1120,9 @@ out.println(String.valueOf(province));
                                                                                 
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('province', 'ProvinceList')\" value=\"Edit Marital Province\" id=\"cmdEditProvince\" name=\"cmdEditProvince\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -1088,6 +1223,9 @@ out.println(String.valueOf(manner));
                                                                                 
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('mannerofdeath', 'MannerList')\" value=\"Edit Manner of Death\" id=\"cmdEditManner\" name=\"cmdEditManner\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -1138,6 +1276,9 @@ out.println(String.valueOf(sample));
                                                                                 
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('sample', 'SampleList')\" value=\"Edit Sample type\" id=\"cmdEditSample\" name=\"cmdEditSample\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -1188,6 +1329,9 @@ out.println(String.valueOf(status));
                                                                                 
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('bodystatus', 'StatusList')\" value=\"Edit Body Status\" id=\"cmdEditBodystatus\" name=\"cmdEditBodystatus\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -1238,6 +1382,9 @@ out.println(String.valueOf(relationship));
                                                                                 
       out.write("\r\n");
       out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('relationship', 'RelationshipList')\" value=\"Edit Relationship type\" id=\"cmdEditRelationship\" name=\"cmdEditRelationship\" />\r\n");
+      out.write("\r\n");
       out.write("                                                                        </div>\r\n");
       out.write("                                                                    </div> \r\n");
       out.write("                                                                    ");
@@ -1245,6 +1392,110 @@ out.println(String.valueOf(relationship));
       out.write("                                                                    <div  class=\"offset3\">\r\n");
       out.write("                                                                        <label  > ");
  out.println(String.valueOf(relationshipResult));
+      out.write("</label>\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                    <br/>\r\n");
+      out.write("                                                                    <br/>\r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("                                                                <div id=\"bodyPart\" class=\"tab-pane ");
+out.println(String.valueOf(bodyPart));
+      out.write(" \"> \r\n");
+      out.write("                                                                    <div align=\"center\"><h2>Body Part </h2> </div>   \r\n");
+      out.write("                                                                    ");
+      out.write("\r\n");
+      out.write("                                                                    <div class=\"offset2 \">\r\n");
+      out.write("                                                                        <form name=\"AddBodyPart\" id=\"AddBodyPart\" method=\"post\" action=\"ReferenceListServlet\"  >\r\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddBodyPart\" style=\"visibility: hidden\" />\r\n");
+      out.write("                                                                            <div class=\"control-group form-horizontal\">\r\n");
+      out.write("                                                                                <label class=\"control-label\" for=\"txtBodyPart\">Body Part Type:</label>\r\n");
+      out.write("                                                                                <div class=\"controls\">\r\n");
+      out.write("                                                                                    <input type=\"text\" id=\"txtBodyPart\" name=\"txtBodyPart\"   />\r\n");
+      out.write("                                                                                    <input type=\"submit\" value=\"Add Blody Part Type\" name=\"cmdBodyPart\" />\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <br/>  </div>\r\n");
+      out.write("                                                                        </form>\r\n");
+      out.write("                                                                        <div class=\"controls offset2\" >\r\n");
+      out.write("                                                                            <label class=\"control-label\" for=\"BodyClassList\">Current Body Part Type(s):</label>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <select id=\"BodyClassList\" name=\"BodyClassList\" size=\"5\">\r\n");
+      out.write("                                                                                ");
+
+                                                                                    for (int i = 0; i < bodyPartList.size(); i++) {
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                                <option>");
+ out.print(bodyPartList.get(i));
+      out.write(" </option>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                ");
+
+                                                                                    }
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('bodypart', 'BodyClassList')\" value=\"Edit Body Part type\" id=\"cmdEditBodyPart\" name=\"cmdEditBodyPart\" />\r\n");
+      out.write("\r\n");
+      out.write("                                                                        </div>\r\n");
+      out.write("                                                                    </div> \r\n");
+      out.write("                                                                    ");
+      out.write(" \r\n");
+      out.write("                                                                    <div  class=\"offset3\">\r\n");
+      out.write("                                                                        <label  > ");
+ out.println(String.valueOf(bodyPartResult));
+      out.write("</label>\r\n");
+      out.write("                                                                    </div>\r\n");
+      out.write("                                                                    <br/>\r\n");
+      out.write("                                                                    <br/>\r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("                                                                <div id=\"specialCur\" class=\"tab-pane ");
+out.println(String.valueOf(specialCur));
+      out.write(" \"> \r\n");
+      out.write("                                                                    <div align=\"center\"><h2>Special Circumstances</h2> </div>   \r\n");
+      out.write("                                                                    ");
+      out.write("\r\n");
+      out.write("                                                                    <div class=\"offset2 \">\r\n");
+      out.write("                                                                        <form name=\"AddSpecialCur\" id=\"AddSpecialCur\" method=\"post\" action=\"ReferenceListServlet\"  >\r\n");
+      out.write("                                                                            <input type=\"text\" name=\"form\" value=\"AddSpecialCur\" style=\"visibility: hidden\" />\r\n");
+      out.write("                                                                            <div class=\"control-group form-horizontal\">\r\n");
+      out.write("                                                                                <label class=\"control-label\" for=\"txtSpecialCur\">Special Circumstance Type:</label>\r\n");
+      out.write("                                                                                <div class=\"controls\">\r\n");
+      out.write("                                                                                    <input type=\"text\" id=\"txtSpecialCur\" name=\"txtSpecialCur\"   />\r\n");
+      out.write("                                                                                    <input type=\"submit\" value=\"Add Special Circumstance Type\" name=\"cmdSpecialCur\" />\r\n");
+      out.write("                                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                <br/>  </div>\r\n");
+      out.write("                                                                        </form>\r\n");
+      out.write("                                                                        <div class=\"controls offset2\" >\r\n");
+      out.write("                                                                            <label class=\"control-label\" for=\"SpecialCurList\">Special Circumstance Type(s):</label>\r\n");
+      out.write("\r\n");
+      out.write("                                                                            <select id=\"BodyClassList\" name=\"SpecialCurList\" size=\"5\">\r\n");
+      out.write("                                                                                ");
+
+                                                                                    for (int i = 0; i < specialCurList.size(); i++) {
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                                <option>");
+ out.print(specialCurList.get(i));
+      out.write(" </option>\r\n");
+      out.write("\r\n");
+      out.write("                                                                                ");
+
+                                                                                    }
+                                                                                
+      out.write("\r\n");
+      out.write("                                                                            </select>\r\n");
+      out.write("                                                                            <br/>\r\n");
+      out.write("                                                                            <input type=\"button\" onclick=\"editReferenceList('specialcircumstance', 'SpecialCurList')\" value=\"Edit Special Circumstance\" id=\"cmdEditSpecialCur\" name=\"cmdEditSpecialCur\" />\r\n");
+      out.write("\r\n");
+      out.write("                                                                        </div>\r\n");
+      out.write("                                                                    </div> \r\n");
+      out.write("                                                                    ");
+      out.write(" \r\n");
+      out.write("                                                                    <div  class=\"offset3\">\r\n");
+      out.write("                                                                        <label  > ");
+ out.println(String.valueOf(specialCurResult));
       out.write("</label>\r\n");
       out.write("                                                                    </div>\r\n");
       out.write("                                                                    <br/>\r\n");

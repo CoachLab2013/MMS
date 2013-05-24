@@ -17,17 +17,17 @@ $(document).ready(function(){
             
             detailyear:{
               valueNotEquals: "Year",
-              validdate : true
+              checkdate : true
           },//end rule for year
           
           detailmonth:{
               valueNotEquals: "Month",
-              validdate: true
+              checkdate: true
           },//end rule for month
           
           detailday:{
               valueNotEquals: "Day",
-              validdate: true
+              checkdate: true
           },//end rule for day
           
           detailhour:{
@@ -74,17 +74,17 @@ $(document).ready(function(){
           
           detailyear:{
               valueNotEquals: "Invalid date.",
-              validdate: "Invalid date."
+              checkdate: "Invalid date."
           },//end message for year
           
           detailmonth:{
               valueNotEquals: "Invalid date.",
-              validdate: "Invalid date."
+              checkdate: "Invalid date."
           },//end message for month
           
           detailday:{
               valueNotEquals: "Invalid date.",
-              validdate: "Invalid date."
+              checkdate: "Invalid date."
           },//end message for day
           
           detailhour:{
@@ -121,43 +121,47 @@ $(document).ready(function(){
      */
     $.validator.addMethod("valueNotEquals", function(value, element, arg){
         return arg != value;
-    }, "Value must not equal arg.");
+    });
     
     /**
      * Custom rule to check valid date
      */
-    $.validator.addMethod("validdate",function(value){
+    $.validator.addMethod("checkdate",function(value){
         var year = $("#detailyear").val();
         var month = $("#detailmonth").val();
         var day = $("#detailday").val();
         var nummonth = $("option:selected","#detailmonth").attr("num");
         var date = new Date();
-       if((month=="April")|| (month=="June") || (month=="September") || (month=="November")){
+        
+        if((year == date.getFullYear())&& (nummonth==(date.getMonth()+1)) && (day>date.getDate())){  
+            return !value;
+        }
+        if((year == date.getFullYear()) && (nummonth > (date.getMonth()+1))){
+            return !value;
+        }
+        
+        if((month=="April")|| (month=="June") || (month=="September") || (month=="November")){
             if(day >30){
                 return !value;
             }
             return value;    
         }
-        else if(month == "February"){
+        else if(month == "February"){         
             if((year%4) ==0){
                 if(day>29){
                     return !value;
                 }
-                else{
-                    return value;
-                }
+                return value;
             }
             else if(day > 28){
                 return !value;
             }
             return value;
         }
-        if((year == date.getFullYear())&& (nummonth==(date.getMonth()+1)) && (day>date.getDate())){
-            return !value;
-        }
         
         return value;
-    },"must be a valid date");
+        
+    });
     
     /**
      * check for a valid time
@@ -181,12 +185,12 @@ $(document).ready(function(){
     });
     
     
-    $("#incidentcontinue").on("click",function(){
+    $("#incidentcontinue").click(function(){
         if($("#detailform").valid()){
             $("#IncidentDetailsTab").removeClass("active");
             $("#IncidentDetails").removeClass("tab-pane active");
-            $("#CallDetails").removeClass("tab-pane");
             $("#IncidentDetails").addClass("tab-pane");
+            $("#CallDetails").removeClass("tab-pane");            
             $("#CallDetails").addClass("tab-pane active");
             $("#CallDetailsTab").addClass("active");
             $("#callform").show();
