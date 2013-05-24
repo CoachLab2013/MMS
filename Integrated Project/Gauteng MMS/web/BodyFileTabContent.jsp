@@ -258,7 +258,7 @@
                                                 <legend class="legend"><h4>Body details:</h4></legend>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="BodyPart">Body Classification</label> 
+                                                    <label class="control-label">Body Classification</label> 
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("BodyPart", "type", ""));
                                                             %>
@@ -271,41 +271,41 @@
                                                 </div> 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="bodyName">Name</label> 
+                                                    <label class="control-label" for="atSceneBodyName">Name</label> 
                                                     <div class="controls">
-                                                        <input type="text" name="bodyName" id="bodyName"/> 
+                                                        <input type="text" name="atSceneBodyName" id="atSceneBodyName"/> 
                                                     </div>
 
 
 
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="bodySurname">Surname</label>
+                                                    <label class="control-label" for="atSceneBodySurname">Surname</label>
                                                     <div class="controls">
-                                                        <input type="text" name="bodySurname" id="bodySurname"/> 
+                                                        <input type="text" name="atSceneBodySurname" id="atSceneBodySurname"/> 
                                                     </div>
                                                 </div>
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="bodyID">ID number</label>
+                                                    <label class="control-label" for="atSceneBodyID">ID number</label>
                                                     <div class="controls">
-                                                        <input type="text" name="bodyID" id="bodyID"/> 
+                                                        <input type="text" name="atSceneBodyID" id="atSceneBodyID"/> 
                                                     </div>
                                                 </div>
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="bodyAddress">Address</label>
+                                                    <label class="control-label" for="atSceneBodyAddress">Address</label>
                                                     <div class="controls">
 
-                                                        <textarea cols="50" rows="3" id="bodyAddress" name="bodyAddress"> </textarea>
+                                                        <textarea cols="50" rows="3" id="atSceneBodyAddress" name="atSceneBodyAddress"> </textarea>
 
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="bodyRace">Race</label> 
+                                                    <label class="control-label">Race</label> 
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("Race", "type", ""));
                                                             %>                      
@@ -322,7 +322,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="bodyGender">Gender</label> 
+                                                    <label class="control-label">Gender</label> 
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("Gender", "type", ""));
                                                             %>
@@ -342,9 +342,9 @@
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="bodyAge">Age estimate</label>
+                                                    <label class="control-label" for="atSceneBodyEstAge">Age estimate</label>
                                                     <div class="controls">
-                                                        <input type="text" name="bodyAge" id="bodyAge"/> 
+                                                        <input type="text" name="atSceneBodyEstAge" id="atSceneBodyEstAge"/> 
                                                     </div>
                                                 </div>
 
@@ -358,7 +358,7 @@
 
                                                     <div class="input-append date " id="datepicker" name="bodyFoundDate" >
 
-                                                        <input size="16" id="FoundDate" name="FoundDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
+                                                        <input size="16" id="bodyFoundDate" name="bodyFoundDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-calendar"></i></span> 
 
                                                     </div>
@@ -369,7 +369,7 @@
 
                                                     <div class="input-append date " id="timepicker" name="bodyFoundTime" >
 
-                                                        <input size="16" id="FoundTime" name="FoundTime" data-format="hh:mm" type="text" value="" readonly>
+                                                        <input size="16" id="bodyFoundTime" name="bodyFoundTime" data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
 
                                                     </div>
@@ -386,7 +386,7 @@
 
                                                     <div class="input-append date " id="datepicker2" name="allegedInjuryDate" >
 
-                                                        <input size="16" id="InjuryDate" name="inAllegedInjuryDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
+                                                        <input size="16" id="inAllegedInjuryDate" name="inAllegedInjuryDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-calendar"></i></span> 
 
                                                     </div>
@@ -397,7 +397,7 @@
 
                                                     <div class="input-append date " id="timepicker2" name="allegedInjuryTime">
 
-                                                        <input size="16" id="InjuryTime" name="inAllegedInjuryTime" data-format="hh:mm" type="text" value="" readonly>
+                                                        <input size="16" id="inAllegedInjuryTime" name="inAllegedInjuryTime" data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
 
                                                     </div>
@@ -412,7 +412,7 @@
 
                                                     <div class="input-append date " id="datepicker3" name="allegedDeathDate" >
 
-                                                        <input size="16" id="DeathDate" name="inAllegedDeathDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
+                                                        <input size="16" id="inAllegedDeathDate" name="inAllegedDeathDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-calendar"></i></span> 
 
                                                     </div>
@@ -423,7 +423,7 @@
 
                                                     <div class="input-append date " id="timepicker3" name="allegedDeathtime" >
 
-                                                        <input size="16" id="DeathTime" name="inAllegedDeathTime" data-format="hh:mm" type="text" value="" readonly>
+                                                        <input size="16" id="inAllegedDeathTime" name="inAllegedDeathTime" data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
 
                                                     </div>
@@ -439,7 +439,7 @@
 
                                                     <div class="input-append date " id="datepicker4" name="FPSbodyReceiveSceneDate" >
 
-                                                        <input size="16" id="ReceivedSDate" name="ReceivedSceneDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
+                                                        <input size="16" id="ReceivedSceneDate" name="ReceivedSceneDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
                                                                <span class="add-on"><i class="icon-calendar"></i></span> 
 
                                                     </div>
@@ -450,7 +450,7 @@
 
                                                     <div class="input-append date " id="timepicker4" name="FPSbodyReceiveSceneTime" >
 
-                                                        <input size="16"  id="ReceivedSTime" name="ReceivedSceneTime" data-format="hh:mm" type="text" value="" readonly>
+                                                        <input size="16"  id="ReceivedSceneTime" name="ReceivedSceneTime" data-format="hh:mm" type="text" value="" readonly>
                                                         <span class="add-on"><i class="icon-time"></i></span> 
 
                                                     </div>
@@ -531,20 +531,20 @@
                                                     <div class="control-group">
                                                         <label class="control-label" for="SAPSpropertyDescr">Description</label> 
                                                         <div class="controls">
-                                                            <textarea cols="50" rows="3" id="SAPSdescr" name="SAPSpropertyDescr"> </textarea>
+                                                            <textarea cols="50" rows="3" id="SAPSpropertyDescr" name="SAPSpropertyDescr"> </textarea>
                                                         </div>
                                                     </div>
 
                                                     <div class="control-group">
                                                         <label class="control-label" for="SAPSpropertyName">SAPS member name:</label> 
                                                         <div class="controls">
-                                                            <input type="text" name="SAPSpropertyName" id="SAPSname"/> 
+                                                            <input type="text" name="SAPSpropertyName" id="SAPSpropertyName"/> 
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="SAPSpropertySurname">SAPS member surname:</label> 
                                                         <div class="controls">
-                                                            <input type="text" name="SAPSpropertySurname" id="SAPSsurname"/> 
+                                                            <input type="text" name="SAPSpropertySurname" id="SAPSpropertySurname"/> 
                                                         </div>
                                                     </div>
 
@@ -750,42 +750,42 @@
                                                 <fieldset class="fieldset offset1">     
                                                     <legend class="legend"><h5>Taken/handed over by FPS officer</h5></legend>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="FPSdescr">Description</label> 
+                                                        <label class="control-label" for="atSceneFPSpropertyDescr">Description</label> 
                                                         <div class="controls">
-                                                            <textarea cols="50" rows="3" id="FPSdescr" name="FPSdescr"> </textarea>
+                                                            <textarea cols="50" rows="3" id="atSceneFPSpropertyDescr" name="atSceneFPSpropertyDescr"> </textarea>
                                                         </div>
                                                     </div>
 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="FPSname">FPS member name:</label> 
+                                                        <label class="control-label" for="atSceneFPSpropertyName">FPS member name:</label> 
                                                         <div class="controls">
-                                                            <input type="text" name="FPSname" id="FPSname"/> 
+                                                            <input type="text" name="atSceneFPSpropertyName" id="atSceneFPSpropertyName"/> 
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="FPSsurname">FPS member surname:</label> 
+                                                        <label class="control-label" for="atSceneFPSpropertySurname">FPS member surname:</label> 
                                                         <div class="controls">
-                                                            <input type="text" name="FPSsurname" id="FPSsurname"/> 
+                                                            <input type="text" name="atSceneFPSpropertySurname" id="atSceneFPSpropertySurname"/> 
                                                         </div>
                                                     </div>
 
                                                     <div class="offset4">
-                                                        <input   class="btn btn-primary" onclick="displayResult('FPSTable', 'FPSdescr', 'FPSname', 'FPSsurname')" type="button" value="Add Item" /> 
+                                                        <input   class="btn btn-primary" onclick="displayResult('atSceneFPSpropertyTable', 'atSceneFPSpropertyDescr', 'atSceneFPSpropertyName', 'atSceneFPSpropertySurname')" type="button" value="Add Item" /> 
                                                         <%--Display save result --%> 
                                                     </div>
                                                     <br/> <br/>
-                                                    <table id="FPSTable" border="1">
+                                                    <table id="atSceneFPSpropertyTable" border="1">
                                                         <tr>
-                                                            <th width="60"> select </th>
-                                                            <th width="150"> Description </th>
-                                                            <th width="150">FPS Name </th>
-                                                            <th width="150">FPS Surname </th>
+                                                            <th width="60">select</th>
+                                                            <th width="150">Description</th>
+                                                            <th width="150">FPS Name</th>
+                                                            <th width="150">FPS Surname</th>
                                                         </tr>
 
                                                     </table>
                                                     <br/>
                                                     <div class="offset5">
-                                                        <input    class="btn btn-primary" onclick=" deleteRow('FPSTable')" type="button" value="Delete" /> 
+                                                        <input    class="btn btn-primary" onclick=" deleteRow('atSceneFPSpropertyTable')" type="button" value="Delete" /> 
                                                         <%--Display save result --%> 
                                                     </div>
                                                     <br/><br/>
@@ -808,30 +808,24 @@
                                             <legend class="legend"><h4></h4></legend>
 
                                             <div class="control-group">
-                                                <label class="control-label" for="EmpR">Employee receiving body:</label> 
-                                                <div class="controls">
-                                                    <select id="EmpR" name="EmpR">                            
-                                                        <option>69696969</option>
-                                                        <option>123456</option> 
-                                                    </select>
+                                                <label class="control-label">Employee receiving body:</label> 
+                                                <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Employee", "personnelNumber", ""));
+                                                            %>
                                                 </div>
                                             </div>
                                             <div class="control-group">
-                                                <label class="control-label" for="EmpH">Employee handing over body:</label> 
-                                                <div class="controls">
-                                                    <select id="EmpH" name="EmpH">                            
-                                                        <option>69696969</option>
-                                                        <option>123456</option> 
-                                                    </select>
+                                                <label class="control-label">Employee handing over body:</label> 
+                                                <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Employee", "personnelNumber", ""));
+                                                            %>
                                                 </div>
                                             </div>
                                             <div class="control-group">
-                                                <label class="control-label" for="OrgH">Organisation handing over body :</label> 
-                                                <div class="controls">
-                                                    <select id="OrgH" name="OrgH">                            
-                                                        <option>Eskom</option>
-                                                        <option>SAPS</option> 
-                                                    </select>
+                                                <label class="control-label">Organisation handing over body :</label> 
+                                                <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Organization", "name", ""));
+                                                            %>
                                                 </div>
                                             </div>
 
@@ -841,71 +835,64 @@
                                                 <legend class="legend"><h4>Body details</h4></legend>   
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="atMort">Body Classification</label> 
-                                                    <div class="controls">
-                                                        <select id="atMort" name="atMort">                            
-                                                            <option>Head</option>
-                                                            <option>Eye</option>
-                                                            <option>Body</option>
-                                                        </select>
+                                                    <label class="control-label">Body Classification</label> 
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("BodyPart", "type", ""));
+                                                            %>
                                                     </div>
                                                 </div> 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="BMname">Name</label> 
+                                                    <label class="control-label" for="atMortBodyName">Name</label> 
                                                     <div class="controls">
-                                                        <input type="text" name="BMname" id="BMname"/> 
+                                                        <input type="text" name="atMortBodyName" id="atMortBodyName"/> 
                                                     </div>
 
 
 
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="BMsurname">Surname</label>
+                                                    <label class="control-label" for="atMortBodySurname">Surname</label>
                                                     <div class="controls">
-                                                        <input type="text" name="BMsurname" id="BMsurname"/> 
+                                                        <input type="text" name="atMortBodySurname" id="atMortBodySurname"/> 
                                                     </div>
                                                 </div>
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="BMid">ID number</label>
+                                                    <label class="control-label" for="atMortBodyID">ID number</label>
                                                     <div class="controls">
-                                                        <input type="text" name="BMid" id="BMid"/> 
+                                                        <input type="text" name="atMortBodyID" id="atMortBodyID"/> 
                                                     </div>
                                                 </div>
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="BMaddress">Address</label>
+                                                    <label class="control-label" for="atMortBodyAddress">Address</label>
                                                     <div class="controls">
-                                                        <textarea cols="50" rows="3" id="BMaddress" name="BMaddress"> </textarea>  
+                                                        <textarea cols="50" rows="3" id="atMortBodyAddress" name="atMortBodyAddress"> </textarea>  
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="BMrace">Race</label> 
-                                                    <div class="controls">
-                                                        <select id="BMrace" name="BMrace">                            
-                                                            <option>Black</option>
-
-                                                        </select>
+                                                    <label class="control-label">Race</label> 
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Race", "type", ""));
+                                                            %>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="BMgender">Gender</label> 
-                                                    <div class="controls">
-                                                        <select id="BMgender" name="BMgender">                            
-                                                            <option>Male</option>
-
-                                                        </select>
+                                                    <label class="control-label">Gender</label> 
+                                                    <div class="controls"><%
+                                                            out.print(t.makeReferenceList("Gender", "type", ""));
+                                                            %>
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="BMage">Age estimate</label>
+                                                    <label class="control-label" for="atMortBodyEstAge">Age estimate</label>
                                                     <div class="controls">
-                                                        <input type="text" name="BMage" id="BMage"/> 
+                                                        <input type="text" name="atMortBodyEstAge" id="atMortBodyEstAge"/> 
                                                     </div>
                                                 </div>
 
@@ -914,31 +901,31 @@
                                             <fieldset class="fieldset">     
                                                 <legend class="legend"><h4>Property/evidence</h4></legend>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="MFPSdescr">Description</label> 
+                                                    <label class="control-label" for="atMortFPSpropertyDescr">Description</label> 
                                                     <div class="controls">
-                                                        <textarea cols="50" rows="3" id="MFPSdescr" name="MFPSdescr"> </textarea>
+                                                        <textarea cols="50" rows="3" id="atMortFPSpropertyDescr" name="atMortFPSpropertyDescr"> </textarea>
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="MFPSname">FPS member name:</label> 
+                                                    <label class="control-label" for="atMortFPSpropertyName">FPS member name:</label> 
                                                     <div class="controls">
-                                                        <input type="text" name="MFPSname" id="MFPSname"/> 
+                                                        <input type="text" name="atMortFPSpropertyName" id="atMortFPSpropertyName"/> 
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label" for="MFPSsurname">FPS member surname:</label> 
+                                                    <label class="control-label" for="atMortFPSpropertySurname">FPS member surname:</label> 
                                                     <div class="controls">
-                                                        <input type="text" name="MFPSsurname" id="MFPSsurname"/> 
+                                                        <input type="text" name="atMortFPSpropertySurname" id="atMortFPSpropertySurname"/> 
                                                     </div>
                                                 </div>
 
                                                 <div class="offset4">
-                                                    <input    class="btn btn-primary" onclick="displayResult('MFPSTable', 'MFPSdescr', 'MFPSname', 'MFPSsurname')" type="button" value="Add Item" /> 
+                                                    <input    class="btn btn-primary" onclick="displayResult('atMortFPSpropertyTable', 'atMortFPSpropertyDescr', 'atMortFPSpropertyName', 'atMortFPSpropertySurname')" type="button" value="Add Item" /> 
                                                     <%--Display save result --%> 
                                                 </div>
                                                 <br/> <br/>
-                                                <table id="MFPSTable" border="1">
+                                                <table id="atMortFPSpropertyTable" border="1">
                                                     <tr>
                                                         <th width="60"> select </th>
                                                         <th width="150"> Description </th>
@@ -950,7 +937,7 @@
                                                 </table>
                                                 <br/>
                                                 <div class="offset5">
-                                                    <input    class="btn btn-primary" onclick=" deleteRow('MFPSTable')" type="button" value="Delete" /> 
+                                                    <input    class="btn btn-primary" onclick=" deleteRow('atMortFPSpropertyTable')" type="button" value="Delete" /> 
                                                     <%--Display save result --%> 
                                                 </div>
                                                 <br/><br/>
