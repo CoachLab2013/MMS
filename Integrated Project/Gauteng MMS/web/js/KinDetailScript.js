@@ -27,8 +27,8 @@ $(document).ready(function(){
             
                KinIDNumber:{
                 required: true,
-                minlength: 14,
-                maxlength:14,
+                minlength: 13,
+                maxlength:13,
                 number:true
              },//end rule of ID number
           
@@ -84,14 +84,30 @@ $(document).ready(function(){
     
     if($("#go_to_deceasedDetails").val()=="true")
     {
-         //set focus on Open Incidents tab 
-            $("#OpenIncidentsTab").removeClass("active");
-            $("#EditIncidentTab").addClass("active");
-            
-            $("#OpenIncidents").removeClass("tab-pane active");
-            $("#OpenIncidents").addClass("tab-pane");
-            $("#EditIncident").removeClass("tab-pane");
-            $("#EditIncident").addClass("tab-pane active");
+        $("#IncidentTab").removeClass("active");
+        $("#BodyFileTab").addClass("active");
+        $("#Incident").removeClass("tab-pane active");
+        $("#Incident").addClass("tab-pane");
+        $("#BodyFile").removeClass("tab-pane");
+        $("#BodyFile").addClass("tab-pane active");
+        $("#tabOpenBodyFiles").removeClass("active");
+        $("#tabEditBodyFiles").addClass("active");
+        $("#OpenBodyFiles").removeClass("tab-pane active");
+        $("#OpenBodyFiles").addClass("tab-pane");
+        $("#EditBodyFiles").removeClass("tab-pane");
+        $("#EditBodyFiles").addClass("tab-pane active");
+        $("#tabIncidentInformation").removeClass("active");
+        $("tabBodyIdentification").addClass("active");
+        $("#IncidentInformation").removeClass("tab-pane active");
+        $("#IncidentInformation").addClass("tab-pane");
+        $("#BodyIdentification").removeClass("tab-pane");
+        $("#BodyIdentification").addClass("tab-pane active");
+        $("#tabKinInformantDetails").removeClass("active");
+        $("#tabDeceasedDetails").addClass("active");
+        $("#KinInformantDetails").removeClass("tab-pane active");
+        $("#KinInformantDetails").addClass("tab-pane");
+        $("#DeceasedDetails").removeClass("tab-pane");
+        $("#DeceasedDetails").addClass("tab-pane active");
     }
 }); 
 //end $(document).ready(function())
