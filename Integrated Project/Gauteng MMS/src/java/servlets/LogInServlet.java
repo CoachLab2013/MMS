@@ -44,7 +44,7 @@ public class LogInServlet extends HttpServlet {
             int access = t.logIn(personnelnumber, password, sess);
            
             if(access == -1){
-                sess.setAttribute("loginerror", "Unidentified user, incident has been logged.");
+                sess.setAttribute("loginerror", "Invalid persal number and/or password");
                 response.sendRedirect("/Gauteng_MMS/");
             }
             else{
