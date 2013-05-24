@@ -22,7 +22,14 @@
  <script src="js/PostMortemFindingsContentScript.js"></script>
     </head>
     <body>
-        <form name="Findingsform" id="Findingsform" method="post" action="">
+        <legend>Body File> Edit Body File> Post Mortem> Post Mortem Findings</legend>
+        <%
+            if (session.getAttribute("_PostMortem") != null) {
+                out.print("<input type=hidden id='_PostMortem' value=" + session.getAttribute("_PostMortem") +">"); 
+                session.removeAttribute("_PostMortem");
+            }
+        %>
+        <form name="Findingsform" id="Findingsform" method="post" action="PostMortemServlet">
       
           
                 <table>
@@ -37,7 +44,8 @@
                      
                             </tr>
                             <tr>
-                        <td>  ICD codes:</td><td><select name="ICDcode" id="ICDcode"><br>
+                        <td>  ICD codes:</td><td>
+        <select name="ICDcode" id="ICDcode">
              <option selected="selected">Choose chapter</option>
              <option></option>
              <option></option>
@@ -49,12 +57,12 @@
              <option></option>
          </select>
                             <select name="Diagnosis1">
-                                <option>selected="selected">Select</option>
+                                <option selected="selected">Select</option>
                                 <option></option>
                                 <option></option>
                             </select>   
                             <select name="diagnosis2">
-                                <option>selected="selected">Select</option>
+                                <option selected="selected">Select</option>
                                 <option></option>
                                 <option></option>
                                 <option></option>

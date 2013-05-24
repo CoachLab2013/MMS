@@ -1,7 +1,3 @@
-/* 
- * This is all the validation rules for register forensic sample
- */
-
 /**
  * Need to begin with $(document).ready(function)
  * This ensures that the document if fully loaded before the script is executed
@@ -11,54 +7,77 @@ $(document).ready(function(){
     /**
      * validation for the login form
      */
-    $("#registerform").validate({
+    $("#editform").validate({
         rules:{
-            InitialSealnumber:{
+            editInitialSealnumber:{
                 required: true
             },//end rules for initial seal number 
           
-              DeathRegisternumber:{
+              editDeathRegisternumber:{
               required:true
           },//end rules for Death Register numberr
           
-               NewSealNumber:{
+               editNewSealNumber:{
               required:true
           },//end rules for New Seal Number
           
-               LabReferenceNumber:{
+               editLabReferenceNumber:{
               required:true
           },//end rules for Lab Reference number
           
-               Reasonseal:{
+               editReasonseal:{
               required:true
           }//end rules for Lab Reference number 
        
         },//end of rules
        
         messages:{
-          InitialSealnumber:{
+          editInitialSealnumber:{
                 required: "Please enter in your Initial Seal Number."
           },//end messages for initial seal number
           
-          DeathRegisternumber:{
+          editDeathRegisternumber:{
             required: "Please enter in the Death Register Number."  
           },//end message for death register
           
-          LabReferenceNumber:{
+          editLabReferenceNumber:{
             required: "Please enter in the Lab Reference Number."  
           },//end message for lab reference number
           
-          Reasonseal:{
+          editReasonseal:{
             required: "Please enter in the Reason for Seal."  
           },//end message for reason for seal
           
-          NewSealNumber:{
+          editNewSealNumber:{
             required: "Please enter in the New Seal Number."  
           }//end message for new seal     
         }//end of messages
         
-    });//end of form validation    
+    });//end of form validation 
     
+    $("#sampletable").click();
+     
+    $("#sampletable tr").click(function(){
+        $(".selectedtablerow").addClass("tablerow");
+        $(".selectedtablerow").removeClass("selectedtablerow");
+        $(this).removeClass("tablerow");
+        $(this).addClass("selectedtablerow");  
+        
+        $('input[name="editInitialSealnumber"]').val($(this).children('#trSealNumber').text());
+        $('input[name="editNewSealNumber"]').val($(this).children('#trBrokenSeal').text());
+        $('input[name="editDeathRegisternumber"]').val($(this).children('#trDeathNumber').text());
+        $('textarea[name="editReasonseal"]').val($(this).children('#trReason').text());
+        
+        var labRec = $(this).children('#trLabNumber').text();
+        
+        $('td[name="editRegisteredSamples"] > select[name=LabRecord]').find('option').removeAttr("selected");        
+        $('td[name="editRegisteredSamples"] > select[name=LabRecord] > option').each(function() {
+            if ($(this).text() === labRec) { $(this).attr("selected","selected"); } 
+        });
+        
+        $("#editform").removeAttr('hidden');
+    });
+
     if($("#_registerForensicSample").val() === "true") {
 
             $("#IncidentTab").removeClass("active");
@@ -87,22 +106,22 @@ $(document).ready(function(){
                 $("#PostMortem").addClass("active");
                 $("#ReleaseBody").removeClass("active");
                 
-            $("#tabRegisterForensicSample").addClass("active");
+            $("#tabRegisterForensicSample").removeClass("active");
             $("#tabRequestForensicSample").removeClass("active");
-            $("#tabRegisteredSamples").removeClass("active");
+            $("#tabRegisteredSamples").addClass("active");
             $("#tabLabRecords").removeClass("active");
             $("#tabProperty").removeClass("active");
             $("#tabPostMortemFindings").removeClass("active");
                             
-                $("#RegisterForensicSample").addClass("active");
+                $("#RegisterForensicSample").removeClass("active");
                 $("#RequestForensicSample").removeClass("active");
-                $("#RegisteredSamples").removeClass("active");
+                $("#RegisteredSamples").addClass("active");
                 $("#LabRecords").removeClass("active");
                 $("#Property").removeClass("active");
                 $("#PostMortemFindings").removeClass("active");
-    }
-    
-}); 
-//end $(document).ready(function())
+    }    
+});
+
+
 
 

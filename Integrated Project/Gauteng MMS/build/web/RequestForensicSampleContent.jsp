@@ -27,9 +27,14 @@
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
  <script src="js/RequestForensicSampleScript.js"></script>
     </head>
-    <body>
-                
+    <body>                
         <legend>Body File> Edit Body File> Post Mortem> Request Forensic Sample</legend>
+        <%
+            if (session.getAttribute("_requestForensicSample") != null) {
+                out.print("<input type=hidden id='_requestForensicSample' value=" + session.getAttribute("_requestForensicSample") +">"); 
+                session.removeAttribute("_requestForensicSample");
+            }
+        %>
         <form name="requestform" id="requestform" method="post" action="RequestForensicSampleServlet">
                 <table>
                     <tr>     
@@ -59,21 +64,23 @@
                             <td> Seal Number:</td>  
                             <td>                                 
                                 <%
-                                    ArrayList<ForensicSample> list = new ArrayList();
-                                    ForensicSampleDb sampleRefList = new ForensicSampleDb(new Tools().getDbdetail());
-                                    sampleRefList.init();   
-                                    list = sampleRefList.SampleList("deathRegisterNumber", "099888592");
-                                    String output = "<select name='seal' id='seal'>";
+                                    if (session.getAttribute("death_register_number") != null) {
+                                            ArrayList<ForensicSample> list = new ArrayList();
+                                            ForensicSampleDb sampleRefList = new ForensicSampleDb(new Tools().getDbdetail());
+                                            sampleRefList.init();
+                                            list = sampleRefList.SampleList("deathRegisterNumber", session.getAttribute("death_register_number").toString());
+                                            //list = sampleRefList.SampleList("deathRegisterNumber", "099888592");
+                                            String output = "<select name='seal' id='seal'>";
 
-                                    output = output+ "<option selected='slected'>Select</option>";
+                                            output = output + "<option selected='slected'>Select</option>";
 
-                                    int size = list.size();
-                                    for (int i=0; i<size; i++) 
-                                    {
-                                        output= output + "<option>" + list.get(i).getSealNumber() + "</option>";                              
-                                    }
-                                    output = output + "</select>";
-                                    out.println(output);
+                                            int size = list.size();
+                                            for (int i = 0; i < size; i++) {
+                                                output = output + "<option>" + list.get(i).getSealNumber() + "</option>";
+                                            }
+                                            output = output + "</select>";
+                                            out.println(output);
+                                        } else {out.println("<label class='error'>Please Select A BodyFile First</label>");}
                                 %>                      
                             </td>
                         

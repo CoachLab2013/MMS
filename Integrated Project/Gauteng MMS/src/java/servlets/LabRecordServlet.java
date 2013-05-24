@@ -5,7 +5,6 @@
 package servlets;
 
 import AssistiveClasses.SetDbDetail;
-import database.ForensicSample;
 import database.ForensicSampleDb;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mubien Nakhooda Coachlab 2013
  */
-public class RequestForensicSampleServlet extends HttpServlet {
+public class LabRecordServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -38,15 +37,13 @@ public class RequestForensicSampleServlet extends HttpServlet {
         
         ForensicSampleDb sampleDB = new ForensicSampleDb(dbSet.getDbdetail());
         sampleDB.init();
-        System.out.println("Fetch Sample Correct: " + sampleDB.read(request.getParameter("seal")));
+        System.out.println("Fetch Sample: " + sampleDB.read(request.getParameter("seal")));
         
-        sampleDB.getforensicSample().setTypeOfAnalysis(request.getParameter("analysis"));
-        sampleDB.getforensicSample().setInstitution(request.getParameter("institution"));
-        sampleDB.getforensicSample().setSpeacialInstructions(request.getParameter("special"));
+        sampleDB.getforensicSample().setDateReceived(request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day"));
         
-        System.out.println("Edit Sample Correct: " + sampleDB.edit());
-                
-        request.getSession().setAttribute("_requestForensicSample", "true");
+        System.out.println("Edit Sample Date Received: " + sampleDB.edit());
+        
+        request.getSession().setAttribute("_labRecord", "true");
         response.sendRedirect("Home.jsp");
     }
 

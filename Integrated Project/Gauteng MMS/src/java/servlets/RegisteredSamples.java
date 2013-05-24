@@ -9,6 +9,8 @@ import database.ForensicSample;
 import database.ForensicSampleDb;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mubien Nakhooda Coachlab 2013
  */
-public class RequestForensicSampleServlet extends HttpServlet {
+public class RegisteredSamples extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -33,20 +35,23 @@ public class RequestForensicSampleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        SetDbDetail dbSet = new SetDbDetail();
-        
+                      
+        SetDbDetail dbSet = new SetDbDetail();        
         ForensicSampleDb sampleDB = new ForensicSampleDb(dbSet.getDbdetail());
-        sampleDB.init();
-        System.out.println("Fetch Sample Correct: " + sampleDB.read(request.getParameter("seal")));
+         
+        sampleDB.init();  
+        //Get previous Forensic Sample Data
+        sampleDB.read(request.getParameter("editInitialSealnumber"));
         
-        sampleDB.getforensicSample().setTypeOfAnalysis(request.getParameter("analysis"));
-        sampleDB.getforensicSample().setInstitution(request.getParameter("institution"));
-        sampleDB.getforensicSample().setSpeacialInstructions(request.getParameter("special"));
+        //Update Data
+        sampleDB.getforensicSample().setDeathRegisterNumber(request.getParameter("editDeathRegisternumber"));
+        sampleDB.getforensicSample().setBrokenSealNumber(request.getParameter("editNewSealNumber"));
+        sampleDB.getforensicSample().setReason(request.getParameter("editReasonseal")); 
+        sampleDB.getforensicSample().setLabNumber(request.getParameter("LabRecord")); 
         
-        System.out.println("Edit Sample Correct: " + sampleDB.edit());
-                
-        request.getSession().setAttribute("_requestForensicSample", "true");
+        System.out.println(sampleDB.edit());
+        
+        request.getSession().setAttribute("_registeredSamples", "true");
         response.sendRedirect("Home.jsp");
     }
 

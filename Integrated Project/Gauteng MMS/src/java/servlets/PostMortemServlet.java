@@ -5,10 +5,10 @@
 package servlets;
 
 import AssistiveClasses.SetDbDetail;
-import database.ForensicSample;
-import database.ForensicSampleDb;
+import database.BodyAtMortuary;
+import database.PostMortem;
+import database.PostMortemDb;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mubien Nakhooda Coachlab 2013
  */
-public class RequestForensicSampleServlet extends HttpServlet {
+public class PostMortemServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -33,20 +33,30 @@ public class RequestForensicSampleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+                         
         SetDbDetail dbSet = new SetDbDetail();
         
-        ForensicSampleDb sampleDB = new ForensicSampleDb(dbSet.getDbdetail());
-        sampleDB.init();
-        System.out.println("Fetch Sample Correct: " + sampleDB.read(request.getParameter("seal")));
+        //Needed for Postmortem Constructor
+        BodyAtMortuary body = new BodyAtMortuary();
+        body.setDeathRegisterNumber(request.getSession().getAttribute("death_register_number").toString());
         
-        sampleDB.getforensicSample().setTypeOfAnalysis(request.getParameter("analysis"));
-        sampleDB.getforensicSample().setInstitution(request.getParameter("institution"));
-        sampleDB.getforensicSample().setSpeacialInstructions(request.getParameter("special"));
+        PostMortem postmortem = new PostMortem(                
+            "",
+            "",
+            request.getParameter("findingsmortem"), //
+            request.getParameter("findingsdeath"), //
+            false,
+            false,
+            request.getParameter("findingsnumber"), //
+            body,
+            null //LabRecord, Has been removed from database but still exists in Postmortem Class?
+        );
         
-        System.out.println("Edit Sample Correct: " + sampleDB.edit());
-                
-        request.getSession().setAttribute("_requestForensicSample", "true");
+        PostMortemDb postmortemDB = new PostMortemDb(postmortem, dbSet.getDbdetail());
+        postmortemDB.init();    
+        System.out.println(postmortemDB.add());
+       
+        request.getSession().setAttribute("_PostMortem", "true");
         response.sendRedirect("Home.jsp");
     }
 

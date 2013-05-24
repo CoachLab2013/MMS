@@ -3,6 +3,10 @@
     Created on : 23 May 2013, 10:09:52 AM
     Author     : Lady
 --%>
+<%@page import="servlets.Tools"%>
+<%@page import="database.ForensicSample"%>
+<%@page import="database.ForensicSampleDb"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,19 +27,38 @@
  <script src="js/LabRecordScript.js"></script>
     </head>
     <body>
-        <form name="Labform" id="Labform" method="post" action="">
-      
-          
+        <legend>Body File> Edit Body File> Post Mortem> Lab Record</legend>
+        <%
+            if (session.getAttribute("_labRecord") != null) {
+                out.print("<input type=hidden id='_labRecord' value=" + session.getAttribute("_labRecord") +">"); 
+                session.removeAttribute("_labRecord");
+            }
+        %>
+        <form name="Labform" id="Labform" method="post" action="LabRecordServlet">
                 <table>
                     <tr>
                         <td> Sample seal number:</td>
                             
                         <td>
-                    <select name="Samplesealnumber">
-                        <option>Select</option>
-                        <option></option>
-                        <option></option>
-                    </select>
+                            <%
+                                if (session.getAttribute("death_register_number") != null) {
+                                        ArrayList<ForensicSample> list = new ArrayList();
+                                        ForensicSampleDb sampleRefList = new ForensicSampleDb(new Tools().getDbdetail());
+                                        sampleRefList.init();
+                                        list = sampleRefList.SampleList("deathRegisterNumber", session.getAttribute("death_register_number").toString());
+
+                                        String output = "<select name='seal' id='seal'>";
+
+                                        output = output + "<option selected='slected'>Select</option>";
+
+                                        int size = list.size();
+                                        for (int i = 0; i < size; i++) {
+                                            output = output + "<option>" + list.get(i).getSealNumber() + "</option>";
+                                        }
+                                        output = output + "</select>";
+                                        out.println(output);
+                                    } else {out.println("<label class='error'>Please Select A BodyFile First</label>");}
+                               %>    
                         </td>
                      </tr>
                     <tr>
@@ -58,18 +81,18 @@
  
                     <select name="month" id="month">
              <option slected="selected">Month</option>
-             <option num=1>January</option>
-             <option num=2>February</option>
-             <option num=3>March</option>
-             <option num=4>April</option>
-             <option num=5>May</option>
-             <option num=6>June</option>
-             <option num=7>July</option>
-             <option num=8>August</option>
-             <option num=9>September</option>
-             <option num=10>October</option>
-             <option num=11>November</option>
-             <option num=12>December</option>
+             <option num=1 value="1">January</option>
+             <option num=2 value="2">February</option>
+             <option num=3 value="3">March</option>
+             <option num=4 value="4">April</option>
+             <option num=5 value="5">May</option>
+             <option num=6 value="6">June</option>
+             <option num=7 value="7">July</option>
+             <option num=8 value="8">August</option>
+             <option num=9 value="9">September</option>
+             <option num=10 value="10">October</option>
+             <option num=11 value="11">November</option>
+             <option num=12 value="12">December</option>
          </select>
          <select name="day" id="day">
              <option selected="selected" id="day">Day</option>>

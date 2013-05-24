@@ -29,7 +29,7 @@ $(document).ready(function() {
                 validdate: true
             }, //end rule for day
 
-            TypeProperty: {
+            propertytype: {
                 valueNotEquals: "Select"
             }, //end rule of institution
 
@@ -66,7 +66,7 @@ $(document).ready(function() {
                 validdate: "Invalid date."
             }, //end message for day
 
-            TypeProperty: {
+            propertytype: {
                 valueNotEquals: "Please select a Type of Property."
             }, //end message for type of property
 
@@ -124,6 +124,49 @@ $(document).ready(function() {
         return value;
     }, "must be a valid date");
 
+    if($("#_registerForensicSample").val() === "true") {
+
+            $("#IncidentTab").removeClass("active");
+            $("#BodyFileTab").addClass("active");
+            
+                $("#Incident").removeClass("active");
+                $("#BodyFile").addClass("active");
+            
+            $("#tabOpenBodyFiles").removeClass("active");
+            $("#tabNewBodyFiles").removeClass("active");
+            $("#tabEditBodyFiles").addClass("active");
+            $("#tabLinkBodyFiles").removeClass("active");
+                            
+                $("#OpenBodyFiles").removeClass("active");
+                $("#NewBodyFiles").removeClass("active");
+                $("#EditBodyFiles").addClass("active");
+                $("#LinkBodyFiles").removeClass("active");
+                        
+            $("#tabIncidentInformation").removeClass("active");
+            $("#tabBodyIdentification").removeClass("active");
+            $("#tabPostMortem").addClass("active");
+            $("#tabReleaseBody").removeClass("active");
+                            
+                $("#IncidentInformation").removeClass("active");
+                $("#BodyIdentification").removeClass("active");
+                $("#PostMortem").addClass("active");
+                $("#ReleaseBody").removeClass("active");
+                
+            $("#tabRegisterForensicSample").removeClass("active");
+            $("#tabRequestForensicSample").removeClass("active");
+            $("#tabRegisteredSamples").removeClass("active");
+            $("#tabLabRecords").removeClass("active");
+            $("#tabProperty").addClass("active");
+            $("#tabPostMortemFindings").removeClass("active");
+                            
+                $("#RegisterForensicSample").removeClass("active");
+                $("#RequestForensicSample").removeClass("active");
+                $("#RegisteredSamples").removeClass("active");
+                $("#LabRecords").removeClass("active");
+                $("#Property").addClass("active");
+                $("#PostMortemFindings").removeClass("active");
+    }
+    
 });
 
 

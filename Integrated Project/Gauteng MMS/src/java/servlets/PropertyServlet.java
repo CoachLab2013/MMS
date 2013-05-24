@@ -5,11 +5,14 @@
 package servlets;
 
 import AssistiveClasses.SetDbDetail;
-import database.ForensicSample;
-import database.ForensicSampleDb;
+import database.Property;
+import database.PropertyDb;
+import database.Witness;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mubien Nakhooda Coachlab 2013
  */
-public class RequestForensicSampleServlet extends HttpServlet {
+@WebServlet(name = "PropertyServlet", urlPatterns = {"/PropertyServlet"})
+public class PropertyServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -33,20 +37,30 @@ public class RequestForensicSampleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+                         
         SetDbDetail dbSet = new SetDbDetail();
-        
-        ForensicSampleDb sampleDB = new ForensicSampleDb(dbSet.getDbdetail());
-        sampleDB.init();
-        System.out.println("Fetch Sample Correct: " + sampleDB.read(request.getParameter("seal")));
-        
-        sampleDB.getforensicSample().setTypeOfAnalysis(request.getParameter("analysis"));
-        sampleDB.getforensicSample().setInstitution(request.getParameter("institution"));
-        sampleDB.getforensicSample().setSpeacialInstructions(request.getParameter("special"));
-        
-        System.out.println("Edit Sample Correct: " + sampleDB.edit());
+        Witness[] witness = {new Witness("",""), new Witness("","")};
                 
-        request.getSession().setAttribute("_requestForensicSample", "true");
+        Property property = new Property(                
+            request.getParameter("seal"),
+            request.getParameter("descriptions"),
+            request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day"),
+            request.getParameter("propertytype"),
+            "",
+            request.getParameter("taken"),
+            witness, //Witness
+            "",
+            "",
+            false,
+            request.getSession().getAttribute("death_register_number").toString(),
+            false
+        );
+        
+        PropertyDb propertyDB = new PropertyDb(dbSet.getDbdetail(), property);
+        propertyDB.init();    
+        System.out.println(propertyDB.add());
+       
+        request.getSession().setAttribute("_Property", "true");
         response.sendRedirect("Home.jsp");
     }
 

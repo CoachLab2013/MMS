@@ -57,10 +57,10 @@
         %>
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
-                <li class="active"><a href="#OpenBodyFiles" data-toggle="tab">Open Body Files</a> </li>
-                <li><a href="#NewBodyFiles" data-toggle="tab">New Body File</a></li>   
-                <li><a href="#EditBodyFiles" data-toggle="tab">Edit Body Files</a></li>
-                <li><a href="#LinkBodyFiles" data-toggle="tab">Link Body Files</a></li> 
+                <li id="tabOpenBodyFiles" class="active"><a href="#OpenBodyFiles" data-toggle="tab">Open Body Files</a> </li>
+                <li id="tabNewBodyFiles" ><a href="#NewBodyFiles" data-toggle="tab">New Body File</a></li>   
+                <li id="tabEditBodyFiles" ><a href="#EditBodyFiles" data-toggle="tab">Edit Body Files</a></li>
+                <li id="tabLinkBodyFiles" ><a href="#LinkBodyFiles" data-toggle="tab">Link Body Files</a></li> 
             </ul>
             <div class="tab-content">
                 <div id="OpenBodyFiles" class="tab-pane active">                             

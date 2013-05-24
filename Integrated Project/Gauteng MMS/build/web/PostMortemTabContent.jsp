@@ -18,12 +18,12 @@
        <body>
            <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
-                <li class="active"><a href="#RegisterForensicSample" data-toggle="tab">Register Forensic Sample</a> </li>
-                <li><a href="#RequestForensicSample" data-toggle="tab">Request Forensic Sample</a></li>   
-                <li><a href="#RegisteredSamples" data-toggle="tab">Registered Samples</a></li>
-                <li><a href="#LabRecords" data-toggle="tab">Lab Records</a></li>
-                <li><a href="#Property" data-toggle="tab">Property</a></li>
-                <li><a href="#PostMortemFindings" data-toggle="tab">Post Mortem Findings</a></li>
+                <li  id="tabRegisterForensicSample" class="active"><a href="#RegisterForensicSample" data-toggle="tab">Register Forensic Sample</a> </li>
+                <li id="tabRequestForensicSample"><a href="#RequestForensicSample" data-toggle="tab">Request Forensic Sample</a></li>   
+                <li id="tabRegisteredSamples"><a href="#RegisteredSamples" data-toggle="tab">Registered Samples</a></li>
+                <li id="tabLabRecords"><a href="#LabRecords" data-toggle="tab">Lab Records</a></li>
+                <li id="tabProperty"><a href="#Property" data-toggle="tab">Property</a></li>
+                <li id="tabPostMortemFindings"><a href="#PostMortemFindings" data-toggle="tab">Post Mortem Findings</a></li>
             </ul>
             <div class="tab-content" >
                 <div id="RegisterForensicSample" class="tab-pane active"> 
@@ -35,7 +35,7 @@
                 </div>   
                 
                 <div id="RegisteredSamples" class="tab-pane ">
-                    <h1>Hello3</h1>
+                    <jsp:include page="RegisteredSamples.jsp" />
                 </div>
                 
                 <div id="LabRecords" class="tab-pane ">

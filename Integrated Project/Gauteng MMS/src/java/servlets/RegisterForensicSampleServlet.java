@@ -54,7 +54,7 @@ public class RegisterForensicSampleServlet extends HttpServlet {
         ForensicSampleDb sampleDB = new ForensicSampleDb(sample, dbSet.getDbdetail());
         sampleDB.init();    
         System.out.println(sampleDB.add());
-       
+        request.getSession().setAttribute("_registerForensicSample", "true");
         response.sendRedirect("Home.jsp");
     }
 

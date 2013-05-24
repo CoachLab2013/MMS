@@ -77,6 +77,50 @@ $(document).ready(function(){
     $.validator.addMethod("valueNotEquals", function(value, element, arg){
         return arg != value;
     }, "Value must not equal arg.");
+    
+    if($("#_registerForensicSample").val() === "true") {
+
+            $("#IncidentTab").removeClass("active");
+            $("#BodyFileTab").addClass("active");
+            
+                $("#Incident").removeClass("active");
+                $("#BodyFile").addClass("active");
+            
+            $("#tabOpenBodyFiles").removeClass("active");
+            $("#tabNewBodyFiles").removeClass("active");
+            $("#tabEditBodyFiles").addClass("active");
+            $("#tabLinkBodyFiles").removeClass("active");
+                            
+                $("#OpenBodyFiles").removeClass("active");
+                $("#NewBodyFiles").removeClass("active");
+                $("#EditBodyFiles").addClass("active");
+                $("#LinkBodyFiles").removeClass("active");
+                        
+            $("#tabIncidentInformation").removeClass("active");
+            $("#tabBodyIdentification").removeClass("active");
+            $("#tabPostMortem").addClass("active");
+            $("#tabReleaseBody").removeClass("active");
+                            
+                $("#IncidentInformation").removeClass("active");
+                $("#BodyIdentification").removeClass("active");
+                $("#PostMortem").addClass("active");
+                $("#ReleaseBody").removeClass("active");
+                
+            $("#tabRegisterForensicSample").removeClass("active");
+            $("#tabRequestForensicSample").addClass("active");
+            $("#tabRegisteredSamples").removeClass("active");
+            $("#tabLabRecords").removeClass("active");
+            $("#tabProperty").removeClass("active");
+            $("#tabPostMortemFindings").removeClass("active");
+                            
+                $("#RegisterForensicSample").removeClass("active");
+                $("#RequestForensicSample").addClass("active");
+                $("#RegisteredSamples").removeClass("active");
+                $("#LabRecords").removeClass("active");
+                $("#Property").removeClass("active");
+                $("#PostMortemFindings").removeClass("active");
+    }
+    
 });
 
 
