@@ -13,6 +13,7 @@ import jcse.coachlab2013.mms.reports.Statistics_UnidentifiedBodies.Report_Uniden
 import jcse.coachlab2013.mms.reports.FacilityStorage.Report_FacilityStorage;
 import jcse.coachlab2013.mms.reports.MannerOfDeath.Report_MannerOfDeath;
 import jcse.coachlab2013.mms.reports.TurnAroundOnResults.Report_TurnAroundOnResults;
+import jcse.coachlab2013.mms.reports.SpecificBody.Report_SpecificBody;
 
 /**
  *
@@ -33,7 +34,8 @@ public class Reports_PDF {
                 new Report_MannerOfDeath("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Manner of Death", connection).createReport();
                 new Report_MannerOfDeathStatistics("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Manner of Death Statistics", connection).createReport();
                 new Report_UnidentifiedBodiesStatistics("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies Statistics", connection).createReport();
-               // new Report_TurnAroundOnResults("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Turn Around on Results", connection).createReport();  
+               // new Report_TurnAroundOnResults("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Turn Around on Results", connection).createReport();
+                new Report_SpecificBody("./" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Specific Body", connection).createReport();
             connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(Reports_PDF.class.getName()).log(Level.SEVERE, null, ex);
