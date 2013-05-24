@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_EmployeeStatistics" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
-	<property name="ireport.zoom" value="1.5"/>
-=======
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
-	<property name="ireport.zoom" value="1.7715610000000017"/>
->>>>>>> origin/HEAD
+	<property name="ireport.zoom" value="0.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
-	<field name="deathManner" class="java.lang.String"/>
-	<field name="numPeople" class="java.lang.Double"/>
+	<field name="typeOfDeath" class="java.lang.String"/>
+	<field name="numberOfDeaths" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -57,6 +52,9 @@
 			</line>
 		</band>
 	</pageHeader>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
@@ -79,23 +77,27 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="313" splitType="Stretch">
+		<band height="207" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="c8df5ec3-6abb-4d23-9395-7224c5be11eb" x="0" y="11" width="762" height="290"/>
+					<reportElement uuid="f664a569-9cb3-4c40-a4b1-0ef84a8d5ad7" positionType="FixRelativeToBottom" x="0" y="0" width="555" height="207" isRemoveLineWhenBlank="true"/>
 					<chartTitle/>
 					<chartSubtitle/>
-					<chartLegend/>
+					<chartLegend position="Bottom"/>
 				</chart>
 				<categoryDataset>
 					<categorySeries>
-						<seriesExpression><![CDATA["Bodies"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{deathManner}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{numPeople}]]></valueExpression>
+						<seriesExpression><![CDATA["Number of Deaths"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{typeOfDeath}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{numberOfDeaths}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
 				<barPlot>
-					<plot/>
+					<plot orientation="Horizontal">
+						<seriesColor seriesOrder="0" color="#9933FF"/>
+						<seriesColor seriesOrder="1" color="#3333FF"/>
+						<seriesColor seriesOrder="2" color="#00CC99"/>
+					</plot>
 					<itemLabel/>
 				</barPlot>
 			</barChart>

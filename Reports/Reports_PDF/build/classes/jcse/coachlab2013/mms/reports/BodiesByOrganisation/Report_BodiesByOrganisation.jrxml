@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_EmployeeStatistics" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
-	<property name="ireport.zoom" value="1.5"/>
-=======
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_BodiesByOrganisation" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
 	<property name="ireport.zoom" value="1.7715610000000017"/>
->>>>>>> origin/HEAD
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="118"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
-	<field name="deathManner" class="java.lang.String"/>
-	<field name="numPeople" class="java.lang.Double"/>
+	<field name="organisationName" class="java.lang.String"/>
+	<field name="numberOfBodies" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -79,26 +74,23 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="313" splitType="Stretch">
-			<barChart>
+		<band height="289" splitType="Stretch">
+			<pieChart>
 				<chart>
-					<reportElement uuid="c8df5ec3-6abb-4d23-9395-7224c5be11eb" x="0" y="11" width="762" height="290"/>
+					<reportElement uuid="5b40376e-8a79-480e-9e81-18d49b1001d2" x="0" y="17" width="762" height="271"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
-				<categoryDataset>
-					<categorySeries>
-						<seriesExpression><![CDATA["Bodies"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{deathManner}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{numPeople}]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<barPlot>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{organisationName}]]></keyExpression>
+					<valueExpression><![CDATA[$F{numberOfBodies}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
 					<plot/>
 					<itemLabel/>
-				</barPlot>
-			</barChart>
+				</piePlot>
+			</pieChart>
 		</band>
 	</summary>
 </jasperReport>

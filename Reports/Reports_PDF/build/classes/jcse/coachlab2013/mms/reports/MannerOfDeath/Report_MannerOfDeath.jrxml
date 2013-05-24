@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_EmployeeStatistics" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
-	<property name="ireport.zoom" value="1.5"/>
-=======
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
-	<property name="ireport.zoom" value="1.7715610000000017"/>
->>>>>>> origin/HEAD
+	<property name="ireport.zoom" value="0.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
-	<field name="deathManner" class="java.lang.String"/>
-	<field name="numPeople" class="java.lang.Double"/>
+	<field name="gender" class="java.lang.String"/>
+	<field name="bodyAge" class="java.lang.String"/>
+	<field name="numberOfDeaths" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -57,8 +53,11 @@
 			</line>
 		</band>
 	</pageHeader>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
+		<band height="60" splitType="Stretch">
 			<textField>
 				<reportElement uuid="37e39b56-f39b-433a-96a5-8ec3c2b94da5" x="613" y="0" width="98" height="54"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
@@ -79,19 +78,19 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="313" splitType="Stretch">
+		<band height="200" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="c8df5ec3-6abb-4d23-9395-7224c5be11eb" x="0" y="11" width="762" height="290"/>
+					<reportElement uuid="0cccd6d8-06c4-4c03-862b-7b5f32bda79f" positionType="FixRelativeToBottom" x="112" y="42" width="555" height="142"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<categoryDataset>
 					<categorySeries>
-						<seriesExpression><![CDATA["Bodies"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{deathManner}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{numPeople}]]></valueExpression>
+						<seriesExpression><![CDATA[$F{gender}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{bodyAge}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{numberOfDeaths}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
 				<barPlot>
