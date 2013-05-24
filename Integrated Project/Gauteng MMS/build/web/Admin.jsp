@@ -27,6 +27,7 @@
         <script src="js/jquery-1.7.1.min.js"></script>
         <script src="js/jquery.validate.min.js"></script>
         <script src="js/script.js"></script>
+        <script src="js/ICD10script.js"></script>
         <link  type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="bootstrap/css/tablecss.css">
         <script src="js/EditReferenceList.js"></script>
@@ -899,32 +900,113 @@
                                                                 <div id="icd10Codes" class="tab-pane <%out.println(String.valueOf(icd10));%> "> 
                                                                     <div align="center"><h2>ICD10 Codes </h2> </div>      
                                                                     <%--content for ICD10 code reference list--%>
-                                                                    <div class="offset2 ">
-                                                                        <form name="AddICD10" id="AddICD10" method="post" action="ReferenceListServlet"  >
-                                                                            <input type="text" name="form" value="AddICD10" style="visibility: hidden" />
-                                                                            <div class="control-group form-horizontal">
-                                                                                <label class="control-label" for="txtICD10">ICD10 code:</label>
-                                                                                <div class="controls">
-                                                                                    <input type="text" id="txtICD10" name="txtICD10"   />
-                                                                                    <input type="submit" value="Add ICD10 Code" name="cmdICD10" />
-                                                                                </div>
+                                                                    <div class="offset2 "> <table border="1" align="left">
+                                                                            <tr><td><form name="AddICD10" id="AddICD10" method="post" action="ReferenceListServlet">
 
-                                                                                <br/>  </div>
-                                                                        </form>
-                                                                        <div class="controls offset2" >
-                                                                            <label class="control-label" for="ICD10List">Current ICD10 Code(s):</label>
+                                                                                        <input type="text" name="form" value="AddICD10" style="visibility: hidden" />
+                                                                                        <div class="control-group form-horizontal">
+                                                                                            <label class="control-label" for="ICD10List">Select ICD10 table:</label>
+                                                                                            <div class="controls">
+                                                                                                <select id="ICD10List"  onchange='SelectDropICD10()' name="ICD10List" >
+                                                                                                    <option value="1"> Level 1 Table </option> 
+                                                                                                    <option value="2"> Level 2 Table </option> 
+                                                                                                    <option value="3"> Level 3 Table </option> 
+                                                                                                </select>
+                                                                                            </div>
 
-                                                                            <select id="ICD10List" name="ICD10List" size="5">
-                                                                                <%
-                                                                                    for (int i = 0; i < icd10List.size(); i++) {
-                                                                                %>
-                                                                                <option><% out.print(icd10List.get(i));%> </option>
+                                                                                        </div>
+                                                                                    </form> </td>
+                                                                                <td><div class="controls offset2" >
+                                                                                        <label class="control-label" for="ICD10List">Current ICD10 Code(s):</label>
+                                                                                        <input type="text" id="txticd10Table" name="txticd10Table"/>
+                                                                                        <%
+                                                                                            String tableNum = "";
+                                                                                            try {
+                                                                                                tableNum = (String) request.getParameter("txticd10Table").trim();
+                                                                                            } catch (Exception ex) {
+                                                                                                tableNum="1";
+                                                                                            }
+                                                                                            if (tableNum == "1") {
 
-                                                                                <%
-                                                                                    }
-                                                                                %>
-                                                                            </select>
-                                                                        </div>
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>Chapter</H4></th>
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+
+                                                                                        <%                                                                                        } else if (tableNum == "2") {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 1</H4></th>
+                                                                                            <th width="150"><H4>Chapter</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                        } else if (tableNum == "3") {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 2</H4></th>
+                                                                                            <th width="150"><H4>DIAG 1</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                        } else if (tableNum == "4") {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 2</H4></th>
+                                                                                            <th width="150"><H4>DIAG 3</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                            }
+                                                                                        %>
+                                                                                    </div> </td>
+
+                                                                            </tr>
+                                                                        </table> 
+
+
                                                                     </div> 
                                                                     <%--Display save result --%> 
                                                                     <div  class="offset3">

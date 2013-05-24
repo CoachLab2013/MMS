@@ -1537,9 +1537,7 @@ out.println(String.valueOf(specialCur));
       out.write("                                                    </form>\r\n");
       out.write("                                                    <form name=\"formdelete\" action=\"DeleteReferenceListServlet\" method=\"post\">\r\n");
       out.write("                                                        <input type=\"hidden\" id=\"item1\" name=\"item1\">\r\n");
-      out.write("                                                        <input type=\"hidden\" id=\"Olditem\" name=\"Olditem\">\r\n");
-      out.write("                                                        <input type=\"hidden\" id=\"table\" name=\"table\">\r\n");
-      out.write("\r\n");
+      out.write("                                                        <input type=\"hidden\" id=\"table1\" name=\"table1\">\r\n");
       out.write("                                                    </form>\r\n");
       out.write("                                                    </html>\r\n");
     } catch (Throwable t) {
