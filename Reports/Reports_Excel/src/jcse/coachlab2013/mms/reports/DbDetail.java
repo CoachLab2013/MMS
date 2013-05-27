@@ -11,7 +11,7 @@ public class DbDetail
 /**
  * The class DbDetail sets up the access to the database. 
  */ 
-    public static DbDetail staticDBDetail = new DbDetail("localhost", "/", "reportuser", "root");
+    public static DbDetail staticDBDetail = new DbDetail("localhost", "/", "root", "root");
     
     private String url;
     private String dbName;
