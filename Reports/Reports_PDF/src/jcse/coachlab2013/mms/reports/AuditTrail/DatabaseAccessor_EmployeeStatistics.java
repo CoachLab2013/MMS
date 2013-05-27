@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 package jcse.coachlab2013.mms.reports.AuditTrail;
 
 import java.sql.Connection;
@@ -22,6 +25,7 @@ public class DatabaseAccessor_EmployeeStatistics extends Template_DatabaseAccess
         super(connection);
     }
    
+<<<<<<< HEAD
 
     
     @Override 
@@ -29,6 +33,14 @@ public class DatabaseAccessor_EmployeeStatistics extends Template_DatabaseAccess
  * creates an sql statement, executes it and returns results as a results set 
  * @return tempSet
  */    
+=======
+/**
+ * creates an sql statement, executes it and returns results as a results set 
+ * @return tempSet
+ */
+    
+    @Override   
+>>>>>>> origin/master
     public ResultSet read() {        
         ResultSet tempSet = null;
         

@@ -36,7 +36,7 @@ public class DispatchVehicleServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession sess = request.getSession();
-        String lognumber = sess.getAttribute("lognumber").toString();
+        String lognumber = sess.getAttribute("new_lognumber").toString();
         Tools t  = new Tools();
        
        Vehicle vehicle = new Vehicle(request.getParameter("vehicle"));
