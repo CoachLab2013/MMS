@@ -147,7 +147,8 @@
                     <%
                     if(session.getAttribute("go_to_editincident")!=null){
                         out.println(t.makeReferenceList("specialcircumstance","type",session.getAttribute("special_circumstances").toString()));
-                        session.removeAttribute("special_circumstances");                        
+                        session.removeAttribute("special_circumstances"); 
+                         out.println("<script src='js/EditIncidentDetailsScript.js'></script>");                      
                    }
                     
                     %>

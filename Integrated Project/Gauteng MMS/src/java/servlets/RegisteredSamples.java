@@ -4,22 +4,23 @@
  */
 package servlets;
 
-import database.*;
+import AssistiveClasses.SetDbDetail;
+import database.ForensicSample;
+import database.ForensicSampleDb;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Asheen
+ * @author Mubien Nakhooda Coachlab 2013
  */
-@WebServlet(name = "DispatchVehicleServlet", urlPatterns = {"/DispatchVehicleServlet"})
-public class DispatchVehicleServlet extends HttpServlet {
+public class RegisteredSamples extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -34,21 +35,24 @@ public class DispatchVehicleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession sess = request.getSession();
-        String lognumber = sess.getAttribute("new_lognumber").toString();
-        Tools t  = new Tools();
-       
-       Vehicle vehicle = new Vehicle(request.getParameter("vehicle"));
-       Incident inc = new Incident(lognumber);
-       VehicleDispatch vehicledispatch = new VehicleDispatch(t.getDateTime(),vehicle,inc);
-       DbDetail dbdetail = t.getDbdetail();
-       VehicleDispatchDb vdb = new VehicleDispatchDb(dbdetail,vehicledispatch);
-       vdb.init();
-       vdb.add();
-       String personnelnumber = sess.getAttribute("personnelnumber").toString();
-       t.makeAuditTrail("Dispatch Vehicle", "Dispatched vehicle "+ request.getParameter("vehicle"), personnelnumber, "Log Incident Tab");
-       response.sendRedirect("Home.jsp");
+                      
+        SetDbDetail dbSet = new SetDbDetail();        
+        ForensicSampleDb sampleDB = new ForensicSampleDb(dbSet.getDbdetail());
+         
+        sampleDB.init();  
+        //Get previous Forensic Sample Data
+        sampleDB.read(request.getParameter("editInitialSealnumber"));
+        
+        //Update Data
+        sampleDB.getforensicSample().setDeathRegisterNumber(request.getParameter("editDeathRegisternumber"));
+        sampleDB.getforensicSample().setBrokenSealNumber(request.getParameter("editNewSealNumber"));
+        sampleDB.getforensicSample().setReason(request.getParameter("editReasonseal")); 
+        sampleDB.getforensicSample().setLabNumber(request.getParameter("LabRecord")); 
+        
+        System.out.println(sampleDB.edit());
+        
+        request.getSession().setAttribute("_registeredSamples", "true");
+        response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -8,9 +8,11 @@ $(document).ready(function(){
     
     $("#close").click(function(){
         if($("#selectedincident").val()===""){
-            alert("Please select an incident.");
+            $("#noincident").show();
+            $("#label_noincident").show();
         }
         else{
+            $("#noincident").hide();
             $("#closeincident").show();
             $("#closereason").focus();
         }
@@ -50,7 +52,8 @@ $(document).ready(function(){
     
     $("#editincidentbutton").click(function(){
         if($("#selectedincident").val()===""){
-            alert("Please select an incident.");
+            $("#noincident").show();
+            $("#label_noincident").show();
         }
         else{
             $("#cancelcloseincident").click();

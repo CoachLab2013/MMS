@@ -19,10 +19,10 @@
             </style>
 <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
- <script src="js/CallDetailsScript.js"></script>
+ <script src="js/EditCallDetailsScript.js"></script>
     </head>
     <body>
-        <legend>Incidents> Edit Incident> Call Details</legend>
+        <legend>Edit Call Details</legend>
         <form name="edit_callform" id="edit_callform" method="post" action="">
     
             <table>
@@ -92,6 +92,7 @@
                            out.println(t.makeReferenceList("region","type",region));
                            session.removeAttribute("region");
                            session.removeAttribute("go_to_editincident");
+                           out.println(" <script src='js/EditCallDetailsScript.js'></script>");
                            }
                            
                            
@@ -106,6 +107,7 @@
                             <td></td> <td>  <input type="submit" value="Save" name="edit_savecall" id="edit_savecall" /> <input type="reset" value="Cancel" id="edit_callcancel" /><br></td>
                         </tr>
         </table>
+                     
                     <input type="hidden" name="edit_lognumber" id ="edit_lognumber"  readonly="true" <% out.println("value="+session.getAttribute("lognumber"));
                                                                                                             session.removeAttribute("lognumber");
                                                                                                         %>/>

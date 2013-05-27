@@ -4,22 +4,25 @@
  */
 package servlets;
 
-import database.*;
+import AssistiveClasses.SetDbDetail;
+import database.Property;
+import database.PropertyDb;
+import database.Witness;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Asheen
+ * @author Mubien Nakhooda Coachlab 2013
  */
-@WebServlet(name = "DispatchVehicleServlet", urlPatterns = {"/DispatchVehicleServlet"})
-public class DispatchVehicleServlet extends HttpServlet {
+@WebServlet(name = "PropertyServlet", urlPatterns = {"/PropertyServlet"})
+public class PropertyServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -34,21 +37,31 @@ public class DispatchVehicleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession sess = request.getSession();
-        String lognumber = sess.getAttribute("new_lognumber").toString();
-        Tools t  = new Tools();
+                         
+        SetDbDetail dbSet = new SetDbDetail();
+        Witness[] witness = {new Witness("",""), new Witness("","")};
+                
+        Property property = new Property(                
+            request.getParameter("seal"),
+            request.getParameter("descriptions"),
+            request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day"),
+            request.getParameter("propertytype"),
+            "",
+            request.getParameter("taken"),
+            witness, //Witness
+            "",
+            "",
+            false,
+            request.getSession().getAttribute("death_register_number").toString(),
+            false
+        );
+        
+        PropertyDb propertyDB = new PropertyDb(dbSet.getDbdetail(), property);
+        propertyDB.init();    
+        System.out.println(propertyDB.add());
        
-       Vehicle vehicle = new Vehicle(request.getParameter("vehicle"));
-       Incident inc = new Incident(lognumber);
-       VehicleDispatch vehicledispatch = new VehicleDispatch(t.getDateTime(),vehicle,inc);
-       DbDetail dbdetail = t.getDbdetail();
-       VehicleDispatchDb vdb = new VehicleDispatchDb(dbdetail,vehicledispatch);
-       vdb.init();
-       vdb.add();
-       String personnelnumber = sess.getAttribute("personnelnumber").toString();
-       t.makeAuditTrail("Dispatch Vehicle", "Dispatched vehicle "+ request.getParameter("vehicle"), personnelnumber, "Log Incident Tab");
-       response.sendRedirect("Home.jsp");
+        request.getSession().setAttribute("_Property", "true");
+        response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

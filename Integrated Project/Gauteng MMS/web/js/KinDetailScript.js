@@ -84,7 +84,6 @@ $(document).ready(function(){
     
     if($("#go_to_deceasedDetails").val()=="true")
     {
-        alert("working");
         $("#IncidentTab").removeClass("active");
         $("#BodyFileTab").addClass("active");
         $("#Incident").removeClass("tab-pane active");
@@ -110,10 +109,6 @@ $(document).ready(function(){
         $("#DeceasedDetails").removeClass("tab-pane");
         $("#DeceasedDetails").addClass("tab-pane active");
     }
-    else
-        {
-            alert("not working");
-        }
 }); 
 //end $(document).ready(function())
 

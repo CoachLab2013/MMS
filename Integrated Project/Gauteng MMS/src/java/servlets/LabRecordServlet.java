@@ -4,22 +4,20 @@
  */
 package servlets;
 
-import database.*;
+import AssistiveClasses.SetDbDetail;
+import database.ForensicSampleDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Asheen
+ * @author Mubien Nakhooda Coachlab 2013
  */
-@WebServlet(name = "DispatchVehicleServlet", urlPatterns = {"/DispatchVehicleServlet"})
-public class DispatchVehicleServlet extends HttpServlet {
+public class LabRecordServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -34,21 +32,19 @@ public class DispatchVehicleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession sess = request.getSession();
-        String lognumber = sess.getAttribute("new_lognumber").toString();
-        Tools t  = new Tools();
-       
-       Vehicle vehicle = new Vehicle(request.getParameter("vehicle"));
-       Incident inc = new Incident(lognumber);
-       VehicleDispatch vehicledispatch = new VehicleDispatch(t.getDateTime(),vehicle,inc);
-       DbDetail dbdetail = t.getDbdetail();
-       VehicleDispatchDb vdb = new VehicleDispatchDb(dbdetail,vehicledispatch);
-       vdb.init();
-       vdb.add();
-       String personnelnumber = sess.getAttribute("personnelnumber").toString();
-       t.makeAuditTrail("Dispatch Vehicle", "Dispatched vehicle "+ request.getParameter("vehicle"), personnelnumber, "Log Incident Tab");
-       response.sendRedirect("Home.jsp");
+        
+        SetDbDetail dbSet = new SetDbDetail();
+        
+        ForensicSampleDb sampleDB = new ForensicSampleDb(dbSet.getDbdetail());
+        sampleDB.init();
+        System.out.println("Fetch Sample: " + sampleDB.read(request.getParameter("seal")));
+        
+        sampleDB.getforensicSample().setDateReceived(request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day"));
+        
+        System.out.println("Edit Sample Date Received: " + sampleDB.edit());
+        
+        request.getSession().setAttribute("_labRecord", "true");
+        response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

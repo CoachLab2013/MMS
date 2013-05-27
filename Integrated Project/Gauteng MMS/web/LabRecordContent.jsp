@@ -1,10 +1,12 @@
 <%-- 
-    Document   : PropertyContent
-    Created on : 22 Apr 2013, 12:11:54 PM
+    Document   : LabRecordContent
+    Created on : 23 May 2013, 10:09:52 AM
     Author     : Lady
 --%>
-
 <%@page import="servlets.Tools"%>
+<%@page import="database.ForensicSample"%>
+<%@page import="database.ForensicSampleDb"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <style type="text/css">
+                <style type="text/css">
                 label.error { 
                     float: none; 
                     color: red; 
@@ -22,20 +24,46 @@
             </style>
 <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
- <script src="js/PropertyScript.js"></script>
+ <script src="js/LabRecordScript.js"></script>
     </head>
     <body>
-        <legend class="legend">Body File >Edit Body File>Post Mortem >Property</legend>
+        <legend>Body File> Edit Body File> Post Mortem> Lab Record</legend>
         <%
-            if (session.getAttribute("_Property") != null) {
-                out.print("<input type=hidden id='_Property' value=" + session.getAttribute("_Property") +">"); 
-                session.removeAttribute("_Property");
+            if (session.getAttribute("_labRecord") != null) {
+                out.print("<input type=hidden id='_labRecord' value=" + session.getAttribute("_labRecord") +">"); 
+                session.removeAttribute("_labRecord");
             }
         %>
-        <form name="propertyform" id="propertyform" method="post" action="PropertyServlet">
-        <table>
-            <tr>
-                <td> date:</td>  
+        <form name="Labform" id="Labform" method="post" action="LabRecordServlet">
+                <table>
+                    <tr>
+                        <td> Sample seal number:</td>
+                            
+                        <td>
+                            <%
+                                if (session.getAttribute("death_register_number") != null) {
+                                        ArrayList<ForensicSample> list = new ArrayList();
+                                        ForensicSampleDb sampleRefList = new ForensicSampleDb(new Tools().getDbdetail());
+                                        sampleRefList.init();
+                                        list = sampleRefList.SampleList("deathRegisterNumber", session.getAttribute("death_register_number").toString());
+
+                                        String output = "<select name='seal' id='seal'>";
+
+                                        output = output + "<option selected='slected'>Select</option>";
+
+                                        int size = list.size();
+                                        for (int i = 0; i < size; i++) {
+                                            output = output + "<option>" + list.get(i).getSealNumber() + "</option>";
+                                        }
+                                        output = output + "</select>";
+                                        out.println(output);
+                                    } else {out.println("<label class='error'>Please Select A BodyFile First</label>");}
+                               %>    
+                        </td>
+                     </tr>
+                    <tr>
+                        <tr>
+                <td> Date results received:</td>  
                 <td> 
                     <select name="year" id="year">
                         <option selected="selected">Year</option>>
@@ -75,38 +103,12 @@
              %>
          </select>
                 </td>
+                    </tr> 
+                     <tr>
+      <td> <td><input type="submit" value="Done" name="LabRecord" /><br></td></td>
             </tr>
-              
-            <tr>
-                <td>Type:</td> 
-                <td> 
-                <%
-                    out.println(new Tools().makeReferenceList("propertytype","type",""));
-                %>
-            </td>
-            </tr>
-
-            <tr>  
-                <td> Seal number:</td>  
-                <td><%
-                    out.println(new Tools().makeReferenceList("seal","idSeal",""));
-                %>
-                </td>
-            </tr>
-            
-            <tr>
-                <td> Description:</td> <td><input type="text" name="descriptions" value="" /> </td>
-            </tr>
-            
-            <tr>
-               <td>Take In By:</td> <td> <br> <input type="text" name="taken" value=""/> </td>
-            </tr>
-            
-            <tr>
-      <td> <td><input type="submit" value="Done" name="Property" /><br></td></td>
-            </tr>
-        </table>
-            
-        </form>
+            </table>
+            </form>
     </body>
+        
 </html>
