@@ -49,7 +49,7 @@ public class BodyAtSceneDb extends DatabaseConnector
         }
         return "successful";
     }
-    public String addMember(Member member)
+    /*public String addMember(Member member)
     {
         try 
         {
@@ -94,7 +94,7 @@ public class BodyAtSceneDb extends DatabaseConnector
             return "error" + ex.getMessage();
         }
         return "successful";
-    }
+    }*/
     public  ArrayList<BodyAtScene> bodiesAtSceneList() throws SQLException
     {
         ArrayList<BodyAtScene> list = new ArrayList<BodyAtScene>();
@@ -120,7 +120,7 @@ public class BodyAtSceneDb extends DatabaseConnector
         }
         return list;
     }
-    public  ArrayList<Member> membersAtSceneList() throws SQLException
+    /*public  ArrayList<Member> membersAtSceneList() throws SQLException
     {
         ArrayList<Member> list = new ArrayList<Member>();
         try 
@@ -139,7 +139,7 @@ public class BodyAtSceneDb extends DatabaseConnector
             throw new SQLException(ex.getMessage());
         }
         return list;
-    }
+    }*/
     @Override
     public String read() 
     {
