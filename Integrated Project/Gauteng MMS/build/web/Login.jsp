@@ -51,7 +51,8 @@
                         <div class="control-group">
                             <label class="control-label" for="password">Password</label>
                             <div class="controls">
-                                <input type="password" name="password" id="password"/> 
+                                <input type="password" name="password" id="password"/><span style="float: right"><a href="ForgotPassword.jsp">Forgot password?</a></span>
+                                
                             </div>
                         </div>
                         <div class="offset2 ">
