@@ -11,23 +11,14 @@ import jcse.coachlab2013.mms.reports.Template_DatabaseAccessor;
  * @author      Mubien Nackoda <coachlab@jcse.org.za>
  * @since       2012-05-20          (the version of the package this class was first added to)
  */
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
-
-public class DatabaseAccessor_SpecificBody extends Template_DatabaseAccessor {
 
 /**
  * connects to the database through the parameter connection
  * @param connection 
  */             
-<<<<<<< HEAD
-=======
 
-                
+public class DatabaseAccessor_SpecificBody extends Template_DatabaseAccessor {
 
->>>>>>> origin/master
     public DatabaseAccessor_SpecificBody(Connection connection){
         super(connection);
     }
