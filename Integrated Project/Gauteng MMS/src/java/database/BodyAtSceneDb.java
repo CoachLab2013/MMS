@@ -33,9 +33,14 @@ public class BodyAtSceneDb extends DatabaseConnector
         {            
             statement.executeUpdate("INSERT INTO atscene (sceneIncidentOccured,sceneDateTime,pathOnScene,allegedInjuryDateTime,allegedDeathDateTime,externalCircumstanceOfInjury,placeOfDeath,dateTimeBodyFound,Body_idDeathRegisterNumber) VALUES('" 
                     + bodyAtScene.getSceneIncidentOccured() + "','" 
-                    + bodyAtScene.getSceneDateTime() +"'," + bodyAtScene.isPathOnScene() + ",'"
-                    + bodyAtScene.getAllegedInjuryDateTime() + "','" + bodyAtScene.getAllegedDeathDateTime() + "','"
-                    + bodyAtScene.getExternalCircumstanceOfInjury()+ "','" + bodyAtScene.getPlaceOfDeath() +"','" + bodyAtScene.getDateTimeBodyFound() + "','" + bodyAtScene.getBody().getDeathRegisterNumber() + "');");
+                    + bodyAtScene.getSceneDateTime() +"'," 
+                    + bodyAtScene.isPathOnScene() + ",'"
+                    + bodyAtScene.getAllegedInjuryDateTime() + "','" 
+                    + bodyAtScene.getAllegedDeathDateTime() + "','"
+                    + bodyAtScene.getExternalCircumstanceOfInjury()+ "','" 
+                    + bodyAtScene.getPlaceOfDeath() +"','" 
+                    + bodyAtScene.getDateTimeBodyFound() + "','" 
+                    + bodyAtScene.getBody().getDeathRegisterNumber() + "');");
             statement.close();
             connection.close(); 
         } 

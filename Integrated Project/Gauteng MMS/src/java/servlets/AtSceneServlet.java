@@ -7,7 +7,10 @@ package servlets;
 import database.BodyAddress;
 import database.BodyAtMortuary;
 import database.BodyAtScene;
+import database.DbDetail;
 import database.Member;
+import database.MemberDb;
+import database.Property;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -37,8 +40,11 @@ public class AtSceneServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
         BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary("INSERT DEATH REGISTER NUMBER"));
+        Tools tool = new Tools();
+        DbDetail dbDetail = tool.getDbdetail();
+        MemberDb memberDb = new MemberDb(dbDetail);
+        memberDb.init();
         
         bodyAtScene.setDateTimeBodyFound(null);
         bodyAtScene.setAllegedInjuryDateTime(null);
@@ -54,7 +60,9 @@ public class AtSceneServlet extends HttpServlet {
             receivedFrom.setName(null);
             receivedFrom.setSurname(null);
             receivedFrom.setOrganization(null);
-            receivedFrom.setDeathRegisterNumber(null);
+            receivedFrom.setDeathRegisterNumber(null); // From Script/ atScene object
+            memberDb.setMember(receivedFrom);
+            memberDb.add();
         //end of building received from
         
         //SAPS member
@@ -64,7 +72,9 @@ public class AtSceneServlet extends HttpServlet {
             SAPSmemeber.setContactNumber(null);
             SAPSmemeber.setOrganization(null); //SAPS
             SAPSmemeber.setRank(null);
-            SAPSmemeber.setDeathRegisterNumber(null);
+            SAPSmemeber.setDeathRegisterNumber(null); //From Script/ atScene object
+            memberDb.setMember(SAPSmemeber);
+            memberDb.add();
         // end of SAPS member
         
         //FPSmemeber
@@ -74,7 +84,9 @@ public class AtSceneServlet extends HttpServlet {
             FPSmemeber.setPersonnelNumber(null);
             FPSmemeber.setContactNumber(null); //SAPS
             FPSmemeber.setRank(null);
-            FPSmemeber.setDeathRegisterNumber(null);
+            FPSmemeber.setDeathRegisterNumber(null); //From Script/ atScene object
+            memberDb.setMember(FPSmemeber);
+            memberDb.add();
         //end of FPS member
             
         //Pathologist on scene
@@ -84,7 +96,9 @@ public class AtSceneServlet extends HttpServlet {
             pathologistOnScene.setPersonnelNumber(null);
             pathologistOnScene.setContactNumber(null); //SAPS
             pathologistOnScene.setRank(null);
-            pathologistOnScene.setDeathRegisterNumber(null);
+            pathologistOnScene.setDeathRegisterNumber(null); //From Script/ atScene object
+            memberDb.setMember(pathologistOnScene);
+            memberDb.add();
          //end of Pathologist on scene
             
          
@@ -107,9 +121,22 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.getBody().setBodyAddress(bodyAddress);
         bodyAtScene.getBody().setRace(null);
         bodyAtScene.getBody().setGender(null);
-        bodyAtScene.getBody().setEstimatedAgeYear(estimatedAgeYear);
+        //bodyAtScene.getBody().setEstimatedAgeYear(estimatedAgeYear);
+        //bodyAtScene.getBody().setEstimatedAgeMonth(estimatedAgeMonth);
         //end of Body details
         
+        //Property 
+        Property propertySAPS = new Property();
+        propertySAPS.setDeathRegisterNumber(null);
+        propertySAPS.setDescription(null);
+        propertySAPS.setSAPS_name(null);
+        propertySAPS.setSAPS_surname(null);
+        
+        Property propertyFPS = new Property();
+        propertyFPS.setDeathRegisterNumber(null);
+        propertyFPS.setDescription(null);
+        propertyFPS.setTakenBy(null);
+        //end Property
         /*try {
             /* TODO output your page here. You may use following sample code. 
             out.println("<!DOCTYPE html>");

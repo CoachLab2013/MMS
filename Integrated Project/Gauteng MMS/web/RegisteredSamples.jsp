@@ -33,9 +33,9 @@
             }
         %>
         <form name="registeredSamplesForm" method="post" action="" class="form-horizontal" >
-        <%
+        <%--
             out.println(new Tools().makeRegisteredSampleTable("sampletable"));
-        %>
+        --%>
 
         <br>        
 
