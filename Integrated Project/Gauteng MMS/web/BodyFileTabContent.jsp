@@ -69,49 +69,49 @@
 
                 <div id="NewBodyFiles" class="tab-pane ">
                     <%--new body file content --%>
-                    <form name="AddBody" id="AddBody" method="post" action="AddBodyFile">  
-                            <div align="center"><h2>New Body File </h2> </div>
-                            <div class="offset1  span8 form-horizontal"  >
+                    <form name="AddBody" id="AddBody" method="post" action="">  
+                        <div align="center"><h2>New Body File </h2> </div>
+                        <div class="offset1  span8 form-horizontal"  >
 
-                                <div class="control-group">
-                                    <label class="control-label" for="inncidentNum">Incident Number</label> 
-                                    <div class="controls"> <%
-                                                            Tools t = new Tools();
-                                                            out.print(t.makeReferenceList("Incident", "incidentLogNumber", ""));
-                                                            %>
-                                    </div>
-                                </div> 
-
-
-                                <div class="control-group">
-                                    <label class="control-label" for="deathRegister">Death Register Number</label> 
-                                    <div class="controls">
-                                        <input type="text" name="deathRegister" id="deathRegister"/> 
-                                    </div>
-                                </div> 
-
-                                <div class="tabbable">
-                                    <ul class="nav nav-tabs " data-tabs="tabs">
-                                        <li id="scene" class="active"><a href="#atScene" data-toggle="tab">Receive body from scene</a> </li>
-                                        <li id="mortuary"><a href="#atMortuary" data-toggle="tab">Receive body at mortuary</a></li>   
-
-                                    </ul>
-                                    
-                                </div>                       
-                            </div>
-
+                            <div class="control-group">
+                                <label class="control-label" for="inncidentNum">Incident Number</label> 
+                                <div class="controls"> <%
+                                    Tools t = new Tools();
+                                    out.print(t.getOPenIncidentList("open_incident_list", ""));
+                                    %>
+                                </div>
+                                <br>
+                                <label class="control-label" for="deathRegister">Death Register Number</label> 
+                                <div class="controls">
+                                    <input type="text" name="deathRegister" id="deathRegister"/> 
+                                </div>
+                                <br>
+                                <div class="offset2">
+                                    <input type="submit" name="continue_new_body_file" id="continue_new_body_file" value="Continue"/> 
+                                </div>
+                            </div> 
+                        </div>
                     </form>
-                    <div class="offset1  span8 form-horizontal"  >
-                                    <div class="tab-content" >
 
-                                        <div id="atScene" class="tab-pane active"> 
-                                            <jsp:include page="RecieveBodyAtScene.jsp" />
-                                        </div>
-                                        <div id="atMortuary" class="tab-pane "> 
-                                            <jsp:include page="RecieveBodyAtMortuary.jsp" />
-                                        </div>   
+                    <div class="offset1  span8 form-horizontal" style="display:none;" >
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs " data-tabs="tabs">
+                                <li id="scene" class="active"><a href="#atScene" data-toggle="tab">Receive body from scene</a> </li>
+                                <li id="mortuary"><a href="#atMortuary" data-toggle="tab">Receive body at mortuary</a></li>   
 
-                                    </div>
+                            </ul>
+
+                        </div> 
+                        <div class="tab-content" >
+
+                            <div id="atScene" class="tab-pane active"> 
+                                <jsp:include page="RecieveBodyAtScene.jsp" />
+                            </div>
+                            <div id="atMortuary" class="tab-pane "> 
+                                <jsp:include page="RecieveBodyAtMortuary.jsp" />
+                            </div>   
+
+                        </div>
                     </div>
                 </div>   
 

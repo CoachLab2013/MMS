@@ -19,38 +19,30 @@ $(document).ready(function() {
 
     });
 
-    $("#callform").submit(function() {
-        if ($("#callform").valid()) {
-            addinfo("fpsnumber", $("#fpsnumber"));
-            addinfo("SAPSnumber", $("#SAPSnumber"));
-            addinfo("detailyear", $("#detailyear"));
-            var form = document.forms["callform"];
-            var el = document.createElement("input");
-            el.type = "hidden";
-            el.name = "detailmonth";
-            el.value = $("option:selected", "#detailmonth").attr("num");
-            form.appendChild(el);
-            addinfo("detailday", $("#detailday"));
-            addinfo("detailhour", $("#detailhour"));
-            addinfo("detailminute", $("#detailminute"));
-            addinfo("numberofbodies", $("#numberofbodies"));
-            addinfo("placefound", $("#placefound"));
-            addinfo("circumstancesofdeath", $("#circumstancesofdeath"));
-            addinfo("specialcircumstance", $("#specialcircumstance"));
-            $("#callform").submit();
-        }
-        return false;
-    });
+      $("#AddBody").validate({
+        rules:{
+            open_incident_list:{
+                valueNotEquals: "Select"
+            }
+        },//end of rules
 
-    function addinfo(name, element)
-    {
-        var form = document.forms["callform"];
-        // form.action = 'put your url here';
-        var el = document.createElement("input");
-        el.type = "hidden";
-        el.name = name;
-        el.value = element.val();
-        form.appendChild(el);
-    }
+        
+        messages:{
+            open_incident_list:{
+                valueNotEquals:"Please select an incident"
+            }
+        }//end of messages
+        
+    });//end of form validation
+    
+    
+    /**
+     * Custom rule to ensure that user has selected an item
+     * in the drop down list
+     */
+    $.validator.addMethod("valueNotEquals", function(value, element, arg){
+        return arg != value;
+    }); 
+    
 
 }); 
