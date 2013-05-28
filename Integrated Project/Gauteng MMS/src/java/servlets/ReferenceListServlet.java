@@ -83,7 +83,7 @@ public class ReferenceListServlet extends HttpServlet {
         //database connection
         SetDbDetail DBdet = new SetDbDetail();
 
-        DbDetail dbDetail = DBdet.getDbdetail();
+        DbDetail dbDetail = DBdet.getDbdetail();;
         String result = "";
 
         //if it comes from add user form

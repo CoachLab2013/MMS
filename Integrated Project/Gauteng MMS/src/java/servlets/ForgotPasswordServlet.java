@@ -4,10 +4,10 @@
  */
 package servlets;
 
-import database.DbDetail;
-import database.DeathCall;
-import database.DeathCallDb;
-import database.Incident;
+import AssistiveClasses.ClassSendMailTLS;
+import AssistiveClasses.testMail;
+import database.Employee;
+import database.EmployeeDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,13 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Asheen
  */
-@WebServlet(name = "SaveCallDetails", urlPatterns = {"/SaveCallDetails"})
-public class SaveCallDetails extends HttpServlet {
+@WebServlet(name = "ForgotPasswordServlet", urlPatterns = {"/ForgotPasswordServlet"})
+public class ForgotPasswordServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -37,27 +38,41 @@ public class SaveCallDetails extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
-        DeathCall dcall = new DeathCall();
-        String calltime = request.getParameter("edit_callhour") + ":" + request.getParameter("edit_callminute")+ ":00"; 
-        dcall.setTimeOfCall(calltime);
-        dcall.setNumberOfCaller(request.getParameter("edit_phonenumber"));
-        dcall.setNameOfCaller(request.getParameter("edit_callname"));
-        dcall.setInstitution(request.getParameter("edit_callinstitution"));
-        dcall.setSceneAddress(request.getParameter("edit_calladdress"));        
-        dcall.setProvince(request.getParameter("province"));
-        dcall.setRegion(request.getParameter("region"));
-        dcall.setSceneConditions(request.getParameter("edit_callcondition"));
-        Incident inc = new Incident(request.getParameter("edit_lognumber"));
-        dcall.setIncident(inc);
         Tools t = new Tools();
-        DbDetail dbdetail = t.getDbdetail();
-        DeathCallDb calldb = new DeathCallDb(dcall,dbdetail);
-        String persal = request.getSession().getAttribute("personnelnumber").toString();                
-        calldb.init();        
-        calldb.edit();
-        t.makeAuditTrail("Incident has been edited", "Call details of incident "+request.getParameter("edit_lognumber") +" has been edited", persal, "Edit Call Details Tab");
-        response.sendRedirect("Home.jsp");
+        
+        String persalnum = request.getParameter("personnelnumber_forgot").toString();
+
+        Employee e = new Employee();
+        EmployeeDb edb = new EmployeeDb(e,t.getDbdetail());
+        edb.init();  
+        HttpSession sess = request.getSession();
+        e = edb.fecthEmployee(persalnum);
+        if(e == null){
+            sess.setAttribute("error_reset", "Invalid persal number");
+        }
+        else{
+            ClassSendMailTLS email = new ClassSendMailTLS();
+            String password = t.makePassword(6);
+            e.setPassword("123456");
+            EmployeeDb newedb = new EmployeeDb(e,t.getDbdetail());
+            newedb.init();
+            if(newedb.editPassword().contains("fail")){
+                sess.setAttribute("error_reset", "Password could not be reset.");
+            }
+            else{
+                try{
+                    email.sendMail(e.getEmail(), "Dear "+e.getName()+" "+e.getSurname()+"\n \nYou have requested to reset your password. Your new password is: \n"+ password+"\nPlease log in with this password. You will be asked to choose another password.\n \nRegards\nGauteng Pathology Services");
+                    sess.setAttribute("password_reset", "Please check your email for your new password.");
+                }
+                catch(Exception error){
+                    sess.setAttribute("error_reset", "Password could not be reset.");
+                }
+                
+            }            
+        }
+        t.makeAuditTrail("Reset Password", "User reset password", persalnum, "Forgot password page");
+        response.sendRedirect("ForgotPassword.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
