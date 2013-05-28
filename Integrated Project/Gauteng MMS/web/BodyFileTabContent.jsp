@@ -63,7 +63,8 @@
                 <li id="tabLinkBodyFiles"><a href="#LinkBodyFiles" data-toggle="tab">Link Body Files</a></li> 
             </ul>
             <div class="tab-content">
-                <div id="OpenBodyFiles" class="tab-pane active">                             
+                <div id="OpenBodyFiles" class="tab-pane active">   
+                 <jsp:include page="OpenBodyFileContent.jsp" />
                 </div>
 
                 <div id="NewBodyFiles" class="tab-pane ">
@@ -92,7 +93,7 @@
                         </div>
                     </form>
 
-                    <div class="offset1  span8 form-horizontal" style="display:none;"  id="recieve_tabs">
+                    <div class="offset1  span8 form-horizontal" id="recieve_tabs">
                         <div class="tabbable">
                             <ul class="nav nav-tabs " data-tabs="tabs">
                                 <li id="scene" class="active"><a href="#atScene" data-toggle="tab">Receive body from scene</a> </li>
