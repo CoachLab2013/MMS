@@ -439,6 +439,17 @@ public class Tools {
         call = calldb.getDeathCall();
         return call;
     }
+    public BodyAtMortuary getBody(String deathRegisterNumber)
+    {
+        BodyAtMortuary body = new BodyAtMortuary(deathRegisterNumber);//"099888592");
+        Tools t = new Tools();
+        DbDetail dbdetail = t.getDbdetail();
+        BodyDb bodyDb = new BodyDb(dbdetail, body);
+        bodyDb.init();
+        bodyDb.read();
+        body = (BodyAtMortuary)bodyDb.getBody();
+        return body;
+    }
     //
 
     /**
