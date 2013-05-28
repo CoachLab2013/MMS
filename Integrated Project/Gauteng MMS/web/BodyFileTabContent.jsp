@@ -322,11 +322,27 @@
                                                 </div>
                                                
                                                <div class="control-group">
-                                                    <label class="control-label" for="atSceneBodyAddressCity">City</label>
+                                                    <label class="control-label" for="atSceneBodyAddressPostalCode">Postal Code</label>
                                                     <div class="controls">
-                                                        <input type="text" name="atSceneBodyAddressCity" id="atSceneBodyAddressCity"/> 
+                                                        <input type="text" name="atSceneBodyAddressPostalCode" id="atSceneBodyAddressPostalCode"/> 
                                                     </div>
                                                 </div>
+                                               
+                                               <div class="control-group">
+                                                    <label class="control-label" for="atSceneBodyAddressProvince">Province</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="atSceneBodyAddressProvince" id="atSceneBodyAddressProvince"/> 
+                                                    </div>
+                                                </div>
+                                               
+                                               <div class="control-group">
+                                                    <label class="control-label" for="atSceneBodyAddressRegion">Region</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="atSceneBodyAddressRegion" id="atSceneBodyAddressRegion"/> 
+                                                    </div>
+                                                </div>
+                                               
+                                               
                                                <%--
                                                 <div class="control-group">
                                                     <label class="control-label" for="atSceneBodyAddress">Address</label>
