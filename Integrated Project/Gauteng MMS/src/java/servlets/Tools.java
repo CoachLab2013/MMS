@@ -4,7 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.HEAD;
 
 /**
  *
@@ -19,7 +21,6 @@ public class Tools {
     public Tools(){
  
         dbdetail = new DbDetail("localhost","/mydb","root","password123");
-
     }
     //end constructor
     
@@ -142,9 +143,9 @@ public class Tools {
     }
     
     public int getMonthNumber(String month){
-        String[] months = {"January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         int index = 0;
-        while(!(months[index].equals(month)) & (index<12)){
+        while((index<12) && !(months[index].equals(month))){
             index ++;
         }
         return index+1;
@@ -275,7 +276,8 @@ public class Tools {
                         +"<td class='tablecell'>" + inc.getCircumstanceOfDeath() + "</td>"
                         +"<td class='tablecell'>" + inc.getSpecialCircumstances() + "</td>"
                         + "</tr>"; 
-            }
+
+            }  
             table = table + "</table>";
             
             return table;
@@ -284,6 +286,131 @@ public class Tools {
             return e.getMessage();
         }
     }
+    // end makeOPenIncidentsTable
+      
+        /**
+     * This will create a table that has bodyRelease information from the database
+     */
+
+     
+      public String bodyRelease(String id){ //change
+     
+       // BodyFile bf = new BodyFile(id);
+       BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
+        bdyDb.init();
+        try{
+           
+           
+            ArrayList <BodyAtMortuary> bodylist = bdyDb.getBodies(); //change
+            
+           String table = "<table class='tabledisplay' id='" + id +"'>"
+                    +"<th class='tableheading'>Deah Register Number</th>"
+                    +"<th class='tableheading'>Name</th>"
+                    +"<th class='tableheading'>Surname</th>"
+                    +"<th class='tableheading'>ID/Passport number</th>"
+                    +"<th class='tableheading'>body status</th>";
+          
+            int size = bodylist.size();
+            for(int i=0;i<size;i++){
+               BodyAtMortuary inc = bodylist.get(i);
+                table = table +"<tr class='tablerow' lognumber='"+inc.getDeathRegisterNumber()+"'>"
+                        +"<td>"+  inc.getDeathRegisterNumber() +"</td>"
+                        + "<td class='tablecell'>" + inc.getNameOfDeceased() +"</td>"
+                        + "<td class='tablecell'>" + inc.getSurnameOfDeceased() +"</td>"
+                        + "<td class='tablecell'>" + inc.getID() +"</td>"  
+                        + "<td class='tablecell'>" + inc.isBodyStatus() +"</td>"
+                        + "</tr>"; 
+            }  
+ 
+            table = table + "</table>";
+           
+            return table;
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }
+    }  
+
+    // end 
+      
+      
+      
+ //     
+       public String bodyfile(String id){
+        BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
+        BodyFileDb bdyfileDb = new BodyFileDb( new DbDetail("localhost","/mydb","root","200918139"));
+        bdyDb.init();
+        bdyfileDb.init();
+        try{
+          
+            ArrayList <BodyAtMortuary> bodylist = bdyDb.getBodies(); 
+            ArrayList <BodyFile> bodyfilelist = bdyfileDb.BodyFileList();
+            
+           String table = "<table class='tabledisplay' id='" + id +"'>"
+                    +"<th class='tableheading'>Deah Register Number</th>"
+                    +"<th class='tableheading'>Name</th>"
+                    +"<th class='tableheading'>Surname</th>"
+                    +"<th class='tableheading'>ID/Passport number</th>"
+                    +"<th class='tableheading'>Deceased body status</th>";
+           
+            int size = bodylist.size();
+            for(int i=0;i<size;i++){
+               BodyAtMortuary inc = bodylist.get(i);
+               BodyFile inc2 = bodyfilelist.get(i);
+                table = table +"<tr class='tablerow' lognumber='"+inc.getDeathRegisterNumber()+"'>"
+                        +"<td>"+  inc.getDeathRegisterNumber() +"</td>"
+                        + "<td class='tablecell'>" + inc.getNameOfDeceased() +"</td>"
+                        + "<td class='tablecell'>" + inc.getSurnameOfDeceased() +"</td>"
+                        + "<td class='tablecell'>" + inc.getID() +"</td>"  
+                        + "</tr>"; 
+            }  
+            table = table + "</table>";
+            
+            return table;
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }
+    }  
+    // end 
+      
+         public String bodyfile2(String id){
+        BodyFileDb bdyfileDb = new BodyFileDb( new DbDetail("localhost","/mydb","root","200918139"));
+       //  BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
+        bdyfileDb.init();
+        try{
+          
+            ArrayList <BodyFile> bodyFilelist = bdyfileDb.BodyFileList();
+             
+           String table = "<table class='tabledisplay' id='" + id +"'>"
+                    +"<th class='tableheading'>Deah Register Number</th>"
+                    +"<th class='tableheading'>Incident number</th>"
+                    +"<th class='tableheading'>Death register numbers</th>"
+                    +"<th class='tableheading'>Deceased body status</th>";
+           
+            int size = bodyFilelist.size();
+            for(int i=0;i<size;i++){
+                //Been commented out because fields could not be added
+           //    BodyAtMortuary inc = bodyFilelist.get(i);
+             
+              //  table = table +"<tr class='tablerow' lognumber='"+inc.getDeathRegisterNumber()+"'>"
+                        //+"<td>"+  inc.getDeathRegisterNumber() +"</td>"
+                        //+ "<td class='tablecell'>" + inc. +"</td>"
+                      //  + "<td class='tablecell'>" + inc. +"</td>"
+                       // + "<td class='tablecell'>" + inc. +"</td>"  
+                        // + "<td class='tablecell'>" + inc. +"</td>" 
+                     //   + "</tr>"; 
+            }  
+            table = table + "</table>";
+            
+            return table;
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }
+    }
+      
+      
     // end makeOPenIncidentsTable
     
     public String getDateTime(){
@@ -312,6 +439,17 @@ public class Tools {
         call = calldb.getDeathCall();
         return call;
     }
+    public BodyAtMortuary getBody(String deathRegisterNumber)
+    {
+        BodyAtMortuary body = new BodyAtMortuary(deathRegisterNumber);//"099888592");
+        Tools t = new Tools();
+        DbDetail dbdetail = t.getDbdetail();
+        BodyDb bodyDb = new BodyDb(dbdetail, body);
+        bodyDb.init();
+        bodyDb.read();
+        body = (BodyAtMortuary)bodyDb.getBody();
+        return body;
+    }
     //
 
     /**
@@ -319,6 +457,19 @@ public class Tools {
      */
     public DbDetail getDbdetail() {
         return dbdetail;
+    }
+    
+        public String makePassword(int len_password) {
+
+        char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < len_password; i++) {
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        return sb.toString();
+
     }
 }
 //end Tools class
