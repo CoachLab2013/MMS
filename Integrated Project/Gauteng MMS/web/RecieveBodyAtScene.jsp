@@ -10,11 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
     </head>
     <body>
-                                            <div class="tab-content" >
-                                        <div id="atScene" class="tab-pane active"> 
                                             <div align="center"><h2>Receive body from scene</h2> </div>
                                             <fieldset class="fieldset">
                                                 <legend class="legend"><h4>Body received from:</h4></legend>
@@ -701,6 +698,5 @@
                                                 <input  type="button"  onclick= "move()" class="btn btn-primary" name="BodyFileNext" id="BodyFileNext"   value="Next" /> 
                                                 <%--Display save result --%> 
                                             </div>
-                                        </div>
     </body>
 </html>

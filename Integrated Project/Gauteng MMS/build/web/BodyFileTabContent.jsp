@@ -331,12 +331,6 @@
                                                     </div>
                                                 </div>
                                                
-                                               <div class="control-group">
-                                                    <label class="control-label" for="atSceneBodyAddressMagisterialDistrict">Magisterial District</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="atSceneBodyAddressMagisterialDistrict" id="atSceneBodyAddressMagisterialDistrict"/> 
-                                                    </div>
-                                                </div>
                                                
                                                <%--
                                                 <div class="control-group">
