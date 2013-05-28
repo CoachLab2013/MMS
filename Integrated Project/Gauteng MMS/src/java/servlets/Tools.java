@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -18,7 +19,7 @@ public class Tools {
      */
     public Tools(){
  
-        dbdetail = new DbDetail("localhost","/mydb","root","password123");
+        dbdetail = new DbDetail("localhost","/mydb","root","password");
 
     }
     //end constructor
@@ -142,9 +143,9 @@ public class Tools {
     }
     
     public int getMonthNumber(String month){
-        String[] months = {"January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         int index = 0;
-        while(!(months[index].equals(month)) & (index<12)){
+        while((index<12) && !(months[index].equals(month))){
             index ++;
         }
         return index+1;
@@ -319,6 +320,19 @@ public class Tools {
      */
     public DbDetail getDbdetail() {
         return dbdetail;
+    }
+    
+        public String makePassword(int len_password) {
+
+        char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < len_password; i++) {
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        return sb.toString();
+
     }
 }
 //end Tools class

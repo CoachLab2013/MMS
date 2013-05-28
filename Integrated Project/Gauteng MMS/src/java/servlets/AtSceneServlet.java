@@ -107,7 +107,7 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.getBody().setBodyAddress(bodyAddress);
         bodyAtScene.getBody().setRace(null);
         bodyAtScene.getBody().setGender(null);
-        bodyAtScene.getBody().setEstimatedAgeYear(estimatedAgeYear);
+        //bodyAtScene.getBody().setEstimatedAgeYear(estimatedAgeYear);
         //end of Body details
         
         /*try {
