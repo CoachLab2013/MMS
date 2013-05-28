@@ -4,6 +4,7 @@
     Author     : Lady
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,7 +26,13 @@
     </head>
     <body>
         <legend class="legend">Body File >Edit Body File>Post Mortem >Property</legend>
-        <form name="propertyform" id="propertyform" method="post" action="">
+        <%
+            if (session.getAttribute("_Property") != null) {
+                out.print("<input type=hidden id='_Property' value=" + session.getAttribute("_Property") +">"); 
+                session.removeAttribute("_Property");
+            }
+        %>
+        <form name="propertyform" id="propertyform" method="post" action="PropertyServlet">
         <table>
             <tr>
                 <td> date:</td>  
@@ -46,18 +53,18 @@
  
                     <select name="month" id="month">
              <option slected="selected">Month</option>
-             <option num=1>January</option>
-             <option num=2>February</option>
-             <option num=3>March</option>
-             <option num=4>April</option>
-             <option num=5>May</option>
-             <option num=6>June</option>
-             <option num=7>July</option>
-             <option num=8>August</option>
-             <option num=9>September</option>
-             <option num=10>October</option>
-             <option num=11>November</option>
-             <option num=12>December</option>
+             <option num=1 value="1">January</option>
+             <option num=2 value="2">February</option>
+             <option num=3 value="3">March</option>
+             <option num=4 value="4">April</option>
+             <option num=5 value="5">May</option>
+             <option num=6 value="6">June</option>
+             <option num=7 value="7">July</option>
+             <option num=8 value="8">August</option>
+             <option num=9 value="9">September</option>
+             <option num=10 value="10">October</option>
+             <option num=11 value="11">November</option>
+             <option num=12 value="12">December</option>
          </select>
          <select name="day" id="day">
              <option selected="selected" id="day">Day</option>>
@@ -71,18 +78,20 @@
             </tr>
               
             <tr>
-                <td>Type:</td> <td> <select name="TypeProperty">
-                                <option>Select</option>
-                                <option></option>
-                                       </select> 
-                             </td>
+                <td>Type:</td> 
+                <td> 
+                <%
+                    out.println(new Tools().makeReferenceList("propertytype","type",""));
+                %>
+            </td>
             </tr>
 
             <tr>  
-                <td> Seal number:</td>  <td>  <select name="Seaumber">
-                                <option>Select</option>
-                                <option></option>
-                            </select> </td>
+                <td> Seal number:</td>  
+                <td><%
+                    out.println(new Tools().makeReferenceList("seal","idSeal",""));
+                %>
+                </td>
             </tr>
             
             <tr>

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -18,8 +19,8 @@ public class Tools {
      */
     public Tools(){
  
-        dbdetail = new DbDetail("localhost","/mydb","root","200918139"); 
- 
+        dbdetail = new DbDetail("localhost","/mydb","root","password");
+
     }
     //end constructor
     
@@ -128,7 +129,7 @@ public class Tools {
         if(month_num==-1){
             out = out + "<option selected='selected'>Month</option>";
         }
-        String[] months = {"January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         for(int i=1;i<13;i++){
             if(i==month_num){
                 out = out + "<option selected='selected' num="+i+">"+months[i-1]+"</option>";
@@ -142,9 +143,9 @@ public class Tools {
     }
     
     public int getMonthNumber(String month){
-        String[] months = {"January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         int index = 0;
-        while(!(months[index].equals(month)) & (index<12)){
+        while((index<12) && !(months[index].equals(month))){
             index ++;
         }
         return index+1;
@@ -245,11 +246,11 @@ public class Tools {
     /**
      * This will create a table with all the open incidents from the database
      */
-    public String makeOpenIncidentsTable(String id){ //change
+    public String makeOpenIncidentsTable(String id){
         IncidentDb indb = new IncidentDb(getDbdetail());
         indb.init();
         try{
-            ArrayList<Incident> openincidents = indb.openIncidentList(); //change
+            ArrayList<Incident> openincidents = indb.openIncidentList();
             
            String table = "<table class='tabledisplay' id='" + id+"'>"
                     +"<th class='tableheading'>FPS Incident Log Number</th>"
@@ -258,7 +259,7 @@ public class Tools {
                     +"<th class='tableheading'>Time</th>"
                     +"<th class='tableheading'>Number of bodies</th>"
                     +"<th class='tableheading'>Number of bodies recieved</th>"
-                    +"<th class='tableheading'>Place Body was found</th>"    //headings
+                    +"<th class='tableheading'>Place Body was found</th>"
                     +"<th class='tableheading'>Circumstances of death</th>"
                     +"<th class='tableheading'>Special Circumstances</th>";
             int size = openincidents.size();
@@ -267,7 +268,7 @@ public class Tools {
                 table = table +"<tr class='tablerow' lognumber='"+inc.getIncidentLogNumber()+"'>"
                         +"<td>"+  inc.getIncidentLogNumber() +"</td>"
                         + "<td class='tablecell'>" + inc.getReferenceNumber() +"</td>"
-                        +"<td class='tablecell'>" + inc.getDateOfIncident() + "</td>"      //data
+                        +"<td class='tablecell'>" + inc.getDateOfIncident() + "</td>"
                         +"<td class='tablecell'>" + inc.getTimeOfIncident() + "</td>"
                         +"<td class='tablecell'>" + Integer.toString(inc.getNumberOfBodies()) + "</td>"
                         +"<td class='tablecell'>" + Integer.toString(inc.getBodyCount()) + "</td>"
@@ -275,6 +276,7 @@ public class Tools {
                         +"<td class='tablecell'>" + inc.getCircumstanceOfDeath() + "</td>"
                         +"<td class='tablecell'>" + inc.getSpecialCircumstances() + "</td>"
                         + "</tr>"; 
+<<<<<<< HEAD
             }  
             table = table + "</table>";
             
@@ -325,6 +327,9 @@ public class Tools {
                         + "<td class='tablecell'>" + inc.isBodyStatus() +"</td>"
                         + "</tr>"; 
             }  
+=======
+            }
+>>>>>>> origin/master
             table = table + "</table>";
             
             return table;
@@ -333,6 +338,7 @@ public class Tools {
             return e.getMessage();
         }
     }
+<<<<<<< HEAD
     // end 
       
       
@@ -412,19 +418,9 @@ public class Tools {
     }
       
       
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+=======
+    // end makeOPenIncidentsTable
+>>>>>>> origin/master
     
     public String getDateTime(){
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -459,6 +455,19 @@ public class Tools {
      */
     public DbDetail getDbdetail() {
         return dbdetail;
+    }
+    
+        public String makePassword(int len_password) {
+
+        char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < len_password; i++) {
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        return sb.toString();
+
     }
 }
 //end Tools class

@@ -167,6 +167,7 @@ public class EmployeeDb extends DatabaseConnector
         }
         return "successful";
     }
+    
 
     @Override
     public String delete() 
@@ -186,4 +187,46 @@ public class EmployeeDb extends DatabaseConnector
         return "successful";
     }
     
+    /**
+     * Asheen
+     */
+    public Employee fecthEmployee(String persalnum)
+    {
+        try 
+        {
+            statement.executeQuery("SELECT name,surname,rank,email,access from employee where personnelNumber='" + persalnum + "' and active=1;");
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            employee.setName(resultSet.getString("name"));
+            employee.setSurname(resultSet.getString("surname"));
+            employee.setRank(resultSet.getString("rank"));
+            employee.setEmail(resultSet.getString("email"));
+            employee.setAccess(resultSet.getInt("access"));
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return null;
+        }
+        return employee;
+    }
+    
+    /**
+     * Asheen
+     */
+    public String editPassword() 
+    {
+        try 
+        {
+            statement.executeUpdate("UPDATE employee SET password='"+employee.getPassword()+"';" );
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "fail " + ex.getMessage();
+        }
+        return "successful";
+    }    
 }

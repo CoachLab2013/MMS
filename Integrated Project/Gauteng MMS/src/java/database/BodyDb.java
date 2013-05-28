@@ -321,7 +321,6 @@ public class BodyDb extends DatabaseConnector{
                     bodyAtMort.setSurnameOfDeceased(resultSet.getString("surnameOfDeceased"));
                     bodyAtMort.setBodyReleaseTo(resultSet.getString("bodyReleasedTo"));
                     bodyAtMort.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
-                    setBody(bodyAtMort);
                     bodyAtMort.setBodyAddress(getBodyAddress());
                     BodyAtMortuary mort = getBodyAtMortuary();
                     bodyAtMort.setBodyHandOverFromPerNum(mort.getBodyHandOverFromPerNum());

@@ -4,6 +4,7 @@
     Author     : Lady
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,27 +24,37 @@
     </head>
     <body>
         <legend>Body File> Edit Body File> Post Mortem> Register Forensic Sample Content</legend>
-        <form name="registerform" id="registerform" method="post" action="">
-      
-          
+        <%
+            if (session.getAttribute("_registerForensicSample") != null) {
+                out.print("<input type=hidden id='_registerForensicSample' value=" + session.getAttribute("_registerForensicSample") +">"); 
+                session.removeAttribute("_registerForensicSample");
+            }
+        %>
+        <form name="registerform" id="registerform" method="post" action="RegisterForensicSampleServlet">
                 <table>
                     <tr>     
-                        <td>Initial Seal number:  </td> <td><input type="text" name="InitialSealnumber" value="" /></td>  
+                        <td>Initial Seal Number: </td> <td><input type="text" name="InitialSealnumber" value="" /> </td>  
                     </tr>
                     
                     <tr>
-                        <td>Death Register number:</td> <td> <input type="text" name="DeathRegisternumber" value="" /> </td>
+                        <td>Death Register Number: </td> <td> <input type="text" name="DeathRegisternumber" value="" /> </td>
                     </tr> 
                         <tr>
                        
-                            <td> New Seal Number:</td>  <td> <input type="text" name="NewSealNumber" value="" /></td>
+                            <td> New Seal Number: </td> <td> <input type="text" name="NewSealNumber" value="" /> </td>
                         
                         </tr>
                         <tr>
-                            <td> Lab Reference Number::</td> <td> <input type="text" name="LabReferenceNumber" value="" /></td>
+                            <td> Lab Reference Number: </td> 
+                            <%--  Foreign Key Constraint with LabRecord table  --%>
+                            <td> 
+                                <%
+                                    out.println(new Tools().makeReferenceList("LabRecord","labNumber",""));
+                                %>                                
+                            </td>
                         </tr>
                             <tr>
-                            <td> Reason for sample:     </td><td><textarea cols="50" rows="3" name="Reasonseal" id=""> </textarea><br></td>
+                            <td> Reason for Sample: </td><td><textarea cols="50" rows="3" name="Reasonseal" id=""> </textarea><br></td>
                      
                             </tr>
                           

@@ -8,9 +8,13 @@ import jcse.coachlab2013.mms.reports.ReportGenerator;
 import jcse.coachlab2013.mms.reports.Template_Report;
 
 /**
+ *
+ * @author Mubien Nakhooda Coachlab 2013
+ * 
+=======
  * @author      Mubien Nackoda <coachlab@jcse.org.za>
  * @since       2012-05-20          (the version of the package this class was first added to)
- */
+*/
 
 public final class Report_SpecificBody extends Template_Report {
     
@@ -40,7 +44,8 @@ public final class Report_SpecificBody extends Template_Report {
             Logger.getLogger(Report_SpecificBody.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        parameters.put("ReportTitle", ""); 
+
+        parameters.put("ReportTitle", "Specific Body Report"); 
         parameters.put("Incident Number:", "");
 	parameters.put("Death Register Number:", "");
 	parameters.put("Name Of Organization:",""); 
@@ -63,6 +68,7 @@ public final class Report_SpecificBody extends Template_Report {
 	parameters.put("Post Mortem Results:",""); 
 	parameters.put("Autopsy Completed:", ""); 
         
+
         reportData = new DatabaseAccessor_SpecificBody(connection).read();
     }
 
@@ -77,6 +83,3 @@ public final class Report_SpecificBody extends Template_Report {
         rg.savePDF(destination); 
     }  
 }
-
-
-        

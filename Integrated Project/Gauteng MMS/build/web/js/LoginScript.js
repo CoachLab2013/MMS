@@ -32,7 +32,7 @@ $(document).ready(function(){
                 required: "Please enter in your personnel number.",
                 minlength: "Your personnel number must be exactly 8 digits long.",
                 maxlength: "Your personnel number must be exactly 8 digits long.",
-                number: "Your personnel number must cosist of 8 numeric digits."
+                number: "Your personnel number must consist of 8 numeric digits."
           },//end messages for personnelnumber
           
           password:{
