@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
 import java.util.ArrayList;
-import java.util.Random;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.HEAD;
 
 /**
  *
@@ -276,7 +276,7 @@ public class Tools {
                         +"<td class='tablecell'>" + inc.getCircumstanceOfDeath() + "</td>"
                         +"<td class='tablecell'>" + inc.getSpecialCircumstances() + "</td>"
                         + "</tr>"; 
-<<<<<<< HEAD
+
             }  
             table = table + "</table>";
             
@@ -327,9 +327,8 @@ public class Tools {
                         + "<td class='tablecell'>" + inc.isBodyStatus() +"</td>"
                         + "</tr>"; 
             }  
-=======
             }
->>>>>>> origin/master
+
             table = table + "</table>";
             
             return table;
@@ -338,7 +337,7 @@ public class Tools {
             return e.getMessage();
         }
     }
-<<<<<<< HEAD
+
     // end 
       
       
@@ -418,9 +417,7 @@ public class Tools {
     }
       
       
-=======
     // end makeOPenIncidentsTable
->>>>>>> origin/master
     
     public String getDateTime(){
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
