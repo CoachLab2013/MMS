@@ -42,10 +42,10 @@
         <servlet-class>servlets.EditReferenceListServlet</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
+ 
         <servlet-name>DeleteReferenceListServlet</servlet-name>
         <servlet-class>servlets.DeleteReferenceListServlet</servlet-class>
-=======
+ 
         <servlet-name>PropertyServlet</servlet-name>
         <servlet-class>servlets.PropertyServlet</servlet-class>
     </servlet>
@@ -60,12 +60,14 @@
     <servlet>
         <servlet-name>RegisteredSamples</servlet-name>
         <servlet-class>servlets.RegisteredSamples</servlet-class>
->>>>>>> origin/master
+ 
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+    
+    
     <servlet-mapping>
         <servlet-name>Handler</servlet-name>
         <url-pattern>/Handler</url-pattern>
@@ -99,10 +101,10 @@
         <url-pattern>/EditReferenceListServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
+ 
         <servlet-name>DeleteReferenceListServlet</servlet-name>
         <url-pattern>/DeleteReferenceListServlet</url-pattern>
-=======
+ 
         <servlet-name>PropertyServlet</servlet-name>
         <url-pattern>/PropertyServlet</url-pattern>
     </servlet-mapping>
@@ -117,7 +119,7 @@
     <servlet-mapping>
         <servlet-name>RegisteredSamples</servlet-name>
         <url-pattern>/RegisteredSamples</url-pattern>
->>>>>>> origin/master
+ 
     </servlet-mapping>
     <session-config>
         <session-timeout>
