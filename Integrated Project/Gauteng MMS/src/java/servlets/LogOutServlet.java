@@ -35,6 +35,7 @@ public class LogOutServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         request.getSession().invalidate();
         response.sendRedirect("/Gauteng_MMS/");
+        //comment
         
     }
 
