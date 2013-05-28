@@ -34,7 +34,6 @@ public class AtMortuaryServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        BodyAtMortuary bodyAtMortuary = new BodyAtMortuary("INSERT DEATH REGISTER NUMBER");
         
         
         /*try {
