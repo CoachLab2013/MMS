@@ -23,7 +23,7 @@
     </head>
     <body>
         <legend>Edit Call Details</legend>
-        <form name="edit_callform" id="edit_callform" method="post" action="">
+        <form name="edit_callform" id="edit_callform" method="post" action="SaveCallDetails">
     
             <table>
                 <tr>     

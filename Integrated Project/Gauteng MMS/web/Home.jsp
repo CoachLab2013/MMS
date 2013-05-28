@@ -11,6 +11,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+                <%  
+             
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+            response.setDateHeader("Expires", 0); // Proxies. 
+        %>
         <style type="text/css">
             label.error { 
                 float: none; 
@@ -28,6 +34,8 @@
         <div class="head"><img src="Images/logo2.jpg">
     </head>
     <body>
+
+        
         <% 
         
         //Tools t = new Tools();
@@ -37,9 +45,12 @@
         <p>
 
             
-            <span style="float: right"><a href="/Gauteng_MMS">Logout</a></span>
+            <span style="float: right"><a href="LogOutServlet">Logout</a></span>
         </p>
         <%
+            if(session.getAttribute("loggedin") == null){               
+                response.sendRedirect("/Gauteng_MMS/");
+            }
             if (session.getAttribute("incidentlogged") != null) {
                 out.println("<input name='incidentlogged' id='incidentlogged' type=hidden value=true>");
             }
