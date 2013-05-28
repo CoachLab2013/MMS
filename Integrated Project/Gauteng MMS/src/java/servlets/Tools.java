@@ -18,7 +18,7 @@ public class Tools {
      */
     public Tools(){
  
-        dbdetail = new DbDetail("localhost","/mydb","root","password");
+        dbdetail = new DbDetail("localhost","/mydb","root","hello");
 
     }
     //end constructor
@@ -311,6 +311,17 @@ public class Tools {
         calldb.read();
         call = calldb.getDeathCall();
         return call;
+    }
+    public BodyAtMortuary getBody(String deathRegisterNumber)
+    {
+        BodyAtMortuary body = new BodyAtMortuary(deathRegisterNumber);//"099888592");
+        Tools t = new Tools();
+        DbDetail dbdetail = t.getDbdetail();
+        BodyDb bodyDb = new BodyDb(dbdetail, body);
+        bodyDb.init();
+        bodyDb.read();
+        body = (BodyAtMortuary)bodyDb.getBody();
+        return body;
     }
     //
 
