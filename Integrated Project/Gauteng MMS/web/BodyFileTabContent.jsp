@@ -320,6 +320,13 @@
                                                         <input type="text" name="atSceneBodyAddressCity" id="atSceneBodyAddressCity"/> 
                                                     </div>
                                                 </div>
+                                               
+                                               <div class="control-group">
+                                                    <label class="control-label" for="atSceneBodyAddressCity">City</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="atSceneBodyAddressCity" id="atSceneBodyAddressCity"/> 
+                                                    </div>
+                                                </div>
                                                <%--
                                                 <div class="control-group">
                                                     <label class="control-label" for="atSceneBodyAddress">Address</label>
