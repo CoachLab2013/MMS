@@ -43,7 +43,7 @@ public final class DatabaseAccessor_ClosedBodyFile extends Template_DatabaseAcce
                 "\n" +
                 "	FROM `reporting database`.`fact_body` AS `reporting_Body`\n" +
                 "		LEFT JOIN `reporting database`.`dim_body` AS `reporting_DimBody` ON `reporting_DimBody`.`body_SK` = `reporting_Body`.`FK_Body_SK`\n" +
-                "		LEFT JOIN `reporting database`.`dim_location`  AS `reporting_Location` ON `reporting_Location`.`location_SK` = `reporting_Body`.`FK_Location`\n" +
+                "		LEFT JOIN `reporting database`.`dim_location`  AS `reporting_Location` ON `reporting_Location`.`location_SK` = `reporting_Body`.`FK_Location_SK`\n" +
                 "		LEFT JOIN `reporting database`.`dim_date` AS `reporting_DateReleased` ON `reporting_DateReleased`.`date_SK` = `reporting_Body`.`FK_DateReleased_SK`\n" +
                 "		LEFT JOIN `reporting database`.`dim_date` AS `reporting_DateReceived` ON `reporting_DateReceived`.`date_SK` = `reporting_Body`.`FK_DateReceived_SK`\n" +
                 "		LEFT JOIN `reporting database`.`dim_bodystatus`  AS `reporting_BodyStatus` ON `reporting_BodyStatus`.`BodyStatus_SK` = `reporting_Body`.`FK_BodyStatus_SK`\n" +

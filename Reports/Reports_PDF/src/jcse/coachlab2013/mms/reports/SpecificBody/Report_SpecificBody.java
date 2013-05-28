@@ -46,27 +46,7 @@ public final class Report_SpecificBody extends Template_Report {
         
 
         parameters.put("ReportTitle", "Specific Body Report"); 
-        parameters.put("Incident Number:", "");
-	parameters.put("Death Register Number:", "");
-	parameters.put("Name Of Organization:",""); 
-	parameters.put("SAPS Reference Number:","");
-	parameters.put("Type Of Organisation:",""); 
-	parameters.put("Date Recieved:","");
-	parameters.put("Time Recieved:",""); 
-	parameters.put("Body Released:",""); 
-	parameters.put("Special Circumstances:",""); 
-	parameters.put("Name:",""); 
-	parameters.put("Next of Kin:",""); 
-	parameters.put("Age:",""); 
-	parameters.put("Gender:",""); 
-	parameters.put("Race:",""); 
-	parameters.put("Contact:",""); 
-	parameters.put("Location Found:",""); 
-	parameters.put("Manner of Death:",""); 
-	parameters.put("Date of Incident:",""); 
-	parameters.put("Time of Incident:",""); 
-	parameters.put("Post Mortem Results:",""); 
-	parameters.put("Autopsy Completed:", ""); 
+     
         
 
         reportData = new DatabaseAccessor_SpecificBody(connection).read();
