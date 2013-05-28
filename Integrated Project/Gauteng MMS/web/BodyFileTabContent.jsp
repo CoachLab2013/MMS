@@ -293,8 +293,27 @@
                                                         <input type="text" name="atSceneBodyID" id="atSceneBodyID"/> 
                                                     </div>
                                                 </div>
-
-
+                                                <%-- ADDING BODY ADDRESS TABS --%> 
+                                               <div class="control-group">
+                                                    <label class="control-label" for="atSceneBodyAddressBuilding">Building</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="atSceneBodyAddressBuilding" id="atSceneBodyAddressBuilding"/> 
+                                                    </div>
+                                                </div>
+                                               <div class="control-group">
+                                                    <label class="control-label" for="atSceneBodyAddressStreet">Street</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="atSceneBodyAddressStreet" id="atSceneBodyAddressStreet"/> 
+                                                    </div>
+                                                </div>
+                                               
+                                               <div class="control-group">
+                                                    <label class="control-label" for="atSceneBodyAddressSuburb">Suburb</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="atSceneBodyAddressSuburb" id="atSceneBodyAddressSuburb"/> 
+                                                    </div>
+                                                </div>
+                                               <%--
                                                 <div class="control-group">
                                                     <label class="control-label" for="atSceneBodyAddress">Address</label>
                                                     <div class="controls">
@@ -302,7 +321,7 @@
                                                         <textarea cols="50" rows="3" id="atSceneBodyAddress" name="atSceneBodyAddress"> </textarea>
 
                                                     </div>
-                                                </div>
+                                                </div> --%>
 
                                                 <div class="control-group">
                                                     <label class="control-label">Race</label> 
