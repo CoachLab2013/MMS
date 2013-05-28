@@ -293,8 +293,6 @@
                                                         <input type="text" name="atSceneBodyID" id="atSceneBodyID"/> 
                                                     </div>
                                                 </div>
-                                                    
-                                                
                                                 <%-- ADDING BODY ADDRESS TABS --%> 
                                                <div class="control-group">
                                                     <label class="control-label" for="atSceneBodyAddressBuilding">Building</label>
@@ -343,17 +341,17 @@
                                                         <input type="text" name="atSceneBodyAddressRegion" id="atSceneBodyAddressRegion"/> 
                                                     </div>
                                                 </div>
-
-
-
-                                                        <%-- <div class="control-group">
+                                               
+                                               
+                                               <%--
+                                                <div class="control-group">
                                                     <label class="control-label" for="atSceneBodyAddress">Address</label>
                                                     <div class="controls">
 
                                                         <textarea cols="50" rows="3" id="atSceneBodyAddress" name="atSceneBodyAddress"> </textarea>
 
                                                     </div>
-</div>--%>
+                                                </div> --%>
 
                                                 <div class="control-group">
                                                     <label class="control-label">Race</label> 
