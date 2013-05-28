@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.HEAD;
 
@@ -19,7 +20,7 @@ public class Tools {
      */
     public Tools(){
  
-        dbdetail = new DbDetail("localhost","/mydb","root","password");
+        dbdetail = new DbDetail("localhost","/mydb","root","200918139");
 
     }
     //end constructor
@@ -287,12 +288,7 @@ public class Tools {
         }
     }
     // end makeOPenIncidentsTable
-    
-    
-    
-    
-    
-    
+      
         /**
      * This will create a table that has bodyRelease information from the database
      */
@@ -301,11 +297,10 @@ public class Tools {
       public String bodyRelease(String id){ //change
      
        // BodyFile bf = new BodyFile(id);
-        BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
+       BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
         bdyDb.init();
         try{
            
-           // Body bodyReleaseList = bdyDb.getBody(); //change
            
             ArrayList <BodyAtMortuary> bodylist = bdyDb.getBodies(); //change
             
@@ -315,7 +310,7 @@ public class Tools {
                     +"<th class='tableheading'>Surname</th>"
                     +"<th class='tableheading'>ID/Passport number</th>"
                     +"<th class='tableheading'>body status</th>";
-           
+          
             int size = bodylist.size();
             for(int i=0;i<size;i++){
                BodyAtMortuary inc = bodylist.get(i);
@@ -323,20 +318,19 @@ public class Tools {
                         +"<td>"+  inc.getDeathRegisterNumber() +"</td>"
                         + "<td class='tablecell'>" + inc.getNameOfDeceased() +"</td>"
                         + "<td class='tablecell'>" + inc.getSurnameOfDeceased() +"</td>"
-                        + "<td class='tablecell'>" + inc.getID() +"</td>"   //data
+                        + "<td class='tablecell'>" + inc.getID() +"</td>"  
                         + "<td class='tablecell'>" + inc.isBodyStatus() +"</td>"
                         + "</tr>"; 
             }  
-            }
-
+ 
             table = table + "</table>";
-            
+           
             return table;
         }
         catch(Exception e){
             return e.getMessage();
         }
-    }
+    }  
 
     // end 
       
@@ -378,7 +372,7 @@ public class Tools {
         catch(Exception e){
             return e.getMessage();
         }
-    }
+    }  
     // end 
       
          public String bodyfile2(String id){
@@ -397,6 +391,7 @@ public class Tools {
            
             int size = bodyFilelist.size();
             for(int i=0;i<size;i++){
+                //Been commented out because fields could not be added
            //    BodyAtMortuary inc = bodyFilelist.get(i);
              
               //  table = table +"<tr class='tablerow' lognumber='"+inc.getDeathRegisterNumber()+"'>"
