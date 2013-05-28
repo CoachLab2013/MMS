@@ -33,9 +33,15 @@
             }
         %>
         <form name="registeredSamplesForm" method="post" action="" class="form-horizontal" >
+<<<<<<< HEAD
         <%--
             out.println(new Tools().makeRegisteredSampleTable("sampletable"));
         --%>
+=======
+        <%
+            //out.println(new Tools().makeRegisteredSampleTable("sampletable"));
+        %>
+>>>>>>> origin/master
 
         <br>        
 

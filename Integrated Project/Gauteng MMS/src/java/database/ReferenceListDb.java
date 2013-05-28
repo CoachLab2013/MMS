@@ -15,6 +15,15 @@ import java.util.ArrayList;
 public class ReferenceListDb extends DatabaseConnector
 {
     private String data;
+    private String newData;
+
+    public String getNewData() {
+        return newData;
+    }
+
+    public void setNewData(String newData) {
+        this.newData = newData;
+    }
     private String tableName, field1, field2;
     private int id;
     public ReferenceListDb(DbDetail dbDetail)
@@ -155,7 +164,7 @@ public class ReferenceListDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeUpdate("update " + tableName + " set " + field2 + "='" + data + "' where " + field2 + "='" + data +"';" );
+            statement.executeUpdate("update " + tableName + " set " + field2 + "='" + newData + "' where " + field2 + "='" + data +"';" );
             statement.close();
             connection.close();
         } 
