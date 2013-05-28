@@ -4,6 +4,7 @@
     Author     : Asheen
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,6 +33,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label" for="organisation">Institution</label> 
                                                     <div class="controls"><%
+                                                            Tools t = new Tools();
                                                             out.print(t.makeReferenceList("Institution", "type", ""));
                                                             %>
                                                             <%--<select id="organisation" name="organisation">                         
