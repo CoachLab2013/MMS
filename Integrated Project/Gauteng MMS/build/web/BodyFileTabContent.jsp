@@ -79,20 +79,6 @@
                                                             Tools t = new Tools();
                                                             out.print(t.makeReferenceList("Incident", "incidentLogNumber", ""));
                                                             %>
-                                       <%-- <select id="inncidentNum" name="inncidentNum">   
-                                            <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
-
-                                            <%
-                                                for (int i = 0; i < incidentsList.size(); i++) {
-                                            %>
-                                            <option><% out.print(incidentsList.get(i).getIncidentLogNumber());%> </option>
-
-                                            <%
-                                                }
-                                            %>
-
-
-                                        </select> --%> 
                                     </div>
                                 </div> 
 
