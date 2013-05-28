@@ -6,7 +6,11 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -62,12 +66,33 @@ public class ForensicSampleDb extends DatabaseConnector {
         return "successful";
     }
 
-    @Override
-    public String read() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String read(String sealNumber) {
+        try {
+            statement.executeQuery("SELECT * FROM forensicsample WHERE `sealNumber` = '" + sealNumber + "';");
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            this.forensicsamp = new ForensicSample(
+                resultSet.getString("sealNumber"),
+                resultSet.getString("deathRegisterNumber"),
+                resultSet.getString("reason"), 
+                resultSet.getString("sealType"),
+                resultSet.getString("brokenSealNumber"),
+                resultSet.getString("typeOfAnalysis"),
+                resultSet.getString("institution"),
+                resultSet.getString("specialInstructions"),
+                resultSet.getBoolean("received"),
+                resultSet.getString("labNumber"),
+                resultSet.getString("dateSent"),
+                resultSet.getString("dateReceived")
+                );
+        } catch (SQLException ex) {
+           return "failed " + ex.getMessage();
+        }
+        return "successful";
     }
+    
 
-    public ArrayList<ForensicSample> KinList() throws SQLException {
+    public ArrayList<ForensicSample> SampleList() throws SQLException {
         ArrayList<ForensicSample> list = new ArrayList();
         try {
             statement.executeQuery("SELECT sealNumber,deathRegisterNumber, reason,sealType,brokenSealNumber,typeOfAnalysis,institution,specialInstructions,received ,labNumber ,dateSent ,dateReceived FROM forensicsample;");
@@ -103,9 +128,45 @@ public class ForensicSampleDb extends DatabaseConnector {
             throw new SQLException(ex.getMessage());
         }
         return list;
-
     } 
  
+    public ArrayList<ForensicSample> SampleList(String column, String where) throws SQLException {
+        ArrayList<ForensicSample> list = new ArrayList();
+        try {
+            statement.executeQuery("SELECT sealNumber,deathRegisterNumber, reason,sealType,brokenSealNumber,typeOfAnalysis,institution,specialInstructions,received ,labNumber ,dateSent ,dateReceived FROM forensicsample WHERE `" + column + "` = '" + where + "';");
+
+            // Kin kinn = null;
+            ResultSet resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                forensicsamp = new ForensicSample();
+                forensicsamp.setSealNumber(resultSet.getString("sealNumber"));
+                forensicsamp.setDeathRegisterNumber(resultSet.getString("deathRegisterNumber"));
+
+                forensicsamp.setReason(resultSet.getString("reason"));
+                forensicsamp.setSealType(resultSet.getString("sealType"));
+
+                forensicsamp.setBrokenSealNumber(resultSet.getString("brokenSealNumber"));
+                forensicsamp.setTypeOfAnalysis(resultSet.getString("typeOfAnalysis"));
+
+                forensicsamp.setInstitution(resultSet.getString("institution"));
+                forensicsamp.setSpeacialInstructions(resultSet.getString("typeOfAnalysis"));
+
+                forensicsamp.setReceived(resultSet.getBoolean("received"));
+                forensicsamp.setLabNumber(resultSet.getString("labNumber"));
+
+                forensicsamp.setDateSent(resultSet.getString("dateSent"));
+                forensicsamp.setDateReceived(resultSet.getString("dateReceived"));
+
+                list.add(forensicsamp);
+            }
+
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            throw new SQLException(ex.getMessage());
+        }
+        return list;
+    } 
     @Override 
     public String edit() { 
          try {                       
@@ -138,6 +199,11 @@ public class ForensicSampleDb extends DatabaseConnector {
 
     @Override
     public String delete() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String read() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

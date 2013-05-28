@@ -126,8 +126,10 @@ $(document).ready(function(){
         if(hour > date.getHours()){
             return !value;
         }
-        else if((hour == date.getHours()) && (min > date.getMinutes())){
-            return !value;
+        else if(hour == date.getHours()){
+            if(min > date.getMinutes()){
+                return !value;
+            }            
         }
         return value;
         
@@ -167,15 +169,6 @@ $(document).ready(function(){
    form.appendChild(el);
 }
     
-   /* $("#createincident").on("click",function(){
-        
-        //alert($().val());
-        //document.$("#callform").submit();
-        //mergeForms("detailform","callform");
-        //getIncidentDetails();
-        v
-        
-    });*/
      
     
     $("#callcancel").click(function(){

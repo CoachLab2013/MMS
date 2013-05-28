@@ -56,14 +56,14 @@
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement key="textFieldCurrentPage" uuid="37e39b56-f39b-433a-96a5-8ec3c2b94da5" x="613" y="0" width="98" height="54"/>
+				<reportElement uuid="37e39b56-f39b-433a-96a5-8ec3c2b94da5" key="textFieldCurrentPage" x="613" y="0" width="98" height="54"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement key="textFieldNumberOfPages" uuid="bc6ba8df-3f2a-40c3-91cd-1242148b3877" x="711" y="0" width="51" height="54"/>
+				<reportElement uuid="bc6ba8df-3f2a-40c3-91cd-1242148b3877" key="textFieldNumberOfPages" x="711" y="0" width="51" height="54"/>
 				<textElement verticalAlignment="Bottom">
 					<font size="12"/>
 				</textElement>
@@ -75,10 +75,10 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="226" splitType="Stretch">
+		<band height="313" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="8eb2c13e-5ced-4fa1-889d-68dfa95d5bb5" x="0" y="0" width="762" height="226"/>
+					<reportElement uuid="8eb2c13e-5ced-4fa1-889d-68dfa95d5bb5" x="0" y="11" width="762" height="290"/>
 					<chartTitle position="Top">
 						<titleExpression><![CDATA["Location Statistics"]]></titleExpression>
 					</chartTitle>

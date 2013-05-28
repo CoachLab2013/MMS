@@ -52,8 +52,10 @@ public class SaveIncidentDetails extends HttpServlet {
         
         DbDetail dbdetail = t.getDbdetail();
         IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
+        String persal = request.getSession().getAttribute("personnelnumber").toString(); 
         incidentdb.init();
-        incidentdb.edit();
+        out.println(incidentdb.edit());
+        t.makeAuditTrail("Incident has been edited", "Incident details of incident "+request.getParameter("editfpsnumber") +" has been edited", persal, "Edit Incident Details Tab");
         response.sendRedirect("Home.jsp");
     }
 

@@ -1,7 +1,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
+<%--<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%> --%>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -51,7 +51,8 @@
                         <div class="control-group">
                             <label class="control-label" for="password">Password</label>
                             <div class="controls">
-                                <input type="password" name="password" id="password"/> 
+                                <input type="password" name="password" id="password"/><span style="float: right"><a href="ForgotPassword.jsp">Forgot password?</a></span>
+                                
                             </div>
                         </div>
                         <div class="offset2 ">

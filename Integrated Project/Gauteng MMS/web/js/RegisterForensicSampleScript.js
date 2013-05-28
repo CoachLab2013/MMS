@@ -57,8 +57,50 @@ $(document).ready(function(){
           }//end message for new seal     
         }//end of messages
         
-    });//end of form validation
+    });//end of form validation    
     
+    if($("#_registerForensicSample").val() === "true") {
+
+            $("#IncidentTab").removeClass("active");
+            $("#BodyFileTab").addClass("active");
+            
+                $("#Incident").removeClass("active");
+                $("#BodyFile").addClass("active");
+            
+            $("#tabOpenBodyFiles").removeClass("active");
+            $("#tabNewBodyFiles").removeClass("active");
+            $("#tabEditBodyFiles").addClass("active");
+            $("#tabLinkBodyFiles").removeClass("active");
+                            
+                $("#OpenBodyFiles").removeClass("active");
+                $("#NewBodyFiles").removeClass("active");
+                $("#EditBodyFiles").addClass("active");
+                $("#LinkBodyFiles").removeClass("active");
+                        
+            $("#tabIncidentInformation").removeClass("active");
+            $("#tabBodyIdentification").removeClass("active");
+            $("#tabPostMortem").addClass("active");
+            $("#tabReleaseBody").removeClass("active");
+                            
+                $("#IncidentInformation").removeClass("active");
+                $("#BodyIdentification").removeClass("active");
+                $("#PostMortem").addClass("active");
+                $("#ReleaseBody").removeClass("active");
+                
+            $("#tabRegisterForensicSample").addClass("active");
+            $("#tabRequestForensicSample").removeClass("active");
+            $("#tabRegisteredSamples").removeClass("active");
+            $("#tabLabRecords").removeClass("active");
+            $("#tabProperty").removeClass("active");
+            $("#tabPostMortemFindings").removeClass("active");
+                            
+                $("#RegisterForensicSample").addClass("active");
+                $("#RequestForensicSample").removeClass("active");
+                $("#RegisteredSamples").removeClass("active");
+                $("#LabRecords").removeClass("active");
+                $("#Property").removeClass("active");
+                $("#PostMortemFindings").removeClass("active");
+    }
     
 }); 
 //end $(document).ready(function())

@@ -27,6 +27,7 @@
         <script src="js/jquery-1.7.1.min.js"></script>
         <script src="js/jquery.validate.min.js"></script>
         <script src="js/script.js"></script>
+        <script src="js/ICD10script.js"></script>
         <link  type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="bootstrap/css/tablecss.css">
         <script src="js/EditReferenceList.js"></script>
@@ -513,10 +514,9 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <form name="formname" action="EditReferenceListServlet" method="post">
-                                                                                <input type="hidden" id="item" name="item">
-                                                                            </form>
+
                                                                             <input type="button" onclick="editReferenceList('Insitution', 'InsitutionList')" value="Edit Institution" id="cmdEditInsitutions" name="cmdEditInsitution" />
+                                                                            <input type="button" onclick="deleteReferenceList('Insitution', 'InsitutionList')" value="Delete Institution" id="cmdDeleteInsitutions" name="cmdDeleteInsitutions" />
 
                                                                         </div>
                                                                     </div>     
@@ -555,6 +555,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('analysis', 'AnalysisList')" value="Edit analysis type" id="cmdEditAnalysis" name="cmdEditAnalysis" />
+                                                                            <input type="button" onclick="deleteReferenceList('analysis', 'AnalysisList')" value="Delete analysis type" id="cmdDeleteAnalysis" name="cmdDeleteAnalysis" />
 
                                                                         </div>
                                                                     </div> 
@@ -597,6 +598,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('propertytype', 'PropertyList')" value="Edit property type" id="cmdEditProperty" name="cmdEditProperty" />
+                                                                            <input type="button" onclick="deleteReferenceList('propertytype', 'PropertyList')" value="Delete property type" id="cmdDeleteProperty" name="cmdDeleteProperty" />
 
                                                                         </div>
                                                                     </div>
@@ -635,6 +637,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('vehicle', 'VehicleList')" value="Edit Vehicle number" id="cmdEditVehicle" name="cmdEditVehicle" />
+                                                                            <input type="button" onclick="deleteReferenceList('vehicle', 'VehicleList')" value="Delete Vehicle number" id="cmdDeleteVehicle" name="cmdDeleteVehicle" />
 
                                                                         </div>
                                                                     </div> 
@@ -673,6 +676,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('rank', 'RankList')" value="Edit Rank" id="cmdEditRank" name="cmdEditRank" />
+                                                                            <input type="button" onclick="deleteReferenceList('rank', 'RankList')" value="Delete Rank" id="cmdDeleteRank" name="cmdDeleteRank" />
 
                                                                         </div>
                                                                     </div> 
@@ -714,6 +718,8 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('gender', 'GenderList')" value="Edit Gender" id="cmdEditGender" name="cmdEditGender" />
+                                                                            <input type="button" onclick="deleteReferenceList('gender', 'GenderList')" value="Delete Gender" id="cmdDeleteGender" name="cmdDeleteGender" />
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -753,6 +759,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('occupation', 'OccuList')" value="Edit Occupation type" id="cmdEditOccupation" name="cmdEditOccupation" />
+                                                                            <input type="button" onclick="deleteReferenceList('occupation', 'OccuList')" value="Delete Occupation type" id="cmdDeleteOccupation" name="cmdDeleteOccupation" />
 
                                                                         </div>
                                                                     </div> 
@@ -794,6 +801,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('race', 'RaceList')" value="Edit Race type" id="cmdEditRace" name="cmdEditRace" />
+                                                                            <input type="button" onclick="deleteReferenceList('race', 'RaceList')" value="Delete Race type" id="cmdDeleteRace" name="cmdDeleteRace" />
 
                                                                         </div>
                                                                     </div> 
@@ -835,6 +843,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('maritalstatus', 'MaritalList')" value="Edit Marital Status type" id="cmdEditMarital" name="cmdEditMarital" />
+                                                                            <input type="button" onclick="deleteReferenceList('maritalstatus', 'MaritalList')" value="Delete Marital Status type" id="cmdDeleteMarital" name="cmdDeleteMarital" />
 
                                                                         </div>
                                                                     </div> 
@@ -875,7 +884,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('province', 'ProvinceList')" value="Edit Marital Province" id="cmdEditProvince" name="cmdEditProvince" />
+                                                                            <input type="button" onclick="editReferenceList('province', 'ProvinceList')" value="Edit Province" id="cmdEditProvince" name="cmdEditProvince" />
+                                                                            <input type="button" onclick="deleteReferenceList('province', 'ProvinceList')" value="Delete Province" id="cmdDeleteProvince" name="cmdDeleteProvince" />
 
                                                                         </div>
                                                                     </div> 
@@ -890,32 +900,113 @@
                                                                 <div id="icd10Codes" class="tab-pane <%out.println(String.valueOf(icd10));%> "> 
                                                                     <div align="center"><h2>ICD10 Codes </h2> </div>      
                                                                     <%--content for ICD10 code reference list--%>
-                                                                    <div class="offset2 ">
-                                                                        <form name="AddICD10" id="AddICD10" method="post" action="ReferenceListServlet"  >
-                                                                            <input type="text" name="form" value="AddICD10" style="visibility: hidden" />
-                                                                            <div class="control-group form-horizontal">
-                                                                                <label class="control-label" for="txtICD10">ICD10 code:</label>
-                                                                                <div class="controls">
-                                                                                    <input type="text" id="txtICD10" name="txtICD10"   />
-                                                                                    <input type="submit" value="Add ICD10 Code" name="cmdICD10" />
-                                                                                </div>
+                                                                    <div class="offset2 "> <table border="1" align="left">
+                                                                            <tr><td><form name="AddICD10" id="AddICD10" method="post" action="ReferenceListServlet">
 
-                                                                                <br/>  </div>
-                                                                        </form>
-                                                                        <div class="controls offset2" >
-                                                                            <label class="control-label" for="ICD10List">Current ICD10 Code(s):</label>
+                                                                                        <input type="text" name="form" value="AddICD10" style="visibility: hidden" />
+                                                                                        <div class="control-group form-horizontal">
+                                                                                            <label class="control-label" for="ICD10List">Select ICD10 table:</label>
+                                                                                            <div class="controls">
+                                                                                                <select id="ICD10List"  onchange='SelectDropICD10()' name="ICD10List" >
+                                                                                                    <option value="1"> Level 1 Table </option> 
+                                                                                                    <option value="2"> Level 2 Table </option> 
+                                                                                                    <option value="3"> Level 3 Table </option> 
+                                                                                                </select>
+                                                                                            </div>
 
-                                                                            <select id="ICD10List" name="ICD10List" size="5">
-                                                                                <%
-                                                                                    for (int i = 0; i < icd10List.size(); i++) {
-                                                                                %>
-                                                                                <option><% out.print(icd10List.get(i));%> </option>
+                                                                                        </div>
+                                                                                    </form> </td>
+                                                                                <td><div class="controls offset2" >
+                                                                                        <label class="control-label" for="ICD10List">Current ICD10 Code(s):</label>
+                                                                                        <input type="text" id="txticd10Table" name="txticd10Table"/>
+                                                                                        <%
+                                                                                            String tableNum = "";
+                                                                                            try {
+                                                                                                tableNum = (String) request.getParameter("txticd10Table").trim();
+                                                                                            } catch (Exception ex) {
+                                                                                                tableNum="1";
+                                                                                            }
+                                                                                            if (tableNum == "1") {
 
-                                                                                <%
-                                                                                    }
-                                                                                %>
-                                                                            </select>
-                                                                        </div>
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>Chapter</H4></th>
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+
+                                                                                        <%                                                                                        } else if (tableNum == "2") {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 1</H4></th>
+                                                                                            <th width="150"><H4>Chapter</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                        } else if (tableNum == "3") {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 2</H4></th>
+                                                                                            <th width="150"><H4>DIAG 1</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                        } else if (tableNum == "4") {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 2</H4></th>
+                                                                                            <th width="150"><H4>DIAG 3</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                            }
+                                                                                        %>
+                                                                                    </div> </td>
+
+                                                                            </tr>
+                                                                        </table> 
+
+
                                                                     </div> 
                                                                     <%--Display save result --%> 
                                                                     <div  class="offset3">
@@ -955,6 +1046,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('mannerofdeath', 'MannerList')" value="Edit Manner of Death" id="cmdEditManner" name="cmdEditManner" />
+                                                                            <input type="button" onclick="deleteReferenceList('mannerofdeath', 'MannerList')" value="Delete Manner of Death" id="cmdDeleteManner" name="cmdDeleteManner" />
 
                                                                         </div>
                                                                     </div> 
@@ -996,6 +1088,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('sample', 'SampleList')" value="Edit Sample type" id="cmdEditSample" name="cmdEditSample" />
+                                                                            <input type="button" onclick="deleteReferenceList('sample', 'SampleList')" value="Delete Sample type" id="cmdDeleteSample" name="cmdDeleteSample" />
 
                                                                         </div>
                                                                     </div> 
@@ -1037,6 +1130,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('bodystatus', 'StatusList')" value="Edit Body Status" id="cmdEditBodystatus" name="cmdEditBodystatus" />
+                                                                            <input type="button" onclick="deleteReferenceList('bodystatus', 'StatusList')" value="Delete Body Status" id="cmdDeleteBodystatus" name="cmdDeleteBodystatus" />
 
                                                                         </div>
                                                                     </div> 
@@ -1078,6 +1172,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('relationship', 'RelationshipList')" value="Edit Relationship type" id="cmdEditRelationship" name="cmdEditRelationship" />
+                                                                            <input type="button" onclick="deleteReferenceList('relationship', 'RelationshipList')" value="Delete Relationship type" id="cmdDeleteRelationship" name="cmdDeleteRelationship" />
 
                                                                         </div>
                                                                     </div> 
@@ -1118,6 +1213,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('bodypart', 'BodyClassList')" value="Edit Body Part type" id="cmdEditBodyPart" name="cmdEditBodyPart" />
+                                                                            <input type="button" onclick="deleteReferenceList('bodypart', 'BodyClassList')" value="Delete Body Part type" id="cmdDeleteBodyPart" name="cmdDeleteBodyPart" />
 
                                                                         </div>
                                                                     </div> 
@@ -1158,6 +1254,7 @@
                                                                             </select>
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('specialcircumstance', 'SpecialCurList')" value="Edit Special Circumstance" id="cmdEditSpecialCur" name="cmdEditSpecialCur" />
+                                                                            <input type="button" onclick="deleteReferenceList('specialcircumstance', 'SpecialCurList')" value="Delete Special Circumstance" id="cmdDeleteSpecialCur" name="cmdDeleteSpecialCur" />
 
                                                                         </div>
                                                                     </div> 
@@ -1177,4 +1274,15 @@
                                                     </div>
 
                                                     </body>
+
+                                                    <form name="formname" action="EditReferenceListServlet" method="post">
+                                                        <input type="hidden" id="item" name="item">
+                                                        <input type="hidden" id="Olditem" name="Olditem">
+                                                        <input type="hidden" id="table" name="table">
+
+                                                    </form>
+                                                    <form name="formdelete" action="DeleteReferenceListServlet" method="post">
+                                                        <input type="hidden" id="item1" name="item1">
+                                                        <input type="hidden" id="table1" name="table1">
+                                                    </form>
                                                     </html>

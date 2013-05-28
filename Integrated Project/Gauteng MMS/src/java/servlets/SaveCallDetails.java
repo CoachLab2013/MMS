@@ -53,8 +53,10 @@ public class SaveCallDetails extends HttpServlet {
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
         DeathCallDb calldb = new DeathCallDb(dcall,dbdetail);
+        String persal = request.getSession().getAttribute("personnelnumber").toString();                
         calldb.init();        
         calldb.edit();
+        t.makeAuditTrail("Incident has been edited", "Call details of incident "+request.getParameter("edit_lognumber") +" has been edited", persal, "Edit Call Details Tab");
         response.sendRedirect("Home.jsp");
     }
 
