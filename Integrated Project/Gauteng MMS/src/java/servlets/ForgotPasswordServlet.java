@@ -53,7 +53,7 @@ public class ForgotPasswordServlet extends HttpServlet {
         else{
             ClassSendMailTLS email = new ClassSendMailTLS();
             String password = t.makePassword(6);
-            e.setPassword("123456");
+            e.setPassword(password);
             EmployeeDb newedb = new EmployeeDb(e,t.getDbdetail());
             newedb.init();
             if(newedb.editPassword().contains("fail")){

@@ -2,9 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6921fbf3-c5d7-4cf0-9b75-73a54d6ac426">
 	<property name="ireport.zoom" value="1.7715610000000037"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="120"/>
+	<property name="ireport.y" value="155"/>
 	<subDataset name="dataset1" uuid="dbd1eec6-0788-49da-9f18-c082e6852e27"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
 	<field name="incidentNumber" class="java.lang.String"/>
 	<field name="deathRegisterNumber" class="java.lang.String"/>
 	<field name="nameOfOrganization" class="java.lang.String"/>
@@ -20,6 +23,8 @@
 	<field name="mannerOfDeath" class="java.lang.String"/>
 	<field name="dateOfIncident" class="java.lang.String"/>
 	<field name="postMortemResults" class="java.lang.String"/>
+        <field name="dateReceived" class="java.lang.String"/>
+        <field name="dateReleased" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -273,6 +278,16 @@
 			<line>
 				<reportElement uuid="90990bb1-a2f9-4be0-95ab-15329e2577a1" x="0" y="385" width="555" height="1"/>
 			</line>
+			<textField>
+				<reportElement uuid="9ca5aee3-2924-42de-bdcf-c86fdc33c3ac" x="391" y="48" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dateReceived}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6dfd6dab-8914-4f27-9c41-49e3fdc1cc55" x="391" y="68" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dateReleased}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
