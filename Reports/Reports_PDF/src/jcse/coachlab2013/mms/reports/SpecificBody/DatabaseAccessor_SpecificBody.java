@@ -34,7 +34,7 @@ public class DatabaseAccessor_SpecificBody extends Template_DatabaseAccessor {
         try {
             
             
-            preparedStatement = connection.prepareStatement(" select dim_incident.incidentNumber_BK as incidentNumber,\n" +
+            preparedStatement = connection.prepareStatement("select dim_incident.incidentNumber_BK as incidentNumber,\n" +
 "dim_incident.SAPSReference as SAPSReferenceNumber , \n" +
 "dim_incident.dateInserted as dateOfIncident,\n" +
 "dim_incident.specialCircumstance as specialCircumstances,\n" +
@@ -49,7 +49,9 @@ public class DatabaseAccessor_SpecificBody extends Template_DatabaseAccessor {
 "dim_organisation.organisationName as nameOfOrganization,\n" +
 "dim_location.locationName as locationFound,\n" +
 "dim_mannerofdeath.deathType as mannerOfDeath,\n" +
-"dim_postmortem.postMortemDescription as postMortemResults\n" +
+"dim_postmortem.postMortemDescription as postMortemResults,\n" +
+"dim_date.dateStamp as dateReceived,\n" +
+"dim_date.dateStamp as dateReleased\n" +
 "from `reporting database`.fact_body \n" +
 "left join `reporting database`.dim_incident\n" +
 "on dim_incident.incident_SK = fact_body.FK_Incident_SK\n" +
@@ -69,6 +71,8 @@ public class DatabaseAccessor_SpecificBody extends Template_DatabaseAccessor {
 "on fact_body.FK_MannerOfDeath_SK = dim_mannerofdeath.mannerOfDeath_SK\n" +
 "left join `reporting database`.dim_postmortem\n" +
 "on fact_body.FK_PostMortem_SK = dim_postmortem.postMortem_SK\n" +
+"left join `reporting database`.dim_date\n" +
+"on fact_body.FK_DateReceived_SK = date_SK and fact_body.FK_DateReleased_SK = date_SK\n" +
 "\n" +
 "\n" +
 "");            
