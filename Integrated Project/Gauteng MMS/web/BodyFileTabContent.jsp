@@ -62,7 +62,8 @@
                 <li><a href="#LinkBodyFiles" data-toggle="tab">Link Body Files</a></li> 
             </ul>
             <div class="tab-content">
-                <div id="OpenBodyFiles" class="tab-pane active">                             
+                <div id="OpenBodyFiles" class="tab-pane active">
+                    <jsp:include page="OpenBodyFileContent.jsp"/>
                 </div>
 
                 <div id="NewBodyFiles" class="tab-pane ">

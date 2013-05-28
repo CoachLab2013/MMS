@@ -22,18 +22,21 @@
          <script src="js/ReleaseBodyContentScript.js"></script>
     </head>
     <body>
+        <h4>Selected body for release : </h4>
          <%
-            Tools t = new Tools();
-            //out.println(t.bodyRelease("bodyreleasetable"));
-             //out.println(t.makeOpenIncidentsTable("opentable"));
-           out.println(t.bodyRelease("opentable"));
+            Tools t = new Tools();            
+            out.println(t.bodyRelease("opentable"));
             %>
        
           <td> <td>  <input type="submit" value="Done" name="releasebodydone" /><br></td></td>
           
                             
         <form name="Releaseform" id="Releaseform" method="post" action="">
-            
+            <h4>Linked bodies : </h4>
+             <%
+            Tools t2 = new Tools();
+            out.println(t2.bodyfile("opentable"));
+            %>
             
             
                 <table>
