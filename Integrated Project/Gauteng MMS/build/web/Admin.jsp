@@ -907,7 +907,7 @@
                                                                                         <div class="control-group form-horizontal">
                                                                                             <label class="control-label" for="ICD10List">Select ICD10 table:</label>
                                                                                             <div class="controls">
-                                                                                                <select id="ICD10List"  onchange='SelectDropICD10()' name="ICD10List" >
+                                                                                                <select id="ICD10List" name="ICD10List" onchange='SelectDropICD10()'  >
                                                                                                     <option value="1"> Level 1 Table </option> 
                                                                                                     <option value="2"> Level 2 Table </option> 
                                                                                                     <option value="3"> Level 3 Table </option> 
@@ -922,9 +922,10 @@
                                                                                         <%
                                                                                             String tableNum = "";
                                                                                             try {
-                                                                                                tableNum = (String) request.getParameter("txticd10Table").trim();
+                                                                                               
+                                                                                                tableNum = request.getAttribute("tab").toString();
                                                                                             } catch (Exception ex) {
-                                                                                                tableNum="1";
+                                                                                                tableNum=ex.getMessage();
                                                                                             }
                                                                                             if (tableNum == "1") {
 
@@ -1010,7 +1011,7 @@
                                                                     </div> 
                                                                     <%--Display save result --%> 
                                                                     <div  class="offset3">
-                                                                        <label  > <% out.println(String.valueOf(iCD10Result));%></label>
+                                                                        <label  > <% out.println(String.valueOf(tableNum));%></label>
                                                                     </div>
                                                                     <br/>
                                                                     <br/>
@@ -1242,7 +1243,7 @@
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="SpecialCurList">Special Circumstance Type(s):</label>
 
-                                                                            <select id="SpecialCurList" name="SpecialCurList" size="5">
+                                                                            <select id="BodyClassList" name="SpecialCurList" size="5">
                                                                                 <%
                                                                                     for (int i = 0; i < specialCurList.size(); i++) {
                                                                                 %>
@@ -1284,5 +1285,9 @@
                                                     <form name="formdelete" action="DeleteReferenceListServlet" method="post">
                                                         <input type="hidden" id="item1" name="item1">
                                                         <input type="hidden" id="table1" name="table1">
+                                                    </form>
+                                                    <form name="LoadICD10" action="LoadICD10Table" method="post">
+                                                       
+                                                         <input type="hidden" id="ICD10table" name="ICD10table">
                                                     </form>
                                                     </html>
