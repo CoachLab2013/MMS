@@ -19,7 +19,7 @@
             </style>
 <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
- <script src="js/DeceasedDetailsScript.js"></script>
+ <script src="js/DeceasedDetailsContentScript.js"></script>
     </head>
     <body>
         <legend>Body File> Edit Body File> Body Identification> Deceased Details Contents </legend>
@@ -47,9 +47,6 @@
                         <tr>     
                         <td>Identification Number:  </td> <td><input type="text" name="DeceasedNumber"  /><input type="submit" value="Confirm" /></td>  
                     </tr> 
-                    <tr>
-                         <td> Identification Number:</td>  <td> <input type="text" name=DeceasedIDNumber" value="" /></td>                       
-                     </tr>
                         
                         <tr>
                             <td> Place of Birth:</td> <td> <input type="text" name="PlaceBirth" value="" /></td>

@@ -19,7 +19,7 @@
             </style>
 <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
- <script src="js/DeceasedDetailsScript.js"></script>
+ <script src="js/DeceasedAddressContentScript.js"></script>
     </head>
     <body>
         <legend>Body File> Edit Body File> Body Identification> Deceased Address Details </legend>
@@ -31,7 +31,7 @@
                         <td>Building:  </td> <td><input type="text" name="deceasedbuilding"  /></td>  
                     </tr>
                      <tr>     
-                        <td>Street:  </td> <td><input type="text" name="deceaesedstreet"  /></td>  
+                        <td>Street:  </td> <td><input type="text" name="deceasedstreet"  /></td>  
                     </tr>
                     <tr>
                         <td>Suburb:</td> <td> <input type="text" name="deceasedsub" value="" /></td>

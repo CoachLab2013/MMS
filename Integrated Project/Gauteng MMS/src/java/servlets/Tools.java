@@ -6,7 +6,6 @@ import database.*;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.HEAD;
 
 /**
  *
@@ -20,12 +19,10 @@ public class Tools {
      */
     public Tools(){
  
-<<<<<<< HEAD
+
         dbdetail = new DbDetail("localhost","/mydb","root","200918139");
 
-=======
-        dbdetail = new DbDetail("localhost","/mydb","root","password123");
->>>>>>> origin/master
+
     }
     //end constructor
     
@@ -381,7 +378,6 @@ public class Tools {
       
          public String bodyfile2(String id){
         BodyFileDb bdyfileDb = new BodyFileDb( new DbDetail("localhost","/mydb","root","200918139"));
-       //  BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
         bdyfileDb.init();
         try{
           
