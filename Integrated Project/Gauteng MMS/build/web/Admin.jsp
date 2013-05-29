@@ -1242,7 +1242,7 @@
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="SpecialCurList">Special Circumstance Type(s):</label>
 
-                                                                            <select id="BodyClassList" name="SpecialCurList" size="5">
+                                                                            <select id="SpecialCurList" name="SpecialCurList" size="5">
                                                                                 <%
                                                                                     for (int i = 0; i < specialCurList.size(); i++) {
                                                                                 %>

@@ -19,8 +19,11 @@ import net.sf.jasperreports.engine.fill.JRTemplatePrintText;
 import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 
 /**
- * @author      Mubien Nackoda <coachlab@jcse.org.za>
+ * @author      Mubien Nakhooda <coachlab@jcse.org.za>
  * @since       2012-05-20          (the version of the package this class was first added to)
+ */
+/*
+ * Class is used to compile reports from .jrxml to pdf document
  */
 public class ReportGenerator {
         

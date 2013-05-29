@@ -53,13 +53,14 @@ public class PropertyDb extends DatabaseConnector
     }
 
     @Override
-    public String read() 
+    public String read() //UNUSED FUNCTION
     {
         try 
         {
-            statement.executeQuery("SELECT * FROM property WHERE sealNumber='" + property.getSealNumber() + "';");
+            statement.executeQuery("SELECT * FROM property WHERE idProperty='" + property.getIdProperty() + "';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
+            property.setSealNumber(resultSet.getString("sealNumber"));
             property.setDescription(resultSet.getString("description"));
             property.setDate(resultSet.getString("date"));
             property.setType(resultSet.getString("type"));
@@ -137,7 +138,7 @@ public class PropertyDb extends DatabaseConnector
                                     + "SAPS_name='" + property.getSAPS_name() +  "',"
                                     + "SAPS_surname='" + property.getSAPS_surname() +  "',"
                                     + "SAPS_taken=" + property.isTakenBySAPS() +  ","
-                                    + "released=" + property.isReleased() +  " WHERE Body_idDeathRegisterNumber='" + property.getDeathRegisterNumber() + "' AND sealNumber='" +property.getSealNumber()  + "';");
+                                    + "released=" + property.isReleased() +  " WHERE Body_idDeathRegisterNumber='" + property.getDeathRegisterNumber() + "';");
             statement.close();
             connection.close();
         } 

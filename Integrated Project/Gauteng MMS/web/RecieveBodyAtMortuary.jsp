@@ -33,7 +33,7 @@
                                                 </div>
                                             </div>
                                             <div class="control-group">
-                                                <label class="control-label">Organisation handing over body :</label> 
+                                                <label class="control-label">Organization handing over body :</label> 
                                                 <div class="controls"><%
                                                             out.print(t.makeReferenceList("Organization", "name", ""));
                                                             %>
