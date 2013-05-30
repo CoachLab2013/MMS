@@ -33,27 +33,39 @@
                     <tr>     
                         <td>Building:  </td> <td><input type="text" name="deceasedbuilding" <% Tools t = new Tools();
                     BodyAtMortuary body = t.getBody("099888592");
+                    if(body!=null)
                     out.print("value =" + body.getBodyAddress().getBuilding());%> /></td>  
                     </tr>
                      <tr>     
-                        <td>Street:  </td> <td><input type="text" name="deceaesedstreet" <%out.print("value =" + body.getBodyAddress().getStreet());%> /></td>  
+                        <td>Street:  </td> <td><input type="text" name="deceaesedstreet" <%
+                    if(body!=null)
+                    out.print("value =" + body.getBodyAddress().getStreet());%> /></td>  
                     </tr>
                     <tr>
-                        <td>Suburb:</td> <td> <input type="text" name="deceasedsub" <%out.print("value =" + body.getBodyAddress().getSuburb());%>  /></td>
+                        <td>Suburb:</td> <td> <input type="text" name="deceasedsub" <%
+                    if(body!=null)
+                    out.print("value =" + body.getBodyAddress().getSuburb());%>  /></td>
                     </tr> 
                      <tr>
-                        <td>City:</td> <td> <input type="text" name="deceasedcity" <%out.print("value =" + body.getBodyAddress().getCity());%>  /> </td>
+                        <td>City:</td> <td> <input type="text" name="deceasedcity" <%
+                    if(body!=null)
+                    out.print("value =" + body.getBodyAddress().getCity());%>  /> </td>
                     </tr> 
                      <tr>
-                        <td>Postal Code:</td> <td> <input type="text" name="postalcode" <%out.print("value =" + body.getBodyAddress().getPostCode());%>  /> </td>
+                        <td>Postal Code:</td> <td> <input type="text" name="postalcode" <%
+                    if(body!=null)
+                    out.print("value =" + body.getBodyAddress().getPostCode());%>  /> </td>
                     </tr> 
                     <tr>     
                         <td>Province:  </td> <td> <select name="province">
-                        <option><%out.print(body.getBodyAddress().getProvince());%></option>
+                        <option><%
+                    if(body!=null)
+                    out.print(body.getBodyAddress().getProvince());%></option>
                         <%
                             ArrayList<String> list = new Tools().getReferenceList("province", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
+                                if(body!=null)
                                 if (!item.equals(body.getBodyAddress().getProvince())) {
                                     
                                     if(item != null)
@@ -66,11 +78,14 @@
                     </tr>
                      <tr>     
                         <td>Region:  </td> <td> <select name="region">
-                        <option><%out.print(body.getBodyAddress().getRegion());%></option>
+                        <option><%
+                            if(body!=null)
+                            out.print(body.getBodyAddress().getRegion());%></option>
                          <%
                             list = new Tools().getReferenceList("region", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
+                                if(body!=null)
                                 if (!item.equals(body.getBodyAddress().getRegion())) {
                                     
                                     if(item != null)
@@ -82,7 +97,9 @@
                       
                     </tr>
                         <tr>     
-                        <td>Magisterial District:  </td> <td><input type="text" name="MagisterialD" <%out.print("value =" + body.getBodyAddress().getMagisterialDistrict());%>   /></td>  
+                        <td>Magisterial District:  </td> <td><input type="text" name="MagisterialD" <%
+                            if(body!=null)
+                            out.print("value =" + body.getBodyAddress().getMagisterialDistrict());%>   /></td>  
                     </tr> 
                             <tr>
                                 <td> <td>  <input type="submit" value="Save" name="bodySave" /><br></td></td>

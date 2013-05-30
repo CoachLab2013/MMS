@@ -40,18 +40,24 @@
             <tr>     
                 <td>Full Name(s):  </td> <td><input type="text" name="DeceasedName"  <% Tools t = new Tools();
                     BodyAtMortuary body = t.getBody("099888592");
+                    if(body!=null)
                     out.print("value =" + body.getNameOfDeceased());%>  /><input type="submit" value="Confirm" /></td>  
             </tr>
             <tr>     
-                <td>Maiden Name:  </td> <td><input type="text" name="DeceasedMaidenName" <%out.print("value =" + body.getMaidenName());%> /></td>  
+                <td>Maiden Name:  </td> <td><input type="text" name="DeceasedMaidenName" <%
+                    if(body!=null)
+                    out.print("value =" + body.getMaidenName());%> /></td>  
             </tr>
             <tr>
-                <td>Surname:</td> <td> <input type="text" name="DeceasedSurname" <%out.print("value =" + body.getSurnameOfDeceased());%> /><input type="submit" value="Confirm" /> </td>
+                <td>Surname:</td> <td> <input type="text" name="DeceasedSurname" <%
+                    if(body!=null)
+                    out.print("value =" + body.getSurnameOfDeceased());%> /><input type="submit" value="Confirm" /> </td>
             </tr> 
 
             <tr>     
                 <td>Identification type:  </td> <td> <select name="deceasedidentificationtype"> 
                         <%
+                            if(body!=null)
                             if (!(body.getID().contains(""))) {
                                 out.print("<option>ID</option>");
                             } else {
@@ -64,28 +70,39 @@
             <tr>     
                 <td>Identification Number:  </td> <td><input type="text" name="DeceasedNumber" <%
                     if (!(body.getID().contains(""))) {
-                        out.print("value =" + body.getID());
+                        if(body!=null)
+                            out.print("value =" + body.getID());
                     } else {
-                        out.print("value =" + body.getPassport());
+                        if(body!=null)
+                            out.print("value =" + body.getPassport());
                     };
                                                              %> /><input type="submit" value="Confirm" /></td>  
             </tr> 
             <tr>
-                <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%out.print("value =" + body.getPlaceOfBirth());%> /></td>
+                <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%
+                    if(body!=null)
+                    out.print("value =" + body.getPlaceOfBirth());%> /></td>
             </tr>
             <tr>     
-                <td>Date of Birth: </td> <td> <input type="text" name="deceasedDateBirth" <%out.print("value =" + body.getDateOfBirth());%> /></td> 
+                <td>Date of Birth: </td> <td> <input type="text" name="deceasedDateBirth" <%
+                    if(body!=null)
+                    out.print("value =" + body.getDateOfBirth());%> /></td> 
             </tr>
             <tr>     
-                <td>Age on the date found:  </td> <td><input type="text" name="deceasedage" <%out.print("value =" + body.getAgeOnDateFound());%> /></td>  
+                <td>Age on the date found:  </td> <td><input type="text" name="deceasedage" <%
+                    if(body!=null)
+                    out.print("value =" + body.getAgeOnDateFound());%> /></td>  
             </tr>
             <tr>     
                 <td>Gender:  </td> <td> <select name="deceasedgender">
-                        <option><%out.print(body.getGender());%></option>
+                        <option><%
+                    if(body!=null)
+                    out.print(body.getGender());%></option>
                         <%
                             ArrayList<String> list = new Tools().getReferenceList("gender", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
+                                if(body!=null)
                                 if (!item.equals(body.getGender())) {
                                     out.print("<option>" + item + "</option>");
                                 }
@@ -94,11 +111,14 @@
                     </select><input type="submit" value="Confirm" /> </td>
             <tr>     
                 <td>Marital Status:  </td> <td> <select name="deceasedMartitalstatus">
-                        <option><%out.print(body.getMaritalStatus());%></option>
+                        <option><%
+                            if(body!=null)
+                            out.print(body.getMaritalStatus());%></option>
                         <%
                             list = new Tools().getReferenceList("maritalstatus", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
+                                if(body!=null)
                                 if (!item.equals(body.getMaritalStatus())) {
                                     out.print("<option>" + item + "</option>");
                                 }
@@ -107,11 +127,14 @@
                     </select> </td>
             <tr>     
                 <td>Race:  </td> <td> <select name="deceasedrace">
-                        <option><%out.print(body.getRace());%></option>
+                        <option><%
+                            if(body!=null)
+                            out.print(body.getRace());%></option>
                         <%
                             list = new Tools().getReferenceList("race", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
+                                if(body!=null)
                                 if (!item.equals(body.getRace())) {
                                     out.print("<option>" + item + "</option>");
                                 }
@@ -120,12 +143,15 @@
                     </select><input type="submit" value="Confirm" /> </td>
             <tr>     
                 <td>Occupation:  </td> <td> <select name="deceasedOccupation">
-                        <option><%out.print(body.getOccupation());%></option>
+                        <option><%
+                            if(body!=null)
+                            out.print(body.getOccupation());%></option>
                         
                         <%
                             list = new Tools().getReferenceList("occupation", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
+                                if(body!=null)
                                 if (!item.equals(body.getOccupation())) {
                                     out.print("<option>" + item + "</option>");
                                 }
@@ -133,12 +159,15 @@
                         %>
                     </select> </td>
             <tr>
-                <td> Citizenship:</td> <td> <input type="text" name="KinContact" <%out.print("value =" + body.getCitizen());%> /></td>
+                <td> Citizenship:</td> <td> <input type="text" name="KinContact" <%
+                            if(body!=null)
+                            out.print("value =" + body.getCitizen());%> /></td>
             </tr>
 
             <tr>
                 <td> Body Status:     </td><td><select name="deceasedBodyStatus">
                         <option><%
+                            if(body!=null)
                             if (body.isBodyStatus()) {
                                 out.print("identified");
                             } else {
@@ -146,6 +175,7 @@
                             }
                             %></option>
                         <option><%
+                            if(body!=null)
                             if (!body.isBodyStatus()) {
                                 out.print("identified");
                             } else {
@@ -156,7 +186,9 @@
             </tr>
             <tr>     
                 <td>Assigned FPS Officer:  </td> <td> <select name="deceasedFPS">
-                        <option><%out.print(body.getAssignedTo());%></option>
+                        <option><%
+                            if(body!=null)
+                            out.print(body.getAssignedTo());%></option>
                     </select> </td>
             <tr>
                 <script>          
