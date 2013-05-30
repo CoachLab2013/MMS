@@ -40,24 +40,24 @@
             <tr>     
                 <td>Full Name(s):  </td> <td><input type="text" name="DeceasedName"  <% Tools t = new Tools();
                     BodyAtMortuary body = t.getBody("099888592");
-                    if(body!=null)
+                    if(body.getNameOfDeceased()!=null)
                     out.print("value =" + body.getNameOfDeceased());%>  /><input type="submit" value="Confirm" /></td>  
             </tr>
             <tr>     
                 <td>Maiden Name:  </td> <td><input type="text" name="DeceasedMaidenName" <%
-                    if(body!=null)
+                    if(body.getMaidenName()!=null)
                     out.print("value =" + body.getMaidenName());%> /></td>  
             </tr>
             <tr>
                 <td>Surname:</td> <td> <input type="text" name="DeceasedSurname" <%
-                    if(body!=null)
+                    if(body.getSurnameOfDeceased()!=null)
                     out.print("value =" + body.getSurnameOfDeceased());%> /><input type="submit" value="Confirm" /> </td>
             </tr> 
 
             <tr>     
                 <td>Identification type:  </td> <td> <select name="deceasedidentificationtype"> 
                         <%
-                            if(body!=null)
+                            if(body.getID()!=null)
                             if (!(body.getID().contains(""))) {
                                 out.print("<option>ID</option>");
                             } else {
@@ -70,39 +70,39 @@
             <tr>     
                 <td>Identification Number:  </td> <td><input type="text" name="DeceasedNumber" <%
                     if (!(body.getID().contains(""))) {
-                        if(body!=null)
+                        if(body.getID()!=null)
                             out.print("value =" + body.getID());
                     } else {
-                        if(body!=null)
+                        if(body.getPassport()!=null)
                             out.print("value =" + body.getPassport());
                     };
                                                              %> /><input type="submit" value="Confirm" /></td>  
             </tr> 
             <tr>
                 <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%
-                    if(body!=null)
+                    if(body.getPlaceOfBirth()!=null)
                     out.print("value =" + body.getPlaceOfBirth());%> /></td>
             </tr>
             <tr>     
                 <td>Date of Birth: </td> <td> <input type="text" name="deceasedDateBirth" <%
-                    if(body!=null)
+                    if(body.getDateOfBirth()!=null)
                     out.print("value =" + body.getDateOfBirth());%> /></td> 
             </tr>
             <tr>     
                 <td>Age on the date found:  </td> <td><input type="text" name="deceasedage" <%
-                    if(body!=null)
+                    if(body.getAgeOnDateFound()!= 0)
                     out.print("value =" + body.getAgeOnDateFound());%> /></td>  
             </tr>
             <tr>     
                 <td>Gender:  </td> <td> <select name="deceasedgender">
                         <option><%
-                    if(body!=null)
+                    if(body.getGender()!=null)
                     out.print(body.getGender());%></option>
                         <%
                             ArrayList<String> list = new Tools().getReferenceList("gender", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
-                                if(body!=null)
+                                if(body.getGender()!=null)
                                 if (!item.equals(body.getGender())) {
                                     out.print("<option>" + item + "</option>");
                                 }
@@ -112,13 +112,13 @@
             <tr>     
                 <td>Marital Status:  </td> <td> <select name="deceasedMartitalstatus">
                         <option><%
-                            if(body!=null)
+                            if(body.getMaritalStatus()!=null)
                             out.print(body.getMaritalStatus());%></option>
                         <%
                             list = new Tools().getReferenceList("maritalstatus", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
-                                if(body!=null)
+                                if(body.getMaritalStatus()!=null)
                                 if (!item.equals(body.getMaritalStatus())) {
                                     out.print("<option>" + item + "</option>");
                                 }
@@ -128,13 +128,13 @@
             <tr>     
                 <td>Race:  </td> <td> <select name="deceasedrace">
                         <option><%
-                            if(body!=null)
+                            if(body.getRace()!=null)
                             out.print(body.getRace());%></option>
                         <%
                             list = new Tools().getReferenceList("race", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
-                                if(body!=null)
+                                if(body.getRace()=null)
                                 if (!item.equals(body.getRace())) {
                                     out.print("<option>" + item + "</option>");
                                 }
@@ -144,14 +144,14 @@
             <tr>     
                 <td>Occupation:  </td> <td> <select name="deceasedOccupation">
                         <option><%
-                            if(body!=null)
+                            if(body.getOccupation()!=null)
                             out.print(body.getOccupation());%></option>
                         
                         <%
                             list = new Tools().getReferenceList("occupation", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
-                                if(body!=null)
+                                if(body.getOccupation()!=null)
                                 if (!item.equals(body.getOccupation())) {
                                     out.print("<option>" + item + "</option>");
                                 }
@@ -159,8 +159,8 @@
                         %>
                     </select> </td>
             <tr>
-                <td> Citizenship:</td> <td> <input type="text" name="KinContact" <%
-                            if(body!=null)
+                <td> Citizenship:</td> <td> <input type="text" name="deceasedCitizenship" <%
+                            if(body.getCitizen()!=null)
                             out.print("value =" + body.getCitizen());%> /></td>
             </tr>
 
@@ -187,7 +187,7 @@
             <tr>     
                 <td>Assigned FPS Officer:  </td> <td> <select name="deceasedFPS">
                         <option><%
-                            if(body!=null)
+                            if(body.getAssignedTo()!=null)
                             out.print(body.getAssignedTo());%></option>
                     </select> </td>
             <tr>

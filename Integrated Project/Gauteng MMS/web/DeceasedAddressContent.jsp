@@ -33,39 +33,39 @@
                     <tr>     
                         <td>Building:  </td> <td><input type="text" name="deceasedbuilding" <% Tools t = new Tools();
                     BodyAtMortuary body = t.getBody("099888592");
-                    if(body!=null)
+                    if(body.getBodyAddress().getBuilding()!=null)
                     out.print("value =" + body.getBodyAddress().getBuilding());%> /></td>  
                     </tr>
                      <tr>     
                         <td>Street:  </td> <td><input type="text" name="deceaesedstreet" <%
-                    if(body!=null)
+                    if(body.getBodyAddress().getStreet()!=null)
                     out.print("value =" + body.getBodyAddress().getStreet());%> /></td>  
                     </tr>
                     <tr>
                         <td>Suburb:</td> <td> <input type="text" name="deceasedsub" <%
-                    if(body!=null)
+                    if(body.getBodyAddress().getSuburb()!=null)
                     out.print("value =" + body.getBodyAddress().getSuburb());%>  /></td>
                     </tr> 
                      <tr>
                         <td>City:</td> <td> <input type="text" name="deceasedcity" <%
-                    if(body!=null)
+                    if(body.getBodyAddress().getCity()!=null)
                     out.print("value =" + body.getBodyAddress().getCity());%>  /> </td>
                     </tr> 
                      <tr>
                         <td>Postal Code:</td> <td> <input type="text" name="postalcode" <%
-                    if(body!=null)
+                    if(body.getBodyAddress().getPostCode()!=null)
                     out.print("value =" + body.getBodyAddress().getPostCode());%>  /> </td>
                     </tr> 
                     <tr>     
                         <td>Province:  </td> <td> <select name="province">
                         <option><%
-                    if(body!=null)
+                    if(body.getBodyAddress().getProvince()!=null)
                     out.print(body.getBodyAddress().getProvince());%></option>
                         <%
                             ArrayList<String> list = new Tools().getReferenceList("province", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
-                                if(body!=null)
+                                if(body.getBodyAddress().getProvince()!=null)
                                 if (!item.equals(body.getBodyAddress().getProvince())) {
                                     
                                     if(item != null)
@@ -79,13 +79,13 @@
                      <tr>     
                         <td>Region:  </td> <td> <select name="region">
                         <option><%
-                            if(body!=null)
+                            if(body.getBodyAddress().getRegion()!=null)
                             out.print(body.getBodyAddress().getRegion());%></option>
                          <%
                             list = new Tools().getReferenceList("region", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
-                                if(body!=null)
+                                if(body.getBodyAddress().getRegion()!=null)
                                 if (!item.equals(body.getBodyAddress().getRegion())) {
                                     
                                     if(item != null)
@@ -98,7 +98,7 @@
                     </tr>
                         <tr>     
                         <td>Magisterial District:  </td> <td><input type="text" name="MagisterialD" <%
-                            if(body!=null)
+                            if(body.getBodyAddress().getMagisterialDistrict()!=null)
                             out.print("value =" + body.getBodyAddress().getMagisterialDistrict());%>   /></td>  
                     </tr> 
                             <tr>
