@@ -38,75 +38,75 @@ public class AtSceneServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary("INSERT DEATH REGISTER NUMBER"));
+        BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter(null)));
         
-        bodyAtScene.setDateTimeBodyFound(null);
-        bodyAtScene.setAllegedInjuryDateTime(null);
-        bodyAtScene.setAllegedDeathDateTime(null);
-        bodyAtScene.setSceneDateTime(null);
-        bodyAtScene.setSceneIncidentOccured(null);
-        bodyAtScene.setPlaceOfDeath(null);
-        bodyAtScene.setExternalCircumstanceOfInjury(null);
+        bodyAtScene.setDateTimeBodyFound(request.getParameter(null));
+        bodyAtScene.setAllegedInjuryDateTime(request.getParameter(null));
+        bodyAtScene.setAllegedDeathDateTime(request.getParameter(null));
+        bodyAtScene.setSceneDateTime(request.getParameter(null));
+        bodyAtScene.setSceneIncidentOccured(request.getParameter(null));
+        bodyAtScene.setPlaceOfDeath(request.getParameter(null));
+        bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter(null));
         bodyAtScene.setPathOnScene(true);
         
         //build body received from
             Member receivedFrom = new Member();
-            receivedFrom.setName(null);
-            receivedFrom.setSurname(null);
-            receivedFrom.setOrganization(null);
-            receivedFrom.setDeathRegisterNumber(null);
+            receivedFrom.setName(request.getParameter("receivedBodyFromName"));
+            receivedFrom.setSurname(request.getParameter("receivedBodyFromSurname"));
+            receivedFrom.setOrganization(request.getParameter("Institution"));
+            receivedFrom.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         //end of building received from
         
         //SAPS member
             Member SAPSmemeber = new Member();
-            SAPSmemeber.setName(null);
-            SAPSmemeber.setSurname(null);
-            SAPSmemeber.setContactNumber(null);
-            SAPSmemeber.setOrganization(null); //SAPS
-            SAPSmemeber.setRank(null);
-            SAPSmemeber.setDeathRegisterNumber(null);
+            SAPSmemeber.setName(request.getParameter("SAPSmemberBodyName"));
+            SAPSmemeber.setSurname(request.getParameter("SAPSmemberBodySurname"));
+            SAPSmemeber.setContactNumber(request.getParameter("SAPSmemberBodyCell"));
+            SAPSmemeber.setOrganization("SAPS"); //SAPS
+            SAPSmemeber.setRank(request.getParameter("SAPSmemberBodyRank"));
+            SAPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         // end of SAPS member
         
         //FPSmemeber
             Member FPSmemeber = new Member();
-            FPSmemeber.setName(null);
-            FPSmemeber.setSurname(null);
-            FPSmemeber.setPersonnelNumber(null);
-            FPSmemeber.setContactNumber(null); //SAPS
-            FPSmemeber.setRank(null);
-            FPSmemeber.setDeathRegisterNumber(null);
+            FPSmemeber.setName(request.getParameter("FPSmemberBodyName"));
+            FPSmemeber.setSurname(request.getParameter("FPSmemberBodySurname"));
+            FPSmemeber.setPersonnelNumber(request.getParameter("FPSmemberBodyPersal"));
+            FPSmemeber.setContactNumber(request.getParameter("FPSmemberBodyCell")); //SAPS
+            FPSmemeber.setRank(request.getParameter("FPSmemberBodyRank"));
+            FPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         //end of FPS member
             
         //Pathologist on scene
             Member pathologistOnScene = new Member();
-            pathologistOnScene.setName(null);
-            pathologistOnScene.setSurname(null);
-            pathologistOnScene.setPersonnelNumber(null);
-            pathologistOnScene.setContactNumber(null); //SAPS
-            pathologistOnScene.setRank(null);
-            pathologistOnScene.setDeathRegisterNumber(null);
+            pathologistOnScene.setName(request.getParameter("pathologistBodyName"));
+            pathologistOnScene.setSurname(request.getParameter("pathologistBodySurname"));
+            //pathologistOnScene.setPersonnelNumber(request.getParameter(null));
+            //pathologistOnScene.setContactNumber(request.getParameter(null)); //SAPS
+            pathologistOnScene.setRank(request.getParameter("pathologistBodyRank"));
+            pathologistOnScene.setDeathRegisterNumber(request.getParameter(bodyAtScene.getBody().getDeathRegisterNumber()));
          //end of Pathologist on scene
             
          
         //Body Details
-        bodyAtScene.getBody().setBodyType(null);
-        bodyAtScene.getBody().setNameOfDeceased(null);
-        bodyAtScene.getBody().setSurnameOfDeceased(null);
-        bodyAtScene.getBody().setID(null);
+        bodyAtScene.getBody().setBodyType(request.getParameter(null));
+        bodyAtScene.getBody().setNameOfDeceased(request.getParameter(null));
+        bodyAtScene.getBody().setSurnameOfDeceased(request.getParameter(null));
+        bodyAtScene.getBody().setID(request.getParameter(null));
         //building body address
             BodyAddress bodyAddress = new BodyAddress();
-            bodyAddress.setBuilding(null);
-            bodyAddress.setStreet(null);
-            bodyAddress.setSuburb(null);
-            bodyAddress.setCity(null);
-            bodyAddress.setPostCode(null);
-            bodyAddress.setProvince(null);
-            bodyAddress.setRegion(null);
-            bodyAddress.setMagisterialDistrict(null);
+            bodyAddress.setBuilding(request.getParameter(null));
+            bodyAddress.setStreet(request.getParameter(null));
+            bodyAddress.setSuburb(request.getParameter(null));
+            bodyAddress.setCity(request.getParameter(null));
+            bodyAddress.setPostCode(request.getParameter(null));
+            bodyAddress.setProvince(request.getParameter(null));
+            bodyAddress.setRegion(request.getParameter(null));
+            bodyAddress.setMagisterialDistrict(request.getParameter(null));
         //end of building body
         bodyAtScene.getBody().setBodyAddress(bodyAddress);
-        bodyAtScene.getBody().setRace(null);
-        bodyAtScene.getBody().setGender(null);
+        bodyAtScene.getBody().setRace(request.getParameter(null));
+        bodyAtScene.getBody().setGender(request.getParameter(null));
  
 //        bodyAtScene.getBody().setEstimatedAgeYear(estimatedAgeYear);
  
