@@ -909,6 +909,7 @@
                                                                 <div id="icd10Codes" class="tab-pane <%out.println(String.valueOf(icd10));%> "> 
                                                                     <div align="center"><h2>ICD10 Codes </h2> </div>      
                                                                     <%--content for ICD10 code reference list--%>
+<<<<<<< HEAD
                                                                     <div class="offset2 ">
                                                                         <form name="AddICD10" id="AddICD10" method="post" action="ReferenceListServlet"  >
                                                                             <input type="text" name="form" value="AddICD10" style="visibility: hidden" />
@@ -923,6 +924,114 @@
                                                                         </form>
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="ICD10List">Current ICD10 Code(s):</label>
+=======
+                                                                    <div class="offset2 "> <table border="1" align="left">
+                                                                            <tr><td><form name="AddICD10" id="AddICD10" method="post" action="ReferenceListServlet">
+
+                                                                                        <input type="text" name="form" value="AddICD10" style="visibility: hidden" />
+                                                                                        <div class="control-group form-horizontal">
+                                                                                            <label class="control-label" for="ICD10List">Select ICD10 table:</label>
+                                                                                            <div class="controls">
+                                                                                                <select id="ICD10List" name="ICD10List" onchange='SelectDropICD10()'  >
+                                                                                                    <option value="1"> Level 1 Table </option> 
+                                                                                                    <option value="2"> Level 2 Table </option> 
+                                                                                                    <option value="3"> Level 3 Table </option> 
+                                                                                                </select>
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </form> </td>
+                                                                                <td><div class="controls offset2" >
+                                                                                        <label class="control-label" for="ICD10List">Current ICD10 Code(s):</label>
+                                                                                        <input type="text" id="txticd10Table" name="txticd10Table"/>
+                                                                                        <%
+                                                                                            String tableNum = "";
+                                                                                            try {
+                                                                                               
+                                                                                                tableNum = request.getAttribute("tab").toString();
+                                                                                            } catch (Exception ex) {
+                                                                                                tableNum=ex.getMessage();
+                                                                                            }
+                                                                                            if (tableNum == "1") {
+
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>Chapter</H4></th>
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+
+                                                                                        <%                                                                                        } else if (tableNum == "2") {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 1</H4></th>
+                                                                                            <th width="150"><H4>Chapter</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                        } else if (tableNum == "3") {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 2</H4></th>
+                                                                                            <th width="150"><H4>DIAG 1</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                        } else if (tableNum == "4") {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 2</H4></th>
+                                                                                            <th width="150"><H4>DIAG 3</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                            }
+                                                                                        %>
+                                                                                    </div> </td>
+
+                                                                            </tr>
+                                                                        </table> 
+>>>>>>> origin/master
 
                                                                             <select id="ICD10List" name="ICD10List" size="5">
                                                                                 <%
@@ -938,7 +1047,7 @@
                                                                     </div> 
                                                                     <%--Display save result --%> 
                                                                     <div  class="offset3">
-                                                                        <label  > <% out.println(String.valueOf(iCD10Result));%></label>
+                                                                        <label  > <% out.println(String.valueOf(tableNum));%></label>
                                                                     </div>
                                                                     <br/>
                                                                     <br/>
@@ -1193,5 +1302,26 @@
                                                     </div>           
                                                     </div>
 
+<<<<<<< HEAD
                                                     </div>                                                    </body>
+=======
+                                                    </div>
+
+                                                    </body>
+
+                                                    <form name="formname" action="EditReferenceListServlet" method="post">
+                                                        <input type="hidden" id="item" name="item">
+                                                        <input type="hidden" id="Olditem" name="Olditem">
+                                                        <input type="hidden" id="table" name="table">
+
+                                                    </form>
+                                                    <form name="formdelete" action="DeleteReferenceListServlet" method="post">
+                                                        <input type="hidden" id="item1" name="item1">
+                                                        <input type="hidden" id="table1" name="table1">
+                                                    </form>
+                                                    <form name="LoadICD10" action="LoadICD10Table" method="post">
+                                                       
+                                                         <input type="hidden" id="ICD10table" name="ICD10table">
+                                                    </form>
+>>>>>>> origin/master
                                                     </html>
