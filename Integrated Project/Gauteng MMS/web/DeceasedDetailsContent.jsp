@@ -134,7 +134,7 @@
                             list = new Tools().getReferenceList("race", "type");
                             for (int i = 0; i < list.size(); i++) {
                                 String item = list.get(i);
-                                if(body.getRace()=null)
+                                //if(body.getRace()=null)
                                 if (!item.equals(body.getRace())) {
                                     out.print("<option>" + item + "</option>");
                                 }
