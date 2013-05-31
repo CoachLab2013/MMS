@@ -11,15 +11,18 @@ import java.sql.SQLException;
  * @author Bandile
  */
 public class BodyAtMortuaryDb extends DatabaseConnector {
+    DbDetail dbDetail;
     BodyAtMortuary bodyAtMortuary;
 
     public BodyAtMortuaryDb(DbDetail dbDetail) {
         super(dbDetail);
+        this.dbDetail = dbDetail;
     }
 
     public BodyAtMortuaryDb(BodyAtMortuary bodyAtMortary, DbDetail dbDetail) {
         super(dbDetail);
         this.bodyAtMortuary = bodyAtMortary;
+        this.dbDetail = dbDetail;
     }
     
 
@@ -67,7 +70,43 @@ public class BodyAtMortuaryDb extends DatabaseConnector {
 
     @Override
     public String edit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try
+        {
+            BodyDb bodyDb = new BodyDb(dbDetail, bodyAtMortuary);
+            bodyDb.edit();
+            if(bodyAtMortuary.getBodyReceivedFromPerNumber().isEmpty()!=true){
+                statement.executeUpdate("UPDATE atMortuary SET "
+                  +"bodyHandedOverToPerNumber=" + bodyAtMortuary.getBodyHandedOverToPerNumber() + ","
+                  +"bodyHandOverFromOrganization='" + bodyAtMortuary.getBodyHandOverFromOrganization() + "'"
+                  +" WHERE Body_idDeathRegisterNumber='"+ bodyAtMortuary.getDeathRegisterNumber() + "';");
+                statement.close();
+                connection.close();
+            }else if(bodyAtMortuary.getBodyHandOverFromOrganization().isEmpty()!=true){
+                statement.executeUpdate("UPDATE atMortuary SET "
+                  +"bodyReceivedFromPerNumber='" + bodyAtMortuary.getBodyReceivedFromPerNumber() + "',"
+                  +"bodyHandedOverToPerNumber=" + bodyAtMortuary.getBodyHandedOverToPerNumber() + ","
+                  +" WHERE Body_idDeathRegisterNumber='"+ bodyAtMortuary.getDeathRegisterNumber() + "';");
+                statement.close();
+                connection.close();
+            }else{
+                statement.executeUpdate("UPDATE atMortuary SET "
+                  +"bodyReceivedFromPerNumber='" + bodyAtMortuary.getBodyReceivedFromPerNumber() + "',"
+                  +"bodyHandedOverToPerNumber=" + bodyAtMortuary.getBodyHandedOverToPerNumber() + ","
+                  +"bodyHandOverFromOrganization='" + bodyAtMortuary.getBodyHandOverFromOrganization() + "'"
+                  +" WHERE Body_idDeathRegisterNumber='"+ bodyAtMortuary.getDeathRegisterNumber() + "';");
+                statement.close();
+                connection.close();
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "successful"; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
