@@ -410,14 +410,10 @@ public class Tools {
     }
     // end 
 
-<<<<<<< HEAD
-    public String openbodyfile(String id) {
-        BodyFileDb bdyfileDb = new BodyFileDb(new DbDetail("localhost", "/mydb", "root", "tahirkhan"));
-=======
+
     public String bodyfile2(String id) {
         BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
->>>>>>> origin/master
-        //  BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
+        //BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
         bdyfileDb.init();
         try {
 

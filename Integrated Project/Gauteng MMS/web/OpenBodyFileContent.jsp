@@ -9,11 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<<<<<<< HEAD
-         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css">
-            
-        <title>JSP Page</title>
-=======
+<link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css">
          <style type="text/css">
                 label.error { 
                     float: none; 
@@ -22,18 +18,13 @@
                     vertical-align: top; 
                 }
             </style>
->>>>>>> origin/master
     </head>
     <body>
         <legend>Open body files </legend>
     
          <%
             Tools t = new Tools();
-<<<<<<< HEAD
-            out.println(t.openbodyfile("opentable"));
-=======
             out.println(t.makeOpenBodyFileTable("opentable"));
->>>>>>> origin/master
             %>
         
        
