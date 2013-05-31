@@ -48,8 +48,6 @@
                                                                 }
 %> --%>
 
-
-
                         </select>
                     </div>
                 </div> 
@@ -466,7 +464,6 @@
 
                         <input size="16" id="ReceivedFTime" name="ReceivedFacilityTime"  data-format="hh:mm" type="text" value="" readonly>
                         <span class="add-on"><i class="icon-time"></i></span> 
-
                     </div>
                 </div>
 

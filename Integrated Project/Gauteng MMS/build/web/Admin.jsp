@@ -1119,12 +1119,12 @@
                                                                                     <input type="text" id="txtICD10" name="txtICD10"   />
                                                                                     <input type="submit" value="Add ICD10 Code" name="cmdICD10" />
                                                                                 </div>
+>>>>>>> origin/master
 
                                                                                 <br/>  </div>
                                                                         </form>
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="ICD10List">Current ICD10 Code(s):</label>
->>>>>>> origin/master
 
                                                                             <select id="ICD10List" name="ICD10List" size="5">
                                                                                 <%
@@ -1140,7 +1140,11 @@
                                                                     </div> 
                                                                     <%--Display save result --%> 
                                                                     <div  class="offset3">
+<<<<<<< HEAD
                                                                         <label  > <% out.println(String.valueOf(tableNum + " " + one + " " + two + " " + three + " " + four));%></label>
+=======
+                                                                        <label  > <% out.println(String.valueOf(iCD10Result));%></label>
+>>>>>>> origin/master
                                                                     </div>
                                                                     <br/>
                                                                     <br/>
@@ -1368,7 +1372,7 @@
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="SpecialCurList">Special Circumstance Type(s):</label>
 
-                                                                            <select id="BodyClassList" name="SpecialCurList" size="5">
+                                                                            <select id="SpecialCurList" name="SpecialCurList" size="5">
                                                                                 <%
                                                                                     for (int i = 0; i < specialCurList.size(); i++) {
                                                                                 %>
