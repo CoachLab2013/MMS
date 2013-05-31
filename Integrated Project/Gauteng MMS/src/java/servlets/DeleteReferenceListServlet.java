@@ -475,7 +475,69 @@ public class DeleteReferenceListServlet extends HttpServlet {
             }
 
 
+        } else if (request.getParameter("table").equals("externalcircumstance")) {
+
+            ReferenceListDb emp = new ReferenceListDb("externalcircumstance", "idExternalCircumstance", "type", Olditem, dbDetail);
+            emp.init();
+            result = emp.delete().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "exCause");
+                sess.setAttribute("externalCauseResults", "External cause type has been successfuly deleted");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "exCause");
+                sess.setAttribute("externalCauseResults", "External cause type did not delete because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+
+        } else if (request.getParameter("table").equals("scenetype")) {
+            ReferenceListDb emp = new ReferenceListDb("scenetype", "idSceneType", "type", Olditem, dbDetail);
+            emp.init();
+            result = emp.delete().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "sceneType");
+                sess.setAttribute("sealTypeResults", "Seal type has been successfuly deleted");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "sceneType");
+                sess.setAttribute("sealTypeResults", "Seal type did not delete because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        } else {
+
+            PrintWriter out = response.getWriter();
+            try {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet DeleteReferenceListServlet</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Servlet DeleteReferenceListServlet at " + request.getContextPath() + "</h1>");
+                out.println("</body>");
+                out.println("</html>");
+            } finally {
+                out.close();
+            }
         }
+
 
     }
 

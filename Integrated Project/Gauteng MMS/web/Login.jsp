@@ -1,6 +1,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page import="servlets.Tools"%>
 <%--<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%> --%>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 
@@ -32,7 +32,10 @@
             <script src="bootstrap/js/bootstrap.min.js"></script>
             <link type="text/css" rel="stylesheet"  href="CSS/Design.css"> 
             <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css"> 
-             <div class="head"><img src="Images/logo2.jpg">
+             <div class="head"><img class="img-rounded" style=" width:100%" src="Images/logo10.jpg"></div>
+             <% Tools t = new Tools();
+            out.println(t.makeIcon());
+        %>
         </head>
         
         <body style=" height:600px">           

@@ -25,7 +25,7 @@
  <script src="js/PropertyScript.js"></script>
     </head>
     <body>
-        <legend class="legend">Body File >Edit Body File>Post Mortem >Property</legend>
+        <legend class="legend">Property</legend>
         <%
             if (session.getAttribute("_Property") != null) {
                 out.print("<input type=hidden id='_Property' value=" + session.getAttribute("_Property") +">"); 

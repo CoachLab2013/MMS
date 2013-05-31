@@ -84,7 +84,7 @@ public class BodyFileDb extends DatabaseConnector
             statement.executeQuery("SELECT * FROM bodyfile;");
             ResultSet rSet = statement.getResultSet();
             while(rSet.next())
-            {
+            {                
                 bodyFile = new BodyFile(rSet.getString("dateFileOpened"),rSet.getBoolean("bodyFileStatus"), rSet.getBoolean("allSamplesReceived"), rSet.getBoolean("bodyIdentified"), rSet.getBoolean("postMortemComplete"), rSet.getString("dateFileClosed"),rSet.getString("Body_idDeathRegisterNumber"));
                 list.add(bodyFile);
             }

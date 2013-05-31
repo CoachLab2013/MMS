@@ -71,7 +71,7 @@
                     <%--new body file content --%>
                     
                     <form name="AddBody" id="AddBody" method="post" action="">  
-                        <div align="center"><h2>New Body File </h2> </div>
+                        <legend>New Body File </legend>
                         <div class="offset1  span8 form-horizontal"  >
 
                             <div class="control-group">
@@ -94,7 +94,7 @@
                         </div>
                     </form>
 
-                    <div class="offset1  span8 form-horizontal" id="recieve_tabs">
+                    <div class="offset1  span8 form-horizontal" style="display: none;" id="recieve_tabs">
                         <div class="tabbable">
                             <ul class="nav nav-tabs " data-tabs="tabs">
                                 <li id="scene" class="active"><a href="#atScene" data-toggle="tab">Receive body from scene</a> </li>
@@ -117,7 +117,7 @@
                 </div>   
 
                 <div id="EditBodyFiles" class="tab-pane "> 
-                    <jsp:include page="EditBodyFileTabContent.jsp"/>
+                 <jsp:include page="EditBodyFileTabContent.jsp"/> 
                 </div>
 
                 <div id="LinkBodyFiles" class="tab-pane ">

@@ -9,14 +9,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
+
 <html>
     <head>
-        <%
-
+       <%  
+             
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-            response.setDateHeader("Expires", 0); // Proxies. 
-%>
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+response.setDateHeader("Expires", 0); // Proxies. 
+        %>
         <style type="text/css">
             label.error { 
                 float: none; 
@@ -31,22 +32,22 @@
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">   
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
         <title>Gauteng Mortuary Management System</title>
-    <div class="head"><img src="Images/logo2.jpg">
-        </head>
-        <body>
-
-
-            <%
-
-                //Tools t = new Tools();
-                //t.adduser();  
+        <% Tools t = new Tools();
+            out.println(t.makeIcon());
+        %>
+       
+</head>
+      
+    <body>
+        <title style="color:white">Gauteng Mortuary Management System</title>
+        <div class="head"><img class="img-rounded" style=" width:100%" src="Images/logo10.jpg"></div>
+        <% //Tools t = new Tools();
+        //t.adduser();  
 %>
-
-            <p>
-
-
-                <span style="float: right"><a href="LogOutServlet">Logout</a></span>
-            </p>
+        <div class="menutab">
+             
+                <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif"><a href="LogOutServlet">Logout</a></span>
+            
             <%
                 if (session.getAttribute("loggedin") == null) {
                     response.sendRedirect("/Gauteng_MMS/");
@@ -55,6 +56,12 @@
                     out.println("<input name='incidentlogged' id='incidentlogged' type=hidden value=true>");
                 }
             %>
+        </div>
+            
+<div class="bodycontent">        
+        
+        
+ 
 
             <div class="tabbable">
                 <ul class="nav nav-tabs " data-tabs="tabs">
@@ -66,13 +73,14 @@
                         <jsp:include page="IncidentsTabContent.jsp" /> 
 
                     </div>
-                    <div id="BodyFile" class="tab-pane "> 
-                        <div align="center"><h2>Body File </h2> </div>
-                        <jsp:include page= "BodyFileTabContent.jsp"/>
-                    </div>           
-                </div>
+                                   <div id="BodyFile" class="tab-pane "> 
+                  
+                    <jsp:include page= "BodyFileTabContent.jsp"/>
+                                   </div>           
 
+                </div>          
             </div>
 
-        </body>
+        </div>
+    </body>
 </html>

@@ -12,30 +12,29 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
 
-                                            <div align="center"><h2>Receive body at mortuary</h2> </div> 
+                                            <legend class="legend"><h3>Receive body at mortuary</h3> </legend> 
                                             <br/><br/>
 
-                                            <legend class="legend"><h4></h4></legend>
 
                                             <div class="control-group">
                                                 <label class="control-label">Employee receiving body:</label> 
                                                 <div class="controls"><%
                                                             Tools t = new Tools();
-                                                            out.print(t.makeReferenceList("Employee", "personnelNumber", ""));
+                                                            out.print(t.makeReferenceList("employee", "personnelNumber", ""));
                                                             %>
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label">Employee handing over body:</label> 
                                                 <div class="controls"><%
-                                                            out.print(t.makeReferenceList("Employee", "personnelNumber", ""));
+                                                            out.print(t.makeReferenceList("employee", "personnelNumber", ""));
                                                             %>
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label">Organization handing over body :</label> 
                                                 <div class="controls"><%
-                                                            out.print(t.makeReferenceList("Organization", "name", ""));
+                                                            out.print(t.makeReferenceList("organization", "name", ""));
                                                             %>
                                                 </div>
                                             </div>
@@ -48,7 +47,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Body Classification</label> 
                                                     <div class="controls"><%
-                                                            out.print(t.makeReferenceList("BodyPart", "type", ""));
+                                                            out.print(t.makeReferenceList("bodypart", "type", ""));
                                                             %>
                                                     </div>
                                                 </div> 
@@ -79,33 +78,91 @@
 
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="atMortBodyAddress">Address</label>
-                                                    <div class="controls">
-                                                        <textarea cols="50" rows="3" id="atMortBodyAddress" name="atMortBodyAddress"> </textarea>  
-                                                    </div>
-                                                </div>
+                    <label class="control-label" for="atMortuaryBodyAddressBuilding">Building</label>
+                    <div class="controls">
+                        <input type="text" name="atMortuaryBodyAddressBuilding" id="atSceneBodyAddressBuilding"/> 
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="atMortuaryBodyAddressStreet">Street</label>
+                    <div class="controls">
+                        <input type="text" name="atMortuaryBodyAddressStreet" id="atSceneBodyAddressStreet"/> 
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="atMortuaryBodyAddressSuburb">Suburb</label>
+                    <div class="controls">
+                        <input type="text" name="atMortuaryBodyAddressSuburb" id="atSceneBodyAddressSuburb"/> 
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="atMortuaryBodyAddressCity">City</label>
+                    <div class="controls">
+                        <input type="text" name="atMortuaryBodyAddressCity" id="atSceneBodyAddressCity"/> 
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="atMortuaryAddressPostalCode">Postal Code</label>
+                    <div class="controls">
+                        <input type="text" name="atMortuaryAddressPostalCode" id="atSceneBodyAddressPostalCode"/> 
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="province">Province</label>
+                    <div class="controls">                                                        
+                        <% out.println(t.makeReferenceList("province", "type", ""));%>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="region">Region</label>
+                    <div class="controls">
+                        <% out.println(t.makeReferenceList("region", "type", ""));%>
+                    </div>
+                </div>
+
 
                                                 <div class="control-group">
                                                     <label class="control-label">Race</label> 
                                                     <div class="controls"><%
-                                                            out.print(t.makeReferenceList("Race", "type", ""));
+                                                            out.print(t.makeReferenceList("race", "type", ""));
                                                             %>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label">Gender</label> 
                                                     <div class="controls"><%
-                                                            out.print(t.makeReferenceList("Gender", "type", ""));
+                                                            out.print(t.makeReferenceList("gender", "type", ""));
                                                             %>
                                                     </div>
                                                 </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="atMortBodyEstAge">Age estimate</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="atMortBodyEstAge" id="atMortBodyEstAge"/> 
-                                                    </div>
-                                                </div>
+                    <label class="control-label" for="atSceneBodyEstAge">Estimated age</label>
+                    <div class="controls">    
+                        <table>
+                            <tr>
+                                <td><select name="atSceneBodyEstAge" id="atSceneBodyEstAge" style="width:100px;" >
+                                        <option selected="selected">Age</option>
+                                        <%
+                                            for (int i = 1; i < 101; i++) {
+                                                out.println("<option>" + i + "</option>");
+                                            }
+                                        %>
+                                    </select></td>
+                                <td><select name="at_scene_body_estimated_age" id="at_scene_body_estimated_age" style="width:120px;" >
+                                        <option selected="selected">Years/Months</option>
+                                        <option>Years</option>
+                                        <option>Months</option>
+                                    </select></td>
+                            </tr>
+                        </table>                                                         
+                    </div>
+                </div>
 
                                             </fieldset>
 

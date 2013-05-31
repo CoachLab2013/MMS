@@ -28,7 +28,7 @@
  <script src="js/RequestForensicSampleScript.js"></script>
     </head>
     <body>                
-        <legend>Body File> Edit Body File> Post Mortem> Request Forensic Sample</legend>
+        <legend>Request Forensic Sample</legend>
         <%
             if (session.getAttribute("_requestForensicSample") != null) {
                 out.print("<input type=hidden id='_requestForensicSample' value=" + session.getAttribute("_requestForensicSample") +">"); 

@@ -4,6 +4,7 @@
     Author     : Asheen
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
     <html>
@@ -40,6 +41,9 @@ response.setDateHeader("Expires", 0); // Proxies.
             <link type="text/css" rel="stylesheet"  href="CSS/Design.css"> 
             <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css"> 
              <div class="head"><img src="Images/logo2.jpg">
+                 <% Tools t = new Tools();
+            out.println(t.makeIcon());
+        %>
         </head>
         
         <body style=" height:600px">           
