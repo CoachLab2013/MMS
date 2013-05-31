@@ -4,6 +4,7 @@
  */
 package servlets;
 
+import database.BodyAtMortuary;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -33,8 +34,12 @@ public class AtMortuaryServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
+        
+        BodyAtMortuary bodyAtMortuary = new BodyAtMortuary(request.getParameter(null));
+        //bodyAtMortuary
+        //bodyAtMortuary
+        /*try {
+            /* TODO output your page here. You may use following sample code.
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -46,7 +51,7 @@ public class AtMortuaryServlet extends HttpServlet {
             out.println("</html>");
         } finally {            
             out.close();
-        }
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

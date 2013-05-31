@@ -60,7 +60,7 @@ public class AtSceneServlet extends HttpServlet {
             Member receivedFrom = new Member();
             receivedFrom.setName(request.getParameter("receivedBodyFromName"));
             receivedFrom.setSurname(request.getParameter("receivedBodyFromSurname"));
-            receivedFrom.setOrganization(request.getParameter("Institution"));
+            receivedFrom.setOrganization(request.getParameter("Organization"));
             receivedFrom.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         //end of building received from
         
