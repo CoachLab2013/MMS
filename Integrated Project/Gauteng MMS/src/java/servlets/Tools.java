@@ -22,7 +22,12 @@ public class Tools {
      */
     public Tools() {
 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
+
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "tahirkhan");
+
+
+        
+
     }
     //end constructor
 
@@ -222,6 +227,7 @@ public class Tools {
         }
     }
     //end getReferenceList
+    
 
     public String makeReferenceList(String listname, String field, String selected) {
         ArrayList<String> list = new ArrayList<String>();
@@ -294,7 +300,7 @@ public class Tools {
     public String bodyRelease(String id) { //change
 
         // BodyFile bf = new BodyFile(id);
-        BodyDb bdyDb = new BodyDb(new DbDetail("localhost", "/mydb", "root", "200918139"));
+        BodyDb bdyDb = new BodyDb(new DbDetail("localhost", "/mydb", "root", "tahirkhan"));
         bdyDb.init();
         try {
 
@@ -404,9 +410,10 @@ public class Tools {
     }
     // end 
 
+
     public String bodyfile2(String id) {
         BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
-        //  BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
+        //BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
         bdyfileDb.init();
         try {
 

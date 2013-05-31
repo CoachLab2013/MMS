@@ -22,7 +22,7 @@
  <script src="js/PostMortemFindingsContentScript.js"></script>
     </head>
     <body>
-        <legend>Body File> Edit Body File> Post Mortem> Post Mortem Findings</legend>
+        <legend>Post Mortem Findings</legend>
         <%
             if (session.getAttribute("_PostMortem") != null) {
                 out.print("<input type=hidden id='_PostMortem' value=" + session.getAttribute("_PostMortem") +">"); 
@@ -43,41 +43,7 @@
                             <td> Chief post mortem:     </td><td><textarea cols="50" rows="3" name="findingsmortem" id="findingsmortem"> </textarea><br></td>
                      
                             </tr>
-                            <tr>
-                        <td>  ICD codes:</td><td>
-        <select name="ICDcode" id="ICDcode">
-             <option selected="selected">Choose chapter</option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-         </select>
-                            <select name="Diagnosis1">
-                                <option selected="selected">Select</option>
-                                <option></option>
-                                <option></option>
-                            </select>   
-                            <select name="diagnosis2">
-                                <option selected="selected">Select</option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                            </select>
                             
-                            <select name="diagnosis2">
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                            </select>
-                            
-                        </td>
                             <br>
                             </tr>
                             <tr>

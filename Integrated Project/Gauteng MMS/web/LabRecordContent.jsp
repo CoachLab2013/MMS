@@ -27,7 +27,7 @@
  <script src="js/LabRecordScript.js"></script>
     </head>
     <body>
-        <legend>Body File> Edit Body File> Post Mortem> Lab Record</legend>
+        <legend>Lab Record</legend>
         <%
             if (session.getAttribute("_labRecord") != null) {
                 out.print("<input type=hidden id='_labRecord' value=" + session.getAttribute("_labRecord") +">"); 
