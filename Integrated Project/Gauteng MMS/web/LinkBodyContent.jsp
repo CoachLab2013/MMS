@@ -22,7 +22,7 @@
     <body>
         <div id="NewBodyFiles" class="tab-pane ">
             <%--new body file content --%>
-            <div align="center"><h2>Link Body Files</h2> </div>
+            <legend>Link Body Files</legend>
 
             <legend>Select Body Files to Link</legend>
 

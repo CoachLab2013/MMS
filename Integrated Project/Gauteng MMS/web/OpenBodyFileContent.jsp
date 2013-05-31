@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css">
          <style type="text/css">
                 label.error { 
                     float: none; 
@@ -17,14 +18,13 @@
                     vertical-align: top; 
                 }
             </style>
-        <title>JSP Page</title>
     </head>
     <body>
-        <h2>Open body files </h2>
+        <legend>Open body files </legend>
     
          <%
             Tools t = new Tools();
-            out.println(t.bodyfile2("opentable"));
+            out.println(t.makeOpenBodyFileTable("opentable"));
             %>
         
        

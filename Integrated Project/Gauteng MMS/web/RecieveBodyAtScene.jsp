@@ -10,9 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="js/RecieveAtSceneScript.js"></script>       
     </head>
     <body>
                                             <div align="center"><h2>Receive body from scene</h2> </div>
+                                            <form name="recieve_body_scene_form" id="recieve_body_scene_form" method="post" action="#">
                                             <fieldset class="fieldset">
                                                 <legend class="legend"><h4>Body received from:</h4></legend>
                                                 <div class="control-group">
@@ -56,26 +58,26 @@
 
                                             <fieldset class="fieldset">
                                                 <legend class="legend"><h4>SAPS member handing over the body:</h4></legend>
-                                                <div class="control-group error">
+                                                <div class="control-group">
                                                     <label class="control-label" for="SAPSmemberBodyName">Name</label> 
                                                     <div class="controls">
                                                         <input type="text" name="SAPSmemberBodyName" id="SAPSmemberBodyName"/> 
                                                     </div>
                                                 </div>
-                                                <div class="control-group error">
+                                                <div class="control-group">
                                                     <label class="control-label" for="SAPSmemberBodySurname">Surname</label>
                                                     <div class="controls">
                                                         <input type="text" name="SAPSmemberBodySurname" id="SAPSmemberBodySurname"/> 
                                                     </div>
                                                 </div>
-                                                <div class="control-group error">
+                                                <div class="control-group">
                                                     <label class="control-label" for="SAPSmemberBodyCell">Cell phone number</label>
                                                     <div class="controls">
                                                         <input type="text" name="SAPSmemberBodyCell" id="SAPSmemberBodyCell"/> 
                                                     </div>
                                                 </div>
 
-                                                <div class="control-group error">
+                                                <div class="control-group">
                                                     <label class="control-label" for="SAPSmemberBodyRank">Rank</label>
                                                     <div class="controls">
                                                         <input type="text" name="SAPSmemberBodyRank" id="SAPSmemberBodyRank"/> 
@@ -161,7 +163,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Body Classification</label> 
                                                     <div class="controls"><%
-                                                            out.print(t.makeReferenceList("BodyPart", "type", ""));
+                                                            out.print(t.makeReferenceList("bodypart", "type", ""));
                                                             %>
                                                         <%--<select id="BodyClass" name="BodyClass">                            
                                                             <option>Head</option>
@@ -186,10 +188,22 @@
                                                         <input type="text" name="atSceneBodySurname" id="atSceneBodySurname"/> 
                                                     </div>
                                                 </div>
-
+                                                 
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="recieve_at_scene_id_type">Identification type</label>
+                                                    
+                                                    
+                                                    <div class="controls">
+                                                        <select id="recieve_at_scene_id_type" name="recieve_at_scene_id_type">
+                                                        <option selected="selected">Select</option>
+                                                        <option>ID</option>
+                                                        <option>Passport</option>
+                                                    </select>
+                                                    </div>
+                                                </div>
 
                                                 <div class="control-group">
-                                                    <label class="control-label" for="atSceneBodyID">ID number</label>
+                                                    <label class="control-label" for="atSceneBodyID">Identification number</label>
                                                     <div class="controls">
                                                         <input type="text" name="atSceneBodyID" id="atSceneBodyID"/> 
                                                     </div>
@@ -231,16 +245,16 @@
                                                 </div>
                                                
                                                <div class="control-group">
-                                                    <label class="control-label" for="atSceneBodyAddressProvince">Province</label>
-                                                    <div class="controls">
-                                                        <input type="text" name="atSceneBodyAddressProvince" id="atSceneBodyAddressProvince"/> 
+                                                    <label class="control-label" for="province">Province</label>
+                                                    <div class="controls">                                                        
+                                                        <% out.println(t.makeReferenceList("province", "type", "")); %>
                                                     </div>
                                                 </div>
                                                
                                                <div class="control-group">
-                                                    <label class="control-label" for="atSceneBodyAddressRegion">Region</label>
+                                                    <label class="control-label" for="region">Region</label>
                                                     <div class="controls">
-                                                        <input type="text" name="atSceneBodyAddressRegion" id="atSceneBodyAddressRegion"/> 
+                                                        <% out.println(t.makeReferenceList("region", "type", "")); %>
                                                     </div>
                                                 </div>
                                                
@@ -264,7 +278,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Race</label> 
                                                     <div class="controls"><%
-                                                            out.print(t.makeReferenceList("Race", "type", ""));
+                                                            out.print(t.makeReferenceList("race", "type", ""));
                                                             %>                      
                                                             <%--<select id="Brace" name="Brace"><option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
                                                             <%
@@ -281,7 +295,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Gender</label> 
                                                     <div class="controls"><%
-                                                            out.print(t.makeReferenceList("Gender", "type", ""));
+                                                            out.print(t.makeReferenceList("gender", "type", ""));
                                                             %>
                                                         <%--<select id="Bgender" name="Bgender">                            
                                                             <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
@@ -751,8 +765,9 @@
                                             </fieldset>
 
                                             <div class="offset5">
-                                                <input  type="button"  onclick= "move()" class="btn btn-primary" name="BodyFileNext" id="BodyFileNext"   value="Next" /> 
+                                                <input  type="submit"  class="btn btn-primary" name="recieve_at_scene_save" id="recieve_at_scene_save"   value="Save" /> 
                                                 <%--Display save result --%> 
                                             </div>
-    </body>
+                                            </form>
+    </body>         
 </html>

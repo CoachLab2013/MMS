@@ -25,7 +25,7 @@
             <script src="js/RegisteredSamples.js"></script>
     </head>
     <body>
-        <legend>Body File> Edit Body File> Post Mortem> Registered Samples</legend>
+        <legend>Registered Samples</legend>
         <%
             if (session.getAttribute("_registeredSamples") != null) {
                 out.print("<input type=hidden id='_registeredSamples' value=" + session.getAttribute("_registeredSamples") +">"); 

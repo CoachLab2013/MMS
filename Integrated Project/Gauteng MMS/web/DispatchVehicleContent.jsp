@@ -30,7 +30,7 @@
     </head>
 
     <body>
-    <legend>Dispatch Vehicle</legend>
+    <legend>Step 3: Dispatch Vehicle(Optional)</legend>
     <%
         if (session.getAttribute("incidentlogged") != null) {
             out.print("<label class='success' id='success' info='success'>" + session.getAttribute("incidentlogged") + "</label>");
