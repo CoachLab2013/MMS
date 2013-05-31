@@ -94,7 +94,7 @@
                         </div>
                     </form>
 
-                    <div class="offset1  span8 form-horizontal" id="recieve_tabs">
+                    <div class="offset1  span8 form-horizontal" style="display: none;" id="recieve_tabs">
                         <div class="tabbable">
                             <ul class="nav nav-tabs " data-tabs="tabs">
                                 <li id="scene" class="active"><a href="#atScene" data-toggle="tab">Receive body from scene</a> </li>
