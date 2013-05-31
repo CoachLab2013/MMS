@@ -9,22 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <style type="text/css">
-                label.error { 
-                    float: none; 
-                    color: red; 
-                    padding-left: .5em; 
-                    vertical-align: top; 
-                }
-            </style>
+         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css">
+            
         <title>JSP Page</title>
     </head>
     <body>
-        <h2>Open body files </h2>
+        <legend>Open body files </legend>
     
          <%
             Tools t = new Tools();
-            out.println(t.bodyfile2("opentable"));
+            out.println(t.openbodyfile("opentable"));
             %>
         
        

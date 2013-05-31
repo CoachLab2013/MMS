@@ -22,7 +22,7 @@
  <script src="js/PostMortemFindingsContentScript.js"></script>
     </head>
     <body>
-        <legend>Body File> Edit Body File> Post Mortem> Post Mortem Findings</legend>
+        <legend>Post Mortem Findings</legend>
         <%
             if (session.getAttribute("_PostMortem") != null) {
                 out.print("<input type=hidden id='_PostMortem' value=" + session.getAttribute("_PostMortem") +">"); 

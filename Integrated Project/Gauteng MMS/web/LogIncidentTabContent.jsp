@@ -17,11 +17,11 @@
     </head>
     <body>
         <div class="tabbable">
-            <ul class="nav nav-tabs " data-tabs="tabs">
-                <li id="IncidentDetailsTab" class="active"><a href="#IncidentDetails" data-toggle="tab">Incident Details</a> </li>
-                <li id="CallDetailsTab"><a href="#CallDetails" data-toggle="tab">Call Details</a></li>   
-                <li id="DispatchVehicleTab"><a href="#DispatchVehicle" data-toggle="tab">Dispatch Vehicle</a></li> 
-            </ul>
+                           <!--<li id="IncidentDetailsTab" class="active"><a href="#IncidentDetails" data-toggle="tab"> Enter Incident Details</a> </li>
+ <ul class="nav nav-tabs " data-tabs="tabs">
+                <li id="CallDetailsTab"><a href="#CallDetails" data-toggle="tab">Enter Call Details</a></li>   
+            </ul>                <li id="DispatchVehicleTab"><a href="#DispatchVehicle" data-toggle="tab">Dispatch Vehicle</a></li> -->
+
             <div class="tab-content" >
                 <div id="IncidentDetails" class="tab-pane active">  
                     <jsp:include page="IncidentDetailsContent.jsp" />
@@ -40,4 +40,3 @@
         </div>
     </body>
 </html>
-

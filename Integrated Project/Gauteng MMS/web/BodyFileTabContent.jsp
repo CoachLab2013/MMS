@@ -71,7 +71,7 @@
                     <%--new body file content --%>
                     
                     <form name="AddBody" id="AddBody" method="post" action="">  
-                        <div align="center"><h2>New Body File </h2> </div>
+                        <legend>New Body File </legend>
                         <div class="offset1  span8 form-horizontal"  >
 
                             <div class="control-group">
