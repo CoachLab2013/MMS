@@ -26,7 +26,7 @@
     </head>
     <body>
         <legend>Incident Details</legend>
-        <form id="detailform" name="detailform" class="form-horizontal" method="post" action="LogIncidentServlet">
+        <form id="detailform" name="detailform" class="form-horizontal" method="post" action="#">
         <table>
             <tr>
                 <td>FPS Incident Log Number: </td> <td><input type="text" id="fpsnumber" name="fpsnumber" readonly="true"

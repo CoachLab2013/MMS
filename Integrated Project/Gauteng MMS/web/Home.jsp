@@ -68,7 +68,7 @@
                     </div>
                     <div id="BodyFile" class="tab-pane "> 
                         <div align="center"><h2>Body File </h2> </div>
-                        <jsp:include page= "BodyFileTabContent.jsp"/>
+                       <jsp:include page= "BodyFileTabContent.jsp"/>
                     </div>           
                 </div>
 

@@ -28,7 +28,7 @@
                 </div>
                 
                 <div id="BodyIdentification" class="tab-pane ">
-                  <jsp:include page="BodyIdentificationTabContent.jsp"/> 
+                  <%--<jsp:include page="BodyIdentificationTabContent.jsp"/> --%>
                 </div> 
                 
                 <div id="PostMortem" class="tab-pane ">

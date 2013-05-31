@@ -117,7 +117,7 @@
                 </div>   
 
                 <div id="EditBodyFiles" class="tab-pane "> 
-                    <jsp:include page="EditBodyFileTabContent.jsp"/>
+                 <jsp:include page="EditBodyFileTabContent.jsp"/> 
                 </div>
 
                 <div id="LinkBodyFiles" class="tab-pane ">
