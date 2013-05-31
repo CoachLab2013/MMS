@@ -17,6 +17,7 @@ public class BodyFile
     private boolean postMortemComplete;
     private String dateFileClosed;
     private String deathRegisterNumber;
+    
     public BodyFile()
     {
         
@@ -25,6 +26,7 @@ public class BodyFile
      {
          this.deathRegisterNumber = deathRegisterNumber;
      }
+     
     public BodyFile(String dateFileOpened,boolean bodyFileStatus,boolean allSamplesRecevied,boolean bodyIdentified,boolean postMortemComplete,String dateFileClosed,String deathRegisterNumber)
     {
         this.dateFileOpened = dateFileOpened;
@@ -41,7 +43,7 @@ public class BodyFile
     }
     public boolean isClosed()
     {
-        return bodyFileStatus;
+        return getBodyFileStatus();
     }
     public boolean isAllSamplesReceived()
     {
@@ -90,5 +92,12 @@ public class BodyFile
     public void setDeathRegisterNumber(String deathRegisterNumber)
     {
         this.deathRegisterNumber = deathRegisterNumber;
+    }
+
+    /**
+     * @return the bodyFileStatus
+     */
+    public boolean getBodyFileStatus() {
+        return bodyFileStatus;
     }
 }
