@@ -12,7 +12,12 @@
 
 <html>
     <head>
-      
+       <%  
+             
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+response.setDateHeader("Expires", 0); // Proxies. 
+        %>
         <style type="text/css">
             label.error { 
                 float: none; 
@@ -38,33 +43,9 @@
         //t.adduser();  
 %>
         <div class="menutab">
-                     
-            <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif; font-size: large; color: black">Logout</span>
-           
-        </div>
+             
+                <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif"><a href="LogOutServlet">Logout</a></span>
             
-<div class="bodycontent">        
-        
-        <%
-            if (session.getAttribute("incidentlogged") != null) {
-                out.println("<input name='incidentlogged' id='incidentlogged' type=hidden value=true>");
-            }
-        %>
-       
-        <div class="tabbable">
-            <ul class="nav nav-tabs " data-tabs="tabs">
-                <li id="IncidentTab" class="active"><a href="#Incident" data-toggle="tab">Incidents</a> </li>
-                <li id ="BodyFileTab"><a href="#BodyFile" data-toggle="tab">Body File</a></li>       
-            </ul>
-            <div class="tab-content" >
-                <div id="Incident" class="tab-pane active">  
-                    <jsp:include page="IncidentsTabContent.jsp" /> 
-
-            <p>
-
-
-                <span style="float: right"><a href="LogOutServlet">Logout</a></span>
-            </p>
             <%
                 if (session.getAttribute("loggedin") == null) {
                     response.sendRedirect("/Gauteng_MMS/");
@@ -73,6 +54,12 @@
                     out.println("<input name='incidentlogged' id='incidentlogged' type=hidden value=true>");
                 }
             %>
+        </div>
+            
+<div class="bodycontent">        
+        
+        
+ 
 
             <div class="tabbable">
                 <ul class="nav nav-tabs " data-tabs="tabs">
@@ -84,18 +71,14 @@
                         <jsp:include page="IncidentsTabContent.jsp" /> 
 
                     </div>
-                    <div id="BodyFile" class="tab-pane "> 
-                        <div align="center"><h2>Body File </h2> </div>
-                       <jsp:include page= "BodyFileTabContent.jsp"/>
-                    </div>           
-                </div>
-                <div id="BodyFile" class="tab-pane "> 
+                                   <div id="BodyFile" class="tab-pane "> 
                   
                     <jsp:include page= "BodyFileTabContent.jsp"/>
-                </div>           
+                                   </div>           
+
+                </div>          
             </div>
 
         </div>
-</div>
     </body>
 </html>

@@ -28,15 +28,8 @@
                 </div>
                 
                 <div id="BodyIdentification" class="tab-pane ">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    <%--<jsp:include page="BodyIdentificationTabContent.jsp"/>--%>
-=======
-                  <jsp:include page="BodyIdentificationTabContent.jsp"/> 
->>>>>>> origin/master
-=======
                   <%--<jsp:include page="BodyIdentificationTabContent.jsp"/> --%>
->>>>>>> origin/master
+
                 </div> 
                 
                 <div id="PostMortem" class="tab-pane ">
