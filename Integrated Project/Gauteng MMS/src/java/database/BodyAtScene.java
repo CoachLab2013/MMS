@@ -12,6 +12,7 @@ public class BodyAtScene /*extends Body*/
 {
     private String sceneIncidentOccured;
     private String sceneDateTime;
+    private String facilityDateTime;
     private boolean pathOnScene;
     private String allegedInjuryDateTime;
     private String allegedDeathDateTime;
@@ -27,9 +28,8 @@ public class BodyAtScene /*extends Body*/
     public BodyAtScene(BodyAtMortuary body) {
         this.body = body;
     }
-    public BodyAtScene(String sceneIncidentOccured, String sceneDateTime, boolean pathOnScene, String allegedInjuryDateTime, String allegedDeathDateTime, String externalCircumstanceOfInjury, String placeOfDeath, String dateTimeBodyFound, BodyAtMortuary body) {
+    public BodyAtScene(String sceneIncidentOccured, boolean pathOnScene, String allegedInjuryDateTime, String allegedDeathDateTime, String externalCircumstanceOfInjury, String placeOfDeath, String dateTimeBodyFound, BodyAtMortuary body) {
         this.sceneIncidentOccured = sceneIncidentOccured;
-        this.sceneDateTime = sceneDateTime;
         this.pathOnScene = pathOnScene;
         this.allegedInjuryDateTime = allegedInjuryDateTime;
         this.allegedDeathDateTime = allegedDeathDateTime;
@@ -37,7 +37,7 @@ public class BodyAtScene /*extends Body*/
         this.placeOfDeath = placeOfDeath;
         this.dateTimeBodyFound = dateTimeBodyFound;
         this.body = body;
-    }
+    }    
     /**
      * @return the sceneIncidentOccured
      */
@@ -218,6 +218,14 @@ public class BodyAtScene /*extends Body*/
      */
     public void setReceivedfrom(Member Receivedfrom) {
         this.Receivedfrom = Receivedfrom;
+    }
+    
+    public String getFacilityDateTime() {
+        return facilityDateTime;
+    }
+
+    public void setFacilityDateTime(String facilityDateTime) {
+        this.facilityDateTime = facilityDateTime;
     }
     
 }

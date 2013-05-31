@@ -251,30 +251,11 @@
                                                     </div>
                                                 </div>
 
-
-                                                        <%--<div class="control-group">
-                                                    <label class="control-label" for="atSceneBodyAddress">Address</label>
-                                                    <div class="controls">
-
-                                                        <textarea cols="50" rows="3" id="atSceneBodyAddress" name="atSceneBodyAddress"> </textarea>
-
-                                                    </div>
-                                                </div>--%>
-
                                                 <div class="control-group">
                                                     <label class="control-label">Race</label> 
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("Race", "type", ""));
                                                             %>                      
-                                                            <%--<select id="Brace" name="Brace"><option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
-                                                            <%
-                                                                for (int i = 0; i < raceList.size(); i++) {
-                                                            %>
-                                                            <option><% out.print(raceList.get(i));%> </option>
-
-                                                            <%
-                                                                }
-                                                            %> --%>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -283,16 +264,6 @@
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("Gender", "type", ""));
                                                             %>
-                                                        <%--<select id="Bgender" name="Bgender">                            
-                                                            <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
-                                                            <%
-                                                                for (int i = 0; i < genderList.size(); i++) {
-                                                            %>
-                                                            <option><% out.print(genderList.get(i));%> </option>
-
-                                                            <%
-                                                                }
-                                                            %> --%>
 
                                                         </select>
                                                     </div>
@@ -450,11 +421,6 @@
                                                     <div class="controls"><%
                                                             out.print(t.makeReferenceList("SceneType", "type", ""));
                                                             %>
-                                                        <%-- <select id="SceneO" name="SceneO">                            
-                                                            <option>home</option>
-                                                            <option>park</option>
-                                                            <option>flat</option>
-                                                        </select> --%>
                                                     </div>
                                                 </div> 
 

@@ -8,6 +8,7 @@ import database.BodyAddress;
 import database.BodyAtMortuary;
 import database.BodyAtScene;
 import database.Member;
+import database.Property;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -40,12 +41,12 @@ public class AtSceneServlet extends HttpServlet {
         
         BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter(null)));
         
-        bodyAtScene.setDateTimeBodyFound(request.getParameter(null));
-        bodyAtScene.setAllegedInjuryDateTime(request.getParameter(null));
-        bodyAtScene.setAllegedDeathDateTime(request.getParameter(null));
-        bodyAtScene.setSceneDateTime(request.getParameter(null));
-        bodyAtScene.setSceneIncidentOccured(request.getParameter(null));
-        bodyAtScene.setPlaceOfDeath(request.getParameter(null));
+        bodyAtScene.setDateTimeBodyFound(request.getParameter("bodyFoundDate") + " " + request.getParameter("bodyFoundTime"));
+        bodyAtScene.setAllegedInjuryDateTime(request.getParameter("inAllegedInjuryDate") + " " + request.getParameter("inAllegedInjuryTime"));
+        bodyAtScene.setAllegedDeathDateTime(request.getParameter("inAllegedDeathDate") + " " + request.getParameter("inAllegedDeathTime"));
+        bodyAtScene.setSceneDateTime(request.getParameter("ReceivedSceneDate") + " " + request.getParameter("ReceivedSceneTime"));
+        bodyAtScene.setSceneIncidentOccured(request.getParameter("SceneType"));
+        bodyAtScene.setPlaceOfDeath(request.getParameter("DeathAddress"));
         bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter(null));
         bodyAtScene.setPathOnScene(true);
         
@@ -77,7 +78,7 @@ public class AtSceneServlet extends HttpServlet {
             FPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         //end of FPS member
             
-        //Pathologist on scene
+        //Pathologist on scene MIGHT NEED TO ADD SEPERATE TABLE
             Member pathologistOnScene = new Member();
             pathologistOnScene.setName(request.getParameter("pathologistBodyName"));
             pathologistOnScene.setSurname(request.getParameter("pathologistBodySurname"));
@@ -89,29 +90,45 @@ public class AtSceneServlet extends HttpServlet {
             
          
         //Body Details
-        bodyAtScene.getBody().setBodyType(request.getParameter(null));
-        bodyAtScene.getBody().setNameOfDeceased(request.getParameter(null));
-        bodyAtScene.getBody().setSurnameOfDeceased(request.getParameter(null));
-        bodyAtScene.getBody().setID(request.getParameter(null));
+        bodyAtScene.getBody().setBodyType(request.getParameter("BodyPart"));
+        bodyAtScene.getBody().setNameOfDeceased(request.getParameter("atSceneBodyName"));
+        bodyAtScene.getBody().setSurnameOfDeceased(request.getParameter("atSceneBodySurname"));
+        bodyAtScene.getBody().setID(request.getParameter("atSceneBodyID"));
         //building body address
             BodyAddress bodyAddress = new BodyAddress();
-            bodyAddress.setBuilding(request.getParameter(null));
-            bodyAddress.setStreet(request.getParameter(null));
-            bodyAddress.setSuburb(request.getParameter(null));
-            bodyAddress.setCity(request.getParameter(null));
-            bodyAddress.setPostCode(request.getParameter(null));
-            bodyAddress.setProvince(request.getParameter(null));
-            bodyAddress.setRegion(request.getParameter(null));
-            bodyAddress.setMagisterialDistrict(request.getParameter(null));
+            bodyAddress.setBuilding(request.getParameter("atSceneBodyAddressBuilding"));
+            bodyAddress.setStreet(request.getParameter("atSceneBodyAddressStreet"));
+            bodyAddress.setSuburb(request.getParameter("atSceneBodyAddressSuburb"));
+            bodyAddress.setCity(request.getParameter("atSceneBodyAddressCity"));
+            bodyAddress.setPostCode(request.getParameter("atSceneBodyAddressPostalCode"));
+            bodyAddress.setProvince(request.getParameter("atSceneBodyAddressProvince"));
+            bodyAddress.setRegion(request.getParameter("atSceneBodyAddressRegion"));
+            bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
         //end of building body
         bodyAtScene.getBody().setBodyAddress(bodyAddress);
-        bodyAtScene.getBody().setRace(request.getParameter(null));
-        bodyAtScene.getBody().setGender(request.getParameter(null));
- 
-//        bodyAtScene.getBody().setEstimatedAgeYear(estimatedAgeYear);
+        bodyAtScene.getBody().setRace(request.getParameter("Race"));
+        bodyAtScene.getBody().setGender(request.getParameter("Gender"));
+        if(request.getParameter(null).equals("Month")){
+            bodyAtScene.getBody().setEstimatedAgeMonth(1);
+        }else if(request.getParameter(null).equals("Year")){
+            bodyAtScene.getBody().setEstimatedAgeYear(1);
+        }
  
         //end of Body details
+        //scroll up to at scene specifics
+        //Property 
+        Property propertySAPS = new Property();
+        propertySAPS.setDeathRegisterNumber(null);
+        propertySAPS.setDescription(null);
+        propertySAPS.setSAPS_name(null);
+        propertySAPS.setSAPS_surname(null);
         
+        Property propertyFPS = new Property();
+        propertyFPS.setDeathRegisterNumber(null);
+        propertyFPS.setDescription(null);
+        propertyFPS.setTakenBy(null);
+        //end Property
+
         /*try {
             /* TODO output your page here. You may use following sample code. 
             out.println("<!DOCTYPE html>");
