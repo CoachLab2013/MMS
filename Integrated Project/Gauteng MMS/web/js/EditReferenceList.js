@@ -4,14 +4,14 @@
  */
 
 
-function editReferenceList(referenceList, currentData)
+function editReferenceList(referenceListTable, currentData)
 {
     if (document.getElementById(currentData).value.toString().trim() == "") {
 
         alert("Please select an item you want to edit")
 
     } else {
-        var answer = prompt("Edit " + referenceList, document.getElementById(currentData).value);
+        var answer = prompt("Edit " + referenceListTable, document.getElementById(currentData).value);
         if (answer == null) {
             //if user clicks cancel
 
@@ -20,14 +20,14 @@ function editReferenceList(referenceList, currentData)
             //if user clicks OK
             $("#item").val(answer);
             $("#Olditem").val(document.getElementById(currentData).value);
-            $("#table").val(referenceList);
+            $("#table").val(referenceListTable);
             document.formname.submit();
 
         }
     }
 }
-function deleteReferenceList(referenceList, currentData)
-{
+function deleteReferenceList(referenceListTable, currentData)
+{   
     if (document.getElementById(currentData).value.toString().trim() == "") {
 
         alert("Please select an item you want to delete")
@@ -43,7 +43,7 @@ function deleteReferenceList(referenceList, currentData)
 
             //$("#item").val(answer);
             $("#item1").val(document.getElementById(currentData).value);
-            $("#table1").val(referenceList);
+            $("#table1").val(referenceListTable);
             document.formdelete.submit();
 
         }

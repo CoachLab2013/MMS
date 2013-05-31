@@ -140,12 +140,10 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
+         SetDbDetail DBdet = new SetDbDetail();
+         DbDetail dbDetail = DBdet.getDbdetail();
         if (request.getParameter("form").equals("EditUser")) {
-
-
-
-
+ 
             String name = request.getParameter("firstName");
             String surname = request.getParameter("surname");
             String personnel = request.getParameter("personnelNumber");
