@@ -17,14 +17,13 @@
                     vertical-align: top; 
                 }
             </style>
-        <title>JSP Page</title>
     </head>
     <body>
         <h2>Open body files </h2>
     
          <%
             Tools t = new Tools();
-            out.println(t.bodyfile2("opentable"));
+            out.println(t.makeOpenBodyFileTable("opentable"));
             %>
         
        

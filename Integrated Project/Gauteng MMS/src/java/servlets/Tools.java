@@ -329,10 +329,47 @@ public class Tools {
     }
 
     // end 
-    //     
+    //   
+    
+    public String makeOpenBodyFileTable(String id){
+        BodyDb bdyDb = new BodyDb(dbdetail);
+        BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
+        bdyDb.init();
+        bdyfileDb.init();
+        String table = "<table class='tabledisplay' id='" + id + "'>"
+                    + "<th class='tableheading'>Deah Register Number</th>"
+                    + "<th class='tableheading'>Date Body Recieved</th>"
+                    + "<th class='tableheading'>Incident Log Number</th>"
+                    + "<th class='tableheading'>Status</th>";
+        try {
+
+           // ArrayList<BodyAtMortuary> bodylist = bdyDb.getBodies();
+            ArrayList<BodyFile> bodyfilelist = bdyfileDb.BodyFileList();
+            int size = bodyfilelist.size();
+            for (int i = 0; i < size; i++) {
+                BodyFile file = bodyfilelist.get(i);
+                String deathregister = file.getDeathRegisterNumber();
+                BodyAtMortuary body = new BodyAtMortuary(deathregister);
+                BodyDb bdb  = new BodyDb(dbdetail, body);
+                bdb.read();
+                Incident inc = body.getIncident();
+                table = table + "<tr class='tablerow' deathregisternumber='" + file.getDeathRegisterNumber() + "'>"
+                        + "<td>" + file.getDateFileOpened() + "</td>"
+                        + "<td class='tablecell'>" + inc.getIncidentLogNumber() + "</td>"
+                        + "<td class='tablecell'>" + file.getBodyFileStatus() + "</td>"
+                        + "</tr>";
+            }
+            table = table + "</table>";
+
+            return table;
+        } catch (Exception e) {
+            return table;
+        }
+    }
+    
     public String bodyfile(String id) {
-        BodyDb bdyDb = new BodyDb(new DbDetail("localhost", "/mydb", "root", "200918139"));
-        BodyFileDb bdyfileDb = new BodyFileDb(new DbDetail("localhost", "/mydb", "root", "200918139"));
+        BodyDb bdyDb = new BodyDb(dbdetail);
+        BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
         bdyDb.init();
         bdyfileDb.init();
         try {
@@ -368,7 +405,7 @@ public class Tools {
     // end 
 
     public String bodyfile2(String id) {
-        BodyFileDb bdyfileDb = new BodyFileDb(new DbDetail("localhost", "/mydb", "root", "200918139"));
+        BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
         //  BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
         bdyfileDb.init();
         try {
