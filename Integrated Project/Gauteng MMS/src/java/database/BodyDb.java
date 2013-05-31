@@ -193,6 +193,7 @@ public class BodyDb extends DatabaseConnector{
                 body.setRace(resultSet.getString("race"));
                 body.setSurnameOfDeceased(resultSet.getString("surnameOfDeceased"));
                 body.setBodyReleaseTo(resultSet.getString("bodyReleasedTo"));
+                body.setBodyAddress(getBodyAddress());
                 IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
                 incidentDb.init();
                 incidentDb.read();
