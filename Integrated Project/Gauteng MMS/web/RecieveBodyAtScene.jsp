@@ -13,7 +13,7 @@
         <script type="text/javascript" src="js/RecieveAtSceneScript.js"></script>       
     </head>
     <body>
-        <div align="center"><h2>Receive body from scene</h2> </div>
+        <legend class="legend"><h3>Receive body from scene</h3> </legend>
         <form name="recieve_body_scene_form" id="recieve_body_scene_form" method="post" action="#">
             <fieldset class="fieldset">
                 <legend class="legend"><h4>Body received from:</h4></legend>
@@ -30,10 +30,10 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="organisation">Institution</label> 
+                    <label class="control-label" for="organisation">Organization</label> 
                     <div class="controls"><%
                         Tools t = new Tools();
-                        out.print(t.makeReferenceList("Institution", "type", ""));
+                        out.print(t.makeReferenceList("organization", "name", ""));
                         %>
                         <%--<select id="organisation" name="organisation">                         
                         <option value=""> 

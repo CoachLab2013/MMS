@@ -23,7 +23,7 @@ public class Tools {
     public Tools() {
 
 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "tahirkhan");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
 
 
         
@@ -532,6 +532,11 @@ public class Tools {
             out = out + "</selected>";
             return out;
         }
+    }
+    
+    public String makeIcon(){
+        String icon = "<link rel='shortcut icon' href='Images/icon.ico'>";
+        return icon;
     }
 }
 //end Tools class

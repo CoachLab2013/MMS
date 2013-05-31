@@ -28,11 +28,13 @@ response.setDateHeader("Expires", 0); // Proxies.
         </style>
         <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
-        <!-- <script src="js/SetFocus.js"></script> !-->
 
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">   
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
         <title>Gauteng Mortuary Management System</title>
+        <% Tools t = new Tools();
+            out.println(t.makeIcon());
+        %>
        
 </head>
       
