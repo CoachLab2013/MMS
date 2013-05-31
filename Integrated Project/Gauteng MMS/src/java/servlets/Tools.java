@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.servlet.http.HttpSession;
@@ -106,6 +107,25 @@ public class Tools {
         }
     }
     //end getIncidentLogNumber
+    
+    
+    public String makeDeathRegisterNumber(){
+        String deathregister = "GP/DK/";
+        BodyFileDb bfdb = new BodyFileDb(dbdetail);
+        String date = this.getDateTime().split(" ")[0];      
+        bfdb.init();
+        try{
+            int count = bfdb.countOpenBodyFile() + 1;
+            String formated_num = String.format("%05d", count);
+            String year = date.split("-")[0];
+            deathregister = deathregister+"/"+formated_num+"/"+year;
+            return deathregister;
+        }
+        catch(SQLException e){
+            return e.getMessage();
+        }
+            
+    }
 
     public String makeYear(String name, int year_num) {
         String out = "<select id=" + name + " name=" + name + ">";

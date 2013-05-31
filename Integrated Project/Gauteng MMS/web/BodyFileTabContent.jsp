@@ -84,7 +84,7 @@
                                 <br>
                                 <label class="control-label" for="deathRegister">Death Register Number</label> 
                                 <div class="controls">
-                                    <input type="text" name="deathRegister" id="deathRegister"/> 
+                                    <input type="text" name="deathRegister" id="deathRegister" readonly="true" value =<% out.println(t.makeDeathRegisterNumber()); %>/> 
                                 </div>
                                 <br>
                                 <div class="offset2">
