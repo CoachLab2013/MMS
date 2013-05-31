@@ -562,6 +562,53 @@ public class ReferenceListServlet extends HttpServlet {
             }
 
 
+        } else if (request.getParameter("form").equals("AddExternalCause")) {
+            String externalcause = request.getParameter("txtExternalCause");
+
+            ReferenceListDb emp = new ReferenceListDb("externalcircumstance", "idExternalCircumstance", "type", externalcause, dbDetail);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "exCause");
+                sess.setAttribute("externalCauseResults", "External cause type has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "exCause");
+                sess.setAttribute("externalCauseResults", "External cause type did not save because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+
+
+        } else if (request.getParameter("form").equals("AddSealType")) {
+            String sealType = request.getParameter("txtSealType");
+            ReferenceListDb emp = new ReferenceListDb("scenetype", "idSceneType", "type", sealType, dbDetail);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "sceneType");
+                sess.setAttribute("sealTypeResults", "Seal type has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "sceneType");
+                sess.setAttribute("sealTypeResults", "Seal type did not save because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
         }
     }
 

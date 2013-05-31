@@ -5,6 +5,7 @@
  
 --%>
 
+<%@page import="database.ICD10CodeLevel1DB"%>
 <%@page import="AssistiveClasses.SetDbDetail"%>
 <%@page import="servlets.Tools"%>
 <%@page import="database.EmployeeDb"%>
@@ -74,6 +75,8 @@
             String relationshipResult = "";
             String bodyPartResult = "";
             String specialCurResult = "";
+            String exCauseResult = "";
+            String slTypeResult = "";
 
             String main1 = "";
             String addUserTab = "";
@@ -113,6 +116,8 @@
             String vehi = "";
             String property = "";
             String specialCur = "";
+            String exCause = "";
+            String slType = "";
 
 
 
@@ -156,6 +161,7 @@
                         province = "active";
                     } else if (session.getAttribute("tab").equals("icd10")) {
                         iCD10Result = session.getAttribute("iCD10Result").toString();
+
                         icd10 = "active";
                     } else if (session.getAttribute("tab").equals("manner")) {
                         mannerResult = session.getAttribute("mannerResult").toString();
@@ -180,6 +186,12 @@
                     } else if (session.getAttribute("tab").equals("Adduser")) {
                         addUserTab = "active";
                         userResult = session.getAttribute("relationshipResult").toString();
+                    } else if (session.getAttribute("tab").equals("exCause")) {
+                        exCause = "active";
+                        exCauseResult = session.getAttribute("externalCauseResults").toString();
+                    } else if (session.getAttribute("tab").equals("sceneType")) {
+                        slType = "active";
+                        slTypeResult = session.getAttribute("sealTypeResults").toString();
                     }
 
 
@@ -207,7 +219,6 @@
                     main1 = "active";
 
                     currentUserTab = "active";
-
 
 
                 }
@@ -309,6 +320,22 @@
             emp.init();
             ArrayList<String> specialCurList = emp.referenceList();
 
+            emp = new ReferenceListDb("externalcircumstance", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> exCauseList = emp.referenceList();
+
+            emp = new ReferenceListDb("scenetype", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> slTypeList = emp.referenceList();
+            /*
+             emp = new ReferenceListDb("externalcircumstance", "e", "type", "e", dbset.getDbdetail());
+             emp.init();
+             ArrayList<String> exCauseList = emp.referenceList();
+
+             emp = new ReferenceListDb("scenetype", "e", "type", "e", dbset.getDbdetail());
+             emp.init();
+             ArrayList<String> slTypeList = emp.referenceList();
+             */
 
             /*
              //
@@ -321,7 +348,7 @@
              ArrayList<String> institutionList = emp.referenceList();
             
              //For institution list box
-             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
+             ReferenceListDb e ReferenceListDb("institution", "e", "type", "e", dbDetail);
              emp.init();
              ArrayList<String> institutionList = emp.referenceList();
              */
@@ -502,6 +529,9 @@
                                                                 <li class="<%out.println(String.valueOf(relationship));%>"><a href="#relationship" data-toggle="tab">Relationship</a></li>
                                                                 <li class="<%out.println(String.valueOf(bodyPart));%>"><a href="#bodyPart" data-toggle="tab">Body Part</a></li>
                                                                 <li class="<%out.println(String.valueOf(specialCur));%>"><a href="#specialCur" data-toggle="tab">Special Circumstance</a></li>
+                                                                <li class="<%out.println(String.valueOf(exCause));%>"><a href="#externalCause" data-toggle="tab">External Cause</a></li>
+                                                                <li class="<%out.println(String.valueOf(slType));%>"><a href="#sealType" data-toggle="tab">Seal Type</a></li>
+
                                                             </ul>
                                                        </div>
                                                             <div class="tab-content" >
@@ -911,6 +941,175 @@
                                                                 <div id="icd10Codes" class="tab-pane <%out.println(String.valueOf(icd10));%> "> 
                                                                     <div align="center"><h2>ICD10 Codes </h2> </div>      
                                                                     <%--content for ICD10 code reference list--%>
+<<<<<<< HEAD
+                                                                    <div class="offset2 "> <table border="1" align="left">
+                                                                            <tr><td><form name="AddICD10" id="AddICD10" method="post" action="ReferenceListServlet">
+
+                                                                                        <input type="text" name="form" value="AddICD10" style="visibility: hidden" />
+                                                                                        <div class="control-group form-horizontal">
+                                                                                            <label class="control-label" for="ICD10List">Level 1 Table:</label>
+                                                                                            <div class="controls">
+                                                                                                <%
+                                                                                                    String one = "true";
+                                                                                                    String two = "false";
+                                                                                                    String three = "false";
+                                                                                                    String four = "false";
+                                                                                                    try {
+                                                                                                        one = session.getAttribute("one").toString().trim();
+                                                                                                        two = session.getAttribute("two").toString().trim();
+                                                                                                        three = session.getAttribute("three").toString().trim();
+                                                                                                        four = session.getAttribute("four").toString().trim();
+                                                                                                    } catch (NullPointerException ex) {
+                                                                                                        one = "true";
+
+                                                                                                    }
+                                                                                                %>
+                                                                                                <select id="ICD10List" name="ICD10List" onchange='SelectDropICD10()'  > 
+                                                                                                    <%
+                                                                                                        // ICD10CodeLevel1DB level1BD = new ICD10CodeLevel1DB(dbset.getDbdetail());
+                                                                                                        for (int i = 0; i < provinceList.size(); i++) {
+                                                                                                    %>
+                                                                                                    <option><% out.print(provinceList.get(i));%> </option>
+
+                                                                                                    <%
+                                                                                                        }
+                                                                                                    %>
+                                                                                                    <%--
+                                                                                                     <option value="1" selected="<%out.println(String.valueOf(one));%>" > Level 1 Table </option> 
+                                                                                                     <option value="2" selected="<%out.println(String.valueOf(two));%>"> Level 2 Table </option> 
+                                                                                                     <option value="3" selected="<%out.println(String.valueOf(three));%>"> Level 3 Table </option> 
+                                                                                                     <option value="4" selected="<%out.println(String.valueOf(four));%>"> Level 4 Table </option> 
+                                                                                                    --%>
+                                                                                                </select>
+
+
+                                                                                            </div>
+                                                                                            <label class="control-label" for="ICD10List">Level 2 Table:</label>
+                                                                                            <div class="controls">
+
+                                                                                                <select id="ICD10List" name="ICD10List" onchange='SelectDropICD10()'  >
+                                                                                                    <option value="1" selected="<%out.println(String.valueOf(one));%>" > asas </option> 
+                                                                                                    <option value="2" selected="<%out.println(String.valueOf(two));%>"> asasas </option> 
+                                                                                                    <option value="3" selected="<%out.println(String.valueOf(three));%>"> aasas </option> 
+                                                                                                    <option value="4" selected="<%out.println(String.valueOf(four));%>"> fffff </option> 
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <label class="control-label" for="ICD10List">Level 3 Table:</label>
+                                                                                            <div class="controls">
+
+                                                                                                <select id="ICD10List" name="ICD10List" onchange='SelectDropICD10()'  >
+                                                                                                    <option value="1" selected="<%out.println(String.valueOf(one));%>" > asas </option> 
+                                                                                                    <option value="2" selected="<%out.println(String.valueOf(two));%>"> asasas </option> 
+                                                                                                    <option value="3" selected="<%out.println(String.valueOf(three));%>"> aasas </option> 
+                                                                                                    <option value="4" selected="<%out.println(String.valueOf(four));%>"> fffff </option> 
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <label class="control-label" for="ICD10List"> Level 4 Table:</label>
+                                                                                            <div class="controls">
+
+                                                                                                <select id="ICD10List" name="ICD10List" onchange='SelectDropICD10()'  >
+                                                                                                    <option value="1" selected="<%out.println(String.valueOf(one));%>" > asas </option> 
+                                                                                                    <option value="2" selected="<%out.println(String.valueOf(two));%>"> asasas </option> 
+                                                                                                    <option value="3" selected="<%out.println(String.valueOf(three));%>"> aasas </option> 
+                                                                                                    <option value="4" selected="<%out.println(String.valueOf(four));%>"> fffff </option> 
+                                                                                                </select>
+                                                                                            </div>
+
+
+                                                                                        </div>
+                                                                                    </form> </td>
+                                                                                <td><div class="controls offset2" >
+                                                                                        <label class="control-label" for="ICD10List">Current ICD10 Code(s):</label>
+                                                                                        <input type="text" id="txticd10Table" name="txticd10Table"/>
+                                                                                        <%
+                                                                                            String tableNum = "1";
+                                                                                            try {
+
+                                                                                                tableNum = session.getAttribute("tableN").toString().trim();
+                                                                                            } catch (Exception ex) {
+                                                                                                tableNum = "1";
+
+                                                                                            }
+                                                                                            if (tableNum.contains("1")) {
+
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>Chapter</H4></th>
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+
+                                                                                        <%                                                                                        } else if (tableNum.contains("2")) {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 1</H4></th>
+                                                                                            <th width="150"><H4>Chapter</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                        } else if (tableNum.contains("3")) {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 2</H4></th>
+                                                                                            <th width="150"><H4>DIAG 1</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                        } else if (tableNum == "4") {
+                                                                                        %>
+                                                                                        <table border="1" class="bordered-table">
+                                                                                            <tr>
+                                                                                                <th width="150"><H4>DIAG 2</H4></th>
+                                                                                            <th width="150"><H4>DIAG 3</H4></th>                                              
+                                                                                            <th width="150"><H4>Description </H4></th>
+
+                                                                                            </tr>
+
+                                                                                            <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
+%>
+                                                                                            <TR>
+
+                                                                                            </TR>
+                                                                                            <%                                                        //    }
+%>
+                                                                                        </table>
+                                                                                        <%                                                                                            }
+                                                                                        %>
+                                                                                    </div> </td>
+
+                                                                            </tr>
+                                                                        </table> 
+=======
                                                                     <div class="offset2 ">
                                                                         <form name="AddICD10" id="AddICD10" method="post" action="ReferenceListServlet"  >
                                                                             <input type="text" name="form" value="AddICD10" style="visibility: hidden" />
@@ -920,6 +1119,7 @@
                                                                                     <input type="text" id="txtICD10" name="txtICD10"   />
                                                                                     <input type="submit" value="Add ICD10 Code" name="cmdICD10" />
                                                                                 </div>
+>>>>>>> origin/master
 
                                                                                 <br/>  </div>
                                                                         </form>
@@ -940,7 +1140,11 @@
                                                                     </div> 
                                                                     <%--Display save result --%> 
                                                                     <div  class="offset3">
+<<<<<<< HEAD
+                                                                        <label  > <% out.println(String.valueOf(tableNum + " " + one + " " + two + " " + three + " " + four));%></label>
+=======
                                                                         <label  > <% out.println(String.valueOf(iCD10Result));%></label>
+>>>>>>> origin/master
                                                                     </div>
                                                                     <br/>
                                                                     <br/>
@@ -1109,6 +1313,7 @@
                                                                     <br/>
                                                                     <br/>
                                                                 </div>
+
                                                                 <div id="bodyPart" class="tab-pane <%out.println(String.valueOf(bodyPart));%> "> 
                                                                     <div align="center"><h2>Body Part </h2> </div>   
                                                                     <%--content for Body Part reference list--%>
@@ -1167,7 +1372,7 @@
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="SpecialCurList">Special Circumstance Type(s):</label>
 
-                                                                            <select id="BodyClassList" name="SpecialCurList" size="5">
+                                                                            <select id="SpecialCurList" name="SpecialCurList" size="5">
                                                                                 <%
                                                                                     for (int i = 0; i < specialCurList.size(); i++) {
                                                                                 %>
@@ -1189,11 +1394,115 @@
                                                                     <br/>
                                                                     <br/>
                                                                 </div>
+
+                                                                <div id="externalCause" class="tab-pane <%out.println(String.valueOf(exCause));%> "> 
+                                                                    <div align="center"><h2>External Cause</h2> </div>   
+                                                                    <%--content for Special Circumstance reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddExternalCause" id="AddExternalCause" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddExternalCause" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtExternalCause">External Cause Type:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtExternalCause" name="txtExternalCause"   />
+                                                                                    <input type="submit" value="Add External Cause Type" name="cmdExternalCause" />
+                                                                                </div>
+
+                                                                                <br/>  </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="ExternalCauseList">External Cause Type(s):</label>
+
+                                                                            <select id="ExternalCauseList" name="ExternalCauseList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < exCauseList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(exCauseList.get(i));%> </option>
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('externalcircumstance', 'ExternalCauseList')" value="Edit External Cause" id="cmdEditExternalCause" name="cmdEditExternalCause" />
+                                                                            <input type="button" onclick="deleteReferenceList('externalcircumstance', 'ExternalCauseList')" value="Delete External Cause" id="cmdDeleteExternalCause" name="cmdDeleteExternalCause" />
+
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label  > <% out.println(String.valueOf(exCauseResult));%></label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
+                                                                <div id="sealType" class="tab-pane <%out.println(String.valueOf(slType));%> "> 
+                                                                    <div align="center"><h2>Seal Type</h2> </div>   
+                                                                    <%--content for seal type reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddSealType" id="AddSealType" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddSealType" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtSealType">Seal Type:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtSealType" name="txtSealType"   />
+                                                                                    <input type="submit" value="Add Seal Type" name="cmdSealType" />
+                                                                                </div>
+
+                                                                                <br/>  </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="SealTypeList">Seal Type(s):</label>
+
+                                                                            <select id="SealTypeList" name="SealTypeList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < slTypeList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(slTypeList.get(i));%> </option>
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceList('scenetype', 'SealTypeList')" value="Edit Seal Type" id="cmdEditSealType" name="cmdEditSealType" />
+                                                                            <input type="button" onclick="deleteReferenceList('scenetype', 'SealTypeList')" value="Delete Seal Type  " id="cmdDeleteSealType" name="cmdDeleteSealType" />
+
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label  > <% out.println(String.valueOf(slTypeResult));%></label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
                                                             </div>
 
                                                         </div> 
                                                     </div>           
                                                     </div>
 
+<<<<<<< HEAD
+                                                    </div>
+
+                                                    </body>
+
+                                                    <form name="formname" action="EditReferenceListServlet" method="post">
+                                                        <input type="hidden" id="item" name="item">
+                                                        <input type="hidden" id="Olditem" name="Olditem">
+                                                        <input type="hidden" id="table" name="table">
+
+                                                    </form>
+                                                    <form name="formdelete" action="DeleteReferenceListServlet" method="post">
+                                                        <input type="hidden" id="item1" name="item1">
+                                                        <input type="hidden" id="table1" name="table1">
+                                                    </form>
+                                                    <form name="LoadICD10Form" action="LoadICD10Table" method="post">
+
+                                                        <input type="hidden" id="ICD10table" name="ICD10table">
+                                                    </form>
+=======
                                                     </div>                                                    </body>
+>>>>>>> origin/master
                                                     </html>

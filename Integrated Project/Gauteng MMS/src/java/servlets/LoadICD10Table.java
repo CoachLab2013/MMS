@@ -76,12 +76,45 @@ public class LoadICD10Table extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String num = request.getParameter("ICD10table").toString();
         HttpSession sess = request.getSession();
-               String num = request.getParameter("ICD10table").toString();
+        /*  
+         PrintWriter out = response.getWriter();
+         try {
+         /* TODO output your page here. You may use following sample code. 
+         out.println("<!DOCTYPE html>");
+         out.println("<html>");
+         out.println("<head>");
+         out.println("<title>Servlet LoadICD10Table</title>");
+         out.println("</head>");
+         out.println("<body>");
+         out.println("<h1>Servlet LoadICD10Table at ---" + num+ " </h1>");
+         out.println("</body>");
+         out.println("</html>");
+         } finally {
+         out.close();
+         } */
+        sess.setAttribute("one", "false");
+        sess.setAttribute("two", "false");
+        sess.setAttribute("three", "false");
+        sess.setAttribute("four", "false");
+        if (num.contains("1")) {
+            sess.setAttribute("one", "true");
+
+        } else if (num.contains("2")) {
+            sess.setAttribute("two", "true");
+
+        } else if (num.contains("3")) {
+            sess.setAttribute("three", "true");
+
+        } else if (num.contains("4")) {
+            sess.setAttribute("four", "true");
+        }
         sess.setAttribute("main", "ref");
         sess.setAttribute("tab", "icd10");
-        sess.setAttribute("tableN","1 -");
-        sess.setAttribute("iCD10Result", "The ICD10 code has been successfuly saved to database");
+        sess.setAttribute("tableN", num.trim());
+        sess.setAttribute("iCD10Result", "Life");
         response.sendRedirect("Admin.jsp");
     }
 
