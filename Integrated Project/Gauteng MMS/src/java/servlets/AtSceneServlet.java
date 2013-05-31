@@ -45,10 +45,16 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.setAllegedInjuryDateTime(request.getParameter("inAllegedInjuryDate") + " " + request.getParameter("inAllegedInjuryTime"));
         bodyAtScene.setAllegedDeathDateTime(request.getParameter("inAllegedDeathDate") + " " + request.getParameter("inAllegedDeathTime"));
         bodyAtScene.setSceneDateTime(request.getParameter("ReceivedSceneDate") + " " + request.getParameter("ReceivedSceneTime"));
+        bodyAtScene.setFacilityDateTime(request.getParameter("ReceivedFacilityDate") + " " + request.getParameter("ReceivedFacilityTime"));
         bodyAtScene.setSceneIncidentOccured(request.getParameter("SceneType"));
         bodyAtScene.setPlaceOfDeath(request.getParameter("DeathAddress"));
-        bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter(null));
-        bodyAtScene.setPathOnScene(true);
+        bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter("ExternalCircumstance"));
+        if (request.getParameter("pathologistAtScene").equals("Yes")){
+            bodyAtScene.setPathOnScene(true);
+        }else{
+            bodyAtScene.setPathOnScene(false);
+        }
+        
         
         //build body received from
             Member receivedFrom = new Member();
@@ -118,14 +124,14 @@ public class AtSceneServlet extends HttpServlet {
         //scroll up to at scene specifics
         //Property 
         Property propertySAPS = new Property();
-        propertySAPS.setDeathRegisterNumber(null);
-        propertySAPS.setDescription(null);
-        propertySAPS.setSAPS_name(null);
-        propertySAPS.setSAPS_surname(null);
+        propertySAPS.setDeathRegisterNumber(request.getParameter(bodyAtScene.getBody().getDeathRegisterNumber()));
+        propertySAPS.setDescription("SAPSpropertyDescr");
+        propertySAPS.setSAPS_name("SAPSpropertyName");
+        propertySAPS.setSAPS_surname("SAPSpropertySurname");
         
         Property propertyFPS = new Property();
-        propertyFPS.setDeathRegisterNumber(null);
-        propertyFPS.setDescription(null);
+        propertyFPS.setDeathRegisterNumber(request.getParameter(bodyAtScene.getBody().getDeathRegisterNumber()));
+        propertyFPS.setDescription("atSceneFPSpropertyDescr");
         propertyFPS.setTakenBy(null);
         //end Property
 
