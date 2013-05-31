@@ -60,6 +60,34 @@
                 <div id="Incident" class="tab-pane active">  
                     <jsp:include page="IncidentsTabContent.jsp" /> 
 
+            <p>
+
+
+                <span style="float: right"><a href="LogOutServlet">Logout</a></span>
+            </p>
+            <%
+                if (session.getAttribute("loggedin") == null) {
+                    response.sendRedirect("/Gauteng_MMS/");
+                }
+                if (session.getAttribute("incidentlogged") != null) {
+                    out.println("<input name='incidentlogged' id='incidentlogged' type=hidden value=true>");
+                }
+            %>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs " data-tabs="tabs">
+                    <li id="IncidentTab" class="active"><a href="#Incident" data-toggle="tab">Incidents</a> </li>
+                    <li id ="BodyFileTab"><a href="#BodyFile" data-toggle="tab">Body File</a></li>       
+                </ul>
+                <div class="tab-content" >
+                    <div id="Incident" class="tab-pane active">  
+                        <jsp:include page="IncidentsTabContent.jsp" /> 
+
+                    </div>
+                    <div id="BodyFile" class="tab-pane "> 
+                        <div align="center"><h2>Body File </h2> </div>
+                       <jsp:include page= "BodyFileTabContent.jsp"/>
+                    </div>           
                 </div>
                 <div id="BodyFile" class="tab-pane "> 
                   

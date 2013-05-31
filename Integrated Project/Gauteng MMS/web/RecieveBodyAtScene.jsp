@@ -10,9 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="js/RecieveAtSceneScript.js"></script>       
     </head>
     <body>
                                             <div align="center"><h2>Receive body from scene</h2> </div>
+                                            <form name="recieve_body_scene_form" id="recieve_body_scene_form" method="post" action="#">
                                             <fieldset class="fieldset">
                                                 <legend class="legend"><h4>Body received from:</h4></legend>
                                                 <div class="control-group">
@@ -56,26 +58,26 @@
 
                                             <fieldset class="fieldset">
                                                 <legend class="legend"><h4>SAPS member handing over the body:</h4></legend>
-                                                <div class="control-group error">
+                                                <div class="control-group">
                                                     <label class="control-label" for="SAPSmemberBodyName">Name</label> 
                                                     <div class="controls">
                                                         <input type="text" name="SAPSmemberBodyName" id="SAPSmemberBodyName"/> 
                                                     </div>
                                                 </div>
-                                                <div class="control-group error">
+                                                <div class="control-group">
                                                     <label class="control-label" for="SAPSmemberBodySurname">Surname</label>
                                                     <div class="controls">
                                                         <input type="text" name="SAPSmemberBodySurname" id="SAPSmemberBodySurname"/> 
                                                     </div>
                                                 </div>
-                                                <div class="control-group error">
+                                                <div class="control-group">
                                                     <label class="control-label" for="SAPSmemberBodyCell">Cell phone number</label>
                                                     <div class="controls">
                                                         <input type="text" name="SAPSmemberBodyCell" id="SAPSmemberBodyCell"/> 
                                                     </div>
                                                 </div>
 
-                                                <div class="control-group error">
+                                                <div class="control-group">
                                                     <label class="control-label" for="SAPSmemberBodyRank">Rank</label>
                                                     <div class="controls">
                                                         <input type="text" name="SAPSmemberBodyRank" id="SAPSmemberBodyRank"/> 
@@ -751,8 +753,9 @@
                                             </fieldset>
 
                                             <div class="offset5">
-                                                <input  type="button"  onclick= "move()" class="btn btn-primary" name="BodyFileNext" id="BodyFileNext"   value="Next" /> 
+                                                <input  type="submit"  class="btn btn-primary" name="recieve_at_scene_save" id="recieve_at_scene_save"   value="Save" /> 
                                                 <%--Display save result --%> 
                                             </div>
-    </body>
+                                            </form>
+    </body>         
 </html>

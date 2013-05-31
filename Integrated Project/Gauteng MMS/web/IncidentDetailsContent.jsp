@@ -25,8 +25,13 @@
  <script src="js/IncidentDetailsScript.js"></script>
     </head>
     <body>
+<<<<<<< HEAD
         <legend>Step 1: Enter Incident Details</legend>
         <form id="detailform" name="detailform" class="form-horizontal" method="post" action="LogIncidentServlet">
+=======
+        <legend>Incident Details</legend>
+        <form id="detailform" name="detailform" class="form-horizontal" method="post" action="#">
+>>>>>>> origin/master
         <table>
             <tr>
                 <td>FPS Incident Log Number: </td> <td><input type="text" id="fpsnumber" name="fpsnumber" readonly="true"
