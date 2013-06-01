@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package icd10codes; 
+package database; 
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
