@@ -11,8 +11,9 @@ package database;
 public class BodyAtMortuary extends Body
 {
     //private BodyAtScene bodyAtScene;
-    private String bodyReceivedFromPerNum;
-    private String bodyHandOverFromPerNum;
+    private String bodyReceivedFromPerNumber;
+    private String bodyHandedOverToPerNumber;
+    private String bodyHandOverFromOrganization;
    
     //CONSTRUCTORS
     public BodyAtMortuary() {
@@ -26,15 +27,23 @@ public class BodyAtMortuary extends Body
     public BodyAtMortuary(String bodyReceivedFromPerNum, String bodyHandOverFromPerNum, String deathRegisterNumber) {
         super(deathRegisterNumber);
         //this.bodyAtScene = bodyAtScene;
-        this.bodyReceivedFromPerNum = bodyReceivedFromPerNum;
-        this.bodyHandOverFromPerNum = bodyHandOverFromPerNum;
+        this.bodyReceivedFromPerNumber = bodyReceivedFromPerNum;
+        this.bodyHandedOverToPerNumber = bodyHandOverFromPerNum;
     }
+
+    public BodyAtMortuary(String bodyReceivedFromPerNumber, String bodyHandedOverToPerNumber, String bodyHandOverFromOrganization, String deathRegisterNumber) {
+        super(deathRegisterNumber);
+        this.bodyReceivedFromPerNumber = bodyReceivedFromPerNumber;
+        this.bodyHandedOverToPerNumber = bodyHandedOverToPerNumber;
+        this.bodyHandOverFromOrganization = bodyHandOverFromOrganization;
+    }
+    
 
     public BodyAtMortuary(String bodyReceivedFromPerNum, String bodyHandOverFromPerNum, String deathRegisterNumber, String gender, String race, String assignedTo, String nameOfDeceased, String surnameOfDeceased, String placeOfBirth, String dateOfBirth, int ageOnDateFound, String martitalStatus, String occupation, String citizen, String maidenName, String inIdentifiedDateTime, BodyAddress bodyAddress, int estimatedAgeYear, int estimatedAgeMonth, String ID, String passport, boolean bodyStatus, String dateBodyReceived, boolean bodyReleased, Incident incident, String bodyType, String dateBodyReleased,String bodyReleasedTo) {
         super(deathRegisterNumber, gender, race, assignedTo, nameOfDeceased, surnameOfDeceased, placeOfBirth, dateOfBirth, ageOnDateFound, martitalStatus, occupation, citizen, maidenName, inIdentifiedDateTime, bodyAddress, estimatedAgeYear, estimatedAgeMonth, ID, passport, bodyStatus, dateBodyReceived, bodyReleased, incident, bodyType, dateBodyReleased,bodyReleasedTo);
         //this.bodyAtScene = bodyAtScene;
-        this.bodyReceivedFromPerNum = bodyReceivedFromPerNum;
-        this.bodyHandOverFromPerNum = bodyHandOverFromPerNum;
+        this.bodyReceivedFromPerNumber = bodyReceivedFromPerNum;
+        this.bodyHandedOverToPerNumber = bodyHandOverFromPerNum;
     }
 
     //GET METHODS
@@ -48,15 +57,15 @@ public class BodyAtMortuary extends Body
     /**
      * @return the bodyReceivedFromPerNum
      */
-    public String getBodyReceivedFromPerNum() {
-        return bodyReceivedFromPerNum;
+    public String getBodyReceivedFromPerNumber() {
+        return bodyReceivedFromPerNumber;
     }
 
     /**
      * @return the bodyHandOverFromPerNum
      */
-    public String getBodyHandOverFromPerNum() {
-        return bodyHandOverFromPerNum;
+    public String getBodyHandedOverToPerNumber() {
+        return bodyHandedOverToPerNumber;
     }
 
     //SET METHODS
@@ -70,15 +79,23 @@ public class BodyAtMortuary extends Body
     /**
      * @param bodyReceivedFromPerNum the bodyReceivedFromPerNum to set
      */
-    public void setBodyReceivedFromPerNum(String bodyReceivedFromPerNum) {
-        this.bodyReceivedFromPerNum = bodyReceivedFromPerNum;
+    public void setBodyReceivedFromPerNumber(String bodyReceivedFromPerNumber) {
+        this.bodyReceivedFromPerNumber = bodyReceivedFromPerNumber;
     }
 
     /**
      * @param bodyHandOverFromPerNum the bodyHandOverFromPerNum to set
      */
-    public void setBodyHandOverFromPerNum(String bodyHandOverFromPerNum) {
-        this.bodyHandOverFromPerNum = bodyHandOverFromPerNum;
+    public void setBodyHandedOverToPerNumber(String bodyHandedOverToPerNumber) {
+        this.bodyHandedOverToPerNumber = bodyHandedOverToPerNumber;
+    }
+
+    public String getBodyHandOverFromOrganization() {
+        return bodyHandOverFromOrganization;
+    }
+
+    public void setBodyHandOverFromOrganization(String bodyHandOverFromOrganization) {
+        this.bodyHandOverFromOrganization = bodyHandOverFromOrganization;
     }
     
     

@@ -4,6 +4,9 @@
  */
 package servlets;
 
+import database.BodyAddress;
+import database.BodyAtMortuary;
+import database.Property;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,21 +35,56 @@ public class AtMortuaryServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AtMortuaryServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AtMortuaryServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
+        PrintWriter out = response.getWriter();        
+
+        BodyAtMortuary bodyAtMortuary = new BodyAtMortuary(request.getParameter(null));
+        bodyAtMortuary.setBodyHandedOverToPerNumber(request.getParameter("employee"));
+        bodyAtMortuary.setBodyReceivedFromPerNumber(request.getParameter("employee_handing"));
+        bodyAtMortuary.setBodyHandOverFromOrganization("organization");
+        
+        //Body Details
+        bodyAtMortuary.setBodyType(request.getParameter("BodyPart"));
+        bodyAtMortuary.setNameOfDeceased(request.getParameter("atMortBodyName"));
+        bodyAtMortuary.setSurnameOfDeceased(request.getParameter("atMortBodySurname"));
+        bodyAtMortuary.setID(request.getParameter("atMortBodyID"));
+        //building body address
+            BodyAddress bodyAddress = new BodyAddress();
+            bodyAddress.setBuilding(request.getParameter("atMortuaryBodyAddressBuilding"));
+            bodyAddress.setStreet(request.getParameter("atMortuaryBodyAddressStreet"));
+            bodyAddress.setSuburb(request.getParameter("atMortuaryBodyAddressSuburb"));
+            bodyAddress.setCity(request.getParameter("atMortuaryBodyAddressCity"));
+            bodyAddress.setPostCode(request.getParameter("atMortuaryAddressPostalCode"));
+            bodyAddress.setProvince(request.getParameter("province"));
+            bodyAddress.setRegion(request.getParameter("region"));
+            //bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
+        //end of building body
+        bodyAtMortuary.setBodyAddress(bodyAddress);
+        bodyAtMortuary.setRace(request.getParameter("Race"));
+        bodyAtMortuary.setGender(request.getParameter("Gender"));
+        if(request.getParameter("at_mortuary_body_estimated_age").equals("Months")){
+            bodyAtMortuary.setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+        }else if(request.getParameter("at_mortuary_body_estimated_age").equals("Years")){
+            bodyAtMortuary.setEstimatedAgeYear(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
         }
+        //end of Body details
+        //property
+        
+        int count_fps = Integer.parseInt(request.getParameter("fps_property_counter_mort").toString());
+        for(int i=0;i<count_fps;i++){
+            String fps_prop_des = "fps_prop_des"+Integer.toString(i+1);
+            String fps_prop_persal = "fps_prop_persal"+Integer.toString(i+1);
+            if(request.getParameter(fps_prop_des) != null){
+                Property propertyFPS = new Property();
+                propertyFPS.setDeathRegisterNumber(request.getParameter(bodyAtMortuary.getDeathRegisterNumber()));
+                propertyFPS.setDescription(request.getParameter(fps_prop_des));
+                propertyFPS.setTakenBy(request.getParameter(fps_prop_persal));
+                //put the code to add this property into the database here
+            }
+        }
+        //property end
+        
+        //response.sendRedirect("Home.jsp");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

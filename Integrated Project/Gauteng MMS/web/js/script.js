@@ -240,6 +240,28 @@ $(document).ready(function() {
 
     });
 
+
+  
+     $('#AddExternalCause').validate({
+        rules: {
+            txtExternalCause: {
+                required: true
+            }
+
+        }
+
+    });
+    
+      
+     $('#AddSealType').validate({
+        rules: {
+            txtSealType: {
+                required: true
+            }
+
+        }
+
+    });
    $('#AddBody').validate({
         rules: {
             
