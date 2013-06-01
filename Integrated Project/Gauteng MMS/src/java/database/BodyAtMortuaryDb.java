@@ -30,13 +30,13 @@ public class BodyAtMortuaryDb extends DatabaseConnector {
     public String add() {
         try 
         {   
-            if(bodyAtMortuary.getBodyReceivedFromPerNumber().isEmpty()!=true){
+            if(bodyAtMortuary.getBodyReceivedFromPerNumber() == null){
                 statement.executeUpdate("INSERT INTO atmortuary (bodyHandedOverToPerNumber,Body_idDeathRegisterNumber,bodyHandOverFromOrganization) VALUES('" 
                     + bodyAtMortuary.getBodyHandedOverToPerNumber() + ",'"
                     + bodyAtMortuary.getDeathRegisterNumber() + "','" + bodyAtMortuary.getBodyHandOverFromOrganization() + "');");
                 statement.close();
                 connection.close(); 
-            }else if(bodyAtMortuary.getBodyHandOverFromOrganization().isEmpty()!=true){
+            }else if(bodyAtMortuary.getBodyHandOverFromOrganization() == null){
                 statement.executeUpdate("INSERT INTO atmortuary (bodyReceivedFromPerNumber,bodyHandedOverToPerNumber,Body_idDeathRegisterNumber) VALUES('" 
                     + bodyAtMortuary.getBodyReceivedFromPerNumber() + "','" 
                     + bodyAtMortuary.getBodyHandedOverToPerNumber() + ",'"
@@ -74,14 +74,14 @@ public class BodyAtMortuaryDb extends DatabaseConnector {
         {
             BodyDb bodyDb = new BodyDb(dbDetail, bodyAtMortuary);
             bodyDb.edit();
-            if(bodyAtMortuary.getBodyReceivedFromPerNumber().isEmpty()!=true){
+            if(bodyAtMortuary.getBodyReceivedFromPerNumber() == null){
                 statement.executeUpdate("UPDATE atMortuary SET "
                   +"bodyHandedOverToPerNumber=" + bodyAtMortuary.getBodyHandedOverToPerNumber() + ","
                   +"bodyHandOverFromOrganization='" + bodyAtMortuary.getBodyHandOverFromOrganization() + "'"
                   +" WHERE Body_idDeathRegisterNumber='"+ bodyAtMortuary.getDeathRegisterNumber() + "';");
                 statement.close();
                 connection.close();
-            }else if(bodyAtMortuary.getBodyHandOverFromOrganization().isEmpty()!=true){
+            }else if(bodyAtMortuary.getBodyHandOverFromOrganization() == null){
                 statement.executeUpdate("UPDATE atMortuary SET "
                   +"bodyReceivedFromPerNumber='" + bodyAtMortuary.getBodyReceivedFromPerNumber() + "',"
                   +"bodyHandedOverToPerNumber=" + bodyAtMortuary.getBodyHandedOverToPerNumber() + ","
