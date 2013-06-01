@@ -162,6 +162,7 @@ public class AtSceneServlet extends HttpServlet {
         }
         
         //end Property
+        //response.sendRedirect("Home.jsp");
 
     }
 
