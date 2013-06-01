@@ -238,19 +238,6 @@ public class BodyAtSceneDb extends DatabaseConnector
                 statement.close();
                 connection.close();
             }
-            statement.executeUpdate("UPDATE atscene SET "
-                  +"sceneIncidentOccured='" + bodyAtScene.getSceneIncidentOccured() + "',"
-                  +"sceneDateTime='" + bodyAtScene.getSceneDateTime() + "',"
-                  +"pathOnScene=" + bodyAtScene.isPathOnScene() + ","
-                  +"allegedInjuryDateTime='" + bodyAtScene.getAllegedInjuryDateTime() + "',"
-                  +"allegedDeathDateTime='" + bodyAtScene.getAllegedDeathDateTime() + "',"
-                  +"externalCircumstanceOfInjury='" + bodyAtScene.getExternalCircumstanceOfInjury() + "',"
-                  +"facilityDateTime='" + bodyAtScene.getFacilityDateTime() + "',"
-                  +"placeOfDeath='" + bodyAtScene.getPlaceOfDeath() + "',"
-                  +"dateTimeBodyFound='" + bodyAtScene.getDateTimeBodyFound() + "'"
-                  +" WHERE Body_idDeathRegisterNumber='"+ bodyAtScene.getBody().getDeathRegisterNumber() + "';");
-            statement.close();
-            connection.close();
         } 
         catch (SQLException ex) 
         {
