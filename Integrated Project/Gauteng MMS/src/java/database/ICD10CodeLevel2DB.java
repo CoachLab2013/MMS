@@ -28,7 +28,7 @@ public class ICD10CodeLevel2DB extends DatabaseConnector {
         idc10CodeLevel2 = null;
 
     }
-<<<<<<< HEAD
+
           
     @Override
     public String add() {
@@ -49,27 +49,7 @@ public class ICD10CodeLevel2DB extends DatabaseConnector {
          
     } 
       
-=======
- 
-    @Override
-    public String add() {
-          try {
-            statement.executeUpdate("INSERT INTO icdlevel2 (diald,description)" + " VALUES"
-                    + "('"
-                
-                    + idc10CodeLevel2.getDiag1()+"','"
-                    + idc10CodeLevel2.getDescription()+ "')");
 
-            statement.close();
-            connection.close();
-        } catch (SQLException ex) {
-            return "failed " + ex.getMessage();
-        }
-        return "successful";
-        
-    }
-     
->>>>>>> origin/master
     
      public ArrayList<ICD10CodeLevel2> ICD10CodesLeve21List() throws SQLException {
         ArrayList<ICD10CodeLevel2> list = new ArrayList();

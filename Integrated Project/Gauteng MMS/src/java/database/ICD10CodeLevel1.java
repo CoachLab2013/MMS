@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-<<<<<<< HEAD
+
 package icd10codes;
-=======
-package database;
->>>>>>> origin/master
+
+//package database;
+
 
 /**
  *

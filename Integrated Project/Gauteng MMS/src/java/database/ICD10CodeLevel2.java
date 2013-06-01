@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-<<<<<<< HEAD
+
 package icd10codes;
-=======
-package database;
->>>>>>> origin/master
+
+//package database;
+
 
 /**
  *
@@ -34,15 +34,14 @@ public class ICD10CodeLevel2 {
         this.diag1 = diag1;
      
     }
-<<<<<<< HEAD
+
      
      public ICD10CodeLevel2(String diag1, String description) {
         this.diag1 = diag1;
         this.description = description;
         
     }
-=======
->>>>>>> origin/master
+
 
     public ICD10CodeLevel2(String diag1, String description, int Level1chapter) {
         this.diag1 = diag1;
@@ -74,8 +73,3 @@ public class ICD10CodeLevel2 {
         return Level1chapter;
     }
 }
-<<<<<<< HEAD
-   
-=======
- 
->>>>>>> origin/master
