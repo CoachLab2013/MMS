@@ -4,7 +4,9 @@
  */
 package servlets;
 
+import database.BodyAddress;
 import database.BodyAtMortuary;
+import database.Property;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,8 +38,41 @@ public class AtMortuaryServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         BodyAtMortuary bodyAtMortuary = new BodyAtMortuary(request.getParameter(null));
-        //bodyAtMortuary
-        //bodyAtMortuary
+        bodyAtMortuary.setBodyHandedOverToPerNumber("employee");
+        bodyAtMortuary.setBodyReceivedFromPerNumber("employee");
+        bodyAtMortuary.setBodyHandOverFromOrganization("organization");
+        
+        //Body Details
+        bodyAtMortuary.setBodyType(request.getParameter("BodyPart"));
+        bodyAtMortuary.setNameOfDeceased(request.getParameter("atMortBodyName"));
+        bodyAtMortuary.setSurnameOfDeceased(request.getParameter("atMortBodySurname"));
+        bodyAtMortuary.setID(request.getParameter("atMortBodyID"));
+        //building body address
+            BodyAddress bodyAddress = new BodyAddress();
+            bodyAddress.setBuilding(request.getParameter("atMortuaryBodyAddressBuilding"));
+            bodyAddress.setStreet(request.getParameter("atMortuaryBodyAddressStreet"));
+            bodyAddress.setSuburb(request.getParameter("atMortuaryBodyAddressSuburb"));
+            bodyAddress.setCity(request.getParameter("atMortuaryBodyAddressCity"));
+            bodyAddress.setPostCode(request.getParameter("atMortuaryAddressPostalCode"));
+            bodyAddress.setProvince(request.getParameter("province"));
+            bodyAddress.setRegion(request.getParameter("region"));
+            //bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
+        //end of building body
+        bodyAtMortuary.setBodyAddress(bodyAddress);
+        bodyAtMortuary.setRace(request.getParameter("Race"));
+        bodyAtMortuary.setGender(request.getParameter("Gender"));
+        if(request.getParameter("at_mortuary_body_estimated_age").equals("Months")){
+            bodyAtMortuary.setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+        }else if(request.getParameter("at_mortuary_body_estimated_age").equals("Years")){
+            bodyAtMortuary.setEstimatedAgeYear(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+        }
+        //end of Body details
+        //property
+        Property propertyFPS = new Property();
+        propertyFPS.setDeathRegisterNumber(request.getParameter(bodyAtMortuary.getDeathRegisterNumber()));
+        propertyFPS.setDescription("atMortFPSpropertyDescr");
+        propertyFPS.setTakenBy(null);
+        //property end
         /*try {
             /* TODO output your page here. You may use following sample code.
             out.println("<!DOCTYPE html>");

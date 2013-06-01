@@ -80,34 +80,34 @@
                                                 <div class="control-group">
                     <label class="control-label" for="atMortuaryBodyAddressBuilding">Building</label>
                     <div class="controls">
-                        <input type="text" name="atMortuaryBodyAddressBuilding" id="atSceneBodyAddressBuilding"/> 
+                        <input type="text" name="atMortuaryBodyAddressBuilding" id="atMortuaryBodyAddressBuilding"/> 
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="atMortuaryBodyAddressStreet">Street</label>
                     <div class="controls">
-                        <input type="text" name="atMortuaryBodyAddressStreet" id="atSceneBodyAddressStreet"/> 
+                        <input type="text" name="atMortuaryBodyAddressStreet" id="atMortuaryBodyAddressStreet"/> 
                     </div>
                 </div>
 
                 <div class="control-group">
                     <label class="control-label" for="atMortuaryBodyAddressSuburb">Suburb</label>
                     <div class="controls">
-                        <input type="text" name="atMortuaryBodyAddressSuburb" id="atSceneBodyAddressSuburb"/> 
+                        <input type="text" name="atMortuaryBodyAddressSuburb" id="atMortuaryBodyAddressSuburb"/> 
                     </div>
                 </div>
 
                 <div class="control-group">
                     <label class="control-label" for="atMortuaryBodyAddressCity">City</label>
                     <div class="controls">
-                        <input type="text" name="atMortuaryBodyAddressCity" id="atSceneBodyAddressCity"/> 
+                        <input type="text" name="atMortuaryBodyAddressCity" id="atMortuaryBodyAddressCity"/> 
                     </div>
                 </div>
 
                 <div class="control-group">
                     <label class="control-label" for="atMortuaryAddressPostalCode">Postal Code</label>
                     <div class="controls">
-                        <input type="text" name="atMortuaryAddressPostalCode" id="atSceneBodyAddressPostalCode"/> 
+                        <input type="text" name="atMortuaryAddressPostalCode" id="atMortuaryAddressPostalCode"/> 
                     </div>
                 </div>
 
@@ -142,11 +142,11 @@
                                                 </div>
 
                                                 <div class="control-group">
-                    <label class="control-label" for="atSceneBodyEstAge">Estimated age</label>
+                    <label class="control-label" for="atMortuaryBodyEstAge">Estimated age</label>
                     <div class="controls">    
                         <table>
                             <tr>
-                                <td><select name="atSceneBodyEstAge" id="atSceneBodyEstAge" style="width:100px;" >
+                                <td><select name="atMortuaryBodyEstAge" id="atMortuaryBodyEstAge" style="width:100px;" >
                                         <option selected="selected">Age</option>
                                         <%
                                             for (int i = 1; i < 101; i++) {
@@ -154,7 +154,7 @@
                                             }
                                         %>
                                     </select></td>
-                                <td><select name="at_scene_body_estimated_age" id="at_scene_body_estimated_age" style="width:120px;" >
+                                <td><select name="at_mortuary_body_estimated_age" id="at_mortuary_body_estimated_age" style="width:120px;" >
                                         <option selected="selected">Years/Months</option>
                                         <option>Years</option>
                                         <option>Months</option>
