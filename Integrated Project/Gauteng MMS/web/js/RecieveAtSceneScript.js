@@ -4,7 +4,7 @@
  */
 
 $(document).ready(function(){
-    $("#recieve_body_scene_form").validate({
+    /*$("#recieve_body_scene_form").validate({
         rules:{
             receivedBodyFromName:{
                 required: true
@@ -54,6 +54,10 @@ $(document).ready(function(){
             
         }
         
+    });*/
+    
+    $("#recieve_body_scene_form").submit(function(){
+        _data = $("#recieve_body_scene_form").serialize();
     });
 });
 

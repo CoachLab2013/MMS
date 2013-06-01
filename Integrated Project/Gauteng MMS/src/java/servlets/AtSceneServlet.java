@@ -39,8 +39,7 @@ public class AtSceneServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter(null)));
-        
+        BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("at_scene_deathregister")));       
         bodyAtScene.setDateTimeBodyFound(request.getParameter("bodyFoundDate") + " " + request.getParameter("bodyFoundTime"));
         bodyAtScene.setAllegedInjuryDateTime(request.getParameter("inAllegedInjuryDate") + " " + request.getParameter("inAllegedInjuryTime"));
         bodyAtScene.setAllegedDeathDateTime(request.getParameter("inAllegedDeathDate") + " " + request.getParameter("inAllegedDeathTime"));
@@ -48,7 +47,8 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.setFacilityDateTime(request.getParameter("ReceivedFacilityDate") + " " + request.getParameter("ReceivedFacilityTime"));
         bodyAtScene.setSceneIncidentOccured(request.getParameter("SceneType"));
         bodyAtScene.setPlaceOfDeath(request.getParameter("DeathAddress"));
-        bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter("ExternalCircumstance"));
+        bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter("externalcircumstance"));
+        
         if (request.getParameter("pathologistAtScene").equals("Yes")){
             bodyAtScene.setPathOnScene(true);
         }else{
@@ -60,7 +60,17 @@ public class AtSceneServlet extends HttpServlet {
             Member receivedFrom = new Member();
             receivedFrom.setName(request.getParameter("receivedBodyFromName"));
             receivedFrom.setSurname(request.getParameter("receivedBodyFromSurname"));
-            receivedFrom.setOrganization(request.getParameter("Organization"));
+            String organization = request.getParameter("organization");
+            /**
+             * Organization is not mandatory, so if they don't select an organization make sure
+             * that you save none into the database
+             */
+            if(organization.equals("Select")){
+                receivedFrom.setOrganization("None");
+            }
+            else{
+                receivedFrom.setOrganization(organization);
+            }
             receivedFrom.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         //end of building received from
         
@@ -114,41 +124,45 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.getBody().setBodyAddress(bodyAddress);
         bodyAtScene.getBody().setRace(request.getParameter("Race"));
         bodyAtScene.getBody().setGender(request.getParameter("Gender"));
-        if(request.getParameter(null).equals("Month")){
+        if(request.getParameter("at_scene_body_estimated_age_type").equals("Month")){
             bodyAtScene.getBody().setEstimatedAgeMonth(1);
-        }else if(request.getParameter(null).equals("Year")){
+        }else if(request.getParameter("at_scene_body_estimated_age_type").equals("Year")){
             bodyAtScene.getBody().setEstimatedAgeYear(1);
         }
  
         //end of Body details
         //scroll up to at scene specifics
         //Property 
-        Property propertySAPS = new Property();
-        propertySAPS.setDeathRegisterNumber(request.getParameter(bodyAtScene.getBody().getDeathRegisterNumber()));
-        propertySAPS.setDescription("SAPSpropertyDescr");
-        propertySAPS.setSAPS_name("SAPSpropertyName");
-        propertySAPS.setSAPS_surname("SAPSpropertySurname");
+        int count_saps = Integer.parseInt(request.getParameter("saps_property_counter").toString());
+        for(int i=0;i<count_saps;i++){
+            String saps_prop_des = "saps_prop_des"+Integer.toString(i+1);
+            String saps_prop_name = "saps_prop_name"+Integer.toString(i+1);
+            String saps_prop_surname = "saps_prop_surname"+Integer.toString(i+1);
+            if(request.getParameter(saps_prop_des) != null){
+                Property propertySAPS = new Property();
+                propertySAPS.setDeathRegisterNumber(request.getParameter(bodyAtScene.getBody().getDeathRegisterNumber()));
+                propertySAPS.setDescription(request.getParameter(saps_prop_des));
+                propertySAPS.setSAPS_name(request.getParameter(saps_prop_name));
+                propertySAPS.setSAPS_surname(request.getParameter(saps_prop_surname));
+                //put the code to add this property into the database here
+            }
+        }
         
-        Property propertyFPS = new Property();
-        propertyFPS.setDeathRegisterNumber(request.getParameter(bodyAtScene.getBody().getDeathRegisterNumber()));
-        propertyFPS.setDescription("atSceneFPSpropertyDescr");
-        propertyFPS.setTakenBy(null);
+        int count_fps = Integer.parseInt(request.getParameter("fps_property_counter").toString());
+        for(int i=0;i<count_fps;i++){
+            String fps_prop_des = "fps_prop_des"+Integer.toString(i+1);
+            String fps_prop_persal = "fps_prop_persal"+Integer.toString(i+1);
+            if(request.getParameter(fps_prop_des) != null){
+                Property propertyFPS = new Property();
+                propertyFPS.setDeathRegisterNumber(request.getParameter(bodyAtScene.getBody().getDeathRegisterNumber()));
+                propertyFPS.setDescription(request.getParameter(fps_prop_des));
+                propertyFPS.setTakenBy(request.getParameter(fps_prop_persal));
+                //put the code to add this property into the database here
+            }
+        }
+        
         //end Property
 
-        /*try {
-            /* TODO output your page here. You may use following sample code. 
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AtSceneServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AtSceneServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
-        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

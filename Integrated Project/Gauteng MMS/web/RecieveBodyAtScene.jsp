@@ -10,11 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript" src="js/RecieveAtSceneScript.js"></script>       
+        <script type="text/javascript" src="js/RecieveAtSceneScript.js"></script>
+        <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
     </head>
     <body>
         <legend class="legend"><h3>Receive body from scene</h3> </legend>
-        <form name="recieve_body_scene_form" id="recieve_body_scene_form" method="post" action="#">
+        <form name="recieve_body_scene_form" id="recieve_body_scene_form" method="post" action="AtSceneServlet">
+            <input type="hidden" name="at_scene_deathregister" id="at_scene_deathregister"/>
             <fieldset class="fieldset">
                 <legend class="legend"><h4>Body received from:</h4></legend>
                 <div class="control-group">
@@ -323,7 +325,7 @@
                                             }
                                         %>
                                     </select></td>
-                                <td><select name="at_scene_body_estimated_age" id="at_scene_body_estimated_age" style="width:120px;" >
+                                <td><select name="at_scene_body_estimated_age_type" id="at_scene_body_estimated_age_type" style="width:120px;" >
                                         <option selected="selected">Years/Months</option>
                                         <option>Years</option>
                                         <option>Months</option>
@@ -495,7 +497,7 @@
                 <div class="control-group">
                     <label class="control-label" for="ExternalCircumstance">External cause or circumstance of injury:</label> 
                     <div class="controls"><%
-                        out.print(t.makeReferenceList("ExternalCircumstance", "type", ""));
+                        out.print(t.makeReferenceList("externalcircumstance", "type", ""));
                         %>
                         <%--<select id="Cause" name="Cause">                            
                             <option>Shot</option>
@@ -533,140 +535,26 @@
                     </div>
 
                     <div class="offset4">
-                        <input   class="btn btn-primary" onclick="displayResult('SAPSpropertyTable', 'SAPSpropertyDescr', 'SAPSpropertyName', 'SAPSpropertySurname')" type="button" value="Add Item" /> 
+                        <input id="saps_property_add" name="saps_property_add"  class="btn btn-primary"  type="button" value="Add Item" /> 
                         <%--Display save result --%> 
                     </div>
                     <br/> <br/>
-                    <table id="SAPSpropertyTable" border="1">
-                        <tr>
-                            <th width="60">select</th>
-                            <th width="150">Description</th>
-                            <th width="150">SAPS Name</th>
-                            <th width="150">SAPS Surname</th>
-
+                    <table class='tabledisplay' id="SAPSpropertyTable" name="SAPSpropertyTable">
+                        <tr class='tablerow'>
+                            <th class='tableheading'>Select</th>
+                            <th class='tableheading'>Description</th>
+                            <th class='tableheading'>SAPS Name</th>
+                            <th class='tableheading'>SAPS Surname</th>
                         </tr>
 
                     </table>
                     <br/>
                     <div class="offset5">
-                        <input   class="btn btn-primary" onclick=" deleteRow('SAPSpropertyTable')" type="button" value="Delete" /> 
+                        <input id="saps_property_delete" name="saps_property_delete"   class="btn btn-primary" type="button" value="Delete" /> 
                         <%--Display save result --%> 
                     </div>
 
-                    <script>
-                        function displayResult(table, des, name, surname)
-                        {
-                            var table = document.getElementById(table);
-                            var row = table.insertRow(1);
-
-                            var cell0 = row.insertCell(0);
-                            var cell1 = row.insertCell(1);
-                            var cell2 = row.insertCell(2);
-                            var cell3 = row.insertCell(3);
-
-                            var element1 = document.createElement("input");
-                            element1.type = "checkbox";
-                            element1.name = "chkbox[]";
-                            cell0.appendChild(element1);
-                            cell1.innerHTML = document.getElementById(des).value;
-                            cell2.innerHTML = document.getElementById(name).value;
-                            cell3.innerHTML = document.getElementById(surname).value;
-                        }
-                        function move() {
-
-                            //  if ($("#callform").valid()) {
-                            $("#scene").removeClass("active");
-                            $("#atScene").removeClass("tab-pane active");
-                            $("#atMortuary").removeClass("tab-pane");
-
-                            $("#atScene").addClass("tab-pane");
-                            $("#atMortuary").addClass("tab-pane active");
-                            $("#mortuary").addClass("active");
-
-
-                            //Copy details to next tab
-                            $("#BMname").val($("#Bname").val());
-                            $("#BMid").val($("#Bid").val());
-                            $("#BMage").val($("#Bage").val());
-                            $("#BMaddress").val($("#Baddress").val());
-                            $("#BMsurname").val($("#Bsurname").val());
-                            /*       
-                                 <div class="control-group">
-                                 <label class="control-label" for="atMort">Body Classification</label> 
-                                 <div class="controls">
-                                 <select id="atMort" name="atMort">                            
-                                 <option>Head</option>
-                                 <option>Eye</option>
-                                 <option>Body</option>
-                                 </select>
-                                 </div>
-                                 </div> */
-
-
-
-
-                            /*
-                                 </div>
-                                 <div class="control-group">
-                                 <label class="control-label" for="BMsurname">Surname</label>
-                                 <div class="controls">
-                                 <input type="text" name="BMsurname" id="BMsurname"/> 
-                                 </div>
-                                 </div>
-                             */
-
-
-
-
-
-                            /*
-                                 <div class="control-group">
-                                 <label class="control-label" for="BMrace">Race</label> 
-                                 <div class="controls">
-                                 <select id="BMrace" name="BMrace">                            
-                                 <option>Black</option>
-                                                                 
-                                 </select>
-                                 </div>
-                                 </div>
-                                 <div class="control-group">
-                                 <label class="control-label" for="BMgender">Gender</label> 
-                                 <div class="controls">
-                                 <select id="BMgender" name="BMgender">                            
-                                 <option>Male</option>
-                                                                 
-                                 </select>
-                                 </div>
-                                 </div>
-                                                                 
-                             */
-
-
-
-                            //    }
-
-                        }
-                        function deleteRow(tableID) {
-                            try {
-                                var table = document.getElementById(tableID);
-                                var rowCount = table.rows.length;
-
-                                for (var i = 0; i < rowCount; i++) {
-                                    var row = table.rows[i];
-                                    var chkbox = row.cells[0].childNodes[0];
-                                    if (null !== chkbox && true === chkbox.checked) {
-                                        table.deleteRow(i);
-                                        rowCount--;
-                                        i--;
-                                    }
-
-
-                                }
-                            } catch (e) {
-                                alert(e);
-                            }
-                        }
-
+                    <script>                      
 
                         $('#datepicker').datetimepicker({
                             pickTime: false,
@@ -729,6 +617,7 @@
                         });
 
                     </script>
+                    
                 </fieldset>
                 <br/> <br/>
                 <fieldset class="fieldset offset1">     
@@ -748,23 +637,23 @@
                     </div>
 
                     <div class="offset4">
-                        <input   class="btn btn-primary" onclick="displayResult('atSceneFPSpropertyTable', 'atSceneFPSpropertyDescr', 'atSceneFPSpropertyName', 'atSceneFPSpropertySurname')" type="button" value="Add Item" /> 
+                        <input id="at_scene_fps_add" id="at_scene_fps_add"  class="btn btn-primary"  type="button" value="Add Item" /> 
                         <%--Display save result --%> 
                     </div>
                     
                     <br/> <br/>
-                    <table id="atSceneFPSpropertyTable" border="1">
+                    <table class="tabledisplay" id="atSceneFPSpropertyTable" name="atSceneFPSpropertyTable">
                         <tr>
-                            <th width="60">select</th>
-                            <th width="150">Description</th>
-                            <th width="150">FPS Name</th>
-                            <th width="150">FPS Surname</th>
+                            <th class="tableheading">Select</th>
+                            <th class="tableheading">Description</th>
+                            <th class="tableheading">Persal Number</th>
                         </tr>
-
                     </table>
                     <br/>
+                    <input id="saps_property_counter" name="saps_property_counter" type="hidden" value="0" />
+                    <input id="fps_property_counter" name="fps_property_counter" type="hidden" value="0" />
                     <div class="offset5">
-                        <input    class="btn btn-primary" onclick=" deleteRow('atSceneFPSpropertyTable')" type="button" value="Delete" /> 
+                        <input id="at_scene_fps_delete" name="at_scene_fps_delete"  class="btn btn-primary"  type="button" value="Delete" /> 
                         <%--Display save result --%> 
                     </div>
                     <br/><br/>
