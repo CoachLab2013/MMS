@@ -39,8 +39,22 @@ public class AtMortuaryServlet extends HttpServlet {
 
         BodyAtMortuary bodyAtMortuary = new BodyAtMortuary(request.getParameter(null));
         bodyAtMortuary.setBodyHandedOverToPerNumber(request.getParameter("employee"));
-        bodyAtMortuary.setBodyReceivedFromPerNumber(request.getParameter("employee_handing"));
-        bodyAtMortuary.setBodyHandOverFromOrganization("organization");
+        String receivedFrom = request.getParameter("employee_handing");
+            /**
+             * Organization is not mandatory, so if they don't select an organization make sure
+             * that you save none into the database
+             */
+            if(receivedFrom.equals("Select")!=true){
+                bodyAtMortuary.setBodyHandOverFromOrganization(receivedFrom);
+            }
+         String organization = request.getParameter("organization");
+            /**
+             * Organization is not mandatory, so if they don't select an organization make sure
+             * that you save none into the database
+             */
+            if(organization.equals("Select")!=true){
+                bodyAtMortuary.setBodyHandOverFromOrganization(organization);
+            }
         
         //Body Details
         bodyAtMortuary.setBodyType(request.getParameter("BodyPart"));

@@ -7,8 +7,14 @@ package servlets;
 import database.BodyAddress;
 import database.BodyAtMortuary;
 import database.BodyAtScene;
+import database.BodyAtSceneDb;
+import database.BodyDb;
+import database.DbDetail;
+import database.Incident;
 import database.Member;
+import database.MemberDb;
 import database.Property;
+import database.PropertyDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -38,6 +44,9 @@ public class AtSceneServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        Tools t = new Tools();
+        DbDetail dbdetail = t.getDbdetail();
+        
         
         BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("at_scene_deathregister")));       
         bodyAtScene.setDateTimeBodyFound(request.getParameter("bodyFoundDate") + " " + request.getParameter("bodyFoundTime"));
@@ -106,6 +115,7 @@ public class AtSceneServlet extends HttpServlet {
             
          
         //Body Details
+        bodyAtScene.getBody().setIncident(new Incident("00120130601"));
         bodyAtScene.getBody().setBodyType(request.getParameter("BodyPart"));
         bodyAtScene.getBody().setNameOfDeceased(request.getParameter("atSceneBodyName"));
         bodyAtScene.getBody().setSurnameOfDeceased(request.getParameter("atSceneBodySurname"));
@@ -120,7 +130,7 @@ public class AtSceneServlet extends HttpServlet {
             bodyAddress.setProvince(request.getParameter("atSceneBodyAddressProvince"));
             bodyAddress.setRegion(request.getParameter("atSceneBodyAddressRegion"));
             bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
-        //end of building body
+        //end of building body address
         bodyAtScene.getBody().setBodyAddress(bodyAddress);
         bodyAtScene.getBody().setRace(request.getParameter("Race"));
         bodyAtScene.getBody().setGender(request.getParameter("Gender"));
@@ -129,10 +139,40 @@ public class AtSceneServlet extends HttpServlet {
         }else if(request.getParameter("at_scene_body_estimated_age_type").equals("Year")){
             bodyAtScene.getBody().setEstimatedAgeYear(1);
         }
- 
         //end of Body details
-        //scroll up to at scene specifics
-        //Property 
+        //inserting body into database
+        BodyDb bodyDb = new BodyDb(dbdetail, bodyAtScene.getBody());
+        bodyDb.init();
+        out.println("adding body :::" + bodyDb.add());
+        //end of body inserting
+        
+        //inserting BodyAtScene into Database
+        BodyAtSceneDb bodyAtSceneDb = new BodyAtSceneDb(dbdetail,bodyAtScene);
+        bodyAtSceneDb.init();
+        out.println("adding bodyAtScene :::" + bodyAtSceneDb.add());
+        //end inserting BodyAtScene
+        
+        //NOTE: must add all other things such as members and property after adding the body, due to foreign key constraints
+        MemberDb memberDb = new MemberDb(dbdetail);
+        memberDb.init();
+        //insertin SAPS member
+        memberDb.setMember(SAPSmemeber);
+        out.println("adding SAPSmem  :::" + memberDb.add());
+        //end inserting SAPS member
+        
+        //insertin FPS member
+        memberDb.setMember(FPSmemeber);
+        out.println("adding FPSmem :::" + memberDb.add());
+        //end insertingF member
+        
+        //insertin Pathologist member
+        memberDb.setMember(pathologistOnScene);
+        out.println("adding Pathmem :::" + memberDb.add());
+        //end inserting Pathologist member
+        
+        //Property
+        PropertyDb propertyDb = new PropertyDb(dbdetail);
+        propertyDb.init();
         int count_saps = Integer.parseInt(request.getParameter("saps_property_counter").toString());
         for(int i=0;i<count_saps;i++){
             String saps_prop_des = "saps_prop_des"+Integer.toString(i+1);
@@ -145,6 +185,8 @@ public class AtSceneServlet extends HttpServlet {
                 propertySAPS.setSAPS_name(request.getParameter(saps_prop_name));
                 propertySAPS.setSAPS_surname(request.getParameter(saps_prop_surname));
                 //put the code to add this property into the database here
+                propertyDb.setProperty(propertySAPS);
+                out.println("adding property :::" + propertyDb.add());
             }
         }
         
@@ -158,6 +200,8 @@ public class AtSceneServlet extends HttpServlet {
                 propertyFPS.setDescription(request.getParameter(fps_prop_des));
                 propertyFPS.setTakenBy(request.getParameter(fps_prop_persal));
                 //put the code to add this property into the database here
+                propertyDb.setProperty(propertyFPS);
+                out.println("adding property :::" + propertyDb.add());
             }
         }
         
