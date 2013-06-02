@@ -39,6 +39,10 @@ public class AtSceneServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
+        /**
+         * Incident Log number: request.getParameter("at_scene_lognmber")
+         */   
+        
         BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("at_scene_deathregister")));       
         bodyAtScene.setDateTimeBodyFound(request.getParameter("bodyFoundDate") + " " + request.getParameter("bodyFoundTime"));
         bodyAtScene.setAllegedInjuryDateTime(request.getParameter("inAllegedInjuryDate") + " " + request.getParameter("inAllegedInjuryTime"));
@@ -162,6 +166,7 @@ public class AtSceneServlet extends HttpServlet {
         }
         
         //end Property
+        
         //response.sendRedirect("Home.jsp");
 
     }
