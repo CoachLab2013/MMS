@@ -28,25 +28,28 @@ public class ICD10CodeLevel2DB extends DatabaseConnector {
         idc10CodeLevel2 = null;
 
     }
- 
+
+          
     @Override
     public String add() {
           try {
-            statement.executeUpdate("INSERT INTO icdlevel2 (diald,description)" + " VALUES"
+            statement.executeUpdate("INSERT INTO icdlevel2 (diaId,description,ICDLevel1_chapter)" + " VALUES"
+                    
                     + "('"
-                
                     + idc10CodeLevel2.getDiag1()+"','"
-                    + idc10CodeLevel2.getDescription()+ "')");
-
+                    + idc10CodeLevel2.getDescription()+"',"
+                    + idc10CodeLevel2.getLevel1chapter()+")");  
+   
             statement.close();
             connection.close();
         } catch (SQLException ex) {
-            return "failed " + ex.getMessage();
+            return "failed " + ex.getMessage(); 
         }
         return "successful";
-        
-    }
-     
+         
+    } 
+      
+
     
      public ArrayList<ICD10CodeLevel2> ICD10CodesLeve21List() throws SQLException {
         ArrayList<ICD10CodeLevel2> list = new ArrayList();

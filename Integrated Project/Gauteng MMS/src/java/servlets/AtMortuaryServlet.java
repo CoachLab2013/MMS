@@ -35,8 +35,13 @@ public class AtMortuaryServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();        
-
+        PrintWriter out = response.getWriter();   
+        
+        /**
+         * Incident log number: request.getParameter("at_mort_deathregister")
+         * Death register number: request.getParameter("at_mort_lognmber")
+         */        
+        
         BodyAtMortuary bodyAtMortuary = new BodyAtMortuary(request.getParameter(null));
         bodyAtMortuary.setBodyHandedOverToPerNumber(request.getParameter("employee"));
         String receivedFrom = request.getParameter("employee_handing");

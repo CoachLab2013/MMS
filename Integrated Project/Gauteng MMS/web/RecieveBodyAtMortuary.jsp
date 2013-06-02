@@ -17,6 +17,8 @@
     <br/><br/>
 
     <form id="recieve_body_mort_form" method="post" action="AtMortuaryServlet">
+        <input type="hidden" name="at_mort_deathregister" id="at_mort_deathregister"/>
+            <input type="hidden" name="at_mort_lognmber" id="at_mort_lognmber"/>
         <div class="control-group">
             <label class="control-label">Employee receiving body:</label> 
             <div class="controls"><%

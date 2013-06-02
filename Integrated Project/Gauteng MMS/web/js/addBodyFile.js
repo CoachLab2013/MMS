@@ -25,6 +25,9 @@ $(document).ready(function() {
             $("#recieve_tabs").show();
             $("#AddBody").submit();
             $("#at_scene_deathregister").val($("#deathRegister").attr("value"));
+            $("#at_scene_lognmber").val($("#open_incident_list option:selected").text());
+            $("#at_mort_deathregister").val($("#deathRegister").attr("value"));
+            $("#at_mort_lognmber").val($("#open_incident_list option:selected").text());
         }
     });
     

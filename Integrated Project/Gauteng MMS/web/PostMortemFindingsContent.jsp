@@ -3,7 +3,9 @@
     Created on : 23 Apr 2013, 2:39:06 PM
     Author     : Lady
 --%>
-
+<%@page import="servlets.Tools"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -44,8 +46,48 @@
                      
                             </tr>
                             
-                            <br>
+                            <tr>
+                            <td>  ICD10 code:</td>
+            <td>
+                    <%
+            Tools t = new Tools();
+                           out.println(t.makeICD10List("ICDlevel1","chapter","description","","Select Chapter"));
+                    %>
+                </td>
                             </tr>
+                            
+                            <tr>
+                                <td></td>
+                                <td>
+                    <%
+           
+                           out.println(t.makeICD10List("ICDlevel2","diag1_Id","description","","Select Diagnosis 1"));
+                    %>
+                
+                            </td>
+                            </tr>
+                       <tr>
+                                <td></td>     
+                <td>
+                    <%
+           
+                           out.println(t.makeICD10List("ICDlevel3","diag2_Id","description","","Select Diagnosis 2"));
+                    %>
+                </td>
+                       </tr>
+                       <tr>
+                                <td></td>
+                
+                <td>
+                    <%
+           
+                           out.println(t.makeICD10List("ICDlevel4","diag3_Id","description","", "Select Diagnosis 3"));
+                    %>
+                </td>
+         
+                       </tr>  
+                            <br>
+                            
                             <tr>
                                 <td> <td>  <input type="submit" value="Done" name="postfindingsdone" /><br></td></td>
           
