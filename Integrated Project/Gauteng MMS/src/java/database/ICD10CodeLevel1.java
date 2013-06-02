@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package icd10codes;
+package database;
 
 //package database;
 
