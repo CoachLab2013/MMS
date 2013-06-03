@@ -4,11 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
 import java.lang.reflect.Array;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.HEAD;
 
 /**
  *
@@ -21,13 +21,17 @@ public class Tools {
     /**
      * constructor for an instance of Tools
      */
+ 
+
+  
     public Tools() {
 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
+ 
     }
     //end constructor
 
-    public String adduser() {
+    public String adduser(){
         Employee e = new Employee("11111111", "password", "User", "UserSurname", "Admin", 4, "user1@user.com", true);
         Employee e2 = new Employee("12345678", "123456", "User2", "UserSurname2", "Pathologist", 3, "user2@user.com", true);
         EmployeeDb db1 = new EmployeeDb(e, getDbdetail());
@@ -360,10 +364,12 @@ public class Tools {
      * This will create a table that has bodyRelease information from the
      * database
      */
-    public String bodyRelease(String id) { //change
+   
+      public String bodyRelease(String id){ //change
+     
+       // BodyFile bf = new BodyFile(id);
+       BodyDb bdyDb = new BodyDb(getDbdetail());
 
-        // BodyFile bf = new BodyFile(id);
-        BodyDb bdyDb = new BodyDb(new DbDetail("localhost", "/mydb", "root", "tahirkhan"));
         bdyDb.init();
         try {
 
@@ -398,6 +404,15 @@ public class Tools {
     }
 
     // end 
+
+      
+      
+      
+ //     
+   /*    public String bodyfile(String id){
+        BodyDb bdyDb = new BodyDb( getDbdetail());
+        BodyFileDb bdyfileDb = new BodyFileDb( getDbdetail());
+       } */
     //   
     
     public String makeOpenBodyFileTable(String id){
@@ -412,7 +427,6 @@ public class Tools {
                     + "<th class='tableheading'>Status</th>";
         try {
 
-           // ArrayList<BodyAtMortuary> bodylist = bdyDb.getBodies();
             ArrayList<BodyFile> bodyfilelist = bdyfileDb.BodyFileList();
             int size = bodyfilelist.size();
             for (int i = 0; i < size; i++) {
@@ -471,34 +485,32 @@ public class Tools {
             return e.getMessage();
         }
     }
-    // end 
+    // end  
 
 
-    public String bodyfile2(String id) {
+
+    public String openbodyfile(String id) {
         BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
-        //BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
         bdyfileDb.init();
         try {
 
-            ArrayList<BodyFile> bodyFilelist = bdyfileDb.BodyFileList();
+            ResultSet rs = bdyfileDb.cyasBodyFileRs();
+
 
             String table = "<table class='tabledisplay' id='" + id + "'>"
                     + "<th class='tableheading'>Deah Register Number</th>"
-                    + "<th class='tableheading'>Incident number</th>"
-                    + "<th class='tableheading'>Death register numbers</th>"
-                    + "<th class='tableheading'>Deceased body status</th>";
+                    + "<th class='tableheading'>Incident number</th>"                
+                    + "<th class='tableheading'>Deceased body recieved</th>"
+                    + "<th class='tableheading'>status</th>";
 
-            int size = bodyFilelist.size();
-            for (int i = 0; i < size; i++) {
-                //Been commented out because fields could not be added
-                //    BodyAtMortuary inc = bodyFilelist.get(i);
-                //  table = table +"<tr class='tablerow' lognumber='"+inc.getDeathRegisterNumber()+"'>"
-                //+"<td>"+  inc.getDeathRegisterNumber() +"</td>"
-                //+ "<td class='tablecell'>" + inc. +"</td>"
-                //  + "<td class='tablecell'>" + inc. +"</td>"
-                // + "<td class='tablecell'>" + inc. +"</td>"  
-                // + "<td class='tablecell'>" + inc. +"</td>" 
-                //   + "</tr>"; 
+          
+            while(rs.next()){
+                  table = table +"<tr class='tablerow' lognumber='"+rs.getString("idDeathRegisterNumber")+"'>"
+                   +"<td>"+  rs.getString("idDeathRegisterNumber") +"</td>"
+                 + "<td class='tablecell'>" + rs.getString("incident_incidentLogNumber") +"</td>"
+                  + "<td class='tablecell'>" + rs.getString("dateBodyReceived") +"</td>"
+                    + "<td class='tablecell'>" + rs.getString("bodyfileStatus") +"</td>"  
+                   + "</tr>"; 
             }
             table = table + "</table>";
 

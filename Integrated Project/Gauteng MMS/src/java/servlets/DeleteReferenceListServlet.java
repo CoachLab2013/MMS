@@ -475,7 +475,7 @@ public class DeleteReferenceListServlet extends HttpServlet {
             }
 
 
-        } else if (request.getParameter("table").equals("externalcircumstance")) {
+        } else if (request.getParameter("table1").equals("externalcircumstance")) {
 
             ReferenceListDb emp = new ReferenceListDb("externalcircumstance", "idExternalCircumstance", "type", Olditem, dbDetail);
             emp.init();
@@ -498,7 +498,7 @@ public class DeleteReferenceListServlet extends HttpServlet {
             }
 
 
-        } else if (request.getParameter("table").equals("scenetype")) {
+        } else if (request.getParameter("table1").equals("scenetype")) {
             ReferenceListDb emp = new ReferenceListDb("scenetype", "idSceneType", "type", Olditem, dbDetail);
             emp.init();
             result = emp.delete().trim();

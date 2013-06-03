@@ -1,48 +1,7 @@
-<<<<<<< HEAD
 /Team1_Db/TestApp/dist/
-/Integrated Project/Gauteng MMS/build/
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-/MMS_Project_DatabaseClasses/build/
-/MMS_Project_DatabaseClasses/dist/
-=======
-/Reports/Report_AuditTrail/nbproject/private/
-/Reports/Report_AuditTrail/dist/
-/Reports/Report_AuditTrail/build/
-/Reports/Report_TurnAroundOnResults/nbproject/private/
-/Reports/Report_TurnAroundOnResults/build/
-/Reports/Report_FacilityStorage/nbproject/private/
-/Reports/Report_FacilityStorage/build/
->>>>>>> origin/master
-<<<<<<< HEAD
-/Reports/Report_UnidentifiedBodiesStatistics/nbproject/private/
-=======
-/Reports/Report_MannerOfDeath/dist/
-/Reports/Report_BodiesByOrganisation/dist/
-/Reports/Report_TurnAroundOnResults/dist/
-<<<<<<< HEAD
-/Team1_Db/TestApp/dist/
-=======
->>>>>>> origin/master
-/Reports/Report_UnidentifiedBodiesStatistics/build/
->>>>>>> origin/master
-<<<<<<< HEAD
-/Reports/Report_UnidentifiedBodiesStatistics/build/
-/Reports/Incident_housekeeping/nbproject/private/
-/Reports/IncidentHouseKeeping/nbproject/private/
-/Reports/Incident_housekeeping/build/
-=======
-/Reports/AuditTrail/nbproject/private/
->>>>>>> origin/master
-/Reports/ExcelReports/Report_IncidentHouseKeeping/nbproject/private/
-/Reports/ExcelReports/Report_IncidentHouseKeeping/build/
-/Reports/ExcelReports/Report_CaseReport/nbproject/private/
-/Reports/ExcelReports/Report_CaseReport/build/
-/Reports/ExcelReports/PSP/nbproject/private/
-/Reports/Reports_Excel/dist/
-=======
-/Team1_Db/TestApp/dist/
->>>>>>> origin/HEAD
->>>>>>> origin/master
 /Integrated Project/Gauteng MMS/dist/
+/Integrated Project/Gauteng MMS/build/
+/Reports/Reports_Excel/dist/
+/Reports/Reports_Excel/build/
+/Reports/Reports_PDF/dist/
+/Reports/Reports_PDF/build/
