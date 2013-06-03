@@ -122,7 +122,11 @@
                 </div>
 
                 <div id="LinkBodyFiles" class="tab-pane ">
+<<<<<<< HEAD
                     <%-- <jsp:include page="LinkBodyContent.jsp"/> --%>
+=======
+                   <%-- <jsp:include page="LinkBodyContent.jsp"/> --%>
+>>>>>>> origin/master
                 </div>
 
             </div>
