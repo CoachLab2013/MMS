@@ -466,7 +466,7 @@ public class ReferenceListServlet extends HttpServlet {
             //Get infor from text box
             String statusName = request.getParameter("txtStatus");
 
-            ReferenceListDb emp = new ReferenceListDb("bodystatus", "idBodyStatus", "type", statusName, dbDetail);
+            ReferenceListDb emp = new ReferenceListDb("bodystatus", "idBodyStatus", "state", statusName, dbDetail);
             emp.init();
             result = emp.add().trim();
             //if save is successful, return a message to page

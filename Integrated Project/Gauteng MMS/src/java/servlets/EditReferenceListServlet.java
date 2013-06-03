@@ -89,7 +89,7 @@ public class EditReferenceListServlet extends HttpServlet {
         String result = "";
         SetDbDetail DBdet = new SetDbDetail();
         DbDetail dbDetail = DBdet.getDbdetail();
-
+  
 
         if (request.getParameter("table").equals("Insitution")) {
 
@@ -402,7 +402,7 @@ public class EditReferenceListServlet extends HttpServlet {
 
         } else if (request.getParameter("table").equals("bodystatus")) {
 
-            ReferenceListDb emp = new ReferenceListDb("bodystatus", "idBodyStatus", "type", Olditem, dbDetail);
+            ReferenceListDb emp = new ReferenceListDb("bodystatus", "idBodyStatus", "state", Olditem, dbDetail);
             emp.setNewData(item);
             emp.init();
             result = emp.edit().trim();

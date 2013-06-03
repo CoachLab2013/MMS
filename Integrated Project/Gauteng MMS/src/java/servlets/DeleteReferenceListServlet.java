@@ -385,7 +385,7 @@ public class DeleteReferenceListServlet extends HttpServlet {
 
         } else if (request.getParameter("table1").equals("bodystatus")) {
 
-            ReferenceListDb emp = new ReferenceListDb("bodystatus", "idBodyStatus", "type", Olditem, dbDetail);
+            ReferenceListDb emp = new ReferenceListDb("bodystatus", "idBodyStatus", "state", Olditem, dbDetail);
             emp.init();
             result = emp.delete().trim();
             //if save is successful, return a message to page
