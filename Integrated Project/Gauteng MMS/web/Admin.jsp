@@ -1483,7 +1483,6 @@
                                                     </div>           
                                                     </div>
 
-<<<<<<< HEAD
                                                     </div>
 
                                                     </body>
@@ -1502,7 +1501,7 @@
 
                                                         <input type="hidden" id="ICD10table" name="ICD10table">
                                                     </form>
-=======
+
                                                     </div>                                                    </body>
->>>>>>> origin/master
+
                                                     </html>

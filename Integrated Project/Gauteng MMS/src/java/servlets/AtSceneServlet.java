@@ -250,7 +250,7 @@ public class AtSceneServlet extends HttpServlet {
         out.println(incidentDb.IncreaseBodyCount());
         //Incident incident = incidentDb.findIncident(request.getParameter("at_scene_lognmber"));
         
-        //response.sendRedirect("Home.jsp");
+        response.sendRedirect("Home.jsp");
 
     }
 
