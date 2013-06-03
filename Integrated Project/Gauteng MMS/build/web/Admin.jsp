@@ -41,13 +41,7 @@
           <script src="js/OpenIncidentScript.js"></script>
          <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> --%>
         <title>Gauteng Mortuary Management System</title>
-<<<<<<< HEAD
-
-=======
-       <% Tools t = new Tools();
-            out.println(t.makeIcon());
-        %>
->>>>>>> origin/master
+ 
     </head>
     <body>  
         <title style="color:white">Gauteng Mortuary Management System</title>
@@ -530,7 +524,7 @@
                                                                     <li class="<%out.println(String.valueOf(icd10));%>"><a href="#icd10Codes" data-toggle="tab">ICD10 Codes</a></li>
                                                                     <li class="<%out.println(String.valueOf(manner));%>"><a href="#mDeath" data-toggle="tab">Manner of Death</a></li>
                                                                     <li class="<%out.println(String.valueOf(sample));%>"><a href="#sType" data-toggle="tab">Sample Type</a></li>
-                                                                    <li class="<%out.println(String.valueOf(status));%>"><a href="#status" data-toggle="tab">Status</a></li>
+                                                                    <li class="<%out.println(String.valueOf(status));%>"><a href="#status" data-toggle="tab">Body Status</a></li>
                                                                     <li class="<%out.println(String.valueOf(relationship));%>"><a href="#relationship" data-toggle="tab">Relationship</a></li>
                                                                     <li class="<%out.println(String.valueOf(bodyPart));%>"><a href="#bodyPart" data-toggle="tab">Body Part</a></li>
                                                                     <li class="<%out.println(String.valueOf(specialCur));%>"><a href="#specialCur" data-toggle="tab">Special Circumstance</a></li>
@@ -1249,7 +1243,7 @@
                                                                     </div>
 
                                                                     <div id="status" class="tab-pane <%out.println(String.valueOf(status));%> "> 
-                                                                        <div align="center"><h2>Status</h2> </div>     
+                                                                        <div align="center"><h2>Body Status</h2> </div>     
                                                                         <%--content for Body Status reference list--%>
                                                                         <div class="offset2 ">
                                                                             <form name="AddStatus" id="AddStatus" method="post" action="ReferenceListServlet"  >
@@ -1266,7 +1260,7 @@
                                                                             <div class="controls offset2" >
                                                                                 <label class="control-label" for="StatusList">Current Body Status Categories:</label>
 
-                                                                                <select id="StatusList  " name="StatusList" size="5">
+                                                                                <select id="StatusList" name="StatusList" size="5">
                                                                                     <%
                                                                                         for (int i = 0; i < bodystatusList.size(); i++) {
                                                                                     %>
@@ -1278,8 +1272,8 @@
                                                                                 </select>
                                                                                 <br/>
                                                                                 <input type="button" onclick="editReferenceList('bodystatus', 'StatusList')" value="Edit Body Status" id="cmdEditBodystatus" name="cmdEditBodystatus" />
-                                                                                  <input type="button" onclick="deleteReferenceList('bodystatus', 'StatusList')" value="Delete Body Status" id="cmdDeleteBodystatus" name="cmdDeleteBodystatus" />
-
+                                                                                <input type="button" onclick="deleteReferenceList('bodystatus', 'StatusList')" value="Delete Body Status" id="cmdDeleteBodystatus" name="cmdDeleteBodystatus" />
+                                                                                
                                                                             </div>
                                                                         </div> 
                                                                         <%--Display save result --%> 
