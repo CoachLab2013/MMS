@@ -24,13 +24,24 @@
     
          <%
             Tools t = new Tools();
-<<<<<<< HEAD
+
             out.println(t.openbodyfile("opentable"));
-=======
-            out.println(t.makeOpenBodyFileTable("open_body_file_table"));
->>>>>>> origin/master
+
             %>
+            <br>
+            
+            <table>
+       <tr>
+                <td width="200"></td>
+                <td width="10"><input type="button" value="Edit" id="editbodyfilebutton"></td>
+                <td width="300" align="center"><input type="button" value="Close case" id="close"> </td>
+            </tr>
+            
+                <td>
+              <%-- <form id="editbodyfileform" hidden="true" action="GetBodyfileServlet"> --%>
+                  <%-- <input type="text" id="selected_edit_bodyfile" name="selected_edit_bodyfile"> --%>
+            </table>
         
-       
+            
     </body>
 </html>
