@@ -12,7 +12,9 @@ import java.util.Date;
  */
 public class TestApp {
 
-    public static DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "password123");
+
+    public static DbDetail dbDetail = new DbDetail("localhost", "/mydb", "root", "200918139");
+
 
     /**
      * @param args the command line arguments
@@ -119,7 +121,10 @@ public class TestApp {
          System.out.println(list.get(i));
          }*/
         //END OF REFERENCE LIST STUFF
-
+        RecipientDb obj = new RecipientDb(dbDetail); 
+        obj.read();
+        
+        System.out.println("Yes i work");
         //TESTING DEATHCALL STUFF
         //timeOfCall,numberCallMade,institution,sceneAddress,province,region,sceneCondition,nameOfCaller
        /* Incident incident = new Incident();
@@ -164,9 +169,15 @@ public class TestApp {
         //TESTING INCIDENT
         //String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances)
 
+
+     //   Incident inci = new  Incident("002201301","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",0,true,"2013-04-06");
+      //  IncidentDb inciDb = new IncidentDb(inci,dbDetail);
+       // inciDb.init();
+
         //Incident inci = new  Incident("002201301","REF" ,4,"2013-04-06","11:50:30" , "rap stabbing", "vegas", "had beef with Rick Ross","Burger King",0,true,"2013-04-06");
         //IncidentDb inciDb = new IncidentDb(inci,dbDetail);
         //inciDb.init();
+
 
 
         //adding an incident
@@ -186,8 +197,9 @@ public class TestApp {
         //counting open incidents
         //System.out.println(inciDb.countOpenIncidents("20130424"));
         
-        //increase body count
+
         //System.out.println(inciDb.IncreaseBodyCount());
+
         
         //END OF INCIDENT STUFF
 
@@ -207,7 +219,11 @@ public class TestApp {
         //add a body details
 
         
+
+    //    BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
+
       //  BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("00120130601"), "44dddd33221", "2013-06-03","2013-06-03");
+
 
         /*BodyAtMortuary body = new BodyAtMortuary("peter", "john", "099888592","female", "0", "3", "00", "00","3333", "2013-04-23", 20, "4444333222", "4442000", "44432ddd", "22kfdkd","2013-04-23", new BodyAddress("D", "D","D","D", "e", "f", "g", "h"), 20, 6, "gg", "ggrer",false, "2013-06-03", false,new Incident("002201301"), "44dddd33221", "2013-06-03","2013-06-03");
 >>>>>>> origin/master

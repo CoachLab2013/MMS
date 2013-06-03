@@ -21,14 +21,16 @@
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
 
  <script src="js/KinDetailScript.js"></script>
+    
     </head>
+    
     <body>
          <%
-            if(session.getAttribute("kinDetail")!= null)
-            {
+          if(session.getAttribute("kinDetail")!= null)
+           {
                 out.print("<input type=hidden class='go_to_deceasedDetails' id='go_to_deceasedDetails' value=" + session.getAttribute("kinDetail") +">");  
                 session.removeAttribute("kinDetail");
-            }
+            } 
         %>
         <legend>Body File> Edit Body File> Body Identification> Kin/Informant Details </legend>
         <form name="Kinform" id="Kinform" method="post" action="SaveKinDetailsServlet">
