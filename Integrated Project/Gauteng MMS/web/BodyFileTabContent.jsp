@@ -121,7 +121,7 @@
                 </div>
 
                 <div id="LinkBodyFiles" class="tab-pane ">
-                    <jsp:include page="LinkBodyContent.jsp"/>
+                   <%-- <jsp:include page="LinkBodyContent.jsp"/> --%>
                 </div>
 
             </div>

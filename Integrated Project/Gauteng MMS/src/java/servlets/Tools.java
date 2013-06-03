@@ -23,7 +23,7 @@ public class Tools {
      */
     public Tools() {
 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
     }
     //end constructor
 
@@ -405,7 +405,7 @@ public class Tools {
 
             return table;
         } catch (Exception e) {
-            return table;
+            return e.toString();
         }
     }
     
