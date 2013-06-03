@@ -47,10 +47,7 @@ public class AtSceneServlet extends HttpServlet {
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
         
-        
-        /**
-         * Incident Log number: request.getParameter("at_scene_lognmber")
-         */   
+        //Incident Log number: request.getParameter("at_scene_lognmber");   
         
         BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("at_scene_deathregister")));       
         bodyAtScene.setDateTimeBodyFound(request.getParameter("bodyFoundDate") + " " + request.getParameter("bodyFoundTime"));
@@ -119,7 +116,7 @@ public class AtSceneServlet extends HttpServlet {
             
          
         //Body Details
-        bodyAtScene.getBody().setIncident(new Incident("00120130601"));
+        bodyAtScene.getBody().setIncident(new Incident(request.getParameter("at_scene_lognmber")));
         bodyAtScene.getBody().setBodyType(request.getParameter("BodyPart"));
         bodyAtScene.getBody().setNameOfDeceased(request.getParameter("atSceneBodyName"));
         bodyAtScene.getBody().setSurnameOfDeceased(request.getParameter("atSceneBodySurname"));
@@ -139,10 +136,21 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.getBody().setRace(request.getParameter("Race"));
         bodyAtScene.getBody().setGender(request.getParameter("Gender"));
         if(request.getParameter("at_scene_body_estimated_age_type").equals("Month")){
-            bodyAtScene.getBody().setEstimatedAgeMonth(1);
+            bodyAtScene.getBody().setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
         }else if(request.getParameter("at_scene_body_estimated_age_type").equals("Year")){
-            bodyAtScene.getBody().setEstimatedAgeYear(1);
+            bodyAtScene.getBody().setEstimatedAgeYear(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
         }
+        //body fields that are not given by the UI input
+        bodyAtScene.getBody().setDateOfBirth("0000-00-00");
+        bodyAtScene.getBody().setAgeOnDateFound(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
+        bodyAtScene.getBody().setIdentifiedDateTime("0000-00-00 00:00");
+        bodyAtScene.getBody().setBodyStatus(false);
+        bodyAtScene.getBody().setDateBodyReceived("0000-00-00");
+        bodyAtScene.getBody().setDateBodyReleased("0000-00-00");
+        bodyAtScene.getBody().setBodyReleased(false);
+        bodyAtScene.getBody().setBodyReleaseTo(null);
+        //end of body fiels that are not given by the UI
+        
         //end of Body details
         //inserting body into database
         BodyDb bodyDb = new BodyDb(dbdetail, bodyAtScene.getBody());
