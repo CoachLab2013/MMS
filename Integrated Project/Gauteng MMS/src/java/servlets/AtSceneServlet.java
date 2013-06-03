@@ -11,10 +11,12 @@ import database.BodyAtSceneDb;
 import database.BodyDb;
 import database.DbDetail;
 import database.Incident;
+import database.IncidentDb;
 import database.Member;
 import database.MemberDb;
 import database.Property;
 import database.PropertyDb;
+import database.Witness;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -111,13 +113,13 @@ public class AtSceneServlet extends HttpServlet {
             //pathologistOnScene.setPersonnelNumber(request.getParameter(null));
             //pathologistOnScene.setContactNumber(request.getParameter(null)); //SAPS
             pathologistOnScene.setRank(request.getParameter("pathologistBodyRank"));
-            pathologistOnScene.setDeathRegisterNumber(request.getParameter(bodyAtScene.getBody().getDeathRegisterNumber()));
+            pathologistOnScene.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
          //end of Pathologist on scene
             
          
         //Body Details
         bodyAtScene.getBody().setIncident(new Incident(request.getParameter("at_scene_lognmber")));
-        bodyAtScene.getBody().setBodyType(request.getParameter("BodyPart"));
+        bodyAtScene.getBody().setBodyType(request.getParameter("bodypart"));
         bodyAtScene.getBody().setNameOfDeceased(request.getParameter("atSceneBodyName"));
         bodyAtScene.getBody().setSurnameOfDeceased(request.getParameter("atSceneBodySurname"));
         bodyAtScene.getBody().setID(request.getParameter("atSceneBodyID"));
@@ -133,8 +135,8 @@ public class AtSceneServlet extends HttpServlet {
             bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
         //end of building body address
         bodyAtScene.getBody().setBodyAddress(bodyAddress);
-        bodyAtScene.getBody().setRace(request.getParameter("Race"));
-        bodyAtScene.getBody().setGender(request.getParameter("Gender"));
+        bodyAtScene.getBody().setRace(request.getParameter("race"));
+        bodyAtScene.getBody().setGender(request.getParameter("gender"));
         if(request.getParameter("at_scene_body_estimated_age_type").equals("Month")){
             bodyAtScene.getBody().setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
         }else if(request.getParameter("at_scene_body_estimated_age_type").equals("Year")){
@@ -166,25 +168,29 @@ public class AtSceneServlet extends HttpServlet {
         
         //NOTE: must add all other things such as members and property after adding the body, due to foreign key constraints
         MemberDb memberDb = new MemberDb(dbdetail);
-        memberDb.init();
         //insertin SAPS member
+        //memberDb = new MemberDb(dbdetail);
         memberDb.setMember(SAPSmemeber);
+        memberDb.init();
         out.println("adding SAPSmem  :::" + memberDb.add());
         //end inserting SAPS member
         
         //insertin FPS member
+        //memberDb = new MemberDb(dbdetail);
         memberDb.setMember(FPSmemeber);
+        memberDb.init();
         out.println("adding FPSmem :::" + memberDb.add());
         //end insertingF member
         
         //insertin Pathologist member
+        //memberDb = new MemberDb(dbdetail);
         memberDb.setMember(pathologistOnScene);
+        memberDb.init();
         out.println("adding Pathmem :::" + memberDb.add());
         //end inserting Pathologist member
         
         //Property
         PropertyDb propertyDb = new PropertyDb(dbdetail);
-        propertyDb.init();
         int count_saps = Integer.parseInt(request.getParameter("saps_property_counter").toString());
         for(int i=0;i<count_saps;i++){
             String saps_prop_des = "saps_prop_des"+Integer.toString(i+1);
@@ -192,12 +198,19 @@ public class AtSceneServlet extends HttpServlet {
             String saps_prop_surname = "saps_prop_surname"+Integer.toString(i+1);
             if(request.getParameter(saps_prop_des) != null){
                 Property propertySAPS = new Property();
-                propertySAPS.setDeathRegisterNumber(request.getParameter(bodyAtScene.getBody().getDeathRegisterNumber()));
+                propertySAPS.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
                 propertySAPS.setDescription(request.getParameter(saps_prop_des));
                 propertySAPS.setSAPS_name(request.getParameter(saps_prop_name));
                 propertySAPS.setSAPS_surname(request.getParameter(saps_prop_surname));
+                //Not null unmentioned fields
+                Witness[] witnesses = {new Witness("null","null"), new Witness("null","null")};
+                propertySAPS.setWitnesses(witnesses);
+                propertySAPS.setDate(request.getParameter("bodyFoundDate"));
+                propertySAPS.setSAPS_taken(true);
+                propertySAPS.setReleased(false);
                 //put the code to add this property into the database here
                 propertyDb.setProperty(propertySAPS);
+                propertyDb.init();
                 out.println("adding property :::" + propertyDb.add());
             }
         }
@@ -206,18 +219,36 @@ public class AtSceneServlet extends HttpServlet {
         for(int i=0;i<count_fps;i++){
             String fps_prop_des = "fps_prop_des"+Integer.toString(i+1);
             String fps_prop_persal = "fps_prop_persal"+Integer.toString(i+1);
+            //out.println("FPS prop des table number: " + fps_prop_des);
             if(request.getParameter(fps_prop_des) != null){
                 Property propertyFPS = new Property();
-                propertyFPS.setDeathRegisterNumber(request.getParameter(bodyAtScene.getBody().getDeathRegisterNumber()));
+                propertyFPS.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
                 propertyFPS.setDescription(request.getParameter(fps_prop_des));
+                //out.println("********FPS PROP DES*********: " + request.getParameter(fps_prop_des));
                 propertyFPS.setTakenBy(request.getParameter(fps_prop_persal));
+                //out.println("********FPS PROP PERSEL*********: " + request.getParameter(fps_prop_persal));
+                //Not null unmentioned fields
+                Witness[] witnesses = {new Witness("null","null"), new Witness("null","null")};
+                propertyFPS.setWitnesses(witnesses);
+                propertyFPS.setDate(request.getParameter("bodyFoundDate"));
+                propertyFPS.setSAPS_taken(false);
+                propertyFPS.setReleased(false);
                 //put the code to add this property into the database here
                 propertyDb.setProperty(propertyFPS);
+                propertyDb.init();
                 out.println("adding property :::" + propertyDb.add());
             }
         }
         
         //end Property
+        
+        //Increase Body Count for the relevent incident
+        IncidentDb incidentDb = new IncidentDb( new Incident(request.getParameter("at_scene_lognmber")), dbdetail);
+        incidentDb.init();
+        out.println(incidentDb.read());
+        incidentDb.init();
+        out.println(incidentDb.IncreaseBodyCount());
+        //Incident incident = incidentDb.findIncident(request.getParameter("at_scene_lognmber"));
         
         //response.sendRedirect("Home.jsp");
 
