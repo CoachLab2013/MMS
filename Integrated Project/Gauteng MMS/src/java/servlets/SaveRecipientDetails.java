@@ -46,7 +46,8 @@ public class SaveRecipientDetails extends HttpServlet {
         recipient.setAddress(request.getParameter("recipientAddres"));
         recipient.setContactNumber(request.getParameter("recipientContact"));
         recipient.setBody_idDeathRegisterNumber("099888592");
-            
+        
+        //connection to the database
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
         RecipientDb recipientDb = new  RecipientDb(recipient, dbdetail);
