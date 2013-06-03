@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_EmployeeStatistics" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="19"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
 	<field name="employeeName" class="java.lang.String"/>
@@ -77,7 +77,9 @@
 		<band height="313" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="8eb2c13e-5ced-4fa1-889d-68dfa95d5bb5" x="0" y="11" width="762" height="290"/>
+					<reportElement uuid="8eb2c13e-5ced-4fa1-889d-68dfa95d5bb5" x="0" y="11" width="762" height="290">
+						<property name="net.sf.jasperreports.chart.range.axis.tick.interval" value="1"/>
+					</reportElement>
 					<chartTitle position="Top">
 						<titleExpression><![CDATA["Employee Statistics"]]></titleExpression>
 					</chartTitle>
@@ -94,6 +96,14 @@
 				<barPlot>
 					<plot/>
 					<itemLabel/>
+					<valueAxisLabelExpression><![CDATA["Number of Occurrences"]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat tickLabelMask="#">
+							<labelFont>
+								<font isBold="true"/>
+							</labelFont>
+						</axisFormat>
+					</valueAxisFormat>
 				</barPlot>
 			</barChart>
 		</band>

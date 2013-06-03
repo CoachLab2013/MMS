@@ -27,7 +27,7 @@ $(document).ready(function(){
             
                ICDcode:{
                 valueNotEquals: "Select"
-            },//end rule of institution
+            }//end rule of institution
        
         },//end of rules
        
@@ -46,12 +46,51 @@ $(document).ready(function(){
            
            ICDcode:{
                valueNotEquals: "Please select ICD codes."
-           },//end rule for type of analysis
+           }//end rule for type of analysis
         }//end of messages
         
     });//end of form validation
    
-    if($("#_registerForensicSample").val() === "true") {
+//   $('#ICDlevel1').change(function() {
+//       $.get("PostMortemServlet",{ data: "Testing..." }, function(data){alert(data);});
+//   });
+   
+    $('#ICDlevel1').change(function() {
+        var value = $(this).val().split(" ")[0];
+        $('#ICDlevel2 > option').each(function() {
+            $(this).removeAttr('hidden');
+            var cmp = $(this).val().substring($(this).val().lastIndexOf('(') + 1, $(this).val().lastIndexOf(')'));
+
+            if (cmp !== value && $(this).val() !== "Select Diagnosis 1")
+            {
+                $(this).attr('hidden', 'hidden');
+            }
+        });
+    });
+
+    $('#ICDlevel2').change(function() {
+        var value = $(this).val().substring(0, 3);
+        $('#ICDlevel3 > option').each(function() {
+            $(this).removeAttr('hidden');
+            if ($(this).val().substring(0, 3) !== value && $(this).val() !== "Select Diagnosis 2")
+            {
+                $(this).attr('hidden', 'hidden');
+            }
+        });
+    });
+
+    $('#ICDlevel3').change(function() {
+        var value = $(this).val().substring(0, 5);
+        $('#ICDlevel4 > option').each(function() {
+            $(this).removeAttr('hidden');
+            if ($(this).val().substring(0, 5) !== value && $(this).val() !== "Select Diagnosis 3")
+            {
+                $(this).attr('hidden', 'hidden');
+            }
+        });
+    });
+  
+   if($("#_registerForensicSample").val() === "true") {
 
             $("#IncidentTab").removeClass("active");
             $("#BodyFileTab").addClass("active");

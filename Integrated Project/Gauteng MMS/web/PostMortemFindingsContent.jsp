@@ -61,7 +61,7 @@
                                 <td>
                     <%
            
-                           out.println(t.makeICD10List("ICDlevel2","diag1_Id","description","","Select Diagnosis 1"));
+                           out.println(t.makeICD10List("ICDlevel2","diag1_Id","description","ICDLevel1_chapter","","Select Diagnosis 1"));
                     %>
                 
                             </td>

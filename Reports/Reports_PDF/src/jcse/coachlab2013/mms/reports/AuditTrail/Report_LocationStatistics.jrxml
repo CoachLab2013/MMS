@@ -78,7 +78,9 @@
 		<band height="313" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="8eb2c13e-5ced-4fa1-889d-68dfa95d5bb5" x="0" y="11" width="762" height="290"/>
+					<reportElement uuid="8eb2c13e-5ced-4fa1-889d-68dfa95d5bb5" x="0" y="11" width="762" height="290">
+						<property name="net.sf.jasperreports.chart.range.axis.tick.interval" value="1"/>
+					</reportElement>
 					<chartTitle position="Top">
 						<titleExpression><![CDATA["Location Statistics"]]></titleExpression>
 					</chartTitle>
@@ -98,8 +100,16 @@
 					</categorySeries>
 				</categoryDataset>
 				<barPlot>
-					<plot orientation="Horizontal"/>
+					<plot/>
 					<itemLabel/>
+					<valueAxisLabelExpression><![CDATA["Number of Occurrences"]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat tickLabelMask="#">
+							<labelFont>
+								<font isBold="true"/>
+							</labelFont>
+						</axisFormat>
+					</valueAxisFormat>
 				</barPlot>
 			</barChart>
 		</band>

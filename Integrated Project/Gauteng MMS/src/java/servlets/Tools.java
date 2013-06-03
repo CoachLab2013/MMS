@@ -242,9 +242,10 @@ public class Tools {
         }
     }
     //end getReferenceList
+    
     public String makeICD10List(String listname, String field1, String field2, String selected, String def) {
-        ArrayList<String> list1 = new ArrayList<String>();
-        ArrayList<String> list2 = new ArrayList<String>();
+        ArrayList<String> list1;
+        ArrayList<String> list2;
         list1 = this.getReferenceList(listname, field1);
         list2 = this.getReferenceList(listname, field2);
         String out = "<select name='" + listname + "' id='" + listname + "'>";
@@ -265,6 +266,32 @@ public class Tools {
         return out;
     }
 
+    public String makeICD10List(String listname, String field1, String field2, String field3, String selected, String def) {
+        ArrayList<String> list1;
+        ArrayList<String> list2;
+        ArrayList<String> list3;
+        list1 = this.getReferenceList(listname, field1);
+        list2 = this.getReferenceList(listname, field2);
+        list3 = this.getReferenceList(listname, field3);
+        String out = "<select name='" + listname + "' id='" + listname + "'>";
+        if (selected.equals("")) {
+            out = out + "<option selected='slected'>"+def+"</option>";
+        }
+        int size = list1.size();
+        for (int i = 0; i < size; i++) {
+            String element1 = list1.get(i);
+            String element2 = list2.get(i);
+            String element3 = list3.get(i);
+            if (element1.equals(selected)) {
+                out = out + "<option selected='selected'>" + element1 + " "+ element2 + " (" + element3 + ") " + "</option>";
+            } else {
+                out = out + "<option>" + element1 + " "+ element2 + " (" + element3 + ") " + "</option>";
+            }
+        }
+        out = out + "</select>";
+        return out;
+    }
+    
     public String makeReferenceList(String listname, String field, String selected) {
         ArrayList<String> list = new ArrayList<String>();
         list = this.getReferenceList(listname, field);
@@ -405,7 +432,7 @@ public class Tools {
 
             return table;
         } catch (Exception e) {
-            return e.toString();
+            return table;
         }
     }
     

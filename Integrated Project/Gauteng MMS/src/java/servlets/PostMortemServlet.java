@@ -74,6 +74,9 @@ public class PostMortemServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+//        System.out.println(request.getParameter("data"));
+//        response.getWriter().println("Hello, World!");
+//        response.getWriter().flush();
     }
 
     /**

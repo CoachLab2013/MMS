@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRPrintPage;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
@@ -42,7 +43,11 @@ public class ReportGenerator {
         try {
             report = JasperCompileManager.compileReport(sourceJRXML);
             report.setWhenNoDataType(WhenNoDataTypeEnum.ALL_SECTIONS_NO_DETAIL);
-            mainPrint = JasperFillManager.fillReport(report, reportParameters, new JRResultSetDataSource(reportData));
+            if (reportData != null) {
+                mainPrint = JasperFillManager.fillReport(report, reportParameters, new JRResultSetDataSource(reportData));
+            } else {
+                mainPrint = JasperFillManager.fillReport(report, reportParameters, new JREmptyDataSource());
+            }
         
         } catch (JRException ex) {
             Logger.getLogger(ReportGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,13 +69,23 @@ public class ReportGenerator {
 
                 report = JasperCompileManager.compileReport(sourceJRXML.get(0));
                 report.setWhenNoDataType(WhenNoDataTypeEnum.ALL_SECTIONS_NO_DETAIL);
-                mainPrint = JasperFillManager.fillReport(report, reportParameters.get(0), new JRResultSetDataSource(reportData.get(0)));
-
+                
+                if (reportData.get(0) != null) {
+                    mainPrint = JasperFillManager.fillReport(report, reportParameters.get(0), new JRResultSetDataSource(reportData.get(0)));
+                } else {
+                    mainPrint = JasperFillManager.fillReport(report, reportParameters.get(0), new JREmptyDataSource());
+                }
+                
+                JasperPrint tempPrint;
                 for (int i = 1; i < sourceJRXML.size(); i++) {
 
                     report = JasperCompileManager.compileReport(sourceJRXML.get(i));
-                    JasperPrint tempPrint = JasperFillManager.fillReport(report, reportParameters.get(i), new JRResultSetDataSource(reportData.get(i)));
-                                        
+                    if (reportData.get(i) != null) {
+                        tempPrint = JasperFillManager.fillReport(report, reportParameters.get(i), new JRResultSetDataSource(reportData.get(i)));
+                    } else {
+                        tempPrint = JasperFillManager.fillReport(report, reportParameters.get(i), new JREmptyDataSource());
+                    }        
+                                     
                     for (JRPrintPage page : tempPrint.getPages()) {
                     mainPrint.addPage(page);
                     }

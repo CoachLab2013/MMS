@@ -1,6 +1,5 @@
 package jcse.coachlab2013.mms.reports;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -150,7 +149,7 @@ public class ExcelGenerator {
         InputStream logo;
 
         try {
-            logo = new FileInputStream("./Logo.png");
+            logo = getClass().getResourceAsStream("Logo.png");
             byte[] bytes = IOUtils.toByteArray(logo);
             int pictureIdx = wb.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
             logo.close();

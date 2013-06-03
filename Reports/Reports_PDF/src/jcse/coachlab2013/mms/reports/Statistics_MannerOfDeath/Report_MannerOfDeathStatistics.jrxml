@@ -77,7 +77,9 @@
 		<band height="313" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="f664a569-9cb3-4c40-a4b1-0ef84a8d5ad7" positionType="FixRelativeToBottom" x="0" y="11" width="762" height="290" isRemoveLineWhenBlank="true"/>
+					<reportElement uuid="f664a569-9cb3-4c40-a4b1-0ef84a8d5ad7" positionType="FixRelativeToBottom" x="0" y="11" width="762" height="290" isRemoveLineWhenBlank="true">
+						<property name="net.sf.jasperreports.chart.range.axis.tick.interval" value="1"/>
+					</reportElement>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend position="Bottom"/>

@@ -86,7 +86,7 @@
 					<keyExpression><![CDATA[$F{organisationName}]]></keyExpression>
 					<valueExpression><![CDATA[$F{numberOfBodies}]]></valueExpression>
 				</pieDataset>
-				<piePlot>
+				<piePlot labelFormat="{0}, {1} ({2})">
 					<plot/>
 					<itemLabel/>
 				</piePlot>

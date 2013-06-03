@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="802" pageHeight="555" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d378049-dce6-4b81-b1c1-299ed42fb07a">
 	<property name="ireport.zoom" value="1.7715610000000017"/>
-
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Heading 1" fontSize="16" isBold="true"/>
@@ -79,7 +77,9 @@
 		<band height="313" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="c8df5ec3-6abb-4d23-9395-7224c5be11eb" x="0" y="11" width="762" height="290"/>
+					<reportElement uuid="c8df5ec3-6abb-4d23-9395-7224c5be11eb" x="0" y="11" width="762" height="290"> 
+                                            <property name="net.sf.jasperreports.chart.range.axis.tick.interval" value="1"/>  
+                                        </reportElement>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
