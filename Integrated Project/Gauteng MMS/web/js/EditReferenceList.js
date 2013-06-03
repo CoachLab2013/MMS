@@ -6,6 +6,7 @@
 
 function editReferenceList(referenceListTable, currentData)
 {
+    
     if (document.getElementById(currentData).value.toString().trim() == "") {
 
         alert("Please select an item you want to edit")
@@ -22,12 +23,13 @@ function editReferenceList(referenceListTable, currentData)
             $("#Olditem").val(document.getElementById(currentData).value);
             $("#table").val(referenceListTable);
             document.formname.submit();
-
+            
         }
     }
 }
 function deleteReferenceList(referenceListTable, currentData)
 {   
+     
     if (document.getElementById(currentData).value.toString().trim() == "") {
 
         alert("Please select an item you want to delete")
