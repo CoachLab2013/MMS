@@ -298,7 +298,7 @@ public class Tools {
       public String bodyRelease(String id){ //change
      
        // BodyFile bf = new BodyFile(id);
-       BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
+       BodyDb bdyDb = new BodyDb(getDbdetail());
         bdyDb.init();
         try{
            
@@ -339,8 +339,8 @@ public class Tools {
       
  //     
        public String bodyfile(String id){
-        BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
-        BodyFileDb bdyfileDb = new BodyFileDb( new DbDetail("localhost","/mydb","root","200918139"));
+        BodyDb bdyDb = new BodyDb( getDbdetail());
+        BodyFileDb bdyfileDb = new BodyFileDb( getDbdetail());
         bdyDb.init();
         bdyfileDb.init();
         try{
@@ -376,8 +376,8 @@ public class Tools {
     }  
     // end 
       
-         public String bodyfile2(String id){
-        BodyFileDb bdyfileDb = new BodyFileDb( new DbDetail("localhost","/mydb","root","200918139"));
+         public String openbodyfile(String id){
+        BodyFileDb bdyfileDb = new BodyFileDb( getDbdetail());
         bdyfileDb.init();
         try{
           

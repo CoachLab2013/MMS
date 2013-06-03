@@ -3,9 +3,10 @@
  * and open the template in the editor.
  */
 package servlets;
+
 import database.DbDetail;
-import database.Kin;
-import database.KinDb;
+import database.Recipient;
+import database.RecipientDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,10 +18,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Chester
+ * @author Cya
  */
-@WebServlet(name = "SaveKinDetailsServlet", urlPatterns = {"/SaveKinDetailsServlet"})
-public class SaveKinDetailsServlet extends HttpServlet {
+@WebServlet(name = "SaveRecipientDetails", urlPatterns = {"/SaveRecipientDetails"})
+public class SaveRecipientDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -35,33 +36,25 @@ public class SaveKinDetailsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();       
-        Kin kin = new Kin();
-        
-        kin.setName(request.getParameter("KinName"));
-        kin.setSurname(request.getParameter("KinSurname"));
-        String kinIdType = request.getParameter("identificationtype");
-        if(kinIdType.contains("ID"))
-        {
-            kin.setID(request.getParameter("KinIDNumber"));
-        }
-        else if(kinIdType.contains("Passport"))
-        {
-            kin.setPassport(request.getParameter("KinIDNumber"));
-        }
-        kin.setRelationWithDeceased(request.getParameter("KinRelationship"));
-        kin.setContactNumber(request.getParameter("KinContact"));
-        kin.setAddress(request.getParameter("KinRes"));
-        kin.setWorkAddress(request.getParameter("KinWork"));
-        kin.setBody_idDeathRegisterNumber("099888592");
-        
+        PrintWriter out = response.getWriter();
+        Recipient recipient = new Recipient();
+     
+        recipient.setName(request.getParameter("RecipientName"));
+        recipient.setSurname(request.getParameter("RecipientSurname"));       
+        recipient.setIdType(request.getParameter("Recipientidentificationtype"));
+        recipient.setID(request.getParameter("recipientIDNumber"));
+        recipient.setAddress(request.getParameter("recipientAddres"));
+        recipient.setContactNumber(request.getParameter("recipientContact"));
+        recipient.setBody_idDeathRegisterNumber("099888592");
+            
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
-        KinDb kinDb = new KinDb(kin, dbdetail);
-        kinDb.init();
-        String success = kinDb.add();
+        RecipientDb recipientDb = new  RecipientDb(recipient, dbdetail);
+        recipientDb.init();
+       // String success =  recipientDb.add();
+        
         HttpSession sess = request.getSession();
-        sess.setAttribute("kinDetail", true);
+        sess.setAttribute("recipient", true);
         response.sendRedirect("Home.jsp");
         out.close();
     }
