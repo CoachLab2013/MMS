@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.servlet.http.HttpSession;
@@ -24,7 +25,11 @@ public class Tools {
          dbdetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
  
 
+<<<<<<< HEAD
  
+=======
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
+>>>>>>> origin/master
     }
     //end constructor
 
@@ -107,6 +112,25 @@ public class Tools {
         }
     }
     //end getIncidentLogNumber
+    
+    
+    public String makeDeathRegisterNumber(){
+        String deathregister = "GP/DK/";
+        BodyFileDb bfdb = new BodyFileDb(dbdetail);
+        String date = this.getDateTime().split(" ")[0];      
+        bfdb.init();
+        try{
+            int count = bfdb.countOpenBodyFile() + 1;
+            String formated_num = String.format("%05d", count);
+            String year = date.split("-")[0];
+            deathregister = deathregister+"/"+formated_num+"/"+year;
+            return deathregister;
+        }
+        catch(SQLException e){
+            return e.getMessage();
+        }
+            
+    }
 
     public String makeYear(String name, int year_num) {
         String out = "<select id=" + name + " name=" + name + ">";
@@ -224,7 +248,28 @@ public class Tools {
         }
     }
     //end getReferenceList
-    
+    public String makeICD10List(String listname, String field1, String field2, String selected, String def) {
+        ArrayList<String> list1 = new ArrayList<String>();
+        ArrayList<String> list2 = new ArrayList<String>();
+        list1 = this.getReferenceList(listname, field1);
+        list2 = this.getReferenceList(listname, field2);
+        String out = "<select name='" + listname + "' id='" + listname + "'>";
+        if (selected.equals("")) {
+            out = out + "<option selected='slected'>"+def+"</option>";
+        }
+        int size = list1.size();
+        for (int i = 0; i < size; i++) {
+            String element1 = list1.get(i);
+            String element2 = list2.get(i);
+            if (element1.equals(selected)) {
+                out = out + "<option selected='selected'>" + element1 + " "+ element2 + "</option>";
+            } else {
+                out = out + "<option>" + element1 + " "+ element2 + "</option>";
+            }
+        }
+        out = out + "</select>";
+        return out;
+    }
 
     public String makeReferenceList(String listname, String field, String selected) {
         ArrayList<String> list = new ArrayList<String>();
@@ -529,6 +574,11 @@ public class Tools {
             out = out + "</selected>";
             return out;
         }
+    }
+    
+    public String makeIcon(){
+        String icon = "<link rel='shortcut icon' href='Images/icon.ico'>";
+        return icon;
     }
 }
 //end Tools class

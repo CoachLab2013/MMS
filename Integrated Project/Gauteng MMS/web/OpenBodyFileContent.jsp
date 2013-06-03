@@ -24,7 +24,7 @@
     
          <%
             Tools t = new Tools();
-            out.println(t.makeOpenBodyFileTable("opentable"));
+            out.println(t.makeOpenBodyFileTable("open_body_file_table"));
             %>
         
        

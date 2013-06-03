@@ -55,7 +55,9 @@ public class ICD10CodeLevel3DB extends DatabaseConnector {
 
                 list.add(icd);
             }
-            statement.close();
+
+            statement.close(); 
+
             connection.close();
         } catch (SQLException ex) {
             throw new SQLException(ex.getMessage());

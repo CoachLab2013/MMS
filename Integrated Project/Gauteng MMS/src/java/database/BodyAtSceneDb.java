@@ -30,14 +30,33 @@ public class BodyAtSceneDb extends DatabaseConnector
     public String add() 
     {
         try 
-        {            
-            statement.executeUpdate("INSERT INTO atscene (sceneIncidentOccured,sceneDateTime,pathOnScene,allegedInjuryDateTime,allegedDeathDateTime,externalCircumstanceOfInjury,placeOfDeath,dateTimeBodyFound,Body_idDeathRegisterNumber) VALUES('" 
+        {   
+            if(bodyAtScene.getFacilityDateTime()==null){
+                statement.executeUpdate("INSERT INTO atscene (sceneIncidentOccured,sceneDateTime,pathOnScene,allegedInjuryDateTime,allegedDeathDateTime,externalCircumstanceOfInjury,placeOfDeath,dateTimeBodyFound,Body_idDeathRegisterNumber) VALUES('" 
                     + bodyAtScene.getSceneIncidentOccured() + "','" 
                     + bodyAtScene.getSceneDateTime() +"'," + bodyAtScene.isPathOnScene() + ",'"
                     + bodyAtScene.getAllegedInjuryDateTime() + "','" + bodyAtScene.getAllegedDeathDateTime() + "','"
                     + bodyAtScene.getExternalCircumstanceOfInjury()+ "','" + bodyAtScene.getPlaceOfDeath() +"','" + bodyAtScene.getDateTimeBodyFound() + "','" + bodyAtScene.getBody().getDeathRegisterNumber() + "');");
-            statement.close();
-            connection.close(); 
+                statement.close();
+                connection.close(); 
+            }else if(bodyAtScene.getSceneDateTime()==null){
+                statement.executeUpdate("INSERT INTO atscene (sceneIncidentOccured,facilityDateTime,pathOnScene,allegedInjuryDateTime,allegedDeathDateTime,externalCircumstanceOfInjury,placeOfDeath,dateTimeBodyFound,Body_idDeathRegisterNumber) VALUES('" 
+                    + bodyAtScene.getSceneIncidentOccured() + "','" 
+                    + bodyAtScene.getFacilityDateTime() +"'," + bodyAtScene.isPathOnScene() + ",'"
+                    + bodyAtScene.getAllegedInjuryDateTime() + "','" + bodyAtScene.getAllegedDeathDateTime() + "','"
+                    + bodyAtScene.getExternalCircumstanceOfInjury()+ "','" + bodyAtScene.getPlaceOfDeath() +"','" + bodyAtScene.getDateTimeBodyFound() + "','" + bodyAtScene.getBody().getDeathRegisterNumber() + "');");
+                statement.close();
+                connection.close(); 
+            }else{
+                statement.executeUpdate("INSERT INTO atscene (sceneIncidentOccured,facilityDateTime,sceneDateTime,pathOnScene,allegedInjuryDateTime,allegedDeathDateTime,externalCircumstanceOfInjury,placeOfDeath,dateTimeBodyFound,Body_idDeathRegisterNumber) VALUES('" 
+                    + bodyAtScene.getSceneIncidentOccured() + "','"
+                    + bodyAtScene.getFacilityDateTime() +"','" 
+                    + bodyAtScene.getSceneDateTime() +"'," + bodyAtScene.isPathOnScene() + ",'"
+                    + bodyAtScene.getAllegedInjuryDateTime() + "','" + bodyAtScene.getAllegedDeathDateTime() + "','"
+                    + bodyAtScene.getExternalCircumstanceOfInjury()+ "','" + bodyAtScene.getPlaceOfDeath() +"','" + bodyAtScene.getDateTimeBodyFound() + "','" + bodyAtScene.getBody().getDeathRegisterNumber() + "');");
+                statement.close();
+                connection.close(); 
+            } 
         } 
         catch (SQLException ex) 
         {
@@ -104,7 +123,13 @@ public class BodyAtSceneDb extends DatabaseConnector
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
-               BodyAtScene bodyAt = new BodyAtScene(resultSet.getString("sceneIncidentOccured"), resultSet.getString("sceneDateTime"), resultSet.getBoolean("pathOnScene"), resultSet.getString("allegedInjuryDateTime"), resultSet.getString("allegedDeathDateTime"), resultSet.getString("externalCircumstanceOfInjury"), resultSet.getString("placeOfDeath"), resultSet.getString("Body_idDeathRegisterNumber"),new BodyAtMortuary());
+               BodyAtScene bodyAt = new BodyAtScene(resultSet.getString("sceneIncidentOccured"), resultSet.getBoolean("pathOnScene"), resultSet.getString("allegedInjuryDateTime"), resultSet.getString("allegedDeathDateTime"), resultSet.getString("externalCircumstanceOfInjury"), resultSet.getString("placeOfDeath"), resultSet.getString("Body_idDeathRegisterNumber"),new BodyAtMortuary());
+               if(resultSet.getString("sceneDateTime").isEmpty()!=true){
+                   bodyAt.setSceneDateTime(resultSet.getString("sceneDateTime"));
+               }else if(resultSet.getString("facilityDateTime").isEmpty()!=true){
+                   bodyAt.setFacilityDateTime(resultSet.getString(null));
+               }
+               
                BodyDb db = new BodyDb(dbDetail,new BodyAtMortuary(bodyAt.getBody().getDeathRegisterNumber()));
                db.init();
                db.read();
@@ -148,7 +173,12 @@ public class BodyAtSceneDb extends DatabaseConnector
             statement.executeQuery("SELECT * FROM AtScene;");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
-            bodyAtScene = new BodyAtScene(resultSet.getString("sceneIncidentOccured"), resultSet.getString("sceneDateTime"), resultSet.getBoolean("pathOnScene"), resultSet.getString("allegedInjuryDateTime"), resultSet.getString("allegedDeathDateTime"), resultSet.getString("externalCircumstanceOfInjury"), resultSet.getString("placeOfDeath"), resultSet.getString("Body_idDeathRegisterNumber"),new BodyAtMortuary());
+            bodyAtScene = new BodyAtScene(resultSet.getString("sceneIncidentOccured"), resultSet.getBoolean("pathOnScene"), resultSet.getString("allegedInjuryDateTime"), resultSet.getString("allegedDeathDateTime"), resultSet.getString("externalCircumstanceOfInjury"), resultSet.getString("placeOfDeath"), resultSet.getString("Body_idDeathRegisterNumber"),new BodyAtMortuary());
+            if(resultSet.getString("sceneDateTime").isEmpty()!=true){
+                bodyAtScene.setSceneDateTime(resultSet.getString("sceneDateTime"));
+            }else if(resultSet.getString("facilityDateTime").isEmpty()!=true){
+                bodyAtScene.setFacilityDateTime(resultSet.getString(null));
+            }
             BodyDb db = new BodyDb(dbDetail,new BodyAtMortuary(bodyAtScene.getBody().getDeathRegisterNumber()));
             db.init();
             db.read();
@@ -168,7 +198,21 @@ public class BodyAtSceneDb extends DatabaseConnector
     {
         try
         {
-            statement.executeUpdate("UPDATE atscene SET "
+            if(bodyAtScene.getSceneDateTime()==null){
+                statement.executeUpdate("UPDATE atscene SET "
+                  +"sceneIncidentOccured='" + bodyAtScene.getSceneIncidentOccured() + "',"
+                  +"pathOnScene=" + bodyAtScene.isPathOnScene() + ","
+                  +"allegedInjuryDateTime='" + bodyAtScene.getAllegedInjuryDateTime() + "',"
+                  +"allegedDeathDateTime='" + bodyAtScene.getAllegedDeathDateTime() + "',"
+                  +"externalCircumstanceOfInjury='" + bodyAtScene.getExternalCircumstanceOfInjury() + "',"
+                  +"facilityDateTime='" + bodyAtScene.getFacilityDateTime() + "',"
+                  +"placeOfDeath='" + bodyAtScene.getPlaceOfDeath() + "',"
+                  +"dateTimeBodyFound='" + bodyAtScene.getDateTimeBodyFound() + "'"
+                  +" WHERE Body_idDeathRegisterNumber='"+ bodyAtScene.getBody().getDeathRegisterNumber() + "';");
+                statement.close();
+                connection.close();
+            }else if(bodyAtScene.getFacilityDateTime()==null){
+                   statement.executeUpdate("UPDATE atscene SET "
                   +"sceneIncidentOccured='" + bodyAtScene.getSceneIncidentOccured() + "',"
                   +"sceneDateTime='" + bodyAtScene.getSceneDateTime() + "',"
                   +"pathOnScene=" + bodyAtScene.isPathOnScene() + ","
@@ -178,8 +222,23 @@ public class BodyAtSceneDb extends DatabaseConnector
                   +"placeOfDeath='" + bodyAtScene.getPlaceOfDeath() + "',"
                   +"dateTimeBodyFound='" + bodyAtScene.getDateTimeBodyFound() + "'"
                   +" WHERE Body_idDeathRegisterNumber='"+ bodyAtScene.getBody().getDeathRegisterNumber() + "';");
-            statement.close();
-            connection.close();
+                statement.close();
+                connection.close();
+            }else{
+                statement.executeUpdate("UPDATE atscene SET "
+                  +"sceneIncidentOccured='" + bodyAtScene.getSceneIncidentOccured() + "',"
+                  +"sceneDateTime='" + bodyAtScene.getSceneDateTime() + "',"
+                  +"pathOnScene=" + bodyAtScene.isPathOnScene() + ","
+                  +"allegedInjuryDateTime='" + bodyAtScene.getAllegedInjuryDateTime() + "',"
+                  +"allegedDeathDateTime='" + bodyAtScene.getAllegedDeathDateTime() + "',"
+                  +"externalCircumstanceOfInjury='" + bodyAtScene.getExternalCircumstanceOfInjury() + "',"
+                  +"facilityDateTime='" + bodyAtScene.getFacilityDateTime() + "',"
+                  +"placeOfDeath='" + bodyAtScene.getPlaceOfDeath() + "',"
+                  +"dateTimeBodyFound='" + bodyAtScene.getDateTimeBodyFound() + "'"
+                  +" WHERE Body_idDeathRegisterNumber='"+ bodyAtScene.getBody().getDeathRegisterNumber() + "';");
+                statement.close();
+                connection.close();
+            }
         } 
         catch (SQLException ex) 
         {

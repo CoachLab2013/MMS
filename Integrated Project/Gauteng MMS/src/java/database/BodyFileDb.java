@@ -81,7 +81,7 @@ public class BodyFileDb extends DatabaseConnector
         ArrayList<BodyFile> list = new ArrayList<BodyFile>();
         try 
         {
-            statement.executeQuery("SELECT * FROM bodyfile;");
+            statement.executeQuery("SELECT * FROM bodyfile WHERE bodyFileStatus <> 0;");
             ResultSet rSet = statement.getResultSet();
             while(rSet.next())
             {                
@@ -131,5 +131,26 @@ public class BodyFileDb extends DatabaseConnector
     public void setBodyFile(BodyFile bodyFile)
     {
         this.bodyFile = bodyFile;
+    }
+    
+    /**
+     * function added by Asheen
+     */
+    public int countOpenBodyFile() throws SQLException{
+        int count = 0;
+        try 
+        {
+            statement.executeQuery("SELECT COUNT(*) as countOpenBodyFile FROM bodyfile;");
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            count = resultSet.getInt("countOpenBodyFile");
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            throw new SQLException(ex.getMessage());
+        }
+             return count;
     }
 }

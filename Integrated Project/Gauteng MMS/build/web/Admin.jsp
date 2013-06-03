@@ -41,7 +41,13 @@
           <script src="js/OpenIncidentScript.js"></script>
          <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> --%>
         <title>Gauteng Mortuary Management System</title>
+<<<<<<< HEAD
 
+=======
+       <% Tools t = new Tools();
+            out.println(t.makeIcon());
+        %>
+>>>>>>> origin/master
     </head>
     <body>  
         <title style="color:white">Gauteng Mortuary Management System</title>

@@ -37,7 +37,7 @@
                 </div>
                 
                 <div id="Releaseproperty" class="tab-pane ">
-                    <h1>Hello5</h1>
+                   <jsp:include page="ReleasePropertyContent.jsp"/>
                 </div>
         
             </div>
