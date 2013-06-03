@@ -20,22 +20,15 @@ public class Tools {
     /**
      * constructor for an instance of Tools
      */
-<<<<<<< HEAD
+
     public Tools(){
  
 
         dbdetail = new DbDetail("localhost","/mydb","root","200918139");
-
-
-=======
-    public Tools() {
-
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
->>>>>>> origin/master
     }
     //end constructor
 
-    public String adduser() {
+    public String adduser(){
         Employee e = new Employee("11111111", "password", "User", "UserSurname", "Admin", 4, "user1@user.com", true);
         Employee e2 = new Employee("12345678", "123456", "User2", "UserSurname2", "Pathologist", 3, "user2@user.com", true);
         EmployeeDb db1 = new EmployeeDb(e, getDbdetail());
@@ -341,18 +334,12 @@ public class Tools {
      * This will create a table that has bodyRelease information from the
      * database
      */
-    public String bodyRelease(String id) { //change
-
-<<<<<<< HEAD
-     
+   
       public String bodyRelease(String id){ //change
      
        // BodyFile bf = new BodyFile(id);
        BodyDb bdyDb = new BodyDb(getDbdetail());
-=======
-        // BodyFile bf = new BodyFile(id);
-        BodyDb bdyDb = new BodyDb(new DbDetail("localhost", "/mydb", "root", "tahirkhan"));
->>>>>>> origin/master
+
         bdyDb.init();
         try {
 
@@ -387,21 +374,20 @@ public class Tools {
     }
 
     // end 
-<<<<<<< HEAD
+
       
       
       
  //     
-       public String bodyfile(String id){
+   /*    public String bodyfile(String id){
         BodyDb bdyDb = new BodyDb( getDbdetail());
         BodyFileDb bdyfileDb = new BodyFileDb( getDbdetail());
-=======
+       } */
     //   
     
     public String makeOpenBodyFileTable(String id){
         BodyDb bdyDb = new BodyDb(dbdetail);
         BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
->>>>>>> origin/master
         bdyDb.init();
         bdyfileDb.init();
         String table = "<table class='tabledisplay' id='" + id + "'>"
@@ -470,18 +456,12 @@ public class Tools {
             return e.getMessage();
         }
     }
-    // end 
-<<<<<<< HEAD
-      
-         public String openbodyfile(String id){
-        BodyFileDb bdyfileDb = new BodyFileDb( getDbdetail());
-=======
+    // end  
 
 
-    public String bodyfile2(String id) {
+
+    public String openbodyfile(String id) {
         BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
-        //BodyDb bdyDb = new BodyDb( new DbDetail("localhost","/mydb","root","200918139"));
->>>>>>> origin/master
         bdyfileDb.init();
         try {
 

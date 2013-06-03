@@ -6,7 +6,6 @@ package database;
 
 /**
  *
-<<<<<<< HEAD
  * @author Cya
  */
 public class Recipient {
@@ -19,24 +18,12 @@ public class Recipient {
     private String contactNumber;
     private String Body_idDeathRegisterNumber;
     
-=======
- * @author Chester
- */
-public class Recipient 
-{
-    private String name;
-    private String surname;
-    private String ID;
-    private String address;
-    private String contactNumber;
-    private String deathRegisterNumber;
->>>>>>> origin/master
+
     public Recipient()
     {
         name = "";
         surname = "";
         ID = "";
-<<<<<<< HEAD
         idType = "";
         address = "";
         contactNumber = "";
@@ -45,18 +32,11 @@ public class Recipient
     }
     
     public Recipient(String name,String surname,String ID,String idType,String address,String contactNumber, String Body_idDeathRegisterNumber)
-=======
-        address = "";
-        contactNumber = "";
-        deathRegisterNumber = "";
-    }
-    public Recipient(String name,String surname,String ID,String address,String contactNumber,String deathRegisterNumber)
->>>>>>> origin/master
     {
         this.name = name;
         this.surname = surname;
         this.ID = ID;
-<<<<<<< HEAD
+
         this.idType = idType;
         this.address = address;
         this.contactNumber = contactNumber;
@@ -124,11 +104,7 @@ public class Recipient
      public void setBody_idDeathRegisterNumber(String Body_idDeathRegisterNumber)
     {
         this.Body_idDeathRegisterNumber = Body_idDeathRegisterNumber;
-=======
-        this.address = address;
-        this.contactNumber = contactNumber;
-        this.deathRegisterNumber = deathRegisterNumber;
->>>>>>> origin/master
+     
     }
     
 }
