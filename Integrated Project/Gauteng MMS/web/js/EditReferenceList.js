@@ -22,7 +22,7 @@ function editReferenceList(referenceListTable, currentData)
             $("#Olditem").val(document.getElementById(currentData).value);
             $("#table").val(referenceListTable);
             document.formname.submit();
-
+            
         }
     }
 }

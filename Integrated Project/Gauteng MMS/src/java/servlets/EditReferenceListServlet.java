@@ -89,7 +89,7 @@ public class EditReferenceListServlet extends HttpServlet {
         String result = "";
         SetDbDetail DBdet = new SetDbDetail();
         DbDetail dbDetail = DBdet.getDbdetail();
-
+  
 
         if (request.getParameter("table").equals("Insitution")) {
 
