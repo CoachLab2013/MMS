@@ -8,8 +8,6 @@ import database.Body;
 import database.BodyAtMortuary;
 import database.BodyDb;
 import database.DbDetail;
-import database.Kin;
-import database.KinDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -39,15 +37,17 @@ public class DeceasedDetailsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Body body = new BodyAtMortuary();
+        BodyAtMortuary body = new BodyAtMortuary();
+        body.setNameOfDeceased(request.getParameter("DeceasedName"));
+        body.setMaidenName(request.getParameter("DeceasedMaidenName"));
+        
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
-        BodyDb bodyDb = new BodyDb(dbdetail, body);
+        BodyDb bodyDb = new BodyDb(dbdetail);
         bodyDb.init();
-        bodyDb.read();
-        body = bodyDb.getBody();
         
-        //request.getParameter("DeceasedName"));
+        
+        //DeceasedMaidenName);
         
         
         

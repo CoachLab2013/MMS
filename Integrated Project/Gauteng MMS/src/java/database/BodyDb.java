@@ -124,10 +124,27 @@ public class BodyDb extends DatabaseConnector{
         {
         //converting to a bodyAtMortuary object
             BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
-            statement.executeUpdate("INSERT INTO AtMortuary (bodyReceivedFromPerNumber,bodyHandOverFromPerNumber,Body_idDeathRegisterNumber) VALUES ('" 
-            + bodyAtMort.getBodyReceivedFromPerNum() + "','" + bodyAtMort.getBodyHandOverFromPerNum() + "','"+  body.getDeathRegisterNumber() + "');");
-            statement.close();
-            connection.close(); 
+            if(bodyAtMort.getBodyReceivedFromPerNumber() == null){
+                statement.executeUpdate("INSERT INTO atmortuary (bodyHandedOverToPerNumber,Body_idDeathRegisterNumber,bodyHandOverFromOrganization) VALUES('" 
+                    + bodyAtMort.getBodyHandedOverToPerNumber() + ",'"
+                    + bodyAtMort.getDeathRegisterNumber() + "','" + bodyAtMort.getBodyHandOverFromOrganization() + "');");
+                statement.close();
+                connection.close(); 
+            }else if(bodyAtMort.getBodyHandOverFromOrganization() == null){
+                statement.executeUpdate("INSERT INTO atmortuary (bodyReceivedFromPerNumber,bodyHandedOverToPerNumber,Body_idDeathRegisterNumber) VALUES('" 
+                    + bodyAtMort.getBodyReceivedFromPerNumber() + "','" 
+                    + bodyAtMort.getBodyHandedOverToPerNumber() + ",'"
+                    + bodyAtMort.getDeathRegisterNumber() + "');");
+                statement.close();
+                connection.close(); 
+            }else{
+                statement.executeUpdate("INSERT INTO atmortuary (bodyReceivedFromPerNumber,bodyHandedOverToPerNumber,Body_idDeathRegisterNumber,bodyHandOverFromOrganization) VALUES('" 
+                    + bodyAtMort.getBodyReceivedFromPerNumber() + "','" 
+                    + bodyAtMort.getBodyHandedOverToPerNumber() + ",'"
+                    + bodyAtMort.getDeathRegisterNumber() + "','" + bodyAtMort.getBodyHandOverFromOrganization() + "');");
+                statement.close();
+                connection.close(); 
+            } 
         } 
         catch (SQLException ex) 
         {
@@ -144,12 +161,29 @@ public class BodyDb extends DatabaseConnector{
         try
         {
             BodyAtMortuary bodyAt = (BodyAtMortuary)body;
-            statement.executeUpdate("UPDATE atmortuary SET "
-                                    + "bodyReceivedFromPerNumber='" + bodyAt.getBodyReceivedFromPerNum() + "',"
-                                    + "bodyHandOverFromPerNumber='" + bodyAt.getBodyHandOverFromPerNum() + "'"
-                                    + " WHERE Body_idDeathRegisterNumber='" + bodyAt.getDeathRegisterNumber() + "';");
-            statement.close();
-            connection.close(); 
+            if(bodyAt.getBodyReceivedFromPerNumber() == null){
+                statement.executeUpdate("UPDATE atMortuary SET "
+                  +"bodyHandedOverToPerNumber=" + bodyAt.getBodyHandedOverToPerNumber() + ","
+                  +"bodyHandOverFromOrganization='" + bodyAt.getBodyHandOverFromOrganization() + "'"
+                  +" WHERE Body_idDeathRegisterNumber='"+ bodyAt.getDeathRegisterNumber() + "';");
+                statement.close();
+                connection.close();
+            }else if(bodyAt.getBodyHandOverFromOrganization() == null){
+                statement.executeUpdate("UPDATE atMortuary SET "
+                  +"bodyReceivedFromPerNumber='" + bodyAt.getBodyReceivedFromPerNumber() + "',"
+                  +"bodyHandedOverToPerNumber=" + bodyAt.getBodyHandedOverToPerNumber() + ","
+                  +" WHERE Body_idDeathRegisterNumber='"+ bodyAt.getDeathRegisterNumber() + "';");
+                statement.close();
+                connection.close();
+            }else{
+                statement.executeUpdate("UPDATE atMortuary SET "
+                  +"bodyReceivedFromPerNumber='" + bodyAt.getBodyReceivedFromPerNumber() + "',"
+                  +"bodyHandedOverToPerNumber=" + bodyAt.getBodyHandedOverToPerNumber() + ","
+                  +"bodyHandOverFromOrganization='" + bodyAt.getBodyHandOverFromOrganization() + "'"
+                  +" WHERE Body_idDeathRegisterNumber='"+ bodyAt.getDeathRegisterNumber() + "';");
+                statement.close();
+                connection.close();
+            }
         } 
         catch (SQLException ex) 
         {
@@ -193,6 +227,7 @@ public class BodyDb extends DatabaseConnector{
                 body.setRace(resultSet.getString("race"));
                 body.setSurnameOfDeceased(resultSet.getString("surnameOfDeceased"));
                 body.setBodyReleaseTo(resultSet.getString("bodyReleasedTo"));
+                body.setBodyAddress(getBodyAddress());
                 IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
                 incidentDb.init();
                 incidentDb.read();
@@ -241,11 +276,28 @@ public class BodyDb extends DatabaseConnector{
             statement.executeQuery("SELECT * FROM bodyAtMortuary WHERE Body_idDeathRegisterNumber='" + body.getDeathRegisterNumber()+"';");
             ResultSet rSet = statement.getResultSet();
             rSet.next();
-            BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
-            bodyAtMort.setBodyHandOverFromPerNum(rSet.getString("bodyHandOverFromPerNumber"));
-            bodyAtMort.setBodyReceivedFromPerNum(rSet.getString("bodyReceivedFromPerNumber"));
-            bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
-            body = bodyAtMort;
+            if (rSet.getString("bodyReceivedFromPerNumber") == null){
+                BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
+                bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandedOverToPerNumber"));
+                bodyAtMort.setBodyHandOverFromOrganization(rSet.getString("bodyHandOverFromOrganization"));
+                bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
+                body = bodyAtMort;
+            }else if(rSet.getString("bodyHandOverFromOrganization") == null){
+                BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
+                bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandedOverToPerNumber"));
+                bodyAtMort.setBodyReceivedFromPerNumber(rSet.getString("bodyReceivedFromPerNumber"));
+                bodyAtMort.setBodyHandOverFromOrganization(rSet.getString("bodyHandOverFromOrganization"));
+                bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
+                body = bodyAtMort;
+            }else{
+                BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
+                bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandedOverToPerNumber"));
+                bodyAtMort.setBodyReceivedFromPerNumber(rSet.getString("bodyReceivedFromPerNumber"));
+                bodyAtMort.setBodyHandOverFromOrganization(rSet.getString("bodyHandOverFromOrganization"));
+                bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
+                body = bodyAtMort;
+            }
+            
         } 
         catch (SQLException ex) 
         {
@@ -260,8 +312,9 @@ public class BodyDb extends DatabaseConnector{
         ResultSet rSet = statement.getResultSet();
         rSet.next();
         BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
-        bodyAtMort.setBodyHandOverFromPerNum(rSet.getString("bodyHandOverFromPerNumber"));
-        bodyAtMort.setBodyReceivedFromPerNum(rSet.getString("bodyReceivedFromPerNumber"));
+        bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandedOverToPerNumber"));
+        bodyAtMort.setBodyReceivedFromPerNumber(rSet.getString("bodyReceivedFromPerNumber"));
+        bodyAtMort.setBodyHandOverFromOrganization(rSet.getString("bodyHandOverFromOrganization"));
         bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
         statement.close();
         connection.close();
@@ -324,8 +377,9 @@ public class BodyDb extends DatabaseConnector{
                     body=bodyAtMort;
                     bodyAtMort.setBodyAddress(getBodyAddress());
                     BodyAtMortuary mort = getBodyAtMortuary();
-                    bodyAtMort.setBodyHandOverFromPerNum(mort.getBodyHandOverFromPerNum());
-                    bodyAtMort.setBodyReceivedFromPerNum(mort.getBodyReceivedFromPerNum());
+                    bodyAtMort.setBodyHandedOverToPerNumber(mort.getBodyHandedOverToPerNumber());
+                    bodyAtMort.setBodyReceivedFromPerNumber(mort.getBodyReceivedFromPerNumber());
+                    bodyAtMort.setBodyHandOverFromOrganization(mort.getBodyHandOverFromOrganization());
                     IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
                     incidentDb.init();
                     incidentDb.read();

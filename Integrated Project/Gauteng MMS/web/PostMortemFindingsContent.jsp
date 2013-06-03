@@ -3,7 +3,9 @@
     Created on : 23 Apr 2013, 2:39:06 PM
     Author     : Lady
 --%>
-
+<%@page import="servlets.Tools"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,7 +24,7 @@
  <script src="js/PostMortemFindingsContentScript.js"></script>
     </head>
     <body>
-        <legend>Body File> Edit Body File> Post Mortem> Post Mortem Findings</legend>
+        <legend>Post Mortem Findings</legend>
         <%
             if (session.getAttribute("_PostMortem") != null) {
                 out.print("<input type=hidden id='_PostMortem' value=" + session.getAttribute("_PostMortem") +">"); 
@@ -43,43 +45,49 @@
                             <td> Chief post mortem:     </td><td><textarea cols="50" rows="3" name="findingsmortem" id="findingsmortem"> </textarea><br></td>
                      
                             </tr>
+                            
                             <tr>
-                        <td>  ICD codes:</td><td>
-        <select name="ICDcode" id="ICDcode">
-             <option selected="selected">Choose chapter</option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-             <option></option>
-         </select>
-                            <select name="Diagnosis1">
-                                <option selected="selected">Select</option>
-                                <option></option>
-                                <option></option>
-                            </select>   
-                            <select name="diagnosis2">
-                                <option selected="selected">Select</option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                            </select>
-                            
-                            <select name="diagnosis2">
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                            </select>
-                            
-                        </td>
-                            <br>
+                            <td>  ICD10 code:</td>
+            <td>
+                    <%
+            Tools t = new Tools();
+                           out.println(t.makeICD10List("ICDlevel1","chapter","description","","Select Chapter"));
+                    %>
+                </td>
                             </tr>
+                            
+                            <tr>
+                                <td></td>
+                                <td>
+                    <%
+           
+                           out.println(t.makeICD10List("ICDlevel2","diag1_Id","description","","Select Diagnosis 1"));
+                    %>
+                
+                            </td>
+                            </tr>
+                       <tr>
+                                <td></td>     
+                <td>
+                    <%
+           
+                           out.println(t.makeICD10List("ICDlevel3","diag2_Id","description","","Select Diagnosis 2"));
+                    %>
+                </td>
+                       </tr>
+                       <tr>
+                                <td></td>
+                
+                <td>
+                    <%
+           
+                           out.println(t.makeICD10List("ICDlevel4","diag3_Id","description","", "Select Diagnosis 3"));
+                    %>
+                </td>
+         
+                       </tr>  
+                            <br>
+                            
                             <tr>
                                 <td> <td>  <input type="submit" value="Done" name="postfindingsdone" /><br></td></td>
           

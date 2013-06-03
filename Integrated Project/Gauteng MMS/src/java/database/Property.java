@@ -22,14 +22,19 @@ public class Property
     private boolean SAPS_taken;
     private String deathRegisterNumber;
     private boolean released;
-    public Property()
-    {
-        
+    private int idProperty;
+
+    public Property() {
     }
-    public Property(String sealNumber)
-    {
-        this.sealNumber = sealNumber;
+
+    public Property(int idProperty) {
+        this.idProperty = idProperty;
+        this.SAPS_taken = false;
+        this.released = false;
     }
+
+    
+    
     public Property(String sealNumber,String description,String date,String type,String sealType,String takenBy,Witness[] witnesses,String SAPS_name,String SAPS_surname,boolean SAPS_taken,String deathRegisterNumber,boolean released)
     {
         this.sealNumber = sealNumber;
@@ -45,6 +50,23 @@ public class Property
         this.deathRegisterNumber = deathRegisterNumber;
         this.released = released;
     }
+
+    public boolean isSAPS_taken() {
+        return SAPS_taken;
+    }
+
+    public void setSAPS_taken(boolean SAPS_taken) {
+        this.SAPS_taken = SAPS_taken;
+    }
+
+    public int getIdProperty() {
+        return idProperty;
+    }
+
+    public void setIdProperty(int idProperty) {
+        this.idProperty = idProperty;
+    }
+    
     public String getSealNumber()
     {
         return sealNumber;
