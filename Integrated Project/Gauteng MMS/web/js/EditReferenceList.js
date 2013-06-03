@@ -12,13 +12,17 @@ function editReferenceList(referenceListTable, currentData)
         alert("Please select an item you want to edit")
 
     } else {
-        var answer = prompt("Edit " + referenceListTable, document.getElementById(currentData).value);
+        var answer = prompt("Edit " + referenceListTable, document.getElementById(currentData).value).trim();
         if (answer == null) {
             //if user clicks cancel
 
 
-        } else {
+        }else if(answer==""){
+            
+             alert("You cannot submit an empty field")
+        }else {
             //if user clicks OK
+            
             $("#item").val(answer);
             $("#Olditem").val(document.getElementById(currentData).value);
             $("#table").val(referenceListTable);
@@ -29,7 +33,7 @@ function editReferenceList(referenceListTable, currentData)
 }
 function deleteReferenceList(referenceListTable, currentData)
 {   
-     
+      
     if (document.getElementById(currentData).value.toString().trim() == "") {
 
         alert("Please select an item you want to delete")
