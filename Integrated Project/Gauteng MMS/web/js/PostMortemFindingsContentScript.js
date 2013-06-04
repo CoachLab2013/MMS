@@ -55,37 +55,79 @@ $(document).ready(function(){
 //       $.get("PostMortemServlet",{ data: "Testing..." }, function(data){alert(data);});
 //   });
    
+   $('#ICDlevel2 > option').each(function() {
+            if ($(this).val() !== "Select Diagnosis 2")
+            {
+                $(this).attr('hidden', 'hidden');
+            } else {
+                $(this).attr('selected', 'selected');
+            }
+       });
+   
+   $('#ICDlevel3 > option').each(function() {
+            if ($(this).val() !== "Select Diagnosis 3")
+            {
+                $(this).attr('hidden', 'hidden');
+            } else {
+                $(this).attr('selected', 'selected');
+            }
+       });
+       
+       $('#ICDlevel4 > option').each(function() {
+            if ($(this).val() !== "Select Diagnosis 4")
+            {
+                $(this).attr('hidden', 'hidden');
+            } else {
+                $(this).attr('selected', 'selected');
+            }
+       });
+       
     $('#ICDlevel1').change(function() {
         var value = $(this).val().split(" ")[0];
+        $('#ICDlevel2').val("1");
+        $('#ICDlevel3').val("1");
+        $('#ICDlevel4').val("1");
+        
         $('#ICDlevel2 > option').each(function() {
-            $(this).removeAttr('hidden');
+            
             var cmp = $(this).val().substring($(this).val().lastIndexOf('(') + 1, $(this).val().lastIndexOf(')'));
 
             if (cmp !== value && $(this).val() !== "Select Diagnosis 1")
             {
                 $(this).attr('hidden', 'hidden');
+            } else {
+                $(this).removeAttr('hidden');
             }
         });
     });
 
     $('#ICDlevel2').change(function() {
         var value = $(this).val().substring(0, 3);
+        $('#ICDlevel3').val("1");
+        $('#ICDlevel4').val("1");
+        
         $('#ICDlevel3 > option').each(function() {
-            $(this).removeAttr('hidden');
+            
             if ($(this).val().substring(0, 3) !== value && $(this).val() !== "Select Diagnosis 2")
             {
                 $(this).attr('hidden', 'hidden');
+            } else {
+                $(this).removeAttr('hidden');
             }
         });
     });
 
     $('#ICDlevel3').change(function() {
         var value = $(this).val().substring(0, 5);
+        $('#ICDlevel4').val("1");
+        
         $('#ICDlevel4 > option').each(function() {
-            $(this).removeAttr('hidden');
+            
             if ($(this).val().substring(0, 5) !== value && $(this).val() !== "Select Diagnosis 3")
             {
                 $(this).attr('hidden', 'hidden');
+            } else {
+                $(this).removeAttr('hidden');
             }
         });
     });

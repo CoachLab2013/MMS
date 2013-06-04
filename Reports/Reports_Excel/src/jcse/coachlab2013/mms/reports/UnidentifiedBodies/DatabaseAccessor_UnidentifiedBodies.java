@@ -37,7 +37,7 @@ public final class DatabaseAccessor_UnidentifiedBodies extends Template_Database
                 "	`reporting_DateReceived`.`dateStamp` AS `Date Received`,\n" +
                 "	`reporting_Organisation`.`organisationName` AS `Organiation`,\n" +
                 "	`reporting_DateReleased`.`dateStamp` AS `Date Released`,\n" +
-                "	`reporting_MannerOfDeath`.`mannerOfDeath_SK` AS `Manner of Death`,\n" +
+                "	`reporting_MannerOfDeath`.`deathType` AS `Manner of Death`,\n" +
                 "	`reporting_Status`.`StatusDescription` AS `PostMortem Status`,\n" +
                 "	`reporting_Body`.`durationBodyStored` AS `Duration at Facility (Days)`\n" +
                 "\n" +
