@@ -57,20 +57,20 @@
         --%>
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
-                <li id="tabOpenBodyFiles" class="active"><a href="#OpenBodyFiles" data-toggle="tab">Open Body Files</a> </li>
-                <li id="tabNewBodyFiles"><a href="#NewBodyFiles" data-toggle="tab">New Body File</a></li>   
+                <li id="tabOpenBodyFiles" class="active" ><a href="#OpenBodyFiles" data-toggle="tab">Open Body Files</a> </li>
+                <li id="tabNewBodyFiles" ><a href="#NewBodyFiles" data-toggle="tab">New Body File</a></li>   
                 <li id="tabEditBodyFiles"><a href="#EditBodyFiles" data-toggle="tab">Edit Body Files</a></li>
                 <li id="tabLinkBodyFiles"><a href="#LinkBodyFiles" data-toggle="tab">Link Body Files</a></li> 
             </ul>
             <div class="tab-content">
                 <div id="OpenBodyFiles" class="tab-pane active">   
-                 <jsp:include page="OpenBodyFileContent.jsp" />
+                    <jsp:include page="OpenBodyFileContent.jsp" />
                 </div>
 
-                <div id="NewBodyFiles" class="tab-pane ">
+                <div id="NewBodyFiles" class="tab-pane  ">
                     <%--new body file content --%>
-                    
-                    <form name="AddBody" id="AddBody" method="post" action="">  
+
+                  <form name="AddBody" id="AddBody" method="post" action="">  
                         <legend>New Body File </legend>
                         <div class="offset1  span8 form-horizontal"  >
 
@@ -84,7 +84,7 @@
                                 <br>
                                 <label class="control-label" for="deathRegister">Death Register Number</label> 
                                 <div class="controls">
-                                    <input type="text" name="deathRegister" id="deathRegister" readonly="true" value =<% out.println(t.makeDeathRegisterNumber()); %>/> 
+                                    <input type="text" name="deathRegister" id="deathRegister" readonly="true" value =<% out.println(t.makeDeathRegisterNumber());%>/> 
                                 </div>
                                 <br>
                                 <div class="offset2">
@@ -92,9 +92,9 @@
                                 </div>
                             </div> 
                         </div>
-                    </form>
+</form> 
 
-                    <div class="offset1  span8 form-horizontal" style="display: none;" id="recieve_tabs">
+                   <div class="offset1  span8 form-horizontal" style="display: none;" id="recieve_tabs">
                         <div class="tabbable">
                             <ul class="nav nav-tabs " data-tabs="tabs">
                                 <li id="scene" class="active"><a href="#atScene" data-toggle="tab">Receive body from scene</a> </li>
@@ -102,26 +102,31 @@
 
                             </ul>
 
-                        </div> 
-                        <div class="tab-content" >
 
-                            <div id="atScene" class="tab-pane active"> 
-                                <jsp:include page="RecieveBodyAtScene.jsp" />
+                            <div class="tab-content" >
+
+                                <div id="atScene" class="tab-pane active"> 
+                                    <jsp:include page="RecieveBodyAtScene.jsp" />
+                                </div>
+                                <div id="atMortuary" class="tab-pane "> 
+                                    <jsp:include page="RecieveBodyAtMortuary.jsp" />
+                                </div>   
+
                             </div>
-                            <div id="atMortuary" class="tab-pane "> 
-                                <jsp:include page="RecieveBodyAtMortuary.jsp" />
-                            </div>   
-
-                        </div>
+                        </div> 
                     </div>
-                </div>   
+                </div>
 
                 <div id="EditBodyFiles" class="tab-pane "> 
-                 <jsp:include page="EditBodyFileTabContent.jsp"/> 
+                  <jsp:include page="EditBodyFileTabContent.jsp"/>
                 </div>
 
                 <div id="LinkBodyFiles" class="tab-pane ">
+<<<<<<< HEAD
+                    <%-- <jsp:include page="LinkBodyContent.jsp"/> --%>
+=======
                    <%-- <jsp:include page="LinkBodyContent.jsp"/> --%>
+>>>>>>> origin/master
                 </div>
 
             </div>
