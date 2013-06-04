@@ -106,7 +106,8 @@
                 <td>
                     <select name="editnumberofbodies" id="editnumberofbodies" >
                         <%
-                           for(int i=1;i<101;i++){
+                           int bodies_recieved = Integer.parseInt(session.getAttribute("bodies_recieved").toString());
+                           for(int i=bodies_recieved;i<101;i++){
                                if(i==session.getAttribute("number_of_bodies")){
                                    out.println("<option selected='selected'>"+i+"</option>");
                               }

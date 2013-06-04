@@ -4,7 +4,7 @@
  */
 
 $(document).ready(function(){
-    /*$("#recieve_body_scene_form").validate({
+    $("#recieve_body_scene_form").validate({
         rules:{
             receivedBodyFromName:{
                 required: true
@@ -50,11 +50,10 @@ $(document).ready(function(){
             },
             SAPSmemberBodyRank:{
                 required: "Please enter in the rank of the SAPS member handing over the body"
-            }
-            
+            }            
         }
         
-    });*/
+    });
     
     $("#recieve_body_scene_form").submit(function(){
         _data = $("#recieve_body_scene_form").serialize();

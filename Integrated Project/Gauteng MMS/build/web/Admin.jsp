@@ -1518,11 +1518,9 @@
                                                         <input type="hidden" id="ICD10table" name="ICD10table">
                                                     </form>
 
-<<<<<<< HEAD
+
                                                     </div>                                                    </body>
 
-=======
                                                     </body>
                                                     
->>>>>>> origin/master
                                                     </html>
