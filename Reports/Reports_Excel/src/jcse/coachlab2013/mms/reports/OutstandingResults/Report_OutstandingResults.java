@@ -13,7 +13,7 @@ import jcse.coachlab2013.mms.reports.ExcelGenerator;
 import jcse.coachlab2013.mms.reports.Template_Report;
 
 /**
- * @author      Mubien Nackoda <coachlab@jcse.org.za>
+ * @author      Mubien Nakhooda <coachlab@jcse.org.za>
  * @since       2012-05-20          (the version of the package this class was first added to)
  */
 public final class Report_OutstandingResults extends Template_Report {
@@ -49,7 +49,7 @@ public final class Report_OutstandingResults extends Template_Report {
  * After the creating the report it is saved to destination 
  */    
     public void createReport() {
-        ArrayList<String> headings = new ArrayList<>();
+        ArrayList<String> headings = new ArrayList<String>();
         try {
             for (int i = 1; i <= reportData.getMetaData().getColumnCount(); i++) {
                 headings.add(reportData.getMetaData().getColumnLabel(i));

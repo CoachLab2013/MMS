@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 /**
- * @author      Mubien Nackoda <coachlab@jcse.org.za>
+ * @author      Mubien Nakhooda <coachlab@jcse.org.za>
  * @since       2012-05-20          (the version of the package this class was first added to)
  */
 public abstract class Template_Report {

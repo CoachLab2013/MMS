@@ -48,10 +48,16 @@ public class DatabaseConnector
             Class.forName(DBCONNECTOR).newInstance();
             connection = DriverManager.getConnection(CONNECTIONSTRING + url + dbName, username, password);            
         } 
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) 
+        catch (ClassNotFoundException ex) 
         {
             Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
             return connection;
+        } catch (InstantiationException ex) {
+            Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
         return connection;
     }

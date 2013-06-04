@@ -1,16 +1,18 @@
-
 package jcse.coachlab2013.mms.reports.AuditTrail;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import jcse.coachlab2013.mms.reports.ReportGenerator;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.Template_Report;
 
 /**
- * @author      Mubien Nackoda <coachlab@jcse.org.za>
+ * @author      Mubien Nakhooda <coachlab@jcse.org.za>
  * @since       2012-05-20          (the version of the package this class was first added to)
  */
 
@@ -38,7 +40,7 @@ public final class Report_AuditTrail extends Template_Report {
  */    
     protected void formatData() {
         try {
-        sourceArray = new ArrayList<>();        
+        sourceArray = new ArrayList<InputStream>();        
         sourceArray.add(getClass().getResource("/jcse/coachlab2013/mms/reports/AuditTrail/Report_MonthlyStatistics.jrxml").openStream());
         sourceArray.add(getClass().getResource("/jcse/coachlab2013/mms/reports/AuditTrail/Report_EmployeeStatistics.jrxml").openStream());
         sourceArray.add(getClass().getResource("/jcse/coachlab2013/mms/reports/AuditTrail/Report_LocationStatistics.jrxml").openStream());
@@ -48,12 +50,12 @@ public final class Report_AuditTrail extends Template_Report {
         }
         parameters.put("ReportTitle", "Audit Trail - Statistics Report"); 
         
-        parameterArray = new ArrayList<>();
+        parameterArray = new ArrayList<Map>();
         parameterArray.add(parameters);
         parameterArray.add(parameters);
         parameterArray.add(parameters);
         
-        reportDataArray = new ArrayList<>();
+        reportDataArray = new ArrayList<ResultSet>();
         reportDataArray.add(new DatabaseAccessor_MonthlyStatistics(connection).read());
         reportDataArray.add(new DatabaseAccessor_EmployeeStatistics(connection).read());
         reportDataArray.add(new DatabaseAccessor_LocationStatistics(connection).read());

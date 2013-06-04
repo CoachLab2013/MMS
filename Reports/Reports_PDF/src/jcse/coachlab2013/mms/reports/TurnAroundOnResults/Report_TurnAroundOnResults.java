@@ -9,7 +9,7 @@ import jcse.coachlab2013.mms.reports.Template_Report;
 import jcse.coachlab2013.mms.reports.BodiesByOrganisation.Report_BodiesByOrganisation;
 
 /**
- * @author      Mubien Nackoda <coachlab@jcse.org.za>
+ * @author      Mubien Nakhooda <coachlab@jcse.org.za>
  * @since       2012-05-20          (the version of the package this class was first added to)
  */
 public final class Report_TurnAroundOnResults extends Template_Report {

@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.Template_DatabaseAccessor;
 
 /**
- *
- * @author Mubien Nakhooda Coachlab 2013
+ * @author      Mubien Nakhooda <coachlab@jcse.org.za>
+ * @since       2012-05-20          (the version of the package this class was first added to)
  */
 public final class DatabaseAccessor_OpenBodyFile extends Template_DatabaseAccessor {
                 

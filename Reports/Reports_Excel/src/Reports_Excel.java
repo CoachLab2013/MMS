@@ -1,13 +1,7 @@
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.File;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.AuditTrail.Report_AuditTrail;
 import jcse.coachlab2013.mms.reports.BodyFile.Report_ClosedBodyFile;
 import jcse.coachlab2013.mms.reports.BodyFile.Report_OpenBodyFile;
@@ -31,11 +25,9 @@ public class Reports_Excel {
      * @exception SQLException
      */
     public static void main(String[] args) {
-        try
-        {
-            try (Connection connection = new DatabaseConnector(DbDetail.staticDBDetail).init()) {
+        Connection connection = new DatabaseConnector(DbDetail.staticDBDetail).init();
                 
-                Files.createDirectories(Paths.get("./Reports/Excel"));
+                new File("Reports/Excel/").mkdirs();
                 
                 new Report_AuditTrail("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Audit Trail", connection).createReport();
                 new Report_OpenBodyFile("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Body File - Open", connection).createReport();
@@ -43,9 +35,6 @@ public class Reports_Excel {
                 new Report_IncidentHouseKeeping("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Incident Housekeeping", connection).createReport();
                 new Report_OutstandingResults("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Outstanding Results", connection).createReport();
                 new Report_UnidentifiedBodies("./Reports/Excel/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies", connection).createReport();
-            } 
-        } catch (SQLException | IOException ex) {
-            Logger.getLogger(Reports_Excel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
     }
 }

@@ -5,8 +5,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author      Mubien Nackoda <coachlab@jcse.org.za>
- * @since       2012-05-20          (the version of the package this class was first added to)
+ * @author Mubien Nakhooda <coachlab@jcse.org.za>
+ * @since 2012-05-20 (the version of the package this class was first added to)
  */
 
 
@@ -56,10 +56,16 @@ public class DatabaseConnector
             Class.forName(DBCONNECTOR).newInstance();
             connection = DriverManager.getConnection(CONNECTIONSTRING + url + dbName, username, password);            
         } 
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) 
+        catch (ClassNotFoundException ex) 
         {
             Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
             return connection;
+        } catch (InstantiationException ex) {
+            Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
         return connection;
     }
