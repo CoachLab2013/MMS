@@ -22,7 +22,7 @@ public abstract class Template_Report {
     protected ResultSet reportData;
     protected ArrayList<ResultSet> reportDataArray;
     
-    protected Map parameters = new HashMap() {};
+    protected Map parameters = new HashMap();
     protected ArrayList<Map> parameterArray;
     
     public Template_Report(String destination, Connection connection)
