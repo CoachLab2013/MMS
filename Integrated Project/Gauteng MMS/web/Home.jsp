@@ -89,7 +89,7 @@
                     </div>
 
                     <div id="Reports" class="tab-pane "> 
-                        <jsp:include page= "ReportsContent.jsp"/>
+                        <jsp:include page= "ReportsTabContent.jsp"/>
                     </div>
                 </div>          
             </div>
