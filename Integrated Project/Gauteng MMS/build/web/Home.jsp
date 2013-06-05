@@ -75,9 +75,8 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs " data-tabs="tabs">
                     <li id="IncidentTab" class="active"><a href="#Incident" data-toggle="tab">Incidents</a> </li>
-
-                    <li id ="BodyFileTab"><a href="#BodyFile" data-toggle="tab">Body File</a></li>
-                    <li id ="ReportsTab"><a href="#Reports" data-toggle="tab">Reports</a></li>    
+                    <li id="BodyFileTab"><a href="#BodyFile" data-toggle="tab">Body File</a></li>
+                    <li id="ReportsTab"><a href="#Reports" data-toggle="tab">Reports</a></li>
 
                 </ul>
                 <div class="tab-content" >
@@ -92,8 +91,6 @@
                     <div id="Reports" class="tab-pane "> 
                         <jsp:include page= "ReportsTabContent.jsp"/>
                     </div>
-
-
                 </div>          
             </div>
 
