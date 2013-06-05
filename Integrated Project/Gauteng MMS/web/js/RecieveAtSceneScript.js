@@ -25,8 +25,16 @@ $(document).ready(function(){
                 maxlength: 10
             },
             SAPSmemberBodyRank:{
-                required: true
-            }            
+                valueNotEquals: "Select"
+            },
+            FPSmemberBodyPersal:{
+                number : true,
+                maxlength: 8,
+                minlength: 8
+            } ,
+            pathologistBodyName:{
+                
+            }
             
         },
         messages:{ 
@@ -49,8 +57,13 @@ $(document).ready(function(){
                 maxlength:"Invalid phone number. A valid phone number consists of ten numeric digits"
             },
             SAPSmemberBodyRank:{
-                required: "Please enter in the rank of the SAPS member handing over the body"
-            }            
+                valueNotEquals: "Please enter in the rank of the SAPS member handing over the body"
+            },
+            FPSmemberBodyPersal:{
+                minlength: "Your personnel number must be exactly 8 digits long.",
+                maxlength: "Your personnel number must be exactly 8 digits long.",
+                number: "Your personnel number must consist of 8 numeric digits."
+            }
         }
         
     });
@@ -58,6 +71,38 @@ $(document).ready(function(){
     $("#recieve_body_scene_form").submit(function(){
         _data = $("#recieve_body_scene_form").serialize();
     });
+    
+     /**
+     * Custom rule to ensure that user has selected an item
+     * in the drop down list
+     */
+    $.validator.addMethod("valueNotEquals", function(value, element, arg){
+        return arg != value;
+    }, "Value must not equal arg.");
+    
+    $.validator.addMethod("pathologist_name", function(value){
+        if($('#pathologistAtScene option').filter(':selected').text() == "Yes"){
+            if($("pathologistBodyName").val().length == 0){
+                return !value;
+            }
+            return value;
+        }
+        return value;
+    });
+           
+    
+    $("#pathologistAtScene").click(function(){
+       if($('#pathologistAtScene option').filter(':selected').text() == "Yes"){
+            $("#pathologist_at_scene_details").show();
+        }
+        else{
+            $("#pathologist_at_scene_details").hide();
+            
+        }
+    });
+    
+    
+    
 });
 
 
