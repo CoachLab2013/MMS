@@ -38,30 +38,6 @@ $(document).ready(function() {
         }//end of messages
 
     });//end of form validation
-
-//    $('select').on('keydown', function(e){
-//    if(e.keyCode === 38 || e.keyCode === 40) { //up or down
-//        //e.preventDefault();
-//        //e.stopPropagation();
-//        return false;
-//    }
-//    });
-//
-//    $('select').on('keyup', function(e){
-//    if(e.keyCode === 38 || e.keyCode === 40) { //up or down
-//        //e.preventDefault();
-//        //e.stopPropagation();
-//        return false;
-//    }
-//    });
-//    
-//    $('select').on('keypress', function(e){
-//    if(e.keyCode === 38 || e.keyCode === 40) { //up or down
-//        //e.preventDefault();
-//        //e.stopPropagation();
-//        return false;
-//    }
-//    });
     
     //Hide all list items on first load.
     $('#ICDlevel2 > option').each(function() {
