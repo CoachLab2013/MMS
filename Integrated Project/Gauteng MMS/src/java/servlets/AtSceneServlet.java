@@ -190,7 +190,7 @@ public class AtSceneServlet extends HttpServlet {
         //end inserting Pathologist member
         
         //Property
-        PropertyDb propertyDb = new PropertyDb(dbdetail);
+        PropertyDb atScene_propertyDb = new PropertyDb(dbdetail);
         int count_saps = Integer.parseInt(request.getParameter("saps_property_counter").toString());
         for(int i=0;i<count_saps;i++){
             String saps_prop_des = "saps_prop_des"+Integer.toString(i+1);
@@ -209,9 +209,9 @@ public class AtSceneServlet extends HttpServlet {
                 propertySAPS.setSAPS_taken(true);
                 propertySAPS.setReleased(false);
                 //put the code to add this property into the database here
-                propertyDb.setProperty(propertySAPS);
-                propertyDb.init();
-                out.println("adding property :::" + propertyDb.add());
+                atScene_propertyDb.setProperty(propertySAPS);
+                atScene_propertyDb.init();
+                out.println("adding property :::" + atScene_propertyDb.add());
             }
         }
         
@@ -234,9 +234,9 @@ public class AtSceneServlet extends HttpServlet {
                 propertyFPS.setSAPS_taken(false);
                 propertyFPS.setReleased(false);
                 //put the code to add this property into the database here
-                propertyDb.setProperty(propertyFPS);
-                propertyDb.init();
-                out.println("adding property :::" + propertyDb.add());
+                atScene_propertyDb.setProperty(propertyFPS);
+                atScene_propertyDb.init();
+                out.println("adding property :::" + atScene_propertyDb.add());
             }
         }
         
@@ -248,7 +248,6 @@ public class AtSceneServlet extends HttpServlet {
         out.println(incidentDb.read());
         incidentDb.init();
         out.println(incidentDb.IncreaseBodyCount());
-        //Incident incident = incidentDb.findIncident(request.getParameter("at_scene_lognmber"));
         
         response.sendRedirect("Home.jsp");
 
