@@ -33,8 +33,7 @@ $(document).ready(function(){
           },//end rules for surname
           
            Adres:{
-              required:false,
-              textOnly:true
+              required:false
           },//end rules for name
           
             propertydescription:{

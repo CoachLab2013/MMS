@@ -555,6 +555,32 @@ public class Tools {
         body = (BodyAtMortuary)bodyDb.getBody();
         return body;
     }
+    public String makePropertyTable(String id)
+    {
+        PropertyDb pDb = new PropertyDb(dbdetail);
+        pDb.init();
+        try {
+            ArrayList<Property> properties = pDb.properties();
+
+            String table = "<table class='tabledisplay' id='" + id + "'>"
+                    + "<th class='tableheading'>Property Type</th>"
+                    + "<th class='tableheading'>Description</th>"
+                    + "<th class='tableheading'>Seal Number</th>";
+            int size = properties.size();
+            for (int i = 0; i < size; i++) {
+                Property property = properties.get(i);
+                table = table + "<tr class='tablerow' sealnumber='" + property.getSealNumber() + "'>"
+                        + "<td>" + property.getType() + "</td>"
+                        + "<td class='tablecell'>" + property.getDescription() + "</td>"
+                        + "<td class='tablecell'>" + property.getSealNumber() + "</td>"
+                        + "</tr>";
+            }
+            table = table + "</table>";
+            return table;
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
     //
 
     /**

@@ -4,6 +4,7 @@
     Author     : Lady
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,9 @@
     </head>
     <body>
         <form name="releasepropertyform" id="releasepropertyform" method="post" action="">
+            <%   
+                new Tools().makePropertyTable("propertytable");
+            %>
                 <table>
                     
                              <tr>
