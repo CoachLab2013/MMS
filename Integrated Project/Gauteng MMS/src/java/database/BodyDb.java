@@ -424,7 +424,7 @@ public class BodyDb extends DatabaseConnector{
                     + "bodyType='" + body.getBodyType() + "',"
                     + "dateBodyReleased='" + body.getDateBodyReleased() + "',"
                     + "bodyReleasedTo='" + body.getBodyReleasedTo() + "'"
-                    + "WHERE idDeathRegisterNumber='"+ body.getDeathRegisterNumber() + "' AND Incident_incidentLogNumber='" + body.getIncident().getIncidentLogNumber() +"';");
+                    + " WHERE idDeathRegisterNumber='"+ body.getDeathRegisterNumber() + "';");
             statement.close();
             connection.close();
         } 
