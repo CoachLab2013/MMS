@@ -1,7 +1,3 @@
-/* 
- * This is all the validation rules for kin details
- */
-
 /**
  * Need to begin with $(document).ready(function)
  * This ensures that the document if fully loaded before the script is executed
@@ -23,10 +19,6 @@ $(document).ready(function() {
 
             findingsmortem: {
                 required: true
-            }, //end rule of Chief post mortem
-
-            ICDcode: {
-                valueNotEquals: "Select"
             }//end rule of institution
 
         }, //end of rules
@@ -42,20 +34,41 @@ $(document).ready(function() {
 
             findingsmortem: {
                 required: "Please select Chief post Mortem Finding."
-            }, //end rule for chief findings
-
-            ICDcode: {
-                valueNotEquals: "Please select ICD codes."
             }//end rule for type of analysis
         }//end of messages
 
     });//end of form validation
 
+//    $('select').on('keydown', function(e){
+//    if(e.keyCode === 38 || e.keyCode === 40) { //up or down
+//        //e.preventDefault();
+//        //e.stopPropagation();
+//        return false;
+//    }
+//    });
+//
+//    $('select').on('keyup', function(e){
+//    if(e.keyCode === 38 || e.keyCode === 40) { //up or down
+//        //e.preventDefault();
+//        //e.stopPropagation();
+//        return false;
+//    }
+//    });
+//    
+//    $('select').on('keypress', function(e){
+//    if(e.keyCode === 38 || e.keyCode === 40) { //up or down
+//        //e.preventDefault();
+//        //e.stopPropagation();
+//        return false;
+//    }
+//    });
+    
     //Hide all list items on first load.
     $('#ICDlevel2 > option').each(function() {
         if ($(this).val() !== "Select Diagnosis 2")
         {
             $(this).attr('hidden', 'hidden');
+            $(this).attr('disabled', 'disabled');
         } else {
             $(this).attr('selected', 'selected');
         }
@@ -65,6 +78,7 @@ $(document).ready(function() {
         if ($(this).val() !== "Select Diagnosis 3")
         {
             $(this).attr('hidden', 'hidden');
+            $(this).attr('disabled', 'disabled');
         } else {
             $(this).attr('selected', 'selected');
         }
@@ -74,17 +88,18 @@ $(document).ready(function() {
         if ($(this).val() !== "Select Diagnosis 4")
         {
             $(this).attr('hidden', 'hidden');
+            $(this).attr('disabled', 'disabled');
         } else {
             $(this).attr('selected', 'selected');
         }
     });
-
+    
     //Trigger on list change. Reset children lists and show filtered values .       
     $('#ICDlevel1').change(function() {
         var value = $(this).val().split(" ")[0];
-        $('#ICDlevel2').val("1");
-        $('#ICDlevel3').val("1");
-        $('#ICDlevel4').val("1");
+        $('#ICDlevel2').prop("selectedIndex",0);
+        $('#ICDlevel3').prop("selectedIndex",0);
+        $('#ICDlevel4').prop("selectedIndex",0);
 
         $('#ICDlevel2 > option').each(function() {
 
@@ -93,39 +108,45 @@ $(document).ready(function() {
             if (cmp !== value && $(this).val() !== "Select Diagnosis 1")
             {
                 $(this).attr('hidden', 'hidden');
+                $(this).attr('disabled', 'disabled');
             } else {
                 $(this).removeAttr('hidden');
+                $(this).removeAttr('disabled');                
             }
         });
     });
 
     $('#ICDlevel2').change(function() {
         var value = $(this).val().substring(0, 3);
-        $('#ICDlevel3').val("1");
-        $('#ICDlevel4').val("1");
+        $('#ICDlevel3').prop("selectedIndex",0);
+        $('#ICDlevel4').prop("selectedIndex",0);
 
         $('#ICDlevel3 > option').each(function() {
 
             if ($(this).val().substring(0, 3) !== value && $(this).val() !== "Select Diagnosis 2")
             {
                 $(this).attr('hidden', 'hidden');
+                $(this).attr('disabled', 'disabled');
             } else {
                 $(this).removeAttr('hidden');
+                $(this).removeAttr('disabled');                
             }
         });
     });
 
     $('#ICDlevel3').change(function() {
         var value = $(this).val().substring(0, 5);
-        $('#ICDlevel4').val("1");
+        $('#ICDlevel4').prop("selectedIndex",0);
 
         $('#ICDlevel4 > option').each(function() {
 
             if ($(this).val().substring(0, 5) !== value && $(this).val() !== "Select Diagnosis 3")
             {
                 $(this).attr('hidden', 'hidden');
+                $(this).attr('disabled', 'disabled');
             } else {
                 $(this).removeAttr('hidden');
+                $(this).removeAttr('disabled');                
             }
         });
     });
