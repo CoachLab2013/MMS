@@ -68,6 +68,31 @@ public abstract class Body
     public Body(String deathRegisterNumber)
     {
         this.deathRegisterNumber = deathRegisterNumber;
+        gender = "";
+        race = "";
+        assignedTo = "";
+        nameOfDeceased = "";
+        surnameOfDeceased = "";
+        placeOfBirth = "";
+        dateOfBirth = "0000-00-00";
+        ageOnDateFound = 0;
+        maritalStatus = "";
+        occupation = "";
+        citizen = "";
+        maidenName = "";
+        identifiedDateTime = "0000-00-00";
+        bodyAddress = new BodyAddress();
+        estimatedAgeYear = 0;
+        estimatedAgeMonth = 0;
+        ID = "";
+        passport = "";
+        bodyStatus = false;
+        dateBodyReceived = "0000-00-00";
+        bodyReleased = false;
+        incident = new Incident();
+        bodyType = "";
+        dateBodyReleased = "0000-00-00";
+        bodyReleasedTo = "";
     }
     public Body(String deathRegisterNumber,String gender,String race,String assignedTo,String nameOfDeceased,String surnameOfDeceased,String placeOfBirth,String dateOfBirth,int ageOnDateFound,String martitalStatus,String occupation,String citizen,String maidenName,String inIdentifiedDateTime,BodyAddress bodyAddress, int estimatedAgeYear, int estimatedAgeMonth, String ID, String passport, boolean bodyStatus, String dateBodyReceived, boolean bodyReleased, Incident incident, String bodyType, String dateBodyReleased,String bodyReleasedTo)
     {
