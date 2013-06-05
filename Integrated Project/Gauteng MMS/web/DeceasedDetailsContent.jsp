@@ -22,6 +22,9 @@
         </style>
         <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
+<<<<<<< HEAD
+ <script src="js/DeceasedDetailsContentScript.js"></script>
+=======
         <script src="js/DeceasedDetailsScript.js"></script>
 
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">
@@ -30,6 +33,7 @@
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
+>>>>>>> origin/master
     </head>
     <body>
     <legend>Body File> Edit Body File> Body Identification> Deceased Details Contents </legend>
@@ -65,6 +69,27 @@
                             }
                         %>
                     </select> </td>
+<<<<<<< HEAD
+                      
+                    </tr>
+                        <tr>     
+                        <td>Identification Number:  </td> <td><input type="text" name="DeceasedNumber"  /><input type="submit" value="Confirm" /></td>  
+                    </tr> 
+                        
+                        <tr>
+                            <td> Place of Birth:</td> <td> <input type="text" name="PlaceBirth" value="" /></td>
+                        </tr>
+                         <tr>     
+                             <td>Date of Birth: </td> <td> <input type="text" name="DateBirth" value="" /></td> 
+                    </tr>
+                     <tr>     
+                        <td>Age on the date found:  </td> <td><input type="text" name="deceasedage"  /></td>  
+                    </tr>
+                     <tr>     
+                        <td>Gender:  </td> <td> <select name="gender">
+                        <option>Female</option>
+                        <option>Male</option>
+=======
 
             </tr>
             <tr>     
@@ -108,6 +133,7 @@
                                 }
                             }
                         %>
+>>>>>>> origin/master
                     </select><input type="submit" value="Confirm" /> </td>
             <tr>     
                 <td>Marital Status:  </td> <td> <select name="deceasedMartitalstatus">
