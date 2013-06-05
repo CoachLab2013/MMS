@@ -15,11 +15,11 @@ $(document).ready(function(){
         rules:{
             RecipientName:{
                 required: true
-            },//end rules for initial seal number 
+            },//end rules for Recipient name 
           
               RecipientSurname:{
               required:true
-          },//end rules for Death Register number
+          },//end rules for Recipient surname number
           
                Recipientidentificationtype:{
                 valueNotEquals: "Select"
@@ -34,7 +34,7 @@ $(document).ready(function(){
         
                RecipientContact:{
               required:true
-          },//end rules for Kin contact
+          },//end rules for  contact
           
              RecipientRes:{
               required:true
