@@ -28,8 +28,9 @@ public class BodyAtMortuaryDb extends DatabaseConnector {
 
     @Override
     public String add() {
-        try 
-        {   
+        try
+        {
+        //converting to a bodyAtMortuary object
             if(bodyAtMortuary.getBodyReceivedFromPerNumber() == null){
                 statement.executeUpdate("INSERT INTO atmortuary (bodyHandedOverToPerNumber,Body_idDeathRegisterNumber,bodyHandOverFromOrganization) VALUES('" 
                     + bodyAtMortuary.getBodyHandedOverToPerNumber() + ",'"

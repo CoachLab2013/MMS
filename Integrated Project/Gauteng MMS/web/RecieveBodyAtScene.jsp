@@ -81,7 +81,11 @@
                 <div class="control-group">
                     <label class="control-label" for="SAPSmemberBodyRank">Rank</label>
                     <div class="controls">
-                        <input type="text" name="SAPSmemberBodyRank" id="SAPSmemberBodyRank"/> 
+                        <% String list = t.makeReferenceList("rank", "type", ""); 
+                           list=list.replaceFirst("name='rank'", "name='SAPSmemberBodyRank'");
+                           list=list.replaceFirst("id='rank'", "id='SAPSmemberBodyRank'");
+                           out.println(list);
+                        %>
                     </div>
                 </div>
 
@@ -117,7 +121,12 @@
                 <div class="control-group">
                     <label class="control-label" for="FPSmemberBodyRank">Rank</label>
                     <div class="controls">
-                        <input type="text" name="FPSmemberBodyRank" id="FPSmemberBodyRank"/> 
+                        <%
+                        String list2 = t.makeReferenceList("rank", "type", ""); 
+                           list2=list2.replaceFirst("name='rank'", "name='FPSmemberBodyRank'");
+                           list2=list2.replaceFirst("id='rank'", "id='FPSmemberBodyRank'");
+                           out.println(list2);
+                           %>
                     </div>
                 </div>
 
@@ -130,11 +139,12 @@
                     <label class="control-label" for="pathologistAtScene">Was pathologist at scene</label> 
                     <div class="controls">
                         <select id="pathologistAtScene" name="pathologistAtScene">                            
-                            <option>No</option>
+                            <option >No</option>
                             <option>Yes</option>
                         </select>
                     </div>
                 </div> 
+                <div id="pathologist_at_scene_details" style="display:none;">
                 <div class="control-group">
                     <label class="control-label" for="pathologistBodyName">Name</label> 
                     <div class="controls">
@@ -152,10 +162,15 @@
                 <div class="control-group">
                     <label class="control-label" for="pathologistBodyRank">Rank</label>
                     <div class="controls">
-                        <input type="text" name="pathologistBodyRank" id="pathologistBodyRank"/> 
+                        <%
+                        String list3 = t.makeReferenceList("rank", "type", ""); 
+                           list3=list3.replaceFirst("name='rank'", "name='pathologistBodyRank'");
+                           list3=list3.replaceFirst("id='rank'", "id='pathologistBodyRank'");
+                           out.println(list3);
+                           %>
                     </div>
                 </div>
-
+                </div>
             </fieldset>
 
             <fieldset class="fieldset">
@@ -514,7 +529,7 @@
                 <legend class="legend"><h4>Property/Evidence:</h4></legend>
 
                 <fieldset class="fieldset offset1">     
-                    <legend class="legend"><h5>Handed over by SAPS:</h5></legend>
+                    <legend class="legend"><h5>Handed over to SAPS:</h5></legend>
                     <div class="control-group">
                         <label class="control-label" for="SAPSpropertyDescr">Description</label> 
                         <div class="controls">
