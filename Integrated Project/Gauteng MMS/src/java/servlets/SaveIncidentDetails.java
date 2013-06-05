@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,6 +49,8 @@ public class SaveIncidentDetails extends HttpServlet {
         incident.setPlaceBodyFound(request.getParameter("editplacefound"));
         incident.setCircumstanceOfDeath(request.getParameter("editcircumstancesofdeath"));
         incident.setSpecialCircumstances(request.getParameter("specialcircumstance"));
+        HttpSession sess = request.getSession();
+        incident.setBodyCount(Integer.parseInt(sess.getAttribute("bodies_recieved").toString()));        
         incident.setStatus(true);
         
         DbDetail dbdetail = t.getDbdetail();
