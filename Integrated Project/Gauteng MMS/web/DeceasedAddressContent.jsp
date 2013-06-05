@@ -37,13 +37,9 @@
                     out.print("value =" + body.getBodyAddress().getBuilding());%> /></td>  
                     </tr>
                      <tr>     
-<<<<<<< HEAD
-                        <td>Street:  </td> <td><input type="text" name="deceasedstreet"  /></td>  
-=======
                         <td>Street:  </td> <td><input type="text" name="deceaesedstreet" <%
                     if(body.getBodyAddress().getStreet()!=null)
                     out.print("value =" + body.getBodyAddress().getStreet());%> /></td>  
->>>>>>> origin/master
                     </tr>
                     <tr>
                         <td>Suburb:</td> <td> <input type="text" name="deceasedsub" <%

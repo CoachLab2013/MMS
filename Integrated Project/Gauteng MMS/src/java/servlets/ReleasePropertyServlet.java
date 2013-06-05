@@ -4,10 +4,9 @@
  */
 package servlets;
 
-import database.Body;
-import database.BodyAtMortuary;
-import database.BodyDb;
-import database.DbDetail;
+import database.InformantProperty;
+import database.InformantPropertyDb;
+import database.Witness;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Chester
  */
-@WebServlet(name = "DeceasedDetailsServlet", urlPatterns = {"/DeceasedDetailsServlet"})
-public class DeceasedDetailsServlet extends HttpServlet {
+@WebServlet(name = "ReleasePropertyServlet", urlPatterns = {"/ReleasePropertyServlet"})
+public class ReleasePropertyServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -35,44 +34,18 @@ public class DeceasedDetailsServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         response.setContentType("text/html;charset=UTF-8");
-        BodyAtMortuary body = new BodyAtMortuary(request.getParameter("deceasedDeathRegisterNr"));
-        Tools t = new Tools();
-        DbDetail dbdetail = t.getDbdetail();
-        BodyDb bodyDb = new BodyDb(dbdetail,body);
-        bodyDb.init();
-        bodyDb.read();
-        body.setNameOfDeceased(request.getParameter("DeceasedName"));
-        body.setMaidenName(request.getParameter("DeceasedMaidenName"));
-        body.setSurnameOfDeceased(request.getParameter("DeceasedSurname"));
-        //body.setIdentifiedDateTime(request.getParameter("deceasedbodyIdentifiedDate") + " " + request.getParameter("deceasedbodyIdentifiedTime"));
-        body.setPlaceOfBirth(request.getParameter("deceasedPlaceBirth"));
-        body.setDateOfBirth(request.getParameter("deceasedDateBirth"));
-        body.setAgeOnDateFound(Integer.parseInt(request.getParameter("deceasedage")));
-        body.setGender(request.getParameter("deceasedgender"));
-        body.setMaritalStatus(request.getParameter("deceasedMartitalstatus"));
-        body.setRace(request.getParameter("deceasedrace"));
-        body.setOccupation(request.getParameter("deceasedOccupation"));
-        body.setCitizen(request.getParameter("deceasedCitizenship"));
-        String bodyStatus = request.getParameter("deceasedBodyStatus");
-        if(bodyStatus.equals("identified"))
-        {
-             body.setBodyStatus(true);
-        }
-        else
-        {
-             body.setBodyStatus(false);
-        }
-        body.setAssignedTo(request.getParameter("deceasedFPS"));
-        bodyDb = new BodyDb(dbdetail,body);
-        bodyDb.init();
-        bodyDb.edit();
+        Witness[] witnesses = {new Witness(request.getParameter("Witness1name"),request.getParameter("Witness1surname")),new Witness(request.getParameter("Witness2name"),request.getParameter("Witness2surname"))};
+        InformantProperty property = new InformantProperty(request.getParameter("formantname"), request.getParameter("formantsurname"), request.getParameter("Adres"), request.getParameter("propertydescription"), request.getParameter("cash"), request.getParameter("othergood"), witnesses, "099888592");
+        InformantPropertyDb proDb = new InformantPropertyDb(new Tools().getDbdetail(), property);
+        proDb.init();
+        proDb.add();
         HttpSession sess = request.getSession();
-        sess.setAttribute("deceasedDetail", "Kin details added successfully");
+        sess.setAttribute("informantDetail", "Kin details added successfully");
         response.sendRedirect("Home.jsp");
-    } 
-
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP

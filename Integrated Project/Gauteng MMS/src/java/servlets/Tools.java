@@ -26,7 +26,7 @@ public class Tools {
   
     public Tools() {
 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
 
     }
     //end constructor
@@ -368,7 +368,7 @@ public class Tools {
       public String bodyRelease(String id){ //change
      
        // BodyFile bf = new BodyFile(id);
-       BodyDb bdyDb = new BodyDb(getDbdetail());
+       BodyDb bdyDb = new BodyDb(dbdetail);
 
         bdyDb.init();
         try {
@@ -549,8 +549,6 @@ public class Tools {
     public BodyAtMortuary getBody(String deathRegisterNumber)
     {
         BodyAtMortuary body = new BodyAtMortuary(deathRegisterNumber);//"099888592");
-        Tools t = new Tools();
-        DbDetail dbdetail = t.getDbdetail();
         BodyDb bodyDb = new BodyDb(dbdetail, body);
         bodyDb.init();
         bodyDb.read();
