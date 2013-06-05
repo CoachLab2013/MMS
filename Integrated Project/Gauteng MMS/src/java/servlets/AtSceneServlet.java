@@ -9,6 +9,8 @@ import database.BodyAtMortuary;
 import database.BodyAtScene;
 import database.BodyAtSceneDb;
 import database.BodyDb;
+import database.BodyFile;
+import database.BodyFileDb;
 import database.DbDetail;
 import database.Incident;
 import database.IncidentDb;
@@ -61,8 +63,18 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.setPlaceOfDeath(request.getParameter("DeathAddress"));
         bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter("externalcircumstance"));
         
+        Member pathologistOnScene = new Member();
         if (request.getParameter("pathologistAtScene").equals("Yes")){
             bodyAtScene.setPathOnScene(true);
+            //Pathologist on scene MIGHT NEED TO ADD SEPERATE TABLE
+            
+            pathologistOnScene.setName(request.getParameter("pathologistBodyName"));
+            pathologistOnScene.setSurname(request.getParameter("pathologistBodySurname"));
+            //pathologistOnScene.setPersonnelNumber(request.getParameter(null));
+            //pathologistOnScene.setContactNumber(request.getParameter(null)); //SAPS
+            pathologistOnScene.setRank(request.getParameter("pathologistBodyRank"));
+            pathologistOnScene.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
+            //end of Pathologist on scene
         }else{
             bodyAtScene.setPathOnScene(false);
         }
@@ -105,18 +117,8 @@ public class AtSceneServlet extends HttpServlet {
             FPSmemeber.setRank(request.getParameter("FPSmemberBodyRank"));
             FPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         //end of FPS member
+           
             
-        //Pathologist on scene MIGHT NEED TO ADD SEPERATE TABLE
-            Member pathologistOnScene = new Member();
-            pathologistOnScene.setName(request.getParameter("pathologistBodyName"));
-            pathologistOnScene.setSurname(request.getParameter("pathologistBodySurname"));
-            //pathologistOnScene.setPersonnelNumber(request.getParameter(null));
-            //pathologistOnScene.setContactNumber(request.getParameter(null)); //SAPS
-            pathologistOnScene.setRank(request.getParameter("pathologistBodyRank"));
-            pathologistOnScene.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
-         //end of Pathologist on scene
-            
-         
         //Body Details
         bodyAtScene.getBody().setIncident(new Incident(request.getParameter("at_scene_lognmber")));
         bodyAtScene.getBody().setBodyType(request.getParameter("bodypart"));
@@ -183,11 +185,22 @@ public class AtSceneServlet extends HttpServlet {
         //end insertingF member
         
         //insertin Pathologist member
-        //memberDb = new MemberDb(dbdetail);
-        memberDb.setMember(pathologistOnScene);
-        memberDb.init();
-        out.println("adding Pathmem :::" + memberDb.add());
+        if(bodyAtScene.isPathOnScene()){
+            memberDb.setMember(pathologistOnScene);
+            memberDb.init();
+            out.println("adding Pathmem :::" + memberDb.add());
+        }
         //end inserting Pathologist member
+        
+        //POPULATING BODYFILE TABLE
+        BodyFile atSceneBodyFile = new BodyFile(bodyAtScene.getBody().getDeathRegisterNumber());
+        String currentSystemDate = t.getDateTime().split(" ")[0];
+        atSceneBodyFile.setDateFileOpened(currentSystemDate);
+        
+        BodyFileDb atSceneBodyFileDb = new BodyFileDb(dbdetail, atSceneBodyFile);
+        atSceneBodyFileDb.init();
+        out.println(atSceneBodyFileDb.add());
+        //END OF POPULATING BODYFILE TABLE
         
         //Property
         PropertyDb atScene_propertyDb = new PropertyDb(dbdetail);
