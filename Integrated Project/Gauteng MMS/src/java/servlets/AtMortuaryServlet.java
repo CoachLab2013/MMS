@@ -8,6 +8,8 @@ import database.BodyAddress;
 import database.BodyAtMortuary;
 import database.BodyAtMortuaryDb;
 import database.BodyDb;
+import database.BodyFile;
+import database.BodyFileDb;
 import database.DbDetail;
 import database.Incident;
 import database.IncidentDb;
@@ -114,12 +116,28 @@ public class AtMortuaryServlet extends HttpServlet {
         bodyDb.init();
         out.println("adding body :::" + bodyDb.add());
         //end of body inserting
+        //inserting Body Address into Body Address table
+        bodyDb.init();
+        out.println("adding body address :::" + bodyDb.addBodyAddress());
+        //end of inserting Body Address
         
         //inserting BodyAtMortuary into Database
         BodyAtMortuaryDb bodyAtMortuaryDb = new BodyAtMortuaryDb(bodyAtMortuary, dbdetail);
         bodyDb.init();
         out.println("adding body at mortuary :::" + bodyAtMortuaryDb.add());
         //end inserting BodyAtMortuary
+        
+        //POPULATING BODYFILE TABLE
+        BodyFile atMortuaryBodyFile = new BodyFile(bodyAtMortuary.getDeathRegisterNumber());
+        String currentSystemDate = t.getDateTime().split(" ")[0];
+        atMortuaryBodyFile.setDateFileOpened(currentSystemDate);
+        /*
+         * There is no need to set the other attributes of this bodyfile since they are initialized in it's constructor
+         */
+        BodyFileDb atMortuaryBodyFileDb = new BodyFileDb(dbdetail, atMortuaryBodyFile);
+        atMortuaryBodyFileDb.init();
+        out.println(atMortuaryBodyFileDb.add());
+        //END OF POPULATING BODYFILE TABLE
         
         //property
         PropertyDb atMort_propertyDb = new PropertyDb(dbdetail);

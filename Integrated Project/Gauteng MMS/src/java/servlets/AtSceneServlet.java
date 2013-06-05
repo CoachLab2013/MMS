@@ -154,13 +154,18 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.getBody().setBodyReleased(false);
         bodyAtScene.getBody().setBodyReleaseTo(null);
         //end of body fiels that are not given by the UI
-        
         //end of Body details
+        
+        
         //inserting body into database
         BodyDb bodyDb = new BodyDb(dbdetail, bodyAtScene.getBody());
         bodyDb.init();
         out.println("adding body :::" + bodyDb.add());
         //end of body inserting
+        //inserting Body Address into Body Address table
+        bodyDb.init();
+        out.println("adding body address :::" + bodyDb.addBodyAddress());
+        //end of inserting Body Address
         
         //inserting BodyAtScene into Database
         BodyAtSceneDb bodyAtSceneDb = new BodyAtSceneDb(dbdetail,bodyAtScene);
@@ -169,6 +174,7 @@ public class AtSceneServlet extends HttpServlet {
         //end inserting BodyAtScene
         
         //NOTE: must add all other things such as members and property after adding the body, due to foreign key constraints
+        
         MemberDb memberDb = new MemberDb(dbdetail);
         //insertin SAPS member
         //memberDb = new MemberDb(dbdetail);
@@ -196,7 +202,9 @@ public class AtSceneServlet extends HttpServlet {
         BodyFile atSceneBodyFile = new BodyFile(bodyAtScene.getBody().getDeathRegisterNumber());
         String currentSystemDate = t.getDateTime().split(" ")[0];
         atSceneBodyFile.setDateFileOpened(currentSystemDate);
-        
+        /*
+         * There is no need to set the other attributes of this bodyfile since they are initialized in it's constructor
+         */
         BodyFileDb atSceneBodyFileDb = new BodyFileDb(dbdetail, atSceneBodyFile);
         atSceneBodyFileDb.init();
         out.println(atSceneBodyFileDb.add());
@@ -262,7 +270,7 @@ public class AtSceneServlet extends HttpServlet {
         incidentDb.init();
         out.println(incidentDb.IncreaseBodyCount());
         
-        response.sendRedirect("Home.jsp");
+        //response.sendRedirect("Home.jsp");
 
     }
 
