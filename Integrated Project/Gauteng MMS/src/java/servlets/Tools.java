@@ -25,7 +25,7 @@ public class Tools {
 
   
     public Tools() {
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
     }
     //end constructor
 
@@ -557,10 +557,11 @@ public class Tools {
     {
         PropertyDb pDb = new PropertyDb(dbdetail);
         pDb.init();
-        try {
+        String table = "";
+        try 
+        {
             ArrayList<Property> properties = pDb.properties();
-
-            String table = "<table class='tabledisplay' id='" + id + "'>"
+            table = "<table class='tabledisplay' id='" + id + "'>"
                     + "<th class='tableheading'>Property Type</th>"
                     + "<th class='tableheading'>Description</th>"
                     + "<th class='tableheading'>Seal Number</th>";
@@ -574,10 +575,12 @@ public class Tools {
                         + "</tr>";
             }
             table = table + "</table>";
-            return table;
-        } catch (Exception e) {
-            return e.getMessage();
+        } 
+        catch (Exception e) 
+        {
+            table = e.getMessage();
         }
+        return table;
     }
     //
 
