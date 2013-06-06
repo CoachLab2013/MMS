@@ -23,10 +23,17 @@ public class Tools {
  
 
   
+<<<<<<< HEAD
     public Tools() {
 
         dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
 
+=======
+    public Tools() 
+    {
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
+       
+>>>>>>> origin/master
     }
     //end constructor
 
@@ -553,6 +560,36 @@ public class Tools {
         bodyDb.read();
         body = (BodyAtMortuary)bodyDb.getBody();
         return body;
+    }
+    public String makePropertyTable()
+    {
+        PropertyDb pDb = new PropertyDb(dbdetail);
+        pDb.init();
+        String table;
+        try 
+        {
+            ArrayList<Property> properties = pDb.properties();
+            table = "<table class='tabledisplay' id='propertytable'>"
+                    + "<th class='tableheading'>Property Type</th>"
+                    + "<th class='tableheading'>Description</th>"
+                    + "<th class='tableheading'>Seal Number</th>";
+            int size = properties.size();
+            for (int i = 0; i < size; i++) 
+            {
+                Property property = properties.get(i);
+                table = table + "<tr class='tablerow' name='propertyId' proId='" + property.getIdProperty() + "'>"
+                        + "<td>" + property.getType() + "</td>"
+                        + "<td class='tablecell'>" + property.getDescription() + "</td>"
+                        + "<td class='tablecell'>" + property.getSealNumber() + "</td>"
+                        + "</tr>";
+            }
+            table = table + "</table>";
+        } 
+        catch (Exception e) 
+        {
+            table = e.getMessage();
+        }
+        return table;
     }
     //
 

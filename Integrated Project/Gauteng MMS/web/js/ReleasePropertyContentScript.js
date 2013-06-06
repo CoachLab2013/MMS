@@ -8,6 +8,13 @@
  */
 
 $(document).ready(function(){
+     $("#propertytable tr").click(function(){
+        $(".selectedtablerow").addClass("tablerow");
+        $(".selectedtablerow").removeClass("selectedtablerow");
+        $(this).removeClass("tablerow");
+        $(this).addClass("selectedtablerow");
+        $("#selectedproperty").val($(this).attr("proId"));
+    });
     /**
      * validation for the request form
      */
@@ -33,8 +40,7 @@ $(document).ready(function(){
           },//end rules for surname
           
            Adres:{
-              required:false,
-              textOnly:true
+              required:false
           },//end rules for name
           
             propertydescription:{
