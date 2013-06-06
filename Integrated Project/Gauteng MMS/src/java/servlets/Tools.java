@@ -25,7 +25,7 @@ public class Tools {
   
     public Tools() {
 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
     }
     //end constructor
 
@@ -544,6 +544,7 @@ public class Tools {
         call = calldb.getDeathCall();
         return call;
     }
+    
     public BodyAtMortuary getBody(String deathRegisterNumber)
     {
         BodyAtMortuary body = new BodyAtMortuary(deathRegisterNumber);//"099888592");
