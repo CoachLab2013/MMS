@@ -61,12 +61,18 @@ public class BodyFileDb extends DatabaseConnector
         }
         return "successful";
     }
-    public String linkBody(String deathRegisterNumber)
+    public String linkBody(String deathRegisterNumber, String linkedDeathRegisterNumber)
     {
         try 
         {                       //passport , name , surname,relationWithDeceased,contactNumber,address,workAddress,ID,Body_IdDeathRegisterNumber
-            statement.executeUpdate("UPDATE bodylink SET BodyFile_Body_idDeathRegisterNumber1='"
-                    + deathRegisterNumber+ "' WHERE Body_idDeathRegisterNumber='" + bodyFile.getDeathRegisterNumber() + "';");
+            statement.executeUpdate("INSERT INTO `mydb`.`bodylink`\n" +
+                "(`BodyFile_Body_idDeathRegisterNumber1`,\n" +
+                "`linkDeathRegisterNumber`)\n" +
+                "VALUES\n" +
+                "(\n" +
+                "'" + deathRegisterNumber + "',\n" +
+                "'" + linkedDeathRegisterNumber + "'\n" +
+                ");");
             statement.close();
             connection.close();
         }

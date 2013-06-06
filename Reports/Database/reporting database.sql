@@ -29,7 +29,8 @@ CREATE TABLE `dim_age` (
   `actualAge` int(11) NOT NULL,
   `ageBand` varchar(10) NOT NULL,
   `dateInserted` datetime NOT NULL,
-  PRIMARY KEY (`age_SK`)
+  PRIMARY KEY (`age_SK`),
+  UNIQUE KEY `actualAge_UNIQUE` (`actualAge`)
 ) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,7 +58,8 @@ CREATE TABLE `dim_body` (
   `identificationNumber` varchar(13) NOT NULL,
   `releasedTo` varchar(45) NOT NULL,
   `dateInserted` datetime NOT NULL,
-  PRIMARY KEY (`body_SK`)
+  PRIMARY KEY (`body_SK`),
+  UNIQUE KEY `deathRegisterNumber_BK_UNIQUE` (`deathRegisterNumber_BK`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -83,7 +85,8 @@ CREATE TABLE `dim_bodystatus` (
   `bodyStatus_BK` tinyint(1) NOT NULL,
   `bodyStatusDescription` varchar(45) NOT NULL,
   `dateInserted` datetime NOT NULL,
-  PRIMARY KEY (`bodyStatus_SK`)
+  PRIMARY KEY (`bodyStatus_SK`),
+  UNIQUE KEY `bodyStatus_BK_UNIQUE` (`bodyStatus_BK`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -408,9 +411,8 @@ CREATE TABLE `dim_mannerofdeath` (
   `ICD10` varchar(45) NOT NULL,
   `dateInserted` datetime NOT NULL,
   PRIMARY KEY (`mannerOfDeath_SK`),
-  UNIQUE KEY `deathType_UNIQUE` (`deathType`),
   UNIQUE KEY `ICD10_UNIQUE` (`ICD10`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -419,7 +421,7 @@ CREATE TABLE `dim_mannerofdeath` (
 
 LOCK TABLES `dim_mannerofdeath` WRITE;
 /*!40000 ALTER TABLE `dim_mannerofdeath` DISABLE KEYS */;
-INSERT INTO `dim_mannerofdeath` VALUES (-1,'unknown','unknown','2013-05-21 09:18:28'),(1,'gy','f','2013-05-21 09:18:28');
+INSERT INTO `dim_mannerofdeath` VALUES (-1,'unknown','unknown','2013-05-21 09:18:28'),(1,'Murder','f','2013-05-21 09:18:28'),(2,'Stabbing','12','2013-05-21 09:18:28');
 /*!40000 ALTER TABLE `dim_mannerofdeath` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -578,6 +580,7 @@ CREATE TABLE `fact_audittrail` (
   `FK_DateOccured_SK` int(11) NOT NULL,
   `dateInserted` datetime NOT NULL,
   PRIMARY KEY (`FK_DateOccured_SK`,`FK_Event_SK`,`FK_EventType_SK`,`FK_EventLocation_SK`,`FK_Employee_SK`),
+  UNIQUE KEY `FK_Event_SK_UNIQUE` (`FK_Event_SK`),
   KEY `fk_Fact_AuditTrailReport_Dim_Employee1_idx` (`FK_Employee_SK`),
   KEY `fk_Fact_AuditTrailReport_Dim_EventLocation1_idx` (`FK_EventLocation_SK`),
   KEY `fk_Fact_AuditTrailReport_Dim_EventType1_idx` (`FK_EventType_SK`),
@@ -627,6 +630,7 @@ CREATE TABLE `fact_body` (
   `FK_PostMortemStatus_SK` int(11) NOT NULL,
   `dateInserted` datetime NOT NULL,
   PRIMARY KEY (`FK_SamplesStatus_SK`,`FK_DateReleased_SK`,`FK_DateReceived_SK`,`Fk_BodyStatus_SK`,`FK_PostMortem_SK`,`FK_Location_SK`,`FK_Age_SK`,`FK_MannerOfDeath_SK`,`FK_Gender_SK`,`FK_Organisation_SK`,`FK_Kin_SK`,`FK_Body_SK`,`FK_Incident_SK`,`FK_PostMortemStatus_SK`),
+  UNIQUE KEY `FK_Body_SK_UNIQUE` (`FK_Body_SK`),
   KEY `fk_Fact_SpecificBodyFileReport_Dim_Incident1_idx` (`FK_Incident_SK`),
   KEY `fk_Fact_SpecificBodyFileReport_Dim_Body1_idx` (`FK_Body_SK`),
   KEY `fk_Fact_SpecificBodyFileReport_Dim_Kin1_idx` (`FK_Kin_SK`),
@@ -688,6 +692,7 @@ CREATE TABLE `fact_incident` (
   `FK_IncidentStatus_SK` int(11) NOT NULL,
   `dateInserted` datetime NOT NULL,
   PRIMARY KEY (`FK_Caller_SK`,`FK_Incident_SK`,`FK_MannerOfDeath_SK`,`FK_Location_SK`,`FK_Organisation_SK`,`FK_DateOfIncident_SK`,`FK_DateIncidentClosed_SK`,`FK_IncidentStatus_SK`),
+  UNIQUE KEY `FK_Incident_SK_UNIQUE` (`FK_Incident_SK`),
   KEY `fk_Fact_IncidentHousekeepingReport_Dim_Caller1_idx` (`FK_Caller_SK`),
   KEY `fk_Fact_IncidentHousekeepingReport_Dim_Incident1_idx` (`FK_Incident_SK`),
   KEY `fk_Fact_IncidentHousekeepingReport_Dim_Date1_idx` (`FK_DateOfIncident_SK`),
@@ -730,6 +735,7 @@ CREATE TABLE `fact_property` (
   `FK_Property_SK` int(11) NOT NULL,
   `dateInserted` datetime NOT NULL,
   PRIMARY KEY (`FK_Property_SK`,`FK_Body_SK`),
+  UNIQUE KEY `FK_Property_SK_UNIQUE` (`FK_Property_SK`),
   KEY `fk_Fact_Property_Dim_Body1_idx` (`FK_Body_SK`),
   KEY `fk_Fact_Property_Dim_Property1_idx` (`FK_Property_SK`),
   CONSTRAINT `fk_Fact_Property_Dim_Body1` FOREIGN KEY (`FK_Body_SK`) REFERENCES `dim_body` (`body_SK`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -765,6 +771,7 @@ CREATE TABLE `fact_sample` (
   `FK_Organisation_SK` int(11) NOT NULL,
   `dateInserted` datetime NOT NULL,
   PRIMARY KEY (`FK_DateSent_SK`,`FK_DateReceived_SK`,`FK_Sample_SK`,`FK_Body_SK`,`FK_Organisation_SK`),
+  UNIQUE KEY `FK_Sample_SK_UNIQUE` (`FK_Sample_SK`),
   KEY `fk_DateReceived_DateID_idx` (`FK_DateReceived_SK`),
   KEY `fk_Sample_SampleID_idx` (`FK_Sample_SK`),
   KEY `fk_Body_BodyID_idx` (`FK_Body_SK`),
@@ -2168,4 +2175,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-06-04 15:01:43
+-- Dump completed on 2013-06-04 20:03:57
