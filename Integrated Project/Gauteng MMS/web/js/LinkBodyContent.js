@@ -54,14 +54,19 @@ $(document).ready(function() {
     });    
     
     $('#linkButton').click(function() {
-        $.post("LinkBodyContent", {type: "save", data1: $('#body').val().split(" ")[0], data2: $('#Body').val().split(" ")[0]});
-
-        $('#body').prop("selectedIndex",0);
-        $('#Body').prop("selectedIndex",0);
         
-        $('#tr1').remove();
-        $('#tr2').remove();
+        if (($('#body').val() !== "Select Body File 1" && $('#Body').val() !== "Select Body File 2") && $('#body').val() !== $('#Body').val()) {
+            
+            $.post("LinkBodyContent", {type: "save", data1: $('#body').val().split(" ")[0], data2: $('#Body').val().split(" ")[0]});
 
+            $('#body').prop("selectedIndex", 0);
+            $('#Body').prop("selectedIndex", 0);
+
+            $('#tr1').remove();
+            $('#tr2').remove();
+        } else {
+            alert("Please Select NonDuplicate/Correct Body Files\nAdd proper error message!");
+        }
     });
     
 });
