@@ -4,27 +4,25 @@
  */
 package servlets;
 
+import AssistiveClasses.SetDbDetail;
+import database.Body;
+import database.BodyAtMortuary;
+import database.BodyDb;
+import database.BodyFile;
+import database.BodyFileDb;
 import database.DbDetail;
-import database.InformantProperty;
-import database.InformantPropertyDb;
-import database.Property;
-import database.PropertyDb;
-import database.Witness;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Chester
+ * @author Mubien Nakhooda Coachlab 2013
  */
-@WebServlet(name = "ReleasePropertyServlet", urlPatterns = {"/ReleasePropertyServlet"})
-public class ReleasePropertyServlet extends HttpServlet {
+public class LinkBodyContent extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -37,29 +35,50 @@ public class ReleasePropertyServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Witness[] witnesses = {new Witness(request.getParameter("Witness1name"),request.getParameter("Witness1surname")),new Witness(request.getParameter("Witness2name"),request.getParameter("Witness2surname"))};
-        Property prop = new Property(Integer.parseInt(request.getParameter("selectedproperty")));
-        PropertyDb propertyDb = new PropertyDb(new Tools().getDbdetail(),prop);
-        propertyDb.init();
-        propertyDb.read();
         
-        prop = propertyDb.getProperty();
-        prop.setWitnesses(witnesses);
-        propertyDb.setProperty(prop);
-        
-        propertyDb.init();
-        propertyDb.edit();
-        InformantProperty property = new InformantProperty(request.getParameter("formantname"), request.getParameter("formantsurname"), request.getParameter("Adres"), request.getParameter("propertydescription"), request.getParameter("cash"), request.getParameter("othergood"), witnesses, "099888592");
-        InformantPropertyDb proDb = new InformantPropertyDb(new Tools().getDbdetail(), property);
-        proDb.init();
-        proDb.add();
-        HttpSession sess = request.getSession();
-        sess.setAttribute("informantDetail", "Kin details added successfully");
-        response.sendRedirect("Home.jsp");
+        if (request.getParameter("type").equals("load")) {
+            PrintWriter out = response.getWriter();
+
+            try {
+
+                DbDetail dbDetail = new SetDbDetail().getDbdetail();
+
+                Body body = new BodyAtMortuary();
+                body.setDeathRegisterNumber(request.getParameter("data"));
+
+                BodyDb bodyDB = new BodyDb(dbDetail, body);
+                bodyDB.init();
+                bodyDB.read();
+
+                body = bodyDB.getBody();
+                String id = body.getID();
+                if (id.equals("")) {
+                    id = body.getPassport();
+                }
+
+                BodyFile bodyFile = new BodyFile();
+                bodyFile.setDeathRegisterNumber(request.getParameter("data"));
+
+                BodyFileDb bodyFileDB = new BodyFileDb(dbDetail, bodyFile);
+                bodyFileDB.init();
+                bodyFileDB.read();
+                bodyFile = bodyFileDB.getBodyFile();
+
+                out.println(body.getDeathRegisterNumber() + " " + body.getNameOfDeceased() + " "
+                        + body.getSurnameOfDeceased() + " " + id + " " + bodyFile.isBodyIdentified());
+            } finally {
+                out.close();
+            }
+        } else if (request.getParameter("type").equals("save")) {
+            
+                BodyFileDb bodyFileDB = new BodyFileDb(new SetDbDetail().getDbdetail());
+                bodyFileDB.init();
+                System.out.println(bodyFileDB.linkBody(request.getParameter("data1"), request.getParameter("data2")));                
+        }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP

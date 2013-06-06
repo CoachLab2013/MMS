@@ -26,13 +26,14 @@
     </head>
     <body>
         <legend>Body File> Edit Body File> Body Identification> Deceased Address Details </legend>
-        <form name="DeceasedAddressform" id="DeceasedAddressform" method="post" action="">
+        <form name="DeceasedAddressform" id="DeceasedAddressform" method="post" action="DeceasedAddressServlet">
       
           
                 <table>
-                    <tr>     
-                        <td>Building:  </td> <td><input type="text" name="deceasedbuilding" <% Tools t = new Tools();
-                    BodyAtMortuary body = t.getBody("099888592");
+                    <tr> 
+                        <% Tools t = new Tools(); BodyAtMortuary body = t.getBody("099888592");%>
+                        <input type="hidden" name="deceasedDeathRegisterNr2" <%out.print("value=" + body.getDeathRegisterNumber());%> />
+                        <td>Building:  </td> <td><input type="text" name="deceasedbuilding" <% 
                     if(body.getBodyAddress().getBuilding()!=null)
                     out.print("value =" + body.getBodyAddress().getBuilding());%> /></td>  
                     </tr>
