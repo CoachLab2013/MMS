@@ -54,14 +54,17 @@ public class AtMortuaryServlet extends HttpServlet {
         BodyAtMortuary bodyAtMortuary = new BodyAtMortuary(request.getParameter("at_mort_deathregister"));
         bodyAtMortuary.setBodyHandedOverToPerNumber(request.getParameter("employee"));
         String receivedFrom = request.getParameter("employee_handing");
+        
+        //out.println("Employee handed over to: " + request.getParameter("employee"));
+        //out.println("Employee recieved from: "+request.getParameter("employee_handing"));
             /**
              * receivedFrom is not mandatory, so if they don't select an organization make sure
              * that you save none into the database
              */
             if(receivedFrom.equals("Select")!=true){
-                bodyAtMortuary.setBodyHandOverFromOrganization(receivedFrom);
+                bodyAtMortuary.setBodyReceivedFromPerNumber(receivedFrom);
             }else{
-                bodyAtMortuary.setBodyHandOverFromOrganization("null");
+                bodyAtMortuary.setBodyReceivedFromPerNumber("null");
             }
         String organization = request.getParameter("organization");
             /**
@@ -75,7 +78,8 @@ public class AtMortuaryServlet extends HttpServlet {
             }
         
         //Body Details
-        bodyAtMortuary.setIncident(new Incident(request.getParameter("at_mort_lognmber")));
+        Incident linked_incident = new Incident(request.getParameter("at_mort_lognmber"));
+        bodyAtMortuary.setIncident(linked_incident);
         bodyAtMortuary.setBodyType(request.getParameter("BodyPart"));
         bodyAtMortuary.setNameOfDeceased(request.getParameter("atMortBodyName"));
         bodyAtMortuary.setSurnameOfDeceased(request.getParameter("atMortBodySurname"));
@@ -123,8 +127,18 @@ public class AtMortuaryServlet extends HttpServlet {
         
         //inserting BodyAtMortuary into Database
         BodyAtMortuaryDb bodyAtMortuaryDb = new BodyAtMortuaryDb(bodyAtMortuary, dbdetail);
-        bodyDb.init();
+        //out.println("Testing input: test 1::::");
+        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getDeathRegisterNumber());
+        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getBodyHandOverFromOrganization());
+        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getBodyHandedOverToPerNumber());
+        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getBodyReceivedFromPerNumber());
+        bodyAtMortuaryDb.init();
         out.println("adding body at mortuary :::" + bodyAtMortuaryDb.add());
+        //out.println("Testing input: test 2::::");
+        //out.println(" test 2::::" + bodyAtMortuary.getBodyHandOverFromOrganization());
+        //out.println(" test 2::::" + bodyAtMortuary.getBodyHandedOverToPerNumber());
+        //out.println(" test 2::::" + bodyAtMortuary.getBodyReceivedFromPerNumber());
+        //out.println(" test 2::::" + bodyAtMortuary.getDeathRegisterNumber());
         //end inserting BodyAtMortuary
         
         //POPULATING BODYFILE TABLE
@@ -136,7 +150,7 @@ public class AtMortuaryServlet extends HttpServlet {
          */
         BodyFileDb atMortuaryBodyFileDb = new BodyFileDb(dbdetail, atMortuaryBodyFile);
         atMortuaryBodyFileDb.init();
-        out.println(atMortuaryBodyFileDb.add());
+        out.println("adding body file:::" + atMortuaryBodyFileDb.add());
         //END OF POPULATING BODYFILE TABLE
         
         //property
@@ -146,18 +160,18 @@ public class AtMortuaryServlet extends HttpServlet {
             String fps_prop_des = "fps_prop_des"+Integer.toString(i+1);
             String fps_prop_persal = "fps_prop_persal"+Integer.toString(i+1);
             if(request.getParameter(fps_prop_des) != null){
-                Property propertyFPS = new Property();
-                propertyFPS.setDeathRegisterNumber(request.getParameter(bodyAtMortuary.getDeathRegisterNumber()));
-                propertyFPS.setDescription(request.getParameter(fps_prop_des));
-                propertyFPS.setTakenBy(request.getParameter(fps_prop_persal));
+                Property atMort_propertyFPS = new Property();
+                atMort_propertyFPS.setDeathRegisterNumber(bodyAtMortuary.getDeathRegisterNumber());
+                atMort_propertyFPS.setDescription(request.getParameter(fps_prop_des));
+                atMort_propertyFPS.setTakenBy(request.getParameter(fps_prop_persal));
                 //Not null unmentioned fields
                 Witness[] witnesses = {new Witness("null","null"), new Witness("null","null")};
-                propertyFPS.setWitnesses(witnesses);
-                propertyFPS.setDate(request.getParameter("bodyFoundDate"));
-                propertyFPS.setSAPS_taken(false);
-                propertyFPS.setReleased(false);
+                atMort_propertyFPS.setWitnesses(witnesses);
+                atMort_propertyFPS.setDate(t.getDateTime().split(" ")[0]); //GET BACK TO THIS
+                atMort_propertyFPS.setSAPS_taken(false);
+                atMort_propertyFPS.setReleased(false);
                 //put the code to add this property into the database here
-                atMort_propertyDb.setProperty(propertyFPS);
+                atMort_propertyDb.setProperty(atMort_propertyFPS);
                 atMort_propertyDb.init();
                 out.println("adding property :::" + atMort_propertyDb.add());
             }
@@ -165,12 +179,12 @@ public class AtMortuaryServlet extends HttpServlet {
         //property end
         
         //Increase Body Count for the relevent incident
-        IncidentDb incidentDb = new IncidentDb( new Incident(request.getParameter("at_scene_lognmber")), dbdetail);
+        IncidentDb incidentDb = new IncidentDb(linked_incident, dbdetail);
         incidentDb.init();
         out.println(incidentDb.read());
         incidentDb.init();
         out.println(incidentDb.IncreaseBodyCount());
-        //response.sendRedirect("Home.jsp");
+        //response.sendRedirect("Home.jsp");*/
 
     }
 
