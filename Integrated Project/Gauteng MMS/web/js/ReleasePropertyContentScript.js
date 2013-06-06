@@ -8,6 +8,13 @@
  */
 
 $(document).ready(function(){
+     $("#propertytable tr").click(function(){
+        $(".selectedtablerow").addClass("tablerow");
+        $(".selectedtablerow").removeClass("selectedtablerow");
+        $(this).removeClass("tablerow");
+        $(this).addClass("selectedtablerow");
+        $("#selectedproperty").val($(this).attr("proId"));
+    });
     /**
      * validation for the request form
      */

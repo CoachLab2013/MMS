@@ -4,8 +4,11 @@
  */
 package servlets;
 
+import database.DbDetail;
 import database.InformantProperty;
 import database.InformantPropertyDb;
+import database.Property;
+import database.PropertyDb;
 import database.Witness;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,6 +41,17 @@ public class ReleasePropertyServlet extends HttpServlet {
     {
         response.setContentType("text/html;charset=UTF-8");
         Witness[] witnesses = {new Witness(request.getParameter("Witness1name"),request.getParameter("Witness1surname")),new Witness(request.getParameter("Witness2name"),request.getParameter("Witness2surname"))};
+        Property prop = new Property(Integer.parseInt(request.getParameter("selectedproperty")));
+        PropertyDb propertyDb = new PropertyDb(new Tools().getDbdetail(),prop);
+        propertyDb.init();
+        propertyDb.read();
+        
+        prop = propertyDb.getProperty();
+        prop.setWitnesses(witnesses);
+        propertyDb.setProperty(prop);
+        
+        propertyDb.init();
+        propertyDb.edit();
         InformantProperty property = new InformantProperty(request.getParameter("formantname"), request.getParameter("formantsurname"), request.getParameter("Adres"), request.getParameter("propertydescription"), request.getParameter("cash"), request.getParameter("othergood"), witnesses, "099888592");
         InformantPropertyDb proDb = new InformantPropertyDb(new Tools().getDbdetail(), property);
         proDb.init();

@@ -36,13 +36,15 @@
 
         <script>
             var counter = 0;
-            function confirmText(txtId,btnId)
+            var ini;
+            function confirmText(txtId,btnId,v)
             {
-                if(counter == 0)
+                ini = v;
+                if(counter == v)
                 {
                     document.getElementById(txtId).readonly = true;
                     document.getElementById(btnId).value ="Edit";
-                    counter++;
+                    counter = 1;
                 }
                 else
                 {
@@ -56,20 +58,20 @@
             <tr>     
                  <% Tools t = new Tools();
                     BodyAtMortuary body = t.getBody("099888592");%>
-                    <input type="hidden" name="deceasedDeathRegisterNr" <%out.print("value=" + body.getDeathRegisterNumber());%> />
+                    <input type="hidden" name="deceasedDeathRegisterNr" <%out.print("value=" + body.getDeathRegisterNumber());%>  />
                 <td>Full Name(s):  </td> <td><input type="text" name="DeceasedName" id="txtDeceasedNameDis" <%
                     if(body.getNameOfDeceased()!=null)
-                    out.print("value =" + body.getNameOfDeceased());%>  /><input type="button" value="Confirm" id="btnDeceasedNameDis"  onclick="confirmText('txtDeceasedNameDis','btnDeceasedNameDis');" /></td>  
+                    out.print("value =" + body.getNameOfDeceased());%>  /><input type="button" value="Confirm" id="btnDeceasedNameDis"  onclick="confirmText('txtDeceasedNameDis','btnDeceasedNameDis',0);" /></td>  
             </tr>
             <tr>     
                 <td>Maiden Name:  </td> <td><input type="text" name="DeceasedMaidenName" <%
                     if(body.getMaidenName()!=null)
-                    out.print("value =" + body.getMaidenName());%> /></td>  
+                    out.print("value =" + body.getMaidenName());%>  /></td>  
             </tr>
             <tr>
                 <td>Surname:</td> <td> <input type="text" name="DeceasedSurname" id="txtDeceasedSurnameDis"<%
                     if(body.getSurnameOfDeceased()!=null)
-                    out.print("value =" + body.getSurnameOfDeceased());%> /><input type="button" value="Confirm" id="btnDeceasedSurnameDis" onclick="confirmText('txtDeceasedSurnameDis','btnDeceasedSurnameDis');" /> </td>
+                    out.print("value =" + body.getSurnameOfDeceased());%>  /><input type="button" value="Confirm" id="btnDeceasedSurnameDis" onclick="confirmText('txtDeceasedSurnameDis','btnDeceasedSurnameDis',0);" /> </td>
             </tr> 
 
             <tr>     
@@ -93,22 +95,22 @@
                         if(body.getPassport()!=null)
                             out.print("value =" + body.getPassport());
                     };
-                                                             %> /><input type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis');" /></td>  
+                                                             %>  /><input type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
             </tr> 
             <tr>
                 <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%
                     if(body.getPlaceOfBirth()!=null)
-                    out.print("value =" + body.getPlaceOfBirth());%> /></td>
+                    out.print("value =" + body.getPlaceOfBirth());%>  /></td>
             </tr>
             <tr>     
                 <td>Date of Birth: </td> <td> <input type="text" name="deceasedDateBirth" <%
                     if(body.getDateOfBirth()!=null)
-                    out.print("value =" + body.getDateOfBirth());%> /></td> 
+                    out.print("value =" + body.getDateOfBirth());%>  /></td> 
             </tr>
             <tr>     
                 <td>Age on the date found:  </td> <td><input type="text" name="deceasedage" <%
                     if(body.getAgeOnDateFound()!= 0)
-                    out.print("value =" + body.getAgeOnDateFound());%> /></td>  
+                    out.print("value =" + body.getAgeOnDateFound());%>  /></td>  
             </tr>
             <tr>     
                 <td>Gender:  </td> <td> <select name="deceasedgender" id="selDeceasedGenderDis">
@@ -125,7 +127,7 @@
                                 }
                             }
                         %>
-                    </select><input type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis');" /> </td>
+                    </select><input type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
             <tr>     
                 <td>Marital Status:  </td> <td> <select name="deceasedMartitalstatus">
                         <option><%
@@ -159,7 +161,7 @@
                                 }
                             }
                         %>
-                    </select><input type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis');"/> </td>
+                    </select><input type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis',0);"/> </td>
             <tr>     
                 <td>Occupation:  </td> <td> <select name="deceasedOccupation">
                         <option><%
@@ -180,7 +182,7 @@
             <tr>
                 <td> Citizenship:</td> <td> <input type="text" name="deceasedCitizenship" <%
                             if(body.getCitizen()!=null)
-                            out.print("value =" + body.getCitizen());%> /></td>
+                            out.print("value =" + body.getCitizen());%>  /></td>
             </tr>
 
             <tr>
