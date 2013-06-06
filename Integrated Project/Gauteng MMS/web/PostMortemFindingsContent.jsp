@@ -71,7 +71,7 @@
                 <td>
                     <%
 
-                        out.println(t.makeICD10List("ICDlevel3", "diag2_Id", "CAST(description AS CHAR(200))", "", "Select Diagnosis 2"));
+                        out.println(t.makeICD10List("ICDlevel3", "diag2_Id", "description", "", "Select Diagnosis 2"));
                     %>
                 </td>
             </tr>
@@ -81,7 +81,7 @@
                 <td>
                     <%
 
-                        out.println(t.makeICD10List("ICDlevel4", "diag3_Id", "CAST(description AS CHAR(200))", "", "Select Diagnosis 3"));
+                        out.println(t.makeICD10List("ICDlevel4", "diag3_Id", "description", "", "Select Diagnosis 3"));
                     %>
                 </td>
 

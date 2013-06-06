@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `mydb`;
 -- MySQL dump 10.13  Distrib 5.6.11, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mydb
@@ -50,10 +48,11 @@ DROP TABLE IF EXISTS `atmortuary`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `atmortuary` (
-  `bodyReceivedFromPerNumber` varchar(10) NOT NULL,
+  `bodyReceivedFromPerNumber` varchar(10) DEFAULT NULL,
   `bodyHandOverFromPerNumber` varchar(10) NOT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
   `idAtMortuary` int(11) NOT NULL AUTO_INCREMENT,
+  `bodyHandOverFromOrganization` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idAtMortuary`),
   KEY `fk_AtMortuary_Body1_idx` (`Body_idDeathRegisterNumber`),
   CONSTRAINT `fk_AtMortuary_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -66,7 +65,7 @@ CREATE TABLE `atmortuary` (
 
 LOCK TABLES `atmortuary` WRITE;
 /*!40000 ALTER TABLE `atmortuary` DISABLE KEYS */;
-INSERT INTO `atmortuary` VALUES ('peter','john','099888592',1);
+INSERT INTO `atmortuary` VALUES ('peter','john','099888592',1,NULL);
 /*!40000 ALTER TABLE `atmortuary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,7 +78,7 @@ DROP TABLE IF EXISTS `atscene`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `atscene` (
   `sceneIncidentOccured` varchar(45) NOT NULL,
-  `sceneDateTime` datetime NOT NULL,
+  `sceneDateTime` datetime DEFAULT NULL,
   `pathOnScene` bit(1) NOT NULL,
   `allegedInjuryDateTime` datetime NOT NULL,
   `allegedDeathDateTime` datetime NOT NULL,
@@ -88,6 +87,7 @@ CREATE TABLE `atscene` (
   `dateTimeBodyFound` datetime NOT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
   `idAtScene` int(11) NOT NULL AUTO_INCREMENT,
+  `facilityDateTime` datetime DEFAULT NULL,
   PRIMARY KEY (`idAtScene`),
   KEY `fk_AtScene_Body1_idx` (`Body_idDeathRegisterNumber`),
   CONSTRAINT `fk_AtScene_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -119,7 +119,7 @@ CREATE TABLE `audittrail` (
   `currentUser` varchar(10) NOT NULL,
   `eventLocation` varchar(45) NOT NULL,
   PRIMARY KEY (`idAuditTrail`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +128,7 @@ CREATE TABLE `audittrail` (
 
 LOCK TABLES `audittrail` WRITE;
 /*!40000 ALTER TABLE `audittrail` DISABLE KEYS */;
-INSERT INTO `audittrail` VALUES (1,'2013-05-20','09:42:30','Log In','Successfull log in','12345678','Log In Screen'),(2,'2013-05-20','11:12:17','Log In','Successfull log in','12345678','Log In Screen'),(3,'2013-05-20','11:32:46','Log In','Successfull log in','12345678','Log In Screen'),(4,'2013-05-20','12:22:02','Log In','Successfull log in','12345678','Log In Screen'),(5,'2013-05-20','12:36:17','Log In','Successfull log in','12345678','Log In Screen'),(6,'2013-05-20','12:49:22','Log In','Successfull log in','12345678','Log In Screen'),(7,'2013-05-21','12:43:26','Log In','Successfull log in','12345678','Log In Screen'),(8,'2013-05-21','12:43:27','Log In','Successfull log in','12345678','Log In Screen'),(9,'2013-05-21','12:44:02','Log In','Successfull log in','11111111','Log In Screen'),(10,'2013-05-21','13:08:49','Log In','Successfull log in','12345678','Log In Screen'),(11,'2013-05-22','10:27:43','Log In','Successfull log in','12345678','Log In Screen'),(12,'2013-05-22','10:45:05','Log In','Successfull log in','12345678','Log In Screen'),(13,'2013-05-22','19:29:10','Log In','Successfull log in','12345678','Log In Screen'),(14,'2013-05-22','19:32:21','Log In','Successfull log in','12345678','Log In Screen'),(15,'2013-05-23','08:38:29','Log In','Successfull log in','12345678','Log In Screen'),(16,'2013-05-23','09:16:43','Log In','Successfull log in','12345678','Log In Screen'),(17,'2013-05-23','09:20:39','Log In','Successfull log in','12345678','Log In Screen'),(18,'2013-05-23','11:20:44','Log In','Successfull log in','12345678','Log In Screen'),(19,'2013-05-24','07:43:06','Log In','Successfull log in','12345678','Log In Screen'),(20,'2013-05-24','11:12:10','Log In','Successfull log in','12345678','Log In Screen'),(21,'2013-05-24','18:56:39','Log In','Successfull log in','12345678','Log In Screen'),(22,'2013-06-03','10:37:39','Log In','Successfull log in','12345678','Log In Screen'),(23,'2013-06-03','11:46:22','Log In','Successfull log in','12345678','Log In Screen'),(24,'2013-06-03','12:00:46','Log In','Successfull log in','12345678','Log In Screen'),(25,'2013-06-03','12:14:02','Log In','Successfull log in','12345678','Log In Screen'),(26,'2013-06-03','12:31:33','Log In','Successfull log in','12345678','Log In Screen'),(27,'2013-06-03','12:51:45','Log In','Successfull log in','12345678','Log In Screen'),(28,'2013-06-03','12:52:38','Log In','Successfull log in','12345678','Log In Screen'),(29,'2013-06-03','13:10:04','Log In','Successfull log in','12345678','Log In Screen'),(30,'2013-06-03','15:02:47','Log In','Successfull log in','12345678','Log In Screen'),(31,'2013-06-03','15:05:24','Log In','Successfull log in','12345678','Log In Screen'),(32,'2013-06-03','15:06:36','Log In','Successfull log in','12345678','Log In Screen'),(33,'2013-06-03','15:10:29','Log In','Successfull log in','12345678','Log In Screen'),(34,'2013-06-03','17:04:56','Log In','Successfull log in','12345678','Log In Screen'),(35,'2013-06-03','17:06:10','Warning','Unsuccessfull log in','12345678','Log In Screen'),(36,'2013-06-03','17:06:18','Log In','Successfull log in','12345678','Log In Screen'),(37,'2013-06-03','18:02:33','Log In','Successfull log in','12345678','Log In Screen'),(38,'2013-06-03','18:36:58','Log In','Successfull log in','12345678','Log In Screen'),(39,'2013-06-03','18:47:02','Log In','Successfull log in','12345678','Log In Screen'),(40,'2013-06-03','21:02:08','Log In','Successfull log in','12345678','Log In Screen'),(41,'2013-06-03','21:33:17','Log In','Successfull log in','12345678','Log In Screen'),(42,'2013-06-03','21:38:59','Log In','Successfull log in','12345678','Log In Screen'),(43,'2013-06-03','21:40:00','Log In','Successfull log in','12345678','Log In Screen'),(44,'2013-06-03','21:40:27','Log In','Successfull log in','12345678','Log In Screen'),(45,'2013-06-03','21:48:09','Log In','Successfull log in','12345678','Log In Screen'),(46,'2013-06-03','21:52:02','Log In','Successfull log in','12345678','Log In Screen'),(47,'2013-06-04','07:26:08','Log In','Successfull log in','12345678','Log In Screen'),(48,'2013-06-04','07:30:33','Log Incident','Created new incident 00120130604','12345678','Log Incident Tab'),(49,'2013-06-04','12:13:30','Log In','Successfull log in','12345678','Log In Screen'),(50,'2013-06-04','12:57:46','Log In','Successfull log in','12345678','Log In Screen'),(51,'2013-06-04','13:10:00','Log In','Successfull log in','12345678','Log In Screen'),(52,'2013-06-05','08:45:15','Log In','Successfull log in','12345678','Log In Screen'),(53,'2013-06-05','08:46:52','Log In','Successfull log in','12345678','Log In Screen'),(54,'2013-06-05','08:51:14','Log In','Successfull log in','12345678','Log In Screen'),(55,'2013-06-05','08:54:24','Log In','Successfull log in','12345678','Log In Screen'),(56,'2013-06-05','09:07:06','Log In','Successfull log in','12345678','Log In Screen'),(57,'2013-06-05','09:10:08','Log In','Successfull log in','12345678','Log In Screen'),(58,'2013-06-05','09:21:28','Log In','Successfull log in','12345678','Log In Screen'),(59,'2013-06-05','09:26:19','Log In','Successfull log in','12345678','Log In Screen'),(60,'2013-06-05','09:29:48','Log In','Successfull log in','12345678','Log In Screen'),(61,'2013-06-05','09:37:55','Log In','Successfull log in','12345678','Log In Screen'),(62,'2013-06-05','09:45:26','Log In','Successfull log in','12345678','Log In Screen'),(63,'2013-06-05','09:49:13','Log In','Successfull log in','12345678','Log In Screen'),(64,'2013-06-05','10:14:39','Log In','Successfull log in','12345678','Log In Screen'),(65,'2013-06-05','10:14:46','Log In','Successfull log in','12345678','Log In Screen'),(66,'2013-06-05','10:15:56','Log In','Successfull log in','12345678','Log In Screen');
+INSERT INTO `audittrail` VALUES (1,'2013-05-20','09:42:30','Log In','Successfull log in','12345678','Log In Screen'),(2,'2013-05-20','11:12:17','Log In','Successfull log in','12345678','Log In Screen'),(3,'2013-05-20','11:32:46','Log In','Successfull log in','12345678','Log In Screen'),(4,'2013-05-20','12:22:02','Log In','Successfull log in','12345678','Log In Screen'),(5,'2013-05-20','12:36:17','Log In','Successfull log in','12345678','Log In Screen'),(6,'2013-05-20','12:49:22','Log In','Successfull log in','12345678','Log In Screen'),(7,'2013-05-21','12:43:26','Log In','Successfull log in','12345678','Log In Screen'),(8,'2013-05-21','12:43:27','Log In','Successfull log in','12345678','Log In Screen'),(9,'2013-05-21','12:44:02','Log In','Successfull log in','11111111','Log In Screen'),(10,'2013-05-21','13:08:49','Log In','Successfull log in','12345678','Log In Screen'),(11,'2013-05-22','10:27:43','Log In','Successfull log in','12345678','Log In Screen'),(12,'2013-05-22','10:45:05','Log In','Successfull log in','12345678','Log In Screen'),(13,'2013-05-22','19:29:10','Log In','Successfull log in','12345678','Log In Screen'),(14,'2013-05-22','19:32:21','Log In','Successfull log in','12345678','Log In Screen'),(15,'2013-05-23','08:38:29','Log In','Successfull log in','12345678','Log In Screen'),(16,'2013-05-23','09:16:43','Log In','Successfull log in','12345678','Log In Screen'),(17,'2013-05-23','09:20:39','Log In','Successfull log in','12345678','Log In Screen'),(18,'2013-05-23','11:20:44','Log In','Successfull log in','12345678','Log In Screen'),(19,'2013-05-24','07:43:06','Log In','Successfull log in','12345678','Log In Screen'),(20,'2013-05-24','11:12:10','Log In','Successfull log in','12345678','Log In Screen'),(21,'2013-05-24','18:56:39','Log In','Successfull log in','12345678','Log In Screen'),(22,'2013-06-03','10:37:39','Log In','Successfull log in','12345678','Log In Screen'),(23,'2013-06-03','11:46:22','Log In','Successfull log in','12345678','Log In Screen'),(24,'2013-06-03','12:00:46','Log In','Successfull log in','12345678','Log In Screen'),(25,'2013-06-03','12:14:02','Log In','Successfull log in','12345678','Log In Screen'),(26,'2013-06-03','12:31:33','Log In','Successfull log in','12345678','Log In Screen'),(27,'2013-06-03','12:51:45','Log In','Successfull log in','12345678','Log In Screen'),(28,'2013-06-03','12:52:38','Log In','Successfull log in','12345678','Log In Screen'),(29,'2013-06-03','13:10:04','Log In','Successfull log in','12345678','Log In Screen'),(30,'2013-06-03','15:02:47','Log In','Successfull log in','12345678','Log In Screen'),(31,'2013-06-03','15:05:24','Log In','Successfull log in','12345678','Log In Screen'),(32,'2013-06-03','15:06:36','Log In','Successfull log in','12345678','Log In Screen'),(33,'2013-06-03','15:10:29','Log In','Successfull log in','12345678','Log In Screen'),(34,'2013-06-03','17:04:56','Log In','Successfull log in','12345678','Log In Screen'),(35,'2013-06-03','17:06:10','Warning','Unsuccessfull log in','12345678','Log In Screen'),(36,'2013-06-03','17:06:18','Log In','Successfull log in','12345678','Log In Screen'),(37,'2013-06-03','18:02:33','Log In','Successfull log in','12345678','Log In Screen'),(38,'2013-06-03','18:36:58','Log In','Successfull log in','12345678','Log In Screen'),(39,'2013-06-03','18:47:02','Log In','Successfull log in','12345678','Log In Screen'),(40,'2013-06-03','21:02:08','Log In','Successfull log in','12345678','Log In Screen'),(41,'2013-06-03','21:33:17','Log In','Successfull log in','12345678','Log In Screen'),(42,'2013-06-03','21:38:59','Log In','Successfull log in','12345678','Log In Screen'),(43,'2013-06-03','21:40:00','Log In','Successfull log in','12345678','Log In Screen'),(44,'2013-06-03','21:40:27','Log In','Successfull log in','12345678','Log In Screen'),(45,'2013-06-03','21:48:09','Log In','Successfull log in','12345678','Log In Screen'),(46,'2013-06-03','21:52:02','Log In','Successfull log in','12345678','Log In Screen'),(47,'2013-06-04','07:26:08','Log In','Successfull log in','12345678','Log In Screen'),(48,'2013-06-04','07:30:33','Log Incident','Created new incident 00120130604','12345678','Log Incident Tab'),(49,'2013-06-04','12:13:30','Log In','Successfull log in','12345678','Log In Screen'),(50,'2013-06-04','12:57:46','Log In','Successfull log in','12345678','Log In Screen'),(51,'2013-06-04','13:10:00','Log In','Successfull log in','12345678','Log In Screen'),(52,'2013-06-05','08:45:15','Log In','Successfull log in','12345678','Log In Screen'),(53,'2013-06-05','08:46:52','Log In','Successfull log in','12345678','Log In Screen'),(54,'2013-06-05','08:51:14','Log In','Successfull log in','12345678','Log In Screen'),(55,'2013-06-05','08:54:24','Log In','Successfull log in','12345678','Log In Screen'),(56,'2013-06-05','09:07:06','Log In','Successfull log in','12345678','Log In Screen'),(57,'2013-06-05','09:10:08','Log In','Successfull log in','12345678','Log In Screen'),(58,'2013-06-05','09:21:28','Log In','Successfull log in','12345678','Log In Screen'),(59,'2013-06-05','09:26:19','Log In','Successfull log in','12345678','Log In Screen'),(60,'2013-06-05','09:29:48','Log In','Successfull log in','12345678','Log In Screen'),(61,'2013-06-05','09:37:55','Log In','Successfull log in','12345678','Log In Screen'),(62,'2013-06-05','09:45:26','Log In','Successfull log in','12345678','Log In Screen'),(63,'2013-06-05','09:49:13','Log In','Successfull log in','12345678','Log In Screen');
 /*!40000 ALTER TABLE `audittrail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -648,6 +648,107 @@ LOCK TABLES `icd10` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `icd10level1`
+--
+
+DROP TABLE IF EXISTS `icd10level1`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `icd10level1` (
+  `chapter` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(200) NOT NULL,
+  PRIMARY KEY (`chapter`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `icd10level1`
+--
+
+LOCK TABLES `icd10level1` WRITE;
+/*!40000 ALTER TABLE `icd10level1` DISABLE KEYS */;
+/*!40000 ALTER TABLE `icd10level1` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `icd10level2`
+--
+
+DROP TABLE IF EXISTS `icd10level2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `icd10level2` (
+  `diaId` char(3) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `ICD10Level1_chapter` int(11) NOT NULL,
+  PRIMARY KEY (`diaId`),
+  KEY `fk_ICD10Level2_ICD10Level1_idx` (`ICD10Level1_chapter`),
+  CONSTRAINT `fk_ICD10Level2_ICD10Level1` FOREIGN KEY (`ICD10Level1_chapter`) REFERENCES `icd10level1` (`chapter`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `icd10level2`
+--
+
+LOCK TABLES `icd10level2` WRITE;
+/*!40000 ALTER TABLE `icd10level2` DISABLE KEYS */;
+/*!40000 ALTER TABLE `icd10level2` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `icd10level3`
+--
+
+DROP TABLE IF EXISTS `icd10level3`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `icd10level3` (
+  `dia2Id` char(5) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `ICD10Level2_diaId` char(3) NOT NULL,
+  PRIMARY KEY (`dia2Id`),
+  KEY `fk_ICD10Level3_ICD10Level21_idx` (`ICD10Level2_diaId`),
+  CONSTRAINT `fk_ICD10Level3_ICD10Level21` FOREIGN KEY (`ICD10Level2_diaId`) REFERENCES `icd10level2` (`diaId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `icd10level3`
+--
+
+LOCK TABLES `icd10level3` WRITE;
+/*!40000 ALTER TABLE `icd10level3` DISABLE KEYS */;
+/*!40000 ALTER TABLE `icd10level3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `icd10level4`
+--
+
+DROP TABLE IF EXISTS `icd10level4`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `icd10level4` (
+  `dia3Id` char(6) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `ICD10Level3_dia2Id` char(5) NOT NULL,
+  PRIMARY KEY (`dia3Id`),
+  KEY `fk_ICD10Level4_ICD10Level31_idx` (`ICD10Level3_dia2Id`),
+  CONSTRAINT `fk_ICD10Level4_ICD10Level31` FOREIGN KEY (`ICD10Level3_dia2Id`) REFERENCES `icd10level3` (`dia2Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `icd10level4`
+--
+
+LOCK TABLES `icd10level4` WRITE;
+/*!40000 ALTER TABLE `icd10level4` DISABLE KEYS */;
+/*!40000 ALTER TABLE `icd10level4` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `icdlevel1`
 --
 
@@ -681,7 +782,7 @@ DROP TABLE IF EXISTS `icdlevel2`;
 CREATE TABLE `icdlevel2` (
   `level2_id` int(10) NOT NULL AUTO_INCREMENT,
   `diag1_Id` varchar(10) NOT NULL,
-  `description` varchar(300) NOT NULL,
+  `description` varchar(200) NOT NULL,
   `ICDLevel1_chapter` int(11) NOT NULL,
   PRIMARY KEY (`level2_id`,`diag1_Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1824 DEFAULT CHARSET=utf8;
@@ -708,7 +809,7 @@ CREATE TABLE `icdlevel3` (
   `icd_level3_id` int(11) NOT NULL AUTO_INCREMENT,
   `diag1_Id` char(10) NOT NULL,
   `diag2_Id` char(10) NOT NULL,
-  `description` varchar(300) NOT NULL,
+  `description` varbinary(300) NOT NULL,
   PRIMARY KEY (`icd_level3_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9287 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -733,7 +834,7 @@ DROP TABLE IF EXISTS `icdlevel4`;
 CREATE TABLE `icdlevel4` (
   `icdlevel4_Id` int(11) NOT NULL AUTO_INCREMENT,
   `diag3_Id` char(10) NOT NULL,
-  `description` varchar(300) NOT NULL,
+  `description` varbinary(200) NOT NULL,
   `ICDLevel3_dia2Id` char(10) NOT NULL,
   PRIMARY KEY (`icdlevel4_Id`,`diag3_Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12227 DEFAULT CHARSET=utf8;
@@ -1183,25 +1284,26 @@ DROP TABLE IF EXISTS `property`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `property` (
-  `sealNumber` varchar(45) NOT NULL,
-  `description` longtext NOT NULL,
-  `date` date NOT NULL,
-  `type` varchar(45) NOT NULL,
-  `sealType` varchar(45) NOT NULL,
-  `takenBy` varchar(10) NOT NULL,
-  `witness1_name` varchar(45) NOT NULL,
-  `witness1_surname` varchar(45) NOT NULL,
-  `witness2_name` varchar(45) NOT NULL,
-  `witness2_surname` varchar(45) NOT NULL,
-  `SAPS_name` varchar(45) NOT NULL,
-  `SAPS_surname` varchar(45) NOT NULL,
+  `sealNumber` varchar(45) DEFAULT NULL,
+  `description` longtext,
+  `date` date DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `sealType` varchar(45) DEFAULT NULL,
+  `takenBy` varchar(10) DEFAULT NULL,
+  `witness1_name` varchar(45) DEFAULT NULL,
+  `witness1_surname` varchar(45) DEFAULT NULL,
+  `witness2_name` varchar(45) DEFAULT NULL,
+  `witness2_surname` varchar(45) DEFAULT NULL,
+  `SAPS_name` varchar(45) DEFAULT NULL,
+  `SAPS_surname` varchar(45) DEFAULT NULL,
   `SAPS_taken` bit(1) NOT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
-  `released` bit(1) DEFAULT NULL,
-  PRIMARY KEY (`sealNumber`),
+  `released` bit(1) NOT NULL,
+  `idProperty` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idProperty`),
   KEY `fk_Property_Body1_idx` (`Body_idDeathRegisterNumber`),
   CONSTRAINT `fk_Property_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1210,7 +1312,7 @@ CREATE TABLE `property` (
 
 LOCK TABLES `property` WRITE;
 /*!40000 ALTER TABLE `property` DISABLE KEYS */;
-INSERT INTO `property` VALUES ('2','Hello, World','2012-03-05','q','','Mubien','','','','','','','\0','099888592','\0');
+INSERT INTO `property` VALUES ('2','Hello, World','2012-03-05','q','','Mubien','','','','','','','\0','099888592','\0',1);
 /*!40000 ALTER TABLE `property` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1393,32 +1495,6 @@ LOCK TABLES `relationship` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `samlpelab`
---
-
-DROP TABLE IF EXISTS `samlpelab`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `samlpelab` (
-  `name` varchar(45) NOT NULL,
-  `contactNumber` varchar(45) NOT NULL,
-  `Organization_idOrganization` int(11) NOT NULL,
-  PRIMARY KEY (`Organization_idOrganization`),
-  KEY `fk_SamlpeLab_Organization1_idx` (`Organization_idOrganization`),
-  CONSTRAINT `fk_SamlpeLab_Organization1` FOREIGN KEY (`Organization_idOrganization`) REFERENCES `organization` (`idOrganization`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `samlpelab`
---
-
-LOCK TABLES `samlpelab` WRITE;
-/*!40000 ALTER TABLE `samlpelab` DISABLE KEYS */;
-/*!40000 ALTER TABLE `samlpelab` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `sample`
 --
 
@@ -1443,6 +1519,33 @@ LOCK TABLES `sample` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `samplelab`
+--
+
+DROP TABLE IF EXISTS `samplelab`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `samplelab` (
+  `name` varchar(45) NOT NULL,
+  `contactNumber` varchar(45) NOT NULL,
+  `Organization_idOrganization` int(11) NOT NULL,
+  PRIMARY KEY (`Organization_idOrganization`),
+  UNIQUE KEY `name_UNIQUE` (`name`),
+  KEY `fk_SamlpeLab_Organization1_idx` (`Organization_idOrganization`),
+  CONSTRAINT `fk_SamlpeLab_Organization1` FOREIGN KEY (`Organization_idOrganization`) REFERENCES `organization` (`idOrganization`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `samplelab`
+--
+
+LOCK TABLES `samplelab` WRITE;
+/*!40000 ALTER TABLE `samplelab` DISABLE KEYS */;
+/*!40000 ALTER TABLE `samplelab` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `scenetype`
 --
 
@@ -1452,7 +1555,8 @@ DROP TABLE IF EXISTS `scenetype`;
 CREATE TABLE `scenetype` (
   `idSceneType` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) NOT NULL,
-  PRIMARY KEY (`idSceneType`)
+  PRIMARY KEY (`idSceneType`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1475,8 +1579,9 @@ DROP TABLE IF EXISTS `seal`;
 CREATE TABLE `seal` (
   `idSeal` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idSeal`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idSeal`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1485,7 +1590,6 @@ CREATE TABLE `seal` (
 
 LOCK TABLES `seal` WRITE;
 /*!40000 ALTER TABLE `seal` DISABLE KEYS */;
-INSERT INTO `seal` VALUES (1,'9'),(2,'8'),(3,'7'),(4,'6'),(5,'5');
 /*!40000 ALTER TABLE `seal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1499,8 +1603,9 @@ DROP TABLE IF EXISTS `specialcircumstance`;
 CREATE TABLE `specialcircumstance` (
   `idSpecialCircumstance` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idSpecialCircumstance`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idSpecialCircumstance`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1509,7 +1614,6 @@ CREATE TABLE `specialcircumstance` (
 
 LOCK TABLES `specialcircumstance` WRITE;
 /*!40000 ALTER TABLE `specialcircumstance` DISABLE KEYS */;
-INSERT INTO `specialcircumstance` VALUES (1,'vip');
 /*!40000 ALTER TABLE `specialcircumstance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1522,7 +1626,8 @@ DROP TABLE IF EXISTS `vehicle`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vehicle` (
   `registrationNumber` varchar(11) NOT NULL,
-  PRIMARY KEY (`registrationNumber`)
+  PRIMARY KEY (`registrationNumber`),
+  UNIQUE KEY `registrationNumber_UNIQUE` (`registrationNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1548,6 +1653,7 @@ CREATE TABLE `vehicledispatch` (
   `Vehicle_registrationNumber` varchar(11) NOT NULL,
   `idVehicleDispatch` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idVehicleDispatch`),
+  UNIQUE KEY `Vehicle_registrationNumber_UNIQUE` (`Vehicle_registrationNumber`),
   KEY `fk_VehicleDispatch_Incident1_idx` (`Incident_incidentLogNumber`),
   KEY `fk_VehicleDispatch_Vehicle1_idx` (`Vehicle_registrationNumber`),
   CONSTRAINT `fk_VehicleDispatch_Incident1` FOREIGN KEY (`Incident_incidentLogNumber`) REFERENCES `incident` (`incidentLogNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -1574,7 +1680,8 @@ DROP TABLE IF EXISTS `vehiclerecord`;
 CREATE TABLE `vehiclerecord` (
   `idVehicle` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idVehicle`)
+  PRIMARY KEY (`idVehicle`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1586,10 +1693,6 @@ LOCK TABLES `vehiclerecord` WRITE;
 /*!40000 ALTER TABLE `vehiclerecord` DISABLE KEYS */;
 /*!40000 ALTER TABLE `vehiclerecord` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'mydb'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1600,4 +1703,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-06-05 10:18:00
+-- Dump completed on 2013-06-05 11:43:06
