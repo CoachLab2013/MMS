@@ -3,7 +3,7 @@
  * This ensures that the document if fully loaded before the script is executed
  */
 
-$(document).ready(function(){
+$(document).ready(function(){    
     $("#recieve_body_scene_form").validate({
         rules:{
             receivedBodyFromName:{
@@ -31,9 +31,9 @@ $(document).ready(function(){
                 number : true,
                 maxlength: 8,
                 minlength: 8
-            } ,
-            pathologistBodyName:{
-                
+            },
+            DeathAddress:{
+                required: true
             }
             
         },
@@ -63,7 +63,13 @@ $(document).ready(function(){
                 minlength: "Your personnel number must be exactly 8 digits long.",
                 maxlength: "Your personnel number must be exactly 8 digits long.",
                 number: "Your personnel number must consist of 8 numeric digits."
+            },
+            
+            
+            DeathAddress:{
+                required: "Please enter in the place of death"
             }
+            
         }
         
     });
@@ -78,17 +84,8 @@ $(document).ready(function(){
      */
     $.validator.addMethod("valueNotEquals", function(value, element, arg){
         return arg != value;
-    }, "Value must not equal arg.");
-    
-    $.validator.addMethod("pathologist_name", function(value){
-        if($('#pathologistAtScene option').filter(':selected').text() == "Yes"){
-            if($("pathologistBodyName").val().length == 0){
-                return !value;
-            }
-            return value;
-        }
-        return value;
     });
+    
            
     
     $("#pathologistAtScene").click(function(){
@@ -101,8 +98,57 @@ $(document).ready(function(){
         }
     });
     
+    $("#recieve_at_scene_id_type").click(function(){
+        if($("#recieve_at_scene_id_type").val() != "Select"){
+            $("#no_id_type").hide();
+        }
+    })
     
+    /*
+    $("#atSceneBodyID").blur(function(){
+        if($("#recieve_at_scene_id_type").val() == "ID"){
+            if($("#atSceneBodyID").val().length != 13){
+                $("#invalid_passport").hide();
+                $("#invalid_id").show();
+            }            
+        }
+        else if($("#recieve_at_scene_id_type").val() == "Passsport"){
+            if($("#atSceneBodyID").val().length == 0){
+                $("#invalid_id").hide();
+                $("#invalid_passport").show();
+            } 
+        }
+        else{
+            $("#invalid_id").hide();
+            $("#invalid_passport").hide();
+        }
+    })
     
+    $("#atSceneBodyID").focus(function(){
+        if($("#recieve_at_scene_id_type").val() == "Select"){
+            $("#no_id_type").show();
+        }
+        else{
+            $("#no_id_type").hide();
+        }
+        if($("#recieve_at_scene_id_type").val() == "ID"){
+            if($("#atSceneBodyID").val().length != 13){
+                $("#invalid_passport").hide();
+                $("#invalid_id").show();
+            }            
+        }
+        else if($("#recieve_at_scene_id_type").val() == "Passsport"){
+            if($("#atSceneBodyID").val().length <= 0){
+                $("#invalid_id").hide();
+                $("#invalid_passport").show();
+            } 
+        }
+        else{
+            $("#invalid_id").hide();
+            $("#invalid_passport").hide();
+        }
+    })
+    */
 });
 
 
