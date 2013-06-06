@@ -104,27 +104,29 @@ $(document).ready(function(){
         }
     })
     
-    /*
     $("#atSceneBodyID").blur(function(){
         if($("#recieve_at_scene_id_type").val() == "ID"){
             if($("#atSceneBodyID").val().length != 13){
                 $("#invalid_passport").hide();
                 $("#invalid_id").show();
-            }            
+            } 
+            else{
+                $("#invalid_id").hide();
+            }
         }
-        else if($("#recieve_at_scene_id_type").val() == "Passsport"){
+        else if($("#recieve_at_scene_id_type").val() == "Passport"){
             if($("#atSceneBodyID").val().length == 0){
                 $("#invalid_id").hide();
                 $("#invalid_passport").show();
             } 
+            else{            
+                $("#invalid_passport").hide();
+            }
         }
-        else{
-            $("#invalid_id").hide();
-            $("#invalid_passport").hide();
-        }
+        
     })
     
-    $("#atSceneBodyID").focus(function(){
+    $("#atSceneBodyID").focus(function(){        
         if($("#recieve_at_scene_id_type").val() == "Select"){
             $("#no_id_type").show();
         }
@@ -135,20 +137,22 @@ $(document).ready(function(){
             if($("#atSceneBodyID").val().length != 13){
                 $("#invalid_passport").hide();
                 $("#invalid_id").show();
-            }            
+            } 
+            else{
+                $("#invalid_id").hide();
+            }
         }
         else if($("#recieve_at_scene_id_type").val() == "Passsport"){
             if($("#atSceneBodyID").val().length <= 0){
                 $("#invalid_id").hide();
                 $("#invalid_passport").show();
             } 
-        }
-        else{
-            $("#invalid_id").hide();
-            $("#invalid_passport").hide();
+            else{
+                $("#invalid_passport").hide();
+            }
         }
     })
-    */
+    
 });
 
 
