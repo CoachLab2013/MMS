@@ -58,7 +58,7 @@ public class LogIncidentServlet extends HttpServlet {
         DbDetail dbdetail = new DbDetail("localhost","/mydb","root","password");
         IncidentDb incidentdb = new IncidentDb(incident, dbdetail);
         incidentdb.init();
-        out.print(incidentdb.add());
+        incidentdb.add();
         
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String[] datetime = timestamp.split(" ");
@@ -84,7 +84,7 @@ public class LogIncidentServlet extends HttpServlet {
         sess.setAttribute("incidentlogged", "Incident created succesully");
         sess.setAttribute("incident", incident);
         sess.setAttribute("lognumber",request.getParameter("fpsnumber") );
-       // response.sendRedirect("Home.jsp");
+       response.sendRedirect("Home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

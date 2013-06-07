@@ -87,7 +87,7 @@ public class IncidentDb extends DatabaseConnector
         
           try  
         {  //
-            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound,dateIncidentClosed)" + " VALUES"
+            statement.executeUpdate("INSERT INTO Incident (incidentLogNumber,referenceNumber,numberOfBodies,dateOfIncident,timeOfIncident,circumstanceOfDeath,specialCircumstances,status,reason,bodyCount,placeBodyFound)" + " VALUES"
                                     +" ('" 
                                     + incident.getIncidentLogNumber() + "','" 
                                     + incident.getReferenceNumber()+ "','"
@@ -99,8 +99,7 @@ public class IncidentDb extends DatabaseConnector
                                     + incident.isOpen() + ",'"
                                     + incident.getReason()+ "',"
                                     + incident.getBodyCount() + ",'"
-                                    + incident.getPlaceBodyFound() + "','"
-                                    + incident.getDateIncidentClosed() + "'"
+                                    + incident.getPlaceBodyFound() + "'"
                                     + ")");
             statement.close(); //status , reason , bodyCountb 
             connection.close(); //deathCall
@@ -120,7 +119,7 @@ public class IncidentDb extends DatabaseConnector
         ArrayList<Incident> incidentList = new ArrayList<Incident>();
         try 
         {
-            statement.executeQuery("SELECT * FROM incident;");
+            statement.executeQuery("SELECT * FROM Incident;");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {

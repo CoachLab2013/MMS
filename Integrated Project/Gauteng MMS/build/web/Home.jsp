@@ -28,8 +28,8 @@
         <title>Gauteng Mortuary Management System</title>
     </head>
     <body>
-        <% Tools t = new Tools();
-        t.adduser();  %>
+        <% //Tools t = new Tools();
+        //t.adduser();  %>
 
         <p>
 

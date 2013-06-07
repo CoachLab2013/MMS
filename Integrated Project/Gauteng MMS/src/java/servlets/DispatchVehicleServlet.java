@@ -38,6 +38,7 @@ public class DispatchVehicleServlet extends HttpServlet {
         HttpSession sess = request.getSession();
         String lognumber = sess.getAttribute("lognumber").toString();
         Tools t  = new Tools();
+       
        Vehicle vehicle = new Vehicle(request.getParameter("vehicle"));
        Incident inc = new Incident(lognumber);
        VehicleDispatch vehicledispatch = new VehicleDispatch(t.getDateTime(),vehicle,inc);
