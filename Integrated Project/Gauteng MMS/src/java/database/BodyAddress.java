@@ -20,6 +20,14 @@ public class BodyAddress
     private String magisterialDistrict;
     public BodyAddress()
     {
+        this.building = "null";
+        this.street = "null";
+        this.suburb = "null";
+        this.city = "null";
+        this.postCode = "null";
+        this.province = "null";
+        this.region = "null";
+        this.magisterialDistrict = "null";
     }
     public BodyAddress(String building,String street,String suburb,String city,String postCode,String province,String region,String magisterialDistrict)
     {

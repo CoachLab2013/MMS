@@ -54,11 +54,11 @@ public class AtSceneServlet extends HttpServlet {
         //Incident Log number: request.getParameter("at_scene_lognmber");   
         
         BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("at_scene_deathregister")));       
-        bodyAtScene.setDateTimeBodyFound(request.getParameter("bodyFoundDate") + " " + request.getParameter("bodyFoundTime"));
-        bodyAtScene.setAllegedInjuryDateTime(request.getParameter("inAllegedInjuryDate") + " " + request.getParameter("inAllegedInjuryTime"));
-        bodyAtScene.setAllegedDeathDateTime(request.getParameter("inAllegedDeathDate") + " " + request.getParameter("inAllegedDeathTime"));
-        bodyAtScene.setSceneDateTime(request.getParameter("ReceivedSceneDate") + " " + request.getParameter("ReceivedSceneTime"));
-        bodyAtScene.setFacilityDateTime(request.getParameter("ReceivedFacilityDate") + " " + request.getParameter("ReceivedFacilityTime"));
+        bodyAtScene.setDateTimeBodyFound(t.checkDate(request.getParameter("bodyFoundDate")) + " " + t.checkTime(request.getParameter("bodyFoundTime")));
+        bodyAtScene.setAllegedInjuryDateTime(t.checkDate(request.getParameter("inAllegedInjuryDate")) + " " + t.checkTime(request.getParameter("inAllegedInjuryTime")));
+        bodyAtScene.setAllegedDeathDateTime(t.checkDate(request.getParameter("inAllegedDeathDate")) + " " + t.checkTime(request.getParameter("inAllegedDeathTime")));
+        bodyAtScene.setSceneDateTime(t.checkDate(request.getParameter("ReceivedSceneDate")) + " " + t.checkTime(request.getParameter("ReceivedSceneTime")));
+        bodyAtScene.setFacilityDateTime(t.checkDate(request.getParameter("ReceivedFacilityDate")) + " " + t.checkTime(request.getParameter("ReceivedFacilityTime")));
         bodyAtScene.setSceneIncidentOccured(request.getParameter("SceneType"));
         bodyAtScene.setPlaceOfDeath(request.getParameter("DeathAddress"));
         bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter("externalcircumstance"));
@@ -124,7 +124,12 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.getBody().setBodyType(request.getParameter("bodypart"));
         bodyAtScene.getBody().setNameOfDeceased(request.getParameter("atSceneBodyName"));
         bodyAtScene.getBody().setSurnameOfDeceased(request.getParameter("atSceneBodySurname"));
-        bodyAtScene.getBody().setID(request.getParameter("atSceneBodyID"));
+        if(request.getParameter("recieve_at_scene_id_type").equals("ID")){
+            bodyAtScene.getBody().setID(request.getParameter("atSceneBodyID"));
+        }else if(request.getParameter("recieve_at_scene_id_type").equals("Passport")){
+            bodyAtScene.getBody().setPassport(request.getParameter("atSceneBodyID"));
+        }
+        
         //building body address
             BodyAddress bodyAddress = new BodyAddress();
             bodyAddress.setBuilding(request.getParameter("atSceneBodyAddressBuilding"));
@@ -139,10 +144,12 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.getBody().setBodyAddress(bodyAddress);
         bodyAtScene.getBody().setRace(request.getParameter("race"));
         bodyAtScene.getBody().setGender(request.getParameter("gender"));
-        if(request.getParameter("at_scene_body_estimated_age_type").equals("Month")){
-            bodyAtScene.getBody().setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
-        }else if(request.getParameter("at_scene_body_estimated_age_type").equals("Year")){
-            bodyAtScene.getBody().setEstimatedAgeYear(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
+        if(request.getParameter("atSceneBodyEstAge").equals("Age")!=true){
+            if(request.getParameter("at_scene_body_estimated_age_type").equals("Month")){
+                bodyAtScene.getBody().setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
+            }else if(request.getParameter("at_scene_body_estimated_age_type").equals("Year")){
+                bodyAtScene.getBody().setEstimatedAgeYear(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
+            }
         }
         //body fields that are not given by the UI input
         bodyAtScene.getBody().setDateOfBirth("0000-00-00");
@@ -273,7 +280,7 @@ public class AtSceneServlet extends HttpServlet {
         //response.sendRedirect("Home.jsp");
 
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP

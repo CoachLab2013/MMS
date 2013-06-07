@@ -17,10 +17,16 @@ public class BodyAtMortuary extends Body
    
     //CONSTRUCTORS
     public BodyAtMortuary() {
+        this.bodyReceivedFromPerNumber = "null";
+        this.bodyHandedOverToPerNumber = "null";
+        this.bodyHandOverFromOrganization = "null";
     }
     public BodyAtMortuary(String deathRegisterNumber) 
     {
         super(deathRegisterNumber);
+        this.bodyReceivedFromPerNumber = "null";
+        this.bodyHandedOverToPerNumber = "null";
+        this.bodyHandOverFromOrganization = "null";
     }
 
     //Constructors with at Scene

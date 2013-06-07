@@ -98,10 +98,12 @@ public class AtMortuaryServlet extends HttpServlet {
         bodyAtMortuary.setBodyAddress(bodyAddress);
         bodyAtMortuary.setRace(request.getParameter("Race"));
         bodyAtMortuary.setGender(request.getParameter("Gender"));
-        if(request.getParameter("at_mortuary_body_estimated_age").equals("Months")){
-            bodyAtMortuary.setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
-        }else if(request.getParameter("at_mortuary_body_estimated_age").equals("Years")){
-            bodyAtMortuary.setEstimatedAgeYear(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+        if (request.getParameter("atMortuaryBodyEstAge").equals("Age")!=true){
+            if(request.getParameter("at_mortuary_body_estimated_age").equals("Months")){
+                bodyAtMortuary.setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+            }else if(request.getParameter("at_mortuary_body_estimated_age").equals("Years")){
+                bodyAtMortuary.setEstimatedAgeYear(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+            }
         }
         //end of Body details
         //body fields that are not given by the UI input
@@ -127,18 +129,8 @@ public class AtMortuaryServlet extends HttpServlet {
         
         //inserting BodyAtMortuary into Database
         BodyAtMortuaryDb bodyAtMortuaryDb = new BodyAtMortuaryDb(bodyAtMortuary, dbdetail);
-        //out.println("Testing input: test 1::::");
-        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getDeathRegisterNumber());
-        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getBodyHandOverFromOrganization());
-        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getBodyHandedOverToPerNumber());
-        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getBodyReceivedFromPerNumber());
         bodyAtMortuaryDb.init();
         out.println("adding body at mortuary :::" + bodyAtMortuaryDb.add());
-        //out.println("Testing input: test 2::::");
-        //out.println(" test 2::::" + bodyAtMortuary.getBodyHandOverFromOrganization());
-        //out.println(" test 2::::" + bodyAtMortuary.getBodyHandedOverToPerNumber());
-        //out.println(" test 2::::" + bodyAtMortuary.getBodyReceivedFromPerNumber());
-        //out.println(" test 2::::" + bodyAtMortuary.getDeathRegisterNumber());
         //end inserting BodyAtMortuary
         
         //POPULATING BODYFILE TABLE

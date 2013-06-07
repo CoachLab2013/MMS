@@ -640,5 +640,19 @@ public class Tools {
         String icon = "<link rel='shortcut icon' href='Images/icon.ico'>";
         return icon;
     }
+    public String checkDate(String inDate){
+        if (inDate.equals("")){
+            return "0000-00-00";
+        }else{
+            return inDate;
+        }
+    }
+    public String checkTime(String inTime){
+        if (inTime.equals("")){
+            return "00:00";
+        }else{
+            return inTime;
+        }
+    }
 }
 //end Tools class

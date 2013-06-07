@@ -51,7 +51,7 @@ public abstract class Body
         occupation = "";
         citizen = "";
         maidenName = "";
-        identifiedDateTime = "0000-00-00";
+        identifiedDateTime = "0000-00-00 00:00";
         bodyAddress = new BodyAddress();
         estimatedAgeYear = 0;
         estimatedAgeMonth = 0;
