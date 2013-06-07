@@ -235,17 +235,17 @@
                                                             });
                 </script>
                 <td> Body Identified Date:     </td><td>  
-                    <div class="input-append date " id="DAidentdatepicker">
-                        <input size="16" id="DA" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" />
+                     <div class="input-append date " id="DAidentdatepicker">
+                        <input size="16" id="ReceivedFDate" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" value="" readonly/>
                         <span class="add-on"><i class="icon-calendar"></i></span> 
-                    </div>
+                     </div>
                     <br>
                 </td>
             </tr>
             <tr>
                 <td> Body Identified Time:</td><td>
                     <div class="input-append date " id="Tidenttimepicker">
-                        <input size="16" id="DAT" name="deceasedbodyIdentifiedTime" data-format="hh:mm" type="text" />
+                        <input size="16" id="DAT" name="deceasedbodyIdentifiedTime" data-format="hh:mm" type="text" value="" readonly/>
                         <span class="add-on"><i class="icon-time"></i></span> 
                     </div>
                     <br>
