@@ -25,7 +25,11 @@ public class Tools {
   
     public Tools() {
 
+<<<<<<< HEAD
         dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
+=======
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
+>>>>>>> origin/master
     }
     //end constructor
 
