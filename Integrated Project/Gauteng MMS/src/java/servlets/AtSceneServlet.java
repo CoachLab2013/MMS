@@ -147,13 +147,15 @@ public class AtSceneServlet extends HttpServlet {
         if(request.getParameter("atSceneBodyEstAge").equals("Age")!=true){
             if(request.getParameter("at_scene_body_estimated_age_type").equals("Month")){
                 bodyAtScene.getBody().setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
+                bodyAtScene.getBody().setAgeOnDateFound(Integer.parseInt(request.getParameter("atSceneBodyEstAge"))); //field not given by UI
             }else if(request.getParameter("at_scene_body_estimated_age_type").equals("Year")){
                 bodyAtScene.getBody().setEstimatedAgeYear(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
+                bodyAtScene.getBody().setAgeOnDateFound(Integer.parseInt(request.getParameter("atSceneBodyEstAge"))); //field not given by UI
             }
+            
         }
         //body fields that are not given by the UI input
         bodyAtScene.getBody().setDateOfBirth("0000-00-00");
-        bodyAtScene.getBody().setAgeOnDateFound(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
         bodyAtScene.getBody().setIdentifiedDateTime("0000-00-00 00:00");
         bodyAtScene.getBody().setBodyStatus(false);
         bodyAtScene.getBody().setDateBodyReceived("0000-00-00");
