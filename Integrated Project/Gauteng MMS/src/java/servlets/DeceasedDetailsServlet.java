@@ -8,6 +8,7 @@ import database.Body;
 import database.BodyAtMortuary;
 import database.BodyDb;
 import database.DbDetail;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

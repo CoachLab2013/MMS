@@ -24,7 +24,7 @@
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
         <script src="js/DeceasedDetailsScript.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">
-        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap-datetimepicker.min.css">
+        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap-datetimepicker">
         <script type="text/javascript"  src="js/jquery-1.9.1.js" charset="UTF-8"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
@@ -57,7 +57,7 @@
         <table>
             <tr>     
                  <% Tools t = new Tools();
-                    BodyAtMortuary body = t.getBody("099888592");%>
+                    BodyAtMortuary body = t.getBody("GP/DK//00002/2013");%>
                     <input type="hidden" name="deceasedDeathRegisterNr" <%out.print("value=" + body.getDeathRegisterNumber());%>  />
                 <td>Full Name(s):  </td> <td><input type="text" name="DeceasedName" id="txtDeceasedNameDis" <%
                     if(body.getNameOfDeceased()!=null)
@@ -77,7 +77,6 @@
             <tr>     
                 <td>Identification type:  </td> <td> <select name="deceasedidentificationtype"> 
                         <%
-                            if(body.getID()!=null)
                             if ((body.getID()!=null)) 
                             {
                                 out.print("<option>ID</option>");
@@ -120,7 +119,6 @@
             </tr>
             <tr>     
                 <td>Gender:  </td> <td> <%
-                   ArrayList list;
                     if(body.getGender()!=null){
               
                             String list2 = t.makeReferenceList("gender", "type",body.getGender() );
@@ -235,8 +233,8 @@
                                                             });
                 </script>
                 <td> Body Identified Date:     </td><td>  
-                     <div class="input-append date " id="DAidentdatepicker">
-                        <input size="16" id="ReceivedFDate" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" value="" readonly/>
+                     <div class="input-append date " name="DAidentdatepicker">
+                        <input size="16" id="IdentifiedDate" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" value="" readonly/>
                         <span class="add-on"><i class="icon-calendar"></i></span> 
                      </div>
                     <br>
@@ -244,7 +242,7 @@
             </tr>
             <tr>
                 <td> Body Identified Time:</td><td>
-                    <div class="input-append date " id="Tidenttimepicker">
+                    <div class="input-append date " name="Tidenttimepicker">
                         <input size="16" id="DAT" name="deceasedbodyIdentifiedTime" data-format="hh:mm" type="text" value="" readonly/>
                         <span class="add-on"><i class="icon-time"></i></span> 
                     </div>

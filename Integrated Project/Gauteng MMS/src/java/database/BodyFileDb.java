@@ -87,7 +87,7 @@ public class BodyFileDb extends DatabaseConnector
         ArrayList<BodyFile> list = new ArrayList<BodyFile>();
         try 
         {
-            statement.executeQuery("SELECT * FROM bodyfile WHERE bodyFileStatus <> 0;");
+            statement.executeQuery("SELECT * FROM bodyfile WHERE bodyFileStatus=0;");
             ResultSet rSet = statement.getResultSet();
             while(rSet.next())
             {                
