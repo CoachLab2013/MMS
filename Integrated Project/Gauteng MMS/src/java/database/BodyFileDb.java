@@ -61,12 +61,18 @@ public class BodyFileDb extends DatabaseConnector
         }
         return "successful";
     }
-    public String linkBody(String deathRegisterNumber)
+    public String linkBody(String deathRegisterNumber, String linkedDeathRegisterNumber)
     {
         try 
         {                       //passport , name , surname,relationWithDeceased,contactNumber,address,workAddress,ID,Body_IdDeathRegisterNumber
-            statement.executeUpdate("UPDATE bodylink SET BodyFile_Body_idDeathRegisterNumber1='"
-                    + deathRegisterNumber+ "' WHERE Body_idDeathRegisterNumber='" + bodyFile.getDeathRegisterNumber() + "';");
+            statement.executeUpdate("INSERT INTO `mydb`.`bodylink`\n" +
+                "(`BodyFile_Body_idDeathRegisterNumber1`,\n" +
+                "`linkDeathRegisterNumber`)\n" +
+                "VALUES\n" +
+                "(\n" +
+                "'" + deathRegisterNumber + "',\n" +
+                "'" + linkedDeathRegisterNumber + "'\n" +
+                ");");
             statement.close();
             connection.close();
         }
@@ -81,7 +87,7 @@ public class BodyFileDb extends DatabaseConnector
         ArrayList<BodyFile> list = new ArrayList<BodyFile>();
         try 
         {
-            statement.executeQuery("SELECT * FROM bodyfile;");
+            statement.executeQuery("SELECT * FROM bodyfile WHERE bodyFileStatus <> 0;");
             ResultSet rSet = statement.getResultSet();
             while(rSet.next())
             {                
@@ -97,6 +103,30 @@ public class BodyFileDb extends DatabaseConnector
         }
         return list;
     }
+    
+    
+     public ResultSet cyasBodyFileRs() throws SQLException
+    {
+       ResultSet rs = null;
+      
+        try 
+        {
+            statement.executeQuery("SELECT * FROM body \n" + "LEFT JOIN bodyfile on bodyfile.Body_idDeathRegisterNumber = body.idDeathRegisterNumber \n" + "WHERE bodyFileStatus <> 0;");
+            rs = statement.getResultSet();
+            
+            
+          //  statement.close();
+          //  connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            throw new SQLException(ex.getMessage());
+        }
+        return rs;
+    }
+  
+    
+    
     @Override
     public String edit() 
     {
@@ -131,5 +161,26 @@ public class BodyFileDb extends DatabaseConnector
     public void setBodyFile(BodyFile bodyFile)
     {
         this.bodyFile = bodyFile;
+    }
+    
+    /**
+     * function added by Asheen
+     */
+    public int countOpenBodyFile() throws SQLException{
+        int count = 0;
+        try 
+        {
+            statement.executeQuery("SELECT COUNT(*) as countOpenBodyFile FROM bodyfile;");
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            count = resultSet.getInt("countOpenBodyFile");
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            throw new SQLException(ex.getMessage());
+        }
+             return count;
     }
 }

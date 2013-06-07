@@ -43,7 +43,7 @@ $(document).ready(function() {
                 textOnly: true
             },
             personnelNumber: {
-                minlength: 8,
+                minlength: 8,   
                 number: true,
                 required: true
             },
@@ -240,6 +240,29 @@ $(document).ready(function() {
 
     });
 
+
+  
+     $('#AddExternalCause').validate({
+        rules: {
+            txtExternalCause: {
+                required: true
+            }
+
+        }
+
+    });
+    
+      
+     $('#AddSealType').validate({
+        rules: {
+            txtSealType: {
+                required: true
+               
+            }
+
+        }
+
+    });
    $('#AddBody').validate({
         rules: {
             

@@ -23,12 +23,12 @@
             </ul>
             <div class="tab-content" >
                 <div id="EditIncidentDetails" class="tab-pane active">  
-                    <jsp:include page="EditIncidentDetailsContent.jsp" />
+                  <jsp:include page="EditIncidentDetailsContent.jsp" /> 
                 </div>
                 
                 <div id="EditCallDetails" class="tab-pane "> 
                     
-                     <jsp:include page="EditCallDetailsContent.jsp" />
+                     <jsp:include page="EditCallDetailsContent.jsp" /> 
                 </div> 
                  
             </div>

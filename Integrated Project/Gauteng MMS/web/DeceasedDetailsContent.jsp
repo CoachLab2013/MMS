@@ -23,7 +23,6 @@
         <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
         <script src="js/DeceasedDetailsScript.js"></script>
-
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap-datetimepicker.min.css">
         <script type="text/javascript"  src="js/jquery-1.9.1.js" charset="UTF-8"></script>
@@ -35,23 +34,44 @@
     <legend>Body File> Edit Body File> Body Identification> Deceased Details Contents </legend>
     <form name="Deceasedform" id="Deceasedform" method="post" action="DeceasedDetailsServlet">
 
-
+        <script>
+            var counter = 0;
+            var ini;
+            function confirmText(txtId,btnId,v)
+            {
+                ini = v;
+                if(counter == v)
+                {
+                    document.getElementById(txtId).readonly = true;
+                    document.getElementById(btnId).value ="Edit";
+                    counter = 1;
+                }
+                else
+                {
+                    counter = 0;
+                    document.getElementById(txtId).readonly = false;  
+                    document.getElementById(btnId).value = "Confirm";
+                }
+            }
+            </script>
         <table>
             <tr>     
-                <td>Full Name(s):  </td> <td><input type="text" name="DeceasedName"  <% Tools t = new Tools();
-                    BodyAtMortuary body = t.getBody("099888592");
+                 <% Tools t = new Tools();
+                    BodyAtMortuary body = t.getBody("099888592");%>
+                    <input type="hidden" name="deceasedDeathRegisterNr" <%out.print("value=" + body.getDeathRegisterNumber());%>  />
+                <td>Full Name(s):  </td> <td><input type="text" name="DeceasedName" id="txtDeceasedNameDis" <%
                     if(body.getNameOfDeceased()!=null)
-                    out.print("value =" + body.getNameOfDeceased());%>  /><input type="submit" value="Confirm" /></td>  
+                    out.print("value =" + body.getNameOfDeceased());%>  /><input type="button" value="Confirm" id="btnDeceasedNameDis"  onclick="confirmText('txtDeceasedNameDis','btnDeceasedNameDis',0);" /></td>  
             </tr>
             <tr>     
                 <td>Maiden Name:  </td> <td><input type="text" name="DeceasedMaidenName" <%
                     if(body.getMaidenName()!=null)
-                    out.print("value =" + body.getMaidenName());%> /></td>  
+                    out.print("value =" + body.getMaidenName());%>  /></td>  
             </tr>
             <tr>
-                <td>Surname:</td> <td> <input type="text" name="DeceasedSurname" <%
+                <td>Surname:</td> <td> <input type="text" name="DeceasedSurname" id="txtDeceasedSurnameDis"<%
                     if(body.getSurnameOfDeceased()!=null)
-                    out.print("value =" + body.getSurnameOfDeceased());%> /><input type="submit" value="Confirm" /> </td>
+                    out.print("value =" + body.getSurnameOfDeceased());%>  /><input type="button" value="Confirm" id="btnDeceasedSurnameDis" onclick="confirmText('txtDeceasedSurnameDis','btnDeceasedSurnameDis',0);" /> </td>
             </tr> 
 
             <tr>     
@@ -65,10 +85,9 @@
                             }
                         %>
                     </select> </td>
-
             </tr>
             <tr>     
-                <td>Identification Number:  </td> <td><input type="text" name="DeceasedNumber" <%
+                <td>Identification Number:  </td> <td><input type="text" id="txtDeceasedNumberDis" name="DeceasedNumber" <%
                     if (!(body.getID().contains(""))) {
                         if(body.getID()!=null)
                             out.print("value =" + body.getID());
@@ -76,25 +95,25 @@
                         if(body.getPassport()!=null)
                             out.print("value =" + body.getPassport());
                     };
-                                                             %> /><input type="submit" value="Confirm" /></td>  
+                                                             %>  /><input type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
             </tr> 
             <tr>
                 <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%
                     if(body.getPlaceOfBirth()!=null)
-                    out.print("value =" + body.getPlaceOfBirth());%> /></td>
+                    out.print("value =" + body.getPlaceOfBirth());%>  /></td>
             </tr>
             <tr>     
                 <td>Date of Birth: </td> <td> <input type="text" name="deceasedDateBirth" <%
                     if(body.getDateOfBirth()!=null)
-                    out.print("value =" + body.getDateOfBirth());%> /></td> 
+                    out.print("value =" + body.getDateOfBirth());%>  /></td> 
             </tr>
             <tr>     
                 <td>Age on the date found:  </td> <td><input type="text" name="deceasedage" <%
                     if(body.getAgeOnDateFound()!= 0)
-                    out.print("value =" + body.getAgeOnDateFound());%> /></td>  
+                    out.print("value =" + body.getAgeOnDateFound());%>  /></td>  
             </tr>
             <tr>     
-                <td>Gender:  </td> <td> <select name="deceasedgender">
+                <td>Gender:  </td> <td> <select name="deceasedgender" id="selDeceasedGenderDis">
                         <option><%
                     if(body.getGender()!=null)
                     out.print(body.getGender());%></option>
@@ -108,7 +127,7 @@
                                 }
                             }
                         %>
-                    </select><input type="submit" value="Confirm" /> </td>
+                    </select><input type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
             <tr>     
                 <td>Marital Status:  </td> <td> <select name="deceasedMartitalstatus">
                         <option><%
@@ -126,7 +145,7 @@
                         %>
                     </select> </td>
             <tr>     
-                <td>Race:  </td> <td> <select name="deceasedrace">
+                <td>Race:  </td> <td> <select name="deceasedrace" id="selDeceasedRaceDis">
                         <option><%
                             if(body.getRace()!=null)
                             out.print(body.getRace());%></option>
@@ -142,7 +161,7 @@
                                 }
                             }
                         %>
-                    </select><input type="submit" value="Confirm" /> </td>
+                    </select><input type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis',0);"/> </td>
             <tr>     
                 <td>Occupation:  </td> <td> <select name="deceasedOccupation">
                         <option><%
@@ -163,7 +182,7 @@
             <tr>
                 <td> Citizenship:</td> <td> <input type="text" name="deceasedCitizenship" <%
                             if(body.getCitizen()!=null)
-                            out.print("value =" + body.getCitizen());%> /></td>
+                            out.print("value =" + body.getCitizen());%>  /></td>
             </tr>
 
             <tr>
@@ -199,7 +218,7 @@
                                                                 autoclose: true
                                                             });
 
-                                                            $('#Tidenttimepicker').datetimepicker({
+                    $('#Tidenttimepicker').datetimepicker({
                                                                 pickDate: false,
                                                                 autoclose: true,
                                                                 pickSeconds: false
@@ -208,7 +227,7 @@
                 </script>
                 <td> Body Identified Date:     </td><td>  
                     <div class="input-append date " id="DAidentdatepicker">
-                        <input size="16" id="DA" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
+                        <input size="16" id="DA" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" />
                         <span class="add-on"><i class="icon-calendar"></i></span> 
                     </div>
                     <br>
@@ -217,7 +236,7 @@
             <tr>
                 <td> Body Identified Time:</td><td>
                     <div class="input-append date " id="Tidenttimepicker">
-                        <input size="16" id="DAT" name="deceasedbodyIdentifiedTime" data-format="hh:mm" type="text" value="" readonly>
+                        <input size="16" id="DAT" name="deceasedbodyIdentifiedTime" data-format="hh:mm" type="text" />
                         <span class="add-on"><i class="icon-time"></i></span> 
                     </div>
                     <br>

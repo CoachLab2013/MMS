@@ -35,8 +35,9 @@ public class SaveKinDetailsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();       
         Kin kin = new Kin();
+        
         kin.setName(request.getParameter("KinName"));
         kin.setSurname(request.getParameter("KinSurname"));
         String kinIdType = request.getParameter("identificationtype");
@@ -53,6 +54,7 @@ public class SaveKinDetailsServlet extends HttpServlet {
         kin.setAddress(request.getParameter("KinRes"));
         kin.setWorkAddress(request.getParameter("KinWork"));
         kin.setBody_idDeathRegisterNumber("099888592");
+        
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
         KinDb kinDb = new KinDb(kin, dbdetail);

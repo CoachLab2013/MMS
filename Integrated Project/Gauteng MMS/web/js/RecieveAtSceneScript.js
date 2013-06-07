@@ -3,7 +3,7 @@
  * This ensures that the document if fully loaded before the script is executed
  */
 
-$(document).ready(function(){
+$(document).ready(function(){    
     $("#recieve_body_scene_form").validate({
         rules:{
             receivedBodyFromName:{
@@ -25,8 +25,16 @@ $(document).ready(function(){
                 maxlength: 10
             },
             SAPSmemberBodyRank:{
+                valueNotEquals: "Select"
+            },
+            FPSmemberBodyPersal:{
+                number : true,
+                maxlength: 8,
+                minlength: 8
+            },
+            DeathAddress:{
                 required: true
-            }            
+            }
             
         },
         messages:{ 
@@ -49,12 +57,102 @@ $(document).ready(function(){
                 maxlength:"Invalid phone number. A valid phone number consists of ten numeric digits"
             },
             SAPSmemberBodyRank:{
-                required: "Please enter in the rank of the SAPS member handing over the body"
+                valueNotEquals: "Please enter in the rank of the SAPS member handing over the body"
+            },
+            FPSmemberBodyPersal:{
+                minlength: "Your personnel number must be exactly 8 digits long.",
+                maxlength: "Your personnel number must be exactly 8 digits long.",
+                number: "Your personnel number must consist of 8 numeric digits."
+            },
+            
+            
+            DeathAddress:{
+                required: "Please enter in the place of death"
             }
             
         }
         
     });
+    
+    $("#recieve_body_scene_form").submit(function(){
+        _data = $("#recieve_body_scene_form").serialize();
+    });
+    
+     /**
+     * Custom rule to ensure that user has selected an item
+     * in the drop down list
+     */
+    $.validator.addMethod("valueNotEquals", function(value, element, arg){
+        return arg != value;
+    });
+    
+           
+    
+    $("#pathologistAtScene").click(function(){
+       if($('#pathologistAtScene option').filter(':selected').text() == "Yes"){
+            $("#pathologist_at_scene_details").show();
+        }
+        else{
+            $("#pathologist_at_scene_details").hide();
+            
+        }
+    });
+    
+    $("#recieve_at_scene_id_type").click(function(){
+        if($("#recieve_at_scene_id_type").val() != "Select"){
+            $("#no_id_type").hide();
+        }
+    })
+    
+    $("#atSceneBodyID").blur(function(){
+        if($("#recieve_at_scene_id_type").val() == "ID"){
+            if($("#atSceneBodyID").val().length != 13){
+                $("#invalid_passport").hide();
+                $("#invalid_id").show();
+            } 
+            else{
+                $("#invalid_id").hide();
+            }
+        }
+        else if($("#recieve_at_scene_id_type").val() == "Passport"){
+            if($("#atSceneBodyID").val().length == 0){
+                $("#invalid_id").hide();
+                $("#invalid_passport").show();
+            } 
+            else{            
+                $("#invalid_passport").hide();
+            }
+        }
+        
+    })
+    
+    $("#atSceneBodyID").focus(function(){        
+        if($("#recieve_at_scene_id_type").val() == "Select"){
+            $("#no_id_type").show();
+        }
+        else{
+            $("#no_id_type").hide();
+        }
+        if($("#recieve_at_scene_id_type").val() == "ID"){
+            if($("#atSceneBodyID").val().length != 13){
+                $("#invalid_passport").hide();
+                $("#invalid_id").show();
+            } 
+            else{
+                $("#invalid_id").hide();
+            }
+        }
+        else if($("#recieve_at_scene_id_type").val() == "Passsport"){
+            if($("#atSceneBodyID").val().length <= 0){
+                $("#invalid_id").hide();
+                $("#invalid_passport").show();
+            } 
+            else{
+                $("#invalid_passport").hide();
+            }
+        }
+    })
+    
 });
 
 
