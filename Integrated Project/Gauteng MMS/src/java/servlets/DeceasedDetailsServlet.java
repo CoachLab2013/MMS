@@ -8,6 +8,7 @@ import database.Body;
 import database.BodyAtMortuary;
 import database.BodyDb;
 import database.DbDetail;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -51,7 +52,7 @@ public class DeceasedDetailsServlet extends HttpServlet {
         body.setDateOfBirth(request.getParameter("deceasedDateBirth"));
         body.setAgeOnDateFound(Integer.parseInt(request.getParameter("deceasedage")));
         body.setGender(request.getParameter("deceasedgender"));
-        body.setMaritalStatus(request.getParameter("deceasedMartitalstatus"));
+        body.setMaritalStatus(request.getParameter("deceasedMaritalstatus"));
         body.setRace(request.getParameter("deceasedrace"));
         body.setOccupation(request.getParameter("deceasedOccupation"));
         body.setCitizen(request.getParameter("deceasedCitizenship"));
