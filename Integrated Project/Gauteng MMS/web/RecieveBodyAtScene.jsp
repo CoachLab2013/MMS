@@ -116,7 +116,12 @@
             <div class="control-group">
                 <label class="control-label" for="FPSmemberBodyPersal">Persal number</label>
                 <div class="controls">
-                    <input type="text" name="FPSmemberBodyPersal" id="FPSmemberBodyPersal"/> 
+                    <%
+                    String persal = t.makeReferenceList("employee", "personnelNumber", "");
+                    persal = persal.replaceAll("name='employee'", "name='FPSmemberBodyPersal'");
+                    persal = persal.replaceAll("id='employee'", "id='FPSmemberBodyPersal'");
+                    out.println(persal);
+                    %>                    
                 </div>
             </div>
 
