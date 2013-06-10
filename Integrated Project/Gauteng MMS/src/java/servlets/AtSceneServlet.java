@@ -59,9 +59,13 @@ public class AtSceneServlet extends HttpServlet {
         bodyAtScene.setAllegedDeathDateTime(t.checkDate(request.getParameter("inAllegedDeathDate")) + " " + t.checkTime(request.getParameter("inAllegedDeathTime")));
         bodyAtScene.setSceneDateTime(t.checkDate(request.getParameter("ReceivedSceneDate")) + " " + t.checkTime(request.getParameter("ReceivedSceneTime")));
         bodyAtScene.setFacilityDateTime(t.checkDate(request.getParameter("ReceivedFacilityDate")) + " " + t.checkTime(request.getParameter("ReceivedFacilityTime")));
-        bodyAtScene.setSceneIncidentOccured(request.getParameter("SceneType"));
+        if (request.getParameter("SceneType").equals("Select")!=true){
+            bodyAtScene.setSceneIncidentOccured(request.getParameter("SceneType"));
+        }
         bodyAtScene.setPlaceOfDeath(request.getParameter("DeathAddress"));
-        bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter("externalcircumstance"));
+        if (request.getParameter("externalcircumstance").equals("Select")!=true){
+            bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter("externalcircumstance"));
+        }
         
         Member pathologistOnScene = new Member();
         if (request.getParameter("pathologistAtScene").equals("Yes")){
