@@ -63,9 +63,10 @@ $(document).ready(function() {
             $('#Body').prop("selectedIndex", 0);
 
             $('#tr1').remove();
-            $('#tr2').remove();
+            $('#tr2').remove();            
+            $('.error').css('display','none');
         } else {
-            alert("Please Select NonDuplicate/Correct Body Files\nAdd proper error message!");
+            $('.error').css('display','inherit');
         }
     });
     
