@@ -18,7 +18,14 @@
 <!DOCTYPE html>
 <html>
     <head>        
+        <%
 
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+            response.setDateHeader("Expires", 0); // Proxies. 
+%>
+
+        <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
         <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
@@ -28,13 +35,9 @@
         <script src="js/jquery-1.7.1.min.js"></script>
         <script src="js/jquery.validate.min.js"></script>
         <script src="js/script.js"></script>
-        <link  type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="bootstrap/css/tablecss.css"> 
         <script src="js/EditReferenceList.js"></script>
-        <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css">
 
-        <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
-        <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
 
         <%-- <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">   
          <script  src="bootstrap/js/bootstrap-tabs.js"></script>
@@ -48,12 +51,11 @@
         <div class="head"><img class="img-rounded" style=" width:100%" src="Images/logo10.jpg"></div>
 
         <div class="menutab">
-
-            <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif; font-size: large; color: black">Logout</span>
-
+            <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif"><a href="LogOutServlet">Logout</a></span>
         </div>
 
         <%
+
             //variables to store results
             String userResult = "";
             String instiResult = "";
@@ -66,6 +68,7 @@
             String raceResult = "";
             String maritalResult = "";
             String provinceResult = "";
+            String regionResult = "";
             String iCD10Result = "";
             String mannerResult = "";
             String sampleResult = "";
@@ -106,6 +109,7 @@
             String manner = "";
             String icd10 = "";
             String province = "";
+            String region = "";
             String marital = "";
             String race = "";
             String occu = "";
@@ -157,6 +161,11 @@
                     } else if (session.getAttribute("tab").equals("province")) {
                         provinceResult = session.getAttribute("provinceResult").toString();
                         province = "active";
+
+                    } else if (session.getAttribute("tab").equals("region")) {
+                        regionResult = session.getAttribute("regionResult").toString();
+                        region = "active";
+
                     } else if (session.getAttribute("tab").equals("icd10")) {
                         iCD10Result = session.getAttribute("iCD10Result").toString();
 
@@ -206,6 +215,7 @@
                     maritalResult = "";
 
                     provinceResult = "";
+                    regionResult = "";
                     iCD10Result = "";
                     mannerResult = "";
                     sampleResult = "";
@@ -213,7 +223,8 @@
                     relationshipResult = "";
                     specialCurResult = "";
                     bodyPartResult = "";
-
+                    exCauseResult = "";
+                    slTypeResult = "";
                     main1 = "active";
 
                     currentUserTab = "active";
@@ -282,6 +293,11 @@
             emp = new ReferenceListDb("province", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> provinceList = emp.referenceList();
+
+            //For region list box
+            emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> regionList = emp.referenceList();
 
             //For icd10 list box
             emp = new ReferenceListDb("icd10", "e", "code", "e", dbset.getDbdetail());
@@ -521,6 +537,7 @@
                                                                     <li class="<%out.println(String.valueOf(race));%>"><a href="#race" data-toggle="tab">Race</a></li>
                                                                     <li class="<%out.println(String.valueOf(marital));%>"><a href="#mStatus" data-toggle="tab">Marital Status</a></li> 
                                                                     <li class="<%out.println(String.valueOf(province));%>"><a href="#province" data-toggle="tab">Province</a></li>
+                                                                    <li class="<%out.println(String.valueOf(region));%>"><a href="#region" data-toggle="tab">Region</a></li>
                                                                     <li class="<%out.println(String.valueOf(icd10));%>"><a href="#icd10Codes" data-toggle="tab">ICD10 Codes</a></li>
                                                                     <li class="<%out.println(String.valueOf(manner));%>"><a href="#mDeath" data-toggle="tab">Manner of Death</a></li>
                                                                     <li class="<%out.println(String.valueOf(sample));%>"><a href="#sType" data-toggle="tab">Sample Type</a></li>
@@ -945,6 +962,68 @@
                                                                     <br/>
                                                                     <br/>
                                                                 </div>
+
+                                                                <div  id="region" class="tab-pane <%out.println(String.valueOf(region));%>"> 
+                                                                    <div align="center"><h2> Region </h2> </div>    
+                                                                    <%--content for Region reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddRegion" id="AddRegion" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddRegion" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="ProvRegionList">Province</label>
+                                                                                <div class="controls">
+
+                                                                                    <select id="ProvRegionList" name="ProvRegionList">
+                                                                                        <%
+                                                                                            for (int i = 0; i < provinceList.size(); i++) {
+                                                                                        %>
+                                                                                        <option><% out.print(provinceList.get(i));%> </option>
+
+                                                                                        <%
+                                                                                            }
+                                                                                        %>
+                                                                                    </select>
+                                                                                </div>
+
+                                                                                <br/>  
+                                                                            </div>
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtRegion">Region</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtRegion" name="txtRegion"   />
+                                                                                    <input type="submit" value="Add Region" name="cmdRegion" />
+                                                                                </div>
+
+                                                                                <br/>  
+                                                                            </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="RegionList">Current Regions:</label>
+
+                                                                            <select id="RegionList" name="RegionList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < regionList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(regionList.get(i));%> </option>
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </select>
+                                                                            <br/>
+                                                                            <input type="button" onclick="editReferenceListReg('region', 'RegionList', 'ProvRegionList')" value="Edit Province" id="cmdEditRegion" name="cmdEditRegion" />
+                                                                            <input type="button" onclick="deleteReferenceListReg('region', 'RegionList', 'ProvRegionList')" value="Delete Province" id="cmdDeleteRegion" name="cmdEditRegion" />
+
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label  > <% out.println(String.valueOf(regionResult));%></label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
+
 
                                                                 <div id="icd10Codes" class="tab-pane <%out.println(String.valueOf(icd10));%> "> 
                                                                     <div align="center"><h2>ICD10 Codes </h2> </div>      
@@ -1483,7 +1562,7 @@
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('scenetype', 'SealTypeList')" value="Edit Seal Type" id="cmdEditSealType" name="cmdEditSealType" />
                                                                             <input type="button" onclick="deleteReferenceList('scenetype', 'SealTypeList')" value="Delete Seal Type  " id="cmdDeleteSealType" name="cmdDeleteSealType" />
-                                                                                                 
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -1507,11 +1586,13 @@
                                                         <input type="hidden" id="item" name="item">
                                                         <input type="hidden" id="Olditem" name="Olditem">
                                                         <input type="hidden" id="table" name="table">
-
+                                                        <input type="hidden" id="editProv" name="editProv">
                                                     </form>
+                                                                    
                                                     <form name="formdelete" action="DeleteReferenceListServlet" method="post">
                                                         <input type="hidden" id="item1" name="item1">
                                                         <input type="hidden" id="table1" name="table1">
+                                                        <input type="hidden" id="editProv1" name="editProv1">
                                                     </form>
                                                     <form name="LoadICD10Form" action="LoadICD10Table" method="post">
 

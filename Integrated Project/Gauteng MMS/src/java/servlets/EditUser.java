@@ -100,8 +100,8 @@ public class EditUser extends HttpServlet {
             sess.setAttribute("personnel", found.getPersonnelNumber().trim());
             sess.setAttribute("level", found.getAccess());
             sess.setAttribute("active", found.isActive());
-            sess.setAttribute("Eresult", "" );
-            
+            sess.setAttribute("Eresult", "");
+
             response.sendRedirect("EditAdmin.jsp");
 
         } catch (SQLException ex) {
@@ -140,10 +140,10 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         SetDbDetail DBdet = new SetDbDetail();
-         DbDetail dbDetail = DBdet.getDbdetail();
+        SetDbDetail DBdet = new SetDbDetail();
+        DbDetail dbDetail = DBdet.getDbdetail();
         if (request.getParameter("form").equals("EditUser")) {
- 
+
             String name = request.getParameter("firstName");
             String surname = request.getParameter("surname");
             String personnel = request.getParameter("personnelNumber");
@@ -167,19 +167,19 @@ public class EditUser extends HttpServlet {
                 sess.setAttribute("email", email);
                 sess.setAttribute("personnel", personnel);
                 sess.setAttribute("level", level);
-                sess.setAttribute("active",active);
+                sess.setAttribute("active", active);
                 sess.setAttribute("Eresult", "Employee has been successfuly edited");
                 response.sendRedirect("EditAdmin.jsp");
 
             } else {
                 //if save is not successful
-                 HttpSession sess = request.getSession();
+                HttpSession sess = request.getSession();
                 sess.setAttribute("name", name);
                 sess.setAttribute("surname", surname);
                 sess.setAttribute("email", email);
                 sess.setAttribute("personnel", personnel);
                 sess.setAttribute("level", level);
-                sess.setAttribute("active",active);
+                sess.setAttribute("active", active);
                 sess.setAttribute("Eresult", "Edit was not successful: because " + result);
                 response.sendRedirect("EditAdmin.jsp");
 
