@@ -17,6 +17,7 @@ public class BodyAtMortuary extends Body
    
     //CONSTRUCTORS
     public BodyAtMortuary() {
+        super();
         this.bodyReceivedFromPerNumber = "null";
         this.bodyHandedOverToPerNumber = "null";
         this.bodyHandOverFromOrganization = "null";
