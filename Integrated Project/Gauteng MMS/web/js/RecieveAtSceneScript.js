@@ -28,9 +28,11 @@ $(document).ready(function(){
                 valueNotEquals: "Select"
             },
             FPSmemberBodyPersal:{
-                number : true,
-                maxlength: 8,
-                minlength: 8
+                valueNotEquals: "Select"
+            },
+            atSceneBodyAddressPostalCode:{
+                required: false,
+                number: true
             },
             DeathAddress:{
                 required: true
@@ -60,12 +62,12 @@ $(document).ready(function(){
                 valueNotEquals: "Please enter in the rank of the SAPS member handing over the body"
             },
             FPSmemberBodyPersal:{
-                minlength: "Your personnel number must be exactly 8 digits long.",
-                maxlength: "Your personnel number must be exactly 8 digits long.",
-                number: "Your personnel number must consist of 8 numeric digits."
+                valueNotEquals: "Please select an employee"
             },
             
-            
+            atSceneBodyAddressPostalCode:{                
+                number: "Invalid postal code"
+            },
             DeathAddress:{
                 required: "Please enter in the place of death"
             }
@@ -91,65 +93,126 @@ $(document).ready(function(){
     $("#pathologistAtScene").click(function(){
        if($('#pathologistAtScene option').filter(':selected').text() == "Yes"){
             $("#pathologist_at_scene_details").show();
+            $("#pathologistBodyName").rules("remove");
+            $("#pathologistBodyName").rules("add",{
+                required: true,
+                messages:{
+                    required: "Please enter the name of the pathologist at the scene"
+                }
+            });
+            $("#pathologistBodySurname").rules("remove");
+            $("#pathologistBodySurname").rules("add",{
+                required: true,
+                messages:{
+                    required: "Please enter the surname of the pathologist at the scene"
+                }
+            });
+            $("#pathologistBodyRank").rules("remove");
+            $("#pathologistBodyRank").rules("add",{
+                valueNotEquals:"Select",
+                messages:{
+                    valueNotEquals: "Please select a rank"
+                }
+            });
         }
         else{
             $("#pathologist_at_scene_details").hide();
-            
+            $("#pathologistBodyName").rules("remove");
+            $("#pathologistBodySurname").rules("remove");
+            $("#pathologistBodyRank").rules("remove");
         }
     });
     
     $("#recieve_at_scene_id_type").click(function(){
-        if($("#recieve_at_scene_id_type").val() != "Select"){
-            $("#no_id_type").hide();
+        if($("#recieve_at_scene_id_type option").filter(':selected').text() == "ID"){
+             $("#recieve_at_scene_id_type").rules("remove");
+             $("#atSceneBodyID").rules("remove");
+             $("#atSceneBodyID").rules("add",{
+                 required:true,
+                 number: true,
+                 minlength: 13,
+                 maxlength: 13,
+                 messages:{
+                    required: "Please enter in an ID number",
+                   number: "Invalid ID number. It must contain exactly 13 numeric digits",
+                   minlength: "Invalid ID number. It must contain exactly 13 numeric digits",
+                   maxlength: "Invalid ID number. It must contain exactly 13 numeric digits" 
+                 }
+             });
         }
-    })
+        else if($("#recieve_at_scene_id_type option").filter(':selected').text() == "Passport"){
+             $("#recieve_at_scene_id_type").rules("remove");
+             $("#atSceneBodyID").rules("remove");
+             $("#atSceneBodyID").rules("add",{
+                 required:true,
+                 messages:{
+                    required: "Please enter in an passport number"
+                 }
+             });
+        }
+        else{            
+             $("#atSceneBodyID").rules("remove");
+        }
+    });
     
-    $("#atSceneBodyID").blur(function(){
-        if($("#recieve_at_scene_id_type").val() == "ID"){
-            if($("#atSceneBodyID").val().length != 13){
-                $("#invalid_passport").hide();
-                $("#invalid_id").show();
-            } 
-            else{
-                $("#invalid_id").hide();
-            }
-        }
-        else if($("#recieve_at_scene_id_type").val() == "Passport"){
-            if($("#atSceneBodyID").val().length == 0){
-                $("#invalid_id").hide();
-                $("#invalid_passport").show();
-            } 
-            else{            
-                $("#invalid_passport").hide();
-            }
-        }
-        
-    })
-    
-    $("#atSceneBodyID").focus(function(){        
-        if($("#recieve_at_scene_id_type").val() == "Select"){
-            $("#no_id_type").show();
+    $("#atSceneBodyID").click(function(){
+        if($("#atSceneBodyID").val().length >0){
+            $("#recieve_at_scene_id_type").rules("remove");
+            $("#recieve_at_scene_id_type").rules("add",{
+                valueNotEquals: "Select",
+                messages:{
+                    valueNotEquals: "Please select an identification type"
+                }
+            });
         }
         else{
-            $("#no_id_type").hide();
+            $("#recieve_at_scene_id_type").rules("remove");
         }
-        if($("#recieve_at_scene_id_type").val() == "ID"){
-            if($("#atSceneBodyID").val().length != 13){
-                $("#invalid_passport").hide();
-                $("#invalid_id").show();
-            } 
-            else{
-                $("#invalid_id").hide();
-            }
+    });
+    
+    $("#atSceneBodyID").blur(function(){
+        if($("#atSceneBodyID").val().length >0){
+            $("#recieve_at_scene_id_type").rules("remove");
+            $("#recieve_at_scene_id_type").rules("add",{
+                valueNotEquals: "Select",
+                messages:{
+                    valueNotEquals: "Please select an identification type"
+                }
+            });
         }
-        else if($("#recieve_at_scene_id_type").val() == "Passsport"){
-            if($("#atSceneBodyID").val().length <= 0){
-                $("#invalid_id").hide();
-                $("#invalid_passport").show();
-            } 
-            else{
-                $("#invalid_passport").hide();
-            }
+        else{
+            $("#recieve_at_scene_id_type").rules("remove");
+        }
+    });
+    
+    $("#atSceneBodyEstAge").click(function(){
+       if($("#atSceneBodyEstAge option").filter(':selected').text() != "Age"){
+           $("#atSceneBodyEstAge").rules("remove");
+           $("#at_scene_body_estimated_age_type").rules("remove");
+           $("#at_scene_body_estimated_age_type").rules("add",{             
+               valueNotEquals: "Years/Months",
+               messages:{
+                   valueNotEquals: "Please select years or months"
+               }
+           });
+       } 
+       else{
+           $("#at_scene_body_estimated_age_type").rules("remove");
+       }
+    });
+    
+    $('#at_scene_body_estimated_age_type').click(function(){
+        if($('#at_scene_body_estimated_age_type option').filter(':selected').text() != "Years/Months"){
+            $('#atSceneBodyEstAge').rules("remove");
+            $('#atSceneBodyEstAge').rules("add",{
+               valueNotEquals: "Age",
+               messages:{
+                valueNotEquals: "Please select an estimated age"
+               }
+            });
+        }
+        else{
+            $('#atSceneBodyEstAge').rules("remove");
         }
     })
     

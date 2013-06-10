@@ -24,7 +24,7 @@
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
         <script src="js/DeceasedDetailsScript.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">
-        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap-datetimepicker.min.css">
+        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap-datetimepicker">
         <script type="text/javascript"  src="js/jquery-1.9.1.js" charset="UTF-8"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
@@ -42,14 +42,14 @@
                 ini = v;
                 if(counter == v)
                 {
-                    document.getElementById(txtId).readonly = true;
+                    document.getElementById(txtId).disabled = true;
                     document.getElementById(btnId).value ="Edit";
                     counter = 1;
                 }
                 else
                 {
                     counter = 0;
-                    document.getElementById(txtId).readonly = false;  
+                    document.getElementById(txtId).disabled = false;  
                     document.getElementById(btnId).value = "Confirm";
                 }
             }
@@ -57,7 +57,9 @@
         <table>
             <tr>     
                  <% Tools t = new Tools();
-                    BodyAtMortuary body = t.getBody("GP/DK//00010/2013");%>
+                 
+                    BodyAtMortuary body = t.getBody("GP/DK//00002/2013");%>
+
                     <input type="hidden" name="deceasedDeathRegisterNr" <%out.print("value=" + body.getDeathRegisterNumber());%>  />
                 <td>Full Name(s):  </td> <td><input type="text" name="DeceasedName" id="txtDeceasedNameDis" <%
                     if(body.getNameOfDeceased()!=null)
@@ -77,10 +79,12 @@
             <tr>     
                 <td>Identification type:  </td> <td> <select name="deceasedidentificationtype"> 
                         <%
-                            if(body.getID()!=null)
-                            if (!(body.getID().contains(""))) {
+                            if ((body.getID()!=null)) 
+                            {
                                 out.print("<option>ID</option>");
-                            } else {
+                            } 
+                            else 
+                            {
                                 out.print("<option>Passport</option>");
                             }
                         %>
@@ -88,10 +92,13 @@
             </tr>
             <tr>     
                 <td>Identification Number:  </td> <td><input type="text" id="txtDeceasedNumberDis" name="DeceasedNumber" <%
-                    if (!(body.getID().contains(""))) {
+                    if (!(body.getID().contains("")))
+                    {
                         if(body.getID()!=null)
                             out.print("value =" + body.getID());
-                    } else {
+                    } 
+                    else 
+                    {
                         if(body.getPassport()!=null)
                             out.print("value =" + body.getPassport());
                     };
@@ -113,72 +120,74 @@
                     out.print("value =" + body.getAgeOnDateFound());%>  /></td>  
             </tr>
             <tr>     
-                <td>Gender:  </td> <td> <select name="deceasedgender" id="selDeceasedGenderDis">
-                        <option><%
-                    if(body.getGender()!=null)
-                    out.print(body.getGender());%></option>
-                        <%
-                            ArrayList<String> list = new Tools().getReferenceList("gender", "type");
-                            for (int i = 0; i < list.size(); i++) {
-                                String item = list.get(i);
-                                if(body.getGender()!=null)
-                                if (!item.equals(body.getGender())) {
-                                    out.print("<option>" + item + "</option>");
-                                }
-                            }
+                <td>Gender:  </td> <td> <%
+                    if(body.getGender()!=null){
+              
+                            String list2 = t.makeReferenceList("gender", "type",body.getGender() );
+                            list2 = list2.replaceFirst("name='gender'", "name='deceasedgender'");
+                            list2 = list2.replaceFirst("id='gender'", "id='selDeceasedGenderDis'");
+                            out.println(list2);
+                    }
+                    else{
+                        String list2 = t.makeReferenceList("gender", "type","");
+                            list2 = list2.replaceFirst("name='gender'", "name='deceasedgender'");
+                            list2 = list2.replaceFirst("id='gender'", "id='selDeceasedGenderDis'");
+                            out.println(list2);
+                    }
                         %>
                     </select><input type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
             <tr>     
-                <td>Marital Status:  </td> <td> <select name="deceasedMartitalstatus">
-                        <option><%
-                            if(body.getMaritalStatus()!=null)
-                            out.print(body.getMaritalStatus());%></option>
-                        <%
-                            list = new Tools().getReferenceList("maritalstatus", "type");
-                            for (int i = 0; i < list.size(); i++) {
-                                String item = list.get(i);
-                                if(body.getMaritalStatus()!=null)
-                                if (!item.equals(body.getMaritalStatus())) {
-                                    out.print("<option>" + item + "</option>");
-                                }
-                            }
-                        %>
+                <td>Marital Status:  </td> <td>
+                    <%
+                     if(body.getMaritalStatus()!=null)
+                     {
+                         String list2 = t.makeReferenceList("maritalstatus", "type",body.getGender());
+                         list2 = list2.replaceFirst("name='maritalstatus'", "name='deceasedMaritalstatus'");
+                         list2 = list2.replaceFirst("id='maritalstatus'", "id='selDeceasedMaritalstatus'");
+                         out.println(list2);
+                     }
+                     else
+                     {
+                         String list2 = t.makeReferenceList("maritalstatus", "type","");
+                         list2 = list2.replaceFirst("name='maritalstatus'", "name='deceasedMaritalstatus'");
+                         list2 = list2.replaceFirst("id='maritalstatus'", "id='selDeceasedMaritalstatus'");
+                         out.println(list2);
+                     }
+                   %>
                     </select> </td>
             <tr>     
-                <td>Race:  </td> <td> <select name="deceasedrace" id="selDeceasedRaceDis">
-                        <option><%
-                            if(body.getRace()!=null)
-                            out.print(body.getRace());%></option>
-                        <%
-                           list = new Tools().getReferenceList("race", "type");
-                            for (int i = 0; i < list.size(); i++) {
-                                String item = list.get(i);
-
-                                //if(body.getRace()=null){
-
-                                if (!item.equals(body.getRace())) {
-                                    out.print("<option>" + item + "</option>");
-                                }
-                            }
-                        %>
-                    </select><input type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis',0);"/> </td>
+                <td>Race:  </td> <td>
+                     <%if(body.getMaritalStatus()!=null)
+                     {
+                         String list2 = t.makeReferenceList("race", "type",body.getGender());
+                         list2 = list2.replaceFirst("name='race'", "name='deceasedrace'");
+                         list2 = list2.replaceFirst("id='race'", "id='selDeceasedRaceDis'");
+                         out.println(list2);
+                     }
+                     else
+                     {
+                         String list2 = t.makeReferenceList("race", "type","");
+                         list2 = list2.replaceFirst("name='race'", "name='deceasedrace'");
+                         list2 = list2.replaceFirst("id='race'", "id='selDeceasedRaceDis'");
+                         out.println(list2);
+                     }%>
+             <input type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis',0);"/> </td>
             <tr>     
-                <td>Occupation:  </td> <td> <select name="deceasedOccupation">
-                        <option><%
-                            if(body.getOccupation()!=null)
-                            out.print(body.getOccupation());%></option>
-                        
-                        <%
-                            list = new Tools().getReferenceList("occupation", "type");
-                            for (int i = 0; i < list.size(); i++) {
-                                String item = list.get(i);
-                                if(body.getOccupation()!=null)
-                                if (!item.equals(body.getOccupation())) {
-                                    out.print("<option>" + item + "</option>");
-                                }
-                            }
-                        %>
-                    </select> </td>
+                <td>Occupation:  </td> <td>
+                        <%if(body.getMaritalStatus()!=null)
+                     {
+                         String list2 = t.makeReferenceList("occupation", "type",body.getGender());
+                         list2 = list2.replaceFirst("name='occupation'", "name='deceasedOccupation'");
+                         list2 = list2.replaceFirst("id='occupation'", "id='selDeceasedOccupation'");
+                         out.println(list2);
+                     }
+                     else
+                     {
+                         String list2 = t.makeReferenceList("occupation", "type","");
+                         list2 = list2.replaceFirst("name='occupation'", "name='deceasedOccupation'");
+                         list2 = list2.replaceFirst("id='occupation'", "id='selDeceasedOccupation'");
+                         out.println(list2);
+                     }%> </td>
             <tr>
                 <td> Citizenship:</td> <td> <input type="text" name="deceasedCitizenship" <%
                             if(body.getCitizen()!=null)
@@ -226,17 +235,17 @@
                                                             });
                 </script>
                 <td> Body Identified Date:     </td><td>  
-                    <div class="input-append date " id="DAidentdatepicker">
-                        <input size="16" id="DA" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" />
+                     <div class="input-append date " name="DAidentdatepicker">
+                        <input size="16" id="IdentifiedDate" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" value="" readonly/>
                         <span class="add-on"><i class="icon-calendar"></i></span> 
-                    </div>
+                     </div>
                     <br>
                 </td>
             </tr>
             <tr>
                 <td> Body Identified Time:</td><td>
-                    <div class="input-append date " id="Tidenttimepicker">
-                        <input size="16" id="DAT" name="deceasedbodyIdentifiedTime" data-format="hh:mm" type="text" />
+                    <div class="input-append date " name="Tidenttimepicker">
+                        <input size="16" id="DAT" name="deceasedbodyIdentifiedTime" data-format="hh:mm" type="text" value="" readonly/>
                         <span class="add-on"><i class="icon-time"></i></span> 
                     </div>
                     <br>

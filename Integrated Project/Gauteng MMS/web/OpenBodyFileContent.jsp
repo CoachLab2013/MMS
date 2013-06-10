@@ -18,6 +18,7 @@
                     vertical-align: top; 
                 }
             </style>
+            <script src="js/OpenBodyFile.js"></script>
     </head>
     <body>
         <legend>Open body files </legend>
@@ -25,9 +26,11 @@
          <%
             Tools t = new Tools();
 
-            out.println(t.openbodyfile("opentable"));
+            out.println(t.makeOpenBodyFileTable("openbodytable"));
 
             %>
+            <input type="hidden" id="selectedbody" name="selectedbody" />
+            
             <br>
             
             <table>

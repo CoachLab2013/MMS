@@ -74,9 +74,22 @@
                 </div>
             </div>
 
-
             <div class="control-group">
-                <label class="control-label" for="atMortBodyID">ID number</label>
+                <label class="control-label" for="recieve_at_scene_id_type">Identification type</label>
+
+
+                <div class="controls">
+                    <select id="recieve_at_mort_id_type" name="recieve_at_mort_id_type">
+                        <option selected="selected">Select</option>
+                        <option>ID</option>
+                        <option>Passport</option>
+                    </select>
+                    <label id="no_id_type" class="error" style="display:none;">Please select an identification type</label>
+                </div>
+            </div>
+                
+            <div class="control-group">
+                <label class="control-label" for="atMortBodyID">Identification number</label>
                 <div class="controls">
                     <input type="text" name="atMortBodyID" id="atMortBodyID"/> 
                 </div>
@@ -177,14 +190,21 @@
             <div class="control-group">
                 <label class="control-label" for="atMortFPSpropertyDescr">Description</label> 
                 <div class="controls">
-                    <textarea cols="50" rows="3" id="atMortFPSpropertyDescr" name="atMortFPSpropertyDescr"> </textarea>
+                    <textarea cols="50" rows="3" id="atMortFPSpropertyDescr" name="atMortFPSpropertyDescr"></textarea>
+                     <label class="error" id="no_fps_description_mort" style="display:none;">Please complete the description</label>
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="atMortFPSpropertyPersal">Persal number:</label> 
                 <div class="controls">
-                    <input type="text" name="atMortFPSpropertyPersal" id="atMortFPSpropertyPersal"/> 
+                    <%
+                            String list4 = t.makeReferenceList("employee", "personnelNumber", "");
+                            list4 = list4.replaceFirst("name='employee'", "name='atMortFPSpropertyPersal'");
+                            list4 = list4.replaceFirst("id='employee'", "id='atMortFPSpropertyPersal'");
+                            out.println(list4);
+                        %>
+                        <label class="error" id="no_fps_persal_mort" style="display:none;">Please select a persal number</label>
                 </div>
             </div>
 
