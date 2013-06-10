@@ -75,8 +75,10 @@ public class AtSceneServlet extends HttpServlet {
             pathologistOnScene.setName(request.getParameter("pathologistBodyName"));
             pathologistOnScene.setSurname(request.getParameter("pathologistBodySurname"));
             //pathologistOnScene.setPersonnelNumber(request.getParameter(null));
-            //pathologistOnScene.setContactNumber(request.getParameter(null)); //SAPS
-            pathologistOnScene.setRank(request.getParameter("pathologistBodyRank"));
+            //pathologistOnScene.setContactNumber(request.getParameter(null));
+            if (request.getParameter("pathologistBodyRank").equals("Select")!=true){
+                pathologistOnScene.setRank(request.getParameter("pathologistBodyRank"));
+            }
             pathologistOnScene.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
             //end of Pathologist on scene
         }else{
@@ -108,7 +110,9 @@ public class AtSceneServlet extends HttpServlet {
             SAPSmemeber.setSurname(request.getParameter("SAPSmemberBodySurname"));
             SAPSmemeber.setContactNumber(request.getParameter("SAPSmemberBodyCell"));
             SAPSmemeber.setOrganization("SAPS"); //SAPS
-            SAPSmemeber.setRank(request.getParameter("SAPSmemberBodyRank"));
+            if (request.getParameter("SAPSmemberBodyRank").equals("Select")!=true){
+                SAPSmemeber.setRank(request.getParameter("SAPSmemberBodyRank"));
+            }
             SAPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         // end of SAPS member
         
@@ -117,8 +121,10 @@ public class AtSceneServlet extends HttpServlet {
             FPSmemeber.setName(request.getParameter("FPSmemberBodyName"));
             FPSmemeber.setSurname(request.getParameter("FPSmemberBodySurname"));
             FPSmemeber.setPersonnelNumber(request.getParameter("FPSmemberBodyPersal"));
-            FPSmemeber.setContactNumber(request.getParameter("FPSmemberBodyCell")); //SAPS
-            FPSmemeber.setRank(request.getParameter("FPSmemberBodyRank"));
+            FPSmemeber.setContactNumber(request.getParameter("FPSmemberBodyCell"));
+            if (request.getParameter("FPSmemberBodyRank").equals("Select")!=true){
+                FPSmemeber.setRank(request.getParameter("FPSmemberBodyRank"));
+            }
             FPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         //end of FPS member
            
@@ -141,11 +147,11 @@ public class AtSceneServlet extends HttpServlet {
             bodyAddress.setSuburb(request.getParameter("atSceneBodyAddressSuburb"));
             bodyAddress.setCity(request.getParameter("atSceneBodyAddressCity"));
             bodyAddress.setPostCode(request.getParameter("atSceneBodyAddressPostalCode"));
-            if (request.getParameter("atSceneBodyAddressProvince").equals("Select")!=true){
-                bodyAddress.setProvince(request.getParameter("atSceneBodyAddressProvince"));
+            if (request.getParameter("province").equals("Select")!=true){
+                bodyAddress.setProvince(request.getParameter("province"));
             }
-            if (request.getParameter("atSceneBodyAddressRegion").equals("Select")!=true){
-                bodyAddress.setRegion(request.getParameter("atSceneBodyAddressRegion"));
+            if (request.getParameter("region").equals("Select")!=true){
+                bodyAddress.setRegion(request.getParameter("region"));
             }
             bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
         //end of building body address
@@ -291,7 +297,7 @@ public class AtSceneServlet extends HttpServlet {
         incidentDb.init();
         out.println(incidentDb.IncreaseBodyCount());
         
-        //response.sendRedirect("Home.jsp");
+        response.sendRedirect("Home.jsp");
 
     }
     

@@ -105,11 +105,11 @@ public class AtMortuaryServlet extends HttpServlet {
             //bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
         //end of building body address
         bodyAtMortuary.setBodyAddress(bodyAddress);
-        if (request.getParameter("Race").equals("Select")!=true){
-            bodyAtMortuary.setRace(request.getParameter("Race"));
+        if (request.getParameter("race").equals("Select")!=true){
+            bodyAtMortuary.setRace(request.getParameter("race"));
         }
-        if (request.getParameter("Gender").equals("Select")!=true){
-            bodyAtMortuary.setGender(request.getParameter("Gender"));
+        if (request.getParameter("gender").equals("Select")!=true){
+            bodyAtMortuary.setGender(request.getParameter("gender"));
         }
         if (request.getParameter("atMortuaryBodyEstAge").equals("Age")!=true){
             if(request.getParameter("at_mortuary_body_estimated_age").equals("Months")){
@@ -190,7 +190,7 @@ public class AtMortuaryServlet extends HttpServlet {
         out.println(incidentDb.read());
         incidentDb.init();
         out.println(incidentDb.IncreaseBodyCount());
-        //response.sendRedirect("Home.jsp");*/
+        response.sendRedirect("Home.jsp");
 
     }
 
