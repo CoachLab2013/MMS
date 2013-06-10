@@ -27,12 +27,14 @@ public class Reports_Excel {
     public static void main(String[] args) {
         Connection connection = new DatabaseConnector(DbDetail.staticDBDetail).init();
 
-        new File("Reports/Weekly/").mkdirs();
-
-        new Report_OpenBodyFile("./Reports/Weekly/" + new SimpleDateFormat("yyyy-").format(Calendar.getInstance().getTime()) + "Week" + new SimpleDateFormat("-w").format(Calendar.getInstance().getTime()) + " Report - Body File - Open", connection).createReport();
-        new Report_ClosedBodyFile("./Reports/Weekly/" + new SimpleDateFormat("yyyy-").format(Calendar.getInstance().getTime()) + "Week" + new SimpleDateFormat("-w").format(Calendar.getInstance().getTime()) + " Report - Body File - Closed", connection).createReport();
-        new Report_OutstandingResults("./Reports/Weekly/" + new SimpleDateFormat("yyyy-").format(Calendar.getInstance().getTime()) + "Week" + new SimpleDateFormat("-w").format(Calendar.getInstance().getTime()) + " Report - Outstanding Results", connection).createReport();
-        new Report_UnidentifiedBodies("./Reports/Weekly/" + new SimpleDateFormat("yyyy-").format(Calendar.getInstance().getTime()) + "Week" + new SimpleDateFormat("-w").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies", connection).createReport();
+        new File("Reports/Weekly/Body File").mkdirs();
+        new File("Reports/Weekly/Outstanding Results").mkdirs();
+        new File("Reports/Weekly/Unidentified Bodies").mkdirs();
+        
+        new Report_OpenBodyFile("./Reports/Weekly/Body File/" + new SimpleDateFormat("yyyy-").format(Calendar.getInstance().getTime()) + "Week" + new SimpleDateFormat("-w").format(Calendar.getInstance().getTime()) + " Report - Body File - Open", connection).createReport();
+        new Report_ClosedBodyFile("./Reports/Weekly/Body File/" + new SimpleDateFormat("yyyy-").format(Calendar.getInstance().getTime()) + "Week" + new SimpleDateFormat("-w").format(Calendar.getInstance().getTime()) + " Report - Body File - Closed", connection).createReport();
+        new Report_OutstandingResults("./Reports/Weekly/Outstanding Results/" + new SimpleDateFormat("yyyy-").format(Calendar.getInstance().getTime()) + "Week" + new SimpleDateFormat("-w").format(Calendar.getInstance().getTime()) + " Report - Outstanding Results", connection).createReport();
+        new Report_UnidentifiedBodies("./Reports/Weekly/Unidentified Bodies/" + new SimpleDateFormat("yyyy-").format(Calendar.getInstance().getTime()) + "Week" + new SimpleDateFormat("-w").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies", connection).createReport();
 
     }
 }

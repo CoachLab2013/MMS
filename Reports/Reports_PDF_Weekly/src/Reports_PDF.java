@@ -22,8 +22,8 @@ public class Reports_PDF {
     public static void main(String[] args) {    
         Connection connection = new DatabaseConnector(DbDetail.staticDBDetail).init();
                 
-        new File("Reports/Weekly/").mkdirs();
+        new File("Reports/Weekly/Specific Body").mkdirs();
         
-        new Report_SpecificBody("./Reports/Weekly/" + new SimpleDateFormat("yyyy-").format(Calendar.getInstance().getTime()) + "Week" + new SimpleDateFormat("-w").format(Calendar.getInstance().getTime()) + " Report - Specific Body", connection).createReport();         
+        new Report_SpecificBody("./Reports/Weekly/Specific Body/" + new SimpleDateFormat("yyyy-").format(Calendar.getInstance().getTime()) + "Week" + new SimpleDateFormat("-w").format(Calendar.getInstance().getTime()) + " Report - Specific Body", connection).createReport();         
     }
 }
