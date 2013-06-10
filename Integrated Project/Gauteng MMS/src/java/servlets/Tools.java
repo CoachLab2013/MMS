@@ -656,7 +656,6 @@ public class Tools {
         String icon = "<link rel='shortcut icon' href='Images/icon.ico'>";
         return icon;
     }
-<<<<<<< HEAD
     
     public Boolean accessReport(int access, String report) {
         
@@ -722,7 +721,8 @@ public class Tools {
         }
         
         return result;
-=======
+    }
+    
     public String checkDate(String inDate){
         if (inDate.equals("")){
             return "0000-00-00";
@@ -730,13 +730,13 @@ public class Tools {
             return inDate;
         }
     }
+    
     public String checkTime(String inTime){
         if (inTime.equals("")){
             return "00:00";
         }else{
             return inTime;
         }
->>>>>>> origin/master
     }
 }
 //end Tools class
