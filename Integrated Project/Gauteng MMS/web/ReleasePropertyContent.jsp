@@ -26,7 +26,7 @@
  <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
     </head>
     <body>
-        <form name="releasepropertyform" id="releasepropertyform" method="post" action="">
+        <form name="releasepropertyform" id="releasepropertyform" method="post" action="ReleasePropertyServlet">
             <legend>Release Property</legend>
              <%   
                    out.println(new Tools().makePropertyTable());

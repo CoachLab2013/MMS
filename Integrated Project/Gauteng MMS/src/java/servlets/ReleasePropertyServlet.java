@@ -40,25 +40,33 @@ public class ReleasePropertyServlet extends HttpServlet {
             throws ServletException, IOException
     {
         response.setContentType("text/html;charset=UTF-8");
-        Witness[] witnesses = {new Witness(request.getParameter("Witness1name"),request.getParameter("Witness1surname")),new Witness(request.getParameter("Witness2name"),request.getParameter("Witness2surname"))};
-        Property prop = new Property(Integer.parseInt(request.getParameter("selectedproperty")));
-        PropertyDb propertyDb = new PropertyDb(new Tools().getDbdetail(),prop);
-        propertyDb.init();
-        propertyDb.read();
-        
-        prop = propertyDb.getProperty();
-        prop.setWitnesses(witnesses);
-        propertyDb.setProperty(prop);
-        
-        propertyDb.init();
-        propertyDb.edit();
-        InformantProperty property = new InformantProperty(request.getParameter("formantname"), request.getParameter("formantsurname"), request.getParameter("Adres"), request.getParameter("propertydescription"), request.getParameter("cash"), request.getParameter("othergood"), witnesses, "099888592");
-        InformantPropertyDb proDb = new InformantPropertyDb(new Tools().getDbdetail(), property);
-        proDb.init();
-        proDb.add();
-        HttpSession sess = request.getSession();
-        sess.setAttribute("informantDetail", "Kin details added successfully");
-        response.sendRedirect("Home.jsp");
+        String id = request.getParameter("selectedproperty");
+        if(!id.equals(""))
+        {
+            Witness[] witnesses = {new Witness(request.getParameter("Witness1name"),request.getParameter("Witness1surname")),new Witness(request.getParameter("Witness2name"),request.getParameter("Witness2surname"))};
+            Property prop = new Property(Integer.parseInt(id));
+            PropertyDb propertyDb = new PropertyDb(new Tools().getDbdetail(),prop);
+            propertyDb.init();
+            propertyDb.read();
+
+            prop = propertyDb.getProperty();
+            prop.setWitnesses(witnesses);
+            propertyDb.setProperty(prop);
+
+            propertyDb.init();
+            propertyDb.edit();
+            InformantProperty property = new InformantProperty(request.getParameter("formantname"), request.getParameter("formantsurname"), request.getParameter("Adres"), request.getParameter("propertydescription"), request.getParameter("cash"), request.getParameter("othergood"), witnesses, "099888592");
+            InformantPropertyDb proDb = new InformantPropertyDb(new Tools().getDbdetail(), property);
+            proDb.init();
+            proDb.add();
+            HttpSession sess = request.getSession();
+            sess.setAttribute("informantDetail", "Kin details added successfully");
+            response.sendRedirect("Home.jsp");
+        }
+        else
+        {
+            response.sendRedirect("Home.jsp");
+        }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

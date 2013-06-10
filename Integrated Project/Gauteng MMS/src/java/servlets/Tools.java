@@ -23,9 +23,9 @@ public class Tools {
  
 
   
-    public Tools() {
-
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
+    public Tools() 
+    {
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
     }
     //end constructor
 
@@ -416,35 +416,49 @@ public class Tools {
     public String makeOpenBodyFileTable(String id){
         BodyDb bdyDb = new BodyDb(dbdetail);
         BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
-        bdyDb.init();
-        bdyfileDb.init();
+       
+        
         String table = "<table class='tabledisplay' id='" + id + "'>"
-                    + "<th class='tableheading'>Deah Register Number</th>"
+                    + "<th class='tableheading'>Death Register Number</th>"
                     + "<th class='tableheading'>Date Body Recieved</th>"
                     + "<th class='tableheading'>Incident Log Number</th>"
                     + "<th class='tableheading'>Status</th>";
         try {
-
+            bdyfileDb.init();
             ArrayList<BodyFile> bodyfilelist = bdyfileDb.BodyFileList();
+            
             int size = bodyfilelist.size();
             for (int i = 0; i < size; i++) {
+                
                 BodyFile file = bodyfilelist.get(i);
                 String deathregister = file.getDeathRegisterNumber();
                 BodyAtMortuary body = new BodyAtMortuary(deathregister);
-                BodyDb bdb  = new BodyDb(dbdetail, body);
-                bdb.read();
+                bdyDb.setBody(body);
+                bdyDb.init();
+                bdyDb.read();
+                body = (BodyAtMortuary) bdyDb.getBody();
                 Incident inc = body.getIncident();
+                String status = "";
+                if(file.getBodyFileStatus())
+                {
+                    status = "closed";
+                }
+                else
+                {
+                    status = "open";
+                }
                 table = table + "<tr class='tablerow' deathregisternumber='" + file.getDeathRegisterNumber() + "'>"
-                        + "<td>" + file.getDateFileOpened() + "</td>"
-                        + "<td class='tablecell'>" + inc.getIncidentLogNumber() + "</td>"
-                        + "<td class='tablecell'>" + file.getBodyFileStatus() + "</td>"
+                        + "<td>" + file.getDeathRegisterNumber() + "</td>"
+                        + "<td class='tablecell'>" +body.getDateBodyReceived()  + "</td>"
+                         + "<td class='tablecell'>" + inc.getIncidentLogNumber() + "</td>"
+                        + "<td class='tablecell'>" + status + "</td>"
                         + "</tr>";
             }
             table = table + "</table>";
 
             return table;
         } catch (Exception e) {
-            return table;
+            return e.getMessage();
         }
     }
     
@@ -496,14 +510,14 @@ public class Tools {
 
 
             String table = "<table class='tabledisplay' id='" + id + "'>"
-                    + "<th class='tableheading'>Deah Register Number</th>"
+                    + "<th class='tableheading'>Death Register Number</th>"
                     + "<th class='tableheading'>Incident number</th>"                
                     + "<th class='tableheading'>Deceased body recieved</th>"
                     + "<th class='tableheading'>status</th>";
 
           
             while(rs.next()){
-                  table = table +"<tr class='tablerow' lognumber='"+rs.getString("idDeathRegisterNumber")+"'>"
+                  table = table +"<tr class='tablerow' regnumber='"+rs.getString("idDeathRegisterNumber")+"'>"
                    +"<td>"+  rs.getString("idDeathRegisterNumber") +"</td>"
                  + "<td class='tablecell'>" + rs.getString("incident_incidentLogNumber") +"</td>"
                   + "<td class='tablecell'>" + rs.getString("dateBodyReceived") +"</td>"
@@ -547,7 +561,7 @@ public class Tools {
     
     public BodyAtMortuary getBody(String deathRegisterNumber)
     {
-        BodyAtMortuary body = new BodyAtMortuary(deathRegisterNumber);//"099888592");
+        BodyAtMortuary body = new BodyAtMortuary(deathRegisterNumber);
         BodyDb bodyDb = new BodyDb(dbdetail, body);
         bodyDb.init();
         bodyDb.read();
@@ -611,10 +625,12 @@ public class Tools {
         idb.init();
         ArrayList<Incident> list = new ArrayList<Incident>();
         String out = "<select name='" + listname + "' id='" + listname + "'>";
-        try {
+        try 
+        {
             list = idb.openIncidentList();
             
-            if (selected.equals("")) {
+            if (selected.equals(""))
+            {
                 out = out + "<option selected='slected'>Select</option>";
             }
             int size = list.size();
