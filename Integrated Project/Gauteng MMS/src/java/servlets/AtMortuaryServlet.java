@@ -83,7 +83,12 @@ public class AtMortuaryServlet extends HttpServlet {
         bodyAtMortuary.setBodyType(request.getParameter("BodyPart"));
         bodyAtMortuary.setNameOfDeceased(request.getParameter("atMortBodyName"));
         bodyAtMortuary.setSurnameOfDeceased(request.getParameter("atMortBodySurname"));
-        bodyAtMortuary.setID(request.getParameter("atMortBodyID"));
+        if (request.getParameter("recieve_at_mort_id_type").equals("ID")){
+            bodyAtMortuary.setID(request.getParameter("atMortBodyID"));
+        }else if (request.getParameter("recieve_at_mort_id_type").equals("Passport")){
+            bodyAtMortuary.setPassport(request.getParameter("atMortBodyID"));
+        }
+        
         //building body address
             BodyAddress bodyAddress = new BodyAddress();
             bodyAddress.setBuilding(request.getParameter("atMortuaryBodyAddressBuilding"));
@@ -91,30 +96,39 @@ public class AtMortuaryServlet extends HttpServlet {
             bodyAddress.setSuburb(request.getParameter("atMortuaryBodyAddressSuburb"));
             bodyAddress.setCity(request.getParameter("atMortuaryBodyAddressCity"));
             bodyAddress.setPostCode(request.getParameter("atMortuaryAddressPostalCode"));
-            bodyAddress.setProvince(request.getParameter("province"));
-            bodyAddress.setRegion(request.getParameter("region"));
+            if (request.getParameter("province").equals("Select")!=true){
+                bodyAddress.setProvince(request.getParameter("province"));
+            }
+            if (request.getParameter("region").equals("Select")!=true){
+                bodyAddress.setRegion(request.getParameter("region"));
+            }
             //bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
         //end of building body address
         bodyAtMortuary.setBodyAddress(bodyAddress);
-        bodyAtMortuary.setRace(request.getParameter("Race"));
-        bodyAtMortuary.setGender(request.getParameter("Gender"));
+        if (request.getParameter("Race").equals("Select")!=true){
+            bodyAtMortuary.setRace(request.getParameter("Race"));
+        }
+        if (request.getParameter("Gender").equals("Select")!=true){
+            bodyAtMortuary.setGender(request.getParameter("Gender"));
+        }
         if (request.getParameter("atMortuaryBodyEstAge").equals("Age")!=true){
             if(request.getParameter("at_mortuary_body_estimated_age").equals("Months")){
                 bodyAtMortuary.setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+                bodyAtMortuary.setAgeOnDateFound(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge"))); //not given by UI
             }else if(request.getParameter("at_mortuary_body_estimated_age").equals("Years")){
                 bodyAtMortuary.setEstimatedAgeYear(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+                bodyAtMortuary.setAgeOnDateFound(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge"))); //not given by UI
             }
         }
         //end of Body details
-        //body fields that are not given by the UI input
+        /*/body fields that are not given by the UI input
         bodyAtMortuary.setDateOfBirth("0000-00-00");
-        bodyAtMortuary.setAgeOnDateFound(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
         bodyAtMortuary.setIdentifiedDateTime("0000-00-00 00:00");
         bodyAtMortuary.setBodyStatus(false);
         bodyAtMortuary.setDateBodyReceived("0000-00-00");
         bodyAtMortuary.setDateBodyReleased("0000-00-00");
         bodyAtMortuary.setBodyReleased(false);
-        bodyAtMortuary.setBodyReleaseTo(null);
+        bodyAtMortuary.setBodyReleaseTo(null);*/
         //end of body fiels that are not given by the UI
         
         //inserting body into database

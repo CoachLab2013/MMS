@@ -137,13 +137,21 @@ public class AtSceneServlet extends HttpServlet {
             bodyAddress.setSuburb(request.getParameter("atSceneBodyAddressSuburb"));
             bodyAddress.setCity(request.getParameter("atSceneBodyAddressCity"));
             bodyAddress.setPostCode(request.getParameter("atSceneBodyAddressPostalCode"));
-            bodyAddress.setProvince(request.getParameter("atSceneBodyAddressProvince"));
-            bodyAddress.setRegion(request.getParameter("atSceneBodyAddressRegion"));
+            if (request.getParameter("atSceneBodyAddressProvince").equals("Select")!=true){
+                bodyAddress.setProvince(request.getParameter("atSceneBodyAddressProvince"));
+            }
+            if (request.getParameter("atSceneBodyAddressRegion").equals("Select")!=true){
+                bodyAddress.setRegion(request.getParameter("atSceneBodyAddressRegion"));
+            }
             bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
         //end of building body address
         bodyAtScene.getBody().setBodyAddress(bodyAddress);
-        bodyAtScene.getBody().setRace(request.getParameter("race"));
-        bodyAtScene.getBody().setGender(request.getParameter("gender"));
+        if (request.getParameter("race").equals("Select")!=true){
+            bodyAtScene.getBody().setRace(request.getParameter("race"));
+        }
+        if (request.getParameter("gender").equals("Select")!=true){
+            bodyAtScene.getBody().setGender(request.getParameter("gender"));
+        }
         if(request.getParameter("atSceneBodyEstAge").equals("Age")!=true){
             if(request.getParameter("at_scene_body_estimated_age_type").equals("Month")){
                 bodyAtScene.getBody().setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
@@ -154,14 +162,14 @@ public class AtSceneServlet extends HttpServlet {
             }
             
         }
-        //body fields that are not given by the UI input
+        /*/body fields that are not given by the UI input
         bodyAtScene.getBody().setDateOfBirth("0000-00-00");
         bodyAtScene.getBody().setIdentifiedDateTime("0000-00-00 00:00");
         bodyAtScene.getBody().setBodyStatus(false);
         bodyAtScene.getBody().setDateBodyReceived("0000-00-00");
         bodyAtScene.getBody().setDateBodyReleased("0000-00-00");
         bodyAtScene.getBody().setBodyReleased(false);
-        bodyAtScene.getBody().setBodyReleaseTo(null);
+        bodyAtScene.getBody().setBodyReleaseTo(null);*/
         //end of body fiels that are not given by the UI
         //end of Body details
         
