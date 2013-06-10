@@ -28,14 +28,14 @@ public class Reports_PDF {
     public static void main(String[] args) {    
         Connection connection = new DatabaseConnector(DbDetail.staticDBDetail).init();
                 
-        new File("Reports/PDF/Monthly/").mkdirs();
+        new File("Reports/Monthly/").mkdirs();
         
-        new Report_AuditTrail("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Audit Trail Statistics", connection).createReport();
-        new Report_BodiesByOrganisation("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Bodies By Organisation", connection).createReport();
-        new Report_FacilityStorage("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Facility Storage", connection).createReport();
-        new Report_MannerOfDeath("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Manner of Death", connection).createReport();
-        new Report_MannerOfDeathStatistics("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Manner of Death Statistics", connection).createReport();
-        new Report_UnidentifiedBodiesStatistics("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies Statistics", connection).createReport();
-        new Report_TurnAroundOnResults("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Turn Around on Results", connection).createReport();
+        new Report_AuditTrail("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Audit Trail Statistics", connection).createReport();
+        new Report_BodiesByOrganisation("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Bodies By Organisation", connection).createReport();
+        new Report_FacilityStorage("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Facility Storage", connection).createReport();
+        new Report_MannerOfDeath("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Manner of Death", connection).createReport();
+        new Report_MannerOfDeathStatistics("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Manner of Death Statistics", connection).createReport();
+        new Report_UnidentifiedBodiesStatistics("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies Statistics", connection).createReport();
+        new Report_TurnAroundOnResults("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Turn Around on Results", connection).createReport();
     }
 }

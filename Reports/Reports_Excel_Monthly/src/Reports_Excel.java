@@ -27,12 +27,12 @@ public class Reports_Excel {
     public static void main(String[] args) {
         Connection connection = new DatabaseConnector(DbDetail.staticDBDetail).init();
 
-        new File("Reports/Excel/Monthly/").mkdirs();
+        new File("Reports/Monthly/").mkdirs();
 
-        new Report_AuditTrail("./Reports/Excel/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Audit Trail", connection).createReport();
-        new Report_OpenBodyFile("./Reports/Excel/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Body File - Open", connection).createReport();
-        new Report_ClosedBodyFile("./Reports/Excel/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Body File - Closed", connection).createReport();
-        new Report_UnidentifiedBodies("./Reports/Excel/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies", connection).createReport();
+        new Report_AuditTrail("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Audit Trail", connection).createReport();
+        new Report_OpenBodyFile("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Body File - Open", connection).createReport();
+        new Report_ClosedBodyFile("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Body File - Closed", connection).createReport();
+        new Report_UnidentifiedBodies("./Reports/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies", connection).createReport();
 
     }
 }
