@@ -49,13 +49,9 @@
         <div class="head"><img class="img-rounded" style=" width:100%" src="Images/logo10.jpg"></div>
 
         <div class="menutab">
-<<<<<<< HEAD
+ 
             <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif"><a href="LogOutServlet">Logout</a></span>
-=======
-
-            <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif"><a href="LogOutServlet">Logout</a></span>
-
->>>>>>> origin/master
+ 
         </div>
 
         <%
@@ -1554,7 +1550,7 @@
                                                                                     %>
                                                                                     <option><% out.print(slTypeList.get(i));%> </option>
 
-<<<<<<< HEAD
+ 
                                                                                 <%
                                                                                     }
                                                                                 %>
@@ -1576,8 +1572,7 @@
                                                                         </div> 
                                                                         <%--Display save result --%> 
                                                                         <div  class="offset3">
-                                                                            <label  > <% out.println(String.valueOf(slTypeResult));%></label>
->>>>>>> origin/master
+                                                                            <label> <% out.println(String.valueOf(slTypeResult));%> 
                                                                         </div>
                                                                         <br/>
                                                                         <br/>
