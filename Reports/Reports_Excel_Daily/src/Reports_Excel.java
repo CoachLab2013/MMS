@@ -24,8 +24,8 @@ public class Reports_Excel {
     public static void main(String[] args) {
         Connection connection = new DatabaseConnector(DbDetail.staticDBDetail).init();
 
-        new File("Reports/Excel/Daily/").mkdirs();
+        new File("Reports/Daily/Incident Housekeeping").mkdirs();
 
-        new Report_IncidentHouseKeeping("./Reports/Excel/Daily/" + new SimpleDateFormat("yyyy-MMMM-dd").format(Calendar.getInstance().getTime()) + " Report - Incident Housekeeping", connection).createReport();
+        new Report_IncidentHouseKeeping("./Reports/Daily/Incident Housekeeping/" + new SimpleDateFormat("yyyy-MMMM-dd").format(Calendar.getInstance().getTime()) + " Report - Incident Housekeeping", connection).createReport();
     }
 }

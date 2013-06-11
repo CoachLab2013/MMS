@@ -159,8 +159,52 @@ $(document).ready(function() {
         deleteRow('atSceneFPSpropertyTable','fps_tr');
     });
     
+    $("#atMortFPSpropertyPersal").blur(function(){
+        if($("#atMortFPSpropertyPersal option").filter(':selected').text() == "Select"){
+            $("#no_fps_persal_mort").show();
+        }
+        else{
+             $("#no_fps_persal_mort").hide();
+        }
+    });
+    
+    $("#atMortFPSpropertyDescr").blur(function(){
+        if($("#atMortFPSpropertyDescr").val().length == 0){
+            $("#no_fps_description_mort").show();           
+        }
+        else{
+            $("#no_fps_description_mort").hide();            
+        }
+    });
+    
     $("#at_mort_fps_add").click(function(){
-        displayResult2('atMortFPSpropertyTable', 'atMortFPSpropertyDescr', 'atMortFPSpropertyPersal', 'fps_property_counter_mort');
+        var error1 = false;
+        var error2 = false;        
+        if($("#atMortFPSpropertyDescr").val().length == 0){
+            $("#no_fps_description_mort").show();
+            error1 = true;
+        }
+        else{
+            $("#no_fps_description_mort").hide();
+            error1 =false;
+        }
+        
+        if($("#atMortFPSpropertyPersal option").filter(':selected').text() == "Select"){
+            $("#no_fps_persal_mort").show();
+            error2 = true;
+        }
+        else{
+             $("#no_fps_persal_mort").hide();
+            error2 = false;
+        }
+        if(!(error1) & !(error2)){            
+            displayResult2('atMortFPSpropertyTable', 'atMortFPSpropertyDescr', 'atMortFPSpropertyPersal', 'fps_property_counter_mort');
+            $("#atMortFPSpropertyDescr").val("");
+            $("#atMortFPSpropertyPersal option").filter(function() { 
+                return ($(this).text() == 'Select');
+            }).prop('selected', true);
+        }
+        
     })
     
     $("#at_mort_fps_delete").click(function(){

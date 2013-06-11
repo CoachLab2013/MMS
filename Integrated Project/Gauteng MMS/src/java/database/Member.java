@@ -19,7 +19,13 @@ public class Member
     private String deathRegisterNumber;
     public Member()
     {
-        
+        this.name = "null";
+        this.surname = "null";
+        this.rank = "null";
+        this.personnelNumber = "null";
+        this.organization = "null";
+        this.contactNumber = "null";
+        this.deathRegisterNumber = "null";
     }
     public Member(String name,String surname,String rank,String personnelNumber,String organization,String contactNumber,String deathRegisterNumber)
     {

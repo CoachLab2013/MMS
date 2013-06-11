@@ -199,10 +199,11 @@ public class BodyDb extends DatabaseConnector{
     public String read(){
         try 
         {
-            statement.executeQuery("SELECT * FROM Body WHERE idDeathRegisterNumber="+ body.getDeathRegisterNumber() +";");
+            statement.executeQuery("SELECT * FROM Body WHERE idDeathRegisterNumber='"+ body.getDeathRegisterNumber() +"';");
             ResultSet resultSet = statement.getResultSet();
-            if(resultSet.next());
-            {
+            resultSet.next();
+                body = new BodyAtMortuary();
+                body.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
                 body.setAgeOnDateFound(resultSet.getInt("ageOnDateFound"));
                 body.setAssignedTo(resultSet.getString("assignedTo"));
                 body.setBodyReleased(resultSet.getBoolean("bodyReleased"));
@@ -212,7 +213,6 @@ public class BodyDb extends DatabaseConnector{
                 body.setDateBodyReceived(resultSet.getString("dateBodyReceived"));
                 body.setDateBodyReleased(resultSet.getString("dateBodyReleased"));
                 body.setDateOfBirth(resultSet.getString("dateOfBirth"));
-                body.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
                 body.setEstimatedAgeMonth(resultSet.getInt("estimatedAgeMonth"));
                 body.setEstimatedAgeYear(resultSet.getInt("estimatedAgeYear"));
                 body.setGender(resultSet.getString("gender"));
@@ -228,11 +228,10 @@ public class BodyDb extends DatabaseConnector{
                 body.setSurnameOfDeceased(resultSet.getString("surnameOfDeceased"));
                 body.setBodyReleaseTo(resultSet.getString("bodyReleasedTo"));
                 body.setBodyAddress(getBodyAddress());
+                getBodyAtMortuary();
                 IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
                 incidentDb.init();
                 incidentDb.read();
-                body.setIncident(incidentDb.getIncident());
-            }
             statement.close();
             connection.close();
         } 
