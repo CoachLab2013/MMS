@@ -32,7 +32,7 @@ public class Reports_PDF {
         
         new Report_AuditTrail("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Audit Trail Statistics", connection).createReport();
         new Report_BodiesByOrganisation("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Bodies By Organisation", connection).createReport();
-        new Report_FacilityStorage("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Facility Storage", connection).createReport();
+        //new Report_FacilityStorage("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Facility Storage", connection).createReport();
         new Report_MannerOfDeath("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Manner of Death", connection).createReport();
         new Report_MannerOfDeathStatistics("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Manner of Death Statistics", connection).createReport();
         new Report_UnidentifiedBodiesStatistics("./Reports/PDF/Monthly/" + new SimpleDateFormat("yyyy-MMMM").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies Statistics", connection).createReport();

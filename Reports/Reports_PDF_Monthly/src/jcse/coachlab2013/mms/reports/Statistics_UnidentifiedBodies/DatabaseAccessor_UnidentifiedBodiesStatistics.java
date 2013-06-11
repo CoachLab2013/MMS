@@ -33,12 +33,14 @@ public class DatabaseAccessor_UnidentifiedBodiesStatistics extends Template_Data
         try {
             
             preparedStatement = connection.prepareStatement("SELECT `dim_mannerofdeath`.`deathType` AS `deathManner`, sum(countBody) AS `numPeople`\n" +
-                "FROM `reporting database`.`fact_body`\n" +
-                "\n" +
-                "LEFT JOIN `reporting database`.`dim_mannerofdeath` ON `dim_mannerofdeath`.`mannerofdeath_SK` = `reporting database`.`fact_body`.`FK_MannerOfDeath_SK`\n" +
-                "LEFT JOIN `reporting database`.`dim_bodystatus` ON `dim_bodystatus`.`bodyStatus_SK` = `reporting database`.`fact_body`.`FK_BodyStatus_SK`\n" +
-                "WHERE `dim_bodystatus`.`bodyStatusDescription` = \"Unidentified\"\n" +
-                "GROUP BY `dim_mannerofdeath`.`deathType`;");           
+"FROM `reporting database`.`fact_body`\n" +
+"LEFT JOIN `reporting database`.`dim_mannerofdeath`\n" +
+"ON `dim_mannerofdeath`.`mannerofdeath_SK` = `reporting database`.`fact_body`.`FK_MannerOfDeath_SK`\n" +
+"LEFT JOIN `reporting database`.`dim_bodystatus` \n" +
+"ON `dim_bodystatus`.`bodyStatus_SK` = `reporting database`.`fact_body`.`FK_BodyStatus_SK`\n" +
+"WHERE `dim_bodystatus`.`bodyStatusDescription` = \"Unidentified\" and \n" +
+"EXTRACT(MONTH FROM TIMESTAMP (`reporting database`.fact_body.dateInserted))=MONTH(NOW())\n" +
+"GROUP BY `dim_mannerofdeath`.`deathType`;");           
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {
