@@ -35,7 +35,9 @@ public abstract class Body
     protected Incident incident;
     protected String bodyType;
     protected String dateBodyReleased;
-    protected String bodyReleasedTo;
+    private String bodyReleasedTo;
+    //added on 11/06/2013
+    private String bodyReleasedType;
     public Body()
     {
         this.deathRegisterNumber = "null";
@@ -64,6 +66,7 @@ public abstract class Body
         this.bodyType = "null";
         this.dateBodyReleased = "0001-01-01";
         this.bodyReleasedTo = "null";
+        this.bodyReleasedType = "null";
     }
     public Body(String deathRegisterNumber)
     {
@@ -93,8 +96,9 @@ public abstract class Body
         this.bodyType = "null";
         this.dateBodyReleased = "0001-01-01";
         this.bodyReleasedTo = "null";
+        this.bodyReleasedType = "null";
     }
-    public Body(String deathRegisterNumber,String gender,String race,String assignedTo,String nameOfDeceased,String surnameOfDeceased,String placeOfBirth,String dateOfBirth,int ageOnDateFound,String martitalStatus,String occupation,String citizen,String maidenName,String inIdentifiedDateTime,BodyAddress bodyAddress, int estimatedAgeYear, int estimatedAgeMonth, String ID, String passport, boolean bodyStatus, String dateBodyReceived, boolean bodyReleased, Incident incident, String bodyType, String dateBodyReleased,String bodyReleasedTo)
+    public Body(String deathRegisterNumber,String gender,String race,String assignedTo,String nameOfDeceased,String surnameOfDeceased,String placeOfBirth,String dateOfBirth,int ageOnDateFound,String martitalStatus,String occupation,String citizen,String maidenName,String inIdentifiedDateTime,BodyAddress bodyAddress, int estimatedAgeYear, int estimatedAgeMonth, String ID, String passport, boolean bodyStatus, String dateBodyReceived, boolean bodyReleased, Incident incident, String bodyType, String dateBodyReleased,String bodyReleasedTo, String bodyReleaseType)
     {
         this.deathRegisterNumber = deathRegisterNumber;
         this.gender = gender;
@@ -122,6 +126,7 @@ public abstract class Body
         this.bodyType = bodyType;
         this.dateBodyReleased = dateBodyReleased;
         this.bodyReleasedTo = bodyReleasedTo;
+        this.bodyReleasedType = bodyReleaseType;
     }
 
     //GET METHODS
@@ -494,7 +499,28 @@ public abstract class Body
     }
     public void setBodyReleaseTo(String bodyReleasedTo)
     {
+        this.setBodyReleasedTo(bodyReleasedTo);
+    }
+
+    /**
+     * @return the bodyReleasedType
+     */
+    public String getBodyReleasedType() {
+        return bodyReleasedType;
+    }
+
+    /**
+     * @param bodyReleasedTo the bodyReleasedTo to set
+     */
+    public void setBodyReleasedTo(String bodyReleasedTo) {
         this.bodyReleasedTo = bodyReleasedTo;
+    }
+
+    /**
+     * @param bodyReleasedType the bodyReleasedType to set
+     */
+    public void setBodyReleasedType(String bodyReleasedType) {
+        this.bodyReleasedType = bodyReleasedType;
     }
     
     
