@@ -66,13 +66,15 @@
         <servlet-class>servlets.LoadICD10Table</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
+ 
         <servlet-name>FilterRegionServlet</servlet-name>
         <servlet-class>servlets.FilterRegionServlet</servlet-class>
-=======
+    </servlet>
+    
+    <servlet>
         <servlet-name>LinkBodyContent</servlet-name>
         <servlet-class>servlets.LinkBodyContent</servlet-class>
->>>>>>> origin/master
+ 
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -135,13 +137,14 @@
         <url-pattern>/LoadICD10Table</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
+ 
         <servlet-name>FilterRegionServlet</servlet-name>
         <url-pattern>/FilterRegionServlet</url-pattern>
-=======
+   </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>LinkBodyContent</servlet-name>
         <url-pattern>/LinkBodyContent</url-pattern>
->>>>>>> origin/master
+ 
     </servlet-mapping>
     <session-config>
         <session-timeout>

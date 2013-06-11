@@ -50,12 +50,7 @@
         <title style="color:white">Gauteng Mortuary Management System</title>
         <div class="head"><img class="img-rounded" style=" width:100%" src="Images/logo10.jpg"></div>
             <%
-<<<<<<< HEAD
-                // Tools t = new Tools();
-=======
-                //Tools t = new Tools();
->>>>>>> origin/master
-                //t.adduser();  
+  
             %>
         <div class="menutab">
 
