@@ -31,7 +31,7 @@
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
     </head>
     <body>
-    <legend>Body File> Edit Body File> Body Identification> Deceased Details Contents </legend>
+    <legend>Deceased Details Contents </legend>
     <form name="Deceasedform" id="Deceasedform" method="post" action="DeceasedDetailsServlet">
 
         <script>
