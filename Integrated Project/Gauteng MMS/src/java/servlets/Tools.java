@@ -25,7 +25,7 @@ public class Tools {
   
     public Tools() 
     {
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
     }
     //end constructor
 
@@ -655,6 +655,88 @@ public class Tools {
     public String makeIcon(){
         String icon = "<link rel='shortcut icon' href='Images/icon.ico'>";
         return icon;
+    }
+    
+    public Boolean accessReport(int access, String report) {
+        
+        //FMANAGER = 0
+        //FOFFICER = 1
+        //CFMEDICALPRACTITIONER = 2
+        //FMEDICALPRACTITIONER = 3
+        //SYSADMIN = 4
+        
+        boolean result = false;
+        
+        switch(access) {
+
+            case 0:
+                if (report.equalsIgnoreCase("Incident HouseKeeping")
+                        || report.equalsIgnoreCase("Facility Storage")
+                        || report.equalsIgnoreCase("Unidentified Bodies")
+                        || report.equalsIgnoreCase("Body File")
+                        || report.equalsIgnoreCase("Bodies by Organization")
+                        || report.equalsIgnoreCase("Manner of Death")
+                        || report.equalsIgnoreCase("Turn Around on Results")) {
+                    result =  true;
+                };
+                break;
+            
+            case 1:
+                if (report.equalsIgnoreCase("Audit Trail")
+                        || report.equalsIgnoreCase("Incident HouseKeeping")
+                        || report.equalsIgnoreCase("Unidentified Bodies")
+                        || report.equalsIgnoreCase("Body File")
+                        || report.equalsIgnoreCase("Turn Around on Results")) {
+                    result =  true;
+                };
+                break;
+            
+            case 2:
+                if (report.equalsIgnoreCase("Incident HouseKeeping")
+                        || report.equalsIgnoreCase("Unidentified Bodies")
+                        || report.equalsIgnoreCase("Specific Body")
+                        || report.equalsIgnoreCase("Body File")
+                        || report.equalsIgnoreCase("Turn Around on Results")) {
+                    result =  true;
+                };
+                break;
+            
+            case 3:
+                if (report.equalsIgnoreCase("Incident HouseKeeping")
+                        || report.equalsIgnoreCase("Unidentified Bodies")
+                        || report.equalsIgnoreCase("Specific Body")
+                        || report.equalsIgnoreCase("Body File")
+                        || report.equalsIgnoreCase("Turn Around on Results")) {
+                    result =  true;
+                };
+                break;
+                
+            case 4:
+                if (report.equalsIgnoreCase("Audit Trail")) {
+                    result =  true;
+                };
+                break;
+    
+            default: result =  false;
+        }
+        
+        return result;
+    }
+    
+    public String checkDate(String inDate){
+        if (inDate.equals("")){
+            return "0000-00-00";
+        }else{
+            return inDate;
+        }
+    }
+    
+    public String checkTime(String inTime){
+        if (inTime.equals("")){
+            return "00:00";
+        }else{
+            return inTime;
+        }
     }
 }
 //end Tools class

@@ -4,40 +4,55 @@
     Author     : Mubien Nakhooda Coachlab 2013
 --%>
 
+<%@page import="java.io.File"%>
+<%@page import="servlets.Tools"%>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Reports</title>
+        <%! 
+            public String getFileList(HttpServletRequest request, String folder) {
+                String out = "";
+                int access = (Integer) request.getSession().getAttribute("accesslevel");
+                Tools tool = new Tools();
+                
+                File file = new File(request.getSession().getServletContext().getRealPath(request.getServletPath())).getParentFile();
+                file = new File(file.getPath() + "/" + folder);
+                File[] files = file.listFiles();
+                for (File tmpFile : files) {
+                    if (tmpFile.isFile()) {
+                        out += "<a href='" + folder + "/" + tmpFile.getName() + "'>" + tmpFile.getName() + "</a><br/>";
+                    } else {    
+                        if(tool.accessReport(access, tmpFile.getName())) {
+                            out += "<h5>" + tmpFile.getName() + "</h5>";
+                            out += getFileList(request, folder + "/" + tmpFile.getName());
+                        }
+                    }
+                }
+                return out;
+            }
+        %>
     </head>
     <body>
-        <h5>Unidentified Bodies Report</h5>
-            <a href="Reports/2013-06-03 Report - Unidentified Bodies.xlsx">2013-06-03 Report - Unidentified Bodies</a>        
-        <h5>Audit Trail Statistics Report</h5>
-            <a href="Reports/2013-05-27 Report - Audit Trail Statistics.pdf">2013-05-27 Report - Audit Trail Statistics</a>
-        <h5>Bodies By Organization Report</h5>
-            <a href="Reports/2013-05-27 Report - Bodies By Organisation.pdf">2013-05-27 Report - Bodies By Organization</a>
-            
-        <br/>
+    <legend>Reports</legend> 
+        <div class="tabbable tabs-left">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#Daily" data-toggle="tab">Daily</a></li>
+                <li><a href="#Weekly" data-toggle="tab">Weekly</a></li>
+                <li><a href="#Monthly" data-toggle="tab">Monthly</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="Daily">
+                    <%= getFileList(request, "Reports/Daily") %>                 
+                </div>
+                <div class="tab-pane" id="Weekly">
+                    <%= getFileList(request, "Reports/Weekly") %>
+                </div>
+                <div class="tab-pane" id="Monthly">
+                    <%= getFileList(request, "Reports/Monthly") %>
+                </div>
+            </div>
+        </div>
         
-        <h5>Audit Trail Report</h5>
-            <a href="#"></a>
-        <h5>Open Body File Report</h5>
-            <a href="#"></a>
-        <h5>Closed Body File Report</h5>
-            <a href="#"></a>
-        <h5>Incident Housekeeping Report</h5>
-            <a href="#"></a>
-        <h5>Outstanding Results Report</h5>
-            <a href="#"></a>
-        <h5>Manner of Death Report</h5>
-            <a href="#"></a>
-        <h5>Manner of Death Statistics Report</h5>
-            <a href="#"></a>
-        <h5>Specific Body Report</h5>
-            <a href="#"></a>
-        <h5>Turn Around on Results Report</h5>
-            <a href="#"></a>
-        <h5>Unidentified Bodies Statistics Report</h5>
-            <a href="#"></a>
     </body>
 </html>

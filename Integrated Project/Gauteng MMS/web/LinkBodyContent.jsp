@@ -20,6 +20,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <script type="text/javascript" src="js/LinkBodyContent.js"></script>
+        
+        <style type="text/css">
+            label.error { 
+                float: none; 
+                color: red; 
+                padding-left: .5em; 
+                vertical-align: top; 
+            }
+        </style>
+        
     </head>
     <body>
         <div id="NewBodyFiles" class="tab-pane ">
@@ -68,7 +78,10 @@
                     <th class='tableheading'>Deceased Identification Status</th>
                 </table>
                 <br>
+                <div  class="control-group form-horizontal">
                 <button id="linkButton" name="linkButton">Link Files</button>
+                <label class="error" style="display: none;">Please Select Non Duplicate or Correct Body File Numbers</label>
+                </div>
                 <br>
             </fieldset>
         </div>

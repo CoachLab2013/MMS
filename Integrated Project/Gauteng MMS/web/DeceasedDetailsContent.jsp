@@ -57,7 +57,9 @@
         <table>
             <tr>     
                  <% Tools t = new Tools();
+                 
                     BodyAtMortuary body = t.getBody("GP/DK//00002/2013");%>
+
                     <input type="hidden" name="deceasedDeathRegisterNr" <%out.print("value=" + body.getDeathRegisterNumber());%>  />
                 <td>Full Name(s):  </td> <td><input type="text" name="DeceasedName" id="txtDeceasedNameDis" <%
                     if(body.getNameOfDeceased()!=null)
