@@ -45,24 +45,24 @@ public abstract class Body
         this.nameOfDeceased = "null";
         this.surnameOfDeceased = "null";
         this.placeOfBirth = "null";
-        this.dateOfBirth = "0000-00-00";
+        this.dateOfBirth = "0001-01-01";
         this.ageOnDateFound = 0;
         this.maritalStatus = "null";
         this.occupation = "null";
         this.citizen = "null";
         this.maidenName = "null";
-        this.identifiedDateTime = "0000-00-00 00:00";
+        this.identifiedDateTime = "0001-01-01 00:00";
         this.bodyAddress = new BodyAddress();
         this.estimatedAgeYear = 0;
         this.estimatedAgeMonth = 0;
         this.ID = "null";
         this.passport = "null";
         this.bodyStatus = false;
-        this.dateBodyReceived = "0000-00-00";
+        this.dateBodyReceived = "0001-01-01";
         this.bodyReleased = false;
         this.incident = new Incident();
         this.bodyType = "null";
-        this.dateBodyReleased = "0000-00-00";
+        this.dateBodyReleased = "0001-01-01";
         this.bodyReleasedTo = "null";
     }
     public Body(String deathRegisterNumber)
@@ -74,24 +74,24 @@ public abstract class Body
         this.nameOfDeceased = "null";
         this.surnameOfDeceased = "null";
         this.placeOfBirth = "null";
-        this.dateOfBirth = "0000-00-00";
+        this.dateOfBirth = "0001-01-01";
         this.ageOnDateFound = 0;
         this.maritalStatus = "null";
         this.occupation = "null";
         this.citizen = "null";
         this.maidenName = "null";
-        this.identifiedDateTime = "0000-00-00 00:00";
+        this.identifiedDateTime = "0001-01-01 00:00";
         this.bodyAddress = new BodyAddress();
         this.estimatedAgeYear = 0;
         this.estimatedAgeMonth = 0;
         this.ID = "null";
         this.passport = "null";
         this.bodyStatus = false;
-        this.dateBodyReceived = "0000-00-00";
+        this.dateBodyReceived = "0001-01-01";
         this.bodyReleased = false;
         this.incident = new Incident();
         this.bodyType = "null";
-        this.dateBodyReleased = "0000-00-00";
+        this.dateBodyReleased = "0001-01-01";
         this.bodyReleasedTo = "null";
     }
     public Body(String deathRegisterNumber,String gender,String race,String assignedTo,String nameOfDeceased,String surnameOfDeceased,String placeOfBirth,String dateOfBirth,int ageOnDateFound,String martitalStatus,String occupation,String citizen,String maidenName,String inIdentifiedDateTime,BodyAddress bodyAddress, int estimatedAgeYear, int estimatedAgeMonth, String ID, String passport, boolean bodyStatus, String dateBodyReceived, boolean bodyReleased, Incident incident, String bodyType, String dateBodyReleased,String bodyReleasedTo)

@@ -658,7 +658,7 @@ public class Tools {
     }
     public String checkDate(String inDate){
         if (inDate.equals("")){
-            return "0000-00-00";
+            return "0001-01-01";
         }else{
             return inDate;
         }
