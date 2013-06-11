@@ -277,22 +277,19 @@ public class BodyDb extends DatabaseConnector{
             rSet.next();
             if (rSet.getString("bodyReceivedFromPerNumber") == null){
                 BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
-                bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandedOverToPerNumber"));
-                bodyAtMort.setBodyHandOverFromOrganization(rSet.getString("bodyHandOverFromOrganization"));
+                bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandOverFromPerNumber"));
                 bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
                 body = bodyAtMort;
             }else if(rSet.getString("bodyHandOverFromOrganization") == null){
                 BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
-                bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandedOverToPerNumber"));
+                bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandOverFromPerNumber"));
                 bodyAtMort.setBodyReceivedFromPerNumber(rSet.getString("bodyReceivedFromPerNumber"));
-                bodyAtMort.setBodyHandOverFromOrganization(rSet.getString("bodyHandOverFromOrganization"));
                 bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
                 body = bodyAtMort;
             }else{
                 BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
-                bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandedOverToPerNumber"));
+                bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandOverFromPerNumber"));
                 bodyAtMort.setBodyReceivedFromPerNumber(rSet.getString("bodyReceivedFromPerNumber"));
-                bodyAtMort.setBodyHandOverFromOrganization(rSet.getString("bodyHandOverFromOrganization"));
                 bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
                 body = bodyAtMort;
             }
@@ -311,9 +308,8 @@ public class BodyDb extends DatabaseConnector{
         ResultSet rSet = statement.getResultSet();
         rSet.next();
         BodyAtMortuary bodyAtMort = (BodyAtMortuary)body;
-        bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandedOverToPerNumber"));
+        bodyAtMort.setBodyHandedOverToPerNumber(rSet.getString("bodyHandOverFromPerNumber"));
         bodyAtMort.setBodyReceivedFromPerNumber(rSet.getString("bodyReceivedFromPerNumber"));
-        bodyAtMort.setBodyHandOverFromOrganization(rSet.getString("bodyHandOverFromOrganization"));
         bodyAtMort.setDeathRegisterNumber(rSet.getString("Body_idDeathRegisterNumber"));
         statement.close();
         connection.close();

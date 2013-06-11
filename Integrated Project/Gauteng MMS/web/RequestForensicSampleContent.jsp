@@ -64,12 +64,13 @@
                             <td> Seal Number:</td>  
                             <td>                                 
                                 <%
+                                    //session.setAttribute("death_register_number", "099888592");
                                     if (session.getAttribute("death_register_number") != null) {
                                             ArrayList<ForensicSample> list = new ArrayList();
                                             ForensicSampleDb sampleRefList = new ForensicSampleDb(new Tools().getDbdetail());
                                             sampleRefList.init();
                                             list = sampleRefList.SampleList("deathRegisterNumber", session.getAttribute("death_register_number").toString());
-                                            //list = sampleRefList.SampleList("deathRegisterNumber", "099888592");
+                                                                                        
                                             String output = "<select name='seal' id='seal'>";
 
                                             output = output + "<option selected='slected'>Select</option>";

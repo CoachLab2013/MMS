@@ -4,8 +4,6 @@
  */
 package servlets;
 
-import AssistiveClasses.SetDbDetail;
-import database.ForensicSampleDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mubien Nakhooda Coachlab 2013
  */
-public class LabRecordServlet extends HttpServlet {
+public class ReleaseBodyServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -33,22 +31,19 @@ public class LabRecordServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        SetDbDetail dbSet = new SetDbDetail();
-        
-        ForensicSampleDb sampleDB = new ForensicSampleDb(dbSet.getDbdetail());
-        sampleDB.init();
-        System.out.println("Fetch Sample: " + sampleDB.read(request.getParameter("seal")));
-        
-        sampleDB.getforensicSample().setDateReceived(request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day"));
-        sampleDB.getforensicSample().setReceived(true);
-        
-        System.out.println("Edit Sample Date Received: " + sampleDB.edit());
-        
-        request.getSession().setAttribute("_labRecord", "true");
-        response.sendRedirect("Home.jsp");
+        if (request.getParameter("type").equals("load")) {
+            PrintWriter out = response.getWriter();
+
+            try {
+                                
+//                DbDetail dbDetail = new SetDbDetail().getDbdetail();
+//                out.println();
+            } finally {
+                out.close();
+            }
+        } 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.
