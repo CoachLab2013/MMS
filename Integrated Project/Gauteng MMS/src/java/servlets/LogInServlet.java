@@ -49,6 +49,7 @@ public class LogInServlet extends HttpServlet {
             }
             else{
                 sess.setAttribute("loggedin", true);
+                sess.setAttribute("accesslevel", access);
                 if (access == 4){
                     response.sendRedirect("Admin.jsp");
                 }

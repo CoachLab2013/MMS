@@ -40,7 +40,7 @@ response.setDateHeader("Expires", 0); // Proxies.
             <script src="bootstrap/js/bootstrap.min.js"></script>
             <link type="text/css" rel="stylesheet"  href="CSS/Design.css"> 
             <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css"> 
-             <div class="head"><img src="Images/logo2.jpg">
+             <div class="head"><img class="img-rounded" style=" width:100%" src="Images/logo10.jpg"></div>
                  <% Tools t = new Tools();
             out.println(t.makeIcon());
         %>

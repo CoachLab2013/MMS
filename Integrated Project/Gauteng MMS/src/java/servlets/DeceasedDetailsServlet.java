@@ -8,6 +8,7 @@ import database.Body;
 import database.BodyAtMortuary;
 import database.BodyDb;
 import database.DbDetail;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -37,20 +38,37 @@ public class DeceasedDetailsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        BodyAtMortuary body = new BodyAtMortuary();
-        body.setNameOfDeceased(request.getParameter("DeceasedName"));
-        body.setMaidenName(request.getParameter("DeceasedMaidenName"));
-        
+        BodyAtMortuary body = new BodyAtMortuary(request.getParameter("deceasedDeathRegisterNr"));
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
-        BodyDb bodyDb = new BodyDb(dbdetail);
+        BodyDb bodyDb = new BodyDb(dbdetail,body);
         bodyDb.init();
-        
-        
-        //DeceasedMaidenName);
-        
-        
-        
+        bodyDb.read();
+        body.setNameOfDeceased(request.getParameter("DeceasedName"));
+        body.setMaidenName(request.getParameter("DeceasedMaidenName"));
+        body.setSurnameOfDeceased(request.getParameter("DeceasedSurname"));
+        //body.setIdentifiedDateTime(request.getParameter("deceasedbodyIdentifiedDate") + " " + request.getParameter("deceasedbodyIdentifiedTime"));
+        body.setPlaceOfBirth(request.getParameter("deceasedPlaceBirth"));
+        body.setDateOfBirth(request.getParameter("deceasedDateBirth"));
+        body.setAgeOnDateFound(Integer.parseInt(request.getParameter("deceasedage")));
+        body.setGender(request.getParameter("deceasedgender"));
+        body.setMaritalStatus(request.getParameter("deceasedMaritalstatus"));
+        body.setRace(request.getParameter("deceasedrace"));
+        body.setOccupation(request.getParameter("deceasedOccupation"));
+        body.setCitizen(request.getParameter("deceasedCitizenship"));
+        String bodyStatus = request.getParameter("deceasedBodyStatus");
+        if(bodyStatus.equals("identified"))
+        {
+             body.setBodyStatus(true);
+        }
+        else
+        {
+             body.setBodyStatus(false);
+        }
+        body.setAssignedTo(request.getParameter("deceasedFPS"));
+        bodyDb = new BodyDb(dbdetail,body);
+        bodyDb.init();
+        bodyDb.edit();
         HttpSession sess = request.getSession();
         sess.setAttribute("deceasedDetail", "Kin details added successfully");
         response.sendRedirect("Home.jsp");

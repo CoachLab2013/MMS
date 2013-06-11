@@ -35,8 +35,8 @@ public class ForensicSample {
         speacialInstructions = "";
         received = false;
         labNumber = "";
-        dateSent = "";
-        dateReceived = "";
+        dateSent = "0001-01-01";
+        dateReceived = "0001-01-01";
     }
 
     public ForensicSample(String sealNumber, String deathRegisterNumber, String reason, String sealType, String brokenSealNumber, String typeOfAnalysis, String institution, String speacialInstructions, boolean received, String labNumber, String dateSent, String dateReceived) {

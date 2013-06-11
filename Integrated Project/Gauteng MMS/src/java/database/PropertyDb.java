@@ -96,6 +96,7 @@ public class PropertyDb extends DatabaseConnector
             while(resultSet.next())
             {
                 Property prop = new Property();
+                prop.setIdProperty(resultSet.getInt("idProperty"));
                 prop.setSealNumber(resultSet.getString("sealNumber"));
                 prop.setDescription(resultSet.getString("description"));
                 prop.setDate(resultSet.getString("date"));

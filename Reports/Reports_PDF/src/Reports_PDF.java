@@ -1,13 +1,7 @@
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.File;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.AuditTrail.Report_AuditTrail;
 import jcse.coachlab2013.mms.reports.BodiesByOrganisation.Report_BodiesByOrganisation;
 import jcse.coachlab2013.mms.reports.DatabaseConnector;
@@ -18,8 +12,6 @@ import jcse.coachlab2013.mms.reports.FacilityStorage.Report_FacilityStorage;
 import jcse.coachlab2013.mms.reports.MannerOfDeath.Report_MannerOfDeath;
 import jcse.coachlab2013.mms.reports.SpecificBody.Report_SpecificBody;
 import jcse.coachlab2013.mms.reports.TurnAroundOnResults.Report_TurnAroundOnResults;
-
-
 
 /**
  * @author      Mubien Nakhooda <coachlab@jcse.org.za>
@@ -35,24 +27,17 @@ public class Reports_PDF {
      * @exception SQLException
     */
     public static void main(String[] args) {    
-        try
-        {
-            try (Connection connection = new DatabaseConnector(DbDetail.staticDBDetail).init()) {
+        Connection connection = new DatabaseConnector(DbDetail.staticDBDetail).init();
                 
-                Files.createDirectories(Paths.get("./Reports/PDF"));
-                new Report_AuditTrail("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Audit Trail Statistics", connection).createReport();
-                new Report_BodiesByOrganisation("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Bodies By Organisation", connection).createReport();
-                //new Report_FacilityStorage("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Facility Storage", connection).createReport();
-                new Report_MannerOfDeath("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Manner of Death", connection).createReport();
-                new Report_MannerOfDeathStatistics("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Manner of Death Statistics", connection).createReport();
-                new Report_UnidentifiedBodiesStatistics("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies Statistics", connection).createReport();
-                new Report_TurnAroundOnResults("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Turn Around on Results", connection).createReport();
-                new Report_SpecificBody("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Specific Body", connection).createReport();
-            }
-        } catch (SQLException | IOException ex) {
-            Logger.getLogger(Reports_PDF.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        new File("Reports/PDF/").mkdirs();
+        
+        new Report_AuditTrail("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Audit Trail Statistics", connection).createReport();
+        new Report_BodiesByOrganisation("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Bodies By Organisation", connection).createReport();
+        new Report_FacilityStorage("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Facility Storage", connection).createReport();
+        new Report_MannerOfDeath("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Manner of Death", connection).createReport();
+        new Report_MannerOfDeathStatistics("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Manner of Death Statistics", connection).createReport();
+        new Report_UnidentifiedBodiesStatistics("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Unidentified Bodies Statistics", connection).createReport();
+        new Report_TurnAroundOnResults("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Turn Around on Results", connection).createReport();
+        new Report_SpecificBody("./Reports/PDF/" + new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + " Report - Specific Body", connection).createReport();         
     }
 }
-
-

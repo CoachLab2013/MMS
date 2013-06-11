@@ -42,7 +42,7 @@ public class BodyDb extends DatabaseConnector{
     {
         try 
         {
-            statement.executeUpdate("INSERT INTO Body (idDeathRegisterNumber, gender, race, assignedTo, nameOfDeceased, surnameOfDeceased, placeOfBirth, dateOfBirth, ageOnDateFound, maritalStatus, occupation, citizen, maidenName, identifiedDateTime, estimatedAgeYear, estimatedAgeMonth, ID, passport, bodyStatus, dateBodyReceived, bodyReleased, Incident_incidentLogNumber, bodyType, dateBodyReleased,bodyReleasedTo) VALUES ('"
+            statement.executeUpdate("INSERT INTO Body (idDeathRegisterNumber, gender, race, assignedTo, nameOfDeceased, surnameOfDeceased, placeOfBirth, dateOfBirth, ageOnDateFound, maritalStatus, occupation, citizen, maidenName, identifiedDateTime, estimatedAgeYear, estimatedAgeMonth, ID, passport, bodyStatus, dateBodyReceived, bodyReleased, Incident_incidentLogNumber, bodyType, dateBodyReleased, bodyReleaseType, bodyReleasedTo) VALUES ('"
                     + body.getDeathRegisterNumber() + "','"+ body.getGender() +"','"
                     + body.getRace() +"','"+ body.getAssignedTo() +"','"
                     + body.getNameOfDeceased() +"','"+ body.getSurnameOfDeceased() +"','"
@@ -54,7 +54,7 @@ public class BodyDb extends DatabaseConnector{
                     + body.getPassport() +"',"+ body.isBodyStatus() +",'"
                     + body.getDateBodyReceived() +"',"+ body.isBodyReleased() +",'"
                     + body.getIncident().getIncidentLogNumber() +"','"+ body.getBodyType() 
-                    +"','"+ body.getDateBodyReleased()+"','"+ body.getBodyReleasedTo() +"')");
+                    +"','"+ body.getDateBodyReleased()+"','"+ body.getBodyReleasedType()+"','"+ body.getBodyReleasedTo() +"')");
             statement.close();
             connection.close(); 
         } 
@@ -199,10 +199,11 @@ public class BodyDb extends DatabaseConnector{
     public String read(){
         try 
         {
-            statement.executeQuery("SELECT * FROM Body WHERE idDeathRegisterNumber="+ body.getDeathRegisterNumber() +";");
+            statement.executeQuery("SELECT * FROM Body WHERE idDeathRegisterNumber='"+ body.getDeathRegisterNumber() +"';");
             ResultSet resultSet = statement.getResultSet();
-            if(resultSet.next());
-            {
+            resultSet.next();
+                body = new BodyAtMortuary();
+                body.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
                 body.setAgeOnDateFound(resultSet.getInt("ageOnDateFound"));
                 body.setAssignedTo(resultSet.getString("assignedTo"));
                 body.setBodyReleased(resultSet.getBoolean("bodyReleased"));
@@ -212,7 +213,6 @@ public class BodyDb extends DatabaseConnector{
                 body.setDateBodyReceived(resultSet.getString("dateBodyReceived"));
                 body.setDateBodyReleased(resultSet.getString("dateBodyReleased"));
                 body.setDateOfBirth(resultSet.getString("dateOfBirth"));
-                body.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
                 body.setEstimatedAgeMonth(resultSet.getInt("estimatedAgeMonth"));
                 body.setEstimatedAgeYear(resultSet.getInt("estimatedAgeYear"));
                 body.setGender(resultSet.getString("gender"));
@@ -227,12 +227,12 @@ public class BodyDb extends DatabaseConnector{
                 body.setRace(resultSet.getString("race"));
                 body.setSurnameOfDeceased(resultSet.getString("surnameOfDeceased"));
                 body.setBodyReleaseTo(resultSet.getString("bodyReleasedTo"));
+                body.setBodyReleasedType(resultSet.getString("bodyReleaseType"));
                 body.setBodyAddress(getBodyAddress());
+                getBodyAtMortuary();
                 IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
                 incidentDb.init();
                 incidentDb.read();
-                body.setIncident(incidentDb.getIncident());
-            }
             statement.close();
             connection.close();
         } 
@@ -423,8 +423,9 @@ public class BodyDb extends DatabaseConnector{
                     + "bodyReleased=" + body.isBodyReleased() + ","
                     + "bodyType='" + body.getBodyType() + "',"
                     + "dateBodyReleased='" + body.getDateBodyReleased() + "',"
-                    + "bodyReleasedTo='" + body.getBodyReleasedTo() + "'"
-                    + "WHERE idDeathRegisterNumber='"+ body.getDeathRegisterNumber() + "' AND Incident_incidentLogNumber='" + body.getIncident().getIncidentLogNumber() +"';");
+                    + "bodyReleasedTo='" + body.getBodyReleasedTo() + "',"
+                    + "bodyReleaseType='" + body.getBodyReleasedType() + "'"
+                    + " WHERE idDeathRegisterNumber='"+ body.getDeathRegisterNumber() + "';");
             statement.close();
             connection.close();
         } 

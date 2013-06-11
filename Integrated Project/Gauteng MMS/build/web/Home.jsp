@@ -28,9 +28,17 @@
         </style>
         <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
-
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">   
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
+        
+        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
+        <script src="bootstrap/js/bootstrap-tabs.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <link type="text/css" rel="stylesheet"  href="CSS/Design.css">
+        <link  type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        
+         
+        
         <title>Gauteng Mortuary Management System</title>
         <% Tools t = new Tools();
             out.println(t.makeIcon());
@@ -42,7 +50,11 @@
         <title style="color:white">Gauteng Mortuary Management System</title>
         <div class="head"><img class="img-rounded" style=" width:100%" src="Images/logo10.jpg"></div>
             <%
+<<<<<<< HEAD
                 // Tools t = new Tools();
+=======
+                //Tools t = new Tools();
+>>>>>>> origin/master
                 //t.adduser();  
             %>
         <div class="menutab">
@@ -67,23 +79,20 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs " data-tabs="tabs">
                     <li id="IncidentTab" class="active"><a href="#Incident" data-toggle="tab">Incidents</a> </li>
-                    <li id ="BodyFileTab"><a href="#BodyFile" data-toggle="tab">Body File</a></li>
-                    <li id ="ReportsTab"><a href="#Reports" data-toggle="tab">Reports</a></li>    
+                    <li id="BodyFileTab"><a href="#BodyFile" data-toggle="tab">Body File</a></li>
+                    <li id="ReportsTab"> <a href="#Reports" data-toggle="tab"> Reports</a> </li>
                 </ul>
                 <div class="tab-content" >
                     <div id="Incident" class="tab-pane active">  
                         <jsp:include page="IncidentsTabContent.jsp" /> 
-
                     </div>
-                    <div id="BodyFile" class="tab-pane"> 
-
+                    
+                    <div id="BodyFile" class="tab-pane "> 
                         <jsp:include page= "BodyFileTabContent.jsp"/>
                     </div>
-                    <div id="Reports" class="tab-pane"> 
-
+                    <div id="Reports" class="tab-pane "> 
                         <jsp:include page= "ReportsTabContent.jsp"/>
-                    </div>       
-
+                    </div>
                 </div>          
             </div>
 

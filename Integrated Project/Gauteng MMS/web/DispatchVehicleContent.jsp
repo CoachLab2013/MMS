@@ -60,7 +60,7 @@
                 %>
                 </td>
             </tr>
-            <tr><td></td><td><input type="submit" id="dispatch" value="Dsipatch Vehicle" /><input type="reset" value="Cancel" id="vehiclecancel" /></td>
+            <tr><td></td><td><input type="submit" id="dispatch" value="Dispatch Vehicle" /><input type="reset" value="Cancel" id="vehiclecancel" /></td>
             </tr>
         </table>
     </form>  

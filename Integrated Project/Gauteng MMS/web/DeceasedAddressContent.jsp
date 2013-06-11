@@ -25,25 +25,22 @@
  <script src="js/DeceasedAddressContentScript.js"></script>
     </head>
     <body>
-        <legend>Body File> Edit Body File> Body Identification> Deceased Address Details </legend>
-        <form name="DeceasedAddressform" id="DeceasedAddressform" method="post" action="">
+        <legend>Deceased Address Details </legend>
+        <form name="DeceasedAddressform" id="DeceasedAddressform" method="post" action="DeceasedAddressServlet">
       
           
                 <table>
-                    <tr>     
-                        <td>Building:  </td> <td><input type="text" name="deceasedbuilding" <% Tools t = new Tools();
-                    BodyAtMortuary body = t.getBody("099888592");
+                    <tr> 
+                        <% Tools t = new Tools(); BodyAtMortuary body = t.getBody("GP/DK//00002/2013");%>
+                        <input type="hidden" name="deceasedDeathRegisterNr2" <%out.print("value=" + body.getDeathRegisterNumber());%> />
+                        <td>Building:  </td> <td><input type="text" name="deceasedbuilding" <% 
                     if(body.getBodyAddress().getBuilding()!=null)
                     out.print("value =" + body.getBodyAddress().getBuilding());%> /></td>  
                     </tr>
                      <tr>     
-<<<<<<< HEAD
-                        <td>Street:  </td> <td><input type="text" name="deceasedstreet"  /></td>  
-=======
                         <td>Street:  </td> <td><input type="text" name="deceaesedstreet" <%
                     if(body.getBodyAddress().getStreet()!=null)
                     out.print("value =" + body.getBodyAddress().getStreet());%> /></td>  
->>>>>>> origin/master
                     </tr>
                     <tr>
                         <td>Suburb:</td> <td> <input type="text" name="deceasedsub" <%
@@ -61,43 +58,37 @@
                     out.print("value =" + body.getBodyAddress().getPostCode());%>  /> </td>
                     </tr> 
                     <tr>     
-                        <td>Province:  </td> <td> <select name="province">
-                        <option><%
-                    if(body.getBodyAddress().getProvince()!=null)
-                    out.print(body.getBodyAddress().getProvince());%></option>
-                        <%
-                            ArrayList<String> list = new Tools().getReferenceList("province", "type");
-                            for (int i = 0; i < list.size(); i++) {
-                                String item = list.get(i);
-                                if(body.getBodyAddress().getProvince()!=null)
-                                if (!item.equals(body.getBodyAddress().getProvince())) {
-                                    
-                                    if(item != null)
-                                    out.print("<option>" + item + "</option>");
-                                }
-                            }
-                        %>
-                    </select> </td>
+                        <td>Province:  </td> <td> 
+                    <%
+                     if(body.getMaritalStatus()!=null)
+                     {
+                         String list2 = t.makeReferenceList("province", "type",body.getGender());
+                         out.println(list2);
+                     }
+                     else
+                     {
+                         String list2 = t.makeReferenceList("province", "type","");
+                         out.println(list2);
+                     }
+                   %>
+                     </td>
                       
                     </tr>
                      <tr>     
-                        <td>Region:  </td> <td> <select name="region">
-                        <option><%
-                            if(body.getBodyAddress().getRegion()!=null)
-                            out.print(body.getBodyAddress().getRegion());%></option>
-                         <%
-                            list = new Tools().getReferenceList("region", "type");
-                            for (int i = 0; i < list.size(); i++) {
-                                String item = list.get(i);
-                                if(body.getBodyAddress().getRegion()!=null)
-                                if (!item.equals(body.getBodyAddress().getRegion())) {
-                                    
-                                    if(item != null)
-                                    out.print("<option>" + item + "</option>");
-                                }
-                            }
-                        %>
-                    </select> </td>
+                        <td>Region:  </td> <td> 
+                            <%
+                     if(body.getMaritalStatus()!=null)
+                     {
+                         String list2 = t.makeReferenceList("region", "type",body.getGender());
+                         out.println(list2);
+                     }
+                     else
+                     {
+                         String list2 = t.makeReferenceList("region", "type","");
+                         out.println(list2);
+                     }
+                   %>
+                    </td>
                       
                     </tr>
                         <tr>     

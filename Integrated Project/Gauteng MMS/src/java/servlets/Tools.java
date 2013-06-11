@@ -3,7 +3,6 @@ package servlets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
-import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,11 +22,10 @@ public class Tools {
      */
  
 
-  
-    public Tools() {
 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
- 
+    public Tools() 
+    {
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
     }
     //end constructor
 
@@ -246,9 +244,10 @@ public class Tools {
         }
     }
     //end getReferenceList
+    
     public String makeICD10List(String listname, String field1, String field2, String selected, String def) {
-        ArrayList<String> list1 = new ArrayList<String>();
-        ArrayList<String> list2 = new ArrayList<String>();
+        ArrayList<String> list1;
+        ArrayList<String> list2;
         list1 = this.getReferenceList(listname, field1);
         list2 = this.getReferenceList(listname, field2);
         String out = "<select name='" + listname + "' id='" + listname + "'>";
@@ -269,6 +268,32 @@ public class Tools {
         return out;
     }
 
+    public String makeICD10List(String listname, String field1, String field2, String field3, String selected, String def) {
+        ArrayList<String> list1;
+        ArrayList<String> list2;
+        ArrayList<String> list3;
+        list1 = this.getReferenceList(listname, field1);
+        list2 = this.getReferenceList(listname, field2);
+        list3 = this.getReferenceList(listname, field3);
+        String out = "<select name='" + listname + "' id='" + listname + "'>";
+        if (selected.equals("")) {
+            out = out + "<option selected='slected'>"+def+"</option>";
+        }
+        int size = list1.size();
+        for (int i = 0; i < size; i++) {
+            String element1 = list1.get(i);
+            String element2 = list2.get(i);
+            String element3 = list3.get(i);
+            if (element1.equals(selected)) {
+                out = out + "<option selected='selected'>" + element1 + " "+ element2 + " (" + element3 + ") " + "</option>";
+            } else {
+                out = out + "<option>" + element1 + " "+ element2 + " (" + element3 + ") " + "</option>";
+            }
+        }
+        out = out + "</select>";
+        return out;
+    }
+    
     public String makeReferenceList(String listname, String field, String selected) {
         ArrayList<String> list = new ArrayList<String>();
         list = this.getReferenceList(listname, field);
@@ -341,7 +366,7 @@ public class Tools {
       public String bodyRelease(String id){ //change
      
        // BodyFile bf = new BodyFile(id);
-       BodyDb bdyDb = new BodyDb(getDbdetail());
+       BodyDb bdyDb = new BodyDb(dbdetail);
 
         bdyDb.init();
         try {
@@ -391,35 +416,49 @@ public class Tools {
     public String makeOpenBodyFileTable(String id){
         BodyDb bdyDb = new BodyDb(dbdetail);
         BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
-        bdyDb.init();
-        bdyfileDb.init();
+       
+        
         String table = "<table class='tabledisplay' id='" + id + "'>"
-                    + "<th class='tableheading'>Deah Register Number</th>"
+                    + "<th class='tableheading'>Death Register Number</th>"
                     + "<th class='tableheading'>Date Body Recieved</th>"
                     + "<th class='tableheading'>Incident Log Number</th>"
                     + "<th class='tableheading'>Status</th>";
         try {
-
+            bdyfileDb.init();
             ArrayList<BodyFile> bodyfilelist = bdyfileDb.BodyFileList();
+            
             int size = bodyfilelist.size();
             for (int i = 0; i < size; i++) {
+                
                 BodyFile file = bodyfilelist.get(i);
                 String deathregister = file.getDeathRegisterNumber();
                 BodyAtMortuary body = new BodyAtMortuary(deathregister);
-                BodyDb bdb  = new BodyDb(dbdetail, body);
-                bdb.read();
+                bdyDb.setBody(body);
+                bdyDb.init();
+                bdyDb.read();
+                body = (BodyAtMortuary) bdyDb.getBody();
                 Incident inc = body.getIncident();
+                String status = "";
+                if(file.getBodyFileStatus())
+                {
+                    status = "closed";
+                }
+                else
+                {
+                    status = "open";
+                }
                 table = table + "<tr class='tablerow' deathregisternumber='" + file.getDeathRegisterNumber() + "'>"
-                        + "<td>" + file.getDateFileOpened() + "</td>"
-                        + "<td class='tablecell'>" + inc.getIncidentLogNumber() + "</td>"
-                        + "<td class='tablecell'>" + file.getBodyFileStatus() + "</td>"
+                        + "<td>" + file.getDeathRegisterNumber() + "</td>"
+                        + "<td class='tablecell'>" +body.getDateBodyReceived()  + "</td>"
+                         + "<td class='tablecell'>" + inc.getIncidentLogNumber() + "</td>"
+                        + "<td class='tablecell'>" + status + "</td>"
                         + "</tr>";
             }
             table = table + "</table>";
 
             return table;
         } catch (Exception e) {
-            return e.toString();
+            return e.getMessage();
         }
     }
     
@@ -471,14 +510,14 @@ public class Tools {
 
 
             String table = "<table class='tabledisplay' id='" + id + "'>"
-                    + "<th class='tableheading'>Deah Register Number</th>"
+                    + "<th class='tableheading'>Death Register Number</th>"
                     + "<th class='tableheading'>Incident number</th>"                
                     + "<th class='tableheading'>Deceased body recieved</th>"
                     + "<th class='tableheading'>status</th>";
 
           
             while(rs.next()){
-                  table = table +"<tr class='tablerow' lognumber='"+rs.getString("idDeathRegisterNumber")+"'>"
+                  table = table +"<tr class='tablerow' regnumber='"+rs.getString("idDeathRegisterNumber")+"'>"
                    +"<td>"+  rs.getString("idDeathRegisterNumber") +"</td>"
                  + "<td class='tablecell'>" + rs.getString("incident_incidentLogNumber") +"</td>"
                   + "<td class='tablecell'>" + rs.getString("dateBodyReceived") +"</td>"
@@ -519,16 +558,45 @@ public class Tools {
         call = calldb.getDeathCall();
         return call;
     }
+    
     public BodyAtMortuary getBody(String deathRegisterNumber)
     {
-        BodyAtMortuary body = new BodyAtMortuary(deathRegisterNumber);//"099888592");
-        Tools t = new Tools();
-        DbDetail dbdetail = t.getDbdetail();
+        BodyAtMortuary body = new BodyAtMortuary(deathRegisterNumber);
         BodyDb bodyDb = new BodyDb(dbdetail, body);
         bodyDb.init();
         bodyDb.read();
         body = (BodyAtMortuary)bodyDb.getBody();
         return body;
+    }
+    public String makePropertyTable()
+    {
+        PropertyDb pDb = new PropertyDb(dbdetail);
+        pDb.init();
+        String table;
+        try 
+        {
+            ArrayList<Property> properties = pDb.properties();
+            table = "<table class='tabledisplay' id='propertytable'>"
+                    + "<th class='tableheading'>Property Type</th>"
+                    + "<th class='tableheading'>Description</th>"
+                    + "<th class='tableheading'>Seal Number</th>";
+            int size = properties.size();
+            for (int i = 0; i < size; i++) 
+            {
+                Property property = properties.get(i);
+                table = table + "<tr class='tablerow' name='propertyId' proId='" + property.getIdProperty() + "'>"
+                        + "<td>" + property.getType() + "</td>"
+                        + "<td class='tablecell'>" + property.getDescription() + "</td>"
+                        + "<td class='tablecell'>" + property.getSealNumber() + "</td>"
+                        + "</tr>";
+            }
+            table = table + "</table>";
+        } 
+        catch (Exception e) 
+        {
+            table = e.getMessage();
+        }
+        return table;
     }
     //
 
@@ -544,7 +612,8 @@ public class Tools {
         char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
-        for (int i = 0; i < len_password; i++) {
+        for (int i = 0; i < len_password; i++) 
+        {
             char c = chars[random.nextInt(chars.length)];
             sb.append(c);
         }
@@ -557,10 +626,12 @@ public class Tools {
         idb.init();
         ArrayList<Incident> list = new ArrayList<Incident>();
         String out = "<select name='" + listname + "' id='" + listname + "'>";
-        try {
+        try 
+        {
             list = idb.openIncidentList();
             
-            if (selected.equals("")) {
+            if (selected.equals(""))
+            {
                 out = out + "<option selected='slected'>Select</option>";
             }
             int size = list.size();
@@ -585,6 +656,88 @@ public class Tools {
     public String makeIcon(){
         String icon = "<link rel='shortcut icon' href='Images/icon.ico'>";
         return icon;
+    }
+    
+    public Boolean accessReport(int access, String report) {
+        
+        //FMANAGER = 0
+        //FOFFICER = 1
+        //CFMEDICALPRACTITIONER = 2
+        //FMEDICALPRACTITIONER = 3
+        //SYSADMIN = 4
+        
+        boolean result = false;
+        
+        switch(access) {
+
+            case 0:
+                if (report.equalsIgnoreCase("Incident HouseKeeping")
+                        || report.equalsIgnoreCase("Facility Storage")
+                        || report.equalsIgnoreCase("Unidentified Bodies")
+                        || report.equalsIgnoreCase("Body File")
+                        || report.equalsIgnoreCase("Bodies by Organization")
+                        || report.equalsIgnoreCase("Manner of Death")
+                        || report.equalsIgnoreCase("Turn Around on Results")) {
+                    result =  true;
+                };
+                break;
+            
+            case 1:
+                if (report.equalsIgnoreCase("Audit Trail")
+                        || report.equalsIgnoreCase("Incident HouseKeeping")
+                        || report.equalsIgnoreCase("Unidentified Bodies")
+                        || report.equalsIgnoreCase("Body File")
+                        || report.equalsIgnoreCase("Turn Around on Results")) {
+                    result =  true;
+                };
+                break;
+            
+            case 2:
+                if (report.equalsIgnoreCase("Incident HouseKeeping")
+                        || report.equalsIgnoreCase("Unidentified Bodies")
+                        || report.equalsIgnoreCase("Specific Body")
+                        || report.equalsIgnoreCase("Body File")
+                        || report.equalsIgnoreCase("Turn Around on Results")) {
+                    result =  true;
+                };
+                break;
+            
+            case 3:
+                if (report.equalsIgnoreCase("Incident HouseKeeping")
+                        || report.equalsIgnoreCase("Unidentified Bodies")
+                        || report.equalsIgnoreCase("Specific Body")
+                        || report.equalsIgnoreCase("Body File")
+                        || report.equalsIgnoreCase("Turn Around on Results")) {
+                    result =  true;
+                };
+                break;
+                
+            case 4:
+                if (report.equalsIgnoreCase("Audit Trail")) {
+                    result =  true;
+                };
+                break;
+    
+            default: result =  false;
+        }
+        
+        return result;
+    }
+    
+    public String checkDate(String inDate){
+        if (inDate.equals("")){
+            return "0001-01-01";
+        }else{
+            return inDate;
+        }
+    }
+    
+    public String checkTime(String inTime){
+        if (inTime.equals("")){
+            return "00:00";
+        }else{
+            return inTime;
+        }
     }
 }
 //end Tools class

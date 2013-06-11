@@ -4,6 +4,9 @@
     Author     : Lady
 --%>
 
+<%@page import="database.Property"%>
+<%@page import="database.PropertyDb"%>
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,14 +21,20 @@
                 }
             </style>
 <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
-        <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
  <script src="js/ReleasePropertyContentScript.js"></script>
+ <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
     </head>
     <body>
-        <form name="releasepropertyform" id="releasepropertyform" method="post" action="">
-                <table>
+        <form name="releasepropertyform" id="releasepropertyform" method="post" action="ReleasePropertyServlet">
+            <legend>Release Property</legend>
+             <%   
+                   out.println(new Tools().makePropertyTable());
+             %>
+                    <input type="hidden" id="selectedproperty" name="selectedproperty" />
                     
-                             <tr>
+                <table>
+                        <tr>
                                 <td> Name:</td> <td> <br> <input type="text" name="formantname" value="" /></td>
                             </tr>
                             

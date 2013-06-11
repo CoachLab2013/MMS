@@ -18,95 +18,72 @@
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <script type="text/javascript" src="js/LinkBodyContent.js"></script>
+        
+        <style type="text/css">
+            label.error { 
+                float: none; 
+                color: red; 
+                padding-left: .5em; 
+                vertical-align: top; 
+            }
+        </style>
+        
     </head>
     <body>
         <div id="NewBodyFiles" class="tab-pane ">
             <%--new body file content --%>
             <legend>Link Body Files</legend>
-
-            <legend>Select Body Files to Link</legend>
-
-            <fieldset>
-               
+            
+            <fieldset>               
                 <legend>First Body File</legend>
                 <div  class="control-group form-horizontal">
                     <label class="control-label" for="DeathRegisterNumber">Death Register Number:</label>
                     <div class="controls">
-                        <input type ="text" name="DeathRegisterNumber" id="DeathRegisterNumber"/>
+                        <%
+                            out.println(new Tools().makeICD10List("body", "idDeathRegisterNumber", "surnameOfDeceased", "", "Select Body File 1"));
+                        %>
                     </div>
-                    <br/>
-                 <div class="offset2">
-                    <input type="submit" class="btn" value="Find File">
                 </div>
-                </div>
-
                 <br/>
-                <legend></legend>
-                <table border="1">
-                    <tr>
-                        <td width="150">Death Register Number</td>
-                        <td width="150">Name</td>
-                        <td width="150">Surname</td>
-                        <td width="150">ID/Passport Number</td>
-                        <td width="150">Deceased Identification Status</td>
-
-
-                    </tr>
-                    <tr>
-                        <td width="150" height="30"></td>
-                        <td width="150" height="30"></td>
-                        <td width="150" height="30"></td>
-                        <td width="150" height="30"></td>
-                        <td width="150" height="30"></td>
-
-
-                    </tr>
-
+                <table class='tabledisplay' id="bodyLink1">
+                    <th class='tableheading'>Death Register Number</th>
+                    <th class='tableheading'>Name</th>
+                    <th class='tableheading'>Surname</th>
+                    <th class='tableheading'>ID/Passport Number</th>
+                    <th class='tableheading'>Deceased Identification Status</th>
                 </table>
                 <br>
                 <br>
             </fieldset>
-
-                <br/>
-            </fieldset>
+            <br/>
             <fieldset>
-                <legend></legend>
                 <legend>Second Body File</legend>
                 <div  class="control-group form-horizontal">
                     <label class="control-label" for="DeathRegisterNumber">Death Register Number:</label>
                     <div class="controls">
-                        <input type ="text" name="DeathRegisterNumber" id="DeathRegisterNumber"/>
+                        <%
+                            out.println(new Tools().makeICD10List("Body", "idDeathRegisterNumber", "surnameOfDeceased", "", "Select Body File 2"));
+                        %>
                     </div>
-                    <br/>
-                 <div class="offset2">
-                    <input type="submit" class="btn" value="Find File">
                 </div>
-                </div>
-
                 <br/>
-                <legend></legend>
-                <table border="1">
-                    <tr>
-                        <td width="150">Death Register Number</td>
-                        <td width="100">Name</td>
-                        <td width="100">Surname</td>
-                        <td width="150">ID/Passport Number</td>
-                        <td width="150">Deceased Identification Status</td>
-
-
-                    </tr>
-                    <tr>
-                        <td width="150" height="30"></td>
-                        <td width="100" height="30"></td>
-                        <td width="100" height="30"></td>
-                        <td width="150" height="30"></td>
-                        <td width="150" height="30"></td>
-
-
-                    </tr>
-
+                
+                <table class='tabledisplay'  id="bodyLink2">
+                    <th class='tableheading'>Death Register Number</th>
+                    <th class='tableheading'>Name</th>
+                    <th class='tableheading'>Surname</th>
+                    <th class='tableheading'>ID/Passport Number</th>
+                    <th class='tableheading'>Deceased Identification Status</th>
                 </table>
                 <br>
+                <div  class="control-group form-horizontal">
+                <button id="linkButton" name="linkButton">Link Files</button>
+                <label class="error" style="display: none;">Please Select Non Duplicate or Correct Body File Numbers</label>
+                </div>
                 <br>
             </fieldset>
-
+        </div>
+    </body>
+</html>

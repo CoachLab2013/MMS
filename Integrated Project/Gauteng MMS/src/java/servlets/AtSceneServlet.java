@@ -9,6 +9,8 @@ import database.BodyAtMortuary;
 import database.BodyAtScene;
 import database.BodyAtSceneDb;
 import database.BodyDb;
+import database.BodyFile;
+import database.BodyFileDb;
 import database.DbDetail;
 import database.Incident;
 import database.IncidentDb;
@@ -52,17 +54,33 @@ public class AtSceneServlet extends HttpServlet {
         //Incident Log number: request.getParameter("at_scene_lognmber");   
         
         BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("at_scene_deathregister")));       
-        bodyAtScene.setDateTimeBodyFound(request.getParameter("bodyFoundDate") + " " + request.getParameter("bodyFoundTime"));
-        bodyAtScene.setAllegedInjuryDateTime(request.getParameter("inAllegedInjuryDate") + " " + request.getParameter("inAllegedInjuryTime"));
-        bodyAtScene.setAllegedDeathDateTime(request.getParameter("inAllegedDeathDate") + " " + request.getParameter("inAllegedDeathTime"));
-        bodyAtScene.setSceneDateTime(request.getParameter("ReceivedSceneDate") + " " + request.getParameter("ReceivedSceneTime"));
-        bodyAtScene.setFacilityDateTime(request.getParameter("ReceivedFacilityDate") + " " + request.getParameter("ReceivedFacilityTime"));
-        bodyAtScene.setSceneIncidentOccured(request.getParameter("SceneType"));
+        bodyAtScene.setDateTimeBodyFound(t.checkDate(request.getParameter("bodyFoundDate")) + " " + t.checkTime(request.getParameter("bodyFoundTime")));
+        bodyAtScene.setAllegedInjuryDateTime(t.checkDate(request.getParameter("inAllegedInjuryDate")) + " " + t.checkTime(request.getParameter("inAllegedInjuryTime")));
+        bodyAtScene.setAllegedDeathDateTime(t.checkDate(request.getParameter("inAllegedDeathDate")) + " " + t.checkTime(request.getParameter("inAllegedDeathTime")));
+        bodyAtScene.setSceneDateTime(t.checkDate(request.getParameter("ReceivedSceneDate")) + " " + t.checkTime(request.getParameter("ReceivedSceneTime")));
+        bodyAtScene.setFacilityDateTime(t.checkDate(request.getParameter("ReceivedFacilityDate")) + " " + t.checkTime(request.getParameter("ReceivedFacilityTime")));
+        if (request.getParameter("SceneType").equals("Select")!=true){
+            bodyAtScene.setSceneIncidentOccured(request.getParameter("SceneType"));
+        }
         bodyAtScene.setPlaceOfDeath(request.getParameter("DeathAddress"));
-        bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter("externalcircumstance"));
+        if (request.getParameter("externalcircumstance").equals("Select")!=true){
+            bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter("externalcircumstance"));
+        }
         
+        Member pathologistOnScene = new Member();
         if (request.getParameter("pathologistAtScene").equals("Yes")){
             bodyAtScene.setPathOnScene(true);
+            //Pathologist on scene MIGHT NEED TO ADD SEPERATE TABLE
+            
+            pathologistOnScene.setName(request.getParameter("pathologistBodyName"));
+            pathologistOnScene.setSurname(request.getParameter("pathologistBodySurname"));
+            //pathologistOnScene.setPersonnelNumber(request.getParameter(null));
+            //pathologistOnScene.setContactNumber(request.getParameter(null));
+            if (request.getParameter("pathologistBodyRank").equals("Select")!=true){
+                pathologistOnScene.setRank(request.getParameter("pathologistBodyRank"));
+            }
+            pathologistOnScene.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
+            //end of Pathologist on scene
         }else{
             bodyAtScene.setPathOnScene(false);
         }
@@ -92,7 +110,9 @@ public class AtSceneServlet extends HttpServlet {
             SAPSmemeber.setSurname(request.getParameter("SAPSmemberBodySurname"));
             SAPSmemeber.setContactNumber(request.getParameter("SAPSmemberBodyCell"));
             SAPSmemeber.setOrganization("SAPS"); //SAPS
-            SAPSmemeber.setRank(request.getParameter("SAPSmemberBodyRank"));
+            if (request.getParameter("SAPSmemberBodyRank").equals("Select")!=true){
+                SAPSmemeber.setRank(request.getParameter("SAPSmemberBodyRank"));
+            }
             SAPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         // end of SAPS member
         
@@ -101,28 +121,25 @@ public class AtSceneServlet extends HttpServlet {
             FPSmemeber.setName(request.getParameter("FPSmemberBodyName"));
             FPSmemeber.setSurname(request.getParameter("FPSmemberBodySurname"));
             FPSmemeber.setPersonnelNumber(request.getParameter("FPSmemberBodyPersal"));
-            FPSmemeber.setContactNumber(request.getParameter("FPSmemberBodyCell")); //SAPS
-            FPSmemeber.setRank(request.getParameter("FPSmemberBodyRank"));
+            FPSmemeber.setContactNumber(request.getParameter("FPSmemberBodyCell"));
+            if (request.getParameter("FPSmemberBodyRank").equals("Select")!=true){
+                FPSmemeber.setRank(request.getParameter("FPSmemberBodyRank"));
+            }
             FPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         //end of FPS member
+           
             
-        //Pathologist on scene MIGHT NEED TO ADD SEPERATE TABLE
-            Member pathologistOnScene = new Member();
-            pathologistOnScene.setName(request.getParameter("pathologistBodyName"));
-            pathologistOnScene.setSurname(request.getParameter("pathologistBodySurname"));
-            //pathologistOnScene.setPersonnelNumber(request.getParameter(null));
-            //pathologistOnScene.setContactNumber(request.getParameter(null)); //SAPS
-            pathologistOnScene.setRank(request.getParameter("pathologistBodyRank"));
-            pathologistOnScene.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
-         //end of Pathologist on scene
-            
-         
         //Body Details
         bodyAtScene.getBody().setIncident(new Incident(request.getParameter("at_scene_lognmber")));
         bodyAtScene.getBody().setBodyType(request.getParameter("bodypart"));
         bodyAtScene.getBody().setNameOfDeceased(request.getParameter("atSceneBodyName"));
         bodyAtScene.getBody().setSurnameOfDeceased(request.getParameter("atSceneBodySurname"));
-        bodyAtScene.getBody().setID(request.getParameter("atSceneBodyID"));
+        if(request.getParameter("recieve_at_scene_id_type").equals("ID")){
+            bodyAtScene.getBody().setID(request.getParameter("atSceneBodyID"));
+        }else if(request.getParameter("recieve_at_scene_id_type").equals("Passport")){
+            bodyAtScene.getBody().setPassport(request.getParameter("atSceneBodyID"));
+        }
+        
         //building body address
             BodyAddress bodyAddress = new BodyAddress();
             bodyAddress.setBuilding(request.getParameter("atSceneBodyAddressBuilding"));
@@ -130,35 +147,52 @@ public class AtSceneServlet extends HttpServlet {
             bodyAddress.setSuburb(request.getParameter("atSceneBodyAddressSuburb"));
             bodyAddress.setCity(request.getParameter("atSceneBodyAddressCity"));
             bodyAddress.setPostCode(request.getParameter("atSceneBodyAddressPostalCode"));
-            bodyAddress.setProvince(request.getParameter("atSceneBodyAddressProvince"));
-            bodyAddress.setRegion(request.getParameter("atSceneBodyAddressRegion"));
+            if (request.getParameter("province").equals("Select")!=true){
+                bodyAddress.setProvince(request.getParameter("province"));
+            }
+            if (request.getParameter("region").equals("Select")!=true){
+                bodyAddress.setRegion(request.getParameter("region"));
+            }
             bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
         //end of building body address
         bodyAtScene.getBody().setBodyAddress(bodyAddress);
-        bodyAtScene.getBody().setRace(request.getParameter("race"));
-        bodyAtScene.getBody().setGender(request.getParameter("gender"));
-        if(request.getParameter("at_scene_body_estimated_age_type").equals("Month")){
-            bodyAtScene.getBody().setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
-        }else if(request.getParameter("at_scene_body_estimated_age_type").equals("Year")){
-            bodyAtScene.getBody().setEstimatedAgeYear(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
+        if (request.getParameter("race").equals("Select")!=true){
+            bodyAtScene.getBody().setRace(request.getParameter("race"));
         }
-        //body fields that are not given by the UI input
+        if (request.getParameter("gender").equals("Select")!=true){
+            bodyAtScene.getBody().setGender(request.getParameter("gender"));
+        }
+        if(request.getParameter("atSceneBodyEstAge").equals("Age")!=true){
+            if(request.getParameter("at_scene_body_estimated_age_type").equals("Month")){
+                bodyAtScene.getBody().setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
+                bodyAtScene.getBody().setAgeOnDateFound(Integer.parseInt(request.getParameter("atSceneBodyEstAge"))); //field not given by UI
+            }else if(request.getParameter("at_scene_body_estimated_age_type").equals("Year")){
+                bodyAtScene.getBody().setEstimatedAgeYear(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
+                bodyAtScene.getBody().setAgeOnDateFound(Integer.parseInt(request.getParameter("atSceneBodyEstAge"))); //field not given by UI
+            }
+            
+        }
+        /*/body fields that are not given by the UI input
         bodyAtScene.getBody().setDateOfBirth("0000-00-00");
-        bodyAtScene.getBody().setAgeOnDateFound(Integer.parseInt(request.getParameter("atSceneBodyEstAge")));
         bodyAtScene.getBody().setIdentifiedDateTime("0000-00-00 00:00");
         bodyAtScene.getBody().setBodyStatus(false);
         bodyAtScene.getBody().setDateBodyReceived("0000-00-00");
         bodyAtScene.getBody().setDateBodyReleased("0000-00-00");
         bodyAtScene.getBody().setBodyReleased(false);
-        bodyAtScene.getBody().setBodyReleaseTo(null);
+        bodyAtScene.getBody().setBodyReleaseTo(null);*/
         //end of body fiels that are not given by the UI
-        
         //end of Body details
+        
+        
         //inserting body into database
         BodyDb bodyDb = new BodyDb(dbdetail, bodyAtScene.getBody());
         bodyDb.init();
         out.println("adding body :::" + bodyDb.add());
         //end of body inserting
+        //inserting Body Address into Body Address table
+        bodyDb.init();
+        out.println("adding body address :::" + bodyDb.addBodyAddress());
+        //end of inserting Body Address
         
         //inserting BodyAtScene into Database
         BodyAtSceneDb bodyAtSceneDb = new BodyAtSceneDb(dbdetail,bodyAtScene);
@@ -167,6 +201,7 @@ public class AtSceneServlet extends HttpServlet {
         //end inserting BodyAtScene
         
         //NOTE: must add all other things such as members and property after adding the body, due to foreign key constraints
+        
         MemberDb memberDb = new MemberDb(dbdetail);
         //insertin SAPS member
         //memberDb = new MemberDb(dbdetail);
@@ -183,14 +218,27 @@ public class AtSceneServlet extends HttpServlet {
         //end insertingF member
         
         //insertin Pathologist member
-        //memberDb = new MemberDb(dbdetail);
-        memberDb.setMember(pathologistOnScene);
-        memberDb.init();
-        out.println("adding Pathmem :::" + memberDb.add());
+        if(bodyAtScene.isPathOnScene()){
+            memberDb.setMember(pathologistOnScene);
+            memberDb.init();
+            out.println("adding Pathmem :::" + memberDb.add());
+        }
         //end inserting Pathologist member
         
+        //POPULATING BODYFILE TABLE
+        BodyFile atSceneBodyFile = new BodyFile(bodyAtScene.getBody().getDeathRegisterNumber());
+        String currentSystemDate = t.getDateTime().split(" ")[0];
+        atSceneBodyFile.setDateFileOpened(currentSystemDate);
+        /*
+         * There is no need to set the other attributes of this bodyfile since they are initialized in it's constructor
+         */
+        BodyFileDb atSceneBodyFileDb = new BodyFileDb(dbdetail, atSceneBodyFile);
+        atSceneBodyFileDb.init();
+        out.println(atSceneBodyFileDb.add());
+        //END OF POPULATING BODYFILE TABLE
+        
         //Property
-        PropertyDb propertyDb = new PropertyDb(dbdetail);
+        PropertyDb atScene_propertyDb = new PropertyDb(dbdetail);
         int count_saps = Integer.parseInt(request.getParameter("saps_property_counter").toString());
         for(int i=0;i<count_saps;i++){
             String saps_prop_des = "saps_prop_des"+Integer.toString(i+1);
@@ -209,9 +257,9 @@ public class AtSceneServlet extends HttpServlet {
                 propertySAPS.setSAPS_taken(true);
                 propertySAPS.setReleased(false);
                 //put the code to add this property into the database here
-                propertyDb.setProperty(propertySAPS);
-                propertyDb.init();
-                out.println("adding property :::" + propertyDb.add());
+                atScene_propertyDb.setProperty(propertySAPS);
+                atScene_propertyDb.init();
+                out.println("adding property :::" + atScene_propertyDb.add());
             }
         }
         
@@ -234,9 +282,9 @@ public class AtSceneServlet extends HttpServlet {
                 propertyFPS.setSAPS_taken(false);
                 propertyFPS.setReleased(false);
                 //put the code to add this property into the database here
-                propertyDb.setProperty(propertyFPS);
-                propertyDb.init();
-                out.println("adding property :::" + propertyDb.add());
+                atScene_propertyDb.setProperty(propertyFPS);
+                atScene_propertyDb.init();
+                out.println("adding property :::" + atScene_propertyDb.add());
             }
         }
         
@@ -248,12 +296,11 @@ public class AtSceneServlet extends HttpServlet {
         out.println(incidentDb.read());
         incidentDb.init();
         out.println(incidentDb.IncreaseBodyCount());
-        //Incident incident = incidentDb.findIncident(request.getParameter("at_scene_lognmber"));
         
-        //response.sendRedirect("Home.jsp");
+        response.sendRedirect("Home.jsp");
 
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP

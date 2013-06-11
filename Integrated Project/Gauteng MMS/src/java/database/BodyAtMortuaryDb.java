@@ -24,29 +24,37 @@ public class BodyAtMortuaryDb extends DatabaseConnector {
         this.bodyAtMortuary = bodyAtMortary;
         this.dbDetail = dbDetail;
     }
-    
 
+    public BodyAtMortuary getBodyAtMortuary() {
+        return bodyAtMortuary;
+    }
+
+    public void setBodyAtMortuary(BodyAtMortuary bodyAtMortuary) {
+        this.bodyAtMortuary = bodyAtMortuary;
+    }
+    
     @Override
     public String add() {
-        try 
-        {   
-            if(bodyAtMortuary.getBodyReceivedFromPerNumber() == null){
+        try
+        {
+        //converting to a bodyAtMortuary object
+            if(bodyAtMortuary.getBodyReceivedFromPerNumber().equals("null")){
                 statement.executeUpdate("INSERT INTO atmortuary (bodyHandedOverToPerNumber,Body_idDeathRegisterNumber,bodyHandOverFromOrganization) VALUES('" 
-                    + bodyAtMortuary.getBodyHandedOverToPerNumber() + ",'"
+                    + bodyAtMortuary.getBodyHandedOverToPerNumber() + "','"
                     + bodyAtMortuary.getDeathRegisterNumber() + "','" + bodyAtMortuary.getBodyHandOverFromOrganization() + "');");
                 statement.close();
                 connection.close(); 
-            }else if(bodyAtMortuary.getBodyHandOverFromOrganization() == null){
+            }else if(bodyAtMortuary.getBodyHandOverFromOrganization().equals("null")){
                 statement.executeUpdate("INSERT INTO atmortuary (bodyReceivedFromPerNumber,bodyHandedOverToPerNumber,Body_idDeathRegisterNumber) VALUES('" 
                     + bodyAtMortuary.getBodyReceivedFromPerNumber() + "','" 
-                    + bodyAtMortuary.getBodyHandedOverToPerNumber() + ",'"
+                    + bodyAtMortuary.getBodyHandedOverToPerNumber() + "','"
                     + bodyAtMortuary.getDeathRegisterNumber() + "');");
                 statement.close();
                 connection.close(); 
             }else{
                 statement.executeUpdate("INSERT INTO atmortuary (bodyReceivedFromPerNumber,bodyHandedOverToPerNumber,Body_idDeathRegisterNumber,bodyHandOverFromOrganization) VALUES('" 
                     + bodyAtMortuary.getBodyReceivedFromPerNumber() + "','" 
-                    + bodyAtMortuary.getBodyHandedOverToPerNumber() + ",'"
+                    + bodyAtMortuary.getBodyHandedOverToPerNumber() + "','"
                     + bodyAtMortuary.getDeathRegisterNumber() + "','" + bodyAtMortuary.getBodyHandOverFromOrganization() + "');");
                 statement.close();
                 connection.close(); 
