@@ -74,8 +74,7 @@
             String raceResult = "";
             String maritalResult = "";
             String provinceResult = "";
-            String regionResult = "";
-            String iCD10Result = "";
+            String regionResult = ""; 
             String mannerResult = "";
             String sampleResult = "";
             String statusResult = "";
@@ -113,7 +112,6 @@
             String status = "";
             String sample = "";
             String manner = "";
-            String icd10 = "";
             String province = "";
             String region = "";
             String marital = "";
@@ -172,11 +170,7 @@
                         regionResult = session.getAttribute("regionResult").toString();
                         region = "active";
 
-                    } else if (session.getAttribute("tab").equals("icd10")) {
-                        iCD10Result = session.getAttribute("iCD10Result").toString();
-
-                        icd10 = "active";
-                    } else if (session.getAttribute("tab").equals("manner")) {
+                    }  else if (session.getAttribute("tab").equals("manner")) {
                         mannerResult = session.getAttribute("mannerResult").toString();
                         manner = "active";
                     } else if (session.getAttribute("tab").equals("sample")) {
@@ -222,7 +216,6 @@
 
                     provinceResult = "";
                     regionResult = "";
-                    iCD10Result = "";
                     mannerResult = "";
                     sampleResult = "";
                     statusResult = "";
@@ -304,12 +297,7 @@
             emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> regionList = emp.referenceListReg("Gauteng");
-
-            //For icd10 list box
-            emp = new ReferenceListDb("icd10", "e", "code", "e", dbset.getDbdetail());
-            emp.init();
-            ArrayList<String> icd10List = emp.referenceList();
-
+ 
             //For mannerofdeath list box
             emp = new ReferenceListDb("mannerofdeath", "e", "type", "e", dbset.getDbdetail());
             emp.init();
@@ -340,38 +328,16 @@
             emp.init();
             ArrayList<String> specialCurList = emp.referenceList();
 
+             //For external circumstance list box
             emp = new ReferenceListDb("externalcircumstance", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> exCauseList = emp.referenceList();
 
+             //For scene type list box
             emp = new ReferenceListDb("scenetype", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> slTypeList = emp.referenceList();
-            /*
-             emp = new ReferenceListDb("externalcircumstance", "e", "type", "e", dbset.getDbdetail());
-             emp.init();
-             ArrayList<String> exCauseList = emp.referenceList();
-
-             emp = new ReferenceListDb("scenetype", "e", "type", "e", dbset.getDbdetail());
-             emp.init();
-             ArrayList<String> slTypeList = emp.referenceList();
-             */
-
-            /*
-             //
             
-             
-            
-             //For institution list box
-             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbDetail);
-             emp.init();
-             ArrayList<String> institutionList = emp.referenceList();
-            
-             //For institution list box
-             ReferenceListDb e ReferenceListDb("institution", "e", "type", "e", dbDetail);
-             emp.init();
-             ArrayList<String> institutionList = emp.referenceList();
-             */
         %>
 
 
@@ -544,7 +510,6 @@
                                                                     <li class="<%out.println(String.valueOf(marital));%>"><a href="#mStatus" data-toggle="tab">Marital Status</a></li> 
                                                                     <li class="<%out.println(String.valueOf(province));%>"><a href="#province" data-toggle="tab">Province</a></li>
                                                                     <li class="<%out.println(String.valueOf(region));%>"><a href="#region" data-toggle="tab">Region</a></li>
-                                                                    <li class="<%out.println(String.valueOf(icd10));%>"><a href="#icd10Codes" data-toggle="tab">ICD10 Codes</a></li>
                                                                     <li class="<%out.println(String.valueOf(manner));%>"><a href="#mDeath" data-toggle="tab">Manner of Death</a></li>
                                                                     <li class="<%out.println(String.valueOf(sample));%>"><a href="#sType" data-toggle="tab">Sample Type</a></li>
                                                                     <li class="<%out.println(String.valueOf(status));%>"><a href="#status" data-toggle="tab">Body Status</a></li>
