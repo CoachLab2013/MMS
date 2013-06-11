@@ -81,7 +81,6 @@ $(document).ready(function(){
         }//end of messages
         
     });//end of form validation
-    
     if($("#go_to_deceasedDetails").val()=="true")
     {
         $("#IncidentTab").removeClass("active");

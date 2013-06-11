@@ -57,73 +57,92 @@
         <table>
             <tr>     
                  <% Tools t = new Tools();
-                 
-                    BodyAtMortuary body = t.getBody("GP/DK//00002/2013");%>
-
-                    <input type="hidden" name="deceasedDeathRegisterNr" <%out.print("value=" + body.getDeathRegisterNumber());%>  />
+                 %>
                 <td>Full Name(s):  </td> <td><input type="text" name="DeceasedName" id="txtDeceasedNameDis" <%
-                    if(body.getNameOfDeceased()!=null)
-                    out.print("value =" + body.getNameOfDeceased());%>  /><input type="button" value="Confirm" id="btnDeceasedNameDis"  onclick="confirmText('txtDeceasedNameDis','btnDeceasedNameDis',0);" /></td>  
+                  if(session.getAttribute("bIdFullName") != null)
+                  {
+                    out.println("value=" + session.getAttribute("bIdFullName")); session.removeAttribute("bIdFullName");
+                  }
+                 %> /><input type="button" value="Confirm" id="btnDeceasedNameDis"  onclick="confirmText('txtDeceasedNameDis','btnDeceasedNameDis',0);" /></td>  
             </tr>
             <tr>     
                 <td>Maiden Name:  </td> <td><input type="text" name="DeceasedMaidenName" <%
-                    if(body.getMaidenName()!=null)
-                    out.print("value =" + body.getMaidenName());%>  /></td>  
+                  if(session.getAttribute("bIdMadienName") != null)
+                  {
+                    out.println("value=" + session.getAttribute("bIdMadienName")); session.removeAttribute("bIdMadienName");
+                  }
+                 %>  /></td>  
             </tr>
             <tr>
-                <td>Surname:</td> <td> <input type="text" name="DeceasedSurname" id="txtDeceasedSurnameDis"<%
-                    if(body.getSurnameOfDeceased()!=null)
-                    out.print("value =" + body.getSurnameOfDeceased());%>  /><input type="button" value="Confirm" id="btnDeceasedSurnameDis" onclick="confirmText('txtDeceasedSurnameDis','btnDeceasedSurnameDis',0);" /> </td>
+                <td>Surname:</td> <td> <input type="text" name="DeceasedSurname" id="txtDeceasedSurnameDis" <%
+                  if(session.getAttribute("bIdSurname") != null)
+                  {
+                    out.println("value=" + session.getAttribute("bIdSurname")); session.removeAttribute("bIdSurname");
+                  }
+                 %>  /><input type="button" value="Confirm" id="btnDeceasedSurnameDis" onclick="confirmText('txtDeceasedSurnameDis','btnDeceasedSurnameDis',0);" /> </td>
             </tr> 
 
             <tr>     
                 <td>Identification type:  </td> <td> <select name="deceasedidentificationtype"> 
                         <%
-                            if ((body.getID()!=null)) 
+                         if(session.getAttribute("bIdIDNumber") != null)
+                         {
+                            String i = (String)session.getAttribute("bIdIDNumber");
+                            if(i.length() == 13) 
                             {
                                 out.print("<option>ID</option>");
+                                out.print("<option>Passport</option>");
                             } 
                             else 
                             {
                                 out.print("<option>Passport</option>");
+                                out.print("<option>ID</option>");
                             }
+                         }
+                         else
+                         {
+                             out.print("<option></option>");
+                         }
                         %>
                     </select> </td>
             </tr>
             <tr>     
                 <td>Identification Number:  </td> <td><input type="text" id="txtDeceasedNumberDis" name="DeceasedNumber" <%
-                    if (!(body.getID().contains("")))
-                    {
-                        if(body.getID()!=null)
-                            out.print("value =" + body.getID());
-                    } 
-                    else 
-                    {
-                        if(body.getPassport()!=null)
-                            out.print("value =" + body.getPassport());
-                    };
-                                                             %>  /><input type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
+                  if(session.getAttribute("bIdIDNumber") != null)
+                  {
+                    out.println("value=" + session.getAttribute("bIdIDNumber")); session.removeAttribute("bIdIDNumber");
+                  }
+                 %> /><input type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
             </tr> 
             <tr>
                 <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%
-                    if(body.getPlaceOfBirth()!=null)
-                    out.print("value =" + body.getPlaceOfBirth());%>  /></td>
+                  if(session.getAttribute("bIdPlaceOfBirth") != null)
+                  {
+                    out.println("value=" + session.getAttribute("bIdPlaceOfBirth")); session.removeAttribute("bIdPlaceOfBirth");
+                  }
+                 %>  /></td>
             </tr>
             <tr>     
                 <td>Date of Birth: </td> <td> <input type="text" name="deceasedDateBirth" <%
-                    if(body.getDateOfBirth()!=null)
-                    out.print("value =" + body.getDateOfBirth());%>  /></td> 
+                  if(session.getAttribute("bIdDateOfBirth") != null)
+                  {
+                    out.println("value=" + session.getAttribute("bIdDateOfBirth")); session.removeAttribute("bIdDateOfBirth");
+                  }
+                 %>  /></td> 
             </tr>
             <tr>     
                 <td>Age on the date found:  </td> <td><input type="text" name="deceasedage" <%
-                    if(body.getAgeOnDateFound()!= 0)
-                    out.print("value =" + body.getAgeOnDateFound());%>  /></td>  
+                  if(session.getAttribute("bIdAgeOnDate") != null)
+                  {
+                    out.println("value=" + session.getAttribute("bIdAgeOnDate")); session.removeAttribute("bIdAgeOnDate");
+                  }
+                 %>  /></td>  
             </tr>
             <tr>     
                 <td>Gender:  </td> <td> <%
-                    if(body.getGender()!=null){
+                    if(session.getAttribute("bIdGender")!=null){
               
-                            String list2 = t.makeReferenceList("gender", "type",body.getGender() );
+                            String list2 = t.makeReferenceList("gender", "type",(String)session.getAttribute("bIdGender"));
                             list2 = list2.replaceFirst("name='gender'", "name='deceasedgender'");
                             list2 = list2.replaceFirst("id='gender'", "id='selDeceasedGenderDis'");
                             out.println(list2);
@@ -134,14 +153,15 @@
                             list2 = list2.replaceFirst("id='gender'", "id='selDeceasedGenderDis'");
                             out.println(list2);
                     }
+                    session.removeAttribute("bIdGender");
                         %>
                     </select><input type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
             <tr>     
                 <td>Marital Status:  </td> <td>
                     <%
-                     if(body.getMaritalStatus()!=null)
+                     if(session.getAttribute("bIdMarital")!=null)
                      {
-                         String list2 = t.makeReferenceList("maritalstatus", "type",body.getGender());
+                         String list2 = t.makeReferenceList("maritalstatus", "type",(String)session.getAttribute("bIdMarital"));
                          list2 = list2.replaceFirst("name='maritalstatus'", "name='deceasedMaritalstatus'");
                          list2 = list2.replaceFirst("id='maritalstatus'", "id='selDeceasedMaritalstatus'");
                          out.println(list2);
@@ -153,13 +173,14 @@
                          list2 = list2.replaceFirst("id='maritalstatus'", "id='selDeceasedMaritalstatus'");
                          out.println(list2);
                      }
+                     session.removeAttribute("bIdMarital");
                    %>
                     </select> </td>
             <tr>     
                 <td>Race:  </td> <td>
-                     <%if(body.getMaritalStatus()!=null)
+                     <%if(session.getAttribute("bIdRace")!=null)
                      {
-                         String list2 = t.makeReferenceList("race", "type",body.getGender());
+                         String list2 = t.makeReferenceList("race", "type",(String)session.getAttribute("bIdRace"));
                          list2 = list2.replaceFirst("name='race'", "name='deceasedrace'");
                          list2 = list2.replaceFirst("id='race'", "id='selDeceasedRaceDis'");
                          out.println(list2);
@@ -170,13 +191,15 @@
                          list2 = list2.replaceFirst("name='race'", "name='deceasedrace'");
                          list2 = list2.replaceFirst("id='race'", "id='selDeceasedRaceDis'");
                          out.println(list2);
-                     }%>
+                     }
+                     session.removeAttribute("bIdRace");
+                     %>
              <input type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis',0);"/> </td>
             <tr>     
                 <td>Occupation:  </td> <td>
-                        <%if(body.getMaritalStatus()!=null)
+                        <%if((String)session.getAttribute("bIdOccupation")!=null)
                      {
-                         String list2 = t.makeReferenceList("occupation", "type",body.getGender());
+                         String list2 = t.makeReferenceList("occupation", "type",(String)session.getAttribute("bIdOccupation"));
                          list2 = list2.replaceFirst("name='occupation'", "name='deceasedOccupation'");
                          list2 = list2.replaceFirst("id='occupation'", "id='selDeceasedOccupation'");
                          out.println(list2);
@@ -187,29 +210,39 @@
                          list2 = list2.replaceFirst("name='occupation'", "name='deceasedOccupation'");
                          list2 = list2.replaceFirst("id='occupation'", "id='selDeceasedOccupation'");
                          out.println(list2);
-                     }%> </td>
+                     }
+                     session.removeAttribute("bIdOccupation");   
+                     %> </td>
             <tr>
                 <td> Citizenship:</td> <td> <input type="text" name="deceasedCitizenship" <%
-                            if(body.getCitizen()!=null)
-                            out.print("value =" + body.getCitizen());%>  /></td>
+                            if((String)session.getAttribute("bIdCitizenship")!=null)
+                            {
+                            out.print("value =" + (String)session.getAttribute("bIdCitizenship"));
+                            session.removeAttribute("bIdCitizenship");
+                            }
+                %>  /></td>
             </tr>
 
             <tr>
                 <td> Body Status:     </td><td><select name="deceasedBodyStatus">
                         <option><%
-                            if(body!=null)
-                            if (body.isBodyStatus()) {
-                                out.print("identified");
-                            } else {
-                                out.print("unidentified");
+                            if(session.getAttribute("bIdBodyStatus") != null)
+                            {
+                                if ((Boolean)session.getAttribute("bIdBodyStatus")) {
+                                    out.print("identified");
+                                } else {
+                                    out.print("unidentified");
+                                }
                             }
                             %></option>
                         <option><%
-                            if(body!=null)
-                            if (!body.isBodyStatus()) {
-                                out.print("identified");
-                            } else {
-                                out.print("unidentified");
+                            if(session.getAttribute("bIdBodyStatus") != null)
+                            {
+                                if (!(Boolean)session.getAttribute("bIdBodyStatus")) {
+                                    out.print("identified");
+                                } else {
+                                    out.print("unidentified");
+                                }
                             }
                             %></option>
                     </select></td>
@@ -217,8 +250,11 @@
             <tr>     
                 <td>Assigned FPS Officer:  </td> <td> <select name="deceasedFPS">
                         <option><%
-                            if(body.getAssignedTo()!=null)
-                            out.print(body.getAssignedTo());%></option>
+                            if(session.getAttribute("bIdAssignedFPS") != null)
+                            {
+                                out.println("value=" + session.getAttribute("bIdAssignedFPS")); session.removeAttribute("bIdAssignedFPS");
+                            }
+                 %></option>
                     </select> </td>
             <tr>
                 <script>          
