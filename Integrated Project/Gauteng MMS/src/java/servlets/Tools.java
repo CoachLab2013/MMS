@@ -22,7 +22,7 @@ public class Tools {
      */
  
 
-  
+
     public Tools() 
     {
         dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
@@ -612,7 +612,8 @@ public class Tools {
         char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
-        for (int i = 0; i < len_password; i++) {
+        for (int i = 0; i < len_password; i++) 
+        {
             char c = chars[random.nextInt(chars.length)];
             sb.append(c);
         }

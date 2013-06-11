@@ -20,12 +20,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="js/RecieveAtSceneScript.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
-       <%-- <script type="text/javascript" src="js/datepicker-validation.min.js"></script> --%>
         <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
-        <script type="text/javascript" src="js/jquery.utils.min.js"></script>
-        <script type="text/javascript" src="js/jquery.strings.js"></script>
          <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
         <link type="text/css" rel="stylesheet"  href="CSS files/datetimestyle.css"> 
+        <%-- http://jqueryui.com/themeroller/ --%>
     </head>
     <body>
     <legend class="legend"><h3>Receive body from scene</h3> </legend>

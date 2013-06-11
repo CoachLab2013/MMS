@@ -25,7 +25,7 @@
  <script src="js/DeceasedAddressContentScript.js"></script>
     </head>
     <body>
-        <legend>Body File> Edit Body File> Body Identification> Deceased Address Details </legend>
+        <legend>Deceased Address Details </legend>
         <form name="DeceasedAddressform" id="DeceasedAddressform" method="post" action="DeceasedAddressServlet">
       
           

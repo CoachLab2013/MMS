@@ -32,7 +32,7 @@
                 session.removeAttribute("kinDetail");
             } 
         %>
-        <legend>Body File> Edit Body File> Body Identification> Kin/Informant Details </legend>
+        <legend>Kin/Informant Details </legend>
         <form name="Kinform" id="Kinform" method="post" action="SaveKinDetailsServlet">
       
           
