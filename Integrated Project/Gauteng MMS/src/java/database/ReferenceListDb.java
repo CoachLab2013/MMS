@@ -224,6 +224,26 @@ public class ReferenceListDb extends DatabaseConnector {
             while (resultSet.next()) {
                 reflist.add(resultSet.getString(field2));
             }
+           
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            throw new SQLException(ex.getMessage());
+        }
+        return reflist;
+    }
+     
+       public ArrayList<String> referenceListReg(String province) throws SQLException {
+        ArrayList<String> reflist = new ArrayList<String>();
+        try {
+            statement.executeQuery("select " + field2 + " from " + tableName + " where province = '"+ province+ "';");
+            ResultSet resultSet = statement.getResultSet();
+           
+            while (resultSet.next()) {
+                reflist.add(resultSet.getString(field2));
+              
+            }
+             
             statement.close();
             connection.close();
         } catch (SQLException ex) {

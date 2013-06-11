@@ -65,6 +65,10 @@
         <servlet-name>LoadICD10Table</servlet-name>
         <servlet-class>servlets.LoadICD10Table</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FilterRegionServlet</servlet-name>
+        <servlet-class>servlets.FilterRegionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -124,6 +128,10 @@
     <servlet-mapping>
         <servlet-name>LoadICD10Table</servlet-name>
         <url-pattern>/LoadICD10Table</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterRegionServlet</servlet-name>
+        <url-pattern>/FilterRegionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

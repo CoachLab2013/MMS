@@ -23,7 +23,7 @@
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
             response.setDateHeader("Expires", 0); // Proxies. 
-%>
+        %>
 
         <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
         <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
@@ -37,12 +37,10 @@
         <script src="js/script.js"></script>
         <link type="text/css" rel="stylesheet" href="bootstrap/css/tablecss.css"> 
         <script src="js/EditReferenceList.js"></script>
+        <script src="js/RegionScript.js"> </script>
 
 
-        <%-- <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">   
-         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
-          <script src="js/OpenIncidentScript.js"></script>
-         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> --%>
+        
         <title>Gauteng Mortuary Management System</title>
 
     </head>
@@ -297,8 +295,8 @@
             //For region list box
             emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
             emp.init();
-            ArrayList<String> regionList = emp.referenceList();
-
+            ArrayList<String> regionList = emp.referenceListReg("Gauteng");
+ 
             //For icd10 list box
             emp = new ReferenceListDb("icd10", "e", "code", "e", dbset.getDbdetail());
             emp.init();
@@ -973,11 +971,11 @@
                                                                                 <label class="control-label" for="ProvRegionList">Province</label>
                                                                                 <div class="controls">
 
-                                                                                    <select id="ProvRegionList" name="ProvRegionList">
+                                                                                    <select id="ProvRegionList" name="ProvRegionList" onload="SelectProvince()" onchange='SelectProvince()'>
                                                                                         <%
                                                                                             for (int i = 0; i < provinceList.size(); i++) {
                                                                                         %>
-                                                                                        <option><% out.print(provinceList.get(i));%> </option>
+                                                                                        <option value="<% out.print(provinceList.get(i));%>"><% out.print(provinceList.get(i));%> </option>
 
                                                                                         <%
                                                                                             }
@@ -1061,12 +1059,7 @@
                                                                                                     <%
                                                                                                         }
                                                                                                     %>
-                                                                                                    <%--
-                                                                                                     <option value="1" selected="<%out.println(String.valueOf(one));%>" > Level 1 Table </option> 
-                                                                                                     <option value="2" selected="<%out.println(String.valueOf(two));%>"> Level 2 Table </option> 
-                                                                                                     <option value="3" selected="<%out.println(String.valueOf(three));%>"> Level 3 Table </option> 
-                                                                                                     <option value="4" selected="<%out.println(String.valueOf(four));%>"> Level 4 Table </option> 
-                                                                                                    --%>
+                                                                                                 
                                                                                                 </select>
 
 
@@ -1128,12 +1121,12 @@
                                                                                             </tr>
 
                                                                                             <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
-                                                                                            %>
+%>
                                                                                             <TR>
 
                                                                                             </TR>
                                                                                             <%                                                        //    }
-                                                                                            %>
+%>
                                                                                         </table>
 
                                                                                         <%                                                                                        } else if (tableNum.contains("2")) {
@@ -1147,12 +1140,12 @@
                                                                                             </tr>
 
                                                                                             <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
-                                                                                            %>
+%>
                                                                                             <TR>
 
                                                                                             </TR>
                                                                                             <%                                                        //    }
-                                                                                            %>
+%>
                                                                                         </table>
                                                                                         <%                                                                                        } else if (tableNum.contains("3")) {
                                                                                         %>
@@ -1165,12 +1158,12 @@
                                                                                             </tr>
 
                                                                                             <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
-                                                                                            %>
+%>
                                                                                             <TR>
 
                                                                                             </TR>
                                                                                             <%                                                        //    }
-                                                                                            %>
+%>
                                                                                         </table>
                                                                                         <%                                                                                        } else if (tableNum == "4") {
                                                                                         %>
@@ -1183,12 +1176,12 @@
                                                                                             </tr>
 
                                                                                             <%                                                        // for (int i = 0; i < employeeList.size(); i++) {
-                                                                                            %>
+%>
                                                                                             <TR>
 
                                                                                             </TR>
                                                                                             <%                                                        //    }
-                                                                                            %>
+%>
                                                                                         </table>
                                                                                         <%                                                                                            }
                                                                                         %>
@@ -1588,7 +1581,7 @@
                                                         <input type="hidden" id="table" name="table">
                                                         <input type="hidden" id="editProv" name="editProv">
                                                     </form>
-                                                                    
+
                                                     <form name="formdelete" action="DeleteReferenceListServlet" method="post">
                                                         <input type="hidden" id="item1" name="item1">
                                                         <input type="hidden" id="table1" name="table1">
