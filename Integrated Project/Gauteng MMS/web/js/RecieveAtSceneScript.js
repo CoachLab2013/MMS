@@ -191,7 +191,7 @@ $(document).ready(function(){
     
 $.validator.addMethod("checkInjuryDate", function(value, element, arg){
         if($("#inAllegedInjuryDate").val() == ""){
-            return value;
+            return !value;
         }
         else if($("#bodyFoundDate").val() == ""){
             return value;
@@ -204,7 +204,7 @@ $.validator.addMethod("checkInjuryDate", function(value, element, arg){
     
 $.validator.addMethod("checkDeathDate", function(value, element, arg){
         if($("#inAllegedDeathDate").val() == ""){
-            return value;
+            return !value;
         }
         else if(($("#inAllegedInjuryDate").val() == "") & ($("#bodyFoundDate").val() == "")){
             return value;
@@ -220,7 +220,7 @@ $.validator.addMethod("checkDeathDate", function(value, element, arg){
     
     $.validator.addMethod("checkDeathTime", function(value, element, arg){
         if($("#inAllegedDeathTime").val() == ""){
-            return value;
+            return !value;
         }
         else if(($("#inAllegedInjuryDate").val() =="") & ($("#inAllegedInjuryTime").val() == "")){
             return value;
@@ -240,7 +240,7 @@ $.validator.addMethod("checkDeathDate", function(value, element, arg){
     
 $.validator.addMethod("checkInjuryTime", function(value, element, arg){
         if($("#inAllegedInjuryTime").val()==""){            
-            return value;
+            return !value;
         }
         else if($("#inAllegedInjuryDate").val()==""){
             return value;
@@ -399,7 +399,25 @@ $.validator.addMethod("checkSceneTime", function(value, element, arg){
         else{
             $('#atSceneBodyEstAge').rules("remove");
         }
-    })
+    });
+    
+    $("#inAllegedDeathTime").click(function(){
+        $("#inAllegedDeathDate").rules("add",{
+            required: true,
+            messages:{
+                required: "Please select a date"
+            }
+        });
+    });
+    
+    $("#inAllegedInjuryTime").click(function(){
+        $("#inAllegedInjuryDate").rules("add",{
+            required: true,
+            messages:{
+                required: "Please select a date"
+            }
+        });
+    });
     
 });
 
