@@ -28,11 +28,11 @@ public class BodyAtScene /*extends Body*/
     public BodyAtScene(BodyAtMortuary body) {
         this.sceneIncidentOccured = "null";
         this.pathOnScene = false;
-        this.allegedInjuryDateTime = "0000-00-00 00:00";
-        this.allegedDeathDateTime = "0000-00-00 00:00";
+        this.allegedInjuryDateTime = "0001-01-01 00:00";
+        this.allegedDeathDateTime = "0001-01-01 00:00";
         this.externalCircumstanceOfInjury = "null";
         this.placeOfDeath = "null";
-        this.dateTimeBodyFound = "0000-00-00 00:00";
+        this.dateTimeBodyFound = "0001-01-01 00:00";
         this.body = body;
     }
     public BodyAtScene(String sceneIncidentOccured, boolean pathOnScene, String allegedInjuryDateTime, String allegedDeathDateTime, String externalCircumstanceOfInjury, String placeOfDeath, String dateTimeBodyFound, BodyAtMortuary body) {

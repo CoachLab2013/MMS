@@ -27,9 +27,9 @@
 
         <table>
             <tr>
-                <td width="200"></td>
-                <td width="10"><input type="button" value="Edit" id="editincidentbutton"></td>
-                <td width="300" align="center"><input type="button" value="Close Incident" id="close"> </td>
+                <td width="20"></td>
+                <td width="50"><input class="btn" type="button" value="Edit" id="editincidentbutton"></td>
+                <td width="30" align="center"><input class="btn" type="button" value="Close Incident" id="close"> </td>
             </tr>
             <tr>
                 <td>
@@ -67,14 +67,15 @@
 
                 </td>
                 <td>
-                    <input id="closeincident" type="submit" value="Close Incident">
-                    <input id="cancelcloseincident" type="reset" value="Cancel">
+                    <input class="btn" id="closeincident" type="submit" value="Close Incident">
+                    <input class="btn" id="cancelcloseincident" type="reset" value="Cancel">
                 </td>
             </tr>
         </table>
     </form>
         <form id="editincidentform" hidden="true" action="GetIncidentServlet">
-            <input type="text" id="selected_edit_incident" name="selected_edit_incident">
+            <input class="btn" type="text" id="selected_edit_incident" name="selected_edit_incident">
+           
         </form>
 </body>
 </html>

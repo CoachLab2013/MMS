@@ -19,10 +19,16 @@
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="js/RecieveAtSceneScript.js"></script>
-        <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
+        <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
+         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
+        <link type="text/css" rel="stylesheet"  href="CSS files/datetimestyle.css"> 
+        <%-- http://jqueryui.com/themeroller/ --%>
     </head>
     <body>
     <legend class="legend"><h3>Receive body from scene</h3> </legend>
+    
+    
     <form name="recieve_body_scene_form" id="recieve_body_scene_form" method="post" action="AtSceneServlet">
         <input type="hidden" name="at_scene_deathregister" id="at_scene_deathregister"/>
         <input type="hidden" name="at_scene_lognmber" id="at_scene_lognmber"/>
@@ -373,25 +379,17 @@
         <fieldset class="fieldset">     
             <legend class="legend"><h4>Date and time body found:</h4></legend>
 
-            <div class="control-group error">
-                <label class="control-label" for="bodyFoundDate">Date</label> 
-
-                <div class="input-append date " id="datepicker" name="bodyFoundDate" >
-
-                    <input size="16" id="bodyFoundDate" name="bodyFoundDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
-                    <span class="add-on"><i class="icon-calendar"></i></span> 
-
+            <div class="control-group">
+                <label class="control-label" for="bodyFoundDate">Date:</label> 
+                <div class="controls" >
+                    <input id="bodyFoundDate" name="bodyFoundDate" type="text" readonly style="cursor:pointer;"/>                    
                 </div>
             </div>
 
-            <div class="control-group error">
-                <label class="control-label" for="bodyFoundTime">Time  </label> 
-
-                <div class="input-append date " id="timepicker" name="bodyFoundTime" >
-
-                    <input size="16" id="bodyFoundTime" name="bodyFoundTime" data-format="hh:mm" type="text" value="" readonly>
-                    <span class="add-on"><i class="icon-time"></i></span> 
-
+            <div class="control-group">
+                <label class="control-label" for="bodyFoundTime">Time:</label> 
+                <div class="controls">
+                    <input id="bodyFoundTime" name="bodyFoundTime"  type="text" readonly  style="cursor:pointer;"/>                    
                 </div>
             </div>
 
@@ -402,24 +400,16 @@
             <legend class="legend"><h4>Alleged date and time of injury:</h4></legend>
 
             <div class="control-group">
-                <label class="control-label" for="allegedInjuryDate">Date</label> 
-
-                <div class="input-append date " id="datepicker2" name="allegedInjuryDate" >
-
-                    <input size="16" id="inAllegedInjuryDate" name="inAllegedInjuryDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
-                    <span class="add-on"><i class="icon-calendar"></i></span> 
-
+                <label class="control-label" for="allegedInjuryDate">Date:</label> 
+                <div class="controls">
+                    <input id="inAllegedInjuryDate" name="inAllegedInjuryDate" type="text" readonly style="cursor:pointer;" />                    
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="allegedInjuryTime">Time</label> 
-
-                <div class="input-append date " id="timepicker2" name="allegedInjuryTime">
-
-                    <input size="16" id="inAllegedInjuryTime" name="inAllegedInjuryTime" data-format="hh:mm" type="text" value="" readonly>
-                    <span class="add-on"><i class="icon-time"></i></span> 
-
+                <label class="control-label" for="allegedInjuryTime">Time:</label> 
+                <div class="controls">
+                    <input id="inAllegedInjuryTime" name="inAllegedInjuryTime" type="text" readonly style="cursor:pointer;" />
                 </div>
             </div>
 
@@ -428,24 +418,18 @@
             <legend class="legend"><h4>Alleged date and time of death:</h4></legend>
 
             <div class="control-group">
-                <label class="control-label" for="allegedDeathDate">Date</label> 
-
-                <div class="input-append date " id="datepicker3" name="allegedDeathDate" >
-
-                    <input size="16" id="inAllegedDeathDate" name="inAllegedDeathDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
-                    <span class="add-on"><i class="icon-calendar"></i></span> 
-
+                <label class="control-label" for="allegedDeathDate">Date:</label> 
+                <div class="controls">
+                    <input id="inAllegedDeathDate" name="inAllegedDeathDate" type="text" readonly style="cursor:pointer;" />                   
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="allegedDeathtime">Time  </label> 
+                <label class="control-label" for="allegedDeathtime">Time:</label> 
 
-                <div class="input-append date " id="timepicker3" name="allegedDeathtime" >
+                <div class="controls">
 
-                    <input size="16" id="inAllegedDeathTime" name="inAllegedDeathTime" data-format="hh:mm" type="text" value="" readonly>
-                    <span class="add-on"><i class="icon-time"></i></span> 
-
+                    <input id="inAllegedDeathTime" name="inAllegedDeathTime" type="text" readonly style="cursor:pointer;" />                    
                 </div>
             </div>
 
@@ -454,24 +438,22 @@
         <fieldset class="fieldset">     
             <legend class="legend"><h4>Date and time of FPS receiving the body at scene:</h4></legend>
 
-            <div class="control-group error">
-                <label class="control-label" for="FPSbodyReceiveSceneDate">Date  </label> 
+            <div class="control-group">
+                <label class="control-label" for="FPSbodyReceiveSceneDate">Date:</label> 
 
-                <div class="input-append date " id="datepicker4" name="FPSbodyReceiveSceneDate" >
+                <div class="controls">
 
-                    <input size="16" id="ReceivedSceneDate" name="ReceivedSceneDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
-                    <span class="add-on"><i class="icon-calendar"></i></span> 
+                    <input id="ReceivedSceneDate" name="ReceivedSceneDate" type="text" readonly style="cursor:pointer;" />                    
 
                 </div>
             </div>
 
-            <div class="control-group error">
-                <label class="control-label" for="FPSbodyReceiveSceneTime">Time  </label> 
+            <div class="control-group">
+                <label class="control-label" for="FPSbodyReceiveSceneTime">Time:</label> 
 
-                <div class="input-append date " id="timepicker4" name="FPSbodyReceiveSceneTime" >
+                <div class="controls">
 
-                    <input size="16"  id="ReceivedSceneTime" name="ReceivedSceneTime" data-format="hh:mm" type="text" value="" readonly>
-                    <span class="add-on"><i class="icon-time"></i></span> 
+                    <input id="ReceivedSceneTime" name="ReceivedSceneTime" type="text" readonly style="cursor:pointer;" />
 
                 </div>
             </div>
@@ -481,24 +463,19 @@
         <fieldset class="fieldset">     
             <legend class="legend"><h4>Date and time of FPS receiving the body at facility:</h4></legend>
 
-            <div class="control-group error">
-                <label class="control-label" for="FPSbodyReceiveFacilitydate">Date  </label> 
+            <div class="control-group">
+                <label class="control-label" for="FPSbodyReceiveFacilitydate">Date:</label> 
 
-                <div class="input-append date " id="datepicker5" name="FPSbodyReceiveFacilityDate" >
-
-                    <input size="16" id="ReceivedFDate" name="ReceivedFacilityDate" data-format="yyyy-MM-dd" type="text" value="" readonly>
-                    <span class="add-on"><i class="icon-calendar"></i></span> 
-
+                <div class="controls">
+                    <input id="ReceivedFDate" name="ReceivedFacilityDate" type="text" readonly style="cursor:pointer;" />                    
                 </div>
             </div>
 
-            <div class="control-group error">
-                <label class="control-label" for="FPSbodyReceiveFacilityTime">Time  </label> 
+            <div class="control-group">
+                <label class="control-label" for="FPSbodyReceiveFacilityTime">Time:</label> 
 
-                <div class="input-append date " id="timepicker5" name="FPSbodyReceiveFacilityTime" >
-
-                    <input size="16" id="ReceivedFTime" name="ReceivedFacilityTime"  data-format="hh:mm" type="text" value="" readonly>
-                    <span class="add-on"><i class="icon-time"></i></span> 
+                <div class="controls">
+                    <input id="ReceivedFTime" name="ReceivedFacilityTime" type="text" readonly style="cursor:pointer;" />                    
                 </div>
             </div>
 
@@ -508,7 +485,7 @@
         <fieldset class="fieldset">     
             <legend class="legend"><h4>Scene details:</h4></legend>
             <div class="control-group">
-                <label class="control-label" for="SceneType">Scene where incident occured:</label> 
+                <label class="control-label" for="SceneType">Scene where incident occurred:</label> 
                 <div class="controls"><%
                     out.print(t.makeReferenceList("SceneType", "type", ""));
                     %>
@@ -590,70 +567,6 @@
                     <%--Display save result --%> 
                 </div>
 
-                <script>                      
-
-                    $('#datepicker').datetimepicker({
-                        pickTime: false,
-                        autoclose: true
-                    });
-
-                    $('#timepicker').datetimepicker({
-                        pickDate: false,
-                        autoclose: true,
-                        pickSeconds: false
-                    });
-                    
-
-                    $('#datepicker2').datetimepicker({
-                        pickTime: false,
-                        autoclose: true
-                    });
-
-                    $('#timepicker2').datetimepicker({
-                        pickDate: false,
-                        autoclose: true,
-                        pickSeconds: false
-
-                    });
-
-                    $('#datepicker3').datetimepicker({
-                        pickTime: false,
-                        autoclose: true
-                    });
-
-                    $('#timepicker3').datetimepicker({
-                        pickDate: false,
-                        autoclose: true,
-                        pickSeconds: false
-
-                    });
-
-                    $('#datepicker4').datetimepicker({
-                        pickTime: false,
-                        autoclose: true
-                    });
-
-                    $('#timepicker4').datetimepicker({
-                        pickDate: false,
-                        autoclose: true,
-                        pickSeconds: false
-
-                    });
-
-                    $('#datepicker5').datetimepicker({
-                        pickTime: false,
-                        autoclose: true
-                    });
-
-                    $('#timepicker5').datetimepicker({
-                        pickDate: false,
-                        autoclose: true,
-                        pickSeconds: false
-
-                    });
-
-                </script>
-
             </fieldset>
             <br/> <br/>
             <fieldset class="fieldset offset1">     
@@ -709,5 +622,6 @@
             <%--Display save result --%> 
         </div>              
     </form>  
+<script type="text/javascript" src="js/RecieveBodyDateTime.js"></script>        
 </body>         
 </html>

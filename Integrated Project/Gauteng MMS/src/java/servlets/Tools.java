@@ -22,7 +22,7 @@ public class Tools {
      */
  
 
-  
+
     public Tools() 
     {
         dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
@@ -644,7 +644,8 @@ public class Tools {
         char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
-        for (int i = 0; i < len_password; i++) {
+        for (int i = 0; i < len_password; i++) 
+        {
             char c = chars[random.nextInt(chars.length)];
             sb.append(c);
         }
@@ -757,7 +758,7 @@ public class Tools {
     
     public String checkDate(String inDate){
         if (inDate.equals("")){
-            return "0000-00-00";
+            return "0001-01-01";
         }else{
             return inDate;
         }

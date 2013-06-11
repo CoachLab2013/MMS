@@ -5,6 +5,9 @@ $(document).ready(function(){
             employee:{
                 valueNotEquals: "Select"
             },
+            bodypart:{
+                valueNotEquals: "Select"
+            },
             atMortuaryAddressPostalCode:{
                 required: false,
                 number: true
@@ -13,6 +16,9 @@ $(document).ready(function(){
         messages:{
             employee:{
                 valueNotEquals: "Please select an employee"
+            },
+            bodypart:{
+                valueNotEquals: "Please select a body calssification"
             },
             atMortuaryAddressPostalCode:{
                 number: "Invalid postal code"
