@@ -59,30 +59,25 @@
             <tr>
                 <td></td>
                 <td>
-                    <%
-
-                        out.println(t.makeICD10List("ICDlevel2", "diag1_Id", "description", "ICDLevel1_chapter", "", "Select Diagnosis 1"));
-                    %>
-
+                    <select id="ICDlevel2" name="ICDlevel2">
+                        <option>Select Diagnosis 1</option>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td></td>     
                 <td>
-                    <%
-
-                        out.println(t.makeICD10List("ICDlevel3", "diag2_Id", "description", "", "Select Diagnosis 2"));
-                    %>
+                    <select id="ICDlevel3" name="ICDlevel3">
+                        <option>Select Diagnosis 2</option>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td></td>
-
                 <td>
-                    <%
-
-                        out.println(t.makeICD10List("ICDlevel4", "diag3_Id", "description", "", "Select Diagnosis 3"));
-                    %>
+                    <select id="ICDlevel4" name="ICDlevel4">
+                        <option>Select Diagnosis 3</option>
+                    </select>
                 </td>
 
             </tr>  

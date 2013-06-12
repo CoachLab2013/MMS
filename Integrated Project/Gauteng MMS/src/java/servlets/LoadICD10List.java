@@ -1,27 +1,31 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
-import database.BodyAtMortuary;
-import database.BodyDb;
-import database.Recipient;
-import database.RecipientDb;
+import AssistiveClasses.SetDbDetail;
+import database.ICD10DB;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Cya
+ * @author Sandile
  */
-@WebServlet(name = "SaveRecipientDetails", urlPatterns = {"/SaveRecipientDetails"})
-public class SaveRecipientDetails extends HttpServlet {
-
+public class LoadICD10List extends HttpServlet {
+    
+    private String getString(ArrayList<String> list) {
+        String tmp = "";
+        
+        for (String tmpString: list) {
+            tmp += tmpString + "~";
+        }
+        
+        return tmp;
+    }
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -35,36 +39,37 @@ public class SaveRecipientDetails extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        Recipient recipient = new Recipient();
                 
-        recipient.setName(request.getParameter("RecipientName"));
-        recipient.setSurname(request.getParameter("RecipientSurname"));       
-        recipient.setIdType(request.getParameter("Recipientidentificationtype"));
-        recipient.setID(request.getParameter("RecipientIDNumber"));
-        recipient.setAddress(request.getParameter("RecipientAddres"));
-        recipient.setContactNumber(request.getParameter("RecipientContact"));
-        recipient.setBody_idDeathRegisterNumber(request.getParameter("RecipientDeathRegisterNumber"));
-        
-        //connection to the database
-        RecipientDb recipientDb = new  RecipientDb(recipient, new Tools().getDbdetail());
-        recipientDb.init();
-        System.out.println(recipientDb.add());
-        
-        BodyAtMortuary bodtAtMortuary = new BodyAtMortuary(request.getParameter("RecipientDeathRegisterNumber"));
-        BodyDb bodyDB = new BodyDb(new Tools().getDbdetail(), bodtAtMortuary);
-        bodyDB.init();
-        bodyDB.read();
-        bodyDB.getBody().setBodyReleased(true);
-        bodyDB.getBody().setBodyReleaseTo(request.getParameter("releaseto"));
-        //bodyDB.getBody().setBodyReleaseTo(request.getParameter("releaseto")); //Release Type
-        bodyDB.edit();
+        if (request.getParameter("type").equals("loadICD2")) {
+            PrintWriter out = response.getWriter();
+            try {              
+             
+               out.println(getString(new ICD10DB(new SetDbDetail().getDbdetail()).filterICD10Code2(request.getParameter("data"))));
                 
-        request.getSession().setAttribute("_recipientDetail", true);
-        response.sendRedirect("Home.jsp");
+            } finally {
+                out.close();
+            }
+        } else if (request.getParameter("type").equals("loadICD3")) {
+            PrintWriter out = response.getWriter();
+            try {
+                
+                out.println(getString(new ICD10DB(new SetDbDetail().getDbdetail()).filterICD10Code3(request.getParameter("data"))));
+                
+            } finally {
+                out.close();
+            }
+        } else if (request.getParameter("type").equals("loadICD4")) {
+            PrintWriter out = response.getWriter();
+            try {
+                
+                out.println(getString(new ICD10DB(new SetDbDetail().getDbdetail()).filterICD10Code4(request.getParameter("data"))));
+                
+            } finally {
+                out.close();
+            }
+        }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.

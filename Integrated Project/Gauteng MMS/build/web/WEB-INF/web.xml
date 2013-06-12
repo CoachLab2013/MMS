@@ -62,19 +62,20 @@
         <servlet-class>servlets.RegisteredSamples</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoadICD10Table</servlet-name>
-        <servlet-class>servlets.LoadICD10Table</servlet-class>
+        <servlet-name>LoadICD10List</servlet-name>
+        <servlet-class>servlets.LoadICD10List</servlet-class>
     </servlet>
     <servlet>
- 
         <servlet-name>FilterRegionServlet</servlet-name>
         <servlet-class>servlets.FilterRegionServlet</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>LinkBodyContent</servlet-name>
         <servlet-class>servlets.LinkBodyContent</servlet-class>
- 
+    </servlet>
+    <servlet>
+        <servlet-name>ReleaseBodyServlet</servlet-name>
+        <servlet-class>servlets.ReleaseBodyServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -133,18 +134,20 @@
         <url-pattern>/RegisteredSamples</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoadICD10Table</servlet-name>
-        <url-pattern>/LoadICD10Table</url-pattern>
+        <servlet-name>LoadICD10List</servlet-name>
+        <url-pattern>/LoadICD10List</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
- 
         <servlet-name>FilterRegionServlet</servlet-name>
         <url-pattern>/FilterRegionServlet</url-pattern>
-   </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LinkBodyContent</servlet-name>
         <url-pattern>/LinkBodyContent</url-pattern>
- 
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReleaseBodyServlet</servlet-name>
+        <url-pattern>/ReleaseBodyServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -34,8 +34,7 @@ public class ReleaseBodyServlet extends HttpServlet {
         if (request.getParameter("type").equals("load")) {
             PrintWriter out = response.getWriter();
 
-            try {
-                                
+            try {                                
 //                DbDetail dbDetail = new SetDbDetail().getDbdetail();
 //                out.println();
             } finally {

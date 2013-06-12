@@ -104,29 +104,6 @@ public class BodyFileDb extends DatabaseConnector
         return list;
     }
     
-    
-     public ResultSet cyasBodyFileRs() throws SQLException
-    {
-       ResultSet rs = null;
-      
-        try 
-        {
-            statement.executeQuery("SELECT * FROM body \n" + "LEFT JOIN bodyfile on bodyfile.Body_idDeathRegisterNumber = body.idDeathRegisterNumber \n" + "WHERE bodyFileStatus <> 0;");
-            rs = statement.getResultSet();
-            
-            
-          //  statement.close();
-          //  connection.close();
-        } 
-        catch (SQLException ex) 
-        {
-            throw new SQLException(ex.getMessage());
-        }
-        return rs;
-    }
-  
-    
-    
     @Override
     public String edit() 
     {

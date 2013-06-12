@@ -20,11 +20,7 @@ $(document).ready(function(){
               RecipientSurname:{
               required:true
           },//end rules for Recipient surname number
-          
-               Recipientidentificationtype:{
-                valueNotEquals: "Select"
-            },//end rule of identification type
-            
+                      
                RecipientIDNumber:{
                 required: true,
                 minlength: 13,
@@ -33,10 +29,11 @@ $(document).ready(function(){
              },//end rule of ID number
         
                RecipientContact:{
+                   number: true,
               required:true
           },//end rules for  contact
           
-             RecipientRes:{
+             RecipientAddres:{
               required:true
           },//end rules for  residential address
           
@@ -59,11 +56,7 @@ $(document).ready(function(){
             required: "Please enter Recipient Surname."  
           },//end message for Kin Surname
           
-          Recipientidentificationtype:{
-               valueNotEquals: "Please select a Recipient ID Number type."
-           },//end rule for id
-           
-           RecipientContact:{
+          RecipientContact:{
                 required: "Please enter in Recipient Contact number.",
                 minlength: "Your Contact number must be exactly 10 digits long.",
                 maxlength: "Your Contact number must be exactly 10 digits long.",
@@ -77,7 +70,7 @@ $(document).ready(function(){
                 number: "Your ID number must consist of 13 numeric digits."
             }, //end messages for ID number
           
-          RecipientRes:{
+          RecipientAddres:{
             required: "Please enter in the Recipient Address."  
           },//end message for reason for seal
           
@@ -93,6 +86,37 @@ $(document).ready(function(){
         }//end of messages
         
     });//end of form validation
+    
+        
+    $("#recipientidentificationtype").click(function(){
+       if($("#recipientidentificationtype option").filter(':selected').text() == "ID"){
+           $("#recipientIDNumber").rules("remove");
+           $("#recipientIDNumber").rules("add",{
+               required: true,
+               number: true,
+               minlength: 13,
+               maxlength: 13,
+               messages:{
+                   required: "Please enter in an ID number",
+                   number: "Invalid ID number. It must contain exactly 13 numeric digits",
+                   minlength: "Invalid ID number. It must contain exactly 13 numeric digits",
+                   maxlength: "Invalid ID number. It must contain exactly 13 numeric digits"
+               }
+           });           
+       }
+       else if($("#recipientidentificationtype option").filter(':selected').text() == "Passport"){
+            $("#recipientIDNumber").rules("remove");
+           $("#recipientIDNumber").rules("add",{
+               required: true,
+               messages:{
+                   required: "Please enter in an passport number"
+               }
+           });
+       }
+       else{
+           $("#recipientIDNumber").rules("remove");
+       }
+    });
     
     $("#releaseTable").click();
      
