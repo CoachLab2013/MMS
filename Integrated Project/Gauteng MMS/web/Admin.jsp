@@ -23,13 +23,13 @@
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
             response.setDateHeader("Expires", 0); // Proxies. 
-           
-                if (session.getAttribute("loggedin") == null) {
-                    response.sendRedirect("/Gauteng_MMS/");
-                }
-                
-           
-%>
+
+            if (session.getAttribute("loggedin") == null) {
+                response.sendRedirect("/Gauteng_MMS/");
+            }
+
+
+        %>
 
         <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
         <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
@@ -74,7 +74,7 @@
             String raceResult = "";
             String maritalResult = "";
             String provinceResult = "";
-            String regionResult = ""; 
+            String regionResult = "";
             String mannerResult = "";
             String sampleResult = "";
             String statusResult = "";
@@ -170,7 +170,7 @@
                         regionResult = session.getAttribute("regionResult").toString();
                         region = "active";
 
-                    }  else if (session.getAttribute("tab").equals("manner")) {
+                    } else if (session.getAttribute("tab").equals("manner")) {
                         mannerResult = session.getAttribute("mannerResult").toString();
                         manner = "active";
                     } else if (session.getAttribute("tab").equals("sample")) {
@@ -231,8 +231,32 @@
 
                 }
             } catch (Exception ex) {
+                 userResult = "";
+                    instiResult = "";
+                    analysisResult = "";
+                    propertyResult = "";
+                    vehicleResult = "";
+                    rankResult = "";
+                    genderResult = "";
+                    occupationResult = "";
+                    raceResult = "";
+                    maritalResult = "";
+
+                    provinceResult = "";
+                    regionResult = "";
+                    mannerResult = "";
+                    sampleResult = "";
+                    statusResult = "";
+                    relationshipResult = "";
+                    specialCurResult = "";
+                    bodyPartResult = "";
+                    exCauseResult = "";
+                    slTypeResult = "";
+                    
                 currentUserTab = "active";
                 main1 = "active";
+                
+                
             }
             SetDbDetail dbset = new SetDbDetail();
 
@@ -296,9 +320,9 @@
             //For region list box
             emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
             emp.init();
-            ArrayList<String> regionList = emp.referenceListReg(provinceList.get(0));
-            
- 
+            ArrayList<String> regionList = emp.referenceListReg(provinceList.get(provinceList.size()-1));
+
+
             //For mannerofdeath list box
             emp = new ReferenceListDb("mannerofdeath", "e", "type", "e", dbset.getDbdetail());
             emp.init();
@@ -329,16 +353,16 @@
             emp.init();
             ArrayList<String> specialCurList = emp.referenceList();
 
-             //For external circumstance list box
+            //For external circumstance list box
             emp = new ReferenceListDb("externalcircumstance", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> exCauseList = emp.referenceList();
 
-             //For scene type list box
+            //For scene type list box
             emp = new ReferenceListDb("scenetype", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> slTypeList = emp.referenceList();
-            
+
         %>
 
 
@@ -477,7 +501,7 @@
                                                                     </div>
 
                                                                 </fieldset>
-                                                                                <br/>                               
+                                                                <br/>                               
                                                                 <div class="offset3">
                                                                     <input type="submit"  class="btn" type="button" value="Add User" /> 
                                                                     <%--Display save result --%> 
@@ -944,12 +968,28 @@
                                                                             <div class="control-group form-horizontal">
                                                                                 <label class="control-label" for="ProvRegionList">Province</label>
                                                                                 <div class="controls">
-                                                                                        
+
                                                                                     <select id="ProvRegionList" name="ProvRegionList" onload="SelectProvince()" onchange='SelectProvince()'>
                                                                                         <%
+                                                                                             String prov = "";
+                                                                                             String selected ="";
+                                                                                           
+                                                                                           if (null != session.getAttribute("provTab")) {
+                                                                                                prov = session.getAttribute("provTab").toString();
+                                                                                           }
+                                                                                            
+                                                                                               
                                                                                             for (int i = 0; i < provinceList.size(); i++) {
+                                                                                               if(prov.trim().equals(provinceList.get(i).trim())){
+                                                                                                selected="selected";
+                                                                                                emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
+            emp.init();                                                                          emp.init();
+                                                                                                regionList = emp.referenceListReg(provinceList.get(i).trim());
+                                                                                                }else{
+                                                                                                selected="";
+                                                                                                } 
                                                                                         %>
-                                                                                        <option value="<% out.print(provinceList.get(i));%>"><% out.print(provinceList.get(i));%> </option>
+                                                                                        <option <%out.println(String.valueOf(selected));%>  value="<% out.print(provinceList.get(i));%>"><% out.print(provinceList.get(i));%> </option>
 
                                                                                         <%
                                                                                             }
@@ -974,7 +1014,10 @@
 
                                                                             <select id="RegionList" name="RegionList" size="5">
                                                                                 <%
+
+
                                                                                     for (int i = 0; i < regionList.size(); i++) {
+                                                                                        
                                                                                 %>
                                                                                 <option><% out.print(regionList.get(i));%> </option>
 
@@ -985,7 +1028,7 @@
                                                                             <br/>
                                                                             <input class="btn" type="button" onclick="editReferenceListReg('region', 'RegionList', 'ProvRegionList')" value="Edit Region" id="cmdEditRegion" name="cmdEditRegion" />
                                                                             <input class="btn" type="button" onclick="deleteReferenceListReg('region', 'RegionList', 'ProvRegionList')" value="Delete Region" id="cmdDeleteRegion" name="cmdEditRegion" />
-                                                                            
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -1324,12 +1367,12 @@
                                                                             <input class="btn" type="button" onclick="editReferenceList('scenetype', 'SealTypeList')" value="Edit Seal Type" id="cmdEditSealType" name="cmdEditSealType" />
                                                                             <input class="btn" type="button" onclick="deleteReferenceList('scenetype', 'SealTypeList')" value="Delete Seal Type  " id="cmdDeleteSealType" name="cmdDeleteSealType" />
 
- 
+
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
                                                                     <div  class="offset3">
-                                                                        <label> <% out.println (String.valueOf(slTypeResult));%> </label>
+                                                                        <label> <% out.println(String.valueOf(slTypeResult));%> </label>
                                                                     </div>
                                                                     <br/>
                                                                     <br/>
