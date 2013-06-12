@@ -101,7 +101,7 @@
                             
                             
                             <tr>
-                                <td> <td>  <input type="submit" value="Request" name="request forensic sample" /><br></td></td>
+                                <td> <td>  <input class="btn" type="submit" value="Request" name="request forensic sample" /><br></td></td>
           
                             </tr>
             </table>

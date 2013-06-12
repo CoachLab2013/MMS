@@ -36,8 +36,8 @@
             <table>
        <tr>
                 <td width="200"></td>
-                <td width="10"><input type="button" value="Edit" id="editbodyfilebutton"></td>
-                <td width="300" align="center"><input type="button" value="Close case" id="close"> </td>
+                <td width="10"><input class="btn" type="button" value="Edit" id="editbodyfilebutton"></td>
+                <td width="300" align="center"><input class="btn" type="button" value="Close case" id="close"> </td>
             </tr>
             
                 <td>

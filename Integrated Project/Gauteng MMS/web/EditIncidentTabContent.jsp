@@ -18,8 +18,8 @@
     <body>
         <div class="tabbable">
             <ul class="nav nav-tabs " data-tabs="tabs">
-                <li id ="EditIncidentDetailsTab" class="active"><a href="#EditIncidentDetails" data-toggle="tab">Incident Details</a> </li>
-                <li id ="EditCallDetailsTab"><a href="#EditCallDetails" data-toggle="tab">Call Details</a></li>   
+                <li id ="EditIncidentDetailsTab" class="active"><a href="#EditIncidentDetails" data-toggle="tab">Edit Incident Details</a> </li>
+                <li id ="EditCallDetailsTab"><a href="#EditCallDetails" data-toggle="tab">Edit Call Details</a></li>   
             </ul>
             <div class="tab-content" >
                 <div id="EditIncidentDetails" class="tab-pane active">  

@@ -55,7 +55,7 @@
             %>
         <div class="menutab">
 
-            <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif"><a href="LogOutServlet">Logout</a></span>
+            <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif"><a href="LogOutServlet" style="color:black" >Logout</a></span>
 
             <%
                 if (session.getAttribute("loggedin") == null) {

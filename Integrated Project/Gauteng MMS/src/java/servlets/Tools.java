@@ -23,16 +23,11 @@ public class Tools {
  
 
   
-<<<<<<< HEAD
     public Tools() {
 
         dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
-=======
-    public Tools() 
-    {
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
->>>>>>> origin/master
     }
+
     //end constructor
 
     public String adduser(){
