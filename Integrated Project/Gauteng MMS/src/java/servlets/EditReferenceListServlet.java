@@ -329,22 +329,22 @@ public class EditReferenceListServlet extends HttpServlet {
 
 
         } else if (request.getParameter("table").equals("region")) {
-
+            HttpSession sess = request.getSession();
             String province = request.getParameter("editProv");
             ReferenceListDb emp = new ReferenceListDb("region", "e", "type", "province", Olditem, province, dbDetail);
             emp.setNewData(item);
             emp.init();
+            sess.setAttribute("provTab", province);
             result = emp.editReg().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
-                HttpSession sess = request.getSession();
+
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "region");
                 sess.setAttribute("regionResult", "The region has been successfuly edited");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
-                HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "region");
                 sess.setAttribute("regionResult", "The region did not edit: because " + result);

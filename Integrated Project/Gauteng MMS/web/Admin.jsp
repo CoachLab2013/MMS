@@ -943,7 +943,7 @@
                                                                             <div class="control-group form-horizontal">
                                                                                 <label class="control-label" for="ProvRegionList">Province</label>
                                                                                 <div class="controls">
-
+                                                                                        
                                                                                     <select id="ProvRegionList" name="ProvRegionList" onload="SelectProvince()" onchange='SelectProvince()'>
                                                                                         <%
                                                                                             for (int i = 0; i < provinceList.size(); i++) {

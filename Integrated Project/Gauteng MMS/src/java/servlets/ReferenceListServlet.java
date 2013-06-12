@@ -388,20 +388,20 @@ public class ReferenceListServlet extends HttpServlet {
             //Get infor from text box
             String regionName = request.getParameter("txtRegion");
             String provinceName = request.getParameter("ProvRegionList");
+             HttpSession sess = request.getSession();
+             sess.setAttribute("provTab", provinceName);
             ReferenceListDb emp = new ReferenceListDb("region", "e", "type", "province", regionName, provinceName, dbDetail);
             emp.init();
             result = emp.addRegion().trim();
             
             //if save is successful, return a message to page
             if (result.equals("successful")) {
-                HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "region");
                 sess.setAttribute("regionResult", "The region has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
-                HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "region");
                 sess.setAttribute("regionResult", "The region did not save: because " + result);

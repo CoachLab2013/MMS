@@ -315,21 +315,22 @@ public class DeleteReferenceListServlet extends HttpServlet {
 
 
         } else if (request.getParameter("table1").equals("region")) {
-
+            HttpSession sess = request.getSession();
             String province = request.getParameter("editProv1");
             ReferenceListDb emp = new ReferenceListDb("region", "e", "type", "province", Olditem, province, dbDetail);
             emp.init();
             result = emp.deleteReg().trim();
+            sess.setAttribute("provTab", province);
             //if save is successful, return a message to page
             if (result.equals("successful")) {
-                HttpSession sess = request.getSession();
+                
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "region");
                 sess.setAttribute("regionResult", " The region has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
-                HttpSession sess = request.getSession();
+                 
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "region");
                 sess.setAttribute("regionResult", "The region delete failed because " + result);
