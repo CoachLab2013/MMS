@@ -4,6 +4,8 @@
  */
 package servlets;
 
+import database.BodyAtMortuary;
+import database.BodyDb;
 import database.DbDetail;
 import database.Recipient;
 import database.RecipientDb;
@@ -36,28 +38,33 @@ public class SaveRecipientDetails extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        
         Recipient recipient = new Recipient();
-     
+                
         recipient.setName(request.getParameter("RecipientName"));
         recipient.setSurname(request.getParameter("RecipientSurname"));       
         recipient.setIdType(request.getParameter("Recipientidentificationtype"));
-        recipient.setID(request.getParameter("recipientIDNumber"));
-        recipient.setAddress(request.getParameter("recipientAddres"));
-        recipient.setContactNumber(request.getParameter("recipientContact"));
-        recipient.setBody_idDeathRegisterNumber("099888592");
+        recipient.setID(request.getParameter("RecipientIDNumber"));
+        recipient.setAddress(request.getParameter("RecipientAddres"));
+        recipient.setContactNumber(request.getParameter("RecipientContact"));
+        recipient.setBody_idDeathRegisterNumber(request.getParameter("RecipientDeathRegisterNumber"));
         
         //connection to the database
-        Tools t = new Tools();
-        DbDetail dbdetail = t.getDbdetail();
-        RecipientDb recipientDb = new  RecipientDb(recipient, dbdetail);
+        RecipientDb recipientDb = new  RecipientDb(recipient, new Tools().getDbdetail());
         recipientDb.init();
-       // String success =  recipientDb.add();
+        System.out.println(recipientDb.add());
         
-        HttpSession sess = request.getSession();
-        sess.setAttribute("recipient", true);
+        BodyAtMortuary bodtAtMortuary = new BodyAtMortuary(request.getParameter("RecipientDeathRegisterNumber"));
+        BodyDb bodyDB = new BodyDb(new Tools().getDbdetail(), bodtAtMortuary);
+        bodyDB.init();
+        bodyDB.read();
+        bodyDB.getBody().setBodyReleased(true);
+        bodyDB.getBody().setBodyReleaseTo(request.getParameter("releaseto"));
+        //bodyDB.getBody().setBodyReleaseTo(request.getParameter("releaseto")); //Release Type
+        bodyDB.edit();
+                
+        request.getSession().setAttribute("_recipientDetail", true);
         response.sendRedirect("Home.jsp");
-        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

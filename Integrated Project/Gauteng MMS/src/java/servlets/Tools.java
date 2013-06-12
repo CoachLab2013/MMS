@@ -25,7 +25,11 @@ public class Tools {
 
     public Tools() 
     {
+<<<<<<< HEAD
         dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
+=======
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
+>>>>>>> origin/master
     }
     //end constructor
 
@@ -361,46 +365,47 @@ public class Tools {
     /**
      * This will create a table that has bodyRelease information from the
      * database
-     */
-   
-      public String bodyRelease(String id){ //change
-     
-       // BodyFile bf = new BodyFile(id);
-       BodyDb bdyDb = new BodyDb(dbdetail);
+     */   
+      public String bodyReleaseTable() {
 
-        bdyDb.init();
+        BodyDb bodyDb = new BodyDb(dbdetail);
+        bodyDb.init();
+
         try {
 
+            ArrayList<BodyAtMortuary> bodylist = bodyDb.getBodies();
 
-            ArrayList<BodyAtMortuary> bodylist = bdyDb.getBodies(); //change
-
-            String table = "<table class='tabledisplay' id='" + id + "'>"
-                    + "<th class='tableheading'>Deah Register Number</th>"
+            String table = "<table class='tabledisplay' id='releaseTable'>"
+                    + "<th class='tableheading'>Death Register Number</th>"
                     + "<th class='tableheading'>Name</th>"
                     + "<th class='tableheading'>Surname</th>"
-                    + "<th class='tableheading'>ID/Passport number</th>"
-                    + "<th class='tableheading'>body status</th>";
+                    + "<th class='tableheading'>ID/Passport Number</th>"
+                    + "<th class='tableheading'>Identification Status</th>";
 
-            int size = bodylist.size();
-            for (int i = 0; i < size; i++) {
-                BodyAtMortuary inc = bodylist.get(i);
-                table = table + "<tr class='tablerow' lognumber='" + inc.getDeathRegisterNumber() + "'>"
-                        + "<td>" + inc.getDeathRegisterNumber() + "</td>"
-                        + "<td class='tablecell'>" + inc.getNameOfDeceased() + "</td>"
-                        + "<td class='tablecell'>" + inc.getSurnameOfDeceased() + "</td>"
-                        + "<td class='tablecell'>" + inc.getID() + "</td>"
-                        + "<td class='tablecell'>" + inc.isBodyStatus() + "</td>"
+            for (int i = 0; i < bodylist.size(); i++) {
+                BodyAtMortuary bodyAtMortuary = bodylist.get(i);
+
+                BodyFile bodyFile = new BodyFile(bodyAtMortuary.getDeathRegisterNumber());
+                BodyFileDb bodyFileDB = new BodyFileDb(dbdetail, bodyFile);
+                bodyFileDB.init();
+                bodyFileDB.read();
+
+                table += "<tr class='tablerow' drnumber='" + bodyAtMortuary.getDeathRegisterNumber() + "'>"
+                        + "<td>" + bodyAtMortuary.getDeathRegisterNumber() + "</td>"
+                        + "<td class='tablecell'>" + bodyAtMortuary.getNameOfDeceased() + "</td>"
+                        + "<td class='tablecell'>" + bodyAtMortuary.getSurnameOfDeceased() + "</td>"
+                        + "<td class='tablecell'>" + bodyAtMortuary.getID() + "</td>"
+                        + "<td class='tablecell'>" + bodyFile.isBodyIdentified() + "</td>"
                         + "</tr>";
             }
 
-            table = table + "</table>";
+            table += "</table>";
 
             return table;
-        } catch (Exception e) {
-            return e.getMessage();
+        } catch (SQLException ex) {
+            return ex.getMessage();
         }
     }
-
     // end 
 
       
@@ -499,8 +504,6 @@ public class Tools {
     }
     // end  
 
-
-
     public String openbodyfile(String id) {
         BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
         bdyfileDb.init();
@@ -508,13 +511,11 @@ public class Tools {
 
             ResultSet rs = bdyfileDb.cyasBodyFileRs();
 
-
             String table = "<table class='tabledisplay' id='" + id + "'>"
                     + "<th class='tableheading'>Death Register Number</th>"
                     + "<th class='tableheading'>Incident number</th>"                
                     + "<th class='tableheading'>Deceased body recieved</th>"
                     + "<th class='tableheading'>status</th>";
-
           
             while(rs.next()){
                   table = table +"<tr class='tablerow' regnumber='"+rs.getString("idDeathRegisterNumber")+"'>"
@@ -600,7 +601,42 @@ public class Tools {
         return table;
     }
     //
-
+    
+    /**
+     * This will create a table with all registered samples for that deathRegisterNumber
+     */
+    public String makeRegisteredSampleTable(String DRNumber){
+        ForensicSampleDb forensicsampleDb = new ForensicSampleDb(getDbdetail());
+        forensicsampleDb.init();
+        try{
+            ArrayList<ForensicSample> registeredSamples = forensicsampleDb.SampleList("deathRegisterNumber", DRNumber);
+            
+           String table = "<table class='tabledisplay' id='sampletable'>"
+                    +"<th class='tableheading'>Initial Seal Number</th>"
+                    +"<th class='tableheading'>New Seal Number</th>"
+                    +"<th class='tableheading'>Death Register Number</th>"
+                    +"<th class='tableheading'>Lab Reference Number</th>"
+                    +"<th class='tableheading'>Reason for Sample</th>";
+            int size = registeredSamples.size();
+            for(int i=0; i<size; i++){
+                ForensicSample sample = registeredSamples.get(i);
+                table +="<tr class='tablerow' sealnumber='"+ sample.getSealNumber() +"'>"
+                        +"<td id='trSealNumber'>"+  sample.getSealNumber() +"</td>"
+                        +"<td class='tablecell' id='trBrokenSeal'>" + sample.getBrokenSealNumber()+ "</td>"
+                        + "<td class='tablecell' id='trDeathNumber'>" + sample.getDeathRegisterNumber() +"</td>"
+                        + "<td class='tablecell' id='trLabNumber'>" + sample.getLabNumber()+"</td>"
+                        +"<td class='tablecell' id='trReason'>" + sample.getReason()+ "</td>"
+                        + "</tr>"; 
+            }
+            table = table + "</table>";
+            
+            return table;
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }
+    }
+    // end makeRegisteredSampleTable
     /**
      * @return the dbdetail
      */
