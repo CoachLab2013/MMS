@@ -25,7 +25,7 @@
         <%
           if(session.getAttribute("bodyFileDetail")!= null)
            {
-                out.print("<input type=hidden class='go_to_bodyidDetails' id='go_to_bodyidDetails' value=" + session.getAttribute("bodyFileDetail") +">");  
+                out.print("<input type=hidden class='go_to_bodyidDetails' id='go_to_bodyidDetails' value=" + session.getAttribute("bodyFileDetail") +" />");  
                 session.removeAttribute("bodyFileDetail");
             } 
         %>
@@ -34,7 +34,7 @@
             out.println(t.makeOpenBodyFileTable("openbodytable"));
          %>
          
-            <input type="hidden" id="selectedbody" name="selectedbody" />
+            <input type="text" id="selectedbody" name="selectedbody" />
             
             <br>
             

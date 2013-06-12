@@ -32,25 +32,29 @@
                 session.removeAttribute("_registeredSamples");
             }
         %>
+        
         <form name="registeredSamplesForm" method="post" action="" class="form-horizontal" >
         <%
-            //out.println(new Tools().makeRegisteredSampleTable("sampletable"));
+            //session.setAttribute("death_register_number", "099888592");
+            if(session.getAttribute("death_register_number") != null) {
+                out.println(new Tools().makeRegisteredSampleTable(session.getAttribute("death_register_number").toString()));
+            }
         %>
 
-        <br>        
-
-
+        <br>     
         <table>
             <tr>
                 <td>
-                    <input type="button" value="Edit" id="editincidentbutton">
+                    <input type="button" value="Edit" id="editsamplebutton">
                 </td>                
             </tr>
 
 
         </table> 
-        <br>
-        <br>
+        <br/><br/>
+        <div class="alert alert-error" style="display: none;">
+            Please Select A Sample
+        </div>
     </form>
         
         <form name="editform" id="editform" method="post" action="RegisteredSamples" hidden="true">
@@ -82,8 +86,13 @@
                             </tr>
                           
                             <tr>
+<<<<<<< HEAD
                                 <td> <td>  <input class="btn" type="submit" value="Save" name="edit forensic samples" /><br></td></td>
           
+=======
+                                <td><input type="submit" value="Save" name="edit_forensic_samples" /><br></td>
+                                <td><input type="button" value="Cancel" id="cancel_forensic_samples" name="cancel_forensic_samples" /><br></td>
+>>>>>>> origin/master
                             </tr>
             </table>
             </form>

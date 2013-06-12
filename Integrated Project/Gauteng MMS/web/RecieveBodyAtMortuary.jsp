@@ -12,7 +12,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="js/RecieveAtMortuary.js"></script>
     </head>
-
+    <body>
+     <%
+        if(session.getAttribute("atMortuary") != null){
+            out.println("<input id='checkmortuary'  type='hidden' value="+session.getAttribute("atMortuary")+" />");
+            session.removeAttribute("atMortuary");
+        }
+     %>
     <legend class="legend"><h3>Receive body at mortuary</h3> </legend> 
     <br/><br/>
 
