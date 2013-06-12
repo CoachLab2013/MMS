@@ -19,7 +19,7 @@ function SelectProvince()
     $.get("FilterRegionServlet", {province: pro}, function(data) {
 
         data = data.toString().trim();
-        var dataValues = data.split(" ");
+        var dataValues = data.split("%");
         while (select.options.length > 0) {
             select.remove(0);
         }
@@ -27,7 +27,7 @@ function SelectProvince()
         for (var i = 0; i < dataValues.length; i++)
         {
             var option = document.createElement('option');
-            option.text = option.value = dataValues[i];
+            option.text = option.value = dataValues[i].toString().trim();
             select.add(option, i);
 
         }

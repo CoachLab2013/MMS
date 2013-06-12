@@ -240,7 +240,7 @@ public class ReferenceListDb extends DatabaseConnector {
             ResultSet resultSet = statement.getResultSet();
            
             while (resultSet.next()) {
-                reflist.add(resultSet.getString(field2));
+                reflist.add(resultSet.getString(field2).trim());
               
             }
              

@@ -59,7 +59,7 @@
                             </tr>
                           
                             <tr>
-                                <td> <td>  <input type="submit" value="Register" name="register forensic samples" /><br></td></td>
+                                <td> <td>  <input class="btn" type="submit" value="Register" name="register forensic samples" /><br></td></td>
           
                             </tr>
             </table>

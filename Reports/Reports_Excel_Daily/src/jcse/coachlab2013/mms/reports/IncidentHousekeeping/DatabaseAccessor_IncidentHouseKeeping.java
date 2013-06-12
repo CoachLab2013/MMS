@@ -49,7 +49,7 @@ public final class DatabaseAccessor_IncidentHouseKeeping extends Template_Databa
                 "		LEFT JOIN `reporting database`.`dim_organisation` AS `reporting_Organisation` ON `reporting_Organisation`.`organisation_SK` = `reporting_Incident`.`FK_Organisation_SK`\n" +
                 "		LEFT JOIN `reporting database`.`dim_mannerofdeath` AS `reporting_MannerOfDeath` ON `reporting_MannerOfDeath`.`mannerOfDeath_SK` = `reporting_Incident`.`FK_MannerOfDeath_SK`\n" +
                 "\n" +
-                "		WHERE `reporting_Incident`.`incidentDuration` > 1;");            
+                "		WHERE `reporting_Incident`.`incidentDuration`<= 1 and (FK_DateIncidentClosed_SK - FK_DateOfIncident_SK<0);");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

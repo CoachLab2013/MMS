@@ -3,8 +3,21 @@
  * This ensures that the document if fully loaded before the script is executed
  */
 
-$(document).ready(function(){   
-    
+$(document).ready(function(){
+    if($("#checkscene").val() == "true"){
+        //lose focus from the incidents side
+        $("#OpenIncidents").removeClass("tab-pane active");
+        $("#OpenIncidents").addClass("tab-pane");
+        $("#OpenIncidentsTab").removeClass("active");
+        $("#Incident").removeClass("tab-pane active");
+        $("#Incident").addClass("tab-pane");
+        $("#IncidentTab").removeClass("active");
+        
+        //set focus to the body file side
+        $("#BodyFileTab").addClass("active");
+        $("#BodyFile").removeClass("tab-pane");
+        $("#BodyFile").addClass("tab-pane active");
+    }
     
     $("#recieve_body_scene_form").validate({
         rules:{

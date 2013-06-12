@@ -61,15 +61,15 @@
                 <td>Full Name(s):  </td> <td><input type="text" name="DeceasedName" id="txtDeceasedNameDis" <%
                   if(session.getAttribute("bIdFullName") != null)
                   {
-                    out.println("value=" + session.getAttribute("bIdFullName")); session.removeAttribute("bIdFullName");
+                    out.println("value=" + session.getAttribute("bIdFullName"));
                   }
-                 %> /><input type="button" value="Confirm" id="btnDeceasedNameDis"  onclick="confirmText('txtDeceasedNameDis','btnDeceasedNameDis',0);" /></td>  
+                 %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNameDis"  onclick="confirmText('txtDeceasedNameDis','btnDeceasedNameDis',0);" /></td>  
             </tr>
             <tr>     
                 <td>Maiden Name:  </td> <td><input type="text" name="DeceasedMaidenName" <%
                   if(session.getAttribute("bIdMadienName") != null)
                   {
-                    out.println("value=" + session.getAttribute("bIdMadienName")); session.removeAttribute("bIdMadienName");
+                    out.println("value=" + session.getAttribute("bIdMadienName"));
                   }
                  %>  /></td>  
             </tr>
@@ -77,9 +77,9 @@
                 <td>Surname:</td> <td> <input type="text" name="DeceasedSurname" id="txtDeceasedSurnameDis" <%
                   if(session.getAttribute("bIdSurname") != null)
                   {
-                    out.println("value=" + session.getAttribute("bIdSurname")); session.removeAttribute("bIdSurname");
+                    out.println("value=" + session.getAttribute("bIdSurname")); 
                   }
-                 %>  /><input type="button" value="Confirm" id="btnDeceasedSurnameDis" onclick="confirmText('txtDeceasedSurnameDis','btnDeceasedSurnameDis',0);" /> </td>
+                 %>  /><input class="btn" type="button" value="Confirm" id="btnDeceasedSurnameDis" onclick="confirmText('txtDeceasedSurnameDis','btnDeceasedSurnameDis',0);" /> </td>
             </tr> 
 
             <tr>     
@@ -110,15 +110,15 @@
                 <td>Identification Number:  </td> <td><input type="text" id="txtDeceasedNumberDis" name="DeceasedNumber" <%
                   if(session.getAttribute("bIdIDNumber") != null)
                   {
-                    out.println("value=" + session.getAttribute("bIdIDNumber")); session.removeAttribute("bIdIDNumber");
+                    out.println("value=" + session.getAttribute("bIdIDNumber"));
                   }
-                 %> /><input type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
+                 %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
             </tr> 
             <tr>
                 <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%
                   if(session.getAttribute("bIdPlaceOfBirth") != null)
                   {
-                    out.println("value=" + session.getAttribute("bIdPlaceOfBirth")); session.removeAttribute("bIdPlaceOfBirth");
+                    out.println("value=" + session.getAttribute("bIdPlaceOfBirth"));
                   }
                  %>  /></td>
             </tr>
@@ -126,7 +126,7 @@
                 <td>Date of Birth: </td> <td> <input type="text" name="deceasedDateBirth" <%
                   if(session.getAttribute("bIdDateOfBirth") != null)
                   {
-                    out.println("value=" + session.getAttribute("bIdDateOfBirth")); session.removeAttribute("bIdDateOfBirth");
+                    out.println("value=" + session.getAttribute("bIdDateOfBirth")); 
                   }
                  %>  /></td> 
             </tr>
@@ -134,7 +134,7 @@
                 <td>Age on the date found:  </td> <td><input type="text" name="deceasedage" <%
                   if(session.getAttribute("bIdAgeOnDate") != null)
                   {
-                    out.println("value=" + session.getAttribute("bIdAgeOnDate")); session.removeAttribute("bIdAgeOnDate");
+                    out.println("value=" + session.getAttribute("bIdAgeOnDate")); 
                   }
                  %>  /></td>  
             </tr>
@@ -153,9 +153,8 @@
                             list2 = list2.replaceFirst("id='gender'", "id='selDeceasedGenderDis'");
                             out.println(list2);
                     }
-                    session.removeAttribute("bIdGender");
                         %>
-                    </select><input type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
+                    </select><input class="btn" type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
             <tr>     
                 <td>Marital Status:  </td> <td>
                     <%
@@ -173,7 +172,6 @@
                          list2 = list2.replaceFirst("id='maritalstatus'", "id='selDeceasedMaritalstatus'");
                          out.println(list2);
                      }
-                     session.removeAttribute("bIdMarital");
                    %>
                     </select> </td>
             <tr>     
@@ -192,9 +190,8 @@
                          list2 = list2.replaceFirst("id='race'", "id='selDeceasedRaceDis'");
                          out.println(list2);
                      }
-                     session.removeAttribute("bIdRace");
                      %>
-             <input type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis',0);"/> </td>
+             <input class="btn" type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis',0);"/> </td>
             <tr>     
                 <td>Occupation:  </td> <td>
                         <%if((String)session.getAttribute("bIdOccupation")!=null)
@@ -211,14 +208,12 @@
                          list2 = list2.replaceFirst("id='occupation'", "id='selDeceasedOccupation'");
                          out.println(list2);
                      }
-                     session.removeAttribute("bIdOccupation");   
                      %> </td>
             <tr>
                 <td> Citizenship:</td> <td> <input type="text" name="deceasedCitizenship" <%
                             if((String)session.getAttribute("bIdCitizenship")!=null)
                             {
-                            out.print("value =" + (String)session.getAttribute("bIdCitizenship"));
-                            session.removeAttribute("bIdCitizenship");
+                                out.print("value =" + (String)session.getAttribute("bIdCitizenship"));
                             }
                 %>  /></td>
             </tr>
@@ -252,7 +247,7 @@
                         <option><%
                             if(session.getAttribute("bIdAssignedFPS") != null)
                             {
-                                out.println("value=" + session.getAttribute("bIdAssignedFPS")); session.removeAttribute("bIdAssignedFPS");
+                                out.print(session.getAttribute("bIdAssignedFPS"));
                             }
                  %></option>
                     </select> </td>
@@ -288,7 +283,7 @@
                 </td>
             </tr>
             <tr>
-                <td> <td>  <input type="submit" value="Save" name="bodySave" /><br></td></td>
+                <td> <td>  <input class="btn" type="submit" value="Save" name="bodySave" /><br></td></td>
 
             </tr>
         </table>

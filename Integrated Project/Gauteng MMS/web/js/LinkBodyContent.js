@@ -24,6 +24,7 @@ $(document).ready(function() {
 
                 $('#bodyLink1').append(tr);
             });
+            
         } else {
             $('#tr1').remove();
         }
@@ -64,9 +65,9 @@ $(document).ready(function() {
 
             $('#tr1').remove();
             $('#tr2').remove();            
-            $('.error').css('display','none');
+            $('.alert').css('display','none');
         } else {
-            $('.error').css('display','inherit');
+            $('.alert').css('display','inherit');
         }
     });
     

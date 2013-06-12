@@ -68,14 +68,34 @@ $(document).ready(function(){
         $('input[name="editDeathRegisternumber"]').val($(this).children('#trDeathNumber').text());
         $('textarea[name="editReasonseal"]').val($(this).children('#trReason').text());
         
+        $("#selectedsample").val($(this).attr("sealnumber"));
+        
         var labRec = $(this).children('#trLabNumber').text();
         
         $('td[name="editRegisteredSamples"] > select[name=LabRecord]').find('option').removeAttr("selected");        
         $('td[name="editRegisteredSamples"] > select[name=LabRecord] > option').each(function() {
             if ($(this).text() === labRec) { $(this).attr("selected","selected"); } 
-        });
+        });        
+    });
+
+    $("#editsamplebutton").click(function() {        
         
-        $("#editform").removeAttr('hidden');
+        if($('input[name="editInitialSealnumber"]').val() === ""){
+            $('.alert').css('display','inherit');
+        } else {
+            $('.alert').css('display','none');
+            $("#editform").removeAttr('hidden');
+        }
+    });
+
+    $("#cancel_forensic_samples").click(function() {
+
+        $("#editform").attr('hidden','hidden');
+        
+        $('input[name="editNewSealNumber"]').val("");
+        $('input[name="editDeathRegisternumber"]').val("");
+        $('textarea[name="editReasonseal"]').val("");
+        
     });
 
     if($("#_registerForensicSample").val() === "true") {
