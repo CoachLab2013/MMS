@@ -26,6 +26,12 @@
         <%-- http://jqueryui.com/themeroller/ --%>
     </head>
     <body>
+        <%
+        if(session.getAttribute("atScene") != null){
+            out.println("<input id='checkscene'  type='text' value="+session.getAttribute("atScene")+" />");
+            session.removeAttribute("atScene");
+        }
+     %>
     <legend class="legend"><h3>Receive body from scene</h3> </legend>
     
     
