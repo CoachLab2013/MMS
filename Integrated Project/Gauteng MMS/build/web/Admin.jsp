@@ -296,7 +296,8 @@
             //For region list box
             emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
             emp.init();
-            ArrayList<String> regionList = emp.referenceListReg("Gauteng");
+            ArrayList<String> regionList = emp.referenceListReg(provinceList.get(0));
+            
  
             //For mannerofdeath list box
             emp = new ReferenceListDb("mannerofdeath", "e", "type", "e", dbset.getDbdetail());
@@ -478,7 +479,7 @@
                                                                 </fieldset>
                                                                 <br/> <br/>                                 
                                                                 <div class="offset4">
-                                                                    <input class="btn" type="submit"   type="button" value="Add User" /> 
+                                                                    <input type="submit"  class="btn btn-primary" type="button" value="Add User" /> 
                                                                     <%--Display save result --%> 
                                                                 </div>
 
@@ -532,7 +533,7 @@
                                                                                 <label class="control-label" for="txtInsitution">Institution Name:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtInsitution" name="txtInsitution"   />
-                                                                                    <input class="btn" type="submit" value="Add Institution" name="cmdInsitution" />
+                                                                                    <input type="submit" value="Add Institution" name="cmdInsitution" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -551,15 +552,9 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-<<<<<<< HEAD
-                                                                             
-                                                                            <input class="btn"  type="button" onclick="editReferenceList('Insitution', 'InsitutionList')" value="Edit Institution" id="cmdEditInsitutions" name="cmdEditInsitution" />
-                                                                            <input class="btn" type="button" onclick="deleteReferenceList('Insitution', 'InsitutionList')" value="Delete Institution" id="cmdDeleteInsitutions" name="cmdDeleteInsitutions" />
-=======
 
                                                                             <input type="button" onclick="editReferenceList('Insitution', 'InsitutionList')" value="Edit Institution" id="cmdEditInsitutions" name="cmdEditInsitution" />
                                                                             <input type="button" onclick="deleteReferenceList('Insitution', 'InsitutionList')" value="Delete Institution" id="cmdDeleteInsitutions" name="cmdDeleteInsitutions" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div>     
@@ -577,7 +572,7 @@
                                                                                 <label class="control-label" for="txtAnalysis">Analysis Type Name:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtAnalysis" name="txtAnalysis"   />
-                                                                                    <input class="btn" type="submit" value="Add Analysis" name="cmdAnalysis" />
+                                                                                    <input type="submit" value="Add Analysis" name="cmdAnalysis" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -597,13 +592,8 @@
 
                                                                             </select>
                                                                             <br/>
-<<<<<<< HEAD
-                                                                            <input class="btn" type="button" onclick="editReferenceList('analysis', 'AnalysisList')" value="Edit analysis type" id="cmdEditAnalysis" name="cmdEditAnalysis" />
-                                                                             <input class="btn" type="button" onclick="deleteReferenceList('analysis', 'AnalysisList')" value="Delete analysis type" id="cmdDeleteAnalysis" name="cmdDeleteAnalysis" />
-=======
                                                                             <input type="button" onclick="editReferenceList('analysis', 'AnalysisList')" value="Edit analysis type" id="cmdEditAnalysis" name="cmdEditAnalysis" />
                                                                             <input type="button" onclick="deleteReferenceList('analysis', 'AnalysisList')" value="Delete analysis type" id="cmdDeleteAnalysis" name="cmdDeleteAnalysis" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -624,7 +614,7 @@
                                                                                 <label class="control-label" for="txtProperty">Property type name:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtProperty" name="txtProperty"   />
-                                                                                    <input class="btn" type="submit" value="Add Property Type" name="cmdProperty" />
+                                                                                    <input type="submit" value="Add Property Type" name="cmdProperty" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -645,13 +635,8 @@
 
                                                                             </select>
                                                                             <br/>
-<<<<<<< HEAD
-                                                                            <input class="btn" type="button" onclick="editReferenceList('propertytype', 'PropertyList')" value="Edit property type" id="cmdEditProperty" name="cmdEditProperty" />
-                                                                             <input class="btn" type="button" onclick="deleteReferenceList('propertytype', 'PropertyList')" value="Delete property type" id="cmdDeleteProperty" name="cmdDeleteProperty" />
-=======
                                                                             <input type="button" onclick="editReferenceList('propertytype', 'PropertyList')" value="Edit property type" id="cmdEditProperty" name="cmdEditProperty" />
                                                                             <input type="button" onclick="deleteReferenceList('propertytype', 'PropertyList')" value="Delete property type" id="cmdDeleteProperty" name="cmdDeleteProperty" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div>
@@ -670,7 +655,7 @@
                                                                                 <label class="control-label" for="txtVehicle">Vehicle Registration Number:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtVehicle" name="txtVehicle"   />
-                                                                                    <input class="btn" type="submit" value="Add Vehicle" name="cmdVehicle" />
+                                                                                    <input type="submit" value="Add Vehicle" name="cmdVehicle" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -689,13 +674,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-<<<<<<< HEAD
-                                                                            <input class="btn" type="button" onclick="editReferenceList('vehicle', 'VehicleList')" value="Edit Vehicle number" id="cmdEditVehicle" name="cmdEditVehicle" />
-                                                                              <input class="btn" type="button" onclick="deleteReferenceList('vehicle', 'VehicleList')" value="Delete Vehicle number" id="cmdDeleteVehicle" name="cmdDeleteVehicle" />
-=======
                                                                             <input type="button" onclick="editReferenceList('vehicle', 'VehicleList')" value="Edit Vehicle number" id="cmdEditVehicle" name="cmdEditVehicle" />
                                                                             <input type="button" onclick="deleteReferenceList('vehicle', 'VehicleList')" value="Delete Vehicle number" id="cmdDeleteVehicle" name="cmdDeleteVehicle" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -714,7 +694,7 @@
                                                                                 <label class="control-label" for="txtRank">Rank Name:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtRank" name="txtRank"   />
-                                                                                    <input class="btn" type="submit" value="Add Rank" name="cmdRank" />
+                                                                                    <input type="submit" value="Add Rank" name="cmdRank" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -733,13 +713,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-<<<<<<< HEAD
-                                                                            <input class="btn" type="button" onclick="editReferenceList('rank', 'RankList')" value="Edit Rank" id="cmdEditRank" name="cmdEditRank" />
-                                                                             <input class="btn" type="button" onclick="deleteReferenceList('rank', 'RankList')" value="Delete Rank" id="cmdDeleteRank" name="cmdDeleteRank" />
-=======
                                                                             <input type="button" onclick="editReferenceList('rank', 'RankList')" value="Edit Rank" id="cmdEditRank" name="cmdEditRank" />
                                                                             <input type="button" onclick="deleteReferenceList('rank', 'RankList')" value="Delete Rank" id="cmdDeleteRank" name="cmdDeleteRank" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -760,7 +735,8 @@
                                                                             <div class="control-group form-horizontal">
                                                                                 <label class="control-label" for="txtGender">Gender Type:</label>
                                                                                 <div class="controls">
-                                                                                    <input  class="btn"  type="submit" value="Add Gender" name="cmdGender" />
+                                                                                    <input type="text" id="txtGender" name="txtGender"   />
+                                                                                    <input type="submit" value="Add Gender" name="cmdGender" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -779,13 +755,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-<<<<<<< HEAD
-                                                                            <input class="btn" type="button" onclick="editReferenceList('gender', 'GenderList')" value="Edit Gender" id="cmdEditGender" name="cmdEditGender" />
-                                                                             <input class="btn" type="button" onclick="deleteReferenceList('gender', 'GenderList')" value="Delete Gender" id="cmdDeleteGender" name="cmdDeleteGender" />
-=======
                                                                             <input type="button" onclick="editReferenceList('gender', 'GenderList')" value="Edit Gender" id="cmdEditGender" name="cmdEditGender" />
                                                                             <input type="button" onclick="deleteReferenceList('gender', 'GenderList')" value="Delete Gender" id="cmdDeleteGender" name="cmdDeleteGender" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -806,7 +777,7 @@
                                                                                 <label class="control-label" for="txtOccu">Occupation Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtOccu" name="txtOccu"   />
-                                                                                    <input class="btn" type="submit" value="Add Occupation" name="cmdOccu" />
+                                                                                    <input type="submit" value="Add Occupation" name="cmdOccu" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -825,13 +796,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-<<<<<<< HEAD
-                                                                            <input class="btn" type="button" onclick="editReferenceList('occupation', 'OccuList')" value="Edit Occupation type" id="cmdEditOccupation" name="cmdEditOccupation" />
-                                                                              <input class="btn" type="button" onclick="deleteReferenceList('occupation', 'OccuList')" value="Delete Occupation type" id="cmdDeleteOccupation" name="cmdDeleteOccupation" />
-=======
                                                                             <input type="button" onclick="editReferenceList('occupation', 'OccuList')" value="Edit Occupation type" id="cmdEditOccupation" name="cmdEditOccupation" />
                                                                             <input type="button" onclick="deleteReferenceList('occupation', 'OccuList')" value="Delete Occupation type" id="cmdDeleteOccupation" name="cmdDeleteOccupation" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -853,7 +819,7 @@
                                                                                 <label class="control-label" for="txtRace">Race Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtRace" name="txtRace"   />
-                                                                                    <input class="btn" type="submit" value="Add Race" name="cmdRace" />
+                                                                                    <input type="submit" value="Add Race" name="cmdRace" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -872,13 +838,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-<<<<<<< HEAD
-                                                                            <input class="btn" type="button" onclick="editReferenceList('race', 'RaceList')" value="Edit Race type" id="cmdEditRace" name="cmdEditRace" />
-                                                                             <input class="btn" type="button" onclick="deleteReferenceList('race', 'RaceList')" value="Delete Race type" id="cmdDeleteRace" name="cmdDeleteRace" />
-=======
                                                                             <input type="button" onclick="editReferenceList('race', 'RaceList')" value="Edit Race type" id="cmdEditRace" name="cmdEditRace" />
                                                                             <input type="button" onclick="deleteReferenceList('race', 'RaceList')" value="Delete Race type" id="cmdDeleteRace" name="cmdDeleteRace" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -900,7 +861,7 @@
                                                                                 <label class="control-label" for="txtMarital">Marital Status Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtMarital" name="txtMarital"   />
-                                                                                    <input class="btn" type="submit" value="Add Marital Status" name="cmdMarital" />
+                                                                                    <input type="submit" value="Add Marital Status" name="cmdMarital" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -919,13 +880,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-<<<<<<< HEAD
-                                                                            <input class="btn" type="button" onclick="editReferenceList('maritalstatus', 'MaritalList')" value="Edit Marital Status type" id="cmdEditMarital" name="cmdEditMarital" />
-                                                                             <input class="btn" type="button" onclick="deleteReferenceList('maritalstatus', 'MaritalList')" value="Delete Marital Status type" id="cmdDeleteMarital" name="cmdDeleteMarital" />
-=======
                                                                             <input type="button" onclick="editReferenceList('maritalstatus', 'MaritalList')" value="Edit Marital Status type" id="cmdEditMarital" name="cmdEditMarital" />
                                                                             <input type="button" onclick="deleteReferenceList('maritalstatus', 'MaritalList')" value="Delete Marital Status type" id="cmdDeleteMarital" name="cmdDeleteMarital" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -947,7 +903,7 @@
                                                                                 <label class="control-label" for="txtProvince">Province:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtProvince" name="txtProvince"   />
-                                                                                    <input class="btn" type="submit" value="Add Province" name="cmdProvince" />
+                                                                                    <input type="submit" value="Add Province" name="cmdProvince" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -966,13 +922,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-<<<<<<< HEAD
-                                                                            <input class="btn" type="button" onclick="editReferenceList('province', 'ProvinceList')" value="Edit Province" id="cmdEditProvince" name="cmdEditProvince" />
-                                                                             <input class="btn" type="button" onclick="deleteReferenceList('province', 'ProvinceList')" value="Delete Province" id="cmdDeleteProvince" name="cmdDeleteProvince" />
-=======
                                                                             <input type="button" onclick="editReferenceList('province', 'ProvinceList')" value="Edit Province" id="cmdEditProvince" name="cmdEditProvince" />
                                                                             <input type="button" onclick="deleteReferenceList('province', 'ProvinceList')" value="Delete Province" id="cmdDeleteProvince" name="cmdDeleteProvince" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -1101,54 +1052,10 @@
                                                                                     <input type="submit" value="Add Sample Type" name="cmdSample" />
                                                                                 </div>
 
-<<<<<<< HEAD
-                                                                                            </TR>
-                                                                                            <%                                                        //    }
-%>
-                                                                                        </table>
-                                                                                        <%                                                                                            }
-                                                                                        %>
-                                                                                    </div> </td>
-
-                                                                            </tr>
-                                                                        </table> 
-
-                                                                        <div class="offset2 ">
-                                                                            <form name="AddICD10" id="AddICD10" method="post" action="ReferenceListServlet"  >
-                                                                                <input type="text" name="form" value="AddICD10" style="visibility: hidden" />
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label class="control-label" for="txtICD10">ICD10 code:</label>
-                                                                                    <div class="controls">
-                                                                                        <input type="text" id="txtICD10" name="txtICD10"   />
-                                                                                        <input class="btn" type="submit" value="Add ICD10 Code" name="cmdICD10" />
-                                                                                    </div>
-
-
-                                                                                    <br/>  </div>
-                                                                            </form>
-                                                                            <div class="controls offset2" >
-                                                                                <label class="control-label" for="ICD10List">Current ICD10 Code(s):</label>
-
-                                                                                <select id="ICD10List" name="ICD10List" size="5">
-                                                                                    <%
-                                                                                        for (int i = 0; i < icd10List.size(); i++) {
-                                                                                    %>
-                                                                                    <option><% out.print(icd10List.get(i));%> </option>
-
-                                                                                    <%
-                                                                                        }
-                                                                                    %>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div> 
-                                                                        <%--Display save result --%> 
-                                                                        <div  class="offset3">
-=======
                                                                                 <br/>  </div>
                                                                         </form>
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="SampleList">Current Sample Types:</label>
->>>>>>> origin/master
 
                                                                             <select id="SampleList" name="SampleList" size="5">
                                                                                 <%
@@ -1173,40 +1080,6 @@
                                                                     <br/>
                                                                     <br/>
                                                                 </div>
-<<<<<<< HEAD
-                                                                    <div id="mDeath" class="tab-pane <%out.println(String.valueOf(manner));%> "> 
-                                                                        <div align="center"><h2> Manner of Death</h2> </div>  
-                                                                        <%--content for Manner of Death reference list--%>
-                                                                        <div class="offset2 ">
-                                                                            <form name="AddManner" id="AddManner" method="post" action="ReferenceListServlet"  >
-                                                                                <input type="text" name="form" value="AddManner" style="visibility: hidden" />
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label class="control-label" for="txtManner">Manner of Death:</label>
-                                                                                    <div class="controls">
-                                                                                        <input type="text" id="txtManner" name="txtManner"   />
-                                                                                        <input class="btn" type="submit" value="Add Manner of Death" name="cmdManner" />
-                                                                                    </div>
-
-                                                                                    <br/>  </div>
-                                                                            </form>
-                                                                            <div class="controls offset2" >
-                                                                                <label class="control-label" for="MannerList">Current Manner of Death(s):</label>
-
-                                                                                <select id="MannerList" name="MannerList" size="5">
-                                                                                    <%
-                                                                                        for (int i = 0; i < mannerofdeathList.size(); i++) {
-                                                                                    %>
-                                                                                    <option><% out.print(mannerofdeathList.get(i));%> </option>
-
-                                                                                    <%
-                                                                                        }
-                                                                                    %>
-                                                                                </select>
-                                                                                <br/>
-                                                                                <input class="btn" type="button" onclick="editReferenceList('mannerofdeath', 'MannerList')" value="Edit Manner of Death" id="cmdEditManner" name="cmdEditManner" />
-                                                                                 <input class="btn" type="button" onclick="deleteReferenceList('mannerofdeath', 'MannerList')" value="Delete Manner of Death" id="cmdDeleteManner" name="cmdDeleteManner" />
-=======
->>>>>>> origin/master
 
                                                                 <div id="status" class="tab-pane <%out.println(String.valueOf(status));%> "> 
                                                                     <div align="center"><h2>Body Status</h2> </div>     
@@ -1226,45 +1099,11 @@
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="StatusList">Current Body Status Categories:</label>
 
-<<<<<<< HEAD
-                                                                    <div id="sType" class="tab-pane <%out.println(String.valueOf(sample));%> "> 
-                                                                        <div align="center"><h2>Sample Type</h2> </div>   
-                                                                        <%--content for Sample Type reference list--%>
-                                                                        <div class="offset2 ">
-                                                                            <form name="AddSample" id="AddSample" method="post" action="ReferenceListServlet"  >
-                                                                                <input type="text" name="form" value="AddSample" style="visibility: hidden" />
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label class="control-label" for="txtSample">Sample Type:</label>
-                                                                                    <div class="controls">
-                                                                                        <input type="text" id="txtSample" name="txtSample"   />
-                                                                                        <input type="submit" value="Add Sample Type" name="cmdSample" />
-                                                                                    </div>
-
-                                                                                    <br/>  </div>
-                                                                            </form>
-                                                                            <div class="controls offset2" >
-                                                                                <label class="control-label" for="SampleList">Current Sample Types:</label>
-
-                                                                                <select id="SampleList" name="SampleList" size="5">
-                                                                                    <%
-                                                                                        for (int i = 0; i < sampleList.size(); i++) {
-                                                                                    %>
-                                                                                    <option><% out.print(sampleList.get(i));%> </option>
-
-                                                                                    <%
-                                                                                        }
-                                                                                    %>
-                                                                                </select>
-                                                                                <br/>
-                                                                                <input class="btn" type="button" onclick="editReferenceList('sample', 'SampleList')" value="Edit Sample type" id="cmdEditSample" name="cmdEditSample" />
-                                                                                 <input class="btn" type="button" onclick="deleteReferenceList('sample', 'SampleList')" value="Delete Sample type" id="cmdDeleteSample" name="cmdDeleteSample" />
-=======
                                                                             <select id="StatusList" name="StatusList" size="5">
                                                                                 <%
                                                                                     for (int i = 0; i < bodystatusList.size(); i++) {
                                                                                 %>
                                                                                 <option><% out.print(bodystatusList.get(i));%> </option>
->>>>>>> origin/master
 
                                                                                 <%
                                                                                     }
@@ -1274,46 +1113,6 @@
                                                                             <input type="button" onclick="editReferenceList('bodystatus', 'StatusList')" value="Edit Body Status" id="cmdEditBodystatus" name="cmdEditBodystatus" />
                                                                             <input type="button" onclick="deleteReferenceList('bodystatus', 'StatusList')" value="Delete Body Status" id="cmdDeleteBodystatus" name="cmdDeleteBodystatus" />
 
-<<<<<<< HEAD
-                                                                    <div id="status" class="tab-pane <%out.println(String.valueOf(status));%> "> 
-                                                                        <div align="center"><h2>Body Status</h2> </div>     
-                                                                        <%--content for Body Status reference list--%>
-                                                                        <div class="offset2 ">
-                                                                            <form name="AddStatus" id="AddStatus" method="post" action="ReferenceListServlet"  >
-                                                                                <input type="text" name="form" value="AddStatus" style="visibility: hidden" />
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label class="control-label" for="txtStatus">Body Status :</label>
-                                                                                    <div class="controls">
-                                                                                        <input type="text" id="txtStatus" name="txtStatus"   />
-                                                                                        <input class="btn" type="submit" value="Add Body Status Type" name="cmdStatus" />
-                                                                                    </div>
-
-                                                                                    <br/>  </div>
-                                                                            </form>
-                                                                            <div class="controls offset2" >
-                                                                                <label class="control-label" for="StatusList">Current Body Status Categories:</label>
-
-                                                                                <select id="StatusList" name="StatusList" size="5">
-                                                                                    <%
-                                                                                        for (int i = 0; i < bodystatusList.size(); i++) {
-                                                                                    %>
-                                                                                    <option><% out.print(bodystatusList.get(i));%> </option>
-
-                                                                                    <%
-                                                                                        }
-                                                                                    %>
-                                                                                </select>
-                                                                                <br/>
-                                                                                <input class="btn" type="button" onclick="editReferenceList('bodystatus', 'StatusList')" value="Edit Body Status" id="cmdEditBodystatus" name="cmdEditBodystatus" />
-                                                                                <input class="btn" type="button" onclick="deleteReferenceList('bodystatus', 'StatusList')" value="Delete Body Status" id="cmdDeleteBodystatus" name="cmdDeleteBodystatus" />
-                                                                                
-                                                                            </div>
-                                                                        </div> 
-                                                                        <%--Display save result --%> 
-                                                                        <div  class="offset3">
-                                                                            <label  > <% out.println(String.valueOf(statusResult));%></label>
-=======
->>>>>>> origin/master
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -1342,39 +1141,6 @@
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="RelationshipList">Current Relationship Type(s):</label>
 
-<<<<<<< HEAD
-                                                                    <div id="relationship" class="tab-pane <%out.println(String.valueOf(relationship));%> "> 
-                                                                        <div align="center"><h2>Relationship</h2> </div>   
-                                                                        <%--content for Relationship reference list--%>
-                                                                        <div class="offset2 ">
-                                                                            <form name="AddRelationship" id="AddRelationship" method="post" action="ReferenceListServlet"  >
-                                                                                <input type="text" name="form" value="AddRelationship" style="visibility: hidden" />
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label class="control-label" for="txtRelationship">Relationship Type:</label>
-                                                                                    <div class="controls">
-                                                                                        <input type="text" id="txtRelationship" name="txtRelationship"   />
-                                                                                        <input class="btn" type="submit" value="Add Relationship Type" name="cmdRelationship" />
-                                                                                    </div>
-
-                                                                                    <br/>  </div>
-                                                                            </form>
-                                                                            <div class="controls offset2" >
-                                                                                <label class="control-label" for="RelationshipList">Current Relationship Type(s):</label>
-
-                                                                                <select id="RelationshipList" name="RelationshipList" size="5">
-                                                                                    <%
-                                                                                        for (int i = 0; i < relationshipList.size(); i++) {
-                                                                                    %>
-                                                                                    <option><% out.print(relationshipList.get(i));%> </option>
-
-                                                                                    <%
-                                                                                        }
-                                                                                    %>
-                                                                                </select>
-                                                                                <br/>
-                                                                                <input class="btn" type="button" onclick="editReferenceList('relationship', 'RelationshipList')" value="Edit Relationship type" id="cmdEditRelationship" name="cmdEditRelationship" />
-                                                                                <input class="btn" type="button" onclick="deleteReferenceList('relationship', 'RelationshipList')" value="Delete Relationship type" id="cmdDeleteRelationship" name="cmdDeleteRelationship" />
-=======
                                                                             <select id="RelationshipList" name="RelationshipList" size="5">
                                                                                 <%
                                                                                     for (int i = 0; i < relationshipList.size(); i++) {
@@ -1388,7 +1154,6 @@
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('relationship', 'RelationshipList')" value="Edit Relationship type" id="cmdEditRelationship" name="cmdEditRelationship" />
                                                                             <input type="button" onclick="deleteReferenceList('relationship', 'RelationshipList')" value="Delete Relationship type" id="cmdDeleteRelationship" name="cmdDeleteRelationship" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -1418,39 +1183,6 @@
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="BodyClassList">Current Body Part Type(s):</label>
 
-<<<<<<< HEAD
-                                                                    <div id="bodyPart" class="tab-pane <%out.println(String.valueOf(bodyPart));%> "> 
-                                                                        <div align="center"><h2>Body Part </h2> </div>   
-                                                                        <%--content for Body Part reference list--%>
-                                                                        <div class="offset2 ">
-                                                                            <form name="AddBodyPart" id="AddBodyPart" method="post" action="ReferenceListServlet"  >
-                                                                                <input type="text" name="form" value="AddBodyPart" style="visibility: hidden" />
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label class="control-label" for="txtBodyPart">Body Part Type:</label>
-                                                                                    <div class="controls">
-                                                                                        <input type="text" id="txtBodyPart" name="txtBodyPart"   />
-                                                                                        <input class="btn" type="submit" value="Add Blody Part Type" name="cmdBodyPart" />
-                                                                                    </div>
-
-                                                                                    <br/>  </div>
-                                                                            </form>
-                                                                            <div class="controls offset2" >
-                                                                                <label class="control-label" for="BodyClassList">Current Body Part Type(s):</label>
-
-                                                                                <select id="BodyClassList" name="BodyClassList" size="5">
-                                                                                    <%
-                                                                                        for (int i = 0; i < bodyPartList.size(); i++) {
-                                                                                    %>
-                                                                                    <option><% out.print(bodyPartList.get(i));%> </option>
-
-                                                                                    <%
-                                                                                        }
-                                                                                    %>
-                                                                                </select>
-                                                                                <br/>
-                                                                                <input class="btn" type="button" onclick="editReferenceList('bodypart', 'BodyClassList')" value="Edit Body Part type" id="cmdEditBodyPart" name="cmdEditBodyPart" />
-                                                                                 <input class="btn" type="button" onclick="deleteReferenceList('bodypart', 'BodyClassList')" value="Delete Body Part type" id="cmdDeleteBodyPart" name="cmdDeleteBodyPart" />
-=======
                                                                             <select id="BodyClassList" name="BodyClassList" size="5">
                                                                                 <%
                                                                                     for (int i = 0; i < bodyPartList.size(); i++) {
@@ -1464,7 +1196,6 @@
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('bodypart', 'BodyClassList')" value="Edit Body Part type" id="cmdEditBodyPart" name="cmdEditBodyPart" />
                                                                             <input type="button" onclick="deleteReferenceList('bodypart', 'BodyClassList')" value="Delete Body Part type" id="cmdDeleteBodyPart" name="cmdDeleteBodyPart" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -1472,39 +1203,6 @@
                                                                     <div  class="offset3">
                                                                         <label  > <% out.println(String.valueOf(bodyPartResult));%></label>
                                                                     </div>
-<<<<<<< HEAD
-                                                                    <div id="specialCur" class="tab-pane <%out.println(String.valueOf(specialCur));%> "> 
-                                                                        <div align="center"><h2>Special Circumstances</h2> </div>   
-                                                                        <%--content for Special Circumstance reference list--%>
-                                                                        <div class="offset2 ">
-                                                                            <form name="AddSpecialCur" id="AddSpecialCur" method="post" action="ReferenceListServlet"  >
-                                                                                <input type="text" name="form" value="AddSpecialCur" style="visibility: hidden" />
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label class="control-label" for="txtSpecialCur">Special Circumstance Type:</label>
-                                                                                    <div class="controls">
-                                                                                        <input type="text" id="txtSpecialCur" name="txtSpecialCur"   />
-                                                                                        <input class="btn" type="submit" value="Add Special Circumstance Type" name="cmdSpecialCur" />
-                                                                                    </div>
-
-                                                                                    <br/>  </div>
-                                                                            </form>
-                                                                            <div class="controls offset2" >
-                                                                                <label class="control-label" for="SpecialCurList">Special Circumstance Type(s):</label>
-
-                                                                                <select id="SpecialCurList" name="SpecialCurList" size="5">
-                                                                                    <%
-                                                                                        for (int i = 0; i < specialCurList.size(); i++) {
-                                                                                    %>
-                                                                                    <option><% out.print(specialCurList.get(i));%> </option>
-
-                                                                                    <%
-                                                                                        }
-                                                                                    %>
-                                                                                </select>
-                                                                                <br/>
-                                                                                <input class="btn" type="button" onclick="editReferenceList('specialcircumstance', 'SpecialCurList')" value="Edit Special Circumstance" id="cmdEditSpecialCur" name="cmdEditSpecialCur" />
-                                                                                <input class="btn" type="button" onclick="deleteReferenceList('specialcircumstance', 'SpecialCurList')" value="Delete Special Circumstance" id="cmdDeleteSpecialCur" name="cmdDeleteSpecialCur" />
-=======
                                                                     <br/>
                                                                     <br/>
                                                                 </div>
@@ -1539,7 +1237,6 @@
                                                                             <br/>
                                                                             <input type="button" onclick="editReferenceList('specialcircumstance', 'SpecialCurList')" value="Edit Special Circumstance" id="cmdEditSpecialCur" name="cmdEditSpecialCur" />
                                                                             <input type="button" onclick="deleteReferenceList('specialcircumstance', 'SpecialCurList')" value="Delete Special Circumstance" id="cmdDeleteSpecialCur" name="cmdDeleteSpecialCur" />
->>>>>>> origin/master
 
                                                                         </div>
                                                                     </div> 
@@ -1551,40 +1248,6 @@
                                                                     <br/>
                                                                 </div>
 
-<<<<<<< HEAD
-                                                                    <div id="externalCause" class="tab-pane <%out.println(String.valueOf(exCause));%> "> 
-                                                                        <div align="center"><h2>External Cause</h2> </div>   
-                                                                        <%--content for Special Circumstance reference list--%>
-                                                                        <div class="offset2 ">
-                                                                            <form name="AddExternalCause" id="AddExternalCause" method="post" action="ReferenceListServlet"  >
-                                                                                <input type="text" name="form" value="AddExternalCause" style="visibility: hidden" />
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label class="control-label" for="txtExternalCause">External Cause Type:</label>
-                                                                                    <div class="controls">
-                                                                                        <input type="text" id="txtExternalCause" name="txtExternalCause"   />
-                                                                                        <input class="btn" type="submit" value="Add External Cause Type" name="cmdExternalCause" />
-                                                                                    </div>
-
-                                                                                    <br/>  
-                                                                                </div>
-                                                                            </form>
-                                                                            <div class="controls offset2" >
-                                                                                <label class="control-label" for="ExternalCauseList">External Cause Type(s):</label>
-
-                                                                                <select id="ExternalCauseList" name="ExternalCauseList" size="5">
-                                                                                    <%
-                                                                                        for (int i = 0; i < exCauseList.size(); i++) {
-                                                                                    %>
-                                                                                    <option><% out.print(exCauseList.get(i));%> </option>
-
-                                                                                    <%
-                                                                                        }
-                                                                                    %>
-                                                                                </select>
-                                                                                <br/>
-                                                                                <input class="btn" type="button" onclick="editReferenceList('externalcircumstance', 'ExternalCauseList')" value="Edit External Cause" id="cmdEditExternalCause" name="cmdEditExternalCause" />
-                                                                                <input class="btn" type="button" onclick="deleteReferenceList('externalcircumstance', 'ExternalCauseList')" value="Delete External Cause" id="cmdDeleteExternalCause" name="cmdDeleteExternalCause" />
-=======
                                                                 <div id="externalCause" class="tab-pane <%out.println(String.valueOf(exCause));%> "> 
                                                                     <div align="center"><h2>External Cause</h2> </div>   
                                                                     <%--content for Special Circumstance reference list--%>
@@ -1597,7 +1260,6 @@
                                                                                     <input type="text" id="txtExternalCause" name="txtExternalCause"   />
                                                                                     <input type="submit" value="Add External Cause Type" name="cmdExternalCause" />
                                                                                 </div>
->>>>>>> origin/master
 
                                                                                 <br/>  
                                                                             </div>
@@ -1629,39 +1291,6 @@
                                                                     <br/>
                                                                 </div>
 
-<<<<<<< HEAD
-                                                                    <div id="sealType" class=" tab-pane <%out.println(String.valueOf(slType));%> "> 
-                                                                        <div align="center"><h2>Seal Type</h2> </div>   
-                                                                        <%--content for seal type reference list--%>
-                                                                        <div class="offset2 ">
-                                                                            <form name="AddSealType" id="AddSealType" method="post" action="ReferenceListServlet"  >
-                                                                                <input type="text" name="form" value="AddSealType" style="visibility: hidden" />
-                                                                                <div class="control-group form-horizontal">
-                                                                                    <label class="control-label" for="txtSealType">Seal Type:</label>
-                                                                                    <div class="controls">
-                                                                                        <input  type="text" id="txtSealType" name="txtSealType"   />
-                                                                                        <input class="btn" type="submit" value="Add Seal Type" name="cmdSealType" />
-                                                                                    </div>
-
-                                                                                    <br/>  </div>
-                                                                            </form>
-                                                                            <div class="controls offset2" >
-                                                                                <label class="control-label" for="SealTypeList">Seal Type(s):</label>
-
-                                                                                <select id="SealTypeList" name="SealTypeList" size="5">
-                                                                                    <%
-                                                                                        for (int i = 0; i < slTypeList.size(); i++) {
-                                                                                    %>
-                                                                                    <option><% out.print(slTypeList.get(i));%> </option>
-
-                                                                                    <%
-                                                                                        }
-                                                                                    %>
-                                                                                </select>
-                                                                                <br/>
-                                                                                <input class="btn" type="button" onclick="editReferenceList('scenetype', 'SealTypeList')" value="Edit Seal Type" id="cmdEditSealType" name="cmdEditSealType" />
-                                                                                <input class="btn" type="button" onclick="deleteReferenceList('scenetype', 'SealTypeList')" value="Delete Seal Type  " id="cmdDeleteSealType" name="cmdDeleteSealType" />
-=======
                                                                 <div id="sealType" class=" tab-pane <%out.println(String.valueOf(slType));%> "> 
                                                                     <div align="center"><h2>Seal Type</h2> </div>   
                                                                     <%--content for seal type reference list--%>
@@ -1674,7 +1303,6 @@
                                                                                     <input type="text" id="txtSealType" name="txtSealType"   />
                                                                                     <input type="submit" value="Add Seal Type" name="cmdSealType" />
                                                                                 </div>
->>>>>>> origin/master
 
                                                                                 <br/>  </div>
                                                                         </form>
