@@ -37,11 +37,7 @@ public class EditBodyFile extends HttpServlet {
     {
         response.setContentType("text/html;charset=UTF-8");
         String deathReg = request.getParameter("selectedbody");
-        BodyAtMortuary body = new BodyAtMortuary(deathReg);
-        BodyDb bodyDb = new BodyDb(new Tools().getDbdetail(),body);
-        bodyDb.init();
-        bodyDb.read();
-        body = (BodyAtMortuary)bodyDb.getBody();
+        BodyAtMortuary body = new Tools().getBody(deathReg);
         HttpSession ses = request.getSession();
         ses.setAttribute("bIdFullName", body.getNameOfDeceased());
         ses.setAttribute("bIdMadienName",body.getMaidenName());
@@ -66,6 +62,7 @@ public class EditBodyFile extends HttpServlet {
         ses.setAttribute("bIdAssignedFPS", body.getAssignedTo());
         ses.setAttribute("bIdBuild", body.getBodyAddress().getBuilding());
         ses.setAttribute("bIdStreet", body.getBodyAddress().getStreet());
+        ses.setAttribute("bIdSuburb", body.getBodyAddress().getSuburb());
         ses.setAttribute("bIdCity", body.getBodyAddress().getCity());
         ses.setAttribute("bIdPostCode", body.getBodyAddress().getPostCode());
         ses.setAttribute("bIdProvince", body.getBodyAddress().getProvince());

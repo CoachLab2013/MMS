@@ -25,7 +25,7 @@ public class Tools {
 
     public Tools() 
     {
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
     }
     //end constructor
 
@@ -462,7 +462,7 @@ public class Tools {
         }
     }
     
-    public String bodyfile(String id) {
+    /*public String bodyfile(String id) {
         BodyDb bdyDb = new BodyDb(dbdetail);
         BodyFileDb bdyfileDb = new BodyFileDb(dbdetail);
         bdyDb.init();
@@ -530,7 +530,7 @@ public class Tools {
         } catch (Exception e) {
             return e.getMessage();
         }
-    }
+    }*/
 
     // end makeOPenIncidentsTable
     public String getDateTime() {
@@ -539,7 +539,8 @@ public class Tools {
     }
     //end getDateTime
 
-    public Incident getIncidentDetail(String lognumber) {
+    public Incident getIncidentDetail(String lognumber) 
+    {
         IncidentDb idb = new IncidentDb(getDbdetail());
         idb.init();
         try {
