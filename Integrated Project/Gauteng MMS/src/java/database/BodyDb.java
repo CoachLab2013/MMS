@@ -202,7 +202,7 @@ public class BodyDb extends DatabaseConnector{
             statement.executeQuery("SELECT * FROM Body WHERE idDeathRegisterNumber ='"+ body.getDeathRegisterNumber() +"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
-<<<<<<< HEAD
+/*<<<<<<< HEAD
                 body = new BodyAtMortuary();
                 body.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
                 body.setAgeOnDateFound(resultSet.getInt("ageOnDateFound"));
@@ -234,7 +234,7 @@ public class BodyDb extends DatabaseConnector{
                 IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
                 incidentDb.init();
                 body.setIncident(incidentDb.findIncident(incidentDb.getIncident().getIncidentLogNumber()));
-=======
+=======*/
             BodyAtMortuary bodyAtMort = new BodyAtMortuary();
             bodyAtMort.setAgeOnDateFound(resultSet.getInt("ageOnDateFound"));
             bodyAtMort.setAssignedTo(resultSet.getString("assignedTo"));
@@ -271,7 +271,7 @@ public class BodyDb extends DatabaseConnector{
             incidentDb.init();
             incidentDb.read();
             bodyAtMort.setIncident(incidentDb.getIncident());
->>>>>>> origin/master
+//>>>>>>> origin/master
             statement.close();
             connection.close();
         } 
