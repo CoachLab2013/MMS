@@ -77,6 +77,10 @@
         <servlet-name>ReleaseBodyServlet</servlet-name>
         <servlet-class>servlets.ReleaseBodyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReleaseBodyServlet</servlet-name>
+        <servlet-class>servlets.ReleaseBodyServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -144,6 +148,10 @@
     <servlet-mapping>
         <servlet-name>LinkBodyContent</servlet-name>
         <url-pattern>/LinkBodyContent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReleaseBodyServlet</servlet-name>
+        <url-pattern>/ReleaseBodyServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ReleaseBodyServlet</servlet-name>

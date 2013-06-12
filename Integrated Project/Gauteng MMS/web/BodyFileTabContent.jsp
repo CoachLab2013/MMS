@@ -88,7 +88,7 @@
                                 </div>
                                 <br>
                                 <div class="offset2">
-                                    <input type="submit" name="continue_new_body_file" id="continue_new_body_file" value="Continue"/> 
+                                    <input class="btn" type="submit" name="continue_new_body_file" id="continue_new_body_file" value="Continue"/> 
                                 </div>
                             </div> 
                         </div>

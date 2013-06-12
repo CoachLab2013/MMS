@@ -22,10 +22,16 @@
         <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
          <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
-        <link type="text/css" rel="stylesheet"  href="CSS files/datetimestyle.css"> 
+        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css">
         <%-- http://jqueryui.com/themeroller/ --%>
     </head>
     <body>
+        <%
+        if(session.getAttribute("atScene") != null){
+            out.println("<input id='checkscene'  type='text' value="+session.getAttribute("atScene")+" />");
+            session.removeAttribute("atScene");
+        }
+     %>
     <legend class="legend"><h3>Receive body from scene</h3> </legend>
     
     
@@ -548,7 +554,7 @@
                 </div>
 
                 <div class="offset4">
-                    <input id="saps_property_add" name="saps_property_add"  class="btn btn-primary"  type="button" value="Add Item" /> 
+                    <input id="saps_property_add" name="saps_property_add"  class="btn"  type="button" value="Add Item" /> 
                     <%--Display save result --%> 
                 </div>
                 <br/> <br/>
@@ -563,7 +569,7 @@
                 </table>
                 <br/>
                 <div class="offset5">
-                    <input id="saps_property_delete" name="saps_property_delete"   class="btn btn-primary" type="button" value="Delete" /> 
+                    <input id="saps_property_delete" name="saps_property_delete"   class="btn" type="button" value="Delete" /> 
                     <%--Display save result --%> 
                 </div>
 
@@ -593,7 +599,7 @@
                 </div>
 
                 <div class="offset4">
-                    <input id="at_scene_fps_add" id="at_scene_fps_add"  class="btn btn-primary"  type="button" value="Add Item" /> 
+                    <input id="at_scene_fps_add" id="at_scene_fps_add"  class="btn"  type="button" value="Add Item" /> 
                     <%--Display save result --%> 
                 </div>
 
@@ -609,7 +615,7 @@
                 <input id="saps_property_counter" name="saps_property_counter" type="hidden" value="0" />
                 <input id="fps_property_counter" name="fps_property_counter" type="hidden" value="0" />
                 <div class="offset5">
-                    <input id="at_scene_fps_delete" name="at_scene_fps_delete"  class="btn btn-primary"  type="button" value="Delete" /> 
+                    <input id="at_scene_fps_delete" name="at_scene_fps_delete"  class="btn"  type="button" value="Delete" /> 
                     <%--Display save result --%> 
                 </div>
                 <br/><br/>
@@ -618,7 +624,7 @@
         </fieldset>
 
         <div class="offset5">
-            <input  type="submit"  class="btn btn-primary" name="recieve_at_scene_save" id="recieve_at_scene_save"   value="Save" /> 
+            <input  type="submit"  class="btn" name="recieve_at_scene_save" id="recieve_at_scene_save"   value="Save" /> 
             <%--Display save result --%> 
         </div>              
     </form>  

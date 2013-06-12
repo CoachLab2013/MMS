@@ -48,7 +48,7 @@ public class FilterRegionServlet extends HttpServlet {
             regionListFilter = DBreg.referenceListReg(province);
             String regions = "";
             for (int i = 0; i < regionListFilter.size(); i++) {
-                regions = regions+regionListFilter.get(i) + " ";
+                regions = regions+regionListFilter.get(i) + "%";
 
             }
             out.println(regions);

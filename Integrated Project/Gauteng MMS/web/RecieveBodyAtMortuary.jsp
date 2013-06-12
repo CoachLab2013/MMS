@@ -12,7 +12,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="js/RecieveAtMortuary.js"></script>
     </head>
-
+    <body>
+     <%
+        if(session.getAttribute("atMortuary") != null){
+            out.println("<input id='checkmortuary'  type='hidden' value="+session.getAttribute("atMortuary")+" />");
+            session.removeAttribute("atMortuary");
+        }
+     %>
     <legend class="legend"><h3>Receive body at mortuary</h3> </legend> 
     <br/><br/>
 
@@ -209,7 +215,7 @@
             </div>
 
             <div class="offset4">
-                <input  id="at_mort_fps_add" name="at_mort_fps_add"  class="btn btn-primary" type="button" value="Add Item" /> 
+                <input  id="at_mort_fps_add" name="at_mort_fps_add"  class="btn" type="button" value="Add Item" /> 
                 <%--Display save result --%> 
             </div>
             <br/> <br/>
@@ -223,7 +229,7 @@
             </table>
             <br/>
             <div class="offset5">
-                <input id="at_mort_fps_delete" name="at_mort_fps_delete"  class="btn btn-primary" onclick=" deleteRow('atMortFPSpropertyTable')" type="button" value="Delete" /> 
+                <input id="at_mort_fps_delete" name="at_mort_fps_delete"  class="btn" onclick=" deleteRow('atMortFPSpropertyTable')" type="button" value="Delete" /> 
                 <%--Display save result --%> 
             </div>
             <br/><br/>
@@ -231,7 +237,7 @@
         </fieldset>
 
         <div class="offset5">
-            <input type="submit"  class="btn btn-primary"    value="Save" /> 
+            <input type="submit"  class="btn"    value="Save" /> 
             <%--Display save result --%> 
         </div>
     </form>
