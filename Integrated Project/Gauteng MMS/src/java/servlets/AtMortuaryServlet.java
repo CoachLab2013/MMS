@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -83,7 +84,12 @@ public class AtMortuaryServlet extends HttpServlet {
         bodyAtMortuary.setBodyType(request.getParameter("BodyPart"));
         bodyAtMortuary.setNameOfDeceased(request.getParameter("atMortBodyName"));
         bodyAtMortuary.setSurnameOfDeceased(request.getParameter("atMortBodySurname"));
-        bodyAtMortuary.setID(request.getParameter("atMortBodyID"));
+        if (request.getParameter("recieve_at_mort_id_type").equals("ID")){
+            bodyAtMortuary.setID(request.getParameter("atMortBodyID"));
+        }else if (request.getParameter("recieve_at_mort_id_type").equals("Passport")){
+            bodyAtMortuary.setPassport(request.getParameter("atMortBodyID"));
+        }
+        
         //building body address
             BodyAddress bodyAddress = new BodyAddress();
             bodyAddress.setBuilding(request.getParameter("atMortuaryBodyAddressBuilding"));
@@ -91,28 +97,39 @@ public class AtMortuaryServlet extends HttpServlet {
             bodyAddress.setSuburb(request.getParameter("atMortuaryBodyAddressSuburb"));
             bodyAddress.setCity(request.getParameter("atMortuaryBodyAddressCity"));
             bodyAddress.setPostCode(request.getParameter("atMortuaryAddressPostalCode"));
-            bodyAddress.setProvince(request.getParameter("province"));
-            bodyAddress.setRegion(request.getParameter("region"));
+            if (request.getParameter("province").equals("Select")!=true){
+                bodyAddress.setProvince(request.getParameter("province"));
+            }
+            if (request.getParameter("region").equals("Select")!=true){
+                bodyAddress.setRegion(request.getParameter("region"));
+            }
             //bodyAddress.setMagisterialDistrict(request.getParameter("atSceneBodyAddressMagisterialDistrict"));
         //end of building body address
         bodyAtMortuary.setBodyAddress(bodyAddress);
-        bodyAtMortuary.setRace(request.getParameter("Race"));
-        bodyAtMortuary.setGender(request.getParameter("Gender"));
-        if(request.getParameter("at_mortuary_body_estimated_age").equals("Months")){
-            bodyAtMortuary.setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
-        }else if(request.getParameter("at_mortuary_body_estimated_age").equals("Years")){
-            bodyAtMortuary.setEstimatedAgeYear(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+        if (request.getParameter("race").equals("Select")!=true){
+            bodyAtMortuary.setRace(request.getParameter("race"));
+        }
+        if (request.getParameter("gender").equals("Select")!=true){
+            bodyAtMortuary.setGender(request.getParameter("gender"));
+        }
+        if (request.getParameter("atMortuaryBodyEstAge").equals("Age")!=true){
+            if(request.getParameter("at_mortuary_body_estimated_age").equals("Months")){
+                bodyAtMortuary.setEstimatedAgeMonth(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+                bodyAtMortuary.setAgeOnDateFound(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge"))); //not given by UI
+            }else if(request.getParameter("at_mortuary_body_estimated_age").equals("Years")){
+                bodyAtMortuary.setEstimatedAgeYear(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
+                bodyAtMortuary.setAgeOnDateFound(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge"))); //not given by UI
+            }
         }
         //end of Body details
-        //body fields that are not given by the UI input
+        /*/body fields that are not given by the UI input
         bodyAtMortuary.setDateOfBirth("0000-00-00");
-        bodyAtMortuary.setAgeOnDateFound(Integer.parseInt(request.getParameter("atMortuaryBodyEstAge")));
         bodyAtMortuary.setIdentifiedDateTime("0000-00-00 00:00");
         bodyAtMortuary.setBodyStatus(false);
         bodyAtMortuary.setDateBodyReceived("0000-00-00");
         bodyAtMortuary.setDateBodyReleased("0000-00-00");
         bodyAtMortuary.setBodyReleased(false);
-        bodyAtMortuary.setBodyReleaseTo(null);
+        bodyAtMortuary.setBodyReleaseTo(null);*/
         //end of body fiels that are not given by the UI
         
         //inserting body into database
@@ -127,18 +144,8 @@ public class AtMortuaryServlet extends HttpServlet {
         
         //inserting BodyAtMortuary into Database
         BodyAtMortuaryDb bodyAtMortuaryDb = new BodyAtMortuaryDb(bodyAtMortuary, dbdetail);
-        //out.println("Testing input: test 1::::");
-        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getDeathRegisterNumber());
-        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getBodyHandOverFromOrganization());
-        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getBodyHandedOverToPerNumber());
-        //out.println(" test 1::::" + bodyAtMortuaryDb.getBodyAtMortuary().getBodyReceivedFromPerNumber());
         bodyAtMortuaryDb.init();
         out.println("adding body at mortuary :::" + bodyAtMortuaryDb.add());
-        //out.println("Testing input: test 2::::");
-        //out.println(" test 2::::" + bodyAtMortuary.getBodyHandOverFromOrganization());
-        //out.println(" test 2::::" + bodyAtMortuary.getBodyHandedOverToPerNumber());
-        //out.println(" test 2::::" + bodyAtMortuary.getBodyReceivedFromPerNumber());
-        //out.println(" test 2::::" + bodyAtMortuary.getDeathRegisterNumber());
         //end inserting BodyAtMortuary
         
         //POPULATING BODYFILE TABLE
@@ -184,7 +191,9 @@ public class AtMortuaryServlet extends HttpServlet {
         out.println(incidentDb.read());
         incidentDb.init();
         out.println(incidentDb.IncreaseBodyCount());
-        //response.sendRedirect("Home.jsp");*/
+        HttpSession sess = request.getSession();
+        sess.setAttribute("atMortuary", true);
+        response.sendRedirect("Home.jsp");
 
     }
 

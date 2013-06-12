@@ -25,8 +25,8 @@ $(document).ready(function(){
     
    if($("#go_to_editincident").val()==="true"){
          //set focus on Open Incidents tab 
-            $("#OpenIncidentsTab").removeClass("active");
-            $("#EditIncidentTab").addClass("active");
+            $("#OpenIncidentsTab").addClass("active");
+            $("#EditIncidentTab").removeClass("active");
             
             $("#OpenIncidents").removeClass("tab-pane active");
             $("#OpenIncidents").addClass("tab-pane");

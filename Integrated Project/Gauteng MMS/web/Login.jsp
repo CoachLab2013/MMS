@@ -34,6 +34,7 @@
             <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css"> 
              <div class="head"><img class="img-rounded" style=" width:100%" src="Images/logo10.jpg"></div>
              <% Tools t = new Tools();
+           //  t.adduser();
             out.println(t.makeIcon());
         %>
         </head>

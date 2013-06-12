@@ -1,8 +1,26 @@
 $(document).ready(function(){
     
+    if($("#checkmortuary").val() == "true"){
+        //lose focus from the incidents side
+        $("#OpenIncidents").removeClass("tab-pane active");
+        $("#OpenIncidents").addClass("tab-pane");
+        $("#OpenIncidentsTab").removeClass("active");
+        $("#Incident").removeClass("tab-pane active");
+        $("#Incident").addClass("tab-pane");
+        $("#IncidentTab").removeClass("active");
+        
+        //set focus to the body file side
+        $("#BodyFileTab").addClass("active");
+        $("#BodyFile").removeClass("tab-pane");
+        $("#BodyFile").addClass("tab-pane active");
+    }
+    
      $("#recieve_body_mort_form").validate({
         rules:{
             employee:{
+                valueNotEquals: "Select"
+            },
+            bodypart:{
                 valueNotEquals: "Select"
             },
             atMortuaryAddressPostalCode:{
@@ -13,6 +31,9 @@ $(document).ready(function(){
         messages:{
             employee:{
                 valueNotEquals: "Please select an employee"
+            },
+            bodypart:{
+                valueNotEquals: "Please select a body calssification"
             },
             atMortuaryAddressPostalCode:{
                 number: "Invalid postal code"

@@ -40,32 +40,38 @@ $(document).ready(function() {
     });//end of form validation
     
     //Hide all list items on first load.
-    $('#ICDlevel2 > option').each(function() {
+    $('#ICDlevel2 option').each(function() {
         if ($(this).val() !== "Select Diagnosis 2")
         {
             $(this).attr('hidden', 'hidden');
             $(this).attr('disabled', 'disabled');
         } else {
+            $(this).removeAttr('hidden');
+            $(this).removeAttr('disabled');
             $(this).attr('selected', 'selected');
         }
     });
 
-    $('#ICDlevel3 > option').each(function() {
+    $('#ICDlevel3 option').each(function() {
         if ($(this).val() !== "Select Diagnosis 3")
         {
             $(this).attr('hidden', 'hidden');
             $(this).attr('disabled', 'disabled');
         } else {
+            $(this).removeAttr('hidden');
+            $(this).removeAttr('disabled');
             $(this).attr('selected', 'selected');
         }
     });
 
-    $('#ICDlevel4 > option').each(function() {
+    $('#ICDlevel4 option').each(function() {
         if ($(this).val() !== "Select Diagnosis 4")
         {
             $(this).attr('hidden', 'hidden');
             $(this).attr('disabled', 'disabled');
         } else {
+            $(this).removeAttr('hidden');
+            $(this).removeAttr('disabled');
             $(this).attr('selected', 'selected');
         }
     });
@@ -77,11 +83,11 @@ $(document).ready(function() {
         $('#ICDlevel3').prop("selectedIndex",0);
         $('#ICDlevel4').prop("selectedIndex",0);
 
-        $('#ICDlevel2 > option').each(function() {
+        $('#ICDlevel2 option').each(function() {
 
             var cmp = $(this).val().substring($(this).val().lastIndexOf('(') + 1, $(this).val().lastIndexOf(')'));
 
-            if (cmp !== value && $(this).val() !== "Select Diagnosis 1")
+            if (cmp !== value && $(this).val() !== "Select Diagnosis 2")
             {
                 $(this).attr('hidden', 'hidden');
                 $(this).attr('disabled', 'disabled');
@@ -97,9 +103,9 @@ $(document).ready(function() {
         $('#ICDlevel3').prop("selectedIndex",0);
         $('#ICDlevel4').prop("selectedIndex",0);
 
-        $('#ICDlevel3 > option').each(function() {
+        $('#ICDlevel3 option').each(function() {
 
-            if ($(this).val().substring(0, 3) !== value && $(this).val() !== "Select Diagnosis 2")
+            if ($(this).val().substring(0, 3) !== value && $(this).val() !== "Select Diagnosis 3")
             {
                 $(this).attr('hidden', 'hidden');
                 $(this).attr('disabled', 'disabled');
@@ -114,9 +120,9 @@ $(document).ready(function() {
         var value = $(this).val().substring(0, 5);
         $('#ICDlevel4').prop("selectedIndex",0);
 
-        $('#ICDlevel4 > option').each(function() {
+        $('#ICDlevel4 option').each(function() {
 
-            if ($(this).val().substring(0, 5) !== value && $(this).val() !== "Select Diagnosis 3")
+            if ($(this).val().substring(0, 5) !== value && $(this).val() !== "Select Diagnosis 4")
             {
                 $(this).attr('hidden', 'hidden');
                 $(this).attr('disabled', 'disabled');

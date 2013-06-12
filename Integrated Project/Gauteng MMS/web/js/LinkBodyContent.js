@@ -24,6 +24,7 @@ $(document).ready(function() {
 
                 $('#bodyLink1').append(tr);
             });
+            
         } else {
             $('#tr1').remove();
         }
@@ -63,9 +64,10 @@ $(document).ready(function() {
             $('#Body').prop("selectedIndex", 0);
 
             $('#tr1').remove();
-            $('#tr2').remove();
+            $('#tr2').remove();            
+            $('.alert').css('display','none');
         } else {
-            alert("Please Select NonDuplicate/Correct Body Files\nAdd proper error message!");
+            $('.alert').css('display','inherit');
         }
     });
     
