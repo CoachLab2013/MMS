@@ -100,7 +100,7 @@
             </tr>
             <tr>
                 <td>
-                <br> <br> </td><td> <input type="submit" value="Continue" id="incidentcontinue" /> <input type="reset" value="Cancel" id="incidentcancel" /></td>
+                <br> <br> </td><td> <input class="btn" type="submit" value="Continue" id="incidentcontinue" /> <input class="btn" type="reset" value="Cancel" id="incidentcancel" /></td>
             </tr>
         </table>
         </form>

@@ -19,9 +19,16 @@
         <script src="js/jquery.validate.min.js"></script>
         <script src="js/script.js"></script>
         <link  type="text/css" href="CSS files/style.css" rel="stylesheet">
+        
         <title>Edit User</title>
     </head>
-    <body style="height:650px">
+    
+    <body style="height:1000px">
+         <title style="color:white">Gauteng Mortuary Management System</title>
+        <div class="head"><img class="img-rounded" style=" width:100%" src="Images/logo10.jpg"></div>
+         <div class="menutab">
+
+            <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif"><a href="LogOutServlet" style="color:black" >Logout</a></span></div>
         <%
             //Java code
                  String name = "";
@@ -74,8 +81,10 @@
                  response.sendRedirect("Login.jsp");
             }
         %>
-
-        <div align="center"><h2>Edit User  </h2> </div>  
+        
+        
+        <div class="bodycontent">
+    <legend> Edit User Details</legend> 
 
         <form name="EditUser" id="EditUser" method="post" action="EditUser" class="form-horizontal">
 
@@ -149,9 +158,9 @@
                     </div>
 
                 </fieldset>
-                <br/> <br/>                                 
-                <div class="offset4">
-                    <input type="submit"  class="btn btn-primary" type="button" value="Save Changes" /> 
+                <br/>                                
+                <div class="offset3">
+                    <input type="submit"  class="btn" type="button" value="Save Changes" /> 
 
                 </div>
 
@@ -160,5 +169,6 @@
             </div>
         </form>
     </div> 
-</body>
+    
+    <body>
 </html>

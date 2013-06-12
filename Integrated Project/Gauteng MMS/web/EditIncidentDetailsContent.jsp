@@ -157,7 +157,7 @@
             </tr>   
             <tr>
                 <td>
-                    <br> <br> </td><td> <input type="submit" value="Save" id="incidentsave" /> <input type="reset" value="Cancel" id="editincidentcancel" /></td>
+                    <br> <br> </td><td> <input class="btn" type="submit" value="Save" id="incidentsave" /> <input class="btn" type="reset" value="Cancel" id="editincidentcancel" /></td>
             </tr>
         </table>
     </form>

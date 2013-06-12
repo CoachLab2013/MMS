@@ -21,13 +21,15 @@ public class Tools {
      * constructor for an instance of Tools
      */
  
+ 
+  
+    public Tools() {
 
-
-    public Tools() 
-    {
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
-
+ 
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
+ 
     }
+
     //end constructor
 
     public String adduser(){
