@@ -41,17 +41,14 @@
             <table>
        <tr>
                 <td width="200"></td>
-<<<<<<< HEAD
-                <td width="10"><input class="btn" type="button" value="Edit" id="editbodyfilebutton"></td>
-                <td width="300" align="center"><input class="btn" type="button" value="Close case" id="close"> </td>
-=======
+
                 <td width="10">
                     <form id="editbodyfileform" action="EditBodyFile"> 
-                        <input type="submit" value="Edit" id="editbodyfilebutton">
+                        <input class="btn" type="submit" value="Edit" id="editbodyfilebutton">
                     </form>
                 </td>
-                <td width="300" align="center"><input type="button" value="Close case" id="close"> </td>
->>>>>>> origin/master
+                <td width="300" align="center"><input class="btn" type="button" value="Close case" id="close"> </td>
+
             </tr>
             
                 <td>

@@ -477,9 +477,9 @@
                                                                     </div>
 
                                                                 </fieldset>
-                                                                <br/> <br/>                                 
-                                                                <div class="offset4">
-                                                                    <input type="submit"  class="btn btn-primary" type="button" value="Add User" /> 
+                                                                                <br/>                               
+                                                                <div class="offset3">
+                                                                    <input type="submit"  class="btn" type="button" value="Add User" /> 
                                                                     <%--Display save result --%> 
                                                                 </div>
 
@@ -533,7 +533,7 @@
                                                                                 <label class="control-label" for="txtInsitution">Institution Name:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtInsitution" name="txtInsitution"   />
-                                                                                    <input type="submit" value="Add Institution" name="cmdInsitution" />
+                                                                                    <input class="btn" type="submit" value="Add Institution" name="cmdInsitution" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -553,8 +553,8 @@
                                                                             </select>
                                                                             <br/>
 
-                                                                            <input type="button" onclick="editReferenceList('Insitution', 'InsitutionList')" value="Edit Institution" id="cmdEditInsitutions" name="cmdEditInsitution" />
-                                                                            <input type="button" onclick="deleteReferenceList('Insitution', 'InsitutionList')" value="Delete Institution" id="cmdDeleteInsitutions" name="cmdDeleteInsitutions" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('Insitution', 'InsitutionList')" value="Edit Institution" id="cmdEditInsitutions" name="cmdEditInsitution" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('Insitution', 'InsitutionList')" value="Delete Institution" id="cmdDeleteInsitutions" name="cmdDeleteInsitutions" />
 
                                                                         </div>
                                                                     </div>     
@@ -572,7 +572,7 @@
                                                                                 <label class="control-label" for="txtAnalysis">Analysis Type Name:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtAnalysis" name="txtAnalysis"   />
-                                                                                    <input type="submit" value="Add Analysis" name="cmdAnalysis" />
+                                                                                    <input class="btn" type="submit" value="Add Analysis" name="cmdAnalysis" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -592,8 +592,8 @@
 
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('analysis', 'AnalysisList')" value="Edit analysis type" id="cmdEditAnalysis" name="cmdEditAnalysis" />
-                                                                            <input type="button" onclick="deleteReferenceList('analysis', 'AnalysisList')" value="Delete analysis type" id="cmdDeleteAnalysis" name="cmdDeleteAnalysis" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('analysis', 'AnalysisList')" value="Edit analysis type" id="cmdEditAnalysis" name="cmdEditAnalysis" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('analysis', 'AnalysisList')" value="Delete analysis type" id="cmdDeleteAnalysis" name="cmdDeleteAnalysis" />
 
                                                                         </div>
                                                                     </div> 
@@ -614,7 +614,7 @@
                                                                                 <label class="control-label" for="txtProperty">Property type name:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtProperty" name="txtProperty"   />
-                                                                                    <input type="submit" value="Add Property Type" name="cmdProperty" />
+                                                                                    <input class="btn" type="submit" value="Add Property Type" name="cmdProperty" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -635,8 +635,8 @@
 
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('propertytype', 'PropertyList')" value="Edit property type" id="cmdEditProperty" name="cmdEditProperty" />
-                                                                            <input type="button" onclick="deleteReferenceList('propertytype', 'PropertyList')" value="Delete property type" id="cmdDeleteProperty" name="cmdDeleteProperty" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('propertytype', 'PropertyList')" value="Edit property type" id="cmdEditProperty" name="cmdEditProperty" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('propertytype', 'PropertyList')" value="Delete property type" id="cmdDeleteProperty" name="cmdDeleteProperty" />
 
                                                                         </div>
                                                                     </div>
@@ -655,7 +655,7 @@
                                                                                 <label class="control-label" for="txtVehicle">Vehicle Registration Number:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtVehicle" name="txtVehicle"   />
-                                                                                    <input type="submit" value="Add Vehicle" name="cmdVehicle" />
+                                                                                    <input class="btn" type="submit" value="Add Vehicle" name="cmdVehicle" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -674,8 +674,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('vehicle', 'VehicleList')" value="Edit Vehicle number" id="cmdEditVehicle" name="cmdEditVehicle" />
-                                                                            <input type="button" onclick="deleteReferenceList('vehicle', 'VehicleList')" value="Delete Vehicle number" id="cmdDeleteVehicle" name="cmdDeleteVehicle" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('vehicle', 'VehicleList')" value="Edit Vehicle number" id="cmdEditVehicle" name="cmdEditVehicle" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('vehicle', 'VehicleList')" value="Delete Vehicle number" id="cmdDeleteVehicle" name="cmdDeleteVehicle" />
 
                                                                         </div>
                                                                     </div> 
@@ -694,7 +694,7 @@
                                                                                 <label class="control-label" for="txtRank">Rank Name:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtRank" name="txtRank"   />
-                                                                                    <input type="submit" value="Add Rank" name="cmdRank" />
+                                                                                    <input class="btn" type="submit" value="Add Rank" name="cmdRank" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -713,8 +713,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('rank', 'RankList')" value="Edit Rank" id="cmdEditRank" name="cmdEditRank" />
-                                                                            <input type="button" onclick="deleteReferenceList('rank', 'RankList')" value="Delete Rank" id="cmdDeleteRank" name="cmdDeleteRank" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('rank', 'RankList')" value="Edit Rank" id="cmdEditRank" name="cmdEditRank" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('rank', 'RankList')" value="Delete Rank" id="cmdDeleteRank" name="cmdDeleteRank" />
 
                                                                         </div>
                                                                     </div> 
@@ -736,7 +736,7 @@
                                                                                 <label class="control-label" for="txtGender">Gender Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtGender" name="txtGender"   />
-                                                                                    <input type="submit" value="Add Gender" name="cmdGender" />
+                                                                                    <input class="btn" type="submit" value="Add Gender" name="cmdGender" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -755,8 +755,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('gender', 'GenderList')" value="Edit Gender" id="cmdEditGender" name="cmdEditGender" />
-                                                                            <input type="button" onclick="deleteReferenceList('gender', 'GenderList')" value="Delete Gender" id="cmdDeleteGender" name="cmdDeleteGender" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('gender', 'GenderList')" value="Edit Gender" id="cmdEditGender" name="cmdEditGender" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('gender', 'GenderList')" value="Delete Gender" id="cmdDeleteGender" name="cmdDeleteGender" />
 
                                                                         </div>
                                                                     </div> 
@@ -777,7 +777,7 @@
                                                                                 <label class="control-label" for="txtOccu">Occupation Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtOccu" name="txtOccu"   />
-                                                                                    <input type="submit" value="Add Occupation" name="cmdOccu" />
+                                                                                    <input class="btn" type="submit" value="Add Occupation" name="cmdOccu" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -796,8 +796,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('occupation', 'OccuList')" value="Edit Occupation type" id="cmdEditOccupation" name="cmdEditOccupation" />
-                                                                            <input type="button" onclick="deleteReferenceList('occupation', 'OccuList')" value="Delete Occupation type" id="cmdDeleteOccupation" name="cmdDeleteOccupation" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('occupation', 'OccuList')" value="Edit Occupation type" id="cmdEditOccupation" name="cmdEditOccupation" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('occupation', 'OccuList')" value="Delete Occupation type" id="cmdDeleteOccupation" name="cmdDeleteOccupation" />
 
                                                                         </div>
                                                                     </div> 
@@ -819,7 +819,7 @@
                                                                                 <label class="control-label" for="txtRace">Race Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtRace" name="txtRace"   />
-                                                                                    <input type="submit" value="Add Race" name="cmdRace" />
+                                                                                    <input class="btn" type="submit" value="Add Race" name="cmdRace" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -838,8 +838,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('race', 'RaceList')" value="Edit Race type" id="cmdEditRace" name="cmdEditRace" />
-                                                                            <input type="button" onclick="deleteReferenceList('race', 'RaceList')" value="Delete Race type" id="cmdDeleteRace" name="cmdDeleteRace" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('race', 'RaceList')" value="Edit Race type" id="cmdEditRace" name="cmdEditRace" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('race', 'RaceList')" value="Delete Race type" id="cmdDeleteRace" name="cmdDeleteRace" />
 
                                                                         </div>
                                                                     </div> 
@@ -861,8 +861,8 @@
                                                                                 <label class="control-label" for="txtMarital">Marital Status Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtMarital" name="txtMarital"   />
-                                                                                    <input type="submit" value="Add Marital Status" name="cmdMarital" />
-                                                                                </div>
+                                                                                    <input class="btn" type="submit" value="Add Marital Status" name="cmdMarital" />
+                                                                                </div> 
 
                                                                                 <br/>  </div>
                                                                         </form>
@@ -880,8 +880,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('maritalstatus', 'MaritalList')" value="Edit Marital Status type" id="cmdEditMarital" name="cmdEditMarital" />
-                                                                            <input type="button" onclick="deleteReferenceList('maritalstatus', 'MaritalList')" value="Delete Marital Status type" id="cmdDeleteMarital" name="cmdDeleteMarital" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('maritalstatus', 'MaritalList')" value="Edit Marital Status type" id="cmdEditMarital" name="cmdEditMarital" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('maritalstatus', 'MaritalList')" value="Delete Marital Status type" id="cmdDeleteMarital" name="cmdDeleteMarital" />
 
                                                                         </div>
                                                                     </div> 
@@ -903,7 +903,7 @@
                                                                                 <label class="control-label" for="txtProvince">Province:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtProvince" name="txtProvince"   />
-                                                                                    <input type="submit" value="Add Province" name="cmdProvince" />
+                                                                                    <input class="btn" type="submit" value="Add Province" name="cmdProvince" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -922,8 +922,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('province', 'ProvinceList')" value="Edit Province" id="cmdEditProvince" name="cmdEditProvince" />
-                                                                            <input type="button" onclick="deleteReferenceList('province', 'ProvinceList')" value="Delete Province" id="cmdDeleteProvince" name="cmdDeleteProvince" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('province', 'ProvinceList')" value="Edit Province" id="cmdEditProvince" name="cmdEditProvince" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('province', 'ProvinceList')" value="Delete Province" id="cmdDeleteProvince" name="cmdDeleteProvince" />
 
                                                                         </div>
                                                                     </div> 
@@ -940,7 +940,7 @@
                                                                     <%--content for Region reference list--%>
                                                                     <div class="offset2 ">
                                                                         <form name="AddRegion" id="AddRegion" method="post" action="ReferenceListServlet"  >
-                                                                            <input type="text" name="form" value="AddRegion" style="visibility: hidden" />
+                                                                            <input  type="text" name="form" value="AddRegion" style="visibility: hidden" />
                                                                             <div class="control-group form-horizontal">
                                                                                 <label class="control-label" for="ProvRegionList">Province</label>
                                                                                 <div class="controls">
@@ -963,7 +963,7 @@
                                                                                 <label class="control-label" for="txtRegion">Region</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtRegion" name="txtRegion"   />
-                                                                                    <input type="submit" value="Add Region" name="cmdRegion" />
+                                                                                    <input class="btn" type="submit" value="Add Region" name="cmdRegion" />
                                                                                 </div>
 
                                                                                 <br/>  
@@ -983,9 +983,9 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceListReg('region', 'RegionList', 'ProvRegionList')" value="Edit Province" id="cmdEditRegion" name="cmdEditRegion" />
-                                                                            <input type="button" onclick="deleteReferenceListReg('region', 'RegionList', 'ProvRegionList')" value="Delete Province" id="cmdDeleteRegion" name="cmdEditRegion" />
-
+                                                                            <input class="btn" type="button" onclick="editReferenceListReg('region', 'RegionList', 'ProvRegionList')" value="Edit Region" id="cmdEditRegion" name="cmdEditRegion" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceListReg('region', 'RegionList', 'ProvRegionList')" value="Delete Region" id="cmdDeleteRegion" name="cmdEditRegion" />
+                                                                            
                                                                         </div>
                                                                     </div> 
                                                                     <%--Display save result --%> 
@@ -1007,7 +1007,7 @@
                                                                                 <label class="control-label" for="txtManner">Manner of Death:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtManner" name="txtManner"   />
-                                                                                    <input type="submit" value="Add Manner of Death" name="cmdManner" />
+                                                                                    <input class="btn" type="submit" value="Add Manner of Death" name="cmdManner" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -1026,8 +1026,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('mannerofdeath', 'MannerList')" value="Edit Manner of Death" id="cmdEditManner" name="cmdEditManner" />
-                                                                            <input type="button" onclick="deleteReferenceList('mannerofdeath', 'MannerList')" value="Delete Manner of Death" id="cmdDeleteManner" name="cmdDeleteManner" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('mannerofdeath', 'MannerList')" value="Edit Manner of Death" id="cmdEditManner" name="cmdEditManner" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('mannerofdeath', 'MannerList')" value="Delete Manner of Death" id="cmdDeleteManner" name="cmdDeleteManner" />
 
                                                                         </div>
                                                                     </div> 
@@ -1049,7 +1049,7 @@
                                                                                 <label class="control-label" for="txtSample">Sample Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtSample" name="txtSample"   />
-                                                                                    <input type="submit" value="Add Sample Type" name="cmdSample" />
+                                                                                    <input class="btn" type="submit" value="Add Sample Type" name="cmdSample" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -1068,8 +1068,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('sample', 'SampleList')" value="Edit Sample type" id="cmdEditSample" name="cmdEditSample" />
-                                                                            <input type="button" onclick="deleteReferenceList('sample', 'SampleList')" value="Delete Sample type" id="cmdDeleteSample" name="cmdDeleteSample" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('sample', 'SampleList')" value="Edit Sample type" id="cmdEditSample" name="cmdEditSample" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('sample', 'SampleList')" value="Delete Sample type" id="cmdDeleteSample" name="cmdDeleteSample" />
 
                                                                         </div>
                                                                     </div> 
@@ -1091,7 +1091,7 @@
                                                                                 <label class="control-label" for="txtStatus">Body Status :</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtStatus" name="txtStatus"   />
-                                                                                    <input type="submit" value="Add Body Status Type" name="cmdStatus" />
+                                                                                    <input class="btn" type="submit" value="Add Body Status Type" name="cmdStatus" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -1110,8 +1110,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('bodystatus', 'StatusList')" value="Edit Body Status" id="cmdEditBodystatus" name="cmdEditBodystatus" />
-                                                                            <input type="button" onclick="deleteReferenceList('bodystatus', 'StatusList')" value="Delete Body Status" id="cmdDeleteBodystatus" name="cmdDeleteBodystatus" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('bodystatus', 'StatusList')" value="Edit Body Status" id="cmdEditBodystatus" name="cmdEditBodystatus" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('bodystatus', 'StatusList')" value="Delete Body Status" id="cmdDeleteBodystatus" name="cmdDeleteBodystatus" />
 
                                                                         </div>
                                                                     </div> 
@@ -1133,7 +1133,7 @@
                                                                                 <label class="control-label" for="txtRelationship">Relationship Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtRelationship" name="txtRelationship"   />
-                                                                                    <input type="submit" value="Add Relationship Type" name="cmdRelationship" />
+                                                                                    <input class="btn" type="submit" value="Add Relationship Type" name="cmdRelationship" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -1152,8 +1152,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('relationship', 'RelationshipList')" value="Edit Relationship type" id="cmdEditRelationship" name="cmdEditRelationship" />
-                                                                            <input type="button" onclick="deleteReferenceList('relationship', 'RelationshipList')" value="Delete Relationship type" id="cmdDeleteRelationship" name="cmdDeleteRelationship" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('relationship', 'RelationshipList')" value="Edit Relationship type" id="cmdEditRelationship" name="cmdEditRelationship" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('relationship', 'RelationshipList')" value="Delete Relationship type" id="cmdDeleteRelationship" name="cmdDeleteRelationship" />
 
                                                                         </div>
                                                                     </div> 
@@ -1175,7 +1175,7 @@
                                                                                 <label class="control-label" for="txtBodyPart">Body Part Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtBodyPart" name="txtBodyPart"   />
-                                                                                    <input type="submit" value="Add Blody Part Type" name="cmdBodyPart" />
+                                                                                    <input class="btn" type="submit" value="Add Body Part Type" name="cmdBodyPart" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -1194,8 +1194,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('bodypart', 'BodyClassList')" value="Edit Body Part type" id="cmdEditBodyPart" name="cmdEditBodyPart" />
-                                                                            <input type="button" onclick="deleteReferenceList('bodypart', 'BodyClassList')" value="Delete Body Part type" id="cmdDeleteBodyPart" name="cmdDeleteBodyPart" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('bodypart', 'BodyClassList')" value="Edit Body Part type" id="cmdEditBodyPart" name="cmdEditBodyPart" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('bodypart', 'BodyClassList')" value="Delete Body Part type" id="cmdDeleteBodyPart" name="cmdDeleteBodyPart" />
 
                                                                         </div>
                                                                     </div> 
@@ -1216,7 +1216,7 @@
                                                                                 <label class="control-label" for="txtSpecialCur">Special Circumstance Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtSpecialCur" name="txtSpecialCur"   />
-                                                                                    <input type="submit" value="Add Special Circumstance Type" name="cmdSpecialCur" />
+                                                                                    <input class="btn" type="submit" value="Add Special Circumstance Type" name="cmdSpecialCur" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -1235,8 +1235,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('specialcircumstance', 'SpecialCurList')" value="Edit Special Circumstance" id="cmdEditSpecialCur" name="cmdEditSpecialCur" />
-                                                                            <input type="button" onclick="deleteReferenceList('specialcircumstance', 'SpecialCurList')" value="Delete Special Circumstance" id="cmdDeleteSpecialCur" name="cmdDeleteSpecialCur" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('specialcircumstance', 'SpecialCurList')" value="Edit Special Circumstance" id="cmdEditSpecialCur" name="cmdEditSpecialCur" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('specialcircumstance', 'SpecialCurList')" value="Delete Special Circumstance" id="cmdDeleteSpecialCur" name="cmdDeleteSpecialCur" />
 
                                                                         </div>
                                                                     </div> 
@@ -1258,7 +1258,7 @@
                                                                                 <label class="control-label" for="txtExternalCause">External Cause Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtExternalCause" name="txtExternalCause"   />
-                                                                                    <input type="submit" value="Add External Cause Type" name="cmdExternalCause" />
+                                                                                    <input class="btn" type="submit" value="Add External Cause Type" name="cmdExternalCause" />
                                                                                 </div>
 
                                                                                 <br/>  
@@ -1278,8 +1278,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('externalcircumstance', 'ExternalCauseList')" value="Edit External Cause" id="cmdEditExternalCause" name="cmdEditExternalCause" />
-                                                                            <input type="button" onclick="deleteReferenceList('externalcircumstance', 'ExternalCauseList')" value="Delete External Cause" id="cmdDeleteExternalCause" name="cmdDeleteExternalCause" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('externalcircumstance', 'ExternalCauseList')" value="Edit External Cause" id="cmdEditExternalCause" name="cmdEditExternalCause" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('externalcircumstance', 'ExternalCauseList')" value="Delete External Cause" id="cmdDeleteExternalCause" name="cmdDeleteExternalCause" />
 
                                                                         </div>
                                                                     </div> 
@@ -1301,7 +1301,7 @@
                                                                                 <label class="control-label" for="txtSealType">Seal Type:</label>
                                                                                 <div class="controls">
                                                                                     <input type="text" id="txtSealType" name="txtSealType"   />
-                                                                                    <input type="submit" value="Add Seal Type" name="cmdSealType" />
+                                                                                    <input class="btn" type="submit" value="Add Seal Type" name="cmdSealType" />
                                                                                 </div>
 
                                                                                 <br/>  </div>
@@ -1321,8 +1321,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input type="button" onclick="editReferenceList('scenetype', 'SealTypeList')" value="Edit Seal Type" id="cmdEditSealType" name="cmdEditSealType" />
-                                                                            <input type="button" onclick="deleteReferenceList('scenetype', 'SealTypeList')" value="Delete Seal Type  " id="cmdDeleteSealType" name="cmdDeleteSealType" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('scenetype', 'SealTypeList')" value="Edit Seal Type" id="cmdEditSealType" name="cmdEditSealType" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('scenetype', 'SealTypeList')" value="Delete Seal Type  " id="cmdDeleteSealType" name="cmdDeleteSealType" />
 
  
                                                                         </div>
