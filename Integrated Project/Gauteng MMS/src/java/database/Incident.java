@@ -53,7 +53,7 @@ public Incident(String inIncidentLogNumber)
  reason = "";
  bodyCount = 0;
  status = false;
- dateIncidentClosed = "";
+ dateIncidentClosed = null;
 }
 public Incident(String incidentLogNumber ,String referenceNumber , int numberOfBodies ,String dateOfIncident,String timeOfIncident , String circumstanceOfDeath , String placeBodyFound , String specialCircumstances,String reason,int bodyCount,boolean status)
 {

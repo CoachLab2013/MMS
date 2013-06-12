@@ -171,9 +171,9 @@ $(document).ready(function() {
 
     });
 
-    $('#AddICD10').validate({
+    $('#AddRegion').validate({
         rules: {
-            txtICD10: {
+            txtRegion: {
                 required: true
             }
 
