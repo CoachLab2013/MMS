@@ -104,11 +104,11 @@
                     <td>  Scene condition: </td><td><textarea cols="50" rows="3" name="edit_callcondition" id="edit_callcondition"><%out.println(session.getAttribute("call_condition")); %></textarea><br></td>
                         </tr>
                         <tr>
-                            <td></td> <td>  <input type="submit" value="Save" name="edit_savecall" id="edit_savecall" /> <input type="reset" value="Cancel" id="edit_callcancel" /><br></td>
+                            <td></td> <td>  <input class="btn" type="submit" value="Save" name="edit_savecall" id="edit_savecall" /> <input class="btn" type="reset" value="Cancel" id="edit_callcancel" /><br></td>
                         </tr>
         </table>
                      
-                    <input type="hidden" name="edit_lognumber" id ="edit_lognumber"  readonly="true" <% out.println("value="+session.getAttribute("lognumber"));
+                    <input class="btn" type="hidden" name="edit_lognumber" id ="edit_lognumber"  readonly="true" <% out.println("value="+session.getAttribute("lognumber"));
                                                                                                             session.removeAttribute("lognumber");
                                                                                                         %>/>
     </form>

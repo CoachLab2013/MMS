@@ -60,9 +60,13 @@ public class BodyFile
     {
         return allSamplesRecevied;
     }
-    public boolean isBodyIdentified()
+    public String isBodyIdentified()
     {
-        return bodyIdentified;
+        if (bodyIdentified) {
+        return "Identified";
+        } else {
+            return "Unidentified";
+        }
     }
     public boolean isPostMortemCompleted()
     {

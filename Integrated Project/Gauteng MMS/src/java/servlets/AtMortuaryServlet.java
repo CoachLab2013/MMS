@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -190,6 +191,8 @@ public class AtMortuaryServlet extends HttpServlet {
         out.println(incidentDb.read());
         incidentDb.init();
         out.println(incidentDb.IncreaseBodyCount());
+        HttpSession sess = request.getSession();
+        sess.setAttribute("atMortuary", true);
         response.sendRedirect("Home.jsp");
 
     }

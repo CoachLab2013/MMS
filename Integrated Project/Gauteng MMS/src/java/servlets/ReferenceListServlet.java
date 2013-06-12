@@ -383,27 +383,28 @@ public class ReferenceListServlet extends HttpServlet {
             }
 
 
-        } else if (request.getParameter("form").equals("AddICD10")) {
+        } else if (request.getParameter("form").equals("AddRegion")) {
             //Code to store IDC10 codes to database 
             //Get infor from text box
-            String icd10Name = request.getParameter("txtICD10");
-
-            ReferenceListDb emp = new ReferenceListDb("icd10", "idICD10", "code", icd10Name, dbDetail);
+            String regionName = request.getParameter("txtRegion");
+            String provinceName = request.getParameter("ProvRegionList");
+            ReferenceListDb emp = new ReferenceListDb("region", "e", "type", "province", regionName, provinceName, dbDetail);
             emp.init();
-            result = emp.add().trim();
+            result = emp.addRegion().trim();
+            
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
-                sess.setAttribute("tab", "icd10");
-                sess.setAttribute("iCD10Result", "The ICD10 code has been successfuly saved to database");
+                sess.setAttribute("tab", "region");
+                sess.setAttribute("regionResult", "The region has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
-                sess.setAttribute("tab", "icd10");
-                sess.setAttribute("iCD10Result", "The ICD10 code did not save: because " + result);
+                sess.setAttribute("tab", "region");
+                sess.setAttribute("regionResult", "The region did not save: because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }

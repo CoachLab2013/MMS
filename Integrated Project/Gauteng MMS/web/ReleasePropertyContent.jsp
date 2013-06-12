@@ -86,7 +86,7 @@
                             
                             
                             <tr>
-                                <td> <td>  <input type="submit" value="Done" name="releaseproperty" /><br></td></td>
+                                <td> <td>  <input class="btn" type="submit" value="Done" name="releaseproperty" /><br></td></td>
           
                             </tr>
             </table>

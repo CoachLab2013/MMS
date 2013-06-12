@@ -80,7 +80,10 @@
                 <br>
                 <div  class="control-group form-horizontal">
                 <button id="linkButton" name="linkButton">Link Files</button>
-                <label class="error" style="display: none;">Please Select Non Duplicate or Correct Body File Numbers</label>
+                <br/><br/>
+                <div class="alert alert-error" style="display: none;">
+                   Please Select Non Duplicate or Correct Body File Numbers
+                </div>
                 </div>
                 <br>
             </fieldset>

@@ -35,7 +35,7 @@
         <form name="propertyform" id="propertyform" method="post" action="PropertyServlet">
         <table>
             <tr>
-                <td> date:</td>  
+                <td> Date:</td>  
                 <td> 
                     <select name="year" id="year">
                         <option selected="selected">Year</option>>
@@ -103,7 +103,7 @@
             </tr>
             
             <tr>
-      <td> <td><input type="submit" value="Done" name="Property" /><br></td></td>
+      <td> <td><input class="btn" type="submit" value="Done" name="Property" /><br></td></td>
             </tr>
         </table>
             

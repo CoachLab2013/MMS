@@ -40,6 +40,7 @@ public class LabRecordServlet extends HttpServlet {
         System.out.println("Fetch Sample: " + sampleDB.read(request.getParameter("seal")));
         
         sampleDB.getforensicSample().setDateReceived(request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day"));
+        sampleDB.getforensicSample().setReceived(true);
         
         System.out.println("Edit Sample Date Received: " + sampleDB.edit());
         

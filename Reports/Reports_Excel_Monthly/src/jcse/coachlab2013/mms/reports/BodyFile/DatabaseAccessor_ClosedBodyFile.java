@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.Template_DatabaseAccessor;
+import java.util.Calendar;
 
 /**
  * @author      Mubien Nakhooda <coachlab@jcse.org.za>
@@ -28,6 +29,9 @@ public final class DatabaseAccessor_ClosedBodyFile extends Template_DatabaseAcce
  */    
     public ResultSet read() {        
         ResultSet tempSet = null;
+        Calendar now = Calendar.getInstance(); 
+        int month = now.get(Calendar.MONTH)+1;
+        String s = Integer.toString(month);
         
         try {
             
@@ -50,7 +54,8 @@ public final class DatabaseAccessor_ClosedBodyFile extends Template_DatabaseAcce
                 "		LEFT JOIN `reporting database`.`dim_status`  AS `reporting_SamplesStatus` ON `reporting_SamplesStatus`.`Status_SK` = `reporting_Body`.`FK_SamplesStatus_SK`\n" +
                 "		LEFT JOIN `reporting database`.`dim_status`  AS `reporting_PostMortemStatus` ON `reporting_PostMortemStatus`.`Status_SK` = `reporting_Body`.`FK_PostMortemStatus_SK`\n" +
                 "		LEFT JOIN `reporting database`.`dim_mannerofdeath` AS `reporting_MannerOfDeath` ON `reporting_MannerOfDeath`.`mannerOfDeath_SK` = `reporting_Body`.`FK_MannerOfDeath_SK`\n" +
-                "	WHERE `reporting_SamplesStatus`.`status_BK` = TRUE AND `reporting_DateReleased`.`date_SK` <> '19000101';");            
+                "	WHERE `reporting_SamplesStatus`.`status_BK` = TRUE AND `reporting_DateReleased`.`date_SK` <> '19000101' "
+                    + "and EXTRACT(MONTH FROM TIMESTAMP (`reporting_DateReleased`.`dateStamp`))="+s + ";");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {
