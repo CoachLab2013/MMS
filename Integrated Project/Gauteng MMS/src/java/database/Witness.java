@@ -14,7 +14,8 @@ public class Witness
     private String surname;
     public Witness()
     {
-        
+        this.name = "null";
+        this.surname = "null";
     }
     public Witness(String name,String surname)
     {

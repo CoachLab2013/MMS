@@ -25,6 +25,20 @@ public class Property
     private int idProperty;
 
     public Property() {
+        this.sealNumber = "null";
+        this.description = "null";
+        this.date = "0001-01-01";
+        this.type = "null";
+        this.sealType = "null";
+        this.takenBy = "null";
+        this.SAPS_name = "null";
+        this.SAPS_surname = "null";
+        this.SAPS_taken = false;
+        this.deathRegisterNumber = "null";
+        this.released = false;
+        Witness witness1 = new Witness();
+        Witness witness2 = new Witness();
+        //this.witnesses = {witness1, witness2};
     }
 
     public Property(int idProperty) {

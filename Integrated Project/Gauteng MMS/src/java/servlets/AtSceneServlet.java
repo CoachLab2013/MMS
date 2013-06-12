@@ -234,7 +234,7 @@ public class AtSceneServlet extends HttpServlet {
          */
         BodyFileDb atSceneBodyFileDb = new BodyFileDb(dbdetail, atSceneBodyFile);
         atSceneBodyFileDb.init();
-        out.println(atSceneBodyFileDb.add());
+        out.println("Adding Body File:::" + atSceneBodyFileDb.add());
         //END OF POPULATING BODYFILE TABLE
         
         //Property

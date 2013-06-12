@@ -232,7 +232,7 @@ public class BodyDb extends DatabaseConnector{
                 getBodyAtMortuary();
                 IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
                 incidentDb.init();
-                incidentDb.read();
+                body.setIncident(incidentDb.findIncident(incidentDb.getIncident().getIncidentLogNumber()));
             statement.close();
             connection.close();
         } 
