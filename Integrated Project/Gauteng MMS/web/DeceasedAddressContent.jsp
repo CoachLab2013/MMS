@@ -28,41 +28,53 @@
         <legend>Deceased Address Details </legend>
         <form name="DeceasedAddressform" id="DeceasedAddressform" method="post" action="DeceasedAddressServlet">
       
-          
+           <%Tools t = new Tools();%> 
                 <table>
                     <tr> 
-                        <% Tools t = new Tools(); BodyAtMortuary body = t.getBody("GP/DK//00002/2013");%>
-                        <input type="hidden" name="deceasedDeathRegisterNr2" <%out.print("value=" + body.getDeathRegisterNumber());%> />
-                        <td>Building:  </td> <td><input type="text" name="deceasedbuilding" <% 
-                    if(body.getBodyAddress().getBuilding()!=null)
-                    out.print("value =" + body.getBodyAddress().getBuilding());%> /></td>  
+                    <td>Building:  </td> <td><input type="text" name="deceasedbuilding" <% 
+                    if(session.getAttribute("bIdBuild")!=null)
+                    {
+                        out.print("value =" + session.getAttribute("bIdBuild"));
+                    }
+                    %> /></td>  
                     </tr>
-                     <tr>     
-                        <td>Street:  </td> <td><input type="text" name="deceaesedstreet" <%
-                    if(body.getBodyAddress().getStreet()!=null)
-                    out.print("value =" + body.getBodyAddress().getStreet());%> /></td>  
+                    <tr>     
+                    <td>Street:  </td> <td><input type="text" name="deceaesedstreet" <%
+                    if(session.getAttribute("bIdStreet")!=null)
+                    {
+                        out.print("value =" + session.getAttribute("bIdStreet"));
+                    }
+                    %> /></td>  
                     </tr>
                     <tr>
                         <td>Suburb:</td> <td> <input type="text" name="deceasedsub" <%
-                    if(body.getBodyAddress().getSuburb()!=null)
-                    out.print("value =" + body.getBodyAddress().getSuburb());%>  /></td>
+                        if(session.getAttribute("bIdSuburb")!=null)
+                        {
+                            out.print("value =" + session.getAttribute("bIdSuburb"));
+                        }
+                        %>  /></td>
                     </tr> 
                      <tr>
                         <td>City:</td> <td> <input type="text" name="deceasedcity" <%
-                    if(body.getBodyAddress().getCity()!=null)
-                    out.print("value =" + body.getBodyAddress().getCity());%>  /> </td>
+                        if(session.getAttribute("bIdCity")!=null)
+                        {
+                            out.print("value =" + session.getAttribute("bIdCity"));
+                        }
+                        %>  /> </td>
                     </tr> 
                      <tr>
                         <td>Postal Code:</td> <td> <input type="text" name="postalcode" <%
-                    if(body.getBodyAddress().getPostCode()!=null)
-                    out.print("value =" + body.getBodyAddress().getPostCode());%>  /> </td>
+                    if(session.getAttribute("bIdPostCode")!=null)
+                    {
+                        out.print("value =" +session.getAttribute("bIdPostCode"));
+                    }%>  /> </td>
                     </tr> 
                     <tr>     
                         <td>Province:  </td> <td> 
                     <%
-                     if(body.getMaritalStatus()!=null)
+                     if(session.getAttribute("bIdProvince")!=null)
                      {
-                         String list2 = t.makeReferenceList("province", "type",body.getGender());
+                         String list2 = t.makeReferenceList("province", "type",(String)session.getAttribute("bIdProvince"));
                          out.println(list2);
                      }
                      else
@@ -77,9 +89,9 @@
                      <tr>     
                         <td>Region:  </td> <td> 
                             <%
-                     if(body.getMaritalStatus()!=null)
+                     if(session.getAttribute("bIdRegion")!=null)
                      {
-                         String list2 = t.makeReferenceList("region", "type",body.getGender());
+                         String list2 = t.makeReferenceList("region", "type",(String)session.getAttribute("bIdRegion"));
                          out.println(list2);
                      }
                      else
@@ -93,8 +105,8 @@
                     </tr>
                         <tr>     
                         <td>Magisterial District:  </td> <td><input type="text" name="MagisterialD" <%
-                            if(body.getBodyAddress().getMagisterialDistrict()!=null)
-                            out.print("value =" + body.getBodyAddress().getMagisterialDistrict());%>   /></td>  
+                            if(session.getAttribute("bIdDistrict")!=null)
+                            out.print("value =" + session.getAttribute("bIdDistrict"));%>   /></td>  
                     </tr> 
                             <tr>
                                 <td> <td>  <input type="submit" value="Save" name="bodySave" /><br></td></td>

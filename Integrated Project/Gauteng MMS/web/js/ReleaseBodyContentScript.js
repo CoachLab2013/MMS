@@ -94,17 +94,62 @@ $(document).ready(function(){
         
     });//end of form validation
     
-    if($("#go_to_deceasedDetails").val()=="true")
-    {
-         //set focus on Open Incidents tab 
-            $("#OpenIncidentsTab").removeClass("active");
-            $("#EditIncidentTab").addClass("active");
+    $("#releaseTable").click();
+     
+    $("#releaseTable tr").click(function(){
+        $(".selectedtablerow").addClass("tablerow");
+        $(".selectedtablerow").removeClass("selectedtablerow");
+        $(this).removeClass("tablerow");
+        $(this).addClass("selectedtablerow");   
+        
+        $.get("ReleaseBodyServlet", {type: "load", data: $(this).attr("drnumber")}, function(data) {
+
+                /*var tr = "<tr class='tablerow'>";
+                var dataValues = data.split(" ");
+
+                for (var i = 0; i < dataValues.length; i++)
+                {
+                    tr += "<td class='tablecell'>" + dataValues[i] + "</td>";
+                }
+
+                tr += "</tr>";
+
+                $('#releaseLinkTable').html(tr);*/
+            });
             
-            $("#OpenIncidents").removeClass("tab-pane active");
-            $("#OpenIncidents").addClass("tab-pane");
-            $("#EditIncident").removeClass("tab-pane");
-            $("#EditIncident").addClass("tab-pane active");
-    }
+            $('#Releaseform').css('display', 'inherit');
+            $('#RecipientDeathRegisterNumber').val($(this).attr("drnumber"));
+    });
+    
+    if($("#_recipientDetail").val() === "true") {
+
+            $("#IncidentTab").removeClass("active");
+            $("#BodyFileTab").addClass("active");
+            
+                $("#Incident").removeClass("active");
+                $("#BodyFile").addClass("active");
+            
+            $("#tabOpenBodyFiles").removeClass("active");
+            $("#tabNewBodyFiles").removeClass("active");
+            $("#tabEditBodyFiles").addClass("active");
+            $("#tabLinkBodyFiles").removeClass("active");
+                            
+                $("#OpenBodyFiles").removeClass("active");
+                $("#NewBodyFiles").removeClass("active");
+                $("#EditBodyFiles").addClass("active");
+                $("#LinkBodyFiles").removeClass("active");
+                        
+            $("#tabIncidentInformation").removeClass("active");
+            $("#tabBodyIdentification").removeClass("active");
+            $("#tabPostMortem").removeClass("active");
+            $("#tabReleaseBody").addClass("active");
+                            
+                $("#IncidentInformation").removeClass("active");
+                $("#BodyIdentification").removeClass("active");
+                $("#PostMortem").removeClass("active");
+                $("#ReleaseBody").addClass("active");
+    }    
+    
 }); 
 //end $(document).ready(function())
 

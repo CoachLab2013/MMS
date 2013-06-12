@@ -20,22 +20,22 @@ public class BodyFile
     
     public BodyFile()
     {
-        this.dateFileOpened = "0000-00-00";
+        this.dateFileOpened = "0001-01-01";
         this.bodyFileStatus = false;
         this.allSamplesRecevied = false;
         this.bodyIdentified = false;
         this.postMortemComplete = false;
-        this.dateFileClosed = "0000-00-00";
+        this.dateFileClosed = "0001-01-01";
     }
      public BodyFile(String deathRegisterNumber)
      {
          this.deathRegisterNumber = deathRegisterNumber;
-         this.dateFileOpened = "0000-00-00";
+         this.dateFileOpened = "0001-01-01";
          this.bodyFileStatus = false;
          this.allSamplesRecevied = false;
          this.bodyIdentified = false;
          this.postMortemComplete = false;
-         this.dateFileClosed = "0000-00-00";
+         this.dateFileClosed = "0001-01-01";
      }
      
     public BodyFile(String dateFileOpened,boolean bodyFileStatus,boolean allSamplesRecevied,boolean bodyIdentified,boolean postMortemComplete,String dateFileClosed,String deathRegisterNumber)
@@ -60,9 +60,13 @@ public class BodyFile
     {
         return allSamplesRecevied;
     }
-    public boolean isBodyIdentified()
+    public String isBodyIdentified()
     {
-        return bodyIdentified;
+        if (bodyIdentified) {
+        return "Identified";
+        } else {
+            return "Unidentified";
+        }
     }
     public boolean isPostMortemCompleted()
     {
