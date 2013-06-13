@@ -23,14 +23,21 @@
         <script language="javascript" src="js/jquery-1.9.1.js"></script>
          <script language="javascript" src="js/jquery.validate.min.js"></script>
          <script src="js/DeceasedDetailsContentScript.js"></script>
-                 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+          <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
-         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
-        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css">
+         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"/> 
+        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css"/>
     </head>
    
     <body>
     <legend>Deceased Details Contents </legend>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
+>>>>>>> origin/master
     <form name="Deceasedform" id="Deceasedform" method="post" action="DeceasedDetailsServlet">
         <input type="hidden" name="deceasedDeathRegisterNr" <% 
             if(session.getAttribute("deceasedDeathRegisterNumber") != null)
@@ -94,14 +101,14 @@
                          {
                             String i = (String)session.getAttribute("bIdIDNumber");
           
-                            if(i.length() == 13) 
+                            if(i.contains("null")) 
                             {
-                                out.print("<option>ID</option>");
+                                out.print("<option selected='selected'>ID</option>");
                                 out.print("<option>Passport</option>");
                             } 
                             else 
                             {
-                                out.print("<option>Passport</option>");
+                                out.print("<option selected='selected'>Passport</option>");
                                 out.print("<option>ID</option>");
                             }
                          }
@@ -117,6 +124,11 @@
                   if(session.getAttribute("bIdIDNumber") != null)
                   {
                     out.println("value=" + session.getAttribute("bIdIDNumber"));
+                  }
+                  else
+                  {
+                      if(session.getAttribute("bIdPassport") != null)
+                      out.println("value=" + session.getAttribute("bIdPassport"));
                   }
                  %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
             </tr> 
