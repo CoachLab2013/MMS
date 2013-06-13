@@ -45,7 +45,7 @@
                                                                          /> </td>
             </tr>
             <tr>
-                <td>
+                  <td>
                     Incident Date:
                 </td>
                 <td>
@@ -83,7 +83,7 @@
             </tr>
 
             <tr>
-                <td>
+                  <td>
                     Incident Time:
                 </td>
                 <td>
@@ -101,7 +101,7 @@
                 </td>
             </tr>
             <tr> 
-                <td> Number of bodies:</td> 
+                  <td>Number of bodies:</td> 
                 <td>
                     <select name="editnumberofbodies" id="editnumberofbodies" >
                         <%
@@ -121,7 +121,7 @@
                 </td>        
             </tr>
             <tr>
-                <td>
+                 <td>
                     Place where body was found:
                 </td>
                 <td> 
@@ -131,7 +131,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+             <td>
                     Circumstances of death:
                 </td>
                 <td>

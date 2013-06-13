@@ -52,9 +52,12 @@
             <%
   
             %>
+        
         <div class="menutab">
+            <div class="nav>"
 
-            <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif"><a href="LogOutServlet" style="color:black" >Logout</a></span>
+            <span style="float: right;margin-right: 10px; margin-top: 5px; font-family: Helvetica, Arial, sans-serif">
+                <a class="brand"  href="LogOutServlet" style="color:black" >Logout</a></span>
 
             <%
                 if (session.getAttribute("loggedin") == null) {
@@ -64,8 +67,8 @@
                     out.println("<input name='incidentlogged' id='incidentlogged' type=hidden value=true>");
                 }
             %>
+       </div>
         </div>
-
         <div class="bodycontent">        
 
 
