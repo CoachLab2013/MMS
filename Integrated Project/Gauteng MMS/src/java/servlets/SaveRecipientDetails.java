@@ -6,17 +6,14 @@ package servlets;
 
 import database.BodyAtMortuary;
 import database.BodyDb;
-import database.DbDetail;
 import database.Recipient;
 import database.RecipientDb;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,8 +45,7 @@ public class SaveRecipientDetails extends HttpServlet {
         recipient.setAddress(request.getParameter("RecipientAddres"));
         recipient.setContactNumber(request.getParameter("RecipientContact"));
         recipient.setBody_idDeathRegisterNumber(request.getParameter("RecipientDeathRegisterNumber"));
-        
-        //connection to the database
+                
         RecipientDb recipientDb = new  RecipientDb(recipient, new Tools().getDbdetail());
         recipientDb.init();
         System.out.println(recipientDb.add());
@@ -57,11 +53,13 @@ public class SaveRecipientDetails extends HttpServlet {
         BodyAtMortuary bodtAtMortuary = new BodyAtMortuary(request.getParameter("RecipientDeathRegisterNumber"));
         BodyDb bodyDB = new BodyDb(new Tools().getDbdetail(), bodtAtMortuary);
         bodyDB.init();
-        bodyDB.read();
+        System.out.println(bodyDB.read());
         bodyDB.getBody().setBodyReleased(true);
-        bodyDB.getBody().setBodyReleaseTo(request.getParameter("releaseto"));
-        //bodyDB.getBody().setBodyReleaseTo(request.getParameter("releaseto")); //Release Type
-        bodyDB.edit();
+        bodyDB.getBody().setBodyReleaseTo(request.getParameter("releasedto"));
+        bodyDB.getBody().setBodyReleasedType(request.getParameter("releasedtype"));
+        
+        bodyDB.init();
+        System.out.println(bodyDB.edit());
                 
         request.getSession().setAttribute("_recipientDetail", true);
         response.sendRedirect("Home.jsp");

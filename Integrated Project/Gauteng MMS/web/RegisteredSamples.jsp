@@ -34,13 +34,21 @@
         %>
         
         <form name="registeredSamplesForm" method="post" action="" class="form-horizontal" >
-        <%
-            //session.setAttribute("death_register_number", "099888592");
-            if(session.getAttribute("death_register_number") != null) {
-                out.println(new Tools().makeRegisteredSampleTable(session.getAttribute("death_register_number").toString()));
-            }
-        %>
-
+            
+            <table class='tabledisplay' id='sampletable'>
+                    <th class='tableheading'>Initial Seal Number</th>
+                    <th class='tableheading'>New Seal Number</th>
+                    <th class='tableheading'>Death Register Number</th>
+                    <th class='tableheading'>Lab Reference Number</th>
+                    <th class='tableheading'>Reason for Sample</th>
+            
+                    <%
+                        //session.setAttribute("death_register_number", "099888592");
+                        if (session.getAttribute("death_register_number") != null) {
+                            out.println(new Tools().makeRegisteredSampleTable(session.getAttribute("death_register_number").toString()));
+                        }
+                    %>
+            </table>
         <br>     
         <table>
             <tr>

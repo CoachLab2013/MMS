@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import AssistiveClasses.SetDbDetail;
-import database.BodyAtMortuary;
-import database.PostMortem;
-import database.PostMortemDb;
+import database.ICD10DB;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Mubien Nakhooda Coachlab 2013
+ * @author Sandile
  */
-public class PostMortemServlet extends HttpServlet {
-
+public class LoadICD10List extends HttpServlet {
+    
+    private String getString(ArrayList<String> list) {
+        String tmp = "";
+        
+        for (String tmpString: list) {
+            tmp += tmpString + "~";
+        }
+        
+        return tmp;
+    }
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -33,31 +39,35 @@ public class PostMortemServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                         
-        SetDbDetail dbSet = new SetDbDetail();
-        
-        //Needed for Postmortem Constructor
-        BodyAtMortuary body = new BodyAtMortuary();
-        body.setDeathRegisterNumber(request.getSession().getAttribute("death_register_number").toString());
-        
-        PostMortem postmortem = new PostMortem(                
-            "",
-            "",
-            request.getParameter("findingsmortem"), //
-            request.getParameter("findingsdeath"), //
-            false,
-            false,
-            request.getParameter("findingsnumber"), //
-            body,
-            null //LabRecord, Has been removed from database but still exists in Postmortem Class?
-        );
-        
-        PostMortemDb postmortemDB = new PostMortemDb(postmortem, dbSet.getDbdetail());
-        postmortemDB.init();    
-        System.out.println(postmortemDB.add());
-       
-        request.getSession().setAttribute("_PostMortem", "true");
-        response.sendRedirect("Home.jsp");
+                
+        if (request.getParameter("type").equals("loadICD2")) {
+            PrintWriter out = response.getWriter();
+            try {              
+             
+               out.println(getString(new ICD10DB(new SetDbDetail().getDbdetail()).filterICD10Code2(request.getParameter("data"))));
+                
+            } finally {
+                out.close();
+            }
+        } else if (request.getParameter("type").equals("loadICD3")) {
+            PrintWriter out = response.getWriter();
+            try {
+                
+                out.println(getString(new ICD10DB(new SetDbDetail().getDbdetail()).filterICD10Code3(request.getParameter("data"))));
+                
+            } finally {
+                out.close();
+            }
+        } else if (request.getParameter("type").equals("loadICD4")) {
+            PrintWriter out = response.getWriter();
+            try {
+                
+                out.println(getString(new ICD10DB(new SetDbDetail().getDbdetail()).filterICD10Code4(request.getParameter("data"))));
+                
+            } finally {
+                out.close();
+            }
+        }
     }
 
     /**
