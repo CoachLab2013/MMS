@@ -67,7 +67,7 @@
                   {
                     out.println("value=" + session.getAttribute("bIdFullName"));
                   }
-                 %> /><input type="button" value="Confirm" id="btnDeceasedNameDis"  onclick="confirmText('txtDeceasedNameDis','btnDeceasedNameDis',0);" /></td>  
+                 %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNameDis"  onclick="confirmText('txtDeceasedNameDis','btnDeceasedNameDis',0);" /></td>  
             </tr>
             <tr>     
                 <td>Maiden Name:  </td> <td><input type="text" name="DeceasedMaidenName" <%
@@ -83,7 +83,7 @@
                   {
                     out.println("value=" + session.getAttribute("bIdSurname")); 
                   }
-                 %>  /><input type="button" value="Confirm" id="btnDeceasedSurnameDis" onclick="confirmText('txtDeceasedSurnameDis','btnDeceasedSurnameDis',0);" /> </td>
+                 %>  /><input class="btn" type="button" value="Confirm" id="btnDeceasedSurnameDis" onclick="confirmText('txtDeceasedSurnameDis','btnDeceasedSurnameDis',0);" /> </td>
             </tr> 
 
             <tr>     
@@ -118,7 +118,7 @@
                   {
                     out.println("value=" + session.getAttribute("bIdIDNumber"));
                   }
-                 %> /><input type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
+                 %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
             </tr> 
             <tr>
                 <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%
@@ -160,7 +160,7 @@
                             out.println(list2);
                     }
                         %>
-                    </select><input type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
+                    </select><input class="btn" type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
             <tr>     
                 <td>Marital Status:  </td> <td>
                     <%
@@ -197,7 +197,7 @@
                          out.println(list2);
                      }
                      %>
-             <input type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis',0);"/> </td>
+             <input class="btn" type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis',0);"/> </td>
             <tr>     
                 <td>Occupation:  </td> <td>
                         <%if((String)session.getAttribute("bIdOccupation")!=null)
@@ -289,7 +289,7 @@
                 </td>
             </tr>
             <tr>
-                <td> <td>  <input type="submit" value="Save" name="bodySave" /><br></td></td>
+                <td> <td>  <input class="btn" type="submit" value="Save" name="bodySave" /><br></td></td>
 
             </tr>
         </table>

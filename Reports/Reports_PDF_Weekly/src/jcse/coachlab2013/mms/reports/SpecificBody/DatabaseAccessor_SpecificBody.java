@@ -73,8 +73,8 @@ public class DatabaseAccessor_SpecificBody extends Template_DatabaseAccessor {
 "on fact_body.FK_PostMortem_SK = dim_postmortem.postMortem_SK\n" +
 "left join `reporting database`.dim_date\n" +
 "on fact_body.FK_DateReceived_SK = date_SK and fact_body.FK_DateReleased_SK = date_SK\n" +
-"\n" +
-"\n" +
+
+"Where EXTRACT(WEEK FROM TIMESTAMP(fact_body.dateInserted))=WEEK(NOW());\n" +
 "");            
             tempSet = preparedStatement.executeQuery();
             

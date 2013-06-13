@@ -100,7 +100,7 @@
                             </tr>
                           
                             <tr>
-                                <td> <td>  <input type="submit" value="Save" name="bodySave" /><br></td></td>
+                                <td> <td>  <input class="btn" type="submit" value="Save" name="bodySave" /><br></td></td>
           
                             </tr>
             </table>

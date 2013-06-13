@@ -33,16 +33,20 @@ public final class DatabaseAccessor_OutstandingResults extends Template_Database
         try {
             
             preparedStatement = connection.prepareStatement("SELECT \n" +
-                "	`reporting_Body`.`deathRegisterNumber_BK` AS `Death Register No.`, \n" +
-                "	SUM(`reporting_Sample`.`countSample`) AS `Number of Samples Sent`, \n" +
-                "	SUM(`reporting_Sample`.`countOutstanding`) AS `Number of Samples Received`, \n" +
-                "	CAST((SUM(`countSample` - `countOutstanding`) / SUM(`countSample`) * 100) AS DECIMAL(5,2)) AS `% Samples Outstanding`,\n" +
-                "	MAX(durationOutstanding) AS `Days Outstanding`\n" +
-                "\n" +
-                "	FROM `reporting database`.`fact_sample` AS `reporting_Sample`\n" +
-                "		LEFT JOIN `reporting database`.`dim_body` AS `reporting_Body` ON `reporting_Body`.`body_SK` = `reporting_Sample`.`FK_Body_SK`\n" +
-                "		LEFT JOIN `reporting database`.`dim_date` AS `reporting_DateSent` ON `reporting_DateSent`.`date_SK` = `reporting_Sample`.`FK_DateSent_SK`\n" +
-                "		GROUP BY `reporting_Body`.`deathRegisterNumber_BK`;");            
+"`reporting_DateSent`.dateStamp AS `Date Sent`,\n" +
+"`reporting_Body`.`deathRegisterNumber_BK` AS `Death Register No.`, \n" +
+"SUM(`reporting_Sample`.`countOutstanding`) AS `Number of Samples Received`, \n" +
+"CAST((SUM(`countSample` - `countOutstanding`) / SUM(`countSample`) * 100) AS DECIMAL(5,2)) \n" +
+"AS `% Samples Outstanding`,\n" +
+"MAX(durationOutstanding) AS `Days Outstanding`\n" +
+"\n" +
+"FROM `reporting database`.`fact_sample` AS `reporting_Sample`\n" +
+"LEFT JOIN `reporting database`.`dim_body` AS `reporting_Body` \n" +
+"ON `reporting_Body`.`body_SK` = `reporting_Sample`.`FK_Body_SK`\n" +
+"LEFT JOIN `reporting database`.`dim_date` AS `reporting_DateSent` \n" +
+"ON `reporting_DateSent`.`date_SK` = `reporting_Sample`.`FK_DateSent_SK`\n" +
+"where EXTRACT(WEEK FROM TIMESTAMP (`reporting_DateSent`.dateStamp))=week(now())\n" +
+"GROUP BY `reporting_Body`.`deathRegisterNumber_BK` ");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

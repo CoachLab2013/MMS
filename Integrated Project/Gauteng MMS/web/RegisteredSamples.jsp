@@ -45,7 +45,7 @@
         <table>
             <tr>
                 <td>
-                    <input type="button" value="Edit" id="editsamplebutton">
+                    <input class="btn" type="button" value="Edit" id="editsamplebutton">
                 </td>                
             </tr>
 
@@ -86,8 +86,10 @@
                             </tr>
                           
                             <tr>
-                                <td><input type="submit" value="Save" name="edit_forensic_samples" /><br></td>
-                                <td><input type="button" value="Cancel" id="cancel_forensic_samples" name="cancel_forensic_samples" /><br></td>
+
+                                <td><input class="btn" type="submit" value="Save" name="edit_forensic_samples" /><br></td>
+                                <td><input class="btn" type="button" value="Cancel" id="cancel_forensic_samples" name="cancel_forensic_samples" /><br></td>
+
                             </tr>
             </table>
             </form>

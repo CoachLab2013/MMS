@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jcse.coachlab2013.mms.reports.Template_DatabaseAccessor;
+import java.util.Calendar;
 
 /**
  * @author      Mubien Nakhooda <coachlab@jcse.org.za>
@@ -28,6 +29,10 @@ public final class DatabaseAccessor_AuditTrail extends Template_DatabaseAccessor
  */
     public ResultSet read() {        
         ResultSet tempSet = null;
+        Calendar now = Calendar.getInstance(); 
+        int month = now.get(Calendar.MONTH)+1;
+        String s = Integer.toString(month);
+        
         
         try {
             
@@ -43,7 +48,11 @@ public final class DatabaseAccessor_AuditTrail extends Template_DatabaseAccessor
                 "	LEFT JOIN `reporting database`.`dim_date` AS `reporting_EventDate` ON `reporting_EventDate`.`date_SK` = `reporting_AuditTrail`.`FK_DateOccured_SK`\n" +
                 "	LEFT JOIN `reporting database`.`dim_employee` AS `reporting_Employee` ON `reporting_Employee`.`employee_SK` = `reporting_AuditTrail`.`FK_Employee_SK`\n" +
                 "	LEFT JOIN `reporting database`.`dim_eventtype` AS `reporting_EventType` ON `reporting_EventType`.`type_SK` = `reporting_AuditTrail`.`FK_EventType_SK`\n" +
-                "	LEFT JOIN `reporting database`.`dim_eventlocation` AS `reporting_EventLocation` ON `reporting_EventLocation`.`location_SK` = `reporting_AuditTrail`.`FK_EventLocation_SK`;");            
+                "	LEFT JOIN `reporting database`.`dim_eventlocation` AS `reporting_EventLocation` ON "
+                    + "`reporting_EventLocation`.`location_SK` = `reporting_AuditTrail`.`FK_EventLocation_SK` "
+                    + "where EXTRACT(MONTH FROM TIMESTAMP (reporting_EventDate.dateStamp))="+s
+                   
+                    + ";");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {
