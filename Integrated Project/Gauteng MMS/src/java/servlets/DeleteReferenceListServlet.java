@@ -523,7 +523,28 @@ public class DeleteReferenceListServlet extends HttpServlet {
             }
 
 
-        } else if (request.getParameter("table1").equals("scenetype")) {
+        } else if (request.getParameter("table1").equals("seal")) {
+            ReferenceListDb emp = new ReferenceListDb("seal", "idSeal", "type", Olditem, dbDetail);
+            emp.init();
+            result = emp.delete().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "seal");
+                sess.setAttribute("sealTypeResults", "Seal type has been successfuly deleted");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "seal");
+                sess.setAttribute("sealTypeResults", "Seal type did not delete because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        } else if (request.getParameter("table1").equals("scene")) {
             ReferenceListDb emp = new ReferenceListDb("scenetype", "idSceneType", "type", Olditem, dbDetail);
             emp.init();
             result = emp.delete().trim();
@@ -531,20 +552,62 @@ public class DeleteReferenceListServlet extends HttpServlet {
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
-                sess.setAttribute("tab", "sceneType");
-                sess.setAttribute("sealTypeResults", "Seal type has been successfuly deleted");
+                sess.setAttribute("tab", "scene");
+                sess.setAttribute("sceneResult", "Scene type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
-                sess.setAttribute("tab", "sceneType");
-                sess.setAttribute("sealTypeResults", "Seal type did not delete because " + result);
+                sess.setAttribute("tab", "scene");
+                sess.setAttribute("sceneResult", "Scene type did not delete because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
 
-        } else {
+        }else if (request.getParameter("table1").equals("releasedtype")) {
+            ReferenceListDb emp = new ReferenceListDb("releasedtype", "idReleasedType", "type", Olditem, dbDetail);
+            emp.init();
+            result = emp.delete().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "releaseType");
+                sess.setAttribute("releaseTypeResult", "Release type has been successfuly deleted");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "releaseType");
+                sess.setAttribute("releaseTypeResult", "Release type did not delete because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        }else if (request.getParameter("table1").equals("releasedto")) {
+            ReferenceListDb emp = new ReferenceListDb("releasedto", "idReleasedTo", "type", Olditem, dbDetail);
+            emp.init();
+            result = emp.delete().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "releaseTo");
+                sess.setAttribute("releaseToResult", "Release-To type has been successfuly deleted");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "releaseTo");
+                sess.setAttribute("releaseToResult", "Release-To type did not delete because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        }else {
 
             PrintWriter out = response.getWriter();
             try {

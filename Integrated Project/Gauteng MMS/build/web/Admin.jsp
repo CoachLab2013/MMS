@@ -83,6 +83,9 @@
             String specialCurResult = "";
             String exCauseResult = "";
             String slTypeResult = "";
+            String sceneResult = "";
+            String releaseTypeResult = "";
+            String releaseToResult = "";
 
             String main1 = "";
             String addUserTab = "";
@@ -124,6 +127,9 @@
             String specialCur = "";
             String exCause = "";
             String slType = "";
+            String releaseTo = "";
+            String scene = "";
+            String releaseType = "";
 
 
 
@@ -196,9 +202,18 @@
                     } else if (session.getAttribute("tab").equals("exCause")) {
                         exCause = "active";
                         exCauseResult = session.getAttribute("externalCauseResults").toString();
-                    } else if (session.getAttribute("tab").equals("sceneType")) {
+                    } else if (session.getAttribute("tab").equals("seal")) {
                         slType = "active";
                         slTypeResult = session.getAttribute("sealTypeResults").toString();
+                    } else if (session.getAttribute("tab").equals("scene")) {
+                        scene = "active";
+                        sceneResult = session.getAttribute("sceneResult").toString();
+                    } else if (session.getAttribute("tab").equals("releaseType")) {
+                        releaseType = "active";
+                        releaseTypeResult = session.getAttribute("releaseTypeResult").toString();
+                    } else if (session.getAttribute("tab").equals("releaseTo")) {
+                        releaseTo = "active";
+                        releaseToResult = session.getAttribute("releaseToResult").toString();
                     }
 
 
@@ -224,6 +239,10 @@
                     bodyPartResult = "";
                     exCauseResult = "";
                     slTypeResult = "";
+                    sceneResult = "";
+                    releaseTypeResult = "";
+                    releaseToResult = "";
+
                     main1 = "active";
 
                     currentUserTab = "active";
@@ -231,32 +250,35 @@
 
                 }
             } catch (Exception ex) {
-                 userResult = "";
-                    instiResult = "";
-                    analysisResult = "";
-                    propertyResult = "";
-                    vehicleResult = "";
-                    rankResult = "";
-                    genderResult = "";
-                    occupationResult = "";
-                    raceResult = "";
-                    maritalResult = "";
+                userResult = "";
+                instiResult = "";
+                analysisResult = "";
+                propertyResult = "";
+                vehicleResult = "";
+                rankResult = "";
+                genderResult = "";
+                occupationResult = "";
+                raceResult = "";
+                maritalResult = "";
 
-                    provinceResult = "";
-                    regionResult = "";
-                    mannerResult = "";
-                    sampleResult = "";
-                    statusResult = "";
-                    relationshipResult = "";
-                    specialCurResult = "";
-                    bodyPartResult = "";
-                    exCauseResult = "";
-                    slTypeResult = "";
-                    
+                provinceResult = "";
+                regionResult = "";
+                mannerResult = "";
+                sampleResult = "";
+                statusResult = "";
+                relationshipResult = "";
+                specialCurResult = "";
+                bodyPartResult = "";
+                exCauseResult = "";
+                slTypeResult = "";
+                sceneResult = "";
+                releaseTypeResult = "";
+                releaseToResult = "";
+
                 currentUserTab = "active";
                 main1 = "active";
-                
-                
+
+
             }
             SetDbDetail dbset = new SetDbDetail();
 
@@ -320,7 +342,7 @@
             //For region list box
             emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
             emp.init();
-            ArrayList<String> regionList = emp.referenceListReg(provinceList.get(provinceList.size()-1));
+            ArrayList<String> regionList = emp.referenceListReg(provinceList.get(0));
 
 
             //For mannerofdeath list box
@@ -358,11 +380,25 @@
             emp.init();
             ArrayList<String> exCauseList = emp.referenceList();
 
-            //For scene type list box
-            emp = new ReferenceListDb("scenetype", "e", "type", "e", dbset.getDbdetail());
+            //For seal type list box
+            emp = new ReferenceListDb("seal", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> slTypeList = emp.referenceList();
 
+            //For scene type list box
+            emp = new ReferenceListDb("scenetype", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> sceneList = emp.referenceList();
+
+            //For scene type list box
+            emp = new ReferenceListDb("releasedtype", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> releasedTypeList = emp.referenceList();
+
+            //For scene type list box
+            emp = new ReferenceListDb("releasedto", "e", "type", "e", dbset.getDbdetail());
+            emp.init();
+            ArrayList<String> releasedToList = emp.referenceList();
         %>
 
 
@@ -543,6 +579,9 @@
                                                                     <li class="<%out.println(String.valueOf(specialCur));%>"><a href="#specialCur" data-toggle="tab">Special Circumstance</a></li>
                                                                     <li class="<%out.println(String.valueOf(exCause));%>"><a href="#externalCause" data-toggle="tab">External Cause</a></li>
                                                                     <li class="<%out.println(String.valueOf(slType));%>"><a href="#sealType" data-toggle="tab">Seal Type</a></li>
+                                                                    <li class="<%out.println(String.valueOf(scene));%>"><a href="#scene" data-toggle="tab">Scene Type</a></li>
+                                                                    <li class="<%out.println(String.valueOf(releaseType));%>"><a href="#releaseType" data-toggle="tab">Release Type</a></li>
+                                                                    <li class="<%out.println(String.valueOf(releaseTo));%>"><a href="#releaseTo" data-toggle="tab">Release To</a></li>
 
                                                                 </ul>
                                                             </div>
@@ -971,23 +1010,23 @@
 
                                                                                     <select id="ProvRegionList" name="ProvRegionList" onload="SelectProvince()" onchange='SelectProvince()'>
                                                                                         <%
-                                                                                             String prov = "";
-                                                                                             String selected ="";
-                                                                                           
-                                                                                           if (null != session.getAttribute("provTab")) {
+                                                                                            String prov = "";
+                                                                                            String selected = "";
+
+                                                                                            if (null != session.getAttribute("provTab")) {
                                                                                                 prov = session.getAttribute("provTab").toString();
-                                                                                           }
-                                                                                            
-                                                                                               
+                                                                                            }
+
+
                                                                                             for (int i = 0; i < provinceList.size(); i++) {
-                                                                                               if(prov.trim().equals(provinceList.get(i).trim())){
-                                                                                                selected="selected";
-                                                                                                emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
-            emp.init();                                                                          emp.init();
-                                                                                                regionList = emp.referenceListReg(provinceList.get(i).trim());
-                                                                                                }else{
-                                                                                                selected="";
-                                                                                                } 
+                                                                                                if (prov.trim().equals(provinceList.get(i).trim())) {
+                                                                                                    selected = "selected";
+                                                                                                    emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
+                                                                                                    emp.init();
+                                                                                                    regionList = emp.referenceListReg(provinceList.get(i).trim());
+                                                                                                } else {
+                                                                                                    selected = "";
+                                                                                                }
                                                                                         %>
                                                                                         <option <%out.println(String.valueOf(selected));%>  value="<% out.print(provinceList.get(i));%>"><% out.print(provinceList.get(i));%> </option>
 
@@ -1015,9 +1054,11 @@
                                                                             <select id="RegionList" name="RegionList" size="5">
                                                                                 <%
 
-
+                                                                                    //  emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
+                                                                                    //emp.init();
+                                                                                    //regionList = emp.referenceListReg(prov.trim());
                                                                                     for (int i = 0; i < regionList.size(); i++) {
-                                                                                        
+
                                                                                 %>
                                                                                 <option><% out.print(regionList.get(i));%> </option>
 
@@ -1364,8 +1405,8 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                            <input class="btn" type="button" onclick="editReferenceList('scenetype', 'SealTypeList')" value="Edit Seal Type" id="cmdEditSealType" name="cmdEditSealType" />
-                                                                            <input class="btn" type="button" onclick="deleteReferenceList('scenetype', 'SealTypeList')" value="Delete Seal Type  " id="cmdDeleteSealType" name="cmdDeleteSealType" />
+                                                                            <input class="btn" type="button" onclick="editReferenceList('seal', 'SealTypeList')" value="Edit Seal Type" id="cmdEditSealType" name="cmdEditSealType" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('seal', 'SealTypeList')" value="Delete Seal Type  " id="cmdDeleteSealType" name="cmdDeleteSealType" />
 
 
                                                                         </div>
@@ -1377,8 +1418,142 @@
                                                                     <br/>
                                                                     <br/>
                                                                 </div>
-                                                            </div> 
-                                                        </div>           
+
+                                                                <div id="scene" class=" tab-pane <%out.println(String.valueOf(scene));%> "> 
+                                                                    <div align="center"><h2>Scene Type</h2> </div>   
+                                                                    <%--content for seal type reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddScene" id="AddScene" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddScene" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtScene">Scene Type:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtScene" name="txtScene"   />
+                                                                                    <input class="btn" type="submit" value="Add Scene Type" name="cmdSceneType" />
+                                                                                </div>
+
+                                                                                <br/>  </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="SceneList">Scene Type(s):</label>
+
+                                                                            <select id="SceneList" name="SceneList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < sceneList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(sceneList.get(i));%> </option>
+
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </select>
+                                                                            <br/>
+                                                                            <input class="btn" type="button" onclick="editReferenceList('scene', 'SceneList')" value="Edit Scene Type" id="cmdEditSceneType" name="cmdEditSceneType" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('scene', 'SceneList')" value="Delete Scene Type  " id="cmdDeleteSceneType" name="cmdDeleteSceneType" />
+
+
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label> <% out.println(String.valueOf(sceneResult));%> </label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
+
+                                                                <div id="releaseType" class=" tab-pane <%out.println(String.valueOf(releaseType));%> "> 
+                                                                    <div align="center"><h2>Release Type</h2> </div>   
+                                                                    <%--content for seal type reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddReleaseType" id="AddReleaseType" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddReleaseType" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtReleaseType">Release Type:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtReleaseType" name="txtReleaseType"   />
+                                                                                    <input class="btn" type="submit" value="Add Release Type" name="cmdReleaseType" />
+                                                                                </div>
+
+                                                                                <br/>  </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="releasedTypeList">Released Type(s):</label>
+
+                                                                            <select id="releasedTypeList" name="releasedTypeList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < releasedTypeList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(releasedTypeList.get(i));%> </option>
+
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </select>
+                                                                            <br/>
+                                                                            <input class="btn" type="button" onclick="editReferenceList('releasedtype', 'releasedTypeList')" value="Edit Release Type" id="cmdEditReleaseType" name="cmdEditReleaseType" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('releasedtype', 'releasedTypeList')" value="Delete Release Type  " id="cmdDeleteReleaseType" name="cmdDeleteReleaseType" />
+
+
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label> <% out.println(String.valueOf(releaseTypeResult));%> </label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
+
+                                                                <div id="releaseTo" class=" tab-pane <%out.println(String.valueOf(releaseTo));%> "> 
+                                                                    <div align="center"><h2>Release To</h2> </div>   
+                                                                    <%--content for seal type reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddReleaseTo" id="AddReleaseTo" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddReleaseTo" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtReleaseTo">Release-To Type:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtReleaseTo" name="txtReleaseTo"   />
+                                                                                    <input class="btn" type="submit" value="Add Release-To Type" name="cmdReleaseTo" />
+                                                                                </div>
+
+                                                                                <br/>  </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="releasedToList">Released-To Type(s):</label>
+
+                                                                            <select id="releasedToList" name="releasedToList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < releasedToList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(releasedToList.get(i));%> </option>
+
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </select>
+                                                                            <br/>
+                                                                            <input class="btn" type="button" onclick="editReferenceList('releasedto', 'releasedToList')" value="Edit Release To" id="cmdEditReleaseTo" name="cmdEditReleaseTo" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('releasedto', 'releasedToList')" value="Delete Release To" id="cmdDeleteReleaseTo" name="cmdDeleteReleaseTo" />
+
+
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label> <% out.println(String.valueOf(releaseToResult));%> </label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
+
+                                                            </div>
+                                                        </div> 
+                                                    </div>           
                                                     </div>
 
 
