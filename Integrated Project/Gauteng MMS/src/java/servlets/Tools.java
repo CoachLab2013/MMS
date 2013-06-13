@@ -25,7 +25,7 @@ public class Tools {
 
     public Tools() 
     {
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
 
     }
     //end constructor
@@ -772,6 +772,15 @@ public class Tools {
         }else{
             return inTime;
         }
+    }
+    public Kin getKin(String death)
+    {
+        Kin kin = new Kin();
+        kin.setBody_idDeathRegisterNumber(death);
+        KinDb kinDb = new KinDb(kin,dbdetail);
+        kinDb.init();
+        kinDb.read();
+        return kinDb.getkin();
     }
 }
 //end Tools class

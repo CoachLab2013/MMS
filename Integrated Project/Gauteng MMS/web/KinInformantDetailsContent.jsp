@@ -38,11 +38,21 @@
           
                 <table>
                     <tr>     
-                        <td>Name:  </td> <td><input type="text" name="KinName" id ="kinName"  /></td>  
+                        <td>Name:  </td> <td><input type="text" name="KinName" id ="kinName" <% 
+                            if(session.getAttribute("kinName") != null)
+                            {
+                                out.print("value=" + session.getAttribute("kinName"));
+                            }
+                        %> /></td>  
                     </tr>
                     
                     <tr>
-                        <td>Surname:</td> <td> <input type="text" name="KinSurname" value="" id ="kinSurname"  /> </td>
+                        <td>Surname:</td> <td> <input type="text" name="KinSurname" value="" id ="kinSurname"  <%
+                            if(session.getAttribute("kinSurname") != null)
+                            {
+                                out.print("value=" + session.getAttribute("kinSurname"));
+                            }
+                        %> /> </td>
                     </tr> 
                     
                     <tr>     
@@ -55,23 +65,38 @@
                     </tr>
                         
                     <tr>
-                         <td> Identification Number:</td>  <td> <input type="text" name="KinIDNumber" value="" id="kinIdNumber" /></td>                       
+                         <td> Identification Number:</td>  <td> <input type="text" name="KinIDNumber" value="" id="kinIdNumber" <%if(session.getAttribute("kinID") != null)
+                            {
+                                out.print("value=" + session.getAttribute("kinID"));
+                            } %> /></td>                       
                      </tr>
                         
                         <tr>
-                            <td> Relationship to deceased:</td> <td> <input type="text" name="KinRelationship" value="" id="kinRelationDeceased" /></td>
+                            <td> Relationship to deceased:</td> <td> <input type="text" name="KinRelationship" value="" id="kinRelationDeceased"  <%if(session.getAttribute("kinRelationship") != null)
+                            {
+                                out.print("value=" + session.getAttribute("kinRelationship"));
+                            } %> /></td>
                         </tr>
                         
                         <tr>
-                            <td> Contact number:</td> <td> <input type="text" name="KinContact" value="" id ="kinContactNumber"/></td>
+                            <td> Contact number:</td> <td> <input type="text" name="KinContact" value="" id ="kinContactNumber" <%if(session.getAttribute("kinContact") != null)
+                            {
+                                out.print("value=" + session.getAttribute("kinContact"));
+                            } %> /></td>
                         </tr>
                         
                             <tr>
-                            <td> Residential Address:     </td><td><textarea cols="50" rows="3" name="KinRes" id="kinAddress"> </textarea><br></td>
+                            <td> Residential Address:     </td><td><textarea cols="50" rows="3" name="KinRes" id="kinAddress" <%if(session.getAttribute("kinAddress") != null)
+                            {
+                                out.print("value=" + session.getAttribute("kinAddress"));
+                            } %> /> </textarea><br></td>
                             </tr>
                             
                             <tr>
-                            <td> Work Address:     </td><td><textarea cols="50" rows="3" name="KinWork" id="kinWorkAddress"> </textarea><br></td>
+                            <td> Work Address:     </td><td><textarea cols="50" rows="3" name="KinWork" id="kinWorkAddress" <%if(session.getAttribute("kinWorkAddress") != null)
+                            {
+                                out.print("value=" + session.getAttribute("kinWorkAddress"));
+                            } %> /> </textarea><br></td>
                             </tr>
                           
                             <tr>

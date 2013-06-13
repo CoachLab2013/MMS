@@ -27,7 +27,11 @@
     <body>
         <legend>Deceased Address Details </legend>
         <form name="DeceasedAddressform" id="DeceasedAddressform" method="post" action="DeceasedAddressServlet">
-      
+           <input type="text" name="deceasedDeathRegisterNr2" <% 
+            if(session.getAttribute("deceasedDeathRegisterNumber") != null)
+            {
+                out.print("value=" + session.getAttribute("deceasedDeathRegisterNumber")); 
+            }%> />
            <%Tools t = new Tools();%> 
                 <table>
                     <tr> 
