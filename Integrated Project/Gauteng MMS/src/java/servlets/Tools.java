@@ -25,7 +25,7 @@ public class Tools {
   
     public Tools() {
 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
 
  
     }
@@ -397,8 +397,8 @@ public class Tools {
                                 + "<td class='tablecell' id='release_Surname'>" + bodyAtMortuary.getSurnameOfDeceased() + "</td>"
                                 + "<td class='tablecell' id='release_ID'>" + bodyAtMortuary.getID() + "</td>"
                                 + "<td class='tablecell' id='release_BodyType'>" + bodyAtMortuary.getBodyType() + "</td>"
-                                + "<td class='tablecell' id='release_Identified'>" + bodyFileDB.getBodyFile().isBodyIdentified() + "</td>"
-                                + "</tr>";
+                                + "<td class='tablecell' id='release_Identified'>" + (bodyFileDB.getBodyFile().isBodyIdentified() == true ? "Identified" : "Unidentified") + "</td>"
+                                + "</tr>"; 
                     }
                 }
             }
