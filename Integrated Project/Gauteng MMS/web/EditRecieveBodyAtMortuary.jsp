@@ -29,14 +29,17 @@
             <label class="control-label">Employee receiving body:</label> 
             <div class="controls"><%
                 Tools t = new Tools();
-                out.print(t.makeReferenceList("employee", "personnelNumber", ""));
+                String list = t.makeReferenceList("employee", "personnelNumber", "");
+                list=list.replaceFirst("name='eemployee'", "name='edit_employee'");
+                list=list.replaceFirst("id='employee'", "id='edit_employee'");
+                out.println(list);
                 %>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Employee handing over body:</label> 
             <div class="controls"><%
-                String list = t.makeReferenceList("edit_employee", "personnelNumber", "");
+                list = t.makeReferenceList("employee", "personnelNumber", "");
                 list=list.replaceFirst("name='edit_employee'", "name='edit_employee_handing'");
                 list=list.replaceFirst("id='edit_employee'", "id='edit_employee_handing'");
                 out.println(list);
