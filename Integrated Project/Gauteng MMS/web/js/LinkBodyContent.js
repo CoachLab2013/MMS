@@ -9,9 +9,9 @@ $(document).ready(function() {
         if ($('#body').val() !== "Select Body File 1") {
             var deathRegisterNumber = $(this).val().split(" ")[0];
             $('#tr1').remove();
-
+            
             $.get("LinkBodyContent", {type: "load", data: deathRegisterNumber}, function(data) {
-
+                
                 var tr = "<tr id='tr1' class='tablerow'>";
                 var dataValues = data.split(" ");
 

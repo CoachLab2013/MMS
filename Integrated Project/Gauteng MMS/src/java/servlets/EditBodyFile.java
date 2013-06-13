@@ -6,6 +6,7 @@ package servlets;
 
 import database.BodyAtMortuary;
 import database.BodyDb;
+import database.Kin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -38,7 +39,9 @@ public class EditBodyFile extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String deathReg = request.getParameter("selectedbody");
         BodyAtMortuary body = new Tools().getBody(deathReg);
+        Kin kin = new Tools().getKin(deathReg);
         HttpSession ses = request.getSession();
+        ses.setAttribute("deceasedDeathRegisterNumber", deathReg);
         ses.setAttribute("bIdFullName", body.getNameOfDeceased());
         ses.setAttribute("bIdMadienName",body.getMaidenName());
         ses.setAttribute("bIdSurname", body.getSurnameOfDeceased());
@@ -68,6 +71,20 @@ public class EditBodyFile extends HttpServlet {
         ses.setAttribute("bIdProvince", body.getBodyAddress().getProvince());
         ses.setAttribute("bIdRegion", body.getBodyAddress().getRegion());
         ses.setAttribute("bIdDistrict", body.getBodyAddress().getMagisterialDistrict());
+        ses.setAttribute("kinName", kin.getName());
+        ses.setAttribute("kinSurname", kin.getSurname());
+        if( kin.getID() != null)
+        {
+            ses.setAttribute("kinID", kin.getID());
+        }
+        else
+        {
+            ses.setAttribute("kinID", kin.getPassport());
+        }
+        ses.setAttribute("kinRelationship", kin.getRelationWithDeceased());
+        ses.setAttribute("kinContact", kin.getContactNumber());
+        ses.setAttribute("kinAddress", kin.getAddress());
+        ses.setAttribute("kinWorkAddress", kin.getWorkAddress());
         ses.setAttribute("bodyFileDetail", true);
         response.sendRedirect("Home.jsp");
     }

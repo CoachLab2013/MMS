@@ -1,5 +1,5 @@
-package servlets;
 
+package servlets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
@@ -26,7 +26,7 @@ public class Tools {
     public Tools() {
 
  
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
  
     }
 
@@ -775,5 +775,15 @@ public class Tools {
             return inTime;
         }
     }
+    public Kin getKin(String death)
+    {
+        Kin kin = new Kin();
+        kin.setBody_idDeathRegisterNumber(death);
+        KinDb kinDb = new KinDb(kin,dbdetail);
+        kinDb.init();
+        kinDb.read();
+        return kinDb.getkin();
+    }
 }
+
 //end Tools class

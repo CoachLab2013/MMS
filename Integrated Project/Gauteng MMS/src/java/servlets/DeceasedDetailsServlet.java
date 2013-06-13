@@ -45,6 +45,18 @@ public class DeceasedDetailsServlet extends HttpServlet {
         bodyDb.init();
         bodyDb.read();
         body.setNameOfDeceased(request.getParameter("DeceasedName"));
+        //DeceasedNumbers
+        String st = (String)request.getParameter("DeceasedNumber");
+        if(st.equals("ID"))
+        {
+            body.setID(request.getParameter("DeceasedNumber"));
+            body.setPassport(null);
+        }
+        else
+        {
+            body.setPassport(request.getParameter("DeceasedNumber"));
+            body.setID(null);
+        }
         body.setMaidenName(request.getParameter("DeceasedMaidenName"));
         body.setSurnameOfDeceased(request.getParameter("DeceasedSurname"));
         //body.setIdentifiedDateTime(request.getParameter("deceasedbodyIdentifiedDate") + " " + request.getParameter("deceasedbodyIdentifiedTime"));

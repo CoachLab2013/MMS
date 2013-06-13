@@ -24,18 +24,21 @@
         <legend>Open body files </legend>
         <%
           if(session.getAttribute("bodyFileDetail")!= null)
-           {
-                out.print("<input type=hidden class='go_to_bodyidDetails' id='go_to_bodyidDetails' value=" + session.getAttribute("bodyFileDetail") +" />");  
-                session.removeAttribute("bodyFileDetail");
-            } 
+          {
+              out.print("<input type=hidden class='go_to_bodyidDetails' id='go_to_bodyidDetails' value=" + session.getAttribute("bodyFileDetail") +" />");  
+              session.removeAttribute("bodyFileDetail");
+          } 
         %>
          <%
             Tools t = new Tools();
             out.println(t.makeOpenBodyFileTable("openbodytable"));
          %>
+<<<<<<< HEAD
+=======
          
-            <input type="text" id="selectedbody" name="selectedbody" />
             
+            
+>>>>>>> origin/master
             <br>
             
             <table>
@@ -44,7 +47,13 @@
 
                 <td width="10">
                     <form id="editbodyfileform" action="EditBodyFile"> 
+<<<<<<< HEAD
+                        <input type="hidden" id="selectedbody" name="selectedbody" />
+                        <input class="btn"  type="submit" value="Edit" id="editbodyfilebutton" />
+=======
+                        <input type="text" id="selectedbody" name="selectedbody" />
                         <input class="btn" type="submit" value="Edit" id="editbodyfilebutton">
+>>>>>>> origin/master
                     </form>
                 </td>
                 <td width="300" align="center"><input class="btn" type="button" value="Close case" id="close"> </td>

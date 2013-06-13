@@ -28,10 +28,29 @@ public class DeathCall {
     private String nameOfCaller;
 
     public DeathCall() {
+        this.incident = new Incident();
+        this.timeOfCall = "00:00";
+        this.dateOfCall = "0001-01-01";
+        this.numberOfCaller = "0000000000";
+        this.institution = "null";
+        this.sceneAddress = "null";
+        this.province = "null";
+        this.region = "null";
+        this.sceneConditions = "null";
+        this.nameOfCaller = "null";
     }
 
     public DeathCall(Incident incident) {
         this.incident = incident;
+        this.timeOfCall = "00:00";
+        this.dateOfCall = "0001-01-01";
+        this.numberOfCaller = "0000000000";
+        this.institution = "null";
+        this.sceneAddress = "null";
+        this.province = "null";
+        this.region = "null";
+        this.sceneConditions = "null";
+        this.nameOfCaller = "null";
     }
 
     public DeathCall(Incident incident, String timeOfCall, String dateOfCall, String numberOfCaller, String institution, String sceneAddress, String province, String region, String sceneConditions, String nameOfCaller) {

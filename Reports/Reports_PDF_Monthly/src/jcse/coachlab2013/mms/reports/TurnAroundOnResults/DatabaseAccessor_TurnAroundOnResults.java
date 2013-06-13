@@ -31,12 +31,14 @@ public class DatabaseAccessor_TurnAroundOnResults extends Template_DatabaseAcces
         
         try {
             
-            preparedStatement = connection.prepareStatement("SELECT \n" +
-                "	`dim_sample`.`analysisType`  AS `analysisType`, \n" +
-                "	AVG(`durationOutstanding`) AS `averageTurnAroundTime`\n" +
-                "		FROM `reporting database`.`fact_sample`\n" +
-                "			LEFT JOIN `reporting database`.`dim_sample` ON `dim_sample`.`sample_SK` = `reporting database`.`fact_sample`.`FK_Sample_SK`\n" +
-                "			GROUP BY `dim_sample`.`analysisType`;");            
+            preparedStatement = connection.prepareStatement("SELECT\n" +
+"`dim_sample`.`analysisType`  AS `analysisType`, \n" +
+"AVG(`durationOutstanding`) AS `averageTurnAroundTime`\n" +
+"FROM `reporting database`.`fact_sample`\n" +
+"LEFT JOIN `reporting database`.`dim_sample`\n" +
+"ON `dim_sample`.`sample_SK` = `reporting database`.`fact_sample`.`FK_Sample_SK`\n" +
+"WHERE EXTRACT(MONTH FROM TIMESTAMP (fact_sample.dateInserted))=MONTH(NOW())\n" +
+"GROUP BY `dim_sample`.`analysisType`;");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

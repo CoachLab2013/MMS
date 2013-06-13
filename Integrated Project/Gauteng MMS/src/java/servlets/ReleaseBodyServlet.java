@@ -4,8 +4,15 @@
  */
 package servlets;
 
+import AssistiveClasses.SetDbDetail;
+import database.BodyAtMortuary;
+import database.BodyDb;
+import database.BodyFile;
+import database.BodyFileDb;
+import database.DbDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,14 +37,36 @@ public class ReleaseBodyServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         if (request.getParameter("type").equals("load")) {
+            
+        DbDetail dbDetail = new SetDbDetail().getDbdetail();
+        
             PrintWriter out = response.getWriter();
-
-            try {
-                                
-//                DbDetail dbDetail = new SetDbDetail().getDbdetail();
-//                out.println();
+            try {      
+                
+                BodyFileDb bodyFileDb = new BodyFileDb(dbDetail);
+                bodyFileDb.init();
+                
+                ArrayList<BodyAtMortuary> list = bodyFileDb.getBodyLinkList(request.getParameter("data"));
+                String result = "";
+                
+                for (BodyAtMortuary tmp : list) {
+                    
+                    BodyFile bodyFile = new BodyFile(tmp.getDeathRegisterNumber());
+                    BodyFileDb bodyFileDB = new BodyFileDb(dbDetail, bodyFile);
+                    bodyFileDB.init();
+                    bodyFileDB.read();
+                    
+                    result += tmp.getDeathRegisterNumber() + "`"
+                            + tmp.getNameOfDeceased() + "`"
+                            + tmp.getSurnameOfDeceased() + "`"
+                            + tmp.getID() + "`";
+                    
+                    result += bodyFileDB.getBodyFile().isBodyIdentified();
+                    result += "~";
+                }
+                
+                out.println(result);
             } finally {
                 out.close();
             }
