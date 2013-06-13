@@ -29,7 +29,8 @@
                 </div>
                 
                 <div id="DeceasedDetails" class="tab-pane ">
-                     <jsp:include page="DeceasedDetailsContent.jsp"/>
+                    <jsp:include page="DeceasedDetailsContent.jsp"/>
+                    <%-- <jsp:include page="test.jsp"/>--%>
                 </div>   
                 
                 <div id="DeaceasedAddress" class="tab-pane ">

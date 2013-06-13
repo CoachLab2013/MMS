@@ -31,16 +31,12 @@
    
     <body>
     <legend>Deceased Details Contents </legend>
-<<<<<<< HEAD
     <form name="Deceasedform" id="Deceasedform" method="post" action="DeceasedDetailsServlet">
         <input type="hidden" name="deceasedDeathRegisterNr" <% 
             if(session.getAttribute("deceasedDeathRegisterNumber") != null)
             {
                 out.print("value=" + session.getAttribute("deceasedDeathRegisterNumber")); 
             }%> />
-=======
-    <form  id="Deceasedform" name="Deceasedform"  method="post" action="DeceasedDetailsServlet">
->>>>>>> origin/master
         <script>
             var counter = 0;
             var ini;

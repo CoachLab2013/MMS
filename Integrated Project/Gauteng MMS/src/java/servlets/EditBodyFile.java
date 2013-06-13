@@ -41,11 +41,8 @@ public class EditBodyFile extends HttpServlet {
         BodyAtMortuary body = new Tools().getBody(deathReg);
         Kin kin = new Tools().getKin(deathReg);
         HttpSession ses = request.getSession();
-<<<<<<< HEAD
         ses.setAttribute("death_register_number", deathReg);
-=======
         ses.setAttribute("deceasedDeathRegisterNumber", deathReg);
->>>>>>> origin/master
         ses.setAttribute("bIdFullName", body.getNameOfDeceased());
         ses.setAttribute("bIdMadienName",body.getMaidenName());
         ses.setAttribute("bIdSurname", body.getSurnameOfDeceased());
