@@ -1,8 +1,9 @@
-package servlets;
 
+package servlets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,8 +25,8 @@ public class Tools {
   
     public Tools() {
 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
-
+ 
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
  
     }
 
@@ -121,7 +122,7 @@ public class Tools {
             int count = bfdb.countOpenBodyFile() + 1;
             String formated_num = String.format("%05d", count);
             String year = date.split("-")[0];
-            deathregister = deathregister+formated_num+"/"+year;
+            deathregister = deathregister+"/"+formated_num+"/"+year;
             return deathregister;
         }
         catch(SQLException e){
@@ -260,7 +261,6 @@ public class Tools {
         for (int i = 0; i < size; i++) {
             String element1 = list1.get(i);
             String element2 = list2.get(i);
-            
             if (element1.equals(selected)) {
                 out = out + "<option selected='selected'>" + element1 + " "+ element2 + "</option>";
             } else {
@@ -379,27 +379,23 @@ public class Tools {
                     + "<th class='tableheading'>Name</th>"
                     + "<th class='tableheading'>Surname</th>"
                     + "<th class='tableheading'>ID/Passport Number</th>"
-                    + "<th class='tableheading'>Body Type</th>"
                     + "<th class='tableheading'>Identification Status</th>";
 
             for (int i = 0; i < bodylist.size(); i++) {
                 BodyAtMortuary bodyAtMortuary = bodylist.get(i);
 
-                if (!bodyAtMortuary.isBodyReleased()) {
-                    BodyFileDb bodyFileDB = new BodyFileDb(dbdetail, new BodyFile(bodyAtMortuary.getDeathRegisterNumber()));
-                    bodyFileDB.init();
-                    bodyFileDB.read();
-                    if (bodyFileDB.getBodyFile().isPostMortemCompleted()) {
-                        table += "<tr class='tablerow' drnumber='" + bodyAtMortuary.getDeathRegisterNumber() + "'>"
-                                + "<td class='tablecell' id='release_DeathRegister'>" + bodyAtMortuary.getDeathRegisterNumber() + "</td>"
-                                + "<td class='tablecell' id='release_Name'>" + bodyAtMortuary.getNameOfDeceased() + "</td>"
-                                + "<td class='tablecell' id='release_Surname'>" + bodyAtMortuary.getSurnameOfDeceased() + "</td>"
-                                + "<td class='tablecell' id='release_ID'>" + bodyAtMortuary.getID() + "</td>"
-                                + "<td class='tablecell' id='release_BodyType'>" + bodyAtMortuary.getBodyType() + "</td>"
-                                + "<td class='tablecell' id='release_Identified'>" + (bodyFileDB.getBodyFile().isBodyIdentified() == true ? "Identified" : "Unidentified") + "</td>"
-                                + "</tr>"; 
-                    }
-                }
+                BodyFile bodyFile = new BodyFile(bodyAtMortuary.getDeathRegisterNumber());
+                BodyFileDb bodyFileDB = new BodyFileDb(dbdetail, bodyFile);
+                bodyFileDB.init();
+                bodyFileDB.read();
+
+                table += "<tr class='tablerow' drnumber='" + bodyAtMortuary.getDeathRegisterNumber() + "'>"
+                        + "<td>" + bodyAtMortuary.getDeathRegisterNumber() + "</td>"
+                        + "<td class='tablecell'>" + bodyAtMortuary.getNameOfDeceased() + "</td>"
+                        + "<td class='tablecell'>" + bodyAtMortuary.getSurnameOfDeceased() + "</td>"
+                        + "<td class='tablecell'>" + bodyAtMortuary.getID() + "</td>"
+                        + "<td class='tablecell'>" + bodyFile.isBodyIdentified() + "</td>"
+                        + "</tr>";
             }
 
             table += "</table>";
@@ -614,7 +610,12 @@ public class Tools {
         try{
             ArrayList<ForensicSample> registeredSamples = forensicsampleDb.SampleList("deathRegisterNumber", DRNumber);
             
-           String table = "";
+           String table = "<table class='tabledisplay' id='sampletable'>"
+                    +"<th class='tableheading'>Initial Seal Number</th>"
+                    +"<th class='tableheading'>New Seal Number</th>"
+                    +"<th class='tableheading'>Death Register Number</th>"
+                    +"<th class='tableheading'>Lab Reference Number</th>"
+                    +"<th class='tableheading'>Reason for Sample</th>";
             int size = registeredSamples.size();
             for(int i=0; i<size; i++){
                 ForensicSample sample = registeredSamples.get(i);
@@ -626,6 +627,7 @@ public class Tools {
                         +"<td class='tablecell' id='trReason'>" + sample.getReason()+ "</td>"
                         + "</tr>"; 
             }
+            table = table + "</table>";
             
             return table;
         }
@@ -773,5 +775,15 @@ public class Tools {
             return inTime;
         }
     }
+    public Kin getKin(String death)
+    {
+        Kin kin = new Kin();
+        kin.setBody_idDeathRegisterNumber(death);
+        KinDb kinDb = new KinDb(kin,dbdetail);
+        kinDb.init();
+        kinDb.read();
+        return kinDb.getkin();
+    }
 }
+
 //end Tools class
