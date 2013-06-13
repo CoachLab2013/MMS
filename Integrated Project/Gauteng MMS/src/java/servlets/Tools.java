@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 
 package servlets;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
