@@ -27,7 +27,7 @@
     <body>
         <legend>Deceased Address Details </legend>
         <form name="DeceasedAddressform" id="DeceasedAddressform" method="post" action="DeceasedAddressServlet">
-           <input type="text" name="deceasedDeathRegisterNr2" <% 
+           <input type="hidden" name="deceasedDeathRegisterNr2" <% 
             if(session.getAttribute("deceasedDeathRegisterNumber") != null)
             {
                 out.print("value=" + session.getAttribute("deceasedDeathRegisterNumber")); 

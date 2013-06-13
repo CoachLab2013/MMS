@@ -33,8 +33,6 @@
             Tools t = new Tools();
             out.println(t.makeOpenBodyFileTable("openbodytable"));
          %>
-         
-            
             <br>
             
             <table>
@@ -43,12 +41,8 @@
 
                 <td width="10">
                     <form id="editbodyfileform" action="EditBodyFile"> 
-<<<<<<< HEAD
                         <input type="hidden" id="selectedbody" name="selectedbody" />
-                        <input type="submit" value="Edit" id="editbodyfilebutton" />
-=======
-                        <input class="btn" type="submit" value="Edit" id="editbodyfilebutton">
->>>>>>> origin/master
+                        <input class="btn"  type="submit" value="Edit" id="editbodyfilebutton" />
                     </form>
                 </td>
                 <td width="300" align="center"><input class="btn" type="button" value="Close case" id="close"> </td>
