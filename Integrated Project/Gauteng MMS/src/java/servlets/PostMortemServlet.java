@@ -60,7 +60,6 @@ public class PostMortemServlet extends HttpServlet {
         response.sendRedirect("Home.jsp");
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.

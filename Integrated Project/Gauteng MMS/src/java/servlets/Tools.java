@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 package servlets;
 
@@ -788,4 +789,3 @@ public class Tools {
 }
 
 //end Tools class
-
