@@ -269,8 +269,9 @@
 
             </tr>
         </table>
+                     <script src="js/DeceasedDetailsDateTime.js"></script>
     </form>
-                             <script src="js/DeceasedDetailsDateTime.js"></script>
+                            
 </body>
 
 </html>

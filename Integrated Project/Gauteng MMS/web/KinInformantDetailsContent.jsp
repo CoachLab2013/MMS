@@ -4,6 +4,7 @@
     Author     : Lady
 --%>
 
+<%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,7 @@
                     
                     <tr>     
                         <td>Identification type:  </td> <td> <select name="identificationtype" id="kinIdType">
-                        <option>Select</option>
+                        <option selected="Selected">Select</option>
                         <option>ID</option>
                         <option>Passport</option>
                     </select> </td>
@@ -59,7 +60,14 @@
                      </tr>
                         
                         <tr>
-                            <td> Relationship to deceased:</td> <td> <input type="text" name="KinRelationship" value="" id="kinRelationDeceased" /></td>
+                            <td> Relationship to deceased:</td> <td> 
+                            <%
+                                Tools t = new Tools();
+                                String list = t.makeReferenceList("relationship", "type", "");
+                                list = list.replaceAll("name='relationship'", "name='KinRelationship'");
+                                list = list.replaceAll("id='relationship'", "id='kinRelationDeceased'");
+                                out.println(list);
+                            %>   </td>
                         </tr>
                         
                         <tr>
