@@ -3,7 +3,6 @@ package servlets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,7 +25,7 @@ public class Tools {
     public Tools() {
 
  
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
  
     }
 

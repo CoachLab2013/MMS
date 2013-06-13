@@ -33,7 +33,8 @@ public class PostMortemServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                         
+                       
+        if (request.getSession().getAttribute("death_register_number") != null) {  
         SetDbDetail dbSet = new SetDbDetail();
         
         //Needed for Postmortem Constructor
@@ -42,7 +43,7 @@ public class PostMortemServlet extends HttpServlet {
         
         PostMortem postmortem = new PostMortem(                
             "",
-            "",
+            request.getParameter("ICDlevel1") + " " + request.getParameter("ICDlevel2") + " " + request.getParameter("ICDlevel3") + " " + request.getParameter("ICDlevel4"),
             request.getParameter("findingsmortem"), //
             request.getParameter("findingsdeath"), //
             false,
@@ -58,6 +59,7 @@ public class PostMortemServlet extends HttpServlet {
        
         request.getSession().setAttribute("_PostMortem", "true");
         response.sendRedirect("Home.jsp");
+        }
     }
 
     /**
