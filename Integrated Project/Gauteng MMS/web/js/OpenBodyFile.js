@@ -14,9 +14,9 @@ $(document).ready(function(){
     if($("#go_to_bodyidDetails").val()=="true")
     {
         //lose focus from the incidents side
-        $("#OpenIncidents").removeClass("tab-pane active");
+        /*$("#OpenIncidents").removeClass("tab-pane active");
         $("#OpenIncidents").addClass("tab-pane");
-        $("#OpenIncidentsTab").removeClass("active");
+        $("#OpenIncidentsTab").removeClass("active");*/
         $("#Incident").removeClass("tab-pane active");
         $("#Incident").addClass("tab-pane");
         $("#IncidentTab").removeClass("active");

@@ -31,13 +31,7 @@
    
     <body>
     <legend>Deceased Details Contents </legend>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
->>>>>>> origin/master
     <form name="Deceasedform" id="Deceasedform" method="post" action="DeceasedDetailsServlet">
         <input type="hidden" name="deceasedDeathRegisterNr" <% 
             if(session.getAttribute("deceasedDeathRegisterNumber") != null)
@@ -94,7 +88,7 @@
             </tr> 
 
             <tr>     
-                <td>Identification type:  </td> <td> <select name="deceasedidentificationtype"> 
+                <td>Identification type:  </td> <td> <select name="deceasedidentificationtype" id="deceasedidentificationtype"> 
                         <option selected="selected" >Select</option>
                         <%
                          if(session.getAttribute("bIdIDNumber") != null)
@@ -114,7 +108,8 @@
                          }
                          else
                          {
-                             out.print("<option></option>");
+                             out.print("<option>ID</option>");
+                             out.print("<option>Passport</option>");
                          }
                         %>
                     </select> </td>
@@ -133,12 +128,12 @@
                  %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
             </tr> 
             <tr>
-                <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%
+                <td> Place of Birth:</td> <td><textarea cols="50" rows="3" name="deceasedPlaceBirth"><%
                   if(session.getAttribute("bIdPlaceOfBirth") != null)
                   {
-                    out.println("value=" + session.getAttribute("bIdPlaceOfBirth"));
+                    out.println(session.getAttribute("bIdPlaceOfBirth"));
                   }
-                 %>  /></td>
+                 %></textarea></td>
             </tr>
             <tr>     
                 <td>Date of Birth: </td> <td> <input type="text" name="deceasedDateBirth" <%
@@ -282,12 +277,13 @@
                     <br>
                 </td>
             </tr>
+            <script src="js/DeceasedDetailsDateTime.js"></script>
             <tr>
                 <td> <td>  <input class="btn" type="submit" value="Save" name="bodySave" /><br></td></td>
 
             </tr>
         </table>
-                     <script src="js/DeceasedDetailsDateTime.js"></script>
+                     
     </form>
                             
 </body>
