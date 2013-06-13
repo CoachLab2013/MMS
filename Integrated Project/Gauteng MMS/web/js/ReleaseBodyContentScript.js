@@ -152,7 +152,6 @@ $(document).ready(function(){
             
             $('#Releaseform').css('display', 'inherit');
             $('#RecipientDeathRegisterNumber').val($(this).attr("drnumber"));
-            $('#release_bodypart').val($(this).children('#release_BodyType').text());
         } else {
             $('#Releaseform').css('display', 'none');
         }

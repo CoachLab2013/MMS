@@ -19,9 +19,7 @@
                 padding-left: .5em; 
                 vertical-align: top; 
             }
-        </style>
-        
-        
+        </style> 
         <script language="javascript" src="js/jquery-1.9.1.js"></script>
          <script language="javascript" src="js/jquery.validate.min.js"></script>
          <script src="js/DeceasedDetailsContentScript.js"></script>

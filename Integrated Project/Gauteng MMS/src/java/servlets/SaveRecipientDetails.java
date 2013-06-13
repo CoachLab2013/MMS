@@ -56,7 +56,7 @@ public class SaveRecipientDetails extends HttpServlet {
         System.out.println(bodyDB.read());
         bodyDB.getBody().setBodyReleased(true);
         bodyDB.getBody().setBodyReleaseTo(request.getParameter("releasedto"));
-        bodyDB.getBody().setBodyReleasedType(request.getParameter("bodypart"));
+        bodyDB.getBody().setBodyReleasedType(request.getParameter("releasedtype"));
         
         bodyDB.init();
         System.out.println(bodyDB.edit());

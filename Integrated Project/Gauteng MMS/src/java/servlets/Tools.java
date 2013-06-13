@@ -24,10 +24,7 @@ public class Tools {
  
   
     public Tools() {
-
- 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
- 
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
     }
 
     //end constructor
@@ -610,12 +607,7 @@ public class Tools {
         try{
             ArrayList<ForensicSample> registeredSamples = forensicsampleDb.SampleList("deathRegisterNumber", DRNumber);
             
-           String table = "<table class='tabledisplay' id='sampletable'>"
-                    +"<th class='tableheading'>Initial Seal Number</th>"
-                    +"<th class='tableheading'>New Seal Number</th>"
-                    +"<th class='tableheading'>Death Register Number</th>"
-                    +"<th class='tableheading'>Lab Reference Number</th>"
-                    +"<th class='tableheading'>Reason for Sample</th>";
+           String table = "";
             int size = registeredSamples.size();
             for(int i=0; i<size; i++){
                 ForensicSample sample = registeredSamples.get(i);
@@ -627,7 +619,6 @@ public class Tools {
                         +"<td class='tablecell' id='trReason'>" + sample.getReason()+ "</td>"
                         + "</tr>"; 
             }
-            table = table + "</table>";
             
             return table;
         }
