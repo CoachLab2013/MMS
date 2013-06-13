@@ -214,28 +214,28 @@
                 </div>
             </div>
 
-            <div class="offset4">
+            <div class="offset2">
                 <input  id="at_mort_fps_add" name="at_mort_fps_add"  class="btn" type="button" value="Add Item" /> 
                 <%--Display save result --%> 
             </div>
             <br/> <br/>
             <table class="tabledisplay" id="atMortFPSpropertyTable" name="atMortFPSpropertyTable">
                 <tr>
-                    <th class="tableheading">Select</th>
-                    <th class="tableheading">Description</th>
-                    <th class="tableheading">Persal Number</th>
+                   <th width="100" class="tableheading">Select</th>
+                        <th width="130" class="tableheading">Description</th>
+                        <th width="100" class="tableheading">Persal Number</th>
                 </tr>
 
             </table>
             <br/>
-            <div class="offset5">
+            <div class="offset2">
                 <input id="at_mort_fps_delete" name="at_mort_fps_delete"  class="btn" onclick=" deleteRow('atMortFPSpropertyTable')" type="button" value="Delete" /> 
                 <%--Display save result --%> 
             </div>
             <br/><br/>
             <input  type="hidden" id="fps_property_counter_mort" name ="fps_property_counter_mort" value="0"/>
         </fieldset>
-
+<legend></legend>
         <div class="offset5">
             <input type="submit"  class="btn"    value="Save" /> 
             <%--Display save result --%> 

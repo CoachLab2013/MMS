@@ -19,9 +19,7 @@
                 padding-left: .5em; 
                 vertical-align: top; 
             }
-        </style>
-        
-        
+        </style> 
         <script language="javascript" src="js/jquery-1.9.1.js"></script>
          <script language="javascript" src="js/jquery.validate.min.js"></script>
          <script src="js/DeceasedDetailsContentScript.js"></script>
@@ -33,7 +31,16 @@
    
     <body>
     <legend>Deceased Details Contents </legend>
+<<<<<<< HEAD
+    <form name="Deceasedform" id="Deceasedform" method="post" action="DeceasedDetailsServlet">
+        <input type="hidden" name="deceasedDeathRegisterNr" <% 
+            if(session.getAttribute("deceasedDeathRegisterNumber") != null)
+            {
+                out.print("value=" + session.getAttribute("deceasedDeathRegisterNumber")); 
+            }%> />
+=======
     <form  id="Deceasedform" name="Deceasedform"  method="post" action="DeceasedDetailsServlet">
+>>>>>>> origin/master
         <script>
             var counter = 0;
             var ini;
@@ -84,10 +91,12 @@
 
             <tr>     
                 <td>Identification type:  </td> <td> <select name="deceasedidentificationtype"> 
+                        <option selected="selected" >Select</option>
                         <%
                          if(session.getAttribute("bIdIDNumber") != null)
                          {
                             String i = (String)session.getAttribute("bIdIDNumber");
+          
                             if(i.length() == 13) 
                             {
                                 out.print("<option>ID</option>");

@@ -1,5 +1,5 @@
-package servlets;
 
+package servlets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import database.*;
@@ -24,10 +24,7 @@ public class Tools {
  
   
     public Tools() {
-
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
-
- 
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
     }
 
     //end constructor
@@ -122,7 +119,7 @@ public class Tools {
             int count = bfdb.countOpenBodyFile() + 1;
             String formated_num = String.format("%05d", count);
             String year = date.split("-")[0];
-            deathregister = deathregister+formated_num+"/"+year;
+            deathregister = deathregister+"/"+formated_num+"/"+year;
             return deathregister;
         }
         catch(SQLException e){
@@ -610,12 +607,7 @@ public class Tools {
         try{
             ArrayList<ForensicSample> registeredSamples = forensicsampleDb.SampleList("deathRegisterNumber", DRNumber);
             
-           String table = "<table class='tabledisplay' id='sampletable'>"
-                    +"<th class='tableheading'>Initial Seal Number</th>"
-                    +"<th class='tableheading'>New Seal Number</th>"
-                    +"<th class='tableheading'>Death Register Number</th>"
-                    +"<th class='tableheading'>Lab Reference Number</th>"
-                    +"<th class='tableheading'>Reason for Sample</th>";
+           String table = "";
             int size = registeredSamples.size();
             for(int i=0; i<size; i++){
                 ForensicSample sample = registeredSamples.get(i);
@@ -627,7 +619,6 @@ public class Tools {
                         +"<td class='tablecell' id='trReason'>" + sample.getReason()+ "</td>"
                         + "</tr>"; 
             }
-            table = table + "</table>";
             
             return table;
         }
@@ -775,5 +766,15 @@ public class Tools {
             return inTime;
         }
     }
+    public Kin getKin(String death)
+    {
+        Kin kin = new Kin();
+        kin.setBody_idDeathRegisterNumber(death);
+        KinDb kinDb = new KinDb(kin,dbdetail);
+        kinDb.init();
+        kinDb.read();
+        return kinDb.getkin();
+    }
 }
+
 //end Tools class

@@ -75,14 +75,14 @@
                         <div class="offset1  span8 form-horizontal"  >
 
                             <div class="control-group">
-                                <label class="control-label" for="open_incident_list">Incident Number</label> 
+                                <label class="control-label" for="open_incident_list">Incident Number:</label> 
                                 <div class="controls"> <%
                                     Tools t = new Tools();
                                     out.print(t.getOPenIncidentList("open_incident_list", ""));
                                     %>
                                 </div>
                                 <br>
-                                <label class="control-label" for="deathRegister">Death Register Number</label> 
+                                <label class="control-label" for="deathRegister">Death Register Number:</label> 
                                 <div class="controls">
                                     <input type="text" name="deathRegister" id="deathRegister" readonly="true" value =<% out.println(t.makeDeathRegisterNumber());%>/> 
                                 </div>

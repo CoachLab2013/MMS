@@ -61,7 +61,6 @@
 
                 <tr>     
                     <td>Identification type:  </td> <td> <select name="Recipientidentificationtype" id="recipientidentificationtype">
-                            <option>Select</option>
                             <option>ID</option>
                             <option>Passport</option>
                         </select> </td>
@@ -83,11 +82,9 @@
                 <tr>
                     <td>Body Release Type:</td>
                     <td>
-                        <select name="releasetype" id="releasetype">
-                            <option>Select</option>
-                            <option>001</option>
-                            <option>002</option>
-                        </select>
+                        <%
+                            out.println(new Tools().makeReferenceList("releasedtype", "type", ""));
+                        %> 
                     </td>
                 </tr>
 
@@ -95,11 +92,9 @@
                 <tr>
                     <td>Released To:</td>
                     <td>
-                        <select name="releaseto" id="releaseto">
-                            <option>Select</option>
-                            <option>Peter</option>
-                            <option>Jacob</option>
-                        </select>
+                        <%
+                            out.println(new Tools().makeReferenceList("releasedto", "type", ""));
+                        %>
                     </td>  
                 </tr>
 
