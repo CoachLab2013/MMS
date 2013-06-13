@@ -24,7 +24,7 @@ public class Tools {
  
   
     public Tools() {
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
     }
 
     //end constructor
