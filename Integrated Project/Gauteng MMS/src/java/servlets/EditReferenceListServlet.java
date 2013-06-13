@@ -587,7 +587,7 @@ public class EditReferenceListServlet extends HttpServlet {
 
             }
 
-        } else if (request.getParameter("table1").equals("releasedto")) {
+        } else if (request.getParameter("table").equals("releasedto")) {
             ReferenceListDb emp = new ReferenceListDb("releasedto", "idReleasedTo", "type", Olditem, dbDetail);
             emp.setNewData(item);
             emp.init();
