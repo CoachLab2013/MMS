@@ -1,51 +1,46 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 $(document).ready(function(){
-    /**
-     * validation for the login form
-     */
+    
     $("#Deceasedform").validate({
         rules:{
-    
             
-             PlaceBirth:{
-                   required: false,
-                   number: false
-               
-            },//end rule for postal code
-            
-            deceasedage:{
-                required: false,
-                number: true
-                
-            }            
-
-        },//end of rules
-               
-       
-        messages:{
-         PlaceBirth:{
-             number: "No number required"
-       
-         },
-         
-           deceasedage:{
-                
-                number: "Only numbers allowed"
-                
+            txtDeceasedNameDis:{
+                required: true                
+            },
+            txtDeceasedSurnameDis:{
+                required: true
             }
-            
-        }//end of messages
-        
-    });//end of form validation
+        },
+        messages:{
+            txtDeceasedNameDis:{
+                required: "Please enter in the name of the deceased"
+            },
+            txtDeceasedSurnameDis:{
+                required: "Please enter in the surname of the deceased"
+            }
+        }
+    });
     
-
-}); 
-//end $(document).ready(function())
-
-
-
-
+    alert("sdv");
+    
+    $("#btnDeceasedNameDis").click(function(){
+        toggle("btnDeceasedNameDis","txtDeceasedNameDis");
+    });
+    
+    function toggle(button, text){
+        if($("#"+button).val() == "Confirm"){
+            $("#"+text).attr("readonly", true);
+            $("#"+button).attr("value", "Edit");
+        }
+        else if($("#"+button).val() == "Edit"){
+            $("#"+text).attr("readonly", false);
+            $("#"+button).attr("value", "Confirm");
+        }
+        
+    };
+    
+    
+    $.validator.addMethod("valueNotEquals", function(value, element, arg){
+        return arg != value;
+    }, "Value must not equal arg.");
+    
+});

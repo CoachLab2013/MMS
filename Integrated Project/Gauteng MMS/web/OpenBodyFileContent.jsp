@@ -34,7 +34,7 @@
             out.println(t.makeOpenBodyFileTable("openbodytable"));
          %>
          
-            <input type="text" id="selectedbody" name="selectedbody" />
+            
             
             <br>
             
@@ -44,6 +44,7 @@
 
                 <td width="10">
                     <form id="editbodyfileform" action="EditBodyFile"> 
+                        <input type="text" id="selectedbody" name="selectedbody" />
                         <input class="btn" type="submit" value="Edit" id="editbodyfilebutton">
                     </form>
                 </td>
