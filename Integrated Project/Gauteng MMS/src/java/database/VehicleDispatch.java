@@ -17,7 +17,7 @@ public class VehicleDispatch {
     
     //CONSTUCTORS
     public VehicleDispatch(){
-        this.notificationDateTime = "";
+        this.notificationDateTime = "0001-01-01";
         this.vehicle = new Vehicle();
         this.incident = new Incident();
     }
