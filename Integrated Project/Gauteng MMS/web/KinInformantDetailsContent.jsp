@@ -47,7 +47,7 @@
                     </tr>
                     
                     <tr>
-                        <td>Surname:</td> <td> <input type="text" name="KinSurname" value="" id ="kinSurname"  <%
+                        <td>Surname:</td> <td> <input type="text" name="KinSurname" id ="kinSurname"  <%
                             if(session.getAttribute("kinSurname") != null)
                             {
                                 out.print("value=" + session.getAttribute("kinSurname"));
@@ -57,29 +57,50 @@
                     
                     <tr>     
                         <td>Identification type:  </td> <td> <select name="identificationtype" id="kinIdType">
-                        <option>Select</option>
-                        <option>ID</option>
-                        <option>Passport</option>
+                                <option selected="selected">Select</option>
+                        <%
+                         if(session.getAttribute("kinID") != null)
+                         {
+                            String i = (String)session.getAttribute("kinID");
+    
+                            if(i.contains("null")) 
+                            {
+                                out.print("<option selected='selected'>ID</option>");
+                                out.print("<option>Passport</option>");
+                            } 
+                            else 
+                            {
+                                out.print("<option selected='selected'>Passport</option>");
+                                out.print("<option>ID</option>");
+                            }
+                         }
+                        %>
                     </select> </td>
                       
                     </tr>
                         
                     <tr>
-                         <td> Identification Number:</td>  <td> <input type="text" name="KinIDNumber" value="" id="kinIdNumber" <%if(session.getAttribute("kinID") != null)
-                            {
-                                out.print("value=" + session.getAttribute("kinID"));
-                            } %> /></td>                       
+                         <td> Identification Number:</td>  <td> <input type="text" name="KinIDNumber"  id="kinIdNumber" <%
+                         if(session.getAttribute("kinID") != null)
+                         {
+                             out.print("value=" + session.getAttribute("kinID"));
+                         }
+                         else
+                         {
+                             out.print("value=" + session.getAttribute("kinPassport"));
+                         }
+                         %> /></td>                       
                      </tr>
                         
                         <tr>
-                            <td> Relationship to deceased:</td> <td> <input type="text" name="KinRelationship" value="" id="kinRelationDeceased"  <%if(session.getAttribute("kinRelationship") != null)
+                            <td> Relationship to deceased:</td> <td> <input type="text" name="KinRelationship"  id="kinRelationDeceased"  <%if(session.getAttribute("kinRelationship") != null)
                             {
                                 out.print("value=" + session.getAttribute("kinRelationship"));
                             } %> /></td>
                         </tr>
                         
                         <tr>
-                            <td> Contact number:</td> <td> <input type="text" name="KinContact" value="" id ="kinContactNumber" <%if(session.getAttribute("kinContact") != null)
+                            <td> Contact number:</td> <td> <input type="text" name="KinContact"  id ="kinContactNumber" <%if(session.getAttribute("kinContact") != null)
                             {
                                 out.print("value=" + session.getAttribute("kinContact"));
                             } %> /></td>
