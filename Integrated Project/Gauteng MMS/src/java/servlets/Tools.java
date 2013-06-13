@@ -25,8 +25,8 @@ public class Tools {
   
     public Tools() {
 
- 
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
+
  
     }
 
@@ -122,7 +122,7 @@ public class Tools {
             int count = bfdb.countOpenBodyFile() + 1;
             String formated_num = String.format("%05d", count);
             String year = date.split("-")[0];
-            deathregister = deathregister+"/"+formated_num+"/"+year;
+            deathregister = deathregister+formated_num+"/"+year;
             return deathregister;
         }
         catch(SQLException e){
