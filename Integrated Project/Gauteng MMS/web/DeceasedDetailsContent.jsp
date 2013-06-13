@@ -25,7 +25,12 @@
         <script language="javascript" src="js/jquery-1.9.1.js"></script>
          <script language="javascript" src="js/jquery.validate.min.js"></script>
          <script src="js/DeceasedDetailsContentScript.js"></script>
+                 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
+         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
+        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css">
     </head>
+   
     <body>
     <legend>Deceased Details Contents </legend>
     <form  id="Deceasedform" name="Deceasedform"  method="post" action="DeceasedDetailsServlet">
@@ -249,19 +254,13 @@
             <tr>
 
                 <td> Body Identified Date:     </td><td>  
-                     <div class="input-append date " name="DAidentdatepicker">
-                        <input size="16" id="IdentifiedDate" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" value="" readonly/>
-                        <span class="add-on"><i class="icon-calendar"></i></span> 
-                     </div>
+                        <input id="IdentifiedDate" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" value="" readonly/>
                     <br>
                 </td>
             </tr>
             <tr>
                 <td> Body Identified Time:</td><td>
-                    <div class="input-append date " name="Tidenttimepicker">
-                        <input size="16" id="DAT" name="deceasedbodyIdentifiedTime" data-format="hh:mm" type="text" value="" readonly/>
-                        <span class="add-on"><i class="icon-time"></i></span> 
-                    </div>
+                        <input id="DAT" name="deceasedbodyIdentifiedTime" type="text" readonly/>
                     <br>
                 </td>
             </tr>
@@ -271,6 +270,7 @@
             </tr>
         </table>
     </form>
+                             <script src="js/DeceasedDetailsDateTime.js"></script>
 </body>
 
 </html>

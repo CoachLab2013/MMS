@@ -20,7 +20,6 @@ $(document).ready(function(){
         }
     });
     
-    alert("sdv");
     
     $("#btnDeceasedNameDis").click(function(){
         toggle("btnDeceasedNameDis","txtDeceasedNameDis");
