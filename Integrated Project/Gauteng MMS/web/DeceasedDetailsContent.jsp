@@ -22,7 +22,7 @@
         </style>
         <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
-        <script src="js/DeceasedDetailsScript.js"></script>
+        <script src="js/DeceasedDetailsContentScript.js"></script>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap-datetimepicker">
         <script type="text/javascript"  src="js/jquery-1.9.1.js" charset="UTF-8"></script>
