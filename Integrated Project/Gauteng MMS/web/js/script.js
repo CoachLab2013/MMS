@@ -263,6 +263,40 @@ $(document).ready(function() {
         }
 
     });
+    
+    
+       $('#AddScene').validate({
+        rules: {
+            txtScene: {
+                required: true
+               
+            }
+
+        }
+
+    });
+    
+       $('#AddReleaseType').validate({
+        rules: {
+            txtReleaseType: {
+                required: true
+               
+            }
+
+        }
+
+    });
+    
+       $('#AddReleaseTo').validate({
+        rules: {
+            txtReleaseTo: {
+                required: true
+               
+            }
+
+        }
+
+    });
    $('#AddBody').validate({
         rules: {
             
