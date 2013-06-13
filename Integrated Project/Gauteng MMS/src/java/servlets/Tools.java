@@ -261,6 +261,7 @@ public class Tools {
         for (int i = 0; i < size; i++) {
             String element1 = list1.get(i);
             String element2 = list2.get(i);
+            
             if (element1.equals(selected)) {
                 out = out + "<option selected='selected'>" + element1 + " "+ element2 + "</option>";
             } else {
@@ -379,23 +380,27 @@ public class Tools {
                     + "<th class='tableheading'>Name</th>"
                     + "<th class='tableheading'>Surname</th>"
                     + "<th class='tableheading'>ID/Passport Number</th>"
+                    + "<th class='tableheading'>Body Type</th>"
                     + "<th class='tableheading'>Identification Status</th>";
 
             for (int i = 0; i < bodylist.size(); i++) {
                 BodyAtMortuary bodyAtMortuary = bodylist.get(i);
 
-                BodyFile bodyFile = new BodyFile(bodyAtMortuary.getDeathRegisterNumber());
-                BodyFileDb bodyFileDB = new BodyFileDb(dbdetail, bodyFile);
-                bodyFileDB.init();
-                bodyFileDB.read();
-
-                table += "<tr class='tablerow' drnumber='" + bodyAtMortuary.getDeathRegisterNumber() + "'>"
-                        + "<td>" + bodyAtMortuary.getDeathRegisterNumber() + "</td>"
-                        + "<td class='tablecell'>" + bodyAtMortuary.getNameOfDeceased() + "</td>"
-                        + "<td class='tablecell'>" + bodyAtMortuary.getSurnameOfDeceased() + "</td>"
-                        + "<td class='tablecell'>" + bodyAtMortuary.getID() + "</td>"
-                        + "<td class='tablecell'>" + bodyFile.isBodyIdentified() + "</td>"
-                        + "</tr>";
+                if (!bodyAtMortuary.isBodyReleased()) {
+                    BodyFileDb bodyFileDB = new BodyFileDb(dbdetail, new BodyFile(bodyAtMortuary.getDeathRegisterNumber()));
+                    bodyFileDB.init();
+                    bodyFileDB.read();
+                    if (bodyFileDB.getBodyFile().isPostMortemCompleted()) {
+                        table += "<tr class='tablerow' drnumber='" + bodyAtMortuary.getDeathRegisterNumber() + "'>"
+                                + "<td class='tablecell' id='release_DeathRegister'>" + bodyAtMortuary.getDeathRegisterNumber() + "</td>"
+                                + "<td class='tablecell' id='release_Name'>" + bodyAtMortuary.getNameOfDeceased() + "</td>"
+                                + "<td class='tablecell' id='release_Surname'>" + bodyAtMortuary.getSurnameOfDeceased() + "</td>"
+                                + "<td class='tablecell' id='release_ID'>" + bodyAtMortuary.getID() + "</td>"
+                                + "<td class='tablecell' id='release_BodyType'>" + bodyAtMortuary.getBodyType() + "</td>"
+                                + "<td class='tablecell' id='release_Identified'>" + bodyFileDB.getBodyFile().isBodyIdentified() + "</td>"
+                                + "</tr>";
+                    }
+                }
             }
 
             table += "</table>";

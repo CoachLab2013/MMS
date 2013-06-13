@@ -82,9 +82,7 @@
                 <tr>
                     <td>Body Release Type:</td>
                     <td>
-                        <%
-                            out.println(new Tools().makeReferenceList("bodypart", "type", ""));
-                        %> 
+                        <input type="text" readonly="true" id="release_bodypart" name="release_bodypart" val=""/>                       
                     </td>
                 </tr>
 
@@ -93,7 +91,7 @@
                     <td>Released To:</td>
                     <td>
                         <%
-                            //out.println(new Tools().makeReferenceList("bodypart", "type", ""));
+                            out.println(new Tools().makeReferenceList("releasedto", "type", ""));
                         %>
                     </td>  
                 </tr>

@@ -82,21 +82,25 @@ public class BodyFileDb extends DatabaseConnector
         }
         return "successful";
     }
-    public ArrayList<BodyAtMortuary> getBodyLinkList(String deathRegister) throws SQLException
+    public ArrayList<BodyAtMortuary> getBodyLinkList(String deathRegister)
     {
         ArrayList<BodyAtMortuary> list = new ArrayList<BodyAtMortuary>();
-        statement.executeQuery("SELECT linkDeathRegisterNumber FROM bodylink WHERE BodyFile_Body_idDeathRegisterNumber1='" + deathRegister + "';");
-        ResultSet rSet = statement.getResultSet();
-        while(rSet.next())
-        {                
-            String deathReg = rSet.getString("linkDeathRegisterNumber");
-            BodyDb bodyDb = new BodyDb(dbDetail,new BodyAtMortuary(deathReg));
-            bodyDb.init();
-            bodyDb.read();
-            list.add((BodyAtMortuary) bodyDb.getBody());
+        try {
+            statement.executeQuery("SELECT linkDeathRegisterNumber FROM bodylink WHERE BodyFile_Body_idDeathRegisterNumber1='" + deathRegister + "';");
+            ResultSet rSet = statement.getResultSet();
+            while (rSet.next()) {
+                String deathReg = rSet.getString("linkDeathRegisterNumber");
+                BodyDb bodyDb = new BodyDb(dbDetail, new BodyAtMortuary(deathReg));
+                bodyDb.init();
+                bodyDb.read();
+                list.add((BodyAtMortuary) bodyDb.getBody());
+            }
+            statement.close();
+            connection.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
-        statement.close();
-        connection.close();
         return list;
     }
     public ArrayList<BodyFile> BodyFileList() throws SQLException

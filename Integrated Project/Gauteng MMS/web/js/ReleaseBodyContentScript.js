@@ -124,25 +124,38 @@ $(document).ready(function(){
         $(".selectedtablerow").addClass("tablerow");
         $(".selectedtablerow").removeClass("selectedtablerow");
         $(this).removeClass("tablerow");
-        $(this).addClass("selectedtablerow");   
+        $(this).addClass("selectedtablerow");  
         
-        $.get("ReleaseBodyServlet", {type: "load", data: $(this).attr("drnumber")}, function(data) {
+        if (!$(this).attr("drnumber") == "") {
+            $.get("ReleaseBodyServlet", {type: "load", data: $(this).attr("drnumber")}, function(data) {
 
-                /*var tr = "<tr class='tablerow'>";
-                var dataValues = data.split(" ");
+                var tr = "<tr><th class='tableheading'>Death Register Number</th>" +
+                        "<th class='tableheading'>Name</th>" +
+                        "<th class='tableheading'>Surname</th>" +
+                        "<th class='tableheading'>ID/Passport Number</th>" +
+                        "<th class='tableheading'>Identification Status</th></tr>";
+                var row = data.split("~");
 
-                for (var i = 0; i < dataValues.length; i++)
+                for (var i = 0; i < row.length - 1; i++)
                 {
-                    tr += "<td class='tablecell'>" + dataValues[i] + "</td>";
+                    tr += "<tr class='tablerow'>";
+                    var cell = row[i].split("`");
+                    for (var j = 0; j < cell.length; j++)
+                    {
+                        tr += "<td class='tablecell'>" + cell[j] + "</td>";
+                    }
+                    tr += "</tr>";
                 }
 
-                tr += "</tr>";
-
-                $('#releaseLinkTable').html(tr);*/
+                $('#releaseLinkTable').html(tr);
             });
             
             $('#Releaseform').css('display', 'inherit');
             $('#RecipientDeathRegisterNumber').val($(this).attr("drnumber"));
+            $('#release_bodypart').val($(this).children('#release_BodyType').text());
+        } else {
+            $('#Releaseform').css('display', 'none');
+        }
     });
     
     if($("#_recipientDetail").val() === "true") {
