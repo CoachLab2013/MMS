@@ -635,8 +635,8 @@ public class Tools {
             ArrayList<ForensicSample> registeredSamples = forensicsampleDb.SampleList("deathRegisterNumber", DRNumber);
             
            String table = "";
-            int size = registeredSamples.size();
-            for(int i=0; i<size; i++){
+           
+            for(int i=0; i < registeredSamples.size(); i++){
                 ForensicSample sample = registeredSamples.get(i);
                 table +="<tr class='tablerow' sealnumber='"+ sample.getSealNumber() +"'>"
                         +"<td id='trSealNumber'>"+  sample.getSealNumber() +"</td>"
