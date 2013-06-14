@@ -25,11 +25,11 @@
             </ul>
             <div class="tab-content" >
                 <div id="KinInformantDetails" class="tab-pane active"> 
-                    <jsp:include page="KinInformantDetailsContent.jsp"/>
+                   <jsp:include page="KinInformantDetailsContent.jsp"/>
                 </div>
                 
                 <div id="DeceasedDetails" class="tab-pane ">
-                     <jsp:include page="DeceasedDetailsContent.jsp"/>
+                   <jsp:include page="DeceasedDetailsContent.jsp"/>
                 </div>   
                 
                 <div id="DeaceasedAddress" class="tab-pane ">
@@ -37,7 +37,7 @@
                 </div>
                 
                 <div id="Releaseproperty" class="tab-pane ">
-                   <jsp:include page="ReleasePropertyContent.jsp"/>
+                  <jsp:include page="ReleasePropertyContent.jsp"/>
                 </div>
         
             </div>

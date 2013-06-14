@@ -41,6 +41,7 @@ public class EditBodyFile extends HttpServlet {
         BodyAtMortuary body = new Tools().getBody(deathReg);
         Kin kin = new Tools().getKin(deathReg);
         HttpSession ses = request.getSession();
+        ses.setAttribute("death_register_number", deathReg);
         ses.setAttribute("deceasedDeathRegisterNumber", deathReg);
         ses.setAttribute("bIdFullName", body.getNameOfDeceased());
         ses.setAttribute("bIdMadienName",body.getMaidenName());
@@ -51,7 +52,7 @@ public class EditBodyFile extends HttpServlet {
         }
         else
         {
-            ses.setAttribute("bIdIDNumber", body.getPassport());
+            ses.setAttribute("bIdPassport", body.getPassport());
         }
         ses.setAttribute("bIdPlaceOfBirth", body.getPlaceOfBirth());
         ses.setAttribute("bIdDateOfBirth", body.getDateOfBirth());
@@ -79,7 +80,7 @@ public class EditBodyFile extends HttpServlet {
         }
         else
         {
-            ses.setAttribute("kinID", kin.getPassport());
+            ses.setAttribute("kinPassport", kin.getPassport());
         }
         ses.setAttribute("kinRelationship", kin.getRelationWithDeceased());
         ses.setAttribute("kinContact", kin.getContactNumber());

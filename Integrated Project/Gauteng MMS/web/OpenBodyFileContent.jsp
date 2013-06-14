@@ -33,7 +33,6 @@
             Tools t = new Tools();
             out.println(t.makeOpenBodyFileTable("openbodytable"));
          %>
-
            <br>
             
             <table>
