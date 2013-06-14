@@ -261,18 +261,28 @@ public class BodyDb extends DatabaseConnector{
             bodyAtMort.setBodyReleaseTo(resultSet.getString("bodyReleasedTo"));
             bodyAtMort.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
             bodyAtMort.setBodyReleasedType(resultSet.getString("bodyReleaseType"));
-            bodyAtMort.setBodyAddress(getBodyAddress());
-            BodyAtMortuary mort = getBodyAtMortuary();
-            bodyAtMort.setBodyHandedOverToPerNumber(mort.getBodyHandedOverToPerNumber());
-            bodyAtMort.setBodyReceivedFromPerNumber(mort.getBodyReceivedFromPerNumber());
-            bodyAtMort.setBodyHandOverFromOrganization(mort.getBodyHandOverFromOrganization());
-            //IncidentDb incidentDb = new IncidentDb(new Incident(), dbDetail);
-            //incidentDb.init();
-            //incidentDb.read();
-            bodyAtMort.setIncident(new Incident(resultSet.getString("Incident_incidentLogNumber")));
-            body = bodyAtMort;
-            statement.close();
-            connection.close();
+            try
+            {
+                bodyAtMort.setBodyAddress(getBodyAddress());
+                BodyAtMortuary mort = getBodyAtMortuary();
+                bodyAtMort.setBodyHandedOverToPerNumber(mort.getBodyHandedOverToPerNumber());
+                bodyAtMort.setBodyReceivedFromPerNumber(mort.getBodyReceivedFromPerNumber());
+                bodyAtMort.setBodyHandOverFromOrganization(mort.getBodyHandOverFromOrganization());
+            }
+            catch (Exception ex)
+            {
+                 ;
+            }
+            finally
+            {
+                IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
+                incidentDb.init();
+                incidentDb.read();
+                bodyAtMort.setIncident(incidentDb.getIncident());
+                body = bodyAtMort;
+                statement.close();
+                connection.close();
+            }
         } 
         catch (SQLException ex) 
         {
@@ -413,11 +423,18 @@ public class BodyDb extends DatabaseConnector{
                     bodyAtMort.setDeathRegisterNumber(resultSet.getString("idDeathRegisterNumber"));
                     bodyAtMort.setBodyReleasedType(resultSet.getString("bodyReleaseType"));
                     body=bodyAtMort;
-                    bodyAtMort.setBodyAddress(getBodyAddress());
-                    BodyAtMortuary mort = getBodyAtMortuary();
-                    bodyAtMort.setBodyHandedOverToPerNumber(mort.getBodyHandedOverToPerNumber());
-                    bodyAtMort.setBodyReceivedFromPerNumber(mort.getBodyReceivedFromPerNumber());
-                    bodyAtMort.setBodyHandOverFromOrganization(mort.getBodyHandOverFromOrganization());
+                    try
+                    {
+                        bodyAtMort.setBodyAddress(getBodyAddress());
+                        BodyAtMortuary mort = getBodyAtMortuary();
+                        bodyAtMort.setBodyHandedOverToPerNumber(mort.getBodyHandedOverToPerNumber());
+                        bodyAtMort.setBodyReceivedFromPerNumber(mort.getBodyReceivedFromPerNumber());
+                        bodyAtMort.setBodyHandOverFromOrganization(mort.getBodyHandOverFromOrganization());
+                    }
+                    catch (Exception ex)
+                    {
+                        break;
+                    }
                     IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
                     incidentDb.init();
                     incidentDb.read();
