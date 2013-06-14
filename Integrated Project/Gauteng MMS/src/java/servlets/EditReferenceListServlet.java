@@ -329,22 +329,22 @@ public class EditReferenceListServlet extends HttpServlet {
 
 
         } else if (request.getParameter("table").equals("region")) {
-
+            HttpSession sess = request.getSession();
             String province = request.getParameter("editProv");
             ReferenceListDb emp = new ReferenceListDb("region", "e", "type", "province", Olditem, province, dbDetail);
             emp.setNewData(item);
             emp.init();
+            sess.setAttribute("provTab", province);
             result = emp.editReg().trim();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
-                HttpSession sess = request.getSession();
+
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "region");
                 sess.setAttribute("regionResult", "The region has been successfuly edited");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
-                HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "region");
                 sess.setAttribute("regionResult", "The region did not edit: because " + result);
@@ -521,7 +521,29 @@ public class EditReferenceListServlet extends HttpServlet {
             }
 
 
-        } else if (request.getParameter("table").equals("scenetype")) {
+        } else if (request.getParameter("table").equals("seal")) {
+            ReferenceListDb emp = new ReferenceListDb("seal", "idSeal", "type", Olditem, dbDetail);
+            emp.setNewData(item);
+            emp.init();
+            result = emp.edit().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "seal");
+                sess.setAttribute("sealTypeResults", "Seal type has been successfuly edited to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "seal");
+                sess.setAttribute("sealTypeResults", "Seal type did not edit because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        } else if (request.getParameter("table").equals("scene")) {
             ReferenceListDb emp = new ReferenceListDb("scenetype", "idSceneType", "type", Olditem, dbDetail);
             emp.setNewData(item);
             emp.init();
@@ -530,15 +552,59 @@ public class EditReferenceListServlet extends HttpServlet {
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
-                sess.setAttribute("tab", "sceneType");
-                sess.setAttribute("sealTypeResults", "Seal type has been successfuly edited to database");
+                sess.setAttribute("tab", "scene");
+                sess.setAttribute("sceneResult", "Scene type has been successfuly deleted");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
-                sess.setAttribute("tab", "sceneType");
-                sess.setAttribute("sealTypeResults", "Seal type did not edit because " + result);
+                sess.setAttribute("tab", "scene");
+                sess.setAttribute("sceneResult", "Scene type did not delete because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        } else if (request.getParameter("table").equals("releasedtype")) {
+            ReferenceListDb emp = new ReferenceListDb("releasedtype", "idReleasedType", "type", Olditem, dbDetail);
+            emp.setNewData(item);
+            emp.init();
+            result = emp.edit().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "releaseType");
+                sess.setAttribute("releaseTypeResult", "Release type has been successfuly deleted");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "releaseType");
+                sess.setAttribute("releaseTypeResult", "Release type did not delete because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        } else if (request.getParameter("table").equals("releasedto")) {
+            ReferenceListDb emp = new ReferenceListDb("releasedto", "idReleasedTo", "type", Olditem, dbDetail);
+            emp.setNewData(item);
+            emp.init();
+            result = emp.edit().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "releaseTo");
+                sess.setAttribute("releaseToResult", "Release-To type has been successfuly deleted");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "releaseTo");
+                sess.setAttribute("releaseToResult", "Release-To type did not delete because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }
