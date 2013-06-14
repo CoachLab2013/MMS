@@ -53,9 +53,9 @@ public class EditAtSceneDetails extends HttpServlet {
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
         
-        //Incident Log number: request.getParameter("at_scene_lognmber");   
+        //Incident Log number: request.getParameter("edit_at_scene_lognmber");   
         
-        BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("at_scene_deathregister")));       
+        BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("edit_at_scene_deathregister")));       
         bodyAtScene.setDateTimeBodyFound(t.checkDate(request.getParameter("edit_bodyFoundDate")) + " " + t.checkTime(request.getParameter("edit_bodyFoundTime")));
         bodyAtScene.setAllegedInjuryDateTime(t.checkDate(request.getParameter("edit_inAllegedInjuryDate")) + " " + t.checkTime(request.getParameter("edit_inAllegedInjuryTime")));
         bodyAtScene.setAllegedDeathDateTime(t.checkDate(request.getParameter("edit_inAllegedDeathDate")) + " " + t.checkTime(request.getParameter("edit_inAllegedDeathTime")));
@@ -132,7 +132,7 @@ public class EditAtSceneDetails extends HttpServlet {
            
             
         //Body Details
-        bodyAtScene.getBody().setIncident(new Incident(request.getParameter("at_scene_lognmber")));
+        bodyAtScene.getBody().setIncident(new Incident(request.getParameter("edit_at_scene_lognmber")));
         bodyAtScene.getBody().setBodyType(request.getParameter("bodypart"));
         bodyAtScene.getBody().setNameOfDeceased(request.getParameter("edit_atSceneBodyName"));
         bodyAtScene.getBody().setSurnameOfDeceased(request.getParameter("edit_atSceneBodySurname"));

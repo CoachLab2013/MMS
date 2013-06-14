@@ -30,7 +30,7 @@
             <div class="controls"><%
                 Tools t = new Tools();
                 String list = t.makeReferenceList("employee", "personnelNumber", "");
-                list=list.replaceFirst("name='eemployee'", "name='edit_employee'");
+                list=list.replaceFirst("name='employee'", "name='edit_employee'");
                 list=list.replaceFirst("id='employee'", "id='edit_employee'");
                 out.println(list);
                 %>
@@ -40,8 +40,8 @@
             <label class="control-label">Employee handing over body:</label> 
             <div class="controls"><%
                 list = t.makeReferenceList("employee", "personnelNumber", "");
-                list=list.replaceFirst("name='edit_employee'", "name='edit_employee_handing'");
-                list=list.replaceFirst("id='edit_employee'", "id='edit_employee_handing'");
+                list=list.replaceFirst("name='employee'", "name='edit_employee_handing'");
+                list=list.replaceFirst("id='employee'", "id='edit_employee_handing'");
                 out.println(list);
                 %>
             </div>
@@ -49,7 +49,10 @@
         <div class="control-group">
             <label class="control-label">Organization handing over body :</label> 
             <div class="controls"><%
-                out.print(t.makeReferenceList("organization", "name", ""));
+                list = t.makeReferenceList("organization", "name", "");
+                list=list.replaceFirst("name='organization'", "name='edit_organization'");
+                list=list.replaceFirst("id='organization'", "id='edit_organization'");
+                out.println(list);
                 %>
             </div>
         </div>
@@ -62,7 +65,10 @@
             <div class="control-group">
                 <label class="control-label">Body Classification</label> 
                 <div class="controls"><%
-                    out.print(t.makeReferenceList("edit_bodypart", "type", ""));
+                    list = t.makeReferenceList("bodypart", "type", "");
+                    list=list.replaceFirst("name='bodypart'", "name='edit_bodypart'");
+                    list=list.replaceFirst("id='bodypart'", "id='edit_bodypart'");
+                    out.println(list);
                     %>
                 </div>
             </div> 
@@ -142,14 +148,24 @@
             <div class="control-group">
                 <label class="control-label" for="edit_province">Province</label>
                 <div class="controls">                                                        
-                    <% out.println(t.makeReferenceList("province", "type", ""));%>
+                    <%
+                    list = t.makeReferenceList("province", "type", "");
+                    list=list.replaceFirst("name='province'", "name='edit_province'");
+                    list=list.replaceFirst("id='province'", "id='edit_province'");
+                    out.println(list);
+                    %>
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_region">Region</label>
                 <div class="controls">
-                    <% out.println(t.makeReferenceList("region", "type", ""));%>
+                    <%
+                    list = t.makeReferenceList("region", "type", "");
+                    list=list.replaceFirst("name='region'", "name='edit_region'");
+                    list=list.replaceFirst("id='region'", "id='edit_region'");
+                    out.println(list);
+                    %>
                 </div>
             </div>
 
@@ -157,14 +173,20 @@
             <div class="control-group">
                 <label class="control-label">Race</label> 
                 <div class="controls"><%
-                    out.print(t.makeReferenceList("race", "type", ""));
+                    list = t.makeReferenceList("race", "type", "");
+                    list=list.replaceFirst("name='race'", "name='edit_race'");
+                    list=list.replaceFirst("id='race'", "id='edit_race'");
+                    out.println(list);
                     %>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Gender</label> 
                 <div class="controls"><%
-                    out.print(t.makeReferenceList("gender", "type", ""));
+                    list = t.makeReferenceList("gender", "type", "");
+                    list=list.replaceFirst("name='gender'", "name='edit_gender'");
+                    list=list.replaceFirst("id='gender'", "id='edit_gender'");
+                    out.println(list);
                     %>
                 </div>
             </div>
@@ -209,8 +231,8 @@
                 <div class="controls">
                     <%
                             String list4 = t.makeReferenceList("employee", "personnelNumber", "");
-                            list4 = list4.replaceFirst("name='employee'", "name='atMortFPSpropertyPersal'");
-                            list4 = list4.replaceFirst("id='employee'", "id='atMortFPSpropertyPersal'");
+                            list4 = list4.replaceFirst("name='employee'", "name='edit_atMortFPSpropertyPersal'");
+                            list4 = list4.replaceFirst("id='employee'", "id='edit_atMortFPSpropertyPersal'");
                             out.println(list4);
                         %>
                         <label class="error" id="edit_no_fps_persal_mort" style="display:none;">Please select a persal number</label>
@@ -236,7 +258,7 @@
                 <%--Display save result --%> 
             </div>
             <br/><br/>
-            <input  type="hidden" id="edit_fps_property_counter_mort" name ="fps_property_counter_mort" value="0"/>
+            <input  type="hidden" id="edit_fps_property_counter_mort" name ="edit_fps_property_counter_mort" value="0"/>
         </fieldset>
 
         <div class="offset5">
