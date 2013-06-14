@@ -20,7 +20,7 @@
                 file = new File(file.getPath() + "/" + folder);
                 File[] files = file.listFiles();
                 for (File tmpFile : files) {
-                    if (tmpFile.isFile()) {
+                    if (tmpFile.isFile() && (tmpFile.getName().contains(".pdf") || tmpFile.getName().contains(".xlsx"))) {
                         out += "<a href='" + folder + "/" + tmpFile.getName() + "'>" + tmpFile.getName() + "</a><br/>";
                     } else {    
                         if(tool.accessReport(access, tmpFile.getName())) {
