@@ -27,9 +27,9 @@
 
         <table>
             <tr>
-                <td width="20"></td>
-                <td width="50"><input class="btn" type="button" value="Edit" id="editincidentbutton"></td>
-                <td width="30" align="center"><input class="btn" type="button" value="Close Incident" id="close"> </td>
+                <td width="10"></td>
+                <td width="80" ><input class="btn" type="button" value="Edit" id="editincidentbutton"></td>
+                <td width="50" align="right"><input class="btn" type="button" value="Close Incident" id="close"> </td>
             </tr>
             <tr>
                 <td>

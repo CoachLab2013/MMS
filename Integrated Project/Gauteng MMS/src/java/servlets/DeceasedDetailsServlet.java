@@ -38,13 +38,25 @@ public class DeceasedDetailsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        BodyAtMortuary body = new BodyAtMortuary(request.getParameter("deceasedDeathRegisterNr"));
+        /*BodyAtMortuary body = new BodyAtMortuary(request.getParameter("deceasedDeathRegisterNr"));
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
         BodyDb bodyDb = new BodyDb(dbdetail,body);
         bodyDb.init();
         bodyDb.read();
         body.setNameOfDeceased(request.getParameter("DeceasedName"));
+        //DeceasedNumbers
+        String st = (String)request.getParameter("DeceasedNumber");
+        if(st.equals("ID"))
+        {
+            body.setID(request.getParameter("DeceasedNumber"));
+            body.setPassport(null);
+        }
+        else
+        {
+            body.setPassport(request.getParameter("DeceasedNumber"));
+            body.setID(null);
+        }
         body.setMaidenName(request.getParameter("DeceasedMaidenName"));
         body.setSurnameOfDeceased(request.getParameter("DeceasedSurname"));
         //body.setIdentifiedDateTime(request.getParameter("deceasedbodyIdentifiedDate") + " " + request.getParameter("deceasedbodyIdentifiedTime"));
@@ -71,7 +83,7 @@ public class DeceasedDetailsServlet extends HttpServlet {
         bodyDb.edit();
         HttpSession sess = request.getSession();
         sess.setAttribute("deceasedDetail", "Kin details added successfully");
-        response.sendRedirect("Home.jsp");
+        response.sendRedirect("Home.jsp");*/
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

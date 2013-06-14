@@ -19,20 +19,25 @@
                 padding-left: .5em; 
                 vertical-align: top; 
             }
-        </style>
-        <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
-        <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
-        <script src="js/DeceasedDetailsScript.js"></script>
-        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">
-        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap-datetimepicker">
-        <script type="text/javascript"  src="js/jquery-1.9.1.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
-        <script  src="bootstrap/js/bootstrap-tabs.js"></script>
+        </style> 
+        <script language="javascript" src="js/jquery-1.9.1.js"></script>
+         <script language="javascript" src="js/jquery.validate.min.js"></script>
+         <script src="js/DeceasedDetailsContentScript.js"></script>
+          <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
+         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"/> 
+        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css"/>
     </head>
+   
     <body>
     <legend>Deceased Details Contents </legend>
+
     <form name="Deceasedform" id="Deceasedform" method="post" action="DeceasedDetailsServlet">
+        <input type="hidden" name="deceasedDeathRegisterNr" <% 
+            if(session.getAttribute("deceasedDeathRegisterNumber") != null)
+            {
+                out.print("value=" + session.getAttribute("deceasedDeathRegisterNumber")); 
+            }%> />
 
         <script>
             var counter = 0;
@@ -83,25 +88,28 @@
             </tr> 
 
             <tr>     
-                <td>Identification type:  </td> <td> <select name="deceasedidentificationtype"> 
+                <td>Identification type:  </td> <td> <select name="deceasedidentificationtype" id="deceasedidentificationtype"> 
+                        <option selected="selected" >Select</option>
                         <%
                          if(session.getAttribute("bIdIDNumber") != null)
                          {
                             String i = (String)session.getAttribute("bIdIDNumber");
-                            if(i.length() == 13) 
+          
+                            if(i.contains("null")) 
                             {
-                                out.print("<option>ID</option>");
+                                out.print("<option selected='selected'>ID</option>");
                                 out.print("<option>Passport</option>");
                             } 
                             else 
                             {
-                                out.print("<option>Passport</option>");
+                                out.print("<option selected='selected'>Passport</option>");
                                 out.print("<option>ID</option>");
                             }
                          }
                          else
                          {
-                             out.print("<option></option>");
+                             out.print("<option>ID</option>");
+                             out.print("<option>Passport</option>");
                          }
                         %>
                     </select> </td>
@@ -112,15 +120,20 @@
                   {
                     out.println("value=" + session.getAttribute("bIdIDNumber"));
                   }
+                  else
+                  {
+                      if(session.getAttribute("bIdPassport") != null)
+                      out.println("value=" + session.getAttribute("bIdPassport"));
+                  }
                  %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
             </tr> 
             <tr>
-                <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%
+                <td> Place of Birth:</td> <td><textarea cols="50" rows="3" name="deceasedPlaceBirth"><%
                   if(session.getAttribute("bIdPlaceOfBirth") != null)
                   {
-                    out.println("value=" + session.getAttribute("bIdPlaceOfBirth"));
+                    out.println(session.getAttribute("bIdPlaceOfBirth"));
                   }
-                 %>  /></td>
+                 %></textarea></td>
             </tr>
             <tr>     
                 <td>Date of Birth: </td> <td> <input type="text" name="deceasedDateBirth" <%
@@ -154,7 +167,7 @@
                             out.println(list2);
                     }
                         %>
-                    </select><input class="btn" type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
+                    <input class="btn" type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
             <tr>     
                 <td>Marital Status:  </td> <td>
                     <%
@@ -173,7 +186,7 @@
                          out.println(list2);
                      }
                    %>
-                    </select> </td>
+                    </td>
             <tr>     
                 <td>Race:  </td> <td>
                      <%if(session.getAttribute("bIdRace")!=null)
@@ -252,42 +265,27 @@
                  %></option>
                     </select> </td>
             <tr>
-                <script>          
-                    $('#DAidentdatepicker').datetimepicker({
-                                                                pickTime: false,
-                                                                autoclose: true
-                                                            });
 
-                    $('#Tidenttimepicker').datetimepicker({
-                                                                pickDate: false,
-                                                                autoclose: true,
-                                                                pickSeconds: false
-
-                                                            });
-                </script>
                 <td> Body Identified Date:     </td><td>  
-                     <div class="input-append date " name="DAidentdatepicker">
-                        <input size="16" id="IdentifiedDate" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" value="" readonly/>
-                        <span class="add-on"><i class="icon-calendar"></i></span> 
-                     </div>
+                        <input id="IdentifiedDate" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" value="" readonly/>
                     <br>
                 </td>
             </tr>
             <tr>
                 <td> Body Identified Time:</td><td>
-                    <div class="input-append date " name="Tidenttimepicker">
-                        <input size="16" id="DAT" name="deceasedbodyIdentifiedTime" data-format="hh:mm" type="text" value="" readonly/>
-                        <span class="add-on"><i class="icon-time"></i></span> 
-                    </div>
+                        <input id="DAT" name="deceasedbodyIdentifiedTime" type="text" readonly/>
                     <br>
                 </td>
             </tr>
+            <script src="js/DeceasedDetailsDateTime.js"></script>
             <tr>
                 <td> <td>  <input class="btn" type="submit" value="Save" name="bodySave" /><br></td></td>
 
             </tr>
         </table>
+                     
     </form>
+                            
 </body>
 
 </html>

@@ -79,6 +79,7 @@ html {
   background-image: -o-linear-gradient(top, #333333, #222222);
   background-image: linear-gradient(top, #333333, #222222);
   background-repeat: repeat-x;
+  height:auto;
    
 }
 
@@ -246,7 +247,7 @@ body{
   line-height: 20px;
   color: black;
   background-color: whitesmoke;
-   width: 90%;
+   width: 75%;
   min-height: 550px;
   border-radius:20px;
   
@@ -426,7 +427,7 @@ a:focus {
 }
 
 .offset2 {
-  margin-left: 180px;
+  margin-left: 190px;
 }
 
 .offset1 {

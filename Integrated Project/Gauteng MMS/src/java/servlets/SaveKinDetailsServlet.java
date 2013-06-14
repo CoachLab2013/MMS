@@ -37,30 +37,30 @@ public class SaveKinDetailsServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();       
         Kin kin = new Kin();
-        
+        HttpSession sess = request.getSession();
         kin.setName(request.getParameter("KinName"));
         kin.setSurname(request.getParameter("KinSurname"));
         String kinIdType = request.getParameter("identificationtype");
         if(kinIdType.contains("ID"))
         {
             kin.setID(request.getParameter("KinIDNumber"));
+            kin.setPassport(null);
         }
         else if(kinIdType.contains("Passport"))
         {
             kin.setPassport(request.getParameter("KinIDNumber"));
+            kin.setID(null);
         }
         kin.setRelationWithDeceased(request.getParameter("KinRelationship"));
         kin.setContactNumber(request.getParameter("KinContact"));
         kin.setAddress(request.getParameter("KinRes"));
         kin.setWorkAddress(request.getParameter("KinWork"));
-        kin.setBody_idDeathRegisterNumber("099888592");
-        
+        kin.setBody_idDeathRegisterNumber((String)sess.getAttribute("deceasedDeathRegisterNumber"));
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
         KinDb kinDb = new KinDb(kin, dbdetail);
         kinDb.init();
-        String success = kinDb.add();
-        HttpSession sess = request.getSession();
+        String success = kinDb.edit();
         sess.setAttribute("kinDetail", true);
         response.sendRedirect("Home.jsp");
         out.close();

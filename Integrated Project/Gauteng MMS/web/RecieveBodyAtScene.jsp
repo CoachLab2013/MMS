@@ -41,19 +41,19 @@
         <fieldset class="fieldset">
             <legend class="legend"><h4>Body received from:</h4></legend>
             <div class="control-group">
-                <label class="control-label" for="receivedBodyFromName">Name</label> 
+                <label class="control-label" for="receivedBodyFromName">Name:</label> 
                 <div class="controls">
                     <input type="text" name="receivedBodyFromName" id="receivedBodyFromName"/> 
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="receivedBodyFromSurname">Surname</label>
+                <label class="control-label" for="receivedBodyFromSurname">Surname:</label>
                 <div class="controls">
                     <input type="text" name="receivedBodyFromSurname" id="receivedFromBodySurname"/> 
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="organisation">Organization</label> 
+                <label class="control-label" for="organisation">Organization:</label> 
                 <div class="controls"><%
                     Tools t = new Tools();
                     out.print(t.makeReferenceList("organization", "name", ""));
@@ -80,26 +80,26 @@
         <fieldset class="fieldset">
             <legend class="legend"><h4>SAPS member handing over the body:</h4></legend>
             <div class="control-group">
-                <label class="control-label" for="SAPSmemberBodyName">Name</label> 
+                <label class="control-label" for="SAPSmemberBodyName">Name:</label> 
                 <div class="controls">
                     <input type="text" name="SAPSmemberBodyName" id="SAPSmemberBodyName"/> 
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="SAPSmemberBodySurname">Surname</label>
+                <label class="control-label" for="SAPSmemberBodySurname">Surname:</label>
                 <div class="controls">
                     <input type="text" name="SAPSmemberBodySurname" id="SAPSmemberBodySurname"/> 
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="SAPSmemberBodyCell">Cell phone number</label>
+                <label class="control-label" for="SAPSmemberBodyCell">Cell phone number:</label>
                 <div class="controls">
                     <input type="text" name="SAPSmemberBodyCell" id="SAPSmemberBodyCell"/> 
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="SAPSmemberBodyRank">Rank</label>
+                <label class="control-label" for="SAPSmemberBodyRank">Rank:</label>
                 <div class="controls">
                     <% String list = t.makeReferenceList("rank", "type", "");
                         list = list.replaceFirst("name='rank'", "name='SAPSmemberBodyRank'");
@@ -114,19 +114,19 @@
         <fieldset class="fieldset">
             <legend class="legend"><h4>FPS member receiving body:</h4></legend>
             <div class="control-group">
-                <label class="control-label" for="FPSmemberBodyName">Name</label> 
+                <label class="control-label" for="FPSmemberBodyName">Name:</label> 
                 <div class="controls">
                     <input type="text" name="FPSmemberBodyName" id="FPSmemberBodyName"/> 
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="FPSmemberBodySurname">Surname</label>
+                <label class="control-label" for="FPSmemberBodySurname">Surname:</label>
                 <div class="controls">
                     <input type="text" name="FPSmemberBodySurname" id="FPSmemberBodySurname"/> 
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="FPSmemberBodyPersal">Persal number</label>
+                <label class="control-label" for="FPSmemberBodyPersal">Persal number:</label>
                 <div class="controls">
                     <%
                     String persal = t.makeReferenceList("employee", "personnelNumber", "");
@@ -138,13 +138,13 @@
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="FPSmemberBodyCell">Cell phone number</label>
+                <label class="control-label" for="FPSmemberBodyCell">Cell phone number:</label>
                 <div class="controls">
                     <input type="text" name="FPSmemberBodyCell" id="FPSmemberBodyCell"/> 
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="FPSmemberBodyRank">Rank</label>
+                <label class="control-label" for="FPSmemberBodyRank">Rank:</label>
                 <div class="controls">
                     <%
                         String list2 = t.makeReferenceList("rank", "type", "");
@@ -161,7 +161,7 @@
             <legend class="legend"><h4>Pathologist at scene:</h4></legend>
 
             <div class="control-group">
-                <label class="control-label" for="pathologistAtScene">Was pathologist at scene</label> 
+                <label class="control-label" for="pathologistAtScene">Was the pathologist at scene?</label> 
                 <div class="controls">
                     <select id="pathologistAtScene" name="pathologistAtScene">                            
                         <option >No</option>
@@ -171,13 +171,13 @@
             </div> 
             <div id="pathologist_at_scene_details" style="display:none;">
                 <div class="control-group">
-                    <label class="control-label" for="pathologistBodyName">Name</label> 
+                    <label class="control-label" for="pathologistBodyName">Name:</label> 
                     <div class="controls">
                         <input type="text" name="pathologistBodyName" id="pathologistBodyName"/> 
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="pathologistBodySurname">Surname</label>
+                    <label class="control-label" for="pathologistBodySurname">Surname:</label>
                     <div class="controls">
                         <input type="text" name="pathologistBodySurname" id="pathologistBodySurname"/> 
                     </div>
@@ -185,7 +185,7 @@
 
 
                 <div class="control-group">
-                    <label class="control-label" for="pathologistBodyRank">Rank</label>
+                    <label class="control-label" for="pathologistBodyRank">Rank:</label>
                     <div class="controls">
                         <%
                             String list3 = t.makeReferenceList("rank", "type", "");
@@ -202,7 +202,7 @@
             <legend class="legend"><h4>Body details:</h4></legend>
 
             <div class="control-group">
-                <label class="control-label">Body Classification</label> 
+                <label class="control-label">Body Classification:</label> 
                 <div class="controls"><%
                     out.print(t.makeReferenceList("bodypart", "type", ""));
                     %>
@@ -215,7 +215,7 @@
             </div> 
 
             <div class="control-group">
-                <label class="control-label" for="atSceneBodyName">Name</label> 
+                <label class="control-label" for="atSceneBodyName">Name:</label> 
                 <div class="controls">
                     <input type="text" name="atSceneBodyName" id="atSceneBodyName"/> 
                 </div>
@@ -224,14 +224,14 @@
 
             </div>
             <div class="control-group">
-                <label class="control-label" for="atSceneBodySurname">Surname</label>
+                <label class="control-label" for="atSceneBodySurname">Surname:</label>
                 <div class="controls">
                     <input type="text" name="atSceneBodySurname" id="atSceneBodySurname"/> 
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="recieve_at_scene_id_type">Identification type</label>
+                <label class="control-label" for="recieve_at_scene_id_type">Identification type:</label>
 
 
                 <div class="controls">
@@ -240,71 +240,71 @@
                         <option>ID</option>
                         <option>Passport</option>
                     </select>
-                    <label id="no_id_type" class="error" style="display:none;">Please select an identification type</label>
+                    <label id="no_id_type" class="error" style="display:none;">Please select an identification type:</label>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="atSceneBodyID">Identification number</label>
+                <label class="control-label" for="atSceneBodyID">Identification number:</label>
                 <div class="controls">
                     <input type="text" name="atSceneBodyID" id="atSceneBodyID"/> 
-                    <label id ="invalid_id" class="error" style="display:none;">Invalid ID number</label>
-                    <label id="invalid_passport" class="error" style="display:none;">Invalid passport number</label>
+                    <label id ="invalid_id" class="error" style="display:none;">Invalid ID number:</label>
+                    <label id="invalid_passport" class="error" style="display:none;">Invalid passport number:</label>
                 </div>
                 
             </div>
 
             <%-- ADDING BODY ADDRESS TABS --%> 
             <div class="control-group">
-                <label class="control-label" for="atSceneBodyAddressBuilding">Building</label>
+                <label class="control-label" for="atSceneBodyAddressBuilding">Building:</label>
                 <div class="controls">
                     <input type="text" name="atSceneBodyAddressBuilding" id="atSceneBodyAddressBuilding"/> 
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="atSceneBodyAddressStreet">Street</label>
+                <label class="control-label" for="atSceneBodyAddressStreet">Street:</label>
                 <div class="controls">
                     <input type="text" name="atSceneBodyAddressStreet" id="atSceneBodyAddressStreet"/> 
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="atSceneBodyAddressSuburb">Suburb</label>
+                <label class="control-label" for="atSceneBodyAddressSuburb">Suburb:</label>
                 <div class="controls">
                     <input type="text" name="atSceneBodyAddressSuburb" id="atSceneBodyAddressSuburb"/> 
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="atSceneBodyAddressCity">City</label>
+                <label class="control-label" for="atSceneBodyAddressCity">City:</label>
                 <div class="controls">
                     <input type="text" name="atSceneBodyAddressCity" id="atSceneBodyAddressCity"/> 
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="atSceneBodyAddressPostalCode">Postal Code</label>
+                <label class="control-label" for="atSceneBodyAddressPostalCode">Postal Code:</label>
                 <div class="controls">
                     <input type="text" name="atSceneBodyAddressPostalCode" id="atSceneBodyAddressPostalCode"/> 
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="province">Province</label>
+                <label class="control-label" for="province">Province:</label>
                 <div class="controls">                                                        
                     <% out.println(t.makeReferenceList("province", "type", ""));%>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="region">Region</label>
+                <label class="control-label" for="region">Region:</label>
                 <div class="controls">
                     <% out.println(t.makeReferenceList("region", "type", ""));%>
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="atSceneBodyAddressMagisterialDistrict">Magisterial District</label>
+                <label class="control-label" for="atSceneBodyAddressMagisterialDistrict">Magisterial District:</label>
                 <div class="controls">
                     <input type="text" name="atSceneBodyAddressMagisterialDistrict" id="atSceneBodyAddressMagisterialDistrict"/> 
                 </div>
@@ -321,7 +321,7 @@
                                                 </div>--%>
 
             <div class="control-group">
-                <label class="control-label">Race</label> 
+                <label class="control-label">Race:</label> 
                 <div class="controls"><%
                     out.print(t.makeReferenceList("race", "type", ""));
                     %>                      
@@ -338,7 +338,7 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">Gender</label> 
+                <label class="control-label">Gender:</label> 
                 <div class="controls"><%
                     out.print(t.makeReferenceList("gender", "type", ""));
                     %>
@@ -358,12 +358,12 @@
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="atSceneBodyEstAge">Estimated age</label>
+                <label class="control-label" for="atSceneBodyEstAge">Estimated age:</label>
                 <div class="controls">    
                     <table>
                         <tr>
                             <td><select name="atSceneBodyEstAge" id="atSceneBodyEstAge" style="width:100px;" >
-                                    <option selected="selected">Age</option>
+                                    <option selected="selected">Age:</option>
                                     <%
                                         for (int i = 1; i < 101; i++) {
                                             out.println("<option>" + i + "</option>");
@@ -504,7 +504,7 @@
             </div> 
 
             <div class="control-group">
-                <label class="control-label" for="DeathAddress">Place of death(Address)</label> 
+                <label class="control-label" for="DeathAddress">Place of death(Address):</label> 
                 <div class="controls">
                     <textarea cols="50" rows="3" id="DeathAddress" name="DeathAddress"> </textarea>
                 </div>
@@ -531,7 +531,7 @@
             <fieldset class="fieldset offset1">     
                 <legend class="legend"><h5>Handed over to SAPS:</h5></legend>
                 <div class="control-group">
-                    <label class="control-label" for="SAPSpropertyDescr">Description</label> 
+                    <label class="control-label" for="SAPSpropertyDescr">Description:</label> 
                     <div class="controls">
                         <textarea cols="50" rows="3" id="SAPSpropertyDescr" name="SAPSpropertyDescr"></textarea>
                         <label class="error" id="no_saps_description" style="display:none;">Please complete the description</label>
@@ -553,22 +553,22 @@
                     </div>
                 </div>
 
-                <div class="offset4">
+                <div class="offset2">
                     <input id="saps_property_add" name="saps_property_add"  class="btn"  type="button" value="Add Item" /> 
                     <%--Display save result --%> 
                 </div>
                 <br/> <br/>
                 <table class='tabledisplay' id="SAPSpropertyTable" name="SAPSpropertyTable">
                     <tr class='tablerow'>
-                        <th class='tableheading'>Select</th>
-                        <th class='tableheading'>Description</th>
+                        <th width="80" class='tableheading'>Select</th>
+                        <th width="100" class='tableheading'>Description</th>
                         <th class='tableheading'>SAPS Name</th>
                         <th class='tableheading'>SAPS Surname</th>
                     </tr>
 
                 </table>
                 <br/>
-                <div class="offset5">
+                <div class="offset2">
                     <input id="saps_property_delete" name="saps_property_delete"   class="btn" type="button" value="Delete" /> 
                     <%--Display save result --%> 
                 </div>
@@ -578,7 +578,7 @@
             <fieldset class="fieldset offset1">     
                 <legend class="legend"><h5>Taken by FPS officer</h5></legend>                    
                 <div class="control-group">
-                    <label class="control-label" for="atSceneFPSpropertyDescr">Description</label> 
+                    <label class="control-label" for="atSceneFPSpropertyDescr">Description:</label> 
                     <div class="controls">
                         <textarea cols="50" rows="3" id="atSceneFPSpropertyDescr" name="atSceneFPSpropertyDescr"></textarea>
                         <label class="error" id="no_fps_description" style="display:none;">Please complete the description</label>
@@ -598,23 +598,23 @@
                     </div>
                 </div>
 
-                <div class="offset4">
+                <div class="offset2">
                     <input id="at_scene_fps_add" id="at_scene_fps_add"  class="btn"  type="button" value="Add Item" /> 
                     <%--Display save result --%> 
                 </div>
 
                 <br/> <br/>
                 <table class="tabledisplay" id="atSceneFPSpropertyTable" name="atSceneFPSpropertyTable">
-                    <tr>
-                        <th class="tableheading">Select</th>
-                        <th class="tableheading">Description</th>
-                        <th class="tableheading">Persal Number</th>
+                    <tr >
+                        <th width="100" class="tableheading">Select</th>
+                        <th width="130" class="tableheading">Description</th>
+                        <th width="100" class="tableheading">Persal Number</th>
                     </tr>
                 </table>
                 <br/>
                 <input id="saps_property_counter" name="saps_property_counter" type="hidden" value="0" />
                 <input id="fps_property_counter" name="fps_property_counter" type="hidden" value="0" />
-                <div class="offset5">
+                <div class="offset2">
                     <input id="at_scene_fps_delete" name="at_scene_fps_delete"  class="btn"  type="button" value="Delete" /> 
                     <%--Display save result --%> 
                 </div>
@@ -622,12 +622,13 @@
             </fieldset>
 
         </fieldset>
-
-        <div class="offset5">
+             <legend></legend>
+        <div class="offset6">
             <input  type="submit"  class="btn" name="recieve_at_scene_save" id="recieve_at_scene_save"   value="Save" /> 
             <%--Display save result --%> 
-        </div>              
+        </div>                
     </form>  
+         
 <script type="text/javascript" src="js/RecieveBodyDateTime.js"></script>        
 </body>         
 </html>

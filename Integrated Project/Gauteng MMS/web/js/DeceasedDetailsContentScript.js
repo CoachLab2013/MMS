@@ -1,51 +1,115 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 $(document).ready(function(){
-    /**
-     * validation for the login form
-     */
-    $("#Deceasedform").validate({
-        rules:{
     
-            
-             PlaceBirth:{
-                   required: false,
-                   number: false
-               
-            },//end rule for postal code
-            
-            deceasedage:{
-                required: false,
-                number: true
-                
-            }            
-
-        },//end of rules
-               
-       
-        messages:{
-         PlaceBirth:{
-             number: "No number required"
-       
-         },
-         
-           deceasedage:{
-                
-                number: "Only numbers allowed"
-                
-            }
-            
-        }//end of messages
+  $("#Deceasedform").validate({
+      rules:{
+          DeceasedName: {
+              required: true
+          },
+          DeceasedSurname:{
+              required: true
+          },
+          deceasedidentificationtype:{
+              valueNotEquals: "Select"
+          },
+          DeceasedNumber:{
+              required: true
+          },
+          deceasedgender:{
+              valueNotEquals: "Select"
+          },
+          deceasedMaritalstatus:{
+               valueNotEquals: "Select"
+          },
+          deceasedrace:{
+               valueNotEquals: "Select"
+          },
+          deceasedOccupation:{
+               valueNotEquals: "Select" 
+          },
+          deceasedCitizenship:{
+               required: true
+          }
+      },
+      messages:{
+          
+          DeceasedName:{
+              required: "Please enter in the name of the deceased"
+          },
+          DeceasedSurname:{
+              required: "Please enter in the surname of the deceased"
+          },
+          deceasedidentificationtype:{
+              valueNotEquals: "Please select an identification type"
+          },
+          DeceasedNumber:{
+              required: "Please enter in an identification number"
+          },
+          deceasedgender:{
+              valueNotEquals: "Please select the gender of the deceased"
+          },
+          deceasedMaritalstatus:{
+               valueNotEquals: "Please select the marital status of the deceased"
+          },
+          deceasedrace:{
+               valueNotEquals: "Please select the race of the deceased"
+          },
+          deceasedOccupation:{
+               valueNotEquals: "Please select the occupation of the deceased"
+          },
+          deceasedCitizenship:{
+               required: "Please enter in the citizenship of the deceased"
+          }
+          
+      }
+  });
+  
+  $("#deceasedidentificationtype").click(function(){
+      if($("#deceasedidentificationtype option").filter(':selected').text() == "ID"){
+             $("#txtDeceasedNumberDis").rules("remove");
+             $("#txtDeceasedNumberDis").rules("add",{
+                 required:true,
+                 number: true,
+                 minlength: 13,
+                 maxlength: 13,
+                 messages:{
+                    required: "Please enter in an ID number",
+                   number: "Invalid ID number. It must contain exactly 13 numeric digits",
+                   minlength: "Invalid ID number. It must contain exactly 13 numeric digits",
+                   maxlength: "Invalid ID number. It must contain exactly 13 numeric digits" 
+                 }
+             });
+        }
+        else if($("#deceasedidentificationtype option").filter(':selected').text() == "Passport"){
+             $("#txtDeceasedNumberDis").rules("remove");
+             $("#txtDeceasedNumberDis").rules("add",{
+                 required:true,
+                 messages:{
+                    required: "Please enter in an passport number"
+                 }
+             });
+        }    
+  });
+  
+  
+    $("#btnDeceasedNameDis").click(function(){
+        toggle("btnDeceasedNameDis","txtDeceasedNameDis");
+    });
+    
+    function toggle(button, text){
+        if($("#"+button).val() == "Confirm"){
+            $("#"+text).attr("readonly", true);
+            $("#"+button).attr("value", "Edit");
+        }
+        else if($("#"+button).val() == "Edit"){
+            $("#"+text).attr("readonly", false);
+            $("#"+button).attr("value", "Confirm");
+        }
         
-    });//end of form validation
+    };
     
-
-}); 
-//end $(document).ready(function())
-
-
-
-
+    
+    $.validator.addMethod("valueNotEquals", function(value, element, arg){
+        return arg != value;
+    }, "Value must not equal arg.");
+    
+});

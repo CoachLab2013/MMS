@@ -39,98 +39,55 @@ $(document).ready(function() {
 
     });//end of form validation
     
-    //Hide all list items on first load.
-    $('#ICDlevel2 option').each(function() {
-        if ($(this).val() !== "Select Diagnosis 2")
-        {
-            $(this).attr('hidden', 'hidden');
-            $(this).attr('disabled', 'disabled');
-        } else {
-            $(this).removeAttr('hidden');
-            $(this).removeAttr('disabled');
-            $(this).attr('selected', 'selected');
-        }
-    });
-
-    $('#ICDlevel3 option').each(function() {
-        if ($(this).val() !== "Select Diagnosis 3")
-        {
-            $(this).attr('hidden', 'hidden');
-            $(this).attr('disabled', 'disabled');
-        } else {
-            $(this).removeAttr('hidden');
-            $(this).removeAttr('disabled');
-            $(this).attr('selected', 'selected');
-        }
-    });
-
-    $('#ICDlevel4 option').each(function() {
-        if ($(this).val() !== "Select Diagnosis 4")
-        {
-            $(this).attr('hidden', 'hidden');
-            $(this).attr('disabled', 'disabled');
-        } else {
-            $(this).removeAttr('hidden');
-            $(this).removeAttr('disabled');
-            $(this).attr('selected', 'selected');
-        }
-    });
-    
     //Trigger on list change. Reset children lists and show filtered values .       
     $('#ICDlevel1').change(function() {
-        var value = $(this).val().split(" ")[0];
-        $('#ICDlevel2').prop("selectedIndex",0);
-        $('#ICDlevel3').prop("selectedIndex",0);
-        $('#ICDlevel4').prop("selectedIndex",0);
+        
+        $.get("LoadICD10List", {type: "loadICD2", data: $(this).val().split(" ")[0]}, function (data) {
+            
+            var opt = "<option>Select Diagnosis 1</option>";
+            dataValues = data.split("~");
 
-        $('#ICDlevel2 option').each(function() {
-
-            var cmp = $(this).val().substring($(this).val().lastIndexOf('(') + 1, $(this).val().lastIndexOf(')'));
-
-            if (cmp !== value && $(this).val() !== "Select Diagnosis 2")
-            {
-                $(this).attr('hidden', 'hidden');
-                $(this).attr('disabled', 'disabled');
-            } else {
-                $(this).removeAttr('hidden');
-                $(this).removeAttr('disabled');                
-            }
+                for (var i = 0; i < dataValues.length - 1; i++)
+                {
+                    opt += "<option>" + dataValues[i] + "</option>";
+                }
+                $('#ICDlevel2').html(opt);
         });
+        
+        $('#ICDlevel3').html("<option>Select Diagnosis 2</option>");
+        $('#ICDlevel4').html("<option>Select Diagnosis 3</option>");        
     });
 
     $('#ICDlevel2').change(function() {
-        var value = $(this).val().substring(0, 3);
-        $('#ICDlevel3').prop("selectedIndex",0);
-        $('#ICDlevel4').prop("selectedIndex",0);
+        
+        $.get("LoadICD10List", {type: "loadICD3", data: $(this).val().substring(0, 3)}, function (data) {
+            
+            var opt = "<option>Select Diagnosis 2</option>";
+            dataValues = data.split("~");
 
-        $('#ICDlevel3 option').each(function() {
-
-            if ($(this).val().substring(0, 3) !== value && $(this).val() !== "Select Diagnosis 3")
-            {
-                $(this).attr('hidden', 'hidden');
-                $(this).attr('disabled', 'disabled');
-            } else {
-                $(this).removeAttr('hidden');
-                $(this).removeAttr('disabled');                
-            }
+                for (var i = 0; i < dataValues.length - 1; i++)
+                {
+                    opt += "<option>" + dataValues[i] + "</option>";
+                }
+                $('#ICDlevel3').html(opt);
         });
+                
+        $('#ICDlevel4').html("<option>Select Diagnosis 3</option>");        
     });
 
     $('#ICDlevel3').change(function() {
-        var value = $(this).val().substring(0, 5);
-        $('#ICDlevel4').prop("selectedIndex",0);
+        
+        $.get("LoadICD10List", {type: "loadICD4", data: $(this).val().substring(0, 5)}, function (data) {
+            
+            var opt = "<option>Select Diagnosis 3</option>";
+            dataValues = data.split("~");
 
-        $('#ICDlevel4 option').each(function() {
-
-            if ($(this).val().substring(0, 5) !== value && $(this).val() !== "Select Diagnosis 4")
-            {
-                $(this).attr('hidden', 'hidden');
-                $(this).attr('disabled', 'disabled');
-            } else {
-                $(this).removeAttr('hidden');
-                $(this).removeAttr('disabled');                
-            }
-        });
+                for (var i = 0; i < dataValues.length - 1; i++)
+                {
+                    opt += "<option>" + dataValues[i] + "</option>";
+                }
+                $('#ICDlevel4').html(opt);
+        });        
     });
 
     if ($("#_registerForensicSample").val() === "true") {
@@ -175,6 +132,5 @@ $(document).ready(function() {
         $("#Property").removeClass("active");
         $("#PostMortemFindings").addClass("active");
     }
-
 });
 //end $(document).ready(function())

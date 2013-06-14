@@ -8,6 +8,8 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -66,9 +68,31 @@ public class KinDb extends DatabaseConnector {
     }
 
     @Override
-    public String read() {
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String read() 
+    {
+        try 
+        {
+            statement.executeQuery("SELECT * FROM Kin WHERE Body_idDeathRegisterNumber='"+ kin.getBody_idDeathRegisterNumber()+"';");
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            kin = new Kin(); 
+            kin.setPassport(resultSet.getString("passport"));
+            kin.setName(resultSet.getString("name"));
+            kin.setSurname(resultSet.getString("surname"));
+            kin.setRelationWithDeceased(resultSet.getString("relationWithDeceased"));
+            kin.setContactNumber(resultSet.getString("contactNumber"));
+            kin.setAddress(resultSet.getString("address"));
+            kin.setWorkAddress(resultSet.getString("workAddress"));
+            kin.setID(resultSet.getString("ID"));
+            kin.setBody_idDeathRegisterNumber(resultSet.getString("body_idDeathRegisterNumber"));
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex)
+        {
+            return "failed " + ex.getMessage();
+        }
+        return "successful";
     }
 
     @Override
@@ -82,7 +106,7 @@ public class KinDb extends DatabaseConnector {
                     + "',contactNumber='" + kin.getContactNumber()
                     + "',address='" + kin.getAddress()
                     + "',workAddress='" + kin.getWorkAddress()
-                    + "where Id=" + kin.getID() + "';");
+                    + "',ID='" + kin.getID() + "' WHERE body_idDeathRegisterNumber='"+kin.getBody_idDeathRegisterNumber()+ "';");
             statement.close();
             connection.close();
         } catch (SQLException ex) {
@@ -95,7 +119,7 @@ public class KinDb extends DatabaseConnector {
     public ArrayList<Kin> KinList() throws SQLException {
         ArrayList<Kin> list = new ArrayList();
         try {
-            statement.executeQuery("SELECT passport,name, surname,relationWithDeceased,contactNumber,address,workAddress,Id,body_idDeathRegisterNumber From Kin;");
+            statement.executeQuery("SELECT passport,name, surname,relationWithDeceased,contactNumber,address,workAddress,ID,body_idDeathRegisterNumber From Kin;");
             //   Kin kinn = null;
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()) { 
@@ -107,7 +131,7 @@ public class KinDb extends DatabaseConnector {
                 kin.setContactNumber(resultSet.getString("contactNumber"));
                 kin.setAddress(resultSet.getString("address"));
                 kin.setWorkAddress(resultSet.getString("workAddress"));
-               // kin.setID(resultSet.getString("Id"));
+                kin.setID(resultSet.getString("ID"));
                 kin.setBody_idDeathRegisterNumber(resultSet.getString("body_idDeathRegisterNumber"));
                 list.add(kin);
             }

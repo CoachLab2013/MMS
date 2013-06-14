@@ -48,7 +48,7 @@
                         <td> Name of institution: </td><td>    <input type="text" name="institution" id="institution" /><br></td>
                     </tr>
                         <tr>
-                        <td> Scene Address:     </td><td><textarea cols="50" rows="3" name="address" id="address"> </textarea><br></td>
+                        <td> Scene Address:     </td><td><textarea cols="50" rows="3" name="address" id="address"></textarea><br></td>
 
                         </tr>
                         <tr>

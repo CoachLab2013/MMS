@@ -15,33 +15,33 @@ $(document).ready(function(){
         rules:{
             KinName:{
                 required: true
-            },//end rules for initial seal number 
+            },
           
               KinSurname:{
               required:true
-          },//end rules for Death Register number
+          },
           
                identificationtype:{
                 valueNotEquals: "Select"
-            },//end rule of identification type
+            },
             
-               KinIDNumber:{
-                required: true,
-                minlength: 13,
-                maxlength:13,
-                number:true
-             },//end rule of ID number
+          KinIDNumber:{
+              required: true
+          },
           
                NewSealNumber:{
               required:true
           },//end rules for New Seal Number
           
                KinRelationship:{
-              required:true
+                valueNotEquals:"Select"
           },//end rules for Kin Relationship
           
                KinContact:{
-              required:true
+              required:true,
+              number: true,
+              minlength: 10,
+              maxlength: 10
           },//end rules for Kin contact
           
               KinRes:{
@@ -51,7 +51,7 @@ $(document).ready(function(){
         },//end of rules
        
         messages:{
-          Kinname:{
+          KinName:{
                 required: "Please enter Kin/Informant Name."
           },//end messages for Kin Name
           
@@ -60,20 +60,20 @@ $(document).ready(function(){
           },//end message for Kin Surname
           
           identificationtype:{
-               valueNotEquals: "Please select a ID Number."
+               valueNotEquals: "Please select an identification type"
            },//end rule for id
-          
             KinIDNumber:{
-                required: "Please enter in ID number.",
-                minlength: "Your ID number must be exactly 14 digits long.",
-                maxlength: "Your ID number must be exactly 14 digits long.",
-                number: "Your ID number must consist of 14 numeric digits."
-            }, //end messages for ID number
-            
+              required: "Please enter an identification number"
+          },
           KinRelationship:{
-            required: "Please enter the relationship to deceased."  
+            valueNotEquals: "Please enter the relationship to deceased."  
           },//end message for lab reference number
-          
+          KinContact:{
+              required:"Please enter in a phone number",
+              number: "Invalid phone number. A phone number must consist of exactly 10 numeric digits",
+              minlength: "Invalid phone number. A phone number must consist of exactly 10 numeric digits",
+              maxlength: "Invalid phone number. A phone number must consist of exactly 10 numeric digits"
+          },
           KinRes:{
             required: "Please enter in the Kin's/Informant Address."  
           }//end message for reason for seal
@@ -107,7 +107,42 @@ $(document).ready(function(){
         $("#KinInformantDetails").addClass("tab-pane");
         $("#DeceasedDetails").removeClass("tab-pane");
         $("#DeceasedDetails").addClass("tab-pane active");
-    }
+    };
+    
+    
+    $.validator.addMethod("valueNotEquals", function(value, element, arg){
+        return arg != value;
+    }, "Value must not equal arg.");
+    
+    
+    $("#kinIdType").click(function(){
+        
+       if($("#kinIdType option").filter(':selected').text() == "ID"){
+             $("#kinIdNumber").rules("remove");
+             $("#kinIdNumber").rules("add",{
+                 required:true,
+                 number: true,
+                 minlength: 13,
+                 maxlength: 13,
+                 messages:{
+                    required: "Please enter in an ID number",
+                   number: "Invalid ID number. It must contain exactly 13 numeric digits",
+                   minlength: "Invalid ID number. It must contain exactly 13 numeric digits",
+                   maxlength: "Invalid ID number. It must contain exactly 13 numeric digits" 
+                 }
+             });
+        }
+        else if($("#kinIdType option").filter(':selected').text() == "Passport"){
+             $("#kinIdNumber").rules("remove");
+             $("#kinIdNumber").rules("add",{
+                 required:true,
+                 messages:{
+                    required: "Please enter in an passport number"
+                 }
+             });
+        }    
+        
+    });
 }); 
 //end $(document).ready(function())
 
