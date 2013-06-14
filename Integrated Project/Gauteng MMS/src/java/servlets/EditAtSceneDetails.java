@@ -33,7 +33,7 @@ import javax.servlet.http.HttpSession;
  * @author Bandile
  */
 @WebServlet(name = "editAtSceneDetails", urlPatterns = {"/editAtSceneDetails"})
-public class editAtSceneDetails extends HttpServlet {
+public class EditAtSceneDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
