@@ -89,42 +89,55 @@ public class ReferenceListServlet extends HttpServlet {
         //if it comes from add user form
         if (request.getParameter("form").equals("AddUser")) {
             //JOptionPane.showMessageDialog(response, "yey");
+            try {
+                String personnel = request.getParameter("personnelNumber");
+                String password = random(8);
 
-            String personnel = request.getParameter("personnelNumber");
-            String password = random(8);
-
-            String name = request.getParameter("firstName");
-            String surname = request.getParameter("surname");
-            String email = request.getParameter("email");
-            ClassSendMailTLS sendmail = new ClassSendMailTLS();
-            sendmail.sendMail(email.trim(), "You password for the Gauteng MMS system is \n  " + password);
-            boolean active = Boolean.valueOf(request.getParameter("active"));
-            int level = Integer.parseInt(request.getParameter("level"));
+                String name = request.getParameter("firstName");
+                String surname = request.getParameter("surname");
+                String email = request.getParameter("email");
+                ClassSendMailTLS sendmail = new ClassSendMailTLS();
+                sendmail.sendMail(email.trim(), "Hi "+ name+" "+surname +"\n Your Login credentials to the Gauteng MMS system are as follows: \n Persal Number: "+ personnel+"\n Password: " + password+"\n \n Gauteng MMS Admin");
+                boolean active = Boolean.valueOf(request.getParameter("active"));
+                int level = Integer.parseInt(request.getParameter("level"));
 
 
 
-            Employee emp = new Employee(personnel, password, name, surname, "Gauteng MMS", level, email, active);
-            DatabaseConnector empDb = new EmployeeDb(emp, dbDetail);
+                Employee emp = new Employee(personnel, password, name, surname, "Gauteng MMS", level, email, active);
+                DatabaseConnector empDb = new EmployeeDb(emp, dbDetail);
 
-            boolean status = empDb.init();
-            result = empDb.add();
+                boolean status = empDb.init();
+                result = empDb.add();
 
-            if (result.equals("successful")) {
-                //if save is successful, return a message to page
+                if (result.equals("successful")) {
+                    //if save is successful, return a message to page
+                    HttpSession sess = request.getSession();
+                    sess.setAttribute("main", "user");
+                    sess.setAttribute("tab", "Adduser");
+                    sess.setAttribute("result", "Employee has been successfuly saved to database");
+                    response.sendRedirect("Admin.jsp");
+
+                } else {
+                    //if save is not successful
+                    HttpSession sess = request.getSession();
+                    sess.setAttribute("main", "user");
+                    sess.setAttribute("tab", "Adduser");
+                    sess.setAttribute("result", "Employee did not save: because " + result);
+                    response.sendRedirect("Admin.jsp");
+
+                }
+            } catch (Exception ex) {
                 HttpSession sess = request.getSession();
+                String mess = "";
                 sess.setAttribute("main", "user");
                 sess.setAttribute("tab", "Adduser");
-                sess.setAttribute("result", "Employee has been successfuly saved to database");
+                if(ex.getMessage().contains("javax.mail")){
+                  mess = "there is no internet connection found on this computer";
+                }else{
+                   mess= "an exception was found in ReferenceListServlet.java, the exception is: "+ex.getMessage();
+                }
+                sess.setAttribute("result",  "Employee did not save: because " + mess);
                 response.sendRedirect("Admin.jsp");
-
-            } else {
-                //if save is not successful
-                HttpSession sess = request.getSession();
-                sess.setAttribute("main", "user");
-                sess.setAttribute("tab", "Adduser");
-                sess.setAttribute("result", "Employee did not save: because " + result);
-                response.sendRedirect("Admin.jsp");
-
             }
 
         } else if (request.getParameter("form").equals("AddInsitution")) {
@@ -633,7 +646,7 @@ public class ReferenceListServlet extends HttpServlet {
             }
 
         } else if (request.getParameter("form").equals("AddReleaseType")) {
-             String releaseType = request.getParameter("txtReleaseType");
+            String releaseType = request.getParameter("txtReleaseType");
             ReferenceListDb emp = new ReferenceListDb("releasedtype", "idReleasedType", "type", releaseType, dbDetail);
             emp.init();
             result = emp.add().trim();
@@ -655,7 +668,7 @@ public class ReferenceListServlet extends HttpServlet {
             }
 
         } else if (request.getParameter("form").equals("AddReleaseTo")) {
-             String releaseTo = request.getParameter("txtReleaseTo");
+            String releaseTo = request.getParameter("txtReleaseTo");
             ReferenceListDb emp = new ReferenceListDb("releasedto", "idReleasedTo", "type", releaseTo, dbDetail);
             emp.init();
             result = emp.add().trim();

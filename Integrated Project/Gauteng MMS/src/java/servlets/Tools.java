@@ -40,7 +40,7 @@ public class Tools {
         db1.init();
         EmployeeDb db2 = new EmployeeDb(e2, getDbdetail());
         db2.init();
-        db1.add();
+        db1.add();  
         return (db2.add());
     }
 

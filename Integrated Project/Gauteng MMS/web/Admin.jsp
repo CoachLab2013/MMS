@@ -87,26 +87,10 @@
             String releaseTypeResult = "";
             String releaseToResult = "";
 
+            //Veriables to determine which tab to open
             String main1 = "";
             String addUserTab = "";
             String currentUserTab = "";
-
-            //checks which tab to open
-            if (null != session.getAttribute("result")) {
-                userResult = session.getAttribute("result").toString();
-                if (null != session.getAttribute("tab")) {
-                    if (session.getAttribute("tab").toString().equals("Adduser")) {
-                        addUserTab = "active";
-                        currentUserTab = "";
-                    }
-
-                }
-            } else {
-                addUserTab = "";
-                currentUserTab = "active";
-            }
-
-            //Veriables to determine which tab to open
             String main2 = "";
             String inst = "";
             String analysis = "";
@@ -131,155 +115,162 @@
             String scene = "";
             String releaseType = "";
 
-
-
-            //Determine which tab must be open
-            try {
-                if (session.getAttribute("main").equals("ref")) {
-
-                    main2 = "active";
-
-                    if (session.getAttribute("tab").equals("insti")) {
-                        inst = "active";
-                        instiResult = session.getAttribute("insti").toString();
-
-                    } else if (session.getAttribute("tab").equals("analysis")) {
-                        analysis = "active";
-                        analysisResult = session.getAttribute("analysisResult").toString();
-
-                    } else if (session.getAttribute("tab").equals("property")) {
-                        propertyResult = session.getAttribute("propertyResult").toString();
-                        property = "active";
-                    } else if (session.getAttribute("tab").equals("vehi")) {
-                        vehicleResult = session.getAttribute("vehicleResult").toString();
-                        vehi = "active";
-                    } else if (session.getAttribute("tab").equals("rank")) {
-                        rankResult = session.getAttribute("rankResult").toString();
-                        rank = "active";
-                    } else if (session.getAttribute("tab").equals("gender")) {
-                        genderResult = session.getAttribute("genderResult").toString();
-                        gender = "active";
-                    } else if (session.getAttribute("tab").equals("occu")) {
-                        occupationResult = session.getAttribute("occupationResult").toString();
-                        occu = "active";
-                    } else if (session.getAttribute("tab").equals("race")) {
-                        raceResult = session.getAttribute("raceResult").toString();
-                        race = "active";
-                    } else if (session.getAttribute("tab").equals("marital")) {
-                        maritalResult = session.getAttribute("maritalResult").toString();
-                        marital = "active";
-                    } else if (session.getAttribute("tab").equals("province")) {
-                        provinceResult = session.getAttribute("provinceResult").toString();
-                        province = "active";
-
-                    } else if (session.getAttribute("tab").equals("region")) {
-                        regionResult = session.getAttribute("regionResult").toString();
-                        region = "active";
-
-                    } else if (session.getAttribute("tab").equals("manner")) {
-                        mannerResult = session.getAttribute("mannerResult").toString();
-                        manner = "active";
-                    } else if (session.getAttribute("tab").equals("sample")) {
-
-                        sampleResult = session.getAttribute("sampleResult").toString();
-                        sample = "active";
-
-                    } else if (session.getAttribute("tab").equals("status")) {
-                        statusResult = session.getAttribute("statusResult").toString();
-                        status = "active";
-                    } else if (session.getAttribute("tab").equals("relationship")) {
-                        relationshipResult = session.getAttribute("relationshipResult").toString();
-                        relationship = "active";
-                    } else if (session.getAttribute("tab").equals("bodyPart")) {
-                        bodyPart = "active";
-                        bodyPartResult = session.getAttribute("bodyPartResult").toString();
-                    } else if (session.getAttribute("tab").equals("specialCur")) {
-                        specialCur = "active";
-                        specialCurResult = session.getAttribute("specialCurResult").toString();
-                    } else if (session.getAttribute("tab").equals("Adduser")) {
-                        addUserTab = "active";
-                        userResult = session.getAttribute("relationshipResult").toString();
-                    } else if (session.getAttribute("tab").equals("exCause")) {
-                        exCause = "active";
-                        exCauseResult = session.getAttribute("externalCauseResults").toString();
-                    } else if (session.getAttribute("tab").equals("seal")) {
-                        slType = "active";
-                        slTypeResult = session.getAttribute("sealTypeResults").toString();
-                    } else if (session.getAttribute("tab").equals("scene")) {
-                        scene = "active";
-                        sceneResult = session.getAttribute("sceneResult").toString();
-                    } else if (session.getAttribute("tab").equals("releaseType")) {
-                        releaseType = "active";
-                        releaseTypeResult = session.getAttribute("releaseTypeResult").toString();
-                    } else if (session.getAttribute("tab").equals("releaseTo")) {
-                        releaseTo = "active";
-                        releaseToResult = session.getAttribute("releaseToResult").toString();
-                    }
-
+            //checks which tab to open
+            
+            try{
+            
+            if (session.getAttribute("main").equals("user")) {
+                main1 = "active";
+                if (null != session.getAttribute("result")) {
+                    userResult = session.getAttribute("result").toString();
+                }
+                if (session.getAttribute("tab").toString().equals("Adduser")) {
+                    addUserTab = "active";
 
                 } else {
-                    userResult = "";
-                    instiResult = "";
-                    analysisResult = "";
-                    propertyResult = "";
-                    vehicleResult = "";
-                    rankResult = "";
-                    genderResult = "";
-                    occupationResult = "";
-                    raceResult = "";
-                    maritalResult = "";
-
-                    provinceResult = "";
-                    regionResult = "";
-                    mannerResult = "";
-                    sampleResult = "";
-                    statusResult = "";
-                    relationshipResult = "";
-                    specialCurResult = "";
-                    bodyPartResult = "";
-                    exCauseResult = "";
-                    slTypeResult = "";
-                    sceneResult = "";
-                    releaseTypeResult = "";
-                    releaseToResult = "";
-
-                    main1 = "active";
-
                     currentUserTab = "active";
-
-
                 }
-            } catch (Exception ex) {
-                userResult = "";
-                instiResult = "";
-                analysisResult = "";
-                propertyResult = "";
-                vehicleResult = "";
-                rankResult = "";
-                genderResult = "";
-                occupationResult = "";
-                raceResult = "";
-                maritalResult = "";
+            } else if (session.getAttribute("main").equals("ref")) {
 
-                provinceResult = "";
-                regionResult = "";
-                mannerResult = "";
-                sampleResult = "";
-                statusResult = "";
-                relationshipResult = "";
-                specialCurResult = "";
-                bodyPartResult = "";
-                exCauseResult = "";
-                slTypeResult = "";
-                sceneResult = "";
-                releaseTypeResult = "";
-                releaseToResult = "";
+                main2 = "active";
 
-                currentUserTab = "active";
+                if (session.getAttribute("tab").equals("insti")) {
+                    inst = "active";
+                    instiResult = session.getAttribute("insti").toString();
+
+                } else if (session.getAttribute("tab").equals("analysis")) {
+                    analysis = "active";
+                    analysisResult = session.getAttribute("analysisResult").toString();
+
+                } else if (session.getAttribute("tab").equals("property")) {
+                    propertyResult = session.getAttribute("propertyResult").toString();
+                    property = "active";
+                } else if (session.getAttribute("tab").equals("vehi")) {
+                    vehicleResult = session.getAttribute("vehicleResult").toString();
+                    vehi = "active";
+                } else if (session.getAttribute("tab").equals("rank")) {
+                    rankResult = session.getAttribute("rankResult").toString();
+                    rank = "active";
+                } else if (session.getAttribute("tab").equals("gender")) {
+                    genderResult = session.getAttribute("genderResult").toString();
+                    gender = "active";
+                } else if (session.getAttribute("tab").equals("occu")) {
+                    occupationResult = session.getAttribute("occupationResult").toString();
+                    occu = "active";
+                } else if (session.getAttribute("tab").equals("race")) {
+                    raceResult = session.getAttribute("raceResult").toString();
+                    race = "active";
+                } else if (session.getAttribute("tab").equals("marital")) {
+                    maritalResult = session.getAttribute("maritalResult").toString();
+                    marital = "active";
+                } else if (session.getAttribute("tab").equals("province")) {
+                    provinceResult = session.getAttribute("provinceResult").toString();
+                    province = "active";
+
+                } else if (session.getAttribute("tab").equals("region")) {
+                    regionResult = session.getAttribute("regionResult").toString();
+                    region = "active";
+
+                } else if (session.getAttribute("tab").equals("manner")) {
+                    mannerResult = session.getAttribute("mannerResult").toString();
+                    manner = "active";
+                } else if (session.getAttribute("tab").equals("sample")) {
+
+                    sampleResult = session.getAttribute("sampleResult").toString();
+                    sample = "active";
+
+                } else if (session.getAttribute("tab").equals("status")) {
+                    statusResult = session.getAttribute("statusResult").toString();
+                    status = "active";
+                } else if (session.getAttribute("tab").equals("relationship")) {
+                    relationshipResult = session.getAttribute("relationshipResult").toString();
+                    relationship = "active";
+                } else if (session.getAttribute("tab").equals("bodyPart")) {
+                    bodyPart = "active";
+                    bodyPartResult = session.getAttribute("bodyPartResult").toString();
+                } else if (session.getAttribute("tab").equals("specialCur")) {
+                    specialCur = "active";
+                    specialCurResult = session.getAttribute("specialCurResult").toString();
+                } else if (session.getAttribute("tab").equals("Adduser")) {
+                    addUserTab = "active";
+                    userResult = session.getAttribute("relationshipResult").toString();
+                } else if (session.getAttribute("tab").equals("exCause")) {
+                    exCause = "active";
+                    exCauseResult = session.getAttribute("externalCauseResults").toString();
+                } else if (session.getAttribute("tab").equals("seal")) {
+                    slType = "active";
+                    slTypeResult = session.getAttribute("sealTypeResults").toString();
+                } else if (session.getAttribute("tab").equals("scene")) {
+                    scene = "active";
+                    sceneResult = session.getAttribute("sceneResult").toString();
+                } else if (session.getAttribute("tab").equals("releaseType")) {
+                    releaseType = "active";
+                    releaseTypeResult = session.getAttribute("releaseTypeResult").toString();
+                } else if (session.getAttribute("tab").equals("releaseTo")) {
+                    releaseTo = "active";
+                    releaseToResult = session.getAttribute("releaseToResult").toString();
+                }
+
+
+            } else {
                 main1 = "active";
-
+                addUserTab = "";
+                currentUserTab = "active";
+                main2 = "";
+                inst = "";
+                analysis = "";
+                relationship = "";
+                bodyPart = "";
+                status = "";
+                sample = "";
+                manner = "";
+                province = "";
+                region = "";
+                marital = "";
+                race = "";
+                occu = "";
+                gender = "";
+                rank = "";
+                vehi = "";
+                property = "";
+                specialCur = "";
+                exCause = "";
+                slType = "";
+                releaseTo = "";
+                scene = "";
+                releaseType = "";
 
             }
+            
+            }catch(NullPointerException ex){
+                main1 = "active";
+                addUserTab = "";
+                currentUserTab = "active";
+                main2 = "";
+                inst = "";
+                analysis = "";
+                relationship = "";
+                bodyPart = "";
+                status = "";
+                sample = "";
+                manner = "";
+                province = "";
+                region = "";
+                marital = "";
+                race = "";
+                occu = "";
+                gender = "";
+                rank = "";
+                vehi = "";
+                property = "";
+                specialCur = "";
+                exCause = "";
+                slType = "";
+                releaseTo = "";
+                scene = "";
+                releaseType = "";
+            }
+
             SetDbDetail dbset = new SetDbDetail();
 
             //Code to fill users table
