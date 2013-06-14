@@ -126,35 +126,7 @@ $(document).ready(function(){
         $(this).removeClass("tablerow");
         $(this).addClass("selectedtablerow");  
         
-        if (!$(this).attr("drnumber") == "") {
-            $.get("ReleaseBodyServlet", {type: "load", data: $(this).attr("drnumber")}, function(data) {
-
-                var tr = "<tr><th class='tableheading'>Death Register Number</th>" +
-                        "<th class='tableheading'>Name</th>" +
-                        "<th class='tableheading'>Surname</th>" +
-                        "<th class='tableheading'>ID/Passport Number</th>" +
-                        "<th class='tableheading'>Identification Status</th></tr>";
-                var row = data.split("~");
-
-                for (var i = 0; i < row.length - 1; i++)
-                {
-                    tr += "<tr class='tablerow'>";
-                    var cell = row[i].split("`");
-                    for (var j = 0; j < cell.length; j++)
-                    {
-                        tr += "<td class='tablecell'>" + cell[j] + "</td>";
-                    }
-                    tr += "</tr>";
-                }
-
-                $('#releaseLinkTable').html(tr);
-            });
-            
-            $('#Releaseform').css('display', 'inherit');
-            $('#RecipientDeathRegisterNumber').val($(this).attr("drnumber"));
-        } else {
-            $('#Releaseform').css('display', 'none');
-        }
+        $('#Releaseform').css('display', 'inherit');            
     });
     
     if($("#_recipientDetail").val() === "true") {

@@ -63,7 +63,7 @@
                             <input type="submit" class="btn" value="Login" /> <br/><br/>
                             <%
                                     if(null != session.getAttribute("loginerror")){
-                                    out.println("<label class='error'>"+session.getAttribute("loginerror")+"</label>");
+                                    out.println("<label class='alert alert-error'>"+session.getAttribute("loginerror")+"</label>");
                                     session.removeAttribute("loginerror");
                                     }
                             %>

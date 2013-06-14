@@ -364,14 +364,11 @@ public class Tools {
      * This will create a table that has bodyRelease information from the
      * database
      */   
-      public String bodyReleaseTable() {
-
-        BodyDb bodyDb = new BodyDb(dbdetail);
-        bodyDb.init();
-
-        try {
-
-            ArrayList<BodyAtMortuary> bodylist = bodyDb.getBodies();
+      public String bodyReleaseTable(String drnumber) {
+            
+            BodyDb bodyDb = new BodyDb(dbdetail, new BodyAtMortuary(drnumber));
+            bodyDb.init();
+            bodyDb.read();
 
             String table = "<table class='tabledisplay' id='releaseTable'>"
                     + "<th class='tableheading'>Death Register Number</th>"
@@ -379,34 +376,62 @@ public class Tools {
                     + "<th class='tableheading'>Surname</th>"
                     + "<th class='tableheading'>ID/Passport Number</th>"
                     + "<th class='tableheading'>Identification Status</th>";
-
-            for (int i = 0; i < bodylist.size(); i++) {
-                BodyAtMortuary bodyAtMortuary = bodylist.get(i);
-
-                BodyFile bodyFile = new BodyFile(bodyAtMortuary.getDeathRegisterNumber());
+            
+                BodyFile bodyFile = new BodyFile(bodyDb.getBody().getDeathRegisterNumber());
                 BodyFileDb bodyFileDB = new BodyFileDb(dbdetail, bodyFile);
                 bodyFileDB.init();
                 bodyFileDB.read();
 
-                table += "<tr class='tablerow' drnumber='" + bodyAtMortuary.getDeathRegisterNumber() + "'>"
-                        + "<td>" + bodyAtMortuary.getDeathRegisterNumber() + "</td>"
-                        + "<td class='tablecell'>" + bodyAtMortuary.getNameOfDeceased() + "</td>"
-                        + "<td class='tablecell'>" + bodyAtMortuary.getSurnameOfDeceased() + "</td>"
-                        + "<td class='tablecell'>" + bodyAtMortuary.getID() + "</td>"
+                table += "<tr class='tablerow' drnumber='" + bodyDb.getBody().getDeathRegisterNumber() + "'>"
+                        + "<td>" + bodyDb.getBody().getDeathRegisterNumber() + "</td>"
+                        + "<td class='tablecell'>" + bodyDb.getBody().getNameOfDeceased() + "</td>"
+                        + "<td class='tablecell'>" + bodyDb.getBody().getSurnameOfDeceased() + "</td>"
+                        + "<td class='tablecell'>" + bodyDb.getBody().getID() + "</td>"
                         + "<td class='tablecell'>" + bodyFile.isBodyIdentified() + "</td>"
                         + "</tr>";
-            }
 
             table += "</table>";
 
             return table;
-        } catch (SQLException ex) {
-            return ex.getMessage();
-        }
     }
     // end 
 
-      
+    /**
+     * This will create a table that has all the linked body information for the
+     * release body
+     */   
+         public String bodyReleaseLinkedTable(String drnumber) {
+            
+            String table = "<table class='tabledisplay' id='releaseLinkedTable'>"
+                    + "<th class='tableheading'>Death Register Number</th>"
+                    + "<th class='tableheading'>Name</th>"
+                    + "<th class='tableheading'>Surname</th>"
+                    + "<th class='tableheading'>ID/Passport Number</th>"
+                    + "<th class='tableheading'>Identification Status</th>";
+            
+                BodyFileDb bodyFileDB = new BodyFileDb(dbdetail);
+                bodyFileDB.init();
+
+                ArrayList<BodyAtMortuary> list = bodyFileDB.getBodyLinkList(drnumber);
+                for (BodyAtMortuary tmpBody : list) {
+                                        
+                    bodyFileDB = new BodyFileDb(dbdetail, new BodyFile(tmpBody.getDeathRegisterNumber()));
+                    bodyFileDB.init();
+                    bodyFileDB.read();
+                    
+                table += "<tr class='tablerow' drnumber='" + tmpBody.getDeathRegisterNumber() + "'>"
+                        + "<td>" + tmpBody.getDeathRegisterNumber() + "</td>"
+                        + "<td class='tablecell'>" + tmpBody.getNameOfDeceased() + "</td>"
+                        + "<td class='tablecell'>" + tmpBody.getSurnameOfDeceased() + "</td>"
+                        + "<td class='tablecell'>" + tmpBody.getID() + "</td>"
+                        + "<td class='tablecell'>" + bodyFileDB.getBodyFile().isBodyIdentified() + "</td>"
+                        + "</tr>";
+                }
+            table += "</table>";
+
+            return table;
+    }  
+    // end 
       
       
  //     

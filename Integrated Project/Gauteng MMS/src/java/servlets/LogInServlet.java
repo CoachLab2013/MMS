@@ -44,7 +44,7 @@ public class LogInServlet extends HttpServlet {
             int access = t.logIn(personnelnumber, password, sess);
            
             if(access == -1){
-                sess.setAttribute("loginerror", "Invalid persal number and/or password");
+                sess.setAttribute("loginerror", "Invalid Persal Number and/or Password");
                 response.sendRedirect("/Gauteng_MMS/");
             }
             else{
