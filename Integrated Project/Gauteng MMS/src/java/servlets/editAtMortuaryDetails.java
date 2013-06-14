@@ -29,8 +29,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Bandile
  */
-@WebServlet(name = "AtMortuaryServlet", urlPatterns = {"/AtMortuaryServlet"})
-public class AtMortuaryServlet extends HttpServlet {
+@WebServlet(name = "editAtMortuaryDetails", urlPatterns = {"/editAtMortuaryDetails"})
+public class editAtMortuaryDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -45,7 +45,8 @@ public class AtMortuaryServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();   
+        PrintWriter out = response.getWriter();
+        
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
         /**
@@ -194,7 +195,21 @@ public class AtMortuaryServlet extends HttpServlet {
         HttpSession sess = request.getSession();
         sess.setAttribute("atMortuary", true);
         response.sendRedirect("Home.jsp");
-
+        
+        /*try {
+            /* TODO output your page here. You may use following sample code. 
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet editAtMortuaryDetails</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet editAtMortuaryDetails at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {            
+            out.close();
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

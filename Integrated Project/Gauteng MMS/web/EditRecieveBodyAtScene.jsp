@@ -102,8 +102,8 @@
                 <label class="control-label" for="edit_SAPSmemberBodyRank">Rank</label>
                 <div class="controls">
                     <% String list = t.makeReferenceList("rank", "type", "");
-                        list = list.replaceFirst("name='rank'", "name='SAPSmemberBodyRank'");
-                        list = list.replaceFirst("id='rank'", "id='SAPSmemberBodyRank'");
+                        list = list.replaceFirst("name='rank'", "name='edit_SAPSmemberBodyRank'");
+                        list = list.replaceFirst("id='rank'", "id='edit_SAPSmemberBodyRank'");
                         out.println(list);
                     %>
                 </div>
@@ -130,8 +130,8 @@
                 <div class="controls">
                     <%
                     String persal = t.makeReferenceList("employee", "personnelNumber", "");
-                    persal = persal.replaceAll("name='employee'", "name='FPSmemberBodyPersal'");
-                    persal = persal.replaceAll("id='employee'", "id='FPSmemberBodyPersal'");
+                    persal = persal.replaceAll("name='employee'", "name='edit_FPSmemberBodyPersal'");
+                    persal = persal.replaceAll("id='employee'", "id='edit_FPSmemberBodyPersal'");
                     out.println(persal);
                     %>                    
                 </div>
@@ -148,8 +148,8 @@
                 <div class="controls">
                     <%
                         String list2 = t.makeReferenceList("rank", "type", "");
-                        list2 = list2.replaceFirst("name='rank'", "name='FPSmemberBodyRank'");
-                        list2 = list2.replaceFirst("id='rank'", "id='FPSmemberBodyRank'");
+                        list2 = list2.replaceFirst("name='rank'", "name='edit_FPSmemberBodyRank'");
+                        list2 = list2.replaceFirst("id='rank'", "id='edit_FPSmemberBodyRank'");
                         out.println(list2);
                     %>
                 </div>
@@ -189,8 +189,8 @@
                     <div class="controls">
                         <%
                             String list3 = t.makeReferenceList("rank", "type", "");
-                            list3 = list3.replaceFirst("name='rank'", "name='pathologistBodyRank'");
-                            list3 = list3.replaceFirst("id='rank'", "id='pathologistBodyRank'");
+                            list3 = list3.replaceFirst("name='rank'", "name='edit_pathologistBodyRank'");
+                            list3 = list3.replaceFirst("id='rank'", "id='edit_pathologistBodyRank'");
                             out.println(list3);
                         %>
                     </div>
@@ -473,7 +473,7 @@
                 <label class="control-label" for="edit_FPSbodyReceiveFacilitydate">Date:</label> 
 
                 <div class="controls">
-                    <input id="edit_ReceivedFDate" name="edit_ReceivedFacilityDate" type="text" readonly style="cursor:pointer;" />                    
+                    <input id="edit_ReceivedFacilityDate" name="edit_ReceivedFacilityDate" type="text" readonly style="cursor:pointer;" />                    
                 </div>
             </div>
 
@@ -481,7 +481,7 @@
                 <label class="control-label" for="edit_FPSbodyReceiveFacilityTime">Time:</label> 
 
                 <div class="controls">
-                    <input id="edit_ReceivedFTime" name="edit_ReceivedFacilityTime" type="text" readonly style="cursor:pointer;" />                    
+                    <input id="edit_ReceivedFacilityTime" name="edit_ReceivedFacilityTime" type="text" readonly style="cursor:pointer;" />                    
                 </div>
             </div>
 
