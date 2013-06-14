@@ -16,7 +16,7 @@ $(document).ready(function(){
                    number: true,
                    minlength : 4,
                    maxlength : 4
-            },//end rule for postal code
+            }//end rule for postal code
             
 
         },//end of rules
@@ -27,9 +27,9 @@ $(document).ready(function(){
        
         messages:{
          postalcode:{
-             number: "Please enter valid code",
-             minlength :"Postal code must be 4 numbers long",
-             maxlength :"Postal code must be 4 numbers long"
+             number: "Invalid postal code. It must contain 4 numeric digits",
+             minlength :"Invalid postal code. It must contain 4 numeric digits",
+             maxlength :"Invalid postal code. It must contain 4 numeric digits"
          }
           
    

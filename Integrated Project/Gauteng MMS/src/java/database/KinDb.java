@@ -106,7 +106,7 @@ public class KinDb extends DatabaseConnector {
                     + "',contactNumber='" + kin.getContactNumber()
                     + "',address='" + kin.getAddress()
                     + "',workAddress='" + kin.getWorkAddress()
-                    + "where Id=" + kin.getID() + "';");
+                    + "',ID='" + kin.getID() + "' WHERE body_idDeathRegisterNumber='"+kin.getBody_idDeathRegisterNumber()+ "';");
             statement.close();
             connection.close();
         } catch (SQLException ex) {
@@ -119,7 +119,7 @@ public class KinDb extends DatabaseConnector {
     public ArrayList<Kin> KinList() throws SQLException {
         ArrayList<Kin> list = new ArrayList();
         try {
-            statement.executeQuery("SELECT passport,name, surname,relationWithDeceased,contactNumber,address,workAddress,Id,body_idDeathRegisterNumber From Kin;");
+            statement.executeQuery("SELECT passport,name, surname,relationWithDeceased,contactNumber,address,workAddress,ID,body_idDeathRegisterNumber From Kin;");
             //   Kin kinn = null;
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()) { 

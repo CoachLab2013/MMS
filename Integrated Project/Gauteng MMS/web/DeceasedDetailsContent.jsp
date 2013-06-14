@@ -23,24 +23,22 @@
         <script language="javascript" src="js/jquery-1.9.1.js"></script>
          <script language="javascript" src="js/jquery.validate.min.js"></script>
          <script src="js/DeceasedDetailsContentScript.js"></script>
-                 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+          <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
-         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
-        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css">
+         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"/> 
+        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css"/>
     </head>
    
     <body>
     <legend>Deceased Details Contents </legend>
-<<<<<<< HEAD
+
     <form name="Deceasedform" id="Deceasedform" method="post" action="DeceasedDetailsServlet">
         <input type="hidden" name="deceasedDeathRegisterNr" <% 
             if(session.getAttribute("deceasedDeathRegisterNumber") != null)
             {
                 out.print("value=" + session.getAttribute("deceasedDeathRegisterNumber")); 
             }%> />
-=======
-    <form  id="Deceasedform" name="Deceasedform"  method="post" action="DeceasedDetailsServlet">
->>>>>>> origin/master
+
         <script>
             var counter = 0;
             var ini;
@@ -90,27 +88,28 @@
             </tr> 
 
             <tr>     
-                <td>Identification type:  </td> <td> <select name="deceasedidentificationtype"> 
+                <td>Identification type:  </td> <td> <select name="deceasedidentificationtype" id="deceasedidentificationtype"> 
                         <option selected="selected" >Select</option>
                         <%
                          if(session.getAttribute("bIdIDNumber") != null)
                          {
                             String i = (String)session.getAttribute("bIdIDNumber");
           
-                            if(i.length() == 13) 
+                            if(i.contains("null")) 
                             {
-                                out.print("<option>ID</option>");
+                                out.print("<option selected='selected'>ID</option>");
                                 out.print("<option>Passport</option>");
                             } 
                             else 
                             {
-                                out.print("<option>Passport</option>");
+                                out.print("<option selected='selected'>Passport</option>");
                                 out.print("<option>ID</option>");
                             }
                          }
                          else
                          {
-                             out.print("<option></option>");
+                             out.print("<option>ID</option>");
+                             out.print("<option>Passport</option>");
                          }
                         %>
                     </select> </td>
@@ -121,15 +120,20 @@
                   {
                     out.println("value=" + session.getAttribute("bIdIDNumber"));
                   }
+                  else
+                  {
+                      if(session.getAttribute("bIdPassport") != null)
+                      out.println("value=" + session.getAttribute("bIdPassport"));
+                  }
                  %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
             </tr> 
             <tr>
-                <td> Place of Birth:</td> <td> <input type="text" name="deceasedPlaceBirth" <%
+                <td> Place of Birth:</td> <td><textarea cols="50" rows="3" name="deceasedPlaceBirth"><%
                   if(session.getAttribute("bIdPlaceOfBirth") != null)
                   {
-                    out.println("value=" + session.getAttribute("bIdPlaceOfBirth"));
+                    out.println(session.getAttribute("bIdPlaceOfBirth"));
                   }
-                 %>  /></td>
+                 %></textarea></td>
             </tr>
             <tr>     
                 <td>Date of Birth: </td> <td> <input type="text" name="deceasedDateBirth" <%
@@ -273,13 +277,15 @@
                     <br>
                 </td>
             </tr>
+            <script src="js/DeceasedDetailsDateTime.js"></script>
             <tr>
                 <td> <td>  <input class="btn" type="submit" value="Save" name="bodySave" /><br></td></td>
 
             </tr>
         </table>
+                     
     </form>
-                             <script src="js/DeceasedDetailsDateTime.js"></script>
+                            
 </body>
 
 </html>
