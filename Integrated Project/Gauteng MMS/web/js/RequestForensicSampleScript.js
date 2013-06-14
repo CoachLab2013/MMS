@@ -78,7 +78,7 @@ $(document).ready(function(){
         return arg != value;
     }, "Value must not equal arg.");
     
-    if($("#_registerForensicSample").val() === "true") {
+    if($("#_requestForensicSample").val() === "true") {
 
             $("#IncidentTab").removeClass("active");
             $("#BodyFileTab").addClass("active");

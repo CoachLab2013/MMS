@@ -124,7 +124,7 @@ $(document).ready(function() {
         return value;
     }, "must be a valid date");
 
-    if($("#_registerForensicSample").val() === "true") {
+    if($("#_Property").val() === "true") {
 
             $("#IncidentTab").removeClass("active");
             $("#BodyFileTab").addClass("active");

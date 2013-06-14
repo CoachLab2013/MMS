@@ -99,7 +99,7 @@ $(document).ready(function(){
         return value;
     }, "must be a valid date");
 
-    if($("#_registerForensicSample").val() === "true") {
+    if($("#_labRecord").val() === "true") {
 
             $("#IncidentTab").removeClass("active");
             $("#BodyFileTab").addClass("active");
