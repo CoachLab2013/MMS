@@ -31,7 +31,7 @@ public class DatabaseAccessor_MonthlyStatistics extends Template_DatabaseAccesso
         
         try {
             
-            preparedStatement = connection.prepareStatement("SELECT DAY(`reporting_EventDate`.`datestamp`) AS `date`,\n" +
+            preparedStatement = connection.prepareStatement("SELECT DATE_FORMAT(`reporting_EventDate`.`datestamp`, '%d %M') AS `date`,\n" +
                 "SUM(`reporting_AuditTrail`.`countEvent`) AS `numberOfEvents`,\n" +
                 "SUM(`reporting_AuditTrail`.`countWarning`) AS `numberOfWarnings`,\n" +
                 "SUM(`reporting_AuditTrail`.`countError`) AS `numberOfErrors`\n" +
