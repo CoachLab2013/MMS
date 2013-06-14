@@ -64,7 +64,7 @@ public class EditAtSceneDetails extends HttpServlet {
         if (request.getParameter("SceneType").equals("Select")!=true){
             bodyAtScene.setSceneIncidentOccured(request.getParameter("SceneType"));
         }
-        bodyAtScene.setPlaceOfDeath(request.getParameter("DeathAddress"));
+        bodyAtScene.setPlaceOfDeath(request.getParameter("edit_DeathAddress"));
         if (request.getParameter("externalcircumstance").equals("Select")!=true){
             bodyAtScene.setExternalCircumstanceOfInjury(request.getParameter("externalcircumstance"));
         }
@@ -241,11 +241,11 @@ public class EditAtSceneDetails extends HttpServlet {
         
         //Property
         PropertyDb atScene_propertyDb = new PropertyDb(dbdetail);
-        int count_saps = Integer.parseInt(request.getParameter("saps_property_counter").toString());
+        int count_saps = Integer.parseInt(request.getParameter("edit_saps_property_counter").toString());
         for(int i=0;i<count_saps;i++){
-            String saps_prop_des = "saps_prop_des"+Integer.toString(i+1);
-            String saps_prop_name = "saps_prop_name"+Integer.toString(i+1);
-            String saps_prop_surname = "saps_prop_surname"+Integer.toString(i+1);
+            String saps_prop_des = "edit_SAPSpropertyDescr"+Integer.toString(i+1);
+            String saps_prop_name = "edit_SAPSpropertyName"+Integer.toString(i+1);
+            String saps_prop_surname = "edit_SAPSpropertySurname"+Integer.toString(i+1);
             if(request.getParameter(saps_prop_des) != null){
                 Property propertySAPS = new Property();
                 propertySAPS.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
@@ -255,7 +255,7 @@ public class EditAtSceneDetails extends HttpServlet {
                 //Not null unmentioned fields
                 Witness[] witnesses = {new Witness("null","null"), new Witness("null","null")};
                 propertySAPS.setWitnesses(witnesses);
-                propertySAPS.setDate(request.getParameter("bodyFoundDate"));
+                propertySAPS.setDate(t.checkDate(request.getParameter("bodyFoundDate")));
                 propertySAPS.setSAPS_taken(true);
                 propertySAPS.setReleased(false);
                 //put the code to add this property into the database here
@@ -265,10 +265,10 @@ public class EditAtSceneDetails extends HttpServlet {
             }
         }
         
-        int count_fps = Integer.parseInt(request.getParameter("fps_property_counter").toString());
+        int count_fps = Integer.parseInt(request.getParameter("edit_fps_property_counter").toString());
         for(int i=0;i<count_fps;i++){
-            String fps_prop_des = "fps_prop_des"+Integer.toString(i+1);
-            String fps_prop_persal = "fps_prop_persal"+Integer.toString(i+1);
+            String fps_prop_des = "edit_atSceneFPSpropertyDescr"+Integer.toString(i+1);
+            String fps_prop_persal = "edit_atSceneFPSpersal"+Integer.toString(i+1);
             //out.println("FPS prop des table number: " + fps_prop_des);
             if(request.getParameter(fps_prop_des) != null){
                 Property propertyFPS = new Property();
@@ -280,7 +280,7 @@ public class EditAtSceneDetails extends HttpServlet {
                 //Not null unmentioned fields
                 Witness[] witnesses = {new Witness("null","null"), new Witness("null","null")};
                 propertyFPS.setWitnesses(witnesses);
-                propertyFPS.setDate(request.getParameter("bodyFoundDate"));
+                propertyFPS.setDate(t.checkDate(request.getParameter("bodyFoundDate")));
                 propertyFPS.setSAPS_taken(false);
                 propertyFPS.setReleased(false);
                 //put the code to add this property into the database here

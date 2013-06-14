@@ -590,8 +590,8 @@
                     <div class="controls">
                         <%
                             String list4 = t.makeReferenceList("employee", "personnelNumber", "");
-                            list4 = list4.replaceFirst("name='employee'", "name='atSceneFPSpersal'");
-                            list4 = list4.replaceFirst("id='employee'", "id='atSceneFPSpersal'");
+                            list4 = list4.replaceFirst("name='employee'", "name='edit_atSceneFPSpersal'");
+                            list4 = list4.replaceFirst("id='employee'", "id='edit_atSceneFPSpersal'");
                             out.println(list4);
                         %>                            
                         <label class="error" id="edit_no_fps_persal" style="display:none;">Please select a persal number</label>                            
