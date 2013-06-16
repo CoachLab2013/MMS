@@ -269,7 +269,7 @@ public class BodyDb extends DatabaseConnector{
                 bodyAtMort.setBodyReceivedFromPerNumber(mort.getBodyReceivedFromPerNumber());
                 bodyAtMort.setBodyHandOverFromOrganization(mort.getBodyHandOverFromOrganization());
             }
-            catch (Exception ex)
+            catch (SQLException ex)
             {
                  ;
             }
@@ -433,20 +433,23 @@ public class BodyDb extends DatabaseConnector{
                     }
                     catch (Exception ex)
                     {
-                        break;
+                        ;
                     }
-                    IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
-                    incidentDb.init();
-                    incidentDb.read();
-                    bodyAtMort.setIncident(incidentDb.getIncident());
-                    list.add(bodyAtMort);
+                    finally
+                    {
+                        IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
+                        incidentDb.init();
+                        incidentDb.read();
+                        bodyAtMort.setIncident(incidentDb.getIncident());
+                        body = bodyAtMort;
+                        statement.close();
+                        connection.close();
+                        list.add(body);
+                    } 
              }
-             statement.close();
-             connection.close();
         } 
         catch (SQLException ex) 
         {
-            System.err.println(ex);
             throw new SQLException(ex.getMessage());
         }
         return list;
@@ -503,4 +506,5 @@ public class BodyDb extends DatabaseConnector{
         return null;
         
     }
+   
 }
