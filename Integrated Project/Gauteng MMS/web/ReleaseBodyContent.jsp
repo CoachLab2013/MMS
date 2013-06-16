@@ -36,17 +36,13 @@
 
             <h4>Select Body for Release : </h4>
             <%
-                out.println(new Tools().bodyReleaseTable());
+                out.println(new Tools().bodyReleaseTable(session.getAttribute("death_register_number").toString()));
             %>
 
             <h4>Linked Bodies : </h4>
-            <table class='tabledisplay'  id="releaseLinkTable">
-                    <th class='tableheading'>Death Register Number</th>
-                    <th class='tableheading'>Name</th>
-                    <th class='tableheading'>Surname</th>
-                    <th class='tableheading'>ID/Passport Number</th>
-                    <th class='tableheading'>Identification Status</th>
-            </table>
+            <%
+                out.println(new Tools().bodyReleaseLinkedTable(session.getAttribute("death_register_number").toString()));
+            %>
             <hr/>
 
         <form name="Releaseform" id="Releaseform" method="post" action="SaveRecipientDetails" style="display: none;">

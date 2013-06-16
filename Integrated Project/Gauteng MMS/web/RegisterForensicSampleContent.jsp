@@ -37,7 +37,7 @@
                     </tr>
                     
                     <tr>
-                        <td>Death Register Number: </td> <td> <input type="text" name="DeathRegisternumber" value="" /> </td>
+                        <td>Death Register Number: </td> <td> <input type="text" name="DeathRegisternumber" readonly="true" value="<% out.println(session.getAttribute("death_register_number")); %>" /> </td>
                     </tr> 
                         <tr>
                        

@@ -98,7 +98,7 @@ $(document).ready(function(){
         
     });
 
-    if($("#_registerForensicSample").val() === "true") {
+    if($("#_registeredSamples").val() === "true") {
 
             $("#IncidentTab").removeClass("active");
             $("#BodyFileTab").addClass("active");
