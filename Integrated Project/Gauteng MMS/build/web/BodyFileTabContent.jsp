@@ -23,10 +23,7 @@
         --%>
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap-datetimepicker.min.css">
-        <script type="text/javascript"  src="js/jquery-1.9.1.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
-        <script  src="bootstrap/js/bootstrap-tabs.js"></script>
+
         <script type="text/javascript" src="js/addBodyFile.js"></script>
         <%--  <script src="js/script.js"></script>   --%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

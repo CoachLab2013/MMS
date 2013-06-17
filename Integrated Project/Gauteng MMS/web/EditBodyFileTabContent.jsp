@@ -25,7 +25,7 @@
             
             <div class="tab-content" >
                 <div id="IncidentInformation" class="tab-pane active">
-                    <jsp:include page="IncidentInformationTabContent.jsp"/>
+                   <jsp:include page="IncidentInformationTabContent.jsp"/>
                 </div>
                 
                 <div id="BodyIdentification" class="tab-pane ">

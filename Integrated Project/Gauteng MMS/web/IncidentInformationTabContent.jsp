@@ -42,13 +42,22 @@
                                 <label class="control-label" for="open_incident_list">Incident Number</label> 
                                 <div class="controls"> <%
                                     Tools t = new Tools();
-                                    out.print(t.getOPenIncidentList("open_incident_list", ""));
+                                    if(session.getAttribute("bIdIncidentLog")!=null){
+                                        out.println(t.getOPenIncidentList("open_incident_list", session.getAttribute("bIdIncidentLog").toString()));
+                                    }else{
+                                        out.print(t.getOPenIncidentList("open_incident_list", ""));
+                                    }
+                                    
                                     %>
                                 </div>
                                 <br>
                                 <label class="control-label" for="deathRegister">Death Register Number</label> 
                                 <div class="controls">
-                                    <input type="text" name="deathRegister" id="deathRegister" readonly="true" value =<% out.println(t.makeDeathRegisterNumber());%>/> 
+                                    <input type="text" name="deathRegister" id="deathRegister" readonly="true" value =<% 
+                                    if(session.getAttribute("death_register_number")!=null){
+                                        out.println(session.getAttribute("death_register_number"));
+                                    }
+                                    %> /> 
                                 </div>
                                 <br>
                                 <div class="offset2">
@@ -73,7 +82,7 @@
                                      <jsp:include page="EditRecieveBodyAtScene.jsp" /> 
                                 </div>
                                 <div id="edit_atMortuary" class="tab-pane "> 
-                                    <jsp:include page="EditRecieveBodyAtMortuary.jsp" /> 
+                                   <jsp:include page="EditRecieveBodyAtMortuary.jsp" /> 
                                 </div>   
 
                             </div>

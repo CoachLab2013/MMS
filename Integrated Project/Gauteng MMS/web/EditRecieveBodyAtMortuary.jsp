@@ -151,17 +151,22 @@
 
                     <%
                         String identification_type;
-                        String id = (String) session.getAttribute("bIdIDNumber");
-                        String passport = (String) session.getAttribute("bIdPassport");
-                        if ((id.toString().equals("null")) && (passport.toString().equals("null"))) {
+                        if ((session.getAttribute("bIdIDNumber") != null) | (session.getAttribute("bIdPassport") != null)) {
+                            String id = session.getAttribute("bIdIDNumber").toString();
+                            String passport = session.getAttribute("bIdPassport").toString();
+                            if ((id.toString().equals("null")) && (passport.toString().equals("null"))) {
+                                identification_type = "<select id='edit_recieve_at_mort_id_type' name='edit_recieve_at_mort_id_type'><option selected='selected'>Select</option><option>ID</option><option>Passport</option></select>";
+                                value = "";
+                            } else if (!(id.toString().equals("null"))) {
+                                identification_type = "<select id='edit_recieve_at_mort_id_type' name='edit_recieve_at_mort_id_type'><option>Select</option><option selected='selected'>ID</option><option>Passport</option></select>";
+                                value = id;
+                            } else {
+                                identification_type = "<select id='edit_recieve_at_mort_id_type' name='edit_recieve_at_mort_id_type'><option>Select</option><option>ID</option><option selected='selected'>Passport</option></select>";
+                                value = passport;
+                            }
+                        } else {
                             identification_type = "<select id='edit_recieve_at_mort_id_type' name='edit_recieve_at_mort_id_type'><option selected='selected'>Select</option><option>ID</option><option>Passport</option></select>";
                             value = "";
-                        } else if (!(id.toString().equals("null"))) {
-                            identification_type = "<select id='edit_recieve_at_mort_id_type' name='edit_recieve_at_mort_id_type'><option>Select</option><option selected='selected'>ID</option><option>Passport</option></select>";
-                            value = id;
-                        } else {
-                            identification_type = "<select id='edit_recieve_at_mort_id_type' name='edit_recieve_at_mort_id_type'><option>Select</option><option>ID</option><option selected='selected'>Passport</option></select>";
-                            value = passport;
                         }
                         out.println(identification_type);
                     %>

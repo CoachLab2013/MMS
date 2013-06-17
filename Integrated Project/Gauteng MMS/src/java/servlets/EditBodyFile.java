@@ -90,6 +90,7 @@ public class EditBodyFile extends HttpServlet {
         ses.setAttribute("kinWorkAddress", kin.getWorkAddress());
         ses.setAttribute("bodyFileDetail", true);
         //ahseen's code
+        ses.setAttribute("bIdIncidentLog",body.getIncident().getIncidentLogNumber());
         ses.setAttribute("bIdBodytype",body.getBodyType());  
         int year = body.getEstimatedAgeYear();
         if(year!=0){
