@@ -38,7 +38,11 @@
                     <td>Building:  </td> <td><input type="text" name="deceasedbuilding" <% 
                     if(session.getAttribute("bIdBuild")!=null)
                     {
-                        out.print("value =" + session.getAttribute("bIdBuild"));
+                         String build = (String)session.getAttribute("bIdBuild");
+                         if(!build.contains("null"))
+                         {
+                            out.print("value=" + build);
+                         }
                     }
                     %> /></td>  
                     </tr>
@@ -46,7 +50,11 @@
                     <td>Street:  </td> <td><input type="text" name="deceaesedstreet" <%
                     if(session.getAttribute("bIdStreet")!=null)
                     {
-                        out.print("value =" + session.getAttribute("bIdStreet"));
+                        String street = (String)session.getAttribute("bIdStreet");
+                        if(!street.contains("null"))
+                        {
+                            out.print("value =" + street);
+                        }
                     }
                     %> /></td>  
                     </tr>
@@ -54,7 +62,11 @@
                         <td>Suburb:</td> <td> <input type="text" name="deceasedsub" <%
                         if(session.getAttribute("bIdSuburb")!=null)
                         {
-                            out.print("value =" + session.getAttribute("bIdSuburb"));
+                            String suburb = (String)session.getAttribute("bIdSuburb");
+                            if(!suburb.contains("null"))
+                            {
+                                out.print("value =" + suburb);
+                            }
                         }
                         %>  /></td>
                     </tr> 
@@ -62,7 +74,11 @@
                         <td>City:</td> <td> <input type="text" name="deceasedcity" <%
                         if(session.getAttribute("bIdCity")!=null)
                         {
-                            out.print("value =" + session.getAttribute("bIdCity"));
+                            String city = (String)session.getAttribute("bIdCity");
+                            if(!city.contains("null"))
+                            {
+                                out.print("value =" + city);
+                            }
                         }
                         %>  /> </td>
                     </tr> 
@@ -70,8 +86,13 @@
                         <td>Postal Code:</td> <td> <input type="text" name="postalcode" <%
                     if(session.getAttribute("bIdPostCode")!=null)
                     {
-                        out.print("value =" +session.getAttribute("bIdPostCode"));
-                    }%>  /> </td>
+                        String post = (String)session.getAttribute("bIdPostCode");
+                        if(!post.contains("null"))
+                        {
+                            out.print("value =" +post);
+                        }
+                    }
+                    %>  /> </td>
                     </tr> 
                     <tr>     
                         <td>Province:  </td> <td> 
@@ -79,12 +100,12 @@
                      if(session.getAttribute("bIdProvince")!=null)
                      {
                          String list2 = t.makeReferenceList("province", "type",(String)session.getAttribute("bIdProvince"));
-                         out.println(list2);
+                         out.print(list2);
                      }
                      else
                      {
                          String list2 = t.makeReferenceList("province", "type","");
-                         out.println(list2);
+                         out.print(list2);
                      }
                    %>
                      </td>
@@ -96,12 +117,12 @@
                      if(session.getAttribute("bIdRegion")!=null)
                      {
                          String list2 = t.makeReferenceList("region", "type",(String)session.getAttribute("bIdRegion"));
-                         out.println(list2);
+                         out.print(list2);
                      }
                      else
                      {
                          String list2 = t.makeReferenceList("region", "type","");
-                         out.println(list2);
+                         out.print(list2);
                      }
                    %>
                     </td>
@@ -110,7 +131,15 @@
                         <tr>     
                         <td>Magisterial District:  </td> <td><input type="text" name="MagisterialD" <%
                             if(session.getAttribute("bIdDistrict")!=null)
-                            out.print("value =" + session.getAttribute("bIdDistrict"));%>   /></td>  
+                            {
+                                String district= (String)session.getAttribute("bIdDistrict");
+                                if(!district.contains("null"))
+                                {
+                                    out.print("value =" + district);
+                                }
+                                
+                            }
+                        %>   /></td>  
                     </tr> 
                             <tr>
                                 <td> <td>  <input class="btn" type="submit" value="Save" name="bodySave" /><br></td></td>

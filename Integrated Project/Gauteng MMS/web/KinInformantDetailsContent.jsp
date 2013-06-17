@@ -27,7 +27,8 @@
 
     <body>
         <%
-            if (session.getAttribute("kinDetail") != null) {
+            if (session.getAttribute("kinDetail") != null) 
+            {
                 out.print("<input type=hidden class='go_to_deceasedDetails' id='go_to_deceasedDetails' value=" + session.getAttribute("kinDetail") + ">");
                 session.removeAttribute("kinDetail");
             }
@@ -36,21 +37,31 @@
         <form name="Kinform" id="Kinform" method="post" action="SaveKinDetailsServlet">                
                 <table>
                     <tr>     
-                        <td>Name:  </td> <td><input type="text" name="KinName" id ="kinName" <% 
+                        <td>Name:  </td> <td><input type="text" name="KinName" id ="kinName"  
+                        <% 
                             if(session.getAttribute("kinName") != null)
                             {
-                                out.print("value=" + session.getAttribute("kinName"));
+                                String kinName = (String)session.getAttribute("kinName");
+                                if(!kinName.contains(""))
+                                {
+                                    out.print("value=" + kinName);
+                                }  
                             }
-                        %> /></td>  
+                        %>  /></td>  
                     </tr>
-                    
+                  
                     <tr>
-                        <td>Surname:</td> <td> <input type="text" name="KinSurname" id ="kinSurname"  <%
+                        <td>Surname:</td> <td> <input type="text" name="KinSurname" id ="kinSurname"  
+                        <%
                             if(session.getAttribute("kinSurname") != null)
                             {
-                                out.print("value=" + session.getAttribute("kinSurname"));
+                                String kinSurname = (String)session.getAttribute("kinSurname");
+                                if(!kinSurname.contains(""))
+                                {
+                                    out.print("value=" + kinSurname);
+                                }
                             }
-                        %> /> </td>
+                        %>  /> </td>
                     </tr> 
                     
                     <tr>     
@@ -63,12 +74,12 @@
     
                             if(i.contains("null")) 
                             {
-                                out.print("<option selected='selected'>ID</option>");
+                                out.print("<option>ID</option>");
                                 out.print("<option>Passport</option>");
                             } 
                             else 
                             {
-                                out.print("<option selected='selected'>Passport</option>");
+                                out.print("<option>Passport</option>");
                                 out.print("<option>ID</option>");
                             }
                          }
@@ -78,14 +89,24 @@
                     </tr>
                         
                     <tr>
-                         <td> Identification Number:</td>  <td> <input type="text" name="KinIDNumber"  id="kinIdNumber" <%
+                         <td> Identification Number:</td>  <td> <input type="text" name="KinIDNumber"  id="kinIdNumber" 
+                         <%
                          if(session.getAttribute("kinID") != null)
                          {
-                             out.print("value=" + session.getAttribute("kinID"));
+                             String kinId = (String)session.getAttribute("kinID");
+                             if(!kinId.contains(""))
+                             {
+                                out.print("value=" + kinId);
+                             }
                          }
                          else
                          {
-                             out.print("value=" + session.getAttribute("kinPassport"));
+                             String pass = (String)session.getAttribute("kinPassport");
+                             if(pass != null)
+                             if(!pass.contains(""))
+                             {
+                                out.print("value=" + pass);
+                             }
                          }
                          %> /></td>                       
                      </tr>
@@ -102,29 +123,60 @@
                         }
                         list = list.replaceAll("name='relationship'", "name='KinRelationship'");
                         list = list.replaceAll("id='relationship'", "id='kinRelationDeceased'");
-                        out.println(list);
+                        out.print(list);
                     %>   </td>
                         </tr>
                         
                         <tr>
-                            <td> Contact number:</td> <td> <input type="text" name="KinContact"  id ="kinContactNumber" <%if(session.getAttribute("kinContact") != null)
+                            <td> Contact number:</td> <td> <input type="text" name="KinContact"  id ="kinContactNumber" 
+                            <%
+                            if(session.getAttribute("kinContact") != null)
                             {
-                                out.print("value=" + session.getAttribute("kinContact"));
-                            } %> /></td>
+                                String kinContact = (String) session.getAttribute("kinContact");
+                                if(!kinContact.contains(""))
+                                {
+                                    out.print("value=" + kinContact);
+                                }
+                            }
+                            %> 
+                            /></td>
                         </tr>
                         
                             <tr>
-                            <td> Residential Address:     </td><td><textarea cols="50" rows="3" name="KinRes" id="kinAddress" <%if(session.getAttribute("kinAddress") != null)
+                            <td> Residential Address:     </td><td><textarea cols="50" rows="3" name="KinRes" id="kinAddress" >
+                             <%
+                            if(session.getAttribute("kinAddress") != null)
                             {
-                                out.print("value=" + session.getAttribute("kinAddress"));
-                            } %> /> </textarea><br></td>
+                                String kinAddress = (String)session.getAttribute("kinAddress");
+                                if(!kinAddress.contains(""))
+                                {
+                                    out.print(kinAddress);
+                                }
+                            } 
+                            else
+                            {
+                                out.print("");
+                            }
+                            %> </textarea><br></td>
                             </tr>
                             
                             <tr>
-                            <td> Work Address:     </td><td><textarea cols="50" rows="3" name="KinWork" id="kinWorkAddress" <%if(session.getAttribute("kinWorkAddress") != null)
-                            {
-                                out.print("value=" + session.getAttribute("kinWorkAddress"));
-                            } %> /> </textarea><br></td>
+                            <td> Work Address:     </td><td><textarea cols="50" rows="3" name="KinWork" id="kinWorkAddress"> 
+                            <%
+                                if(session.getAttribute("kinWorkAddress") != null)
+                                {
+                                    String kinWorkAddress = (String)session.getAttribute("kinWorkAddress");
+                                    if(!kinWorkAddress.contains(""))
+                                    {
+                                        out.print(kinWorkAddress);
+                                    }
+                                } 
+                                else
+                                {
+                                    out.print("");
+                                }
+                            %>
+                            </textarea><br></td>
                             </tr>
                           
                             <tr>
