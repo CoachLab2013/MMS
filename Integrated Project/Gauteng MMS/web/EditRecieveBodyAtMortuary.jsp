@@ -18,6 +18,7 @@
             out.println("<input id='checkmortuary'  type='hidden' value="+session.getAttribute("atMortuary")+" />");
             session.removeAttribute("atMortuary");
         }
+        String value = "";
      %>
     <legend class="legend"><h3>Receive body at mortuary</h3> </legend> 
     <br/><br/>
@@ -28,8 +29,14 @@
         <div class="control-group">
             <label class="control-label">Employee receiving body:</label> 
             <div class="controls"><%
+                if(!(session.getAttribute("bIdEmployeeRecieving").toString().equals("null"))){
+                    value = session.getAttribute("bIdEmployeeRecieving").toString();
+                }   
+                       else{
+                        value="";
+                       }
                 Tools t = new Tools();
-                String list = t.makeReferenceList("employee", "personnelNumber", "");
+                String list = t.makeReferenceList("employee", "personnelNumber", value);
                 list=list.replaceFirst("name='eemployee'", "name='edit_employee'");
                 list=list.replaceFirst("id='employee'", "id='edit_employee'");
                 out.println(list);
@@ -70,7 +77,15 @@
             <div class="control-group">
                 <label class="control-label" for="edit_atMortBodyName">Name</label> 
                 <div class="controls">
-                    <input type="text" name="edit_atMortBodyName" id="edit_atMortBodyName"/> 
+                    <%
+                        if(!(session.getAttribute("bIdFullName").toString().equals("null"))){
+                            value = session.getAttribute("bIdFullName").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atMortBodyName" id="edit_atMortBodyName" <%out.println("value='" + value+"' ");%> /> 
                 </div>
 
 
@@ -79,7 +94,15 @@
             <div class="control-group">
                 <label class="control-label" for="edit_atMortBodySurname">Surname</label>
                 <div class="controls">
-                    <input type="text" name="edit_atMortBodySurname" id="edit_atMortBodySurname"/> 
+                    <%
+                        if(!(session.getAttribute("bIdSurname").toString().equals("null"))){
+                            value = session.getAttribute("bIdSurname").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atMortBodySurname" id="edit_atMortBodySurname" <%out.println("value='" + value+"' ");%> /> 
                 </div>
             </div>
 
@@ -100,6 +123,7 @@
             <div class="control-group">
                 <label class="control-label" for="edit_atMortBodyID">Identification number</label>
                 <div class="controls">
+                    
                     <input type="text" name="edit_atMortBodyID" id="edit_atMortBodyID"/> 
                 </div>
             </div>
@@ -108,63 +132,145 @@
             <div class="control-group">
                 <label class="control-label" for="edit_atMortuaryBodyAddressBuilding">Building</label>
                 <div class="controls">
-                    <input type="text" name="edit_atMortuaryBodyAddressBuilding" id="edit_atMortuaryBodyAddressBuilding"/> 
+                    <%
+                        if(!(session.getAttribute("bIdBuild").toString().equals("null"))){
+                            value = session.getAttribute("bIdBuild").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atMortuaryBodyAddressBuilding" id="edit_atMortuaryBodyAddressBuilding" <%out.println("value='" + value+"' ");%> /> 
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="edit_atMortuaryBodyAddressStreet">Street</label>
                 <div class="controls">
-                    <input type="text" name="edit_atMortuaryBodyAddressStreet" id="edit_atMortuaryBodyAddressStreet"/> 
+                    <%
+                        if(!(session.getAttribute("bIdStreet").toString().equals("null"))){
+                            value = session.getAttribute("bIdStreet").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atMortuaryBodyAddressStreet" id="edit_atMortuaryBodyAddressStreet" <%out.println("value='" + value+"' ");%> /> 
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_atMortuaryBodyAddressSuburb">Suburb</label>
                 <div class="controls">
-                    <input type="text" name="edit_atMortuaryBodyAddressSuburb" id="edit_atMortuaryBodyAddressSuburb"/> 
+                    <%
+                        if(!(session.getAttribute("bIdSuburb").toString().equals("null"))){
+                            value = session.getAttribute("bIdSuburb").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atMortuaryBodyAddressSuburb" id="edit_atMortuaryBodyAddressSuburb" <%out.println("value='" + value+"' ");%> /> 
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_atMortuaryBodyAddressCity">City</label>
                 <div class="controls">
-                    <input type="text" name="edit_atMortuaryBodyAddressCity" id="edit_atMortuaryBodyAddressCity"/> 
+                    <%
+                        if(!(session.getAttribute("bIdCity").toString().equals("null"))){
+                            value = session.getAttribute("bIdCity").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atMortuaryBodyAddressCity" id="edit_atMortuaryBodyAddressCity" <%out.println("value='" + value+"' ");%> /> 
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_atMortuaryAddressPostalCode">Postal Code</label>
                 <div class="controls">
-                    <input type="text" name="edit_atMortuaryAddressPostalCode" id="edit_atMortuaryAddressPostalCode"/> 
+                    <%
+                        if(!(session.getAttribute("bIdPostCode").toString().equals("null"))){
+                            value = session.getAttribute("bIdPostCode").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atMortuaryAddressPostalCode" id="edit_atMortuaryAddressPostalCode" <%out.println("value='" + value+"' ");%> /> 
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_province">Province</label>
-                <div class="controls">                                                        
-                    <% out.println(t.makeReferenceList("province", "type", ""));%>
+                <div class="controls">   
+                    <%
+                        if(!(session.getAttribute("bIdProvince").toString().equals("null"))){
+                            value = session.getAttribute("bIdProvince").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    %>
+                    <% out.println(t.makeReferenceList("province", "type", value));%>
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_region">Region</label>
                 <div class="controls">
-                    <% out.println(t.makeReferenceList("region", "type", ""));%>
+                    <%
+                        if(!(session.getAttribute("bIdRegion").toString().equals("null"))){
+                            value = session.getAttribute("bIdRegion").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    %>
+                    <% out.println(t.makeReferenceList("region", "type", value));%>
                 </div>
             </div>
 
+                <div class="control-group">
+                <label class="control-label" for="edit_atMortBodyAddressMagisterialDistrict">Magisterial District:</label>
+                <div class="controls">
+                    <%
+                        if(!(session.getAttribute("bIdDistrict").toString().equals("null"))){
+                            value = session.getAttribute("bIdDistrict").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atMortBodyAddressMagisterialDistrict" id="edit_atMortBodyAddressMagisterialDistrict" <%out.println("value='" + value+"' ");%> /> 
+                </div>
+            </div>
 
             <div class="control-group">
                 <label class="control-label">Race</label> 
                 <div class="controls"><%
-                    out.print(t.makeReferenceList("race", "type", ""));
+                if(!(session.getAttribute("bIdRace").toString().equals("null"))){
+                            value = session.getAttribute("bIdRace").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    out.print(t.makeReferenceList("race", "type", value));
                     %>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Gender</label> 
                 <div class="controls"><%
-                    out.print(t.makeReferenceList("gender", "type", ""));
+                if(!(session.getAttribute("bIdGender").toString().equals("null"))){
+                            value = session.getAttribute("bIdGender").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                    out.print(t.makeReferenceList("gender", "type", value));
                     %>
                 </div>
             </div>
@@ -222,14 +328,15 @@
                 <%--Display save result --%> 
             </div>
             <br/> <br/>
-            <table class="tabledisplay" id="edit_atMortFPSpropertyTable" name="edit_atMortFPSpropertyTable">
-                <tr>
-                    <th class="tableheading">Select</th>
-                    <th class="tableheading">Description</th>
-                    <th class="tableheading">Persal Number</th>
-                </tr>
-
-            </table>
+            <%
+                if(!(session.getAttribute("death_register_number").toString().equals("null"))){
+                            value = session.getAttribute("death_register_number").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                   out.println(new Tools().makePropertyTable(value));
+             %>
             <br/>
             <div class="offset5">
                 <input id="edit_at_mort_fps_delete" name="edit_at_mort_fps_delete"  class="btn" onclick=" deleteRow('atMortFPSpropertyTable')" type="button" value="Delete" /> 

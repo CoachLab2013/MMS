@@ -25,7 +25,7 @@ public class Tools {
     public Tools() {
 
  
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
  
     }
 
@@ -593,26 +593,38 @@ public class Tools {
         body = (BodyAtMortuary)bodyDb.getBody();
         return body;
     }
-    public String makePropertyTable()
+    public String makePropertyTable(String deathregister)
     {
         PropertyDb pDb = new PropertyDb(dbdetail);
         pDb.init();
         String table;
         try 
         {
-            ArrayList<Property> properties = pDb.properties();
+            ArrayList<Property> properties = pDb.properties(deathregister);
             table = "<table class='tabledisplay' id='propertytable'>"
+                    + "<th class='tableheading'>Select</th>"
                     + "<th class='tableheading'>Property Type</th>"
                     + "<th class='tableheading'>Description</th>"
                     + "<th class='tableheading'>Seal Number</th>";
             int size = properties.size();
             for (int i = 0; i < size; i++) 
             {
+                
                 Property property = properties.get(i);
+                String property_type = property.getType();
+                String property_description= property.getDescription();
+                String property_seal = property.getSealNumber() ;
+                if(property_type.equals("null")){
+                    property_type="";
+                }
+                if(property_seal.equals("null")){
+                    property_seal="";
+                }
                 table = table + "<tr class='tablerow' name='propertyId' proId='" + property.getIdProperty() + "'>"
-                        + "<td>" + property.getType() + "</td>"
-                        + "<td class='tablecell'>" + property.getDescription() + "</td>"
-                        + "<td class='tablecell'>" + property.getSealNumber() + "</td>"
+                        +"<td class=tablecell><input type=checkbox name=checkbox[]></td>"
+                        + "<td>" + property_type + "</td>"
+                        + "<td class='tablecell'>" + property_description + "</td>"
+                        + "<td class='tablecell'>" + property_seal + "</td>"
                         + "</tr>";
             }
             table = table + "</table>";

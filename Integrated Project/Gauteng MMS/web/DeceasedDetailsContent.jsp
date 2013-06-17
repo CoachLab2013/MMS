@@ -23,10 +23,9 @@
         <script language="javascript" src="js/jquery-1.9.1.js"></script>
          <script language="javascript" src="js/jquery.validate.min.js"></script>
          <script src="js/DeceasedDetailsContentScript.js"></script>
-          <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+         <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
-         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"/> 
-        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css"/>
+        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css">
     </head>
    
     <body>
@@ -267,23 +266,24 @@
             <tr>
 
                 <td> Body Identified Date:     </td><td>  
-                        <input id="IdentifiedDate" name="deceasedbodyIdentifiedDate" data-format="yyyy-MM-dd" type="text" value="" readonly/>
+                        <input id="IdentifiedDate" name="deceasedbodyIdentifiedDate" type="text" />
                     <br>
                 </td>
             </tr>
             <tr>
                 <td> Body Identified Time:</td><td>
-                        <input id="DAT" name="deceasedbodyIdentifiedTime" type="text" readonly/>
+                        <input id="DAT" name="deceasedbodyIdentifiedTime" type="text" />
+                        
                     <br>
                 </td>
             </tr>
-            <script src="js/DeceasedDetailsDateTime.js"></script>
+            
             <tr>
                 <td> <td>  <input class="btn" type="submit" value="Save" name="bodySave" /><br></td></td>
 
             </tr>
         </table>
-                     
+         <script src="js/DeceasedDetailsDateTime.js"></script>        
     </form>
                             
 </body>

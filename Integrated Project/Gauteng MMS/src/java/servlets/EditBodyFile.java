@@ -72,6 +72,9 @@ public class EditBodyFile extends HttpServlet {
         ses.setAttribute("bIdProvince", body.getBodyAddress().getProvince());
         ses.setAttribute("bIdRegion", body.getBodyAddress().getRegion());
         ses.setAttribute("bIdDistrict", body.getBodyAddress().getMagisterialDistrict());
+        ses.setAttribute("bIdEmployeeRecieving",body.getBodyHandedOverToPerNumber());
+        ses.setAttribute("bIdEmployeeHandingOver",body.getBodyReceivedFromPerNumber());
+        ses.setAttribute("bIdOrhanizationhandingOver",body.getBodyHandOverFromOrganization());
         ses.setAttribute("kinName", kin.getName());
         ses.setAttribute("kinSurname", kin.getSurname());
         if( kin.getID() != null)
