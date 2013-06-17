@@ -136,17 +136,17 @@ public class EditAtMortuaryDetails extends HttpServlet {
         //inserting body into database
         BodyDb bodyDb = new BodyDb(dbdetail, bodyAtMortuary);
         bodyDb.init();
-        out.println("adding body :::" + bodyDb.add());
+        out.println("editing body :::" + bodyDb.edit());
         //end of body inserting
         //inserting Body Address into Body Address table
         bodyDb.init();
-        out.println("adding body address :::" + bodyDb.addBodyAddress());
+        out.println("editing body address :::" + bodyDb.editBodyAddresss());
         //end of inserting Body Address
         
         //inserting BodyAtMortuary into Database
         BodyAtMortuaryDb bodyAtMortuaryDb = new BodyAtMortuaryDb(bodyAtMortuary, dbdetail);
         bodyAtMortuaryDb.init();
-        out.println("adding body at mortuary :::" + bodyAtMortuaryDb.add());
+        out.println("editing body at mortuary :::" + bodyAtMortuaryDb.edit());
         //end inserting BodyAtMortuary
         
         //POPULATING BODYFILE TABLE
@@ -193,7 +193,7 @@ public class EditAtMortuaryDetails extends HttpServlet {
         incidentDb.init();
         out.println(incidentDb.IncreaseBodyCount());
         HttpSession sess = request.getSession();
-        sess.setAttribute("atMortuary", true);
+        sess.setAttribute("edit_atMortuary", true);
         response.sendRedirect("Home.jsp");
         
         /*try {

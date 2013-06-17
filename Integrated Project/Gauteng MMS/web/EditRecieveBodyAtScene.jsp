@@ -27,9 +27,9 @@
     </head>
     <body>
         <%
-        if(session.getAttribute("atScene") != null){
-            out.println("<input id='checkscene'  type='text' value="+session.getAttribute("atScene")+" />");
-            session.removeAttribute("atScene");
+        if(session.getAttribute("edit_atScene") != null){
+            out.println("<input id='edit_checkscene'  type='text' value="+session.getAttribute("edit_atScene")+" />");
+            session.removeAttribute("edit_atScene");
         }
      %>
     <legend class="legend"><h3>Receive body from scene</h3> </legend>

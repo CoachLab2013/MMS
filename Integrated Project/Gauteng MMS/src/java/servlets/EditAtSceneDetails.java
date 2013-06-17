@@ -189,17 +189,17 @@ public class EditAtSceneDetails extends HttpServlet {
         //inserting body into database
         BodyDb bodyDb = new BodyDb(dbdetail, bodyAtScene.getBody());
         bodyDb.init();
-        out.println("adding body :::" + bodyDb.add());
+        out.println("editing body :::" + bodyDb.edit());
         //end of body inserting
         //inserting Body Address into Body Address table
         bodyDb.init();
-        out.println("adding body address :::" + bodyDb.addBodyAddress());
+        out.println("editing body address :::" + bodyDb.editBodyAddresss());
         //end of inserting Body Address
         
         //inserting BodyAtScene into Database
         BodyAtSceneDb bodyAtSceneDb = new BodyAtSceneDb(dbdetail,bodyAtScene);
         bodyAtSceneDb.init();
-        out.println("adding bodyAtScene :::" + bodyAtSceneDb.add());
+        out.println("editing bodyAtScene :::" + bodyAtSceneDb.edit());
         //end inserting BodyAtScene
         
         //NOTE: must add all other things such as members and property after adding the body, due to foreign key constraints
@@ -209,34 +209,37 @@ public class EditAtSceneDetails extends HttpServlet {
         //memberDb = new MemberDb(dbdetail);
         memberDb.setMember(SAPSmemeber);
         memberDb.init();
-        out.println("adding SAPSmem  :::" + memberDb.add());
+        out.println("editing SAPSmem  :::" + memberDb.edit());
         //end inserting SAPS member
         
         //insertin FPS member
         //memberDb = new MemberDb(dbdetail);
         memberDb.setMember(FPSmemeber);
         memberDb.init();
-        out.println("adding FPSmem :::" + memberDb.add());
+        out.println("editing FPSmem :::" + memberDb.edit());
         //end insertingF member
         
         //insertin Pathologist member
         if(bodyAtScene.isPathOnScene()){
             memberDb.setMember(pathologistOnScene);
             memberDb.init();
-            out.println("adding Pathmem :::" + memberDb.add());
+            out.println("editing Pathmem :::" + memberDb.edit());
         }
         //end inserting Pathologist member
         
         //POPULATING BODYFILE TABLE
         BodyFile atSceneBodyFile = new BodyFile(bodyAtScene.getBody().getDeathRegisterNumber());
-        String currentSystemDate = t.getDateTime().split(" ")[0];
-        atSceneBodyFile.setDateFileOpened(currentSystemDate);
+        //String currentSystemDate = t.getDateTime().split(" ")[0];
+        //atSceneBodyFile.setDateFileOpened(currentSystemDate);
         /*
          * There is no need to set the other attributes of this bodyfile since they are initialized in it's constructor
          */
         BodyFileDb atSceneBodyFileDb = new BodyFileDb(dbdetail, atSceneBodyFile);
         atSceneBodyFileDb.init();
-        out.println("Adding Body File:::" + atSceneBodyFileDb.add());
+        out.println("Reading Body File:::" + atSceneBodyFileDb.read());
+        atSceneBodyFileDb.init();
+        //What what is meant to be changed
+        out.println("editing Body File:::" + atSceneBodyFileDb.edit());
         //END OF POPULATING BODYFILE TABLE
         
         //Property
@@ -299,7 +302,7 @@ public class EditAtSceneDetails extends HttpServlet {
         incidentDb.init();
         out.println(incidentDb.IncreaseBodyCount());
         HttpSession sess = request.getSession();
-        sess.setAttribute("atScene", true);
+        sess.setAttribute("edit_atScene", true);
         response.sendRedirect("Home.jsp");
         
         /*try {

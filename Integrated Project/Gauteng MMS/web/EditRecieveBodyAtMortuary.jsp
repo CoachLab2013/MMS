@@ -14,9 +14,9 @@
     </head>
     <body>
      <%
-        if(session.getAttribute("atMortuary") != null){
-            out.println("<input id='checkmortuary'  type='hidden' value="+session.getAttribute("atMortuary")+" />");
-            session.removeAttribute("atMortuary");
+        if(session.getAttribute("edit_atMortuary") != null){
+            out.println("<input id='edit_checkmortuary'  type='hidden' value="+session.getAttribute("edit_atMortuary")+" />");
+            session.removeAttribute("edit_atMortuary");
         }
      %>
     <legend class="legend"><h3>Receive body at mortuary</h3> </legend> 
