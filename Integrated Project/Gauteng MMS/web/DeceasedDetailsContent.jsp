@@ -20,21 +20,14 @@
                 vertical-align: top; 
             }
         </style> 
-<<<<<<< HEAD
-        <script language="javascript" src="js/jquery-1.9.1.js"></script>
-         <script language="javascript" src="js/jquery.validate.min.js"></script>
-         <script src="js/DeceasedDetailsContentScript.js"></script>
-         <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
-        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css">
-=======
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
          <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
          <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
          <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"/> 
          <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css"/>  
          <script type="text/javascript" src="js/DeceasedDetailsContentScript.js"></script>
->>>>>>> origin/master
+
     </head>
    
     <body>
@@ -307,39 +300,27 @@
                 
 
                 <td> Body Identified Date:     </td><td>  
-<<<<<<< HEAD
-                        <input id="IdentifiedDate" name="deceasedbodyIdentifiedDate" type="text" />
-                    <br>
-=======
+
                        <input id="txtDeceasedBodyIdentifiedDate" type="text"  name="deceasedbodyIdentifiedDate" readonly style="cursor:pointer;"/>                    
->>>>>>> origin/master
+
                 </td>
             </tr>
             <tr>
                 <td> Body Identified Time:</td><td>
-<<<<<<< HEAD
-                        <input id="DAT" name="deceasedbodyIdentifiedTime" type="text" />
-                        
-                    <br>
-                </td>
-            </tr>
-            
-=======
+
                         <input id="txtDeceasedBodyIdentifiedTime" type="text" name="deceasedbodyIdentifiedTime"  readonly  style="cursor:pointer;"/>
                 </td>
             </tr>
->>>>>>> origin/master
+
             <tr>
                 <td> <td>  <input class="btn" type="submit" value="Save" name="bodySave" /><br></td></td>
 
             </tr>
             
         </table>
-<<<<<<< HEAD
-         <script src="js/DeceasedDetailsDateTime.js"></script>        
-=======
+
         <script type="text/javascript" src="js/DeceasedDetailsDateTime.js"></script> 
->>>>>>> origin/master
+
     </form>
                             
 </body>
