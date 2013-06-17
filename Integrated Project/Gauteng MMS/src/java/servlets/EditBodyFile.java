@@ -46,14 +46,14 @@ public class EditBodyFile extends HttpServlet {
         ses.setAttribute("bIdFullName", body.getNameOfDeceased());
         ses.setAttribute("bIdMadienName",body.getMaidenName());
         ses.setAttribute("bIdSurname", body.getSurnameOfDeceased());
-        if(body.getID().equals(""))
-        {
+        
+       
             ses.setAttribute("bIdIDNumber", body.getID());
-        }
-        else
-        {
+       
+        
+        
             ses.setAttribute("bIdPassport", body.getPassport());
-        }
+        
         ses.setAttribute("bIdPlaceOfBirth", body.getPlaceOfBirth());
         ses.setAttribute("bIdDateOfBirth", body.getDateOfBirth());
         ses.setAttribute("bIdAgeOnDate", body.getAgeOnDateFound());
@@ -70,11 +70,10 @@ public class EditBodyFile extends HttpServlet {
         ses.setAttribute("bIdCity", body.getBodyAddress().getCity());
         ses.setAttribute("bIdPostCode", body.getBodyAddress().getPostCode());
         ses.setAttribute("bIdProvince", body.getBodyAddress().getProvince());
-        ses.setAttribute("bIdRegion", body.getBodyAddress().getRegion());
+        ses.setAttribute("bIdRegion", body.getBodyAddress().getRegion());        
         ses.setAttribute("bIdDistrict", body.getBodyAddress().getMagisterialDistrict());
-        ses.setAttribute("bIdEmployeeRecieving",body.getBodyHandedOverToPerNumber());
-        ses.setAttribute("bIdEmployeeHandingOver",body.getBodyReceivedFromPerNumber());
-        ses.setAttribute("bIdOrhanizationhandingOver",body.getBodyHandOverFromOrganization());
+        
+        
         ses.setAttribute("kinName", kin.getName());
         ses.setAttribute("kinSurname", kin.getSurname());
         if( kin.getID() != null)
@@ -90,6 +89,31 @@ public class EditBodyFile extends HttpServlet {
         ses.setAttribute("kinAddress", kin.getAddress());
         ses.setAttribute("kinWorkAddress", kin.getWorkAddress());
         ses.setAttribute("bodyFileDetail", true);
+        //ahseen's code
+        ses.setAttribute("bIdBodytype",body.getBodyType());  
+        int year = body.getEstimatedAgeYear();
+        if(year!=0){
+            ses.setAttribute("bIdEstAgeYear",year);
+        }
+        else{
+            ses.removeAttribute("bIdEstAgeYear");
+        }
+        int months =  body.getEstimatedAgeMonth();
+        if(months!=0){
+            ses.setAttribute("bIdEstAgeMonth",months);
+        }
+        else{
+            ses.removeAttribute("bIdEstAgeMonth");
+        }
+         
+        /*BodyDb bdb = new BodyDb(new Tools().getDbdetail(), body);
+        bdb.init();
+        PrintWriter out = response.getWriter();
+        out.println(bdb.readBodyAtMortuary());   
+        ses.setAttribute("bIdEmployeeRecieving",body.getBodyHandedOverToPerNumber());
+        ses.setAttribute("bIdEmployeeHandingOver",body.getBodyReceivedFromPerNumber());
+        ses.setAttribute("bIdOrhanizationhandingOver",body.getBodyHandOverFromOrganization());*/
+        //end asheen's code
         response.sendRedirect("Home.jsp");
     }
 

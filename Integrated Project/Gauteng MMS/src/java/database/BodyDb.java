@@ -269,7 +269,7 @@ public class BodyDb extends DatabaseConnector{
                 bodyAtMort.setBodyReceivedFromPerNumber(mort.getBodyReceivedFromPerNumber());
                 bodyAtMort.setBodyHandOverFromOrganization(mort.getBodyHandOverFromOrganization());
             }
-            catch (SQLException ex)
+            catch (Exception ex)
             {
                  ;
             }
@@ -321,7 +321,7 @@ public class BodyDb extends DatabaseConnector{
     {
         try
         {
-            statement.executeQuery("SELECT * FROM bodyAtMortuary WHERE Body_idDeathRegisterNumber='" + body.getDeathRegisterNumber()+"';");
+            statement.executeQuery("SELECT * FROM atmortuary WHERE Body_idDeathRegisterNumber='" + body.getDeathRegisterNumber()+"';");
             ResultSet rSet = statement.getResultSet();
             rSet.next();
             if (rSet.getString("bodyReceivedFromPerNumber") == null){
@@ -433,23 +433,20 @@ public class BodyDb extends DatabaseConnector{
                     }
                     catch (Exception ex)
                     {
-                        ;
+                        break;
                     }
-                    finally
-                    {
-                        IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
-                        incidentDb.init();
-                        incidentDb.read();
-                        bodyAtMort.setIncident(incidentDb.getIncident());
-                        body = bodyAtMort;
-                        statement.close();
-                        connection.close();
-                        list.add(body);
-                    } 
+                    IncidentDb incidentDb = new IncidentDb(new Incident(resultSet.getString("Incident_incidentLogNumber")), dbDetail);
+                    incidentDb.init();
+                    incidentDb.read();
+                    bodyAtMort.setIncident(incidentDb.getIncident());
+                    list.add(bodyAtMort);
              }
+             statement.close();
+             connection.close();
         } 
         catch (SQLException ex) 
         {
+            System.err.println(ex);
             throw new SQLException(ex.getMessage());
         }
         return list;
@@ -506,5 +503,4 @@ public class BodyDb extends DatabaseConnector{
         return null;
         
     }
-   
 }
