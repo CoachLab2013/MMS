@@ -25,7 +25,7 @@ public class Tools {
     public Tools() {
 
  
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
  
     }
 
