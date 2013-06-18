@@ -50,11 +50,11 @@
                     </tr>
                     
                     <tr>
-                        <td>Institution:</td> 
+                        <td>Organization:</td> 
                         <td> 
                             
                             <%
-                                out.println(new Tools().makeReferenceList("institution","type",""));
+                                out.println(new Tools().makeReferenceList("organization","name",""));
                             %>
                             
                         </td>
