@@ -6,11 +6,13 @@ package servlets;
 
 import AssistiveClasses.SetDbDetail;
 import database.BodyAtMortuary;
+import database.BodyDb;
 import database.BodyFile;
 import database.BodyFileDb;
-import database.PostMortem;
-import database.PostMortemDb;
+import database.DbDetail;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mubien Nakhooda Coachlab 2013
  */
-public class PostMortemServlet extends HttpServlet {
+public class ReleaseBodyServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -35,39 +37,40 @@ public class PostMortemServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                       
-            SetDbDetail dbSet = new SetDbDetail();
-System.err.println("DR Number: " +  request.getSession().getAttribute("death_register_number").toString());
-
-            //Needed for Postmortem Constructor
-            BodyAtMortuary body = new BodyAtMortuary();
-            body.setDeathRegisterNumber(request.getSession().getAttribute("death_register_number").toString());
-
-            PostMortem postmortem = new PostMortem(
-                request.getParameter("ICDlevel1").split(" ")[0] + " " + request.getParameter("ICDlevel2").split(" ")[0] + " " + request.getParameter("ICDlevel3").split(" ")[0] + " " + request.getParameter("ICDlevel4").split(" ")[0],
-                request.getParameter("findingsmortem"), //
-                request.getParameter("findingsdeath"), //
-                false,
-                false,
-                request.getParameter("findingsnumber"), //
-                body,
-                null //LabRecord, Has been removed from database but still exists in Postmortem Class?
-            );
-
-            PostMortemDb postmortemDB = new PostMortemDb(postmortem, dbSet.getDbdetail());
-            postmortemDB.init();    
-            System.out.println(postmortemDB.add());
-
-            BodyFile bodyFile = new BodyFile(request.getSession().getAttribute("death_register_number").toString());
-            BodyFileDb bodyFileDB = new BodyFileDb(dbSet.getDbdetail(), bodyFile);
-            bodyFileDB.init();
-            System.err.println(bodyFileDB.read());
-            bodyFileDB.getBodyFile().setPostMortemCompleted(true);
-            bodyFileDB.init();
-            System.err.println(bodyFileDB.edit());
+        if (request.getParameter("type").equals("load")) {
             
-            request.getSession().setAttribute("_PostMortem", "true");
-            response.sendRedirect("Home.jsp");
+        DbDetail dbDetail = new SetDbDetail().getDbdetail();
+        
+            PrintWriter out = response.getWriter();
+            try {      
+                
+                BodyFileDb bodyFileDb = new BodyFileDb(dbDetail);
+                bodyFileDb.init();
+                
+                ArrayList<BodyAtMortuary> list = bodyFileDb.getBodyLinkList(request.getParameter("data"));
+                String result = "";
+                
+                for (BodyAtMortuary tmp : list) {
+                    
+                    BodyFile bodyFile = new BodyFile(tmp.getDeathRegisterNumber());
+                    BodyFileDb bodyFileDB = new BodyFileDb(dbDetail, bodyFile);
+                    bodyFileDB.init();
+                    bodyFileDB.read();
+                    
+                    result += tmp.getDeathRegisterNumber() + "`"
+                            + tmp.getNameOfDeceased() + "`"
+                            + tmp.getSurnameOfDeceased() + "`"
+                            + tmp.getID() + "`";
+                    
+                    result += bodyFileDB.getBodyFile().isBodyIdentified();
+                    result += "~";
+                }
+                
+                out.println(result);
+            } finally {
+                out.close();
+            }
+        } 
     }
 
     /**

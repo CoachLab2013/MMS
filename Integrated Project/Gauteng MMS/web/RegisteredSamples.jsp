@@ -80,12 +80,9 @@
                         
                         </tr>
                         <tr>
-                            <td> Lab Reference Number:</td> 
-                            <%--  Foreign Key Constraint with LabRecord table  --%>
-                            <td name="editRegisteredSamples"> 
-                                <%
-                                    out.println(new Tools().makeReferenceList("LabRecord","labNumber",""));
-                                %>                                
+                            <td> Lab Reference Number:</td>
+                            <td> 
+                                <input type="text" name="editSampleLabRecord" value="" />                         
                             </td>
                         </tr>
                             <tr>

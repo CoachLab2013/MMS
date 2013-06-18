@@ -86,12 +86,12 @@ public class PropertyDb extends DatabaseConnector
         }
         return "successful";
     }
-    public ArrayList<Property> properties() throws SQLException
+    public ArrayList<Property> properties(String deathregister) throws SQLException
     {
         ArrayList<Property> list = new ArrayList<Property>();
         try 
         {
-            statement.executeQuery("SELECT * FROM property;");
+            statement.executeQuery("SELECT * FROM property WHERE Body_idDeathRegisterNumber='"+deathregister+"';");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {

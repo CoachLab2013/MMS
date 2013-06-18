@@ -66,16 +66,10 @@ $(document).ready(function(){
         $('input[name="editInitialSealnumber"]').val($(this).children('#trSealNumber').text());
         $('input[name="editNewSealNumber"]').val($(this).children('#trBrokenSeal').text());
         $('input[name="editDeathRegisternumber"]').val($(this).children('#trDeathNumber').text());
+        $('input[name="editSampleLabRecord"]').val($(this).children('#trLabNumber').text());
         $('textarea[name="editReasonseal"]').val($(this).children('#trReason').text());
         
-        $("#selectedsample").val($(this).attr("sealnumber"));
-        
-        var labRec = $(this).children('#trLabNumber').text();
-        
-        $('td[name="editRegisteredSamples"] > select[name=LabRecord]').find('option').removeAttr("selected");        
-        $('td[name="editRegisteredSamples"] > select[name=LabRecord] > option').each(function() {
-            if ($(this).text() === labRec) { $(this).attr("selected","selected"); } 
-        });        
+        $("#selectedsample").val($(this).attr("sealnumber"));        
     });
 
     $("#editsamplebutton").click(function() {        
@@ -94,6 +88,7 @@ $(document).ready(function(){
         
         $('input[name="editNewSealNumber"]').val("");
         $('input[name="editDeathRegisternumber"]').val("");
+        $('input[name="editSampleLabRecord"]').val("");
         $('textarea[name="editReasonseal"]').val("");
         
     });

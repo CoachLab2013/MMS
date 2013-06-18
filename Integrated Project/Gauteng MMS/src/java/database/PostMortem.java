@@ -17,11 +17,11 @@ public class PostMortem {
     private boolean approved;
     private String DHA1663number;
     private LabRecord labRecord;
+    private String reason;
     private Body body;
 
     public PostMortem() {
     }
-
     public PostMortem(String labNumber, String icd10, String chiefFind, String causeOfDeath, boolean status, boolean approved, String DHA1663number, Body body, LabRecord labRecord) {
         this.labNumber = labNumber;
         this.icd10 = icd10;
@@ -32,6 +32,18 @@ public class PostMortem {
         this.DHA1663number = DHA1663number;
         this.body = body;
         this.labRecord = labRecord;
+    }
+    public PostMortem(String labNumber, String icd10, String chiefFind, String causeOfDeath, boolean status, boolean approved, String DHA1663number, Body body, LabRecord labRecord,String reason) {
+        this.labNumber = labNumber;
+        this.icd10 = icd10;
+        this.chiefFind = chiefFind;
+        this.causeOfDeath = causeOfDeath;
+        this.status = status;
+        this.approved = approved;
+        this.DHA1663number = DHA1663number;
+        this.body = body;
+        this.labRecord = labRecord;
+        this.reason = reason;
     }
 
     /**
@@ -89,7 +101,14 @@ public class PostMortem {
     public Body getBody() {
         return body;
     }
-
+    /**
+     * 
+     * @return the reason for closing manually
+     */
+    public String getReason()
+    {
+        return reason;
+    }
     /**
      * @param labNumber the labNumber to set
      */
@@ -160,5 +179,9 @@ public class PostMortem {
     public void setLabRecord(LabRecord labRecord)
     {
         this.labRecord = labRecord;
+    }
+    public void setReason(String reason)
+    {
+        this.reason = reason;
     }
 }

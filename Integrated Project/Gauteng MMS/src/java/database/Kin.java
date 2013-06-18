@@ -20,7 +20,8 @@ public class Kin {
     private String Id;
     private String body_idDeathRegisterNumber; 
 
-    public Kin() {
+    public Kin() 
+    {
         passport = "";
         name = "";
         surname = "";

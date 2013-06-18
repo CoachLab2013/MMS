@@ -23,9 +23,14 @@ public class Tools {
  
   
     public Tools() {
+<<<<<<< HEAD
 
  
         dbdetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
+=======
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
+
+>>>>>>> origin/master
  
     }
 
@@ -593,26 +598,38 @@ public class Tools {
         body = (BodyAtMortuary)bodyDb.getBody();
         return body;
     }
-    public String makePropertyTable()
+    public String makePropertyTable(String deathregister)
     {
         PropertyDb pDb = new PropertyDb(dbdetail);
         pDb.init();
         String table;
         try 
         {
-            ArrayList<Property> properties = pDb.properties();
+            ArrayList<Property> properties = pDb.properties(deathregister);
             table = "<table class='tabledisplay' id='propertytable'>"
+                    + "<th class='tableheading'>Select</th>"
                     + "<th class='tableheading'>Property Type</th>"
                     + "<th class='tableheading'>Description</th>"
                     + "<th class='tableheading'>Seal Number</th>";
             int size = properties.size();
             for (int i = 0; i < size; i++) 
             {
+                
                 Property property = properties.get(i);
+                String property_type = property.getType();
+                String property_description= property.getDescription();
+                String property_seal = property.getSealNumber() ;
+                if(property_type.equals("null")){
+                    property_type="";
+                }
+                if(property_seal.equals("null")){
+                    property_seal="";
+                }
                 table = table + "<tr class='tablerow' name='propertyId' proId='" + property.getIdProperty() + "'>"
-                        + "<td>" + property.getType() + "</td>"
-                        + "<td class='tablecell'>" + property.getDescription() + "</td>"
-                        + "<td class='tablecell'>" + property.getSealNumber() + "</td>"
+                        +"<td class=tablecell><input type=checkbox name=checkbox[]></td>"
+                        + "<td>" + property_type + "</td>"
+                        + "<td class='tablecell'>" + property_description + "</td>"
+                        + "<td class='tablecell'>" + property_seal + "</td>"
                         + "</tr>";
             }
             table = table + "</table>";
@@ -711,73 +728,7 @@ public class Tools {
         String icon = "<link rel='shortcut icon' href='Images/icon.ico'>";
         return icon;
     }
-    
-    public Boolean accessReport(int access, String report) {
         
-        //FMANAGER = 0
-        //FOFFICER = 1
-        //CFMEDICALPRACTITIONER = 2
-        //FMEDICALPRACTITIONER = 3
-        //SYSADMIN = 4
-        
-        boolean result = false;
-        
-        switch(access) {
-
-            case 0:
-                if (report.equalsIgnoreCase("Incident HouseKeeping")
-                        || report.equalsIgnoreCase("Facility Storage")
-                        || report.equalsIgnoreCase("Unidentified Bodies")
-                        || report.equalsIgnoreCase("Body File")
-                        || report.equalsIgnoreCase("Bodies by Organization")
-                        || report.equalsIgnoreCase("Manner of Death")
-                        || report.equalsIgnoreCase("Turn Around on Results")) {
-                    result =  true;
-                };
-                break;
-            
-            case 1:
-                if (report.equalsIgnoreCase("Audit Trail")
-                        || report.equalsIgnoreCase("Incident HouseKeeping")
-                        || report.equalsIgnoreCase("Unidentified Bodies")
-                        || report.equalsIgnoreCase("Body File")
-                        || report.equalsIgnoreCase("Turn Around on Results")) {
-                    result =  true;
-                };
-                break;
-            
-            case 2:
-                if (report.equalsIgnoreCase("Incident HouseKeeping")
-                        || report.equalsIgnoreCase("Unidentified Bodies")
-                        || report.equalsIgnoreCase("Specific Body")
-                        || report.equalsIgnoreCase("Body File")
-                        || report.equalsIgnoreCase("Turn Around on Results")) {
-                    result =  true;
-                };
-                break;
-            
-            case 3:
-                if (report.equalsIgnoreCase("Incident HouseKeeping")
-                        || report.equalsIgnoreCase("Unidentified Bodies")
-                        || report.equalsIgnoreCase("Specific Body")
-                        || report.equalsIgnoreCase("Body File")
-                        || report.equalsIgnoreCase("Turn Around on Results")) {
-                    result =  true;
-                };
-                break;
-                
-            case 4:
-                if (report.equalsIgnoreCase("Audit Trail")) {
-                    result =  true;
-                };
-                break;
-    
-            default: result =  false;
-        }
-        
-        return result;
-    }
-    
     public String checkDate(String inDate){
         if (inDate.equals("")){
             return "0001-01-01";
