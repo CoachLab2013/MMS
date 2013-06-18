@@ -19,14 +19,13 @@
                 padding-left: .5em; 
                 vertical-align: top; 
             }
-        </style> 
-
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-         <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
-         <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
-         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"/> 
-         <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css"/>  
-         <script type="text/javascript" src="js/DeceasedDetailsContentScript.js"></script>
+        </style> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <script type="text/javascript" src="js/DeceasedDetailsContentScript.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
+         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
+        <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css"> 
+         
 
     </head>
    
@@ -53,7 +52,7 @@
                           out.print("value=" + fullName);
                       }
                   }
-                 %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNameDis"  onclick="confirmText('txtDeceasedNameDis','btnDeceasedNameDis',0);" /></td>  
+                 %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNameDis" name="btnDeceasedNameDis" /></td>  
             </tr>
             <tr>     
                 <td>Maiden Name:  </td> <td><input type="text" name="DeceasedMaidenName" <%
@@ -77,7 +76,7 @@
                         out.print("value=" + surName); 
                       }
                   }
-                 %>  /><input class="btn" type="button" value="Confirm" id="btnDeceasedSurnameDis" onclick="confirmText('txtDeceasedSurnameDis','btnDeceasedSurnameDis',0);" /> </td>
+                 %>  /><input class="btn" type="button" value="Confirm" id="btnDeceasedSurnameDis" name="btnDeceasedSurnameDis" /> </td>
             </tr> 
 
             <tr>     
@@ -128,7 +127,7 @@
                            }
                       }
                   }
-                 %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNumberDis" onclick="confirmText('txtDeceasedNumberDis','btnDeceasedNumberDis',0);" /></td>  
+                 %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNumberDis" name="btnDeceasedNumberDis"/></td>  
             </tr> 
             <tr>
                 <td> Place of Birth:</td> <td><textarea cols="50" rows="3" name="deceasedPlaceBirth"><%
@@ -183,7 +182,7 @@
                             out.print(list2);
                     }
                         %>
-                    <input class="btn" type="button" value="Confirm" id="btnDeceasedGenderDis" onclick="confirmText('selDeceasedGenderDis','btnDeceasedGenderDis',0);" /> </td>
+                    <input class="btn" type="button" value="Confirm" id="btnDeceasedGenderDis" name="btnDeceasedGenderDis"/> </td>
             <tr>     
                 <td>Marital Status:  </td> <td>
                     <%
@@ -221,7 +220,7 @@
                          out.print(list2);
                      }
                      %>
-             <input class="btn" type="button" value="Confirm" id="btnDeceasedRaceDis" onclick="confirmText('selDeceasedRaceDis','btnDeceasedRaceDis',0);"/> </td>
+             <input class="btn" type="button" value="Confirm" id="btnDeceasedRaceDis" name="btnDeceasedRaceDis" /> </td>
             <tr>     
                 <td>Occupation:  </td> <td>
                         <%
@@ -301,7 +300,7 @@
 
                 <td> Body Identified Date:     </td><td>  
 
-                       <input id="txtDeceasedBodyIdentifiedDate" type="text"  name="deceasedbodyIdentifiedDate" readonly style="cursor:pointer;"/>                    
+                       <input id="test" type="text"  name="deceasedbodyIdentifiedDate" readonly style="cursor:pointer;"/>                    
 
                 </td>
             </tr>

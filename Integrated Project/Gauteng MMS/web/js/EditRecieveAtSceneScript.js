@@ -4,6 +4,7 @@
  */
 
 $(document).ready(function(){
+    
     if($("#checkscene").val() == "true"){
         //lose focus from the incidents side
         $("#OpenIncidents").removeClass("tab-pane active");
