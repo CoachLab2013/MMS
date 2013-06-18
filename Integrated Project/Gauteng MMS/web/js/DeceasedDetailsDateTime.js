@@ -1,5 +1,5 @@
         
-        $("#txtDeceasedDateBirth").datepicker({
+        $("input#txtDeceasedDateBirth").datepicker({
             dateFormat:"yy-mm-dd",
             maxDate: 0            
         });

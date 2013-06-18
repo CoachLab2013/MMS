@@ -19,13 +19,13 @@
                 padding-left: .5em; 
                 vertical-align: top; 
             }
-        </style> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-       <script type="text/javascript" src="js/DeceasedDetailsContentScript.js"></script>
+        </style>       
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="js/DeceasedDetailsContentScript.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
          <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
         <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css"> 
-         
 
     </head>
    
@@ -142,8 +142,8 @@
                   
                  %></textarea></td>
             </tr>
-            <tr>     
-                <td>Date of Birth: </td> <td><input id="txtDeceasedDateBirth"  type="text" name="deceasedDateBirth"  <%
+            <tr>    
+                <td>Date of Birth: </td> <td><input id="txtDeceasedDateBirth" name="deceasedDateBirth" type="text"  <%
                   if(session.getAttribute("bIdDateOfBirth") != null)
                   {
                     String dateOfBirth = (String)session.getAttribute("bIdDateOfBirth");
@@ -152,7 +152,7 @@
                         out.print("value=" + dateOfBirth); 
                     }
                   }
-                 %> /></td> 
+                 %> readonly style="cursor:pointer;" /></td> 
             </tr>
             <tr>     
                 <td>Age on the date found:  </td> <td><input type="text" name="deceasedage" <%
@@ -318,10 +318,10 @@
             
         </table>
 
-        <script type="text/javascript" src="js/DeceasedDetailsDateTime.js"></script> 
+         
 
     </form>
-                            
+    <script type="text/javascript" src="js/DeceasedDetailsDateTime.js"></script>                       
 </body>
 
 </html>
