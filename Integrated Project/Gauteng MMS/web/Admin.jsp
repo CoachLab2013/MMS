@@ -19,7 +19,7 @@
 <html>
     <head>        
         <%
-
+            //this is to check the session is not expired for logging in
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
             response.setDateHeader("Expires", 0); // Proxies. 
@@ -62,7 +62,7 @@
 
         <%
 
-            //variables to store results
+            //variables to store results coming from servlets 
             String userResult = "";
             String instiResult = "";
             String analysisResult = "";
@@ -87,7 +87,7 @@
             String releaseTypeResult = "";
             String releaseToResult = "";
 
-            //Veriables to determine which tab to open
+            //Vriables to determine which tab to open when coming from servlets
             String main1 = "";
             String addUserTab = "";
             String currentUserTab = "";
@@ -115,8 +115,7 @@
             String scene = "";
             String releaseType = "";
 
-            //checks which tab to open
-            
+            //checks which tab to open, set the above variables to active if that tab must be open
             try{
             
             if (session.getAttribute("main").equals("user")) {
@@ -278,7 +277,7 @@
             emplo.init();
             ArrayList<Employee> employeeList = emplo.employeeList();
 
-            //Code to populate list boxes in tabs
+                              //Code to populate list boxes in tabs//
 
             //For institution list box
             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbset.getDbdetail());
@@ -320,7 +319,7 @@
             emp.init();
             ArrayList<String> raceList = emp.referenceList();
 
-            //For maritalstatus list box
+            //For marital status list box
             emp = new ReferenceListDb("maritalstatus", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> maritalstatusList = emp.referenceList();
@@ -333,10 +332,11 @@
             //For region list box
             emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
             emp.init();
+            //initialize the region list to display regions of the first province
             ArrayList<String> regionList = emp.referenceListReg(provinceList.get(0));
 
 
-            //For mannerofdeath list box
+            //For manner of death list box
             emp = new ReferenceListDb("mannerofdeath", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> mannerofdeathList = emp.referenceList();
@@ -346,7 +346,7 @@
             emp.init();
             ArrayList<String> sampleList = emp.referenceList();
 
-            //For bodystatus list box
+            //For body status list box
             emp = new ReferenceListDb("bodystatus", "e", "state", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> bodystatusList = emp.referenceList();
@@ -356,7 +356,7 @@
             emp.init();
             ArrayList<String> relationshipList = emp.referenceList();
 
-            //For special Body class list box
+            //For  Body part list box
             emp = new ReferenceListDb("bodypart", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> bodyPartList = emp.referenceList();
@@ -381,12 +381,12 @@
             emp.init();
             ArrayList<String> sceneList = emp.referenceList();
 
-            //For scene type list box
+            //For release type list box
             emp = new ReferenceListDb("releasedtype", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> releasedTypeList = emp.referenceList();
 
-            //For scene type list box
+            //For release to list box
             emp = new ReferenceListDb("releasedto", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> releasedToList = emp.referenceList();
@@ -417,7 +417,7 @@
                         <div class="tab-content" >
                             <div id="cUser" class="tab-pane <%out.println(String.valueOf(currentUserTab));%>">  
                                 <legend>Users</legend>
-                                <%--  Current user content --%>
+                                <%--  Current user content : Display users in a table--%>
                                 <table >
                                     <tr>
                                         <th width="150"><H4>Name</H4></th>
@@ -531,7 +531,7 @@
                                                                 <br/>                               
                                                                 <div class="offset3">
                                                                     <input type="submit"  class="btn" type="button" value="Add User" /> 
-                                                                    <%--Display save result --%> 
+                                                                   
                                                                 </div>
 
                                                                 <br/> <br/> 
@@ -548,7 +548,7 @@
                                                         <legend>References Lists</legend>
                                                         <div class="tabbable">
                                                             <div class="span3 bs-docs-sidebar">
-                                                                <%-- reference list  tab has 20 tabs, and they are the following --%>
+                                                                <%-- reference list tabs, and they are the following --%>
                                                                 <ul class="nav nav-tabs nav-stacked " data-tabs="tabs">
 
                                                                     <li class="<%out.println(String.valueOf(inst));%>"><a href="#inst" data-toggle="tab">Institution</a> </li>
@@ -577,16 +577,20 @@
                                                                 </ul>
                                                             </div>
                                                             <div class="tab-content" >
+                                                                 <%-- Institution tab   --%>
                                                                 <div id="inst" class="tab-pane <%out.println(String.valueOf(inst));%>" >  
                                                                     <div align="center"><h2>Institution </h2> </div>
 
                                                                     <div class="offset2 ">
                                                                         <form name="AddInsitution" id="AddInsitution" method="post" action="ReferenceListServlet"  >
+                                                                             <%--this is a hidden textbox that is used in the ReferenceListServlet to identify the form --%>
                                                                             <input type="text" name="form" value="AddInsitution" style="visibility: hidden" />
                                                                             <div class="control-group form-horizontal">
                                                                                 <label class="control-label" for="txtInsitution">Institution Name:</label>
                                                                                 <div class="controls">
+                                                                                     <%--  Textboxes are validated in the script.js in the js folder. USed the the textbox id to identify the text box --%>
                                                                                     <input type="text" id="txtInsitution" name="txtInsitution"   />
+                                                                                     <%-- Button to submit the form to the ReferenceListServlet and all the data that is in the text boxes  --%>
                                                                                     <input class="btn" type="submit" value="Add Institution" name="cmdInsitution" />
                                                                                 </div>
 
@@ -594,7 +598,7 @@
                                                                         </form>
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="InsitutionList">Current Institutions:</label>
-
+                                                                                 <%-- Display institution list   --%>
                                                                             <select id="InsitutionList" name="InsitutionList" size="5">
                                                                                 <%
                                                                                     for (int i = 0; i < institutionList.size(); i++) {
@@ -606,18 +610,21 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-
+                                                                             <%-- Buttons to edit or delete selected institution. When clicked, the function in the EditReferenceList.js page in the js folder is called     --%>
+                                                                              <%--The methods take the table name and the id of List.--%>
                                                                             <input class="btn" type="button" onclick="editReferenceList('Insitution', 'InsitutionList')" value="Edit Institution" id="cmdEditInsitutions" name="cmdEditInsitution" />
                                                                             <input class="btn" type="button" onclick="deleteReferenceList('Insitution', 'InsitutionList')" value="Delete Institution" id="cmdDeleteInsitutions" name="cmdDeleteInsitutions" />
 
                                                                         </div>
                                                                     </div>     
                                                                     <div  class="offset3">
+                                                                         <%-- display results  --%>
                                                                         <label  > <% out.println(String.valueOf(instiResult));%></label>
                                                                     </div>   <br/>
                                                                     <br/>
                                                                 </div>
                                                                 <div id="anlysis" class="tab-pane <%out.println(String.valueOf(analysis));%>"> 
+                                                                     <%-- Analysis tab  --%>
                                                                     <div align="center"><h2>Type of Analysis </h2> </div> 
                                                                     <div class="offset2 ">
                                                                         <form name="AddAnalysis" id="AddAnalysis" method="post" action="ReferenceListServlet"  >
@@ -998,27 +1005,33 @@
                                                                             <div class="control-group form-horizontal">
                                                                                 <label class="control-label" for="ProvRegionList">Province</label>
                                                                                 <div class="controls">
-
+                                                                                         <%--List box used to filter region list box according to the selected Province   --%>
+                                                                                          <%--  The method SelectProvince() in the RegionScript.js page is called when the list is loaded or changed  --%>
                                                                                     <select id="ProvRegionList" name="ProvRegionList" onload="SelectProvince()" onchange='SelectProvince()'>
                                                                                         <%
                                                                                             String prov = "";
                                                                                             String selected = "";
-
+                                                                                                
+                                                                                            //It sets prov from provTab that is set in the ReferenceListServlet under the loop statement that pertains the region
+                                                                                            //prov variable will contain either one of the provinces or nothing 
                                                                                             if (null != session.getAttribute("provTab")) {
                                                                                                 prov = session.getAttribute("provTab").toString();
                                                                                             }
 
-
+                                                                                                //We loop through the province list that has all provinces, and find the reference list that is equal prov
                                                                                             for (int i = 0; i < provinceList.size(); i++) {
+                                                                                                //if we do find that province ...
                                                                                                 if (prov.trim().equals(provinceList.get(i).trim())) {
-                                                                                                    selected = "selected";
+                                                                                                    selected = "selected";//...set selected to selected
                                                                                                     emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
                                                                                                     emp.init();
-                                                                                                    regionList = emp.referenceListReg(provinceList.get(i).trim());
+                                                                                                    regionList = emp.referenceListReg(provinceList.get(i).trim());//generate the region lists that is from the provinc equals to prov
                                                                                                 } else {
                                                                                                     selected = "";
+                                                                                                    //if we dont find it, clear the selected variable
                                                                                                 }
                                                                                         %>
+                                                                                         <%-- we then set the select the province that equals prov to be the one selected in the list. If we dont find any the default selected will be the first one on the province list  --%>
                                                                                         <option <%out.println(String.valueOf(selected));%>  value="<% out.print(provinceList.get(i));%>"><% out.print(provinceList.get(i));%> </option>
 
                                                                                         <%
@@ -1045,9 +1058,7 @@
                                                                             <select id="RegionList" name="RegionList" size="5">
                                                                                 <%
 
-                                                                                    //  emp = new ReferenceListDb("region", "e", "type", "e", dbset.getDbdetail());
-                                                                                    //emp.init();
-                                                                                    //regionList = emp.referenceListReg(prov.trim());
+                                                                                   //display the region list that was generated in the above province section.
                                                                                     for (int i = 0; i < regionList.size(); i++) {
 
                                                                                 %>
@@ -1551,24 +1562,23 @@
                                                     </div>
 
 
-
+                                                      <%-- The form used to edit selected reference list item. The form is called in the EditReferenceList.js page in the js form   --%>
                                                     <form name="formname" action="EditReferenceListServlet" method="post">
 
-                                                        <input type="hidden" id="item" name="item">
-                                                        <input type="hidden" id="Olditem" name="Olditem">
-                                                        <input type="hidden" id="table" name="table">
-                                                        <input type="hidden" id="editProv" name="editProv">
+                                                        <input type="hidden" id="item" name="item">  <%-- the new item that is being edited to  --%>
+                                                        <input type="hidden" id="Olditem" name="Olditem">  <%-- The item that is being edited  --%>
+                                                        <input type="hidden" id="table" name="table">  <%--  Table name that contains the selected item --%>
+                                                        <input type="hidden" id="editProv" name="editProv">  <%-- used when editing the region, since we need to know which province contains that region  --%>
                                                     </form>
-
+                                                     
+                                                           <%--Used to delete the selected item  --%>
                                                     <form name="formdelete" action="DeleteReferenceListServlet" method="post">
-                                                        <input type="hidden" id="item1" name="item1">
-                                                        <input type="hidden" id="table1" name="table1">
-                                                        <input type="hidden" id="editProv1" name="editProv1">
-                                                    </form>
-                                                    <form name="LoadICD10Form" action="LoadICD10Table" method="post">
+                                                        <input type="hidden" id="item1" name="item1">  <%-- item being deleted  --%>
+                                                        <input type="hidden" id="table1" name="table1">  <%--  table where the deleted item exists --%>
+                                                        <input type="hidden" id="editProv1" name="editProv1">  <%-- used when deleting a region to select the correct item  --%>                                                       <input type="hidden" id="editProv1" name="editProv1">
 
-                                                        <input type="hidden" id="ICD10table" name="ICD10table">
                                                     </form>
+                               
 
 
                                                     </div>                                       

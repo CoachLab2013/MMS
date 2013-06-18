@@ -22,6 +22,7 @@ $(document).ready(function() {
 
             );
 
+ //Specifies the controls being validated in the specified form
 
 
     $('#AddUser').validate({
