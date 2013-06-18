@@ -300,7 +300,7 @@
 
                 <td> Body Identified Date:     </td><td>  
 
-                       <input id="test" type="text"  name="deceasedbodyIdentifiedDate" readonly style="cursor:pointer;"/>                    
+                       <input id="txtDeceasedBodyIdentifiedDate" type="text"  name="deceasedbodyIdentifiedDate" readonly style="cursor:pointer;"/>                    
 
                 </td>
             </tr>
