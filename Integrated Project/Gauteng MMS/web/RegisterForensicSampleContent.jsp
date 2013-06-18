@@ -46,11 +46,8 @@
                         </tr>
                         <tr>
                             <td> Lab Reference Number: </td> 
-                            <%--  Foreign Key Constraint with LabRecord table  --%>
                             <td> 
-                                <%
-                                    out.println(new Tools().makeReferenceList("LabRecord","labNumber",""));
-                                %>                                
+                                <input type="text" name="LabRecord" value="" />                         
                             </td>
                         </tr>
                             <tr>

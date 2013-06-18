@@ -47,7 +47,7 @@ public class RegisteredSamples extends HttpServlet {
         sampleDB.getforensicSample().setDeathRegisterNumber(request.getParameter("editDeathRegisternumber"));
         sampleDB.getforensicSample().setBrokenSealNumber(request.getParameter("editNewSealNumber"));
         sampleDB.getforensicSample().setReason(request.getParameter("editReasonseal")); 
-        sampleDB.getforensicSample().setLabNumber(request.getParameter("LabRecord")); 
+        sampleDB.getforensicSample().setLabNumber(request.getParameter("editSampleLabRecord")); 
         
         System.out.println(sampleDB.edit());
         

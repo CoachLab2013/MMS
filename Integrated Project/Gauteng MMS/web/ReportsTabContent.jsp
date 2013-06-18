@@ -10,20 +10,91 @@
 <html>
     <head>
         <title>Reports</title>
-        <%! 
+        <%!
+            public Boolean accessReport(int access, String report) {
+
+                //FMANAGER = 0
+                //FOFFICER = 1
+                //CFMEDICALPRACTITIONER = 2
+                //FMEDICALPRACTITIONER = 3
+                //SYSADMIN = 4
+
+                boolean result = false;
+
+                switch (access) {
+
+                    case 0:
+                        if (report.equalsIgnoreCase("Incident HouseKeeping")
+                                || report.equalsIgnoreCase("Facility Storage")
+                                || report.equalsIgnoreCase("Unidentified Bodies")
+                                || report.equalsIgnoreCase("Body File")
+                                || report.equalsIgnoreCase("Bodies by Organization")
+                                || report.equalsIgnoreCase("Manner of Death")
+                                || report.equalsIgnoreCase("Turn Around on Results")) {
+                            result = true;
+                        }
+                        ;
+                        break;
+
+                    case 1:
+                        if (report.equalsIgnoreCase("Audit Trail")
+                                || report.equalsIgnoreCase("Incident HouseKeeping")
+                                || report.equalsIgnoreCase("Unidentified Bodies")
+                                || report.equalsIgnoreCase("Body File")
+                                || report.equalsIgnoreCase("Turn Around on Results")) {
+                            result = true;
+                        }
+                        ;
+                        break;
+
+                    case 2:
+                        if (report.equalsIgnoreCase("Incident HouseKeeping")
+                                || report.equalsIgnoreCase("Unidentified Bodies")
+                                || report.equalsIgnoreCase("Specific Body")
+                                || report.equalsIgnoreCase("Body File")
+                                || report.equalsIgnoreCase("Turn Around on Results")) {
+                            result = true;
+                        }
+                        ;
+                        break;
+
+                    case 3:
+                        if (report.equalsIgnoreCase("Incident HouseKeeping")
+                                || report.equalsIgnoreCase("Unidentified Bodies")
+                                || report.equalsIgnoreCase("Specific Body")
+                                || report.equalsIgnoreCase("Body File")
+                                || report.equalsIgnoreCase("Turn Around on Results")) {
+                            result = true;
+                        }
+                        ;
+                        break;
+
+                    case 4:
+                        if (report.equalsIgnoreCase("Audit Trail")) {
+                            result = true;
+                        }
+                        ;
+                        break;
+
+                    default:
+                        result = false;
+                }
+
+                return result;
+            }
+
             public String getFileList(HttpServletRequest request, String folder) {
                 String out = "";
                 int access = (Integer) request.getSession().getAttribute("accesslevel");
-                Tools tool = new Tools();
-                
+
                 File file = new File(request.getSession().getServletContext().getRealPath(request.getServletPath())).getParentFile();
                 file = new File(file.getPath() + "/" + folder);
                 File[] files = file.listFiles();
                 for (File tmpFile : files) {
                     if (tmpFile.isFile() && (tmpFile.getName().contains(".pdf") || tmpFile.getName().contains(".xlsx"))) {
                         out += "<a href='" + folder + "/" + tmpFile.getName() + "'>" + tmpFile.getName() + "</a><br/>";
-                    } else {    
-                        if(tool.accessReport(access, tmpFile.getName())) {
+                    } else {
+                        if (accessReport(access, tmpFile.getName())) {
                             out += "<h5>" + tmpFile.getName() + "</h5>";
                             out += getFileList(request, folder + "/" + tmpFile.getName());
                         }

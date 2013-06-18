@@ -136,7 +136,7 @@ public class BodyFileDb extends DatabaseConnector
                                     + "bodyIdentified="+ bodyFile.isBodyIdentified() + ","
                                     + "postMortemComplete=" + bodyFile.isPostMortemCompleted() + ","
                                     + "dateFileClosed='" + bodyFile.getDateFileClosed() + "'"
-                                    + "WHERE Body_idDeathRegisterNumber=" +bodyFile.getDeathRegisterNumber() + ";");
+                                    + "WHERE Body_idDeathRegisterNumber='" +bodyFile.getDeathRegisterNumber() + "';");
             statement.close();
             connection.close();
         } 
