@@ -28,8 +28,15 @@
     <body>
         <form name="releasepropertyform" id="releasepropertyform" method="post" action="ReleasePropertyServlet">
             <legend>Release Property</legend>
-             <%   
-                   out.println(new Tools().makePropertyTable());
+             <% 
+             String value;
+             if(!(session.getAttribute("death_register_number").toString().equals("null"))){
+                            value = session.getAttribute("death_register_number").toString();
+                        }
+                        else{
+                            value = "";
+                        }
+                   out.println(new Tools().makePropertyTable(value));
              %>
                     <input type="hidden" id="selectedproperty" name="selectedproperty" />
                     

@@ -321,7 +321,7 @@ public class BodyDb extends DatabaseConnector{
     {
         try
         {
-            statement.executeQuery("SELECT * FROM bodyAtMortuary WHERE Body_idDeathRegisterNumber='" + body.getDeathRegisterNumber()+"';");
+            statement.executeQuery("SELECT * FROM atmortuary WHERE Body_idDeathRegisterNumber='" + body.getDeathRegisterNumber()+"';");
             ResultSet rSet = statement.getResultSet();
             rSet.next();
             if (rSet.getString("bodyReceivedFromPerNumber") == null){

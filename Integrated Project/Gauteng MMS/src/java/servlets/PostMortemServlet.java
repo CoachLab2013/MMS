@@ -33,31 +33,33 @@ public class PostMortemServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                         
-        SetDbDetail dbSet = new SetDbDetail();
-        
-        //Needed for Postmortem Constructor
-        BodyAtMortuary body = new BodyAtMortuary();
-        body.setDeathRegisterNumber(request.getSession().getAttribute("death_register_number").toString());
-        
-        PostMortem postmortem = new PostMortem(                
-            "",
-            "",
-            request.getParameter("findingsmortem"), //
-            request.getParameter("findingsdeath"), //
-            false,
-            false,
-            request.getParameter("findingsnumber"), //
-            body,
-            null //LabRecord, Has been removed from database but still exists in Postmortem Class?
-        );
-        
-        PostMortemDb postmortemDB = new PostMortemDb(postmortem, dbSet.getDbdetail());
-        postmortemDB.init();    
-        System.out.println(postmortemDB.add());
-       
-        request.getSession().setAttribute("_PostMortem", "true");
-        response.sendRedirect("Home.jsp");
+                       
+        if (request.getSession().getAttribute("death_register_number") != null) {  
+            SetDbDetail dbSet = new SetDbDetail();
+
+            //Needed for Postmortem Constructor
+            BodyAtMortuary body = new BodyAtMortuary();
+            body.setDeathRegisterNumber(request.getSession().getAttribute("death_register_number").toString());
+
+            PostMortem postmortem = new PostMortem(                
+                "",
+                request.getParameter("ICDlevel1").split(" ")[0] + " " + request.getParameter("ICDlevel2").split(" ")[0] + " " + request.getParameter("ICDlevel3").split(" ")[0] + " " + request.getParameter("ICDlevel4").split(" ")[0],
+                request.getParameter("findingsmortem"), //
+                request.getParameter("findingsdeath"), //
+                false,
+                false,
+                request.getParameter("findingsnumber"), //
+                body,
+                null //LabRecord, Has been removed from database but still exists in Postmortem Class?
+            );
+
+            PostMortemDb postmortemDB = new PostMortemDb(postmortem, dbSet.getDbdetail());
+            postmortemDB.init();    
+            System.out.println(postmortemDB.add());
+
+            request.getSession().setAttribute("_PostMortem", "true");
+            response.sendRedirect("Home.jsp");
+        }
     }
 
     /**

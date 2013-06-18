@@ -7,7 +7,6 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,10 +14,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Administrator
+ * @author Sandile
  */
-@WebServlet(name = "LogInServlet", urlPatterns = {"/LogInServlet"})
-public class LogInServlet extends HttpServlet {
+public class LoadICD10Table extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -35,31 +33,17 @@ public class LogInServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            Tools t = new Tools();
-            String personnelnumber = request.getParameter("personnelnumber");
-            String password = request.getParameter("password");
-            HttpSession sess = request.getSession();
-            sess.setAttribute("personnelnumber", personnelnumber);
-            
-            int access = t.logIn(personnelnumber, password, sess);
-           
-            if(access == -1){
-                sess.setAttribute("loginerror", "Invalid Persal Number and/or Password");
-                response.sendRedirect("/Gauteng_MMS/");
-            }
-            else{
-                sess.setAttribute("loggedin", true);
-                sess.setAttribute("accesslevel", access);
-                if (access == 4){
-                    response.sendRedirect("Admin.jsp");
-                }
-                else{
-                    response.sendRedirect("Home.jsp");
-                }
-                
-            }             
-            
-        } finally {            
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet LoadICD10Table</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet LoadICD10Table at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {
             out.close();
         }
     }
@@ -92,7 +76,46 @@ public class LogInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String num = request.getParameter("ICD10table").toString();
+        HttpSession sess = request.getSession();
+        /*  
+         PrintWriter out = response.getWriter();
+         try {
+         /* TODO output your page here. You may use following sample code. 
+         out.println("<!DOCTYPE html>");
+         out.println("<html>");
+         out.println("<head>");
+         out.println("<title>Servlet LoadICD10Table</title>");
+         out.println("</head>");
+         out.println("<body>");
+         out.println("<h1>Servlet LoadICD10Table at ---" + num+ " </h1>");
+         out.println("</body>");
+         out.println("</html>");
+         } finally {
+         out.close();
+         } */
+        sess.setAttribute("one", "false");
+        sess.setAttribute("two", "false");
+        sess.setAttribute("three", "false");
+        sess.setAttribute("four", "false");
+        if (num.contains("1")) {
+            sess.setAttribute("one", "true");
+
+        } else if (num.contains("2")) {
+            sess.setAttribute("two", "true");
+
+        } else if (num.contains("3")) {
+            sess.setAttribute("three", "true");
+
+        } else if (num.contains("4")) {
+            sess.setAttribute("four", "true");
+        }
+        sess.setAttribute("main", "ref");
+        sess.setAttribute("tab", "icd10");
+        sess.setAttribute("tableN", num.trim());
+        sess.setAttribute("iCD10Result", "Life");
+        response.sendRedirect("Admin.jsp");
     }
 
     /**

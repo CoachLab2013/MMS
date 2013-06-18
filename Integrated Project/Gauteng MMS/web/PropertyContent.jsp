@@ -99,7 +99,12 @@
             </tr>
             
             <tr>
-               <td>Take In By:</td> <td> <br> <input type="text" name="taken" value=""/> </td>
+               <td>Take In By:</td> 
+               <td> 
+                   <%
+                       out.println(new Tools().makeReferenceList("employee", "personnelNumber", ""));
+                   %> 
+               </td>
             </tr>
             
             <tr>

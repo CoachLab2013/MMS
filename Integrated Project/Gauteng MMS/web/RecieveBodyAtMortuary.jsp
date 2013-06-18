@@ -13,18 +13,18 @@
         <script type="text/javascript" src="js/RecieveAtMortuary.js"></script>
     </head>
     <body>
-     <%
-        if(session.getAttribute("atMortuary") != null){
-            out.println("<input id='checkmortuary'  type='hidden' value="+session.getAttribute("atMortuary")+" />");
-            session.removeAttribute("atMortuary");
-        }
-     %>
+        <%
+            if (session.getAttribute("atMortuary") != null) {
+                out.println("<input id='checkmortuary'  type='hidden' value=" + session.getAttribute("atMortuary") + " />");
+                session.removeAttribute("atMortuary");
+            }
+        %>
     <legend class="legend"><h3>Receive body at mortuary</h3> </legend> 
     <br/><br/>
 
     <form id="recieve_body_mort_form" method="post" action="AtMortuaryServlet">
         <input type="hidden" name="at_mort_deathregister" id="at_mort_deathregister"/>
-            <input type="hidden" name="at_mort_lognmber" id="at_mort_lognmber"/>
+        <input type="hidden" name="at_mort_lognmber" id="at_mort_lognmber"/>
         <div class="control-group">
             <label class="control-label">Employee receiving body:</label> 
             <div class="controls"><%
@@ -37,8 +37,8 @@
             <label class="control-label">Employee handing over body:</label> 
             <div class="controls"><%
                 String list = t.makeReferenceList("employee", "personnelNumber", "");
-                list=list.replaceFirst("name='employee'", "name='employee_handing'");
-                list=list.replaceFirst("id='employee'", "id='employee_handing'");
+                list = list.replaceFirst("name='employee'", "name='employee_handing'");
+                list = list.replaceFirst("id='employee'", "id='employee_handing'");
                 out.println(list);
                 %>
             </div>
@@ -93,7 +93,7 @@
                     <label id="no_id_type" class="error" style="display:none;">Please select an identification type</label>
                 </div>
             </div>
-                
+
             <div class="control-group">
                 <label class="control-label" for="atMortBodyID">Identification number</label>
                 <div class="controls">
@@ -149,7 +149,12 @@
                     <% out.println(t.makeReferenceList("region", "type", ""));%>
                 </div>
             </div>
-
+            <div class="control-group">
+                <label class="control-label" for="atMortBodyAddressMagisterialDistrict">Magisterial District:</label>
+                <div class="controls">
+                    <input type="text" name="atMortBodyAddressMagisterialDistrict" id="atMortBodyAddressMagisterialDistrict"/> 
+                </div>
+            </div>
 
             <div class="control-group">
                 <label class="control-label">Race</label> 
@@ -197,7 +202,7 @@
                 <label class="control-label" for="atMortFPSpropertyDescr">Description</label> 
                 <div class="controls">
                     <textarea cols="50" rows="3" id="atMortFPSpropertyDescr" name="atMortFPSpropertyDescr"></textarea>
-                     <label class="error" id="no_fps_description_mort" style="display:none;">Please complete the description</label>
+                    <label class="error" id="no_fps_description_mort" style="display:none;">Please complete the description</label>
                 </div>
             </div>
 
@@ -205,12 +210,12 @@
                 <label class="control-label" for="atMortFPSpropertyPersal">Persal number:</label> 
                 <div class="controls">
                     <%
-                            String list4 = t.makeReferenceList("employee", "personnelNumber", "");
-                            list4 = list4.replaceFirst("name='employee'", "name='atMortFPSpropertyPersal'");
-                            list4 = list4.replaceFirst("id='employee'", "id='atMortFPSpropertyPersal'");
-                            out.println(list4);
-                        %>
-                        <label class="error" id="no_fps_persal_mort" style="display:none;">Please select a persal number</label>
+                        String list4 = t.makeReferenceList("employee", "personnelNumber", "");
+                        list4 = list4.replaceFirst("name='employee'", "name='atMortFPSpropertyPersal'");
+                        list4 = list4.replaceFirst("id='employee'", "id='atMortFPSpropertyPersal'");
+                        out.println(list4);
+                    %>
+                    <label class="error" id="no_fps_persal_mort" style="display:none;">Please select a persal number</label>
                 </div>
             </div>
 
@@ -221,9 +226,9 @@
             <br/> <br/>
             <table class="tabledisplay" id="atMortFPSpropertyTable" name="atMortFPSpropertyTable">
                 <tr>
-                   <th width="100" class="tableheading">Select</th>
-                        <th width="130" class="tableheading">Description</th>
-                        <th width="100" class="tableheading">Persal Number</th>
+                    <th width="100" class="tableheading">Select</th>
+                    <th width="130" class="tableheading">Description</th>
+                    <th width="100" class="tableheading">Persal Number</th>
                 </tr>
 
             </table>
@@ -235,7 +240,7 @@
             <br/><br/>
             <input  type="hidden" id="fps_property_counter_mort" name ="fps_property_counter_mort" value="0"/>
         </fieldset>
-<legend></legend>
+        <legend></legend>
         <div class="offset5">
             <input type="submit"  class="btn"    value="Save" /> 
             <%--Display save result --%> 

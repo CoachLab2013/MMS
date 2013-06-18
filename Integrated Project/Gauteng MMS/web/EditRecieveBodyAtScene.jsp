@@ -628,6 +628,6 @@
             <%--Display save result --%> 
         </div>              
     </form>  
-<script type="text/javascript" src="js/RecieveBodyDateTime.js"></script>        
+<script type="text/javascript" src="js/EditRecieveBodyDateTime.js"></script>        
 </body>         
 </html>

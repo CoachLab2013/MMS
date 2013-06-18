@@ -27,6 +27,25 @@ public class PostMortemDb extends DatabaseConnector
         this.postMortem = postMortem;
          newSampleCount = 0;
     }
+    public String manualPostMortemClose()
+    {
+        try
+        {
+            statement.executeUpdate("UPDATE PostMortem SET reason='" + postMortem.getReason() + "',status=1"
+                    + " WHERE Body_idDeathRegisterNumber='"+ postMortem.getBody().getDeathRegisterNumber() +"';");
+            statement.close();
+            connection.close();
+        } 
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        catch (Exception ex)
+        {
+            return "error" + ex.getMessage();
+        }
+        return "successful"; 
+    }
     @Override
     public String add() 
     {
