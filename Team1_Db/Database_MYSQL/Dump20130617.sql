@@ -632,126 +632,6 @@ LOCK TABLES `hospital` WRITE;
 /*!40000 ALTER TABLE `hospital` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `icd10`
---
-
-DROP TABLE IF EXISTS `icd10`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `icd10` (
-  `idICD10` int(11) NOT NULL AUTO_INCREMENT,
-  `code` varchar(5) NOT NULL,
-  PRIMARY KEY (`idICD10`),
-  UNIQUE KEY `code_UNIQUE` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `icd10`
---
-
-LOCK TABLES `icd10` WRITE;
-/*!40000 ALTER TABLE `icd10` DISABLE KEYS */;
-/*!40000 ALTER TABLE `icd10` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `icd10level1`
---
-
-DROP TABLE IF EXISTS `icd10level1`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `icd10level1` (
-  `chapter` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(200) NOT NULL,
-  PRIMARY KEY (`chapter`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `icd10level1`
---
-
-LOCK TABLES `icd10level1` WRITE;
-/*!40000 ALTER TABLE `icd10level1` DISABLE KEYS */;
-/*!40000 ALTER TABLE `icd10level1` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `icd10level2`
---
-
-DROP TABLE IF EXISTS `icd10level2`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `icd10level2` (
-  `diaId` char(3) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `ICD10Level1_chapter` int(11) NOT NULL,
-  PRIMARY KEY (`diaId`),
-  KEY `fk_ICD10Level2_ICD10Level1_idx` (`ICD10Level1_chapter`),
-  CONSTRAINT `fk_ICD10Level2_ICD10Level1` FOREIGN KEY (`ICD10Level1_chapter`) REFERENCES `icd10level1` (`chapter`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `icd10level2`
---
-
-LOCK TABLES `icd10level2` WRITE;
-/*!40000 ALTER TABLE `icd10level2` DISABLE KEYS */;
-/*!40000 ALTER TABLE `icd10level2` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `icd10level3`
---
-
-DROP TABLE IF EXISTS `icd10level3`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `icd10level3` (
-  `dia2Id` char(5) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `ICD10Level2_diaId` char(3) NOT NULL,
-  PRIMARY KEY (`dia2Id`),
-  KEY `fk_ICD10Level3_ICD10Level21_idx` (`ICD10Level2_diaId`),
-  CONSTRAINT `fk_ICD10Level3_ICD10Level21` FOREIGN KEY (`ICD10Level2_diaId`) REFERENCES `icd10level2` (`diaId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `icd10level3`
---
-
-LOCK TABLES `icd10level3` WRITE;
-/*!40000 ALTER TABLE `icd10level3` DISABLE KEYS */;
-/*!40000 ALTER TABLE `icd10level3` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `icd10level4`
---
-
-DROP TABLE IF EXISTS `icd10level4`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `icd10level4` (
-  `dia3Id` char(6) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `ICD10Level3_dia2Id` char(5) NOT NULL,
-  PRIMARY KEY (`dia3Id`),
-  KEY `fk_ICD10Level4_ICD10Level31_idx` (`ICD10Level3_dia2Id`),
-  CONSTRAINT `fk_ICD10Level4_ICD10Level31` FOREIGN KEY (`ICD10Level3_dia2Id`) REFERENCES `icd10level3` (`dia2Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `icd10level4`
---
-
 LOCK TABLES `icd10level4` WRITE;
 /*!40000 ALTER TABLE `icd10level4` DISABLE KEYS */;
 /*!40000 ALTER TABLE `icd10level4` ENABLE KEYS */;
@@ -766,7 +646,7 @@ DROP TABLE IF EXISTS `icdlevel1`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `icdlevel1` (
   `chapter` int(3) NOT NULL AUTO_INCREMENT,
-  `description` varchar(200) NOT NULL,
+  `description` varchar(500) NOT NULL,
   PRIMARY KEY (`chapter`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -791,7 +671,7 @@ DROP TABLE IF EXISTS `icdlevel2`;
 CREATE TABLE `icdlevel2` (
   `level2_id` int(10) NOT NULL AUTO_INCREMENT,
   `diag1_Id` varchar(10) NOT NULL,
-  `description` varchar(200) NOT NULL,
+  `description` varchar(500) NOT NULL,
   `ICDLevel1_chapter` int(11) NOT NULL,
   PRIMARY KEY (`level2_id`,`diag1_Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1824 DEFAULT CHARSET=utf8;
@@ -818,7 +698,7 @@ CREATE TABLE `icdlevel3` (
   `icd_level3_id` int(11) NOT NULL AUTO_INCREMENT,
   `diag1_Id` char(10) NOT NULL,
   `diag2_Id` char(10) NOT NULL,
-  `description` varbinary(300) NOT NULL,
+  `description` varchar(500) NOT NULL,
   PRIMARY KEY (`icd_level3_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9287 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -843,7 +723,7 @@ DROP TABLE IF EXISTS `icdlevel4`;
 CREATE TABLE `icdlevel4` (
   `icdlevel4_Id` int(11) NOT NULL AUTO_INCREMENT,
   `diag3_Id` char(10) NOT NULL,
-  `description` varbinary(200) NOT NULL,
+  `description` varchar(500) NOT NULL,
   `ICDLevel3_dia2Id` char(10) NOT NULL,
   PRIMARY KEY (`icdlevel4_Id`,`diag3_Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12227 DEFAULT CHARSET=utf8;
