@@ -31,11 +31,9 @@ public class DatabaseAccessor_FacilityStorage extends Template_DatabaseAccessor{
         
         try {
             
-            preparedStatement = connection.prepareStatement("SELECT \n" +
-"IFNULL(SUM(`reporting_Body`.`countBody`), 0) AS `binsUsed` \n" +
-"FROM `reporting database`.`fact_body` AS `reporting_Body`\n" +
-"WHERE FK_DateReleased_SK = '19000101' and \n" +
-"EXTRACT(MONTH FROM TIMESTAMP (`reporting_Body`.dateInserted))=MONTH(NOW());");            
+            preparedStatement = connection.prepareStatement("SELECT IFNULL(SUM(`reporting_Body`.`countBody`), 0) AS `binsUsed` \n" +
+                "	FROM `reporting database`.`fact_body` AS `reporting_Body`\n" +
+                "		WHERE FK_DateReleased_SK = '19000101';");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {
