@@ -632,11 +632,6 @@ LOCK TABLES `hospital` WRITE;
 /*!40000 ALTER TABLE `hospital` ENABLE KEYS */;
 UNLOCK TABLES;
 
-LOCK TABLES `icd10level4` WRITE;
-/*!40000 ALTER TABLE `icd10level4` DISABLE KEYS */;
-/*!40000 ALTER TABLE `icd10level4` ENABLE KEYS */;
-UNLOCK TABLES;
-
 --
 -- Table structure for table `icdlevel1`
 --
