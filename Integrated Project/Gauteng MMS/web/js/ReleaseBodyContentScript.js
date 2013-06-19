@@ -80,7 +80,7 @@ $(document).ready(function(){
            
            releaseto:{
                valueNotEquals: "Please select a Released to."
-           },//end rule for institution
+           }//end rule for institution
           
              
         }//end of messages

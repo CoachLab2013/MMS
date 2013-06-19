@@ -1,4 +1,4 @@
-$(document).ready(function(){
+
         $("input#edit_bodyFoundDate").datepicker({            
             dateFormat: "yy-mm-dd",
             maxDate: 0,
@@ -46,4 +46,3 @@ $(document).ready(function(){
             showTime: false,
             showButtonPanel: false  
         });
-});

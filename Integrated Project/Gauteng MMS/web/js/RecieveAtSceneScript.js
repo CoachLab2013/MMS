@@ -414,7 +414,7 @@ $.validator.addMethod("checkSceneTime", function(value, element, arg){
         }
     });
     
-    $("#inAllegedDeathTime").click(function(){
+ /*   $("#inAllegedDeathTime").click(function(){
         $("#inAllegedDeathDate").rules("add",{
             required: true,
             messages:{
@@ -431,7 +431,7 @@ $.validator.addMethod("checkSceneTime", function(value, element, arg){
             }
         });
     });
-    
+    */
 });
 
 

@@ -628,7 +628,12 @@
             <%--Display save result --%> 
         </div>                
     </form>  
-         
-<script type="text/javascript" src="js/RecieveBodyDateTime.js"></script>        
+        
+      <%
+      if(session.getAttribute("death_register_number")== null){
+          out.println("<script type='text/javascript' src='js/RecieveBodyDateTime.js'></script>");
+      }
+      %>
+
 </body>         
 </html>
