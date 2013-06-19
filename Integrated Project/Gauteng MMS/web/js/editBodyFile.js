@@ -5,12 +5,12 @@
 $(document).ready(function() {
     $("#EditBody").validate({
         rules:{
-            open_incident_list:{
+            edit_open_incident_list:{
                 valueNotEquals: "Select"
             }
         },
         messages:{
-            open_incident_list:{
+            edit_open_incident_list:{
                 valueNotEquals: "Please select an incident"
             }
         }
@@ -23,14 +23,19 @@ $(document).ready(function() {
     $("#edit_continue_new_body_file").click(function(){
          $("#edit_recieve_tabs").show();
         if($("#EditBody").valid()){
-           
-            //$("#AddBody").submit();
-            //$("#at_scene_deathregister").val($("#deathRegister").attr("value"));
-           // $("#at_scene_lognmber").val($("#open_incident_list option:selected").text());
-            //$("#at_mort_deathregister").val($("#deathRegister").attr("value"));
-            //$("#at_mort_lognmber").val($("#open_incident_list option:selected").text());
+            $("#edit_at_scene_deathregister").val($("#edit_deathRegister").attr("value"));
+            $("#edit_at_scene_lognmber").val($("#edit_open_incident_list option:selected").text());
+            $("#edit_at_mort_deathregister").val($("#edit_deathRegister").attr("value"));
+            $("#edit_at_mort_lognmber").val($("#edit_open_incident_list option:selected").text());
         }
     });
+    
+    $("#edit_open_incident_list").click(function(){
+        $("#edit_at_scene_lognmber").val($("#edit_open_incident_list option:selected").text());
+        $("#edit_at_mort_lognmber").val($("#edit_open_incident_list option:selected").text());
+    });
+        
+    
     
     $.validator.addMethod("valueNotEquals", function(value, element, arg){
         return arg != value;

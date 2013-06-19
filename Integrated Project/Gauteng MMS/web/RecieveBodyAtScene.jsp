@@ -32,8 +32,7 @@
             session.removeAttribute("atScene");
         }
      %>
-    <legend class="legend"><h3>Receive body from scene</h3> </legend>
-    
+    <legend class="legend"><h3>Receive body from scene</h3> </legend>    
     
     <form name="recieve_body_scene_form" id="recieve_body_scene_form" method="post" action="AtSceneServlet">
         <input type="hidden" name="at_scene_deathregister" id="at_scene_deathregister"/>

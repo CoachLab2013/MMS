@@ -107,10 +107,6 @@ public class EditBodyFile extends HttpServlet {
             ses.removeAttribute("bIdEstAgeMonth");
         }
          
-        BodyDb bdb = new BodyDb(new Tools().getDbdetail(), body);
-        bdb.init();
-        PrintWriter out = response.getWriter();
-        out.println(bdb.readBodyAtMortuary());   
         ses.setAttribute("bIdEmployeeRecieving",body.getBodyHandedOverToPerNumber());
         ses.setAttribute("bIdEmployeeHandingOver",body.getBodyReceivedFromPerNumber());
         ses.setAttribute("bIdOrhanizationhandingOver",body.getBodyHandOverFromOrganization());

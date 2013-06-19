@@ -17,19 +17,18 @@ public class Tools {
     private DbDetail dbdetail;
 
     /**
-     * constructor for an instance of Tools
+     * constructor for an instance of Tools it initializes the database connection settings
      */
- 
- 
-  
     public Tools() {
         dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
-
- 
     }
-
     //end constructor
 
+    
+    /**
+     * This is a method to manually add users into the database for testing purposes
+     * @return A string indicating the success of failure of adding users
+     */
     public String adduser(){
         Employee e = new Employee("11111111", "password", "User", "UserSurname", "Admin", 4, "user1@user.com", true);
         Employee e2 = new Employee("12345678", "123456", "User2", "UserSurname2", "Pathologist", 3, "user2@user.com", true);
@@ -110,7 +109,10 @@ public class Tools {
     }
     //end getIncidentLogNumber
     
-    
+    /**
+     * This method creates a death register number. The province and facility are hard coded.
+     * @return A string containing a death register number
+     */
     public String makeDeathRegisterNumber(){
         String deathregister = "GP/DK/";
         BodyFileDb bfdb = new BodyFileDb(dbdetail);
@@ -129,6 +131,12 @@ public class Tools {
             
     }
 
+    /**
+     * This method makes and html drop down list for years
+     * @param name The name and id you want to give the list
+     * @param year_num This indicates the default value for the list
+     * @return A html string for a drop down list for years
+     */
     public String makeYear(String name, int year_num) {
         String out = "<select id=" + name + " name=" + name + ">";
         if (year_num == -1) {
@@ -151,6 +159,12 @@ public class Tools {
     }
     //end makeYear
 
+    /**
+     * This method makes a drop down list for months
+     * @param name The name and id you want to give the list
+     * @param month_num The default value for the list
+     * @return A html string of a drop down list for months
+     */
     public String makeMonth(String name, int month_num) {
         String out = "<select id=" + name + " name=" + name + ">";
         if (month_num == -1) {
@@ -691,6 +705,7 @@ public class Tools {
         idb.init();
         ArrayList<Incident> list = new ArrayList<Incident>();
         String out = "<select name='" + listname + "' id='" + listname + "'>";
+        boolean found = false;
         try 
         {
             list = idb.openIncidentList();
@@ -704,9 +719,13 @@ public class Tools {
                 String element = list.get(i).getIncidentLogNumber();
                 if (element.equals(selected)) {
                     out = out + "<option selected='selected'>" + element + "</option>";
+                    found = true;
                 } else {
                     out = out + "<option>" + element + "</option>";
                 }
+            }
+            if(!(found) && !(selected.equals("")) ){
+                out = out + "<option selected='selected'>" + selected + "</option>";
             }
             out = out + "</select>";
             return out;
@@ -718,6 +737,10 @@ public class Tools {
         }
     }
     
+    /**
+     * This function creates the icon for the tab
+     * @return a html string that loads the icon
+     */
     public String makeIcon(){
         String icon = "<link rel='shortcut icon' href='Images/icon.ico'>";
         return icon;
