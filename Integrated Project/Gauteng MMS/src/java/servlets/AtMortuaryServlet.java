@@ -177,6 +177,7 @@ public class AtMortuaryServlet extends HttpServlet {
                 atMort_propertyFPS.setDate(t.getDateTime().split(" ")[0]); //GET BACK TO THIS
                 atMort_propertyFPS.setSAPS_taken(false);
                 atMort_propertyFPS.setReleased(false);
+                atMort_propertyFPS.setLocationReceived("AtMort-FPS");
                 //put the code to add this property into the database here
                 atMort_propertyDb.setProperty(atMort_propertyFPS);
                 atMort_propertyDb.init();

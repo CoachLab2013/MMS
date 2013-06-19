@@ -75,6 +75,7 @@ public class AtSceneServlet extends HttpServlet {
             
             pathologistOnScene.setName(request.getParameter("pathologistBodyName"));
             pathologistOnScene.setSurname(request.getParameter("pathologistBodySurname"));
+            pathologistOnScene.setMemberType("Pathologist");
             //pathologistOnScene.setPersonnelNumber(request.getParameter(null));
             //pathologistOnScene.setContactNumber(request.getParameter(null));
             if (request.getParameter("pathologistBodyRank").equals("Select")!=true){
@@ -92,6 +93,7 @@ public class AtSceneServlet extends HttpServlet {
             receivedFrom.setName(request.getParameter("receivedBodyFromName"));
             receivedFrom.setSurname(request.getParameter("receivedBodyFromSurname"));
             String organization = request.getParameter("organization");
+            receivedFrom.setMemberType("ReceivedFrom");
             /**
              * Organization is not mandatory, so if they don't select an organization make sure
              * that you save none into the database
@@ -106,27 +108,29 @@ public class AtSceneServlet extends HttpServlet {
         //end of building received from
         
         //SAPS member
-            Member SAPSmemeber = new Member();
-            SAPSmemeber.setName(request.getParameter("SAPSmemberBodyName"));
-            SAPSmemeber.setSurname(request.getParameter("SAPSmemberBodySurname"));
-            SAPSmemeber.setContactNumber(request.getParameter("SAPSmemberBodyCell"));
-            SAPSmemeber.setOrganization("SAPS"); //SAPS
+            Member SAPSmember = new Member();
+            SAPSmember.setName(request.getParameter("SAPSmemberBodyName"));
+            SAPSmember.setSurname(request.getParameter("SAPSmemberBodySurname"));
+            SAPSmember.setContactNumber(request.getParameter("SAPSmemberBodyCell"));
+            //SAPSmember.setOrganization("SAPS"); //this field is not given on the UI
+            SAPSmember.setMemberType("SAPS");
             if (request.getParameter("SAPSmemberBodyRank").equals("Select")!=true){
-                SAPSmemeber.setRank(request.getParameter("SAPSmemberBodyRank"));
+                SAPSmember.setRank(request.getParameter("SAPSmemberBodyRank"));
             }
-            SAPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
+            SAPSmember.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         // end of SAPS member
         
         //FPSmemeber
-            Member FPSmemeber = new Member();
-            FPSmemeber.setName(request.getParameter("FPSmemberBodyName"));
-            FPSmemeber.setSurname(request.getParameter("FPSmemberBodySurname"));
-            FPSmemeber.setPersonnelNumber(request.getParameter("FPSmemberBodyPersal"));
-            FPSmemeber.setContactNumber(request.getParameter("FPSmemberBodyCell"));
+            Member FPSmember = new Member();
+            FPSmember.setName(request.getParameter("FPSmemberBodyName"));
+            FPSmember.setSurname(request.getParameter("FPSmemberBodySurname"));
+            FPSmember.setPersonnelNumber(request.getParameter("FPSmemberBodyPersal"));
+            FPSmember.setContactNumber(request.getParameter("FPSmemberBodyCell"));
+            FPSmember.setMemberType("FPS");
             if (request.getParameter("FPSmemberBodyRank").equals("Select")!=true){
-                FPSmemeber.setRank(request.getParameter("FPSmemberBodyRank"));
+                FPSmember.setRank(request.getParameter("FPSmemberBodyRank"));
             }
-            FPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
+            FPSmember.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         //end of FPS member
            
             
@@ -204,19 +208,25 @@ public class AtSceneServlet extends HttpServlet {
         //NOTE: must add all other things such as members and property after adding the body, due to foreign key constraints
         
         MemberDb memberDb = new MemberDb(dbdetail);
+        //inserting body recieved from member
+        memberDb.setMember(receivedFrom);
+        memberDb.init();
+        out.println("adding BodyReceivedFromMem :::" + memberDb.add());
+        //end of inserting body received from member
+        
         //insertin SAPS member
         //memberDb = new MemberDb(dbdetail);
-        memberDb.setMember(SAPSmemeber);
+        memberDb.setMember(SAPSmember);
         memberDb.init();
         out.println("adding SAPSmem  :::" + memberDb.add());
         //end inserting SAPS member
         
         //insertin FPS member
         //memberDb = new MemberDb(dbdetail);
-        memberDb.setMember(FPSmemeber);
+        memberDb.setMember(FPSmember);
         memberDb.init();
         out.println("adding FPSmem :::" + memberDb.add());
-        //end insertingF member
+        //end inserting FPS member
         
         //insertin Pathologist member
         if(bodyAtScene.isPathOnScene()){
@@ -257,6 +267,7 @@ public class AtSceneServlet extends HttpServlet {
                 propertySAPS.setDate(request.getParameter("bodyFoundDate"));
                 propertySAPS.setSAPS_taken(true);
                 propertySAPS.setReleased(false);
+                propertySAPS.setLocationReceived("AtScene-SAPS");
                 //put the code to add this property into the database here
                 atScene_propertyDb.setProperty(propertySAPS);
                 atScene_propertyDb.init();
@@ -282,6 +293,7 @@ public class AtSceneServlet extends HttpServlet {
                 propertyFPS.setDate(request.getParameter("bodyFoundDate"));
                 propertyFPS.setSAPS_taken(false);
                 propertyFPS.setReleased(false);
+                propertyFPS.setLocationReceived("AtScene-FPS");
                 //put the code to add this property into the database here
                 atScene_propertyDb.setProperty(propertyFPS);
                 atScene_propertyDb.init();
