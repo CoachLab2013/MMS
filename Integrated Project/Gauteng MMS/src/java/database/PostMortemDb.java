@@ -31,8 +31,12 @@ public class PostMortemDb extends DatabaseConnector
     {
         try
         {
-            statement.executeUpdate("UPDATE PostMortem SET reason='" + postMortem.getReason() + "',status=1"
-                    + " WHERE Body_idDeathRegisterNumber='"+ postMortem.getBody().getDeathRegisterNumber() +"';");
+            statement.executeUpdate("INSERT INTO `postmortem`\n" +
+                "(`status`,\n" +
+                "`Body_idDeathRegisterNumber`,\n" +
+                "`reason`)\n" +
+                "VALUES\n" +
+                "(1, '" + postMortem.getBody().getDeathRegisterNumber() + "','" + postMortem.getReason() + "');");
             statement.close();
             connection.close();
         } 

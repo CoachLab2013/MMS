@@ -51,7 +51,7 @@ public final class DatabaseAccessor_ClosedBodyFile extends Template_DatabaseAcce
                 "		LEFT JOIN `reporting database`.`dim_status`  AS `reporting_PostMortemStatus` ON `reporting_PostMortemStatus`.`Status_SK` = `reporting_Body`.`FK_PostMortemStatus_SK`\n" +
                 "		LEFT JOIN `reporting database`.`dim_mannerofdeath` AS `reporting_MannerOfDeath` ON `reporting_MannerOfDeath`.`mannerOfDeath_SK` = `reporting_Body`.`FK_MannerOfDeath_SK`\n" +
                 "	WHERE `reporting_SamplesStatus`.`status_BK` = TRUE AND `reporting_DateReleased`.`date_SK` <> '19000101'"
-                    + "and EXTRACT(WEEK FROM TIMESTAMP (reporting_DateReleased.dateStamp))=week(now());");            
+                    + "AND EXTRACT(WEEK FROM TIMESTAMP (reporting_DateReleased.dateStamp))=WEEK(NOW());");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

@@ -6,9 +6,8 @@
 	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
 	<field name="date" class="java.lang.String"/>
-	<field name="numberOfErrors" class="java.lang.Integer"/>
-	<field name="numberOfWarnings" class="java.lang.Integer"/>
 	<field name="numberOfEvents" class="java.lang.Integer"/>
+	<field name="type" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -79,9 +78,8 @@
 		<band height="313" splitType="Stretch">
 			<barChart>
 				<chart>
-					<reportElement uuid="8eb2c13e-5ced-4fa1-889d-68dfa95d5bb5" x="0" y="11" width="762" height="290"> 
-                                            <property name="net.sf.jasperreports.chart.range.axis.tick.interval" value="1"/>  
-                                        </reportElement>
+					<reportElement uuid="8eb2c13e-5ced-4fa1-889d-68dfa95d5bb5" x="0" y="11" width="762" height="290">
+					</reportElement>
 					<chartTitle position="Top">
 						<titleExpression><![CDATA["Monthly Statistics"]]></titleExpression>
 					</chartTitle>
@@ -90,17 +88,7 @@
 				</chart>
 				<categoryDataset>
 					<categorySeries>
-						<seriesExpression><![CDATA["Errors"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{date}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{numberOfErrors}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Warnings"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{date}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{numberOfWarnings}]]></valueExpression>
-					</categorySeries>
-					<categorySeries>
-						<seriesExpression><![CDATA["Events"]]></seriesExpression>
+						<seriesExpression><![CDATA[$F{type}]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{date}]]></categoryExpression>
 						<valueExpression><![CDATA[$F{numberOfEvents}]]></valueExpression>
 					</categorySeries>

@@ -50,7 +50,7 @@ public final class DatabaseAccessor_UnidentifiedBodies extends Template_Database
                 "		LEFT JOIN `reporting database`.`dim_organisation` AS `reporting_Organisation` ON `reporting_Organisation`.`organisation_SK` = `reporting_Body`.`FK_Organisation_SK`\n" +
                 "		LEFT JOIN `reporting database`.`dim_mannerofdeath` AS `reporting_MannerOfDeath` ON `reporting_MannerOfDeath`.`mannerOfDeath_SK` = `reporting_Body`.`FK_MannerOfDeath_SK`\n" +
                 "	\n" +
-                "	WHERE EXTRACT(WEEK FROM TIMESTAMP (`reporting_DateReceived`.`dateStamp`))=week(now());");            
+                "	WHERE EXTRACT(WEEK FROM TIMESTAMP (`reporting_DateReceived`.`dateStamp`))=WEEK(NOW());");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

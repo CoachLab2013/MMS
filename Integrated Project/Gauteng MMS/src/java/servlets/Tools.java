@@ -20,7 +20,13 @@ public class Tools {
      * constructor for an instance of Tools it initializes the database connection settings
      */
     public Tools() {
+<<<<<<< HEAD
         dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
+=======
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "root");
+
+ 
+>>>>>>> origin/master
     }
     //end constructor
 
