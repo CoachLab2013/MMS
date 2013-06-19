@@ -43,11 +43,11 @@ $(document).ready(function(){
 
         messages:{
            analysis:{
-               valueNotEquals: "Please select a Type of analysis."
+               valueNotEquals: "Please select a Type of Analysis."
            },//end rule for type of analysis
            
            institution:{
-               valueNotEquals: "Please select a Institution."
+               valueNotEquals: "Please select an Organization."
            },//end rule for institution
            
            seal:{

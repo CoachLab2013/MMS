@@ -6,7 +6,8 @@
 	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<parameter name="ReportTitle" class="java.lang.String"/>
 	<field name="employeeName" class="java.lang.String"/>
-	<field name="numberOfErrorsAndWarnings" class="java.lang.Integer"/>
+	<field name="numberOfEvents" class="java.lang.Integer"/>
+	<field name="type" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -78,7 +79,6 @@
 			<barChart>
 				<chart>
 					<reportElement uuid="8eb2c13e-5ced-4fa1-889d-68dfa95d5bb5" x="0" y="11" width="762" height="290">
-						<property name="net.sf.jasperreports.chart.range.axis.tick.interval" value="1"/>
 					</reportElement>
 					<chartTitle position="Top">
 						<titleExpression><![CDATA["Employee Statistics"]]></titleExpression>
@@ -89,8 +89,8 @@
 				<categoryDataset>
 					<categorySeries>
 						<seriesExpression><![CDATA[$F{employeeName}]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{employeeName}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{numberOfErrorsAndWarnings}]]></valueExpression>
+						<categoryExpression><![CDATA[$F{type}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{numberOfEvents}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
 				<barPlot>

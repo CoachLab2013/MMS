@@ -1,47 +1,49 @@
-
-        $("#edit_bodyFoundDate").datepicker({            
+$(document).ready(function(){
+        $("input#edit_bodyFoundDate").datepicker({            
             dateFormat: "yy-mm-dd",
             maxDate: 0,
             minDate: -30            
         });
-        $("#edit_bodyFoundTime").timepicker({
+        
+        $("input#edit_bodyFoundTime").timepicker({
             showTime: false,
             showButtonPanel: false  
         });
         
         
-        $("#edit_inAllegedInjuryDate").datepicker({            
+        $("input#edit_inAllegedInjuryDate").datepicker({            
             dateFormat: "yy-mm-dd",
             maxDate: 0            
         });
-        $("#edit_inAllegedInjuryTime").timepicker({
+        $("input#edit_inAllegedInjuryTime").timepicker({
             showTime: false,
             showButtonPanel: false  
         });
         
-        $("#edit_inAllegedDeathDate").datepicker({            
+        $("input#edit_inAllegedDeathDate").datepicker({            
             dateFormat: "yy-mm-dd",
             maxDate: 0          
         });
-        $("#edit_inAllegedDeathTime").timepicker({
+        $("input#edit_inAllegedDeathTime").timepicker({
             showTime: false,
             showButtonPanel: false  
         });
         
-        $("#edit_ReceivedSceneDate").datepicker({            
+        $("input#edit_ReceivedSceneDate").datepicker({            
             dateFormat: "yy-mm-dd",
             maxDate: 0          
         });
-        $("#edit_ReceivedSceneTime").timepicker({
+        $("input#edit_ReceivedSceneTime").timepicker({
             showTime: false,
             showButtonPanel: false  
         });
         
-        $("#edit_ReceivedFDate").datepicker({            
+        $("input#edit_ReceivedFDate").datepicker({            
             dateFormat: "yy-mm-dd",
             maxDate: 0          
         });
-        $("#edit_ReceivedFTime").timepicker({
+        $("input#edit_ReceivedFTime").timepicker({
             showTime: false,
             showButtonPanel: false  
         });
+});

@@ -6,6 +6,8 @@ package servlets;
 
 import AssistiveClasses.SetDbDetail;
 import database.BodyAtMortuary;
+import database.BodyFile;
+import database.BodyFileDb;
 import database.PostMortem;
 import database.PostMortemDb;
 import java.io.IOException;
@@ -34,14 +36,13 @@ public class PostMortemServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
                        
-        if (request.getSession().getAttribute("death_register_number") != null) {  
             SetDbDetail dbSet = new SetDbDetail();
-
+            
             //Needed for Postmortem Constructor
             BodyAtMortuary body = new BodyAtMortuary();
             body.setDeathRegisterNumber(request.getSession().getAttribute("death_register_number").toString());
 
-            PostMortem postmortem = new PostMortem(                
+            PostMortem postmortem = new PostMortem(
                 "",
                 request.getParameter("ICDlevel1").split(" ")[0] + " " + request.getParameter("ICDlevel2").split(" ")[0] + " " + request.getParameter("ICDlevel3").split(" ")[0] + " " + request.getParameter("ICDlevel4").split(" ")[0],
                 request.getParameter("findingsmortem"), //
@@ -57,9 +58,16 @@ public class PostMortemServlet extends HttpServlet {
             postmortemDB.init();    
             System.out.println(postmortemDB.add());
 
+            BodyFile bodyFile = new BodyFile(request.getSession().getAttribute("death_register_number").toString());
+            BodyFileDb bodyFileDB = new BodyFileDb(dbSet.getDbdetail(), bodyFile);
+            bodyFileDB.init();
+            System.out.println(bodyFileDB.read());
+            bodyFileDB.getBodyFile().setPostMortemCompleted(true);
+            bodyFileDB.init();
+            System.out.println(bodyFileDB.edit());
+            
             request.getSession().setAttribute("_PostMortem", "true");
             response.sendRedirect("Home.jsp");
-        }
     }
 
     /**

@@ -37,13 +37,15 @@ public class DatabaseAccessor_LocationStatistics extends Template_DatabaseAccess
         try {
             
             preparedStatement = connection.prepareStatement("SELECT `reporting_EventLocation`.`locationName` AS `locationName`,\n" +
-                "SUM(`reporting_AuditTrail`.`countWarning`) AS `numberOfErrors`,\n" +
-                "SUM(`reporting_AuditTrail`.`countError`) AS `numberOfWarnings`\n" +
-                "\n" +
-                "FROM `reporting database`.`fact_audittrail`	AS `reporting_AuditTrail`\n" +
-                "	LEFT JOIN `reporting database`.`dim_date` AS `reporting_EventDate` ON `reporting_EventDate`.`date_SK` = `reporting_AuditTrail`.`FK_DateOccured_SK`\n" +
-                "	LEFT JOIN `reporting database`.`dim_eventlocation` AS `reporting_EventLocation` ON `reporting_EventLocation`.`location_SK` = `reporting_AuditTrail`.`FK_EventLocation_SK`\n" +
-                "	GROUP BY `reporting_EventLocation`.`location_SK`");            
+                "	`reporting_EventType`.`typeDescription` AS `type`,\n" +
+                "	SUM(`reporting_AuditTrail`.`count`) AS `numberOfEvents`\n" +
+                "	\n" +
+                "	FROM `reporting database`.`fact_audittrail`	AS `reporting_AuditTrail`\n" +
+                "		LEFT JOIN `reporting database`.`dim_date` AS `reporting_EventDate` ON `reporting_EventDate`.`date_SK` = `reporting_AuditTrail`.`FK_DateOccured_SK`\n" +
+                "		LEFT JOIN `reporting database`.`dim_eventlocation` AS `reporting_EventLocation` ON `reporting_EventLocation`.`location_SK` = `reporting_AuditTrail`.`FK_EventLocation_SK`\n" +
+                "		LEFT JOIN `reporting database`.`dim_eventType` AS `reporting_EventType` ON `reporting_EventType`.`type_SK` = `reporting_AuditTrail`.`FK_EventType_SK`\n" +
+                "			WHERE `reporting_EventDate`.`CalenderMonthKey` = MONTH(NOW())\n" +
+                "				GROUP BY `reporting_EventLocation`.`location_SK`, `reporting_EventType`.`typeDescription`;");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {

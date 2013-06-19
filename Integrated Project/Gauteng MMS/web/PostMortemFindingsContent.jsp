@@ -89,6 +89,28 @@
             </tr>
         </table>
     </form>
+              <legend>Cancel Post Mortem</legend>
+    <form id="closepostmortem" action="ClosePostMortemServlet">
+        <table>
+            <tr>
+                <td>
+                    Reason for Cancellation:
+                </td>
+                <td>
+                    <textarea cols="50" rows="3" name="postmortemclosereason" id="postmortemclosereason"> </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <input class="btn" id="closepostmortem" type="submit" value="Close Post Mortem">
+                    <input class="btn" id="cancelclosepostmortem" type="reset" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
 </body
 
 </html>

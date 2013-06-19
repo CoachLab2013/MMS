@@ -178,7 +178,8 @@ public class ForensicSampleDb extends DatabaseConnector {
                     + "',institution='" + forensicsamp.getInstitution()    
                     + "',specialInstructions='" + forensicsamp.getSpeacialInstructions()
                     + "',received=" + forensicsamp.getReceived() 
-                    + ",dateSent='" + forensicsamp.getDateSent()
+                    + ",labNumber='" + forensicsamp.getLabNumber()
+                    + "',dateSent='" + forensicsamp.getDateSent()
                     + "',dateReceived='" + forensicsamp.getDateReceived()
                     + "'where sealNumber='" +forensicsamp.getSealNumber() + "';");
             

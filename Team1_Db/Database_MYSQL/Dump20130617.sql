@@ -561,12 +561,12 @@ CREATE TABLE `forensicsample` (
   `institution` varchar(45) NOT NULL,
   `specialInstructions` varchar(45) NOT NULL,
   `received` bit(1) NOT NULL,
-  `labNumber` varchar(45) NOT NULL,
+  `labNumber` varchar(45) DEFAULT NULL,
   `dateSent` date NOT NULL,
   `dateReceived` date NOT NULL,
   PRIMARY KEY (`sealNumber`),
-  KEY `fk_ForensicSample_LabRecord1_idx` (`labNumber`),
-  CONSTRAINT `fk_ForensicSample_LabRecord1` FOREIGN KEY (`labNumber`) REFERENCES `labrecord` (`labNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_ForensicSample_LabRecord1_idx` (`labNumber`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -908,8 +908,8 @@ CREATE TABLE `labrecord` (
   `numberOfSamples` int(11) DEFAULT NULL,
   `sampleCounter` int(11) DEFAULT NULL,
   PRIMARY KEY (`idLabRecord`),
-  KEY `fk_LabRecord_PostMortem1_idx` (`labNumber`),
-  CONSTRAINT `fk_LabRecord_PostMortem1` FOREIGN KEY (`labNumber`) REFERENCES `postmortem` (`labNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_LabRecord_PostMortem1_idx` (`labNumber`)
+  
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1141,16 +1141,17 @@ DROP TABLE IF EXISTS `postmortem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `postmortem` (
-  `labNumber` varchar(45) NOT NULL,
-  `icd10` varchar(3) NOT NULL,
-  `chiefFind` longtext NOT NULL,
-  `causeOfDeath` longtext NOT NULL,
-  `status` bit(1) NOT NULL,
-  `approved` bit(1) NOT NULL,
-  `DHA1663number` varchar(45) NOT NULL,
+  `labNumber` varchar(45) DEFAULT NULL,
+
+  `icd10` longtext,
+  `chiefFind` longtext,
+  `causeOfDeath` longtext,
+  `status` bit(1) DEFAULT NULL,
+  `approved` bit(1) DEFAULT NULL,
+  `DHA1663number` varchar(45) DEFAULT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
   `reason` longtext,
-  PRIMARY KEY (`labNumber`),
+  PRIMARY KEY (`Body_idDeathRegisterNumber`),
   KEY `fk_PostMortem_Body1_idx` (`Body_idDeathRegisterNumber`),
   CONSTRAINT `fk_PostMortem_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
