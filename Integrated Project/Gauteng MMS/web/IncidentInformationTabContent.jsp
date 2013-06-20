@@ -79,7 +79,7 @@
                             <div class="tab-content" >
 
                                 <div id="edit_atScene" class="tab-pane active"> 
-                                     <jsp:include page="EditRecieveBodyAtScene.jsp" /> 
+                                     <jsp:include page="EditRecieveBodyAtScene.jsp" />
                                 </div>
                                 <div id="edit_atMortuary" class="tab-pane "> 
                                    <jsp:include page="EditRecieveBodyAtMortuary.jsp" /> 
