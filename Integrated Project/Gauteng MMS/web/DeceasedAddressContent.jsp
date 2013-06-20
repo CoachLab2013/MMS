@@ -41,7 +41,8 @@
                          String build = (String)session.getAttribute("bIdBuild");
                          if(!build.contains("null"))
                          {
-                            out.print("value=" + build);
+                             
+                            out.print("value='" + build+ "' ");
                          }
                     }
                     %> /></td>  
@@ -53,7 +54,7 @@
                         String street = (String)session.getAttribute("bIdStreet");
                         if(!street.contains("null"))
                         {
-                            out.print("value =" + street);
+                            out.print("value ='" + street+ "' ");
                         }
                     }
                     %> /></td>  
@@ -65,7 +66,7 @@
                             String suburb = (String)session.getAttribute("bIdSuburb");
                             if(!suburb.contains("null"))
                             {
-                                out.print("value =" + suburb);
+                                out.print("value ='" + suburb+ "' ");
                             }
                         }
                         %>  /></td>
@@ -77,7 +78,7 @@
                             String city = (String)session.getAttribute("bIdCity");
                             if(!city.contains("null"))
                             {
-                                out.print("value =" + city);
+                                out.print("value ='" + city+ "' ");
                             }
                         }
                         %>  /> </td>
@@ -89,7 +90,7 @@
                         String post = (String)session.getAttribute("bIdPostCode");
                         if(!post.contains("null"))
                         {
-                            out.print("value =" +post);
+                            out.print("value ='" +post+ "' ");
                         }
                     }
                     %>  /> </td>
@@ -135,7 +136,7 @@
                                 String district= (String)session.getAttribute("bIdDistrict");
                                 if(!district.contains("null"))
                                 {
-                                    out.print("value =" + district);
+                                    out.print("value ='" + district+ "' ");
                                 }
                                 
                             }

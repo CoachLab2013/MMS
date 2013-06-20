@@ -49,7 +49,8 @@
                       String fullName = (String) session.getAttribute("bIdFullName");
                       if(!fullName.contains("null"))
                       {
-                          out.print("value=" + fullName);
+                          
+                          out.print("value='" + fullName +"' ");
                       }
                   }
                  %> /><input class="btn" type="button" value="Confirm" id="btnDeceasedNameDis" name="btnDeceasedNameDis" /></td>  
@@ -61,7 +62,7 @@
                       String madName = (String)session.getAttribute("bIdMadienName");
                       if(!madName.contains("null"))
                       {
-                        out.print("value=" + madName);
+                        out.print("value='" + madName +"' ");
                       }
                   }
                  %>  /></td>  
@@ -73,7 +74,7 @@
                       String surName = (String)session.getAttribute("bIdSurname");
                       if(!surName.contains("null"))
                       {
-                        out.print("value=" + surName); 
+                        out.print("value='" + surName + "' "); 
                       }
                   }
                  %>  /><input class="btn" type="button" value="Confirm" id="btnDeceasedSurnameDis" name="btnDeceasedSurnameDis" /> </td>
@@ -113,7 +114,7 @@
                       String idNum = (String)session.getAttribute("bIdIDNumber");
                       if(!idNum.contains("null"))
                       {
-                           out.print("value=" + idNum);
+                           out.print("value='" + idNum + "' ");
                       }
                   }
                   else
@@ -123,7 +124,7 @@
                            String passNum = (String)session.getAttribute("bIdPassport");
                            if(!passNum.contains("null"))
                            {
-                                out.print("value=" + passNum);
+                                out.print("value='" + passNum+ "' ");
                            }
                       }
                   }
@@ -149,7 +150,7 @@
                     String dateOfBirth = (String)session.getAttribute("bIdDateOfBirth");
                     if(!dateOfBirth.contains("0001-01-01"))
                     {
-                        out.print("value=" + dateOfBirth); 
+                        out.print("value='" + dateOfBirth+ "' "); 
                     }
                   }
                  %> readonly style="cursor:pointer;" /></td> 
@@ -158,10 +159,18 @@
                 <td>Age on the date found:  </td> <td><input type="text" name="deceasedage" <%
                   if(session.getAttribute("bIdAgeOnDate") != null)
                   {
-                    int ageOnDate = (Integer)session.getAttribute("bIdAgeOnDate");
+                     int ageOnDate;
+                     try
+                     {
+                        ageOnDate = (Integer)session.getAttribute("bIdAgeOnDate");
+                     }
+                     catch(NumberFormatException ex)
+                     {
+                         ageOnDate = 0;
+                     }
                     if(ageOnDate != 0)
                     {
-                        out.print("value=" + ageOnDate); 
+                        out.print("value='" + ageOnDate+ "' "); 
                     }
                   }
                  %>  /></td>  
@@ -246,7 +255,7 @@
                                 String citizen = (String)session.getAttribute("bIdCitizenship");
                                 if(!citizen.contains("null"))
                                 {
-                                    out.print("value =" + citizen);
+                                    out.print("value ='" + citizen+ "' ");
                                 }
                             }
                 %>  /></td>

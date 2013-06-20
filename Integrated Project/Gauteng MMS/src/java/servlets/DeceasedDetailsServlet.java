@@ -82,7 +82,9 @@ public class DeceasedDetailsServlet extends HttpServlet {
         bodyDb.init();
         bodyDb.edit();
         HttpSession sess = request.getSession();
-        sess.setAttribute("deceasedDetail", "Kin details added successfully");
+        sess.setAttribute("deceasedDetail", "Deceased details added successfully");
+        String personnelnumber = sess.getAttribute("personnelnumber").toString();
+        new Tools().makeAuditTrail("Deceased details", "Edit/Confirmed deceased details "+ body.getDeathRegisterNumber(), personnelnumber, "Deceased details");
         response.sendRedirect("Home.jsp");
     } 
 

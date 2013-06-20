@@ -4,6 +4,9 @@
     Author     : Lady
 --%>
 
+<%@page import="database.Member"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="database.MemberDb"%>
 <%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,7 +37,11 @@
         String value="";
      %>
     <legend class="legend"><h3>Receive body from scene</h3> </legend>
-    
+    <%
+         String deathReg = (String)session.getAttribute("death_register_number");
+         MemberDb memberDb = new MemberDb(new Tools().getDbdetail());
+         
+    %>
     
     <form name="edit_recieve_body_scene_form" id="edit_recieve_body_scene_form" method="post" action="#">
         <input type="hidden" name="edit_at_scene_deathregister" id="edit_at_scene_deathregister"/>
