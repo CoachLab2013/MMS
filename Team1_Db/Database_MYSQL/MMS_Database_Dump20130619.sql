@@ -561,12 +561,12 @@ CREATE TABLE `forensicsample` (
   `institution` varchar(45) NOT NULL,
   `specialInstructions` varchar(45) NOT NULL,
   `received` bit(1) NOT NULL,
-  `labNumber` varchar(45) NOT NULL,
+  `labNumber` varchar(45) DEFAULT NULL,
   `dateSent` date NOT NULL,
   `dateReceived` date NOT NULL,
   PRIMARY KEY (`sealNumber`),
-  KEY `fk_ForensicSample_LabRecord1_idx` (`labNumber`),
-  CONSTRAINT `fk_ForensicSample_LabRecord1` FOREIGN KEY (`labNumber`) REFERENCES `labrecord` (`labNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_ForensicSample_LabRecord1_idx` (`labNumber`)
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -908,8 +908,8 @@ CREATE TABLE `labrecord` (
   `numberOfSamples` int(11) DEFAULT NULL,
   `sampleCounter` int(11) DEFAULT NULL,
   PRIMARY KEY (`idLabRecord`),
-  KEY `fk_LabRecord_PostMortem1_idx` (`labNumber`),
-  CONSTRAINT `fk_LabRecord_PostMortem1` FOREIGN KEY (`labNumber`) REFERENCES `postmortem` (`labNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_LabRecord_PostMortem1_idx` (`labNumber`)
+  
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
