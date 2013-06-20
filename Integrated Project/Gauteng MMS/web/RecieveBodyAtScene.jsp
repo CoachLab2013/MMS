@@ -18,10 +18,12 @@
             }
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript" src="js/RecieveAtSceneScript.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
+         <script type="text/javascript" src="js/RecieveAtSceneScript.js"></script>
         <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-timepicker.js"></script>
-         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css"> 
+         <link type="text/css" rel="stylesheet"  href="bootstrap/css/tablecss.css">         
         <link type="text/css" rel="stylesheet"  href="CSS files/jquery-ui-1.10.3.custom.css">
         <%-- http://jqueryui.com/themeroller/ --%>
     </head>
@@ -631,6 +633,7 @@
       <%
       if(session.getAttribute("death_register_number")== null){
           out.println("<script type='text/javascript' src='js/RecieveBodyDateTime.js'></script>");
+         
       }
       %>
 

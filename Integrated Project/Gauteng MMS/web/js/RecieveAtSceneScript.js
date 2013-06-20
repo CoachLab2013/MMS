@@ -4,6 +4,7 @@
  */
 
 $(document).ready(function(){
+    
     if($("#checkscene").val() == "true"){
         //lose focus from the incidents side
         $("#OpenIncidents").removeClass("tab-pane active");
@@ -62,15 +63,7 @@ $(document).ready(function(){
             bodyFoundTime:{
                 required: true,
                 checkFoundTime: true
-            },
-            ReceivedSceneDate:{
-                required: true,
-                checkSceneDate: true
-            },
-            ReceivedSceneTime:{
-                required: true,
-                checkSceneTime: true
-            },
+            },            
             inAllegedInjuryDate:{
                 checkInjuryDate: true
             },
@@ -82,6 +75,14 @@ $(document).ready(function(){
             },
             inAllegedDeathTime:{
                 checkDeathTime: true
+            },
+            ReceivedSceneDate:{
+                required: true,
+                checkSceneDate: true
+            },
+            ReceivedSceneTime:{
+                required: true,
+                checkSceneTime: true
             },
             ReceivedFacilityDate:{
                 required: true
@@ -135,15 +136,7 @@ $(document).ready(function(){
             bodyFoundTime:{
                 required: "Please select the time the body was found",
                 checkFoundTime: "Invalid time"
-            },
-            ReceivedSceneDate:{
-                required: "Please select the date the body was recieved at the scene",
-                checkSceneDate: "Invalid date"
-            },
-            ReceivedSceneTime:{
-                required: "Please select the time the body was recieved at the scene",
-                checkSceneTime: "Invalid time"
-            },  
+            },           
             inAllegedInjuryDate:{
                 checkInjuryDate: "Invalid date"
             },
@@ -156,6 +149,14 @@ $(document).ready(function(){
             inAllegedDeathTime:{
                 checkDeathTime: "Invalid time"
             },
+            ReceivedSceneDate:{
+                required: "Please select the date the body was recieved at the scene",
+                checkSceneDate: "Invalid date"
+            },
+            ReceivedSceneTime:{
+                required: "Please select the time the body was recieved at the scene",
+                checkSceneTime: "Invalid time"
+            }, 
             ReceivedFacilityDate:{
                 required: "Please select the date the body will be recieved at the facility"
             },
@@ -273,8 +274,10 @@ $(document).ready(function(){
         return value;
     });    
     
-    $.validator.addMethod("checkSceneDate", function(value, element, arg){
-        if($("#ReceivedSceneDate").val() < $("#bodyFoundDate").val()){
+    $.validator.addMethod("checkSceneDate", function(value, element, arg){   
+        alert($("#ReceivedSceneDate").val());
+        
+        if($("#ReceivedSceneDate").val() < $("#bodyFoundDate").val()){            
             return !value;
         }
         else if($("#ReceivedSceneDate").val() < $("#inAllegedInjuryDate").val()){

@@ -22,7 +22,7 @@ public class Tools {
     public Tools() {
 
  
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
  
     }
     //end constructor
