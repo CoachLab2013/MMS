@@ -311,7 +311,7 @@ public class AtSceneServlet extends HttpServlet {
         out.println(incidentDb.IncreaseBodyCount());
         HttpSession sess = request.getSession();
         sess.setAttribute("atScene", true);
-        response.sendRedirect("Home.jsp");
+        //response.sendRedirect("Home.jsp");
 
     }
     
