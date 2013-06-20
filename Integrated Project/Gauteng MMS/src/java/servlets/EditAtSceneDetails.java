@@ -52,10 +52,18 @@ public class EditAtSceneDetails extends HttpServlet {
         
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
+        BodyDb bodyDb = new BodyDb(dbdetail);
+        MemberDb memberDb = new MemberDb(dbdetail);
         
         //Incident Log number: request.getParameter("edit_at_scene_lognmber");   
         
-        BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("edit_at_scene_deathregister")));       
+        BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("edit_at_scene_deathregister")));  
+        /*/reading original body details from database before making any changes
+            bodyDb.setBody(bodyAtScene.getBody());
+            bodyDb.init();
+            out.println("reading Body Details:::" + bodyDb.read());
+            bodyAtScene.setBody((BodyAtMortuary) bodyDb.getBody());
+        //end of reading body details*/
         bodyAtScene.setDateTimeBodyFound(t.checkDate(request.getParameter("edit_bodyFoundDate")) + " " + t.checkTime(request.getParameter("edit_bodyFoundTime")));
         bodyAtScene.setAllegedInjuryDateTime(t.checkDate(request.getParameter("edit_inAllegedInjuryDate")) + " " + t.checkTime(request.getParameter("edit_inAllegedInjuryTime")));
         bodyAtScene.setAllegedDeathDateTime(t.checkDate(request.getParameter("edit_inAllegedDeathDate")) + " " + t.checkTime(request.getParameter("edit_inAllegedDeathTime")));
@@ -70,6 +78,13 @@ public class EditAtSceneDetails extends HttpServlet {
         }
         
         Member pathologistOnScene = new Member();
+        pathologistOnScene.setIdMember(idMember);
+        //reading original member details from database before making any changes
+            memberDb.setMember(pathologistOnScene);
+            memberDb.init();
+            out.println("reading Pathologist member:::" + memberDb.read());
+            pathologistOnScene = memberDb.getMember();
+        //end of reding member details
         if (request.getParameter("edit_pathologistAtScene").equals("Yes")){
             bodyAtScene.setPathOnScene(true);
             //Pathologist on scene MIGHT NEED TO ADD SEPERATE TABLE
@@ -90,6 +105,13 @@ public class EditAtSceneDetails extends HttpServlet {
         
         //build body received from
             Member receivedFrom = new Member();
+            receivedFrom.setIdMember(idMember);
+            //reading original member details from database before making any changes
+                memberDb.setMember(receivedFrom);
+                memberDb.init();
+                out.println("reading receivedFrom member:::" + memberDb.read());
+                receivedFrom = memberDb.getMember();
+            //end of reding member details
             receivedFrom.setName(request.getParameter("edit_receivedBodyFromName"));
             receivedFrom.setSurname(request.getParameter("edit_receivedFromBodySurname"));
             String organization = request.getParameter("organization");
@@ -107,19 +129,33 @@ public class EditAtSceneDetails extends HttpServlet {
         //end of building received from
         
         //SAPS member
-            Member SAPSmemeber = new Member();
-            SAPSmemeber.setName(request.getParameter("edit_SAPSmemberBodyName"));
-            SAPSmemeber.setSurname(request.getParameter("edit_SAPSmemberBodySurname"));
-            SAPSmemeber.setContactNumber(request.getParameter("edit_SAPSmemberBodyCell"));
-            SAPSmemeber.setOrganization("SAPS"); //SAPS
+            Member SAPSmember = new Member();
+            SAPSmember.setIdMember(idMember);
+            //reading original member details from database before making any changes
+                memberDb.setMember(SAPSmember);
+                memberDb.init();
+                out.println("reading SAPS member:::" + memberDb.read());
+                SAPSmember = memberDb.getMember();
+            //end of reading member details
+            SAPSmember.setName(request.getParameter("edit_SAPSmemberBodyName"));
+            SAPSmember.setSurname(request.getParameter("edit_SAPSmemberBodySurname"));
+            SAPSmember.setContactNumber(request.getParameter("edit_SAPSmemberBodyCell"));
+            SAPSmember.setOrganization("SAPS"); //SAPS
             if (request.getParameter("edit_SAPSmemberBodyRank").equals("Select")!=true){
-                SAPSmemeber.setRank(request.getParameter("edit_SAPSmemberBodyRank"));
+                SAPSmember.setRank(request.getParameter("edit_SAPSmemberBodyRank"));
             }
-            SAPSmemeber.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
+            SAPSmember.setDeathRegisterNumber(bodyAtScene.getBody().getDeathRegisterNumber());
         // end of SAPS member
         
         //FPSmemeber
             Member FPSmemeber = new Member();
+            FPSmemeber.setIdMember(idMember);
+            //reading original member details from database before making any changes
+                memberDb.setMember(FPSmemeber);
+                memberDb.init();
+                out.println("reading FPS member:::" + memberDb.read());
+                FPSmemeber = memberDb.getMember();
+            //end of reading member details
             FPSmemeber.setName(request.getParameter("edit_FPSmemberBodyName"));
             FPSmemeber.setSurname(request.getParameter("edit_FPSmemberBodySurname"));
             FPSmemeber.setPersonnelNumber(request.getParameter("edit_FPSmemberBodyPersal"));
@@ -176,7 +212,7 @@ public class EditAtSceneDetails extends HttpServlet {
         }
       
         //inserting body into database
-        BodyDb bodyDb = new BodyDb(dbdetail, bodyAtScene.getBody());
+        bodyDb.setBody(bodyAtScene.getBody());
         bodyDb.init();
         out.println("editing body :::" + bodyDb.edit());
         //end of body inserting
@@ -193,26 +229,30 @@ public class EditAtSceneDetails extends HttpServlet {
         
         //NOTE: must add all other things such as members and property after adding the body, due to foreign key constraints
         
-        MemberDb memberDb = new MemberDb(dbdetail);
-        //insertin SAPS member
-        //memberDb = new MemberDb(dbdetail);
-        memberDb.setMember(SAPSmemeber);
+        //editing body recieved from member
+        memberDb.setMember(receivedFrom);
         memberDb.init();
-        out.println("editing SAPSmem  :::" + memberDb.edit());
+        out.println("editing BodyReceivedFromMem :::" + memberDb.edit_by_ID());
+        //end of editing body received from member
+        
+        //insertin SAPS member
+        memberDb.setMember(SAPSmember);
+        memberDb.init();
+        out.println("editing SAPSmem  :::" + memberDb.edit_by_ID());
         //end inserting SAPS member
         
         //insertin FPS member
         //memberDb = new MemberDb(dbdetail);
         memberDb.setMember(FPSmemeber);
         memberDb.init();
-        out.println("editing FPSmem :::" + memberDb.edit());
+        out.println("editing FPSmem :::" + memberDb.edit_by_ID());
         //end insertingF member
         
         //insertin Pathologist member
         if(bodyAtScene.isPathOnScene()){
             memberDb.setMember(pathologistOnScene);
             memberDb.init();
-            out.println("editing Pathmem :::" + memberDb.edit());
+            out.println("editing Pathmem :::" + memberDb.edit_by_ID());
         }
         //end inserting Pathologist member
         
