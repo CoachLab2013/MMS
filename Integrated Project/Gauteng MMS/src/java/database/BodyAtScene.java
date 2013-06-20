@@ -44,7 +44,7 @@ public class BodyAtScene /*extends Body*/
         this.placeOfDeath = placeOfDeath;
         this.dateTimeBodyFound = dateTimeBodyFound;
         this.body = body;
-    }    
+    }
     /**
      * @return the sceneIncidentOccured
      */

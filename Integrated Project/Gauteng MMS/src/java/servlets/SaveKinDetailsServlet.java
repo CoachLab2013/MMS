@@ -60,8 +60,12 @@ public class SaveKinDetailsServlet extends HttpServlet {
         DbDetail dbdetail = t.getDbdetail();
         KinDb kinDb = new KinDb(kin, dbdetail);
         kinDb.init();
-        String success = kinDb.edit();
+        kinDb.edit();
+        kinDb.init();
+        kinDb.add();
         sess.setAttribute("kinDetail", true);
+        String personnelnumber = sess.getAttribute("personnelnumber").toString();
+        new Tools().makeAuditTrail("Kin/Informant details", "Edit/Confirmed kin details "+ kin.getBody_idDeathRegisterNumber(), personnelnumber, "Kin/Informant details");
         response.sendRedirect("Home.jsp");
         out.close();
     }

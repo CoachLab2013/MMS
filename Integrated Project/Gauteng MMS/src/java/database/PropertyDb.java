@@ -29,7 +29,7 @@ public class PropertyDb extends DatabaseConnector
     {
         try
         {
-            statement.executeUpdate("INSERT INTO Property (sealNumber,description,date,type,sealType,takenBy,witness1_name,witness1_surname,witness2_name,witness2_surname,SAPS_name,SAPS_surname,SAPS_taken,Body_idDeathRegisterNumber,released) VALUES('" 
+            statement.executeUpdate("INSERT INTO Property (sealNumber,description,date,type,sealType,takenBy,witness1_name,witness1_surname,witness2_name,witness2_surname,SAPS_name,SAPS_surname,SAPS_taken,Body_idDeathRegisterNumber,released,locationReceived) VALUES('" 
             + property.getSealNumber() + "','" + property.getDescription() + "','"
             + property.getDate() + "','" + property.getType()+ "','" 
             + property.getSealType() + "','" + property.getTakenBy() + "','" 
@@ -37,7 +37,7 @@ public class PropertyDb extends DatabaseConnector
             + property.getWitness(1).getName() + "','" + property.getWitness(1).getSurname() + "','" 
             + property.getSAPS_name() + "','" + property.getSAPS_surname() + "'," 
             + property.isTakenBySAPS() + ",'" + property.getDeathRegisterNumber()  + "'," 
-            + property.isReleased() + ")");
+            + property.isReleased() +", '"+ property.getLocationReceived() +"')");
             statement.close();
             connection.close(); 
         } 
@@ -73,6 +73,7 @@ public class PropertyDb extends DatabaseConnector
             property.setTakenBySAPS(resultSet.getBoolean("SAPS_taken"));
             property.setDeathRegisterNumber(resultSet.getString("Body_idDeathRegisterNumber"));
             property.setReleased(resultSet.getBoolean("released"));
+            property.setLocationReceived(resultSet.getString("locationRceived"));
             statement.close();
             connection.close();
         } 
@@ -110,6 +111,7 @@ public class PropertyDb extends DatabaseConnector
                 prop.setTakenBySAPS(resultSet.getBoolean("SAPS_taken"));
                 prop.setDeathRegisterNumber(resultSet.getString("Body_idDeathRegisterNumber"));
                 prop.setReleased(resultSet.getBoolean("released"));
+                prop.setLocationReceived(resultSet.getString("locationReceived"));
                 list.add(prop);
             }
             statement.close();
@@ -138,8 +140,9 @@ public class PropertyDb extends DatabaseConnector
                                     + "witness2_surname='" + property.getWitness(1).getSurname() + "',"
                                     + "SAPS_name='" + property.getSAPS_name() +  "',"
                                     + "SAPS_surname='" + property.getSAPS_surname() +  "',"
-                                    + "SAPS_taken=" + property.isTakenBySAPS() +  ","
-                                    + "released=" + property.isReleased() +  " WHERE Body_idDeathRegisterNumber='" + property.getDeathRegisterNumber() + "';");
+                                    + "SAPS_taken=" + property.isTakenBySAPS() +  ",'"
+                                    + "locationReceived=" + property.getLocationReceived() +  "',"
+                                    + "released=" + property.isReleased() +  " WHERE idProperty=" + property.getIdProperty() + ";");
             statement.close();
             connection.close();
         } 

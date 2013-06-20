@@ -23,6 +23,7 @@ public class Property
     private String deathRegisterNumber;
     private boolean released;
     private int idProperty;
+    private String locationReceived;
 
     public Property() {
         this.sealNumber = "null";
@@ -38,6 +39,7 @@ public class Property
         this.released = false;
         Witness witness1 = new Witness();
         Witness witness2 = new Witness();
+        this.locationReceived = "null";
         //this.witnesses = {witness1, witness2};
     }
 
@@ -45,6 +47,23 @@ public class Property
         this.idProperty = idProperty;
         this.SAPS_taken = false;
         this.released = false;
+    }
+
+    public Property(String sealNumber, String description, String date, String type, String sealType, String takenBy, Witness[] witnesses, String SAPS_name, String SAPS_surname, boolean SAPS_taken, String deathRegisterNumber, boolean released, int idProperty, String locationReceived) {
+        this.sealNumber = sealNumber;
+        this.description = description;
+        this.date = date;
+        this.type = type;
+        this.sealType = sealType;
+        this.takenBy = takenBy;
+        this.witnesses = witnesses;
+        this.SAPS_name = SAPS_name;
+        this.SAPS_surname = SAPS_surname;
+        this.SAPS_taken = SAPS_taken;
+        this.deathRegisterNumber = deathRegisterNumber;
+        this.released = released;
+        this.idProperty = idProperty;
+        this.locationReceived = locationReceived;
     }
 
     
@@ -177,4 +196,13 @@ public class Property
     {
         this.released = released;
     }
+
+    public String getLocationReceived() {
+        return locationReceived;
+    }
+
+    public void setLocationReceived(String locationReceived) {
+        this.locationReceived = locationReceived;
+    }
+    
 }

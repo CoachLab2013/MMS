@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -52,6 +53,9 @@ public class DeceasedAddressServlet extends HttpServlet {
         BodyDb bodyDb = new BodyDb(dbdetail,body);
         bodyDb.init();
         bodyDb.editBodyAddresss();
+        HttpSession sess = request.getSession();
+        String personnelnumber = sess.getAttribute("personnelnumber").toString();
+        new Tools().makeAuditTrail("Deceased address details", "Edit/Confirmed deceased address details "+ body.getDeathRegisterNumber(), personnelnumber, "Deceased Address details");
         response.sendRedirect("Home.jsp");
     }
 

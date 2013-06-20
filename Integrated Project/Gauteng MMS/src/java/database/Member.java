@@ -10,6 +10,7 @@ package database;
  */
 public class Member 
 {
+    private int idMember;
     private String name;
     private String surname;
     private String rank;
@@ -17,6 +18,7 @@ public class Member
     private String organization;
     private String contactNumber;
     private String deathRegisterNumber;
+    private String memberType;
     public Member()
     {
         this.name = "null";
@@ -26,8 +28,9 @@ public class Member
         this.organization = "null";
         this.contactNumber = "null";
         this.deathRegisterNumber = "null";
+        this.memberType = "null";
     }
-    public Member(String name,String surname,String rank,String personnelNumber,String organization,String contactNumber,String deathRegisterNumber)
+    public Member(String name,String surname,String rank,String personnelNumber,String organization,String contactNumber,String deathRegisterNumber, String memberType)
     {
         this.name = name;
         this.surname = surname;
@@ -36,7 +39,24 @@ public class Member
         this.organization = organization;
         this.contactNumber = contactNumber;
         this.deathRegisterNumber = deathRegisterNumber;
+        this.memberType = memberType;
     }
+    public Member(String deathRegisterNumber)
+    {
+        this.deathRegisterNumber = deathRegisterNumber;
+    }
+    public Member(int id, String name, String surname, String rank, String personnelNumber, String organization, String contactNumber, String deathRegisterNumber, String memberType) {
+        this.idMember = id;
+        this.name = name;
+        this.surname = surname;
+        this.rank = rank;
+        this.personnelNumber = personnelNumber;
+        this.organization = organization;
+        this.contactNumber = contactNumber;
+        this.deathRegisterNumber = deathRegisterNumber;
+        this.memberType = memberType;
+    }
+    
     public String getName()
     {
         return name;
@@ -93,4 +113,21 @@ public class Member
     {
         this.deathRegisterNumber = deathRegisterNumber;
     }
+
+    public String getMemberType() {
+        return memberType;
+    }
+
+    public void setMemberType(String memberType) {
+        this.memberType = memberType;
+    }
+
+    public int getIdMember() {
+        return idMember;
+    }
+
+    public void setIdMember(int idMember) {
+        this.idMember = idMember;
+    }
+    
 }
