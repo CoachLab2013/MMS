@@ -46,14 +46,8 @@ public class EditBodyFile extends HttpServlet {
         ses.setAttribute("bIdFullName", body.getNameOfDeceased());
         ses.setAttribute("bIdMadienName",body.getMaidenName());
         ses.setAttribute("bIdSurname", body.getSurnameOfDeceased());
-        
-       
-            ses.setAttribute("bIdIDNumber", body.getID());
-       
-        
-        
-            ses.setAttribute("bIdPassport", body.getPassport());
-        
+        ses.setAttribute("bIdIDNumber", body.getID());
+        ses.setAttribute("bIdPassport", body.getPassport());
         ses.setAttribute("bIdPlaceOfBirth", body.getPlaceOfBirth());
         ses.setAttribute("bIdDateOfBirth", body.getDateOfBirth());
         ses.setAttribute("bIdAgeOnDate", body.getAgeOnDateFound());
@@ -112,6 +106,7 @@ public class EditBodyFile extends HttpServlet {
         ses.setAttribute("bIdOrhanizationhandingOver",body.getBodyHandOverFromOrganization());
         //end asheen's code
         response.sendRedirect("Home.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

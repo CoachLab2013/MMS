@@ -4,6 +4,10 @@
     Author     : Lady
 --%>
 
+<%@page import="javax.tools.Tool"%>
+<%@page import="database.Member"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="database.MemberDb"%>
 <%@page import="servlets.Tools"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,9 +37,16 @@
         }
         String value="";
      %>
+     <% 
+        
+                    String deathReg = (String)session.getAttribute("death_register_number");
+                    ArrayList<Member> listm = new Tools().getMemberList(deathReg);
+                    Member memReceievdFrom = new Tools().getMemberFromScene("ReceivedFrom",listm);
+                    Member memSAPS = new Tools().getMemberFromScene("SAPS",listm);
+                    Member memFPS = new Tools().getMemberFromScene("FPS",listm);
+                    Member memPath = new Tools().getMemberFromScene("Pathologist",listm);
+            %>
     <legend class="legend"><h3>Receive body from scene</h3> </legend>
-    
-    
     <form name="edit_recieve_body_scene_form" id="edit_recieve_body_scene_form" method="post" action="#">
         <input type="hidden" name="edit_at_scene_deathregister" id="edit_at_scene_deathregister"/>
         <input type="hidden" name="edit_at_scene_lognmber" id="edit_at_scene_lognmber"/>

@@ -44,7 +44,7 @@
                                 String kinName = (String)session.getAttribute("kinName");
                                 if(!kinName.contains(""))
                                 {
-                                    out.print("value=" + kinName);
+                                    out.print("value='" + kinName+ "' ");
                                 }  
                             }
                         %>  /></td>  
@@ -58,7 +58,7 @@
                                 String kinSurname = (String)session.getAttribute("kinSurname");
                                 if(!kinSurname.contains(""))
                                 {
-                                    out.print("value=" + kinSurname);
+                                    out.print("value='" + kinSurname+ "' ");
                                 }
                             }
                         %>  /> </td>
@@ -96,7 +96,7 @@
                              String kinId = (String)session.getAttribute("kinID");
                              if(!kinId.contains(""))
                              {
-                                out.print("value=" + kinId);
+                                out.print("value='" + kinId+ "' ");
                              }
                          }
                          else
@@ -105,7 +105,7 @@
                              if(pass != null)
                              if(!pass.contains(""))
                              {
-                                out.print("value=" + pass);
+                                out.print("value='" + pass+ "' ");
                              }
                          }
                          %> /></td>                       
@@ -135,7 +135,7 @@
                                 String kinContact = (String) session.getAttribute("kinContact");
                                 if(!kinContact.contains(""))
                                 {
-                                    out.print("value=" + kinContact);
+                                    out.print("value='" + kinContact+ "' ");
                                 }
                             }
                             %> 
