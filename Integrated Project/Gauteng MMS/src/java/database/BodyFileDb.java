@@ -181,4 +181,22 @@ public class BodyFileDb extends DatabaseConnector
         }
              return count;
     }
+    
+     public String readBodyFile(String deathregister) 
+    {
+        try
+        {
+            statement.executeQuery("SELECT * FROM bodyfile WHERE Body_idDeathRegisterNumber='" + deathregister + "';");
+            ResultSet rSet = statement.getResultSet();
+            rSet.next();
+            bodyFile = new BodyFile(rSet.getString("dateFileOpened"),rSet.getBoolean("bodyFileStatus"), rSet.getBoolean("allSamplesReceived"), rSet.getBoolean("bodyIdentified"), rSet.getBoolean("postMortemComplete"), rSet.getString("dateFileClosed"),rSet.getString("Body_idDeathRegisterNumber"));
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException ex) 
+        {
+            return "failed " + ex.getMessage();
+        }
+        return "successful";
+    }
 }

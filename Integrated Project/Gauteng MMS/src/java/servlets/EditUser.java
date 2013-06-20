@@ -93,7 +93,7 @@ public class EditUser extends HttpServlet {
             Employee found = employeeList.get(pos);
 
             HttpSession sess = request.getSession();
-            sess.setAttribute("name", found.getName().trim());
+            sess.setAttribute("name", found.getName());
             sess.setAttribute("surname", found.getSurname().trim());
             sess.setAttribute("email", found.getEmail().trim());
             id = found.getAccess();
