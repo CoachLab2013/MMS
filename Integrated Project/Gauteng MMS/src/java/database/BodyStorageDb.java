@@ -45,7 +45,7 @@ public class BodyStorageDb extends DatabaseConnector
     }
     public ArrayList<BodyStorage> getBodyStorage() throws SQLException,Exception
     {
-        statement.executeQuery("SELECT * FROM bodystorage WHERE nameOfMortuary='" + bodyStorage.getNameOfMortuary() + "';");
+        statement.executeQuery("SELECT * FROM bodystorage  ;");
         ResultSet rSet = statement.getResultSet();
         ArrayList<BodyStorage> list = new ArrayList();
         while(rSet.next())

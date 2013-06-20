@@ -3,26 +3,28 @@
  * and open the template in the editor.
  */
 
-
+//edits the the selected reference list that is in CurrentData list int he referenceListTable table
 function editReferenceList(referenceListTable, currentData)
 {
-   
+   //makes sure there is a selected item in the currentData list
     if (document.getElementById(currentData).value.toString().trim() == "") {
 
         alert("Please select an item you want to edit")
 
     } else {
+        //diplay pop up box to edit and the answer is in the answer variable
         var answer = prompt("Edit " + referenceListTable, document.getElementById(currentData).value).trim();
         if (answer == null) {
             //if user clicks cancel
 
 
         } else if (answer == "") {
-
+           //if user cleared the item being edited and clicks okay
             alert("You cannot submit an empty field")
         } else {
             //if user clicks OK
 
+            //set textboxes in the form formname 
             $("#item").val(answer);
             $("#Olditem").val(document.getElementById(currentData).value);
             $("#table").val(referenceListTable);
@@ -31,6 +33,38 @@ function editReferenceList(referenceListTable, currentData)
         }
     }
 }
+
+//edits the the selected reference list that is in CurrentData list int he referenceListTable table
+function editOrganisation(referenceListTable, currentData)
+{
+   //makes sure there is a selected item in the currentData list
+    if (document.getElementById(currentData).value.toString().trim() == "") {
+
+        alert("Please select an item you want to edit")
+
+    } else {
+        //diplay pop up box to edit and the answer is in the answer variable
+        var answer = prompt("Edit " + referenceListTable, document.getElementById(currentData).value).trim();
+        if (answer == null) {
+            //if user clicks cancel
+
+
+        } else if (answer == "") {
+           //if user cleared the item being edited and clicks okay
+            alert("You cannot submit an empty field")
+        } else {
+            //if user clicks OK
+
+            //set textboxes in the form formname 
+            $("#item").val(answer);
+            $("#Olditem").val(document.getElementById(currentData).value);
+            $("#table").val(referenceListTable);
+            document.formname.submit();
+
+        }
+    }
+}
+//delete selected reference list 
 function deleteReferenceList(referenceListTable, currentData)
 {
   
@@ -109,15 +143,28 @@ function deleteReferenceListReg(referenceListTable, currentData, province)
         }
     }
 }
+ 
 $(document).ready(function() {
 
-
-
-    $("#cmdEditInsitution").on("click", function() {
-
-
-        var answer = prompt("What is your age?", "20");
-        alert("You are " + answer + " years old.")
-
+  $("#AddOrg tr").click(function(){
+         alert( $(this).attr("id")) 
+        
+        $(".selectedtablerow").removeClass("selectedtablerow");
+        $(this).addClass("selectedtablerow");
+        
+        
     });
-}); // end document.ready
+    
+     $("#AddBS tr").click(function(){
+         alert( $(this).attr("id")) 
+        
+        $(".selectedtablerow").removeClass("selectedtablerow");
+        $(this).addClass("selectedtablerow");
+        
+        
+    });
+    
+    
+
+    
+}); // end document.ready*/
