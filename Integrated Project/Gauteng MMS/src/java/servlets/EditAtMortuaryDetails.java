@@ -49,11 +49,19 @@ public class EditAtMortuaryDetails extends HttpServlet {
         
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
+        BodyDb bodyDb = new BodyDb(dbdetail);
+        BodyAtMortuaryDb bodyAtMortuaryDb = new BodyAtMortuaryDb(dbdetail);
         /**
          * Death register number: request.getParameter("at_mort_deathregister")
          * Incident log number: request.getParameter("at_mort_lognmber")
          */        
         BodyAtMortuary bodyAtMortuary = new BodyAtMortuary(request.getParameter("edit_at_mort_deathregister"));
+        //reading original bodyAtScene details from database before making any changes
+            bodyAtMortuaryDb.setBodyAtMortuary(bodyAtMortuary);
+            bodyAtMortuaryDb.init();
+            out.println("reading Body At Mortuary Details:::" + bodyAtMortuaryDb.read());//this read function has not been coded yet.
+            bodyAtMortuary = bodyAtMortuaryDb.getBodyAtMortuary();
+        //end of reading bodyAtScene details
         bodyAtMortuary.setBodyHandedOverToPerNumber(request.getParameter("edit_employee"));
         String receivedFrom = request.getParameter("edit_employee_handing");
         
@@ -134,7 +142,7 @@ public class EditAtMortuaryDetails extends HttpServlet {
         //end of body fiels that are not given by the UI
         
         //inserting body into database
-        BodyDb bodyDb = new BodyDb(dbdetail, bodyAtMortuary);
+        bodyDb.setBody(bodyAtMortuary);
         bodyDb.init();
         out.println("editing body :::" + bodyDb.edit());
         //end of body inserting
@@ -144,22 +152,22 @@ public class EditAtMortuaryDetails extends HttpServlet {
         //end of inserting Body Address
         
         //inserting BodyAtMortuary into Database
-        BodyAtMortuaryDb bodyAtMortuaryDb = new BodyAtMortuaryDb(bodyAtMortuary, dbdetail);
+        bodyAtMortuaryDb.setBodyAtMortuary(bodyAtMortuary);
         bodyAtMortuaryDb.init();
         out.println("editing body at mortuary :::" + bodyAtMortuaryDb.edit());
         //end inserting BodyAtMortuary
         
-        //POPULATING BODYFILE TABLE
+        /*/POPULATING BODYFILE TABLE
         BodyFile atMortuaryBodyFile = new BodyFile(bodyAtMortuary.getDeathRegisterNumber());
         String currentSystemDate = t.getDateTime().split(" ")[0];
         atMortuaryBodyFile.setDateFileOpened(currentSystemDate);
         /*
          * There is no need to set the other attributes of this bodyfile since they are initialized in it's constructor
-         */
+         *
         BodyFileDb atMortuaryBodyFileDb = new BodyFileDb(dbdetail, atMortuaryBodyFile);
         atMortuaryBodyFileDb.init();
         out.println("adding body file:::" + atMortuaryBodyFileDb.add());
-        //END OF POPULATING BODYFILE TABLE
+        //END OF POPULATING BODYFILE TABLE*/
         
         //property
         PropertyDb atMort_propertyDb = new PropertyDb(dbdetail);

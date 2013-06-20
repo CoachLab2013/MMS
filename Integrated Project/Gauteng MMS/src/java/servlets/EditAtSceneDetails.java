@@ -53,17 +53,18 @@ public class EditAtSceneDetails extends HttpServlet {
         Tools t = new Tools();
         DbDetail dbdetail = t.getDbdetail();
         BodyDb bodyDb = new BodyDb(dbdetail);
+        BodyAtSceneDb bodyAtSceneDb = new BodyAtSceneDb(dbdetail);
         MemberDb memberDb = new MemberDb(dbdetail);
         
         //Incident Log number: request.getParameter("edit_at_scene_lognmber");   
         
         BodyAtScene bodyAtScene = new BodyAtScene(new BodyAtMortuary(request.getParameter("edit_at_scene_deathregister")));  
-        /*/reading original body details from database before making any changes
-            bodyDb.setBody(bodyAtScene.getBody());
-            bodyDb.init();
-            out.println("reading Body Details:::" + bodyDb.read());
-            bodyAtScene.setBody((BodyAtMortuary) bodyDb.getBody());
-        //end of reading body details*/
+        //reading original bodyAtScene details from database before making any changes
+            bodyAtSceneDb.setBodyAtScene(bodyAtScene);
+            bodyAtSceneDb.init();
+            out.println("reading Body Details:::" + bodyAtSceneDb.read()); 
+            bodyAtScene = bodyAtSceneDb.getBodyAtScene();
+        //end of reading bodyAtScene details
         bodyAtScene.setDateTimeBodyFound(t.checkDate(request.getParameter("edit_bodyFoundDate")) + " " + t.checkTime(request.getParameter("edit_bodyFoundTime")));
         bodyAtScene.setAllegedInjuryDateTime(t.checkDate(request.getParameter("edit_inAllegedInjuryDate")) + " " + t.checkTime(request.getParameter("edit_inAllegedInjuryTime")));
         bodyAtScene.setAllegedDeathDateTime(t.checkDate(request.getParameter("edit_inAllegedDeathDate")) + " " + t.checkTime(request.getParameter("edit_inAllegedDeathTime")));
@@ -78,7 +79,7 @@ public class EditAtSceneDetails extends HttpServlet {
         }
         
         Member pathologistOnScene = new Member();
-        //pathologistOnScene.setIdMember(idMember);
+        //pathologistOnScene.setIdMember(idMember); uncomment this and get this id from a hiiden field in the UI(jsp) when it is implemented
         //reading original member details from database before making any changes
             memberDb.setMember(pathologistOnScene);
             memberDb.init();
@@ -105,7 +106,7 @@ public class EditAtSceneDetails extends HttpServlet {
         
         //build body received from
             Member receivedFrom = new Member();
-            //receivedFrom.setIdMember(idMember);
+            //receivedFrom.setIdMember(idMember); uncomment this and get this id from a hiiden field in the UI(jsp) when it is implemented
             //reading original member details from database before making any changes
                 memberDb.setMember(receivedFrom);
                 memberDb.init();
@@ -130,7 +131,7 @@ public class EditAtSceneDetails extends HttpServlet {
         
         //SAPS member
             Member SAPSmember = new Member();
-            //SAPSmember.setIdMember(idMember);
+            //SAPSmember.setIdMember(idMember);uncomment this and get this id from a hiiden field in the UI(jsp) when it is implemented
             //reading original member details from database before making any changes
                 memberDb.setMember(SAPSmember);
                 memberDb.init();
@@ -149,7 +150,7 @@ public class EditAtSceneDetails extends HttpServlet {
         
         //FPSmemeber
             Member FPSmemeber = new Member();
-            //FPSmemeber.setIdMember(idMember);
+            //FPSmemeber.setIdMember(idMember);uncomment this and get this id from a hiiden field in the UI(jsp) when it is implemented
             //reading original member details from database before making any changes
                 memberDb.setMember(FPSmemeber);
                 memberDb.init();
@@ -211,21 +212,21 @@ public class EditAtSceneDetails extends HttpServlet {
             
         }
       
-        //inserting body into database
+        //editing body into database
         bodyDb.setBody(bodyAtScene.getBody());
         bodyDb.init();
         out.println("editing body :::" + bodyDb.edit());
         //end of body inserting
-        //inserting Body Address into Body Address table
+        //editing Body Address into Body Address table
         bodyDb.init();
         out.println("editing body address :::" + bodyDb.editBodyAddresss());
-        //end of inserting Body Address
+        //end of editing Body Address
         
-        //inserting BodyAtScene into Database
-        BodyAtSceneDb bodyAtSceneDb = new BodyAtSceneDb(dbdetail,bodyAtScene);
+        //editing BodyAtScene into Database
+        bodyAtSceneDb.setBodyAtScene(bodyAtScene);
         bodyAtSceneDb.init();
         out.println("editing bodyAtScene :::" + bodyAtSceneDb.edit());
-        //end inserting BodyAtScene
+        //end editing BodyAtScene
         
         //NOTE: must add all other things such as members and property after adding the body, due to foreign key constraints
         
@@ -235,41 +236,42 @@ public class EditAtSceneDetails extends HttpServlet {
         out.println("editing BodyReceivedFromMem :::" + memberDb.edit_by_ID());
         //end of editing body received from member
         
-        //insertin SAPS member
+        //editing SAPS member
         memberDb.setMember(SAPSmember);
         memberDb.init();
         out.println("editing SAPSmem  :::" + memberDb.edit_by_ID());
-        //end inserting SAPS member
+        //end editing SAPS member
         
-        //insertin FPS member
+        //editing FPS member
         //memberDb = new MemberDb(dbdetail);
         memberDb.setMember(FPSmemeber);
         memberDb.init();
         out.println("editing FPSmem :::" + memberDb.edit_by_ID());
-        //end insertingF member
+        //end editing FPS member
         
-        //insertin Pathologist member
+        //editing Pathologist member
         if(bodyAtScene.isPathOnScene()){
             memberDb.setMember(pathologistOnScene);
             memberDb.init();
             out.println("editing Pathmem :::" + memberDb.edit_by_ID());
         }
-        //end inserting Pathologist member
+        //end editing Pathologist member
         
-        //POPULATING BODYFILE TABLE
-        BodyFile atSceneBodyFile = new BodyFile(bodyAtScene.getBody().getDeathRegisterNumber());
+        /*BodyFile atSceneBodyFile = new BodyFile(bodyAtScene.getBody().getDeathRegisterNumber());
+        //reading original bodyfile details from database before making any changes
+            BodyFileDb atSceneBodyFileDb = new BodyFileDb(dbdetail, atSceneBodyFile);
+            atSceneBodyFileDb.init();
+            out.println("Reading Body File:::" + atSceneBodyFileDb.read());
+            atSceneBodyFile = atSceneBodyFileDb.getBodyFile();
+        //end of reading bodyfile details
+        /*SHOULD INSERT CHANGES TO BODYFILE HERE
         //String currentSystemDate = t.getDateTime().split(" ")[0];
         //atSceneBodyFile.setDateFileOpened(currentSystemDate);
-        /*
-         * There is no need to set the other attributes of this bodyfile since they are initialized in it's constructor
-         */
-        BodyFileDb atSceneBodyFileDb = new BodyFileDb(dbdetail, atSceneBodyFile);
+        //editing bodyfile
+        atSceneBodyFileDb.setBodyFile(atSceneBodyFile);
         atSceneBodyFileDb.init();
-        out.println("Reading Body File:::" + atSceneBodyFileDb.read());
-        atSceneBodyFileDb.init();
-        //What what is meant to be changed
         out.println("editing Body File:::" + atSceneBodyFileDb.edit());
-        //END OF POPULATING BODYFILE TABLE
+        //end editing bodyfile*/
         
         //Property
         PropertyDb atScene_propertyDb = new PropertyDb(dbdetail);
