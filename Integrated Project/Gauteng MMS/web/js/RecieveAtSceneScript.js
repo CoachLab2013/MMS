@@ -275,7 +275,6 @@ $(document).ready(function(){
     });    
     
     $.validator.addMethod("checkSceneDate", function(value, element, arg){   
-        alert($("#ReceivedSceneDate").val());
         
         if($("#ReceivedSceneDate").val() < $("#bodyFoundDate").val()){            
             return !value;
