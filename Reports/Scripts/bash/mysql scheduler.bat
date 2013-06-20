@@ -1,0 +1,1 @@
+"C:\Program Files\MySQL\MySQL Server 5.6\bin\mysql.exe" -u %1 -p -e "USE 'reporting database';SET GLOBAL EVENT_SCHEDULER=1;DROP EVENT IF EXISTS RUN_ETL;CREATE EVENT RUN_ETL ON SCHEDULE EVERY 1 DAY STARTS '2013-06-01 01:00:00' DO CALL	`reporting database`.`Transform_CALL_Procedures`;"

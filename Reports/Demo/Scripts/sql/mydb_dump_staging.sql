@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `mydb`;
+CREATE DATABASE  IF NOT EXISTS `mydb_dump_staging` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `mydb_dump_staging`;
 -- MySQL dump 10.13  Distrib 5.6.11, for Win64 (x86_64)
 --
--- Host: localhost    Database: mydb
+-- Host: localhost    Database: mydb_dump_staging
 -- ------------------------------------------------------
 -- Server version	5.6.11
 
@@ -50,14 +50,14 @@ DROP TABLE IF EXISTS `atmortuary`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `atmortuary` (
-  `bodyReceivedFromPerNumber` varchar(10) NOT NULL,
-  `bodyHandOverFromPerNumber` varchar(10) NOT NULL,
+  `bodyReceivedFromPerNumber` varchar(10) DEFAULT NULL,
+  `bodyHandedOverToPerNumber` varchar(10) NOT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
   `idAtMortuary` int(11) NOT NULL AUTO_INCREMENT,
+  `bodyHandOverFromOrganization` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idAtMortuary`),
-  KEY `fk_AtMortuary_Body1_idx` (`Body_idDeathRegisterNumber`),
-  CONSTRAINT `fk_AtMortuary_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `fk_AtMortuary_Body1_idx` (`Body_idDeathRegisterNumber`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,6 @@ CREATE TABLE `atmortuary` (
 
 LOCK TABLES `atmortuary` WRITE;
 /*!40000 ALTER TABLE `atmortuary` DISABLE KEYS */;
-INSERT INTO `atmortuary` VALUES ('peter','john','099888592',1);
 /*!40000 ALTER TABLE `atmortuary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,7 +78,7 @@ DROP TABLE IF EXISTS `atscene`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `atscene` (
   `sceneIncidentOccured` varchar(45) NOT NULL,
-  `sceneDateTime` datetime NOT NULL,
+  `sceneDateTime` datetime DEFAULT NULL,
   `pathOnScene` bit(1) NOT NULL,
   `allegedInjuryDateTime` datetime NOT NULL,
   `allegedDeathDateTime` datetime NOT NULL,
@@ -88,9 +87,9 @@ CREATE TABLE `atscene` (
   `dateTimeBodyFound` datetime NOT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
   `idAtScene` int(11) NOT NULL AUTO_INCREMENT,
+  `facilityDateTime` datetime DEFAULT NULL,
   PRIMARY KEY (`idAtScene`),
-  KEY `fk_AtScene_Body1_idx` (`Body_idDeathRegisterNumber`),
-  CONSTRAINT `fk_AtScene_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_AtScene_Body1_idx` (`Body_idDeathRegisterNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,7 +118,7 @@ CREATE TABLE `audittrail` (
   `currentUser` varchar(10) NOT NULL,
   `eventLocation` varchar(45) NOT NULL,
   PRIMARY KEY (`idAuditTrail`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +127,7 @@ CREATE TABLE `audittrail` (
 
 LOCK TABLES `audittrail` WRITE;
 /*!40000 ALTER TABLE `audittrail` DISABLE KEYS */;
-INSERT INTO `audittrail` VALUES (1,'2013-05-20','09:42:30','Log In','Successfull log in','12345678','Log In Screen'),(2,'2013-05-20','11:12:17','Log In','Successfull log in','12345678','Log In Screen'),(3,'2013-05-20','11:32:46','Log In','Successfull log in','12345678','Log In Screen'),(4,'2013-05-20','12:22:02','Log In','Successfull log in','12345678','Log In Screen'),(5,'2013-05-20','12:36:17','Log In','Successfull log in','12345678','Log In Screen'),(6,'2013-05-20','12:49:22','Log In','Successfull log in','12345678','Log In Screen'),(7,'2013-05-21','12:43:26','Log In','Successfull log in','12345678','Log In Screen'),(8,'2013-05-21','12:43:27','Log In','Successfull log in','12345678','Log In Screen'),(9,'2013-05-21','12:44:02','Log In','Successfull log in','11111111','Log In Screen'),(10,'2013-05-21','13:08:49','Log In','Successfull log in','12345678','Log In Screen'),(11,'2013-05-22','10:27:43','Log In','Successfull log in','12345678','Log In Screen'),(12,'2013-05-22','10:45:05','Log In','Successfull log in','12345678','Log In Screen'),(13,'2013-05-22','19:29:10','Log In','Successfull log in','12345678','Log In Screen'),(14,'2013-05-22','19:32:21','Log In','Successfull log in','12345678','Log In Screen'),(15,'2013-05-23','08:38:29','Log In','Successfull log in','12345678','Log In Screen'),(16,'2013-05-23','09:16:43','Log In','Successfull log in','12345678','Log In Screen'),(17,'2013-05-23','09:20:39','Log In','Successfull log in','12345678','Log In Screen'),(18,'2013-05-23','11:20:44','Log In','Successfull log in','12345678','Log In Screen'),(19,'2013-05-24','07:43:06','Log In','Successfull log in','12345678','Log In Screen'),(20,'2013-05-24','11:12:10','Log In','Successfull log in','12345678','Log In Screen'),(21,'2013-05-24','18:56:39','Log In','Successfull log in','12345678','Log In Screen'),(22,'2013-06-03','10:37:39','Log In','Successfull log in','12345678','Log In Screen'),(23,'2013-06-03','11:46:22','Log In','Successfull log in','12345678','Log In Screen'),(24,'2013-06-03','12:00:46','Log In','Successfull log in','12345678','Log In Screen'),(25,'2013-06-03','12:14:02','Log In','Successfull log in','12345678','Log In Screen'),(26,'2013-06-03','12:31:33','Log In','Successfull log in','12345678','Log In Screen'),(27,'2013-06-03','12:51:45','Log In','Successfull log in','12345678','Log In Screen'),(28,'2013-06-03','12:52:38','Log In','Successfull log in','12345678','Log In Screen'),(29,'2013-06-03','13:10:04','Log In','Successfull log in','12345678','Log In Screen'),(30,'2013-06-03','15:02:47','Log In','Successfull log in','12345678','Log In Screen'),(31,'2013-06-03','15:05:24','Log In','Successfull log in','12345678','Log In Screen'),(32,'2013-06-03','15:06:36','Log In','Successfull log in','12345678','Log In Screen'),(33,'2013-06-03','15:10:29','Log In','Successfull log in','12345678','Log In Screen'),(34,'2013-06-03','17:04:56','Log In','Successfull log in','12345678','Log In Screen'),(35,'2013-06-03','17:06:10','Warning','Unsuccessfull log in','12345678','Log In Screen'),(36,'2013-06-03','17:06:18','Log In','Successfull log in','12345678','Log In Screen'),(37,'2013-06-03','18:02:33','Log In','Successfull log in','12345678','Log In Screen'),(38,'2013-06-03','18:36:58','Log In','Successfull log in','12345678','Log In Screen'),(39,'2013-06-03','18:47:02','Log In','Successfull log in','12345678','Log In Screen'),(40,'2013-06-03','21:02:08','Log In','Successfull log in','12345678','Log In Screen'),(41,'2013-06-03','21:33:17','Log In','Successfull log in','12345678','Log In Screen'),(42,'2013-06-03','21:38:59','Log In','Successfull log in','12345678','Log In Screen'),(43,'2013-06-03','21:40:00','Log In','Successfull log in','12345678','Log In Screen'),(44,'2013-06-03','21:40:27','Log In','Successfull log in','12345678','Log In Screen'),(45,'2013-06-03','21:48:09','Log In','Successfull log in','12345678','Log In Screen'),(46,'2013-06-03','21:52:02','Log In','Successfull log in','12345678','Log In Screen'),(47,'2013-06-04','07:26:08','Log In','Successfull log in','12345678','Log In Screen'),(48,'2013-06-04','07:30:33','Log Incident','Created new incident 00120130604','12345678','Log Incident Tab'),(49,'2013-06-04','12:13:30','Log In','Successfull log in','12345678','Log In Screen'),(50,'2013-06-04','12:57:46','Log In','Successfull log in','12345678','Log In Screen'),(51,'2013-06-04','13:10:00','Log In','Successfull log in','12345678','Log In Screen'),(52,'2013-06-05','08:45:15','Log In','Successfull log in','12345678','Log In Screen'),(53,'2013-06-05','08:46:52','Log In','Successfull log in','12345678','Log In Screen'),(54,'2013-06-05','08:51:14','Log In','Successfull log in','12345678','Log In Screen'),(55,'2013-06-05','08:54:24','Log In','Successfull log in','12345678','Log In Screen'),(56,'2013-06-05','09:07:06','Log In','Successfull log in','12345678','Log In Screen'),(57,'2013-06-05','09:10:08','Log In','Successfull log in','12345678','Log In Screen'),(58,'2013-06-05','09:21:28','Log In','Successfull log in','12345678','Log In Screen'),(59,'2013-06-05','09:26:19','Log In','Successfull log in','12345678','Log In Screen'),(60,'2013-06-05','09:29:48','Log In','Successfull log in','12345678','Log In Screen'),(61,'2013-06-05','09:37:55','Log In','Successfull log in','12345678','Log In Screen'),(62,'2013-06-05','09:45:26','Log In','Successfull log in','12345678','Log In Screen'),(63,'2013-06-05','09:49:13','Log In','Successfull log in','12345678','Log In Screen'),(64,'2013-06-05','10:14:39','Log In','Successfull log in','12345678','Log In Screen'),(65,'2013-06-05','10:14:46','Log In','Successfull log in','12345678','Log In Screen'),(66,'2013-06-05','10:15:56','Log In','Successfull log in','12345678','Log In Screen');
+INSERT INTO `audittrail` VALUES (1,'2013-05-20','09:42:30','Log In','Successfull log in','12345678','Log In Screen'),(2,'2013-05-20','11:12:17','Log In','Successfull log in','12345678','Log In Screen'),(3,'2013-05-20','11:32:46','Log In','Successfull log in','12345678','Log In Screen'),(4,'2013-05-20','12:22:02','Log In','Successfull log in','12345678','Log In Screen'),(5,'2013-05-20','12:36:17','Log In','Successfull log in','12345678','Log In Screen'),(6,'2013-05-20','12:49:22','Log In','Successfull log in','12345678','Log In Screen'),(7,'2013-05-21','12:43:26','Log In','Successfull log in','12345678','Log In Screen'),(8,'2013-05-21','12:43:27','Log In','Successfull log in','12345678','Log In Screen'),(9,'2013-05-21','12:44:02','Log In','Successfull log in','11111111','Log In Screen'),(10,'2013-05-21','13:08:49','Log In','Successfull log in','12345678','Log In Screen'),(11,'2013-05-22','10:27:43','Log In','Successfull log in','12345678','Log In Screen'),(12,'2013-05-22','10:45:05','Log In','Successfull log in','12345678','Log In Screen'),(13,'2013-05-22','19:29:10','Log In','Successfull log in','12345678','Log In Screen'),(14,'2013-05-22','19:32:21','Log In','Successfull log in','12345678','Log In Screen'),(15,'2013-05-23','08:38:29','Log In','Successfull log in','12345678','Log In Screen'),(16,'2013-05-23','09:16:43','Log In','Successfull log in','12345678','Log In Screen'),(17,'2013-05-23','09:20:39','Log In','Successfull log in','12345678','Log In Screen'),(18,'2013-05-23','11:20:44','Log In','Successfull log in','12345678','Log In Screen'),(19,'2013-05-24','07:43:06','Log In','Successfull log in','12345678','Log In Screen'),(20,'2013-05-24','11:12:10','Log In','Successfull log in','12345678','Log In Screen'),(21,'2013-05-24','18:56:39','Log In','Successfull log in','12345678','Log In Screen'),(22,'2013-06-03','10:37:39','Log In','Successfull log in','12345678','Log In Screen'),(23,'2013-06-03','11:46:22','Log In','Successfull log in','12345678','Log In Screen'),(24,'2013-06-03','12:00:46','Log In','Successfull log in','12345678','Log In Screen'),(25,'2013-06-03','12:14:02','Log In','Successfull log in','12345678','Log In Screen'),(26,'2013-06-03','12:31:33','Log In','Successfull log in','12345678','Log In Screen'),(27,'2013-06-03','12:51:45','Log In','Successfull log in','12345678','Log In Screen'),(28,'2013-06-03','12:52:38','Log In','Successfull log in','12345678','Log In Screen'),(29,'2013-06-03','13:10:04','Log In','Successfull log in','12345678','Log In Screen'),(30,'2013-06-03','15:02:47','Log In','Successfull log in','12345678','Log In Screen'),(31,'2013-06-03','15:05:24','Log In','Successfull log in','12345678','Log In Screen'),(32,'2013-06-03','15:06:36','Log In','Successfull log in','12345678','Log In Screen'),(33,'2013-06-03','15:10:29','Log In','Successfull log in','12345678','Log In Screen'),(34,'2013-06-03','17:04:56','Log In','Successfull log in','12345678','Log In Screen'),(35,'2013-06-03','17:06:10','Warning','Unsuccessfull log in','12345678','Log In Screen'),(36,'2013-06-03','17:06:18','Log In','Successfull log in','12345678','Log In Screen'),(37,'2013-06-03','18:02:33','Log In','Successfull log in','12345678','Log In Screen'),(38,'2013-06-03','18:36:58','Log In','Successfull log in','12345678','Log In Screen'),(39,'2013-06-03','18:47:02','Log In','Successfull log in','12345678','Log In Screen'),(40,'2013-06-03','21:02:08','Log In','Successfull log in','12345678','Log In Screen'),(41,'2013-06-03','21:33:17','Log In','Successfull log in','12345678','Log In Screen'),(42,'2013-06-03','21:38:59','Log In','Successfull log in','12345678','Log In Screen'),(43,'2013-06-03','21:40:00','Log In','Successfull log in','12345678','Log In Screen'),(44,'2013-06-03','21:40:27','Log In','Successfull log in','12345678','Log In Screen'),(45,'2013-06-03','21:48:09','Log In','Successfull log in','12345678','Log In Screen'),(46,'2013-06-03','21:52:02','Log In','Successfull log in','12345678','Log In Screen'),(47,'2013-06-04','07:26:08','Log In','Successfull log in','12345678','Log In Screen'),(48,'2013-06-04','07:30:33','Log Incident','Created new incident 00120130604','12345678','Log Incident Tab'),(49,'2013-06-04','12:13:30','Log In','Successfull log in','12345678','Log In Screen'),(50,'2013-06-04','12:57:46','Log In','Successfull log in','12345678','Log In Screen'),(51,'2013-06-04','13:10:00','Log In','Successfull log in','12345678','Log In Screen'),(52,'2013-06-05','08:45:15','Log In','Successfull log in','12345678','Log In Screen'),(53,'2013-06-05','08:46:52','Log In','Successfull log in','12345678','Log In Screen'),(54,'2013-06-05','08:51:14','Log In','Successfull log in','12345678','Log In Screen'),(55,'2013-06-05','08:54:24','Log In','Successfull log in','12345678','Log In Screen'),(56,'2013-06-05','09:07:06','Log In','Successfull log in','12345678','Log In Screen'),(57,'2013-06-05','09:10:08','Log In','Successfull log in','12345678','Log In Screen'),(58,'2013-06-05','09:21:28','Log In','Successfull log in','12345678','Log In Screen'),(59,'2013-06-05','09:26:19','Log In','Successfull log in','12345678','Log In Screen'),(60,'2013-06-05','09:29:48','Log In','Successfull log in','12345678','Log In Screen'),(61,'2013-06-05','09:37:55','Log In','Successfull log in','12345678','Log In Screen'),(62,'2013-06-05','09:45:26','Log In','Successfull log in','12345678','Log In Screen'),(63,'2013-06-05','09:49:13','Log In','Successfull log in','12345678','Log In Screen'),(64,'2013-06-07','08:10:14','Warning','Unsuccessfull log in','12345678','Log In Screen'),(65,'2013-06-07','08:10:23','Log In','Successfull log in','12345678','Log In Screen'),(66,'2013-06-07','08:31:25','Warning','Unsuccessfull log in','12345678','Log In Screen'),(67,'2013-06-07','08:31:32','Warning','Unsuccessfull log in','12345678','Log In Screen'),(68,'2013-06-07','08:31:40','Log In','Successfull log in','12345678','Log In Screen'),(69,'2013-06-07','08:36:31','Closed Incident','Closed incident 002201301','12345678','Open Incidents Tab'),(70,'2013-06-07','08:37:07','Closed Incident','Closed incident 00120130604','12345678','Open Incidents Tab'),(71,'2013-06-07','08:45:52','Log Incident','Created new incident 00120130607','12345678','Log Incident Tab'),(72,'2013-06-07','08:46:04','Dispatch Vehicle','Dispatched vehicle ABC123GP','12345678','Log Incident Tab'),(73,'2013-06-07','08:46:46','Incident has been edited','Incident details of incident 00120130607 has been edited','12345678','Edit Incident Details Tab'),(74,'2013-06-07','09:25:38','Log In','Successfull log in','12345678','Log In Screen'),(75,'2013-06-07','12:00:16','Log In','Successfull log in','12345678','Log In Screen'),(76,'2013-06-09','14:33:37','Log In','Successfull log in','12345678','Log In Screen'),(77,'2013-06-09','14:54:18','Log In','Successfull log in','12345678','Log In Screen'),(78,'2013-06-09','15:14:04','Log In','Successfull log in','12345678','Log In Screen'),(79,'2013-06-09','15:57:23','Log In','Successfull log in','12345678','Log In Screen'),(80,'2013-06-09','20:06:40','Log In','Successfull log in','12345678','Log In Screen'),(81,'2013-06-09','21:51:01','Log In','Successfull log in','12345678','Log In Screen'),(82,'2013-06-09','21:55:20','Incident has been edited','Incident details of incident 00120130607 has been edited','12345678','Edit Incident Details Tab'),(83,'2013-06-10','07:29:28','Log In','Successfull log in','12345678','Log In Screen'),(84,'2013-06-10','08:06:07','Log In','Successfull log in','12345678','Log In Screen'),(85,'2013-06-10','08:57:15','Log In','Successfull log in','12345678','Log In Screen'),(86,'2013-06-10','10:18:35','Log In','Successfull log in','12345678','Log In Screen'),(87,'2013-06-10','11:04:43','Log In','Successfull log in','12345678','Log In Screen'),(88,'2013-06-10','00:42:58','Log In','Successfull log in','12345678','Log In Screen'),(89,'2013-06-10','06:31:59','Log In','Successfull log in','12345678','Log In Screen'),(90,'2013-06-10','06:32:36','Incident has been edited','Incident details of incident 00120130607 has been edited','12345678','Edit Incident Details Tab'),(91,'2013-06-10','07:15:25','Log In','Successfull log in','12345678','Log In Screen'),(92,'2013-06-10','08:50:34','Log In','Successfull log in','12345678','Log In Screen'),(93,'2013-06-10','10:12:52','Log In','Successfull log in','12345678','Log In Screen'),(94,'2013-06-10','19:17:29','Log In','Successfull log in','12345678','Log In Screen'),(95,'2013-06-11','07:40:32','Log In','Successfull log in','12345678','Log In Screen'),(96,'2013-06-11','09:17:59','Log In','Successfull log in','12345678','Log In Screen'),(97,'2013-06-11','09:42:25','Log In','Successfull log in','12345678','Log In Screen'),(98,'2013-06-11','09:59:38','Log In','Successfull log in','12345678','Log In Screen'),(99,'2013-06-11','10:28:13','Log In','Successfull log in','12345678','Log In Screen'),(100,'2013-06-11','10:40:59','Log In','Successfull log in','12345678','Log In Screen'),(101,'2013-06-14','09:16:19','Log In','Successfull log in','11111111','Log In Screen'),(102,'2013-06-14','09:16:53','Log In','Successfull log in','12345678','Log In Screen'),(103,'2013-06-14','09:18:43','Incident has been edited','Incident details of incident 00120130607 has been edited','12345678','Edit Incident Details Tab'),(104,'2013-06-14','09:20:43','Log Incident','Created new incident 00120130614','12345678','Log Incident Tab'),(105,'2013-06-14','09:20:49','Dispatch Vehicle','Dispatched vehicle ABC123GP','12345678','Log Incident Tab'),(106,'2013-06-14','09:23:54','Log Incident','Created new incident 00120130614','12345678','Log Incident Tab'),(107,'2013-06-14','09:24:00','Dispatch Vehicle','Dispatched vehicle ABC123GP','12345678','Log Incident Tab'),(108,'2013-06-14','09:39:35','Log In','Successfull log in','11111111','Log In Screen'),(109,'2013-06-14','09:39:44','Log In','Successfull log in','12345678','Log In Screen'),(110,'2013-06-16','08:47:44','Log In','Successfull log in','12345678','Log In Screen'),(111,'2013-06-16','09:04:20','Log In','Successfull log in','12345678','Log In Screen'),(112,'2013-06-16','10:07:41','Log In','Successfull log in','12345678','Log In Screen'),(113,'2013-06-16','10:11:12','Log In','Successfull log in','12345678','Log In Screen'),(114,'2013-06-16','10:18:44','Log In','Successfull log in','12345678','Log In Screen'),(115,'2013-06-16','10:36:24','Log In','Successfull log in','12345678','Log In Screen'),(116,'2013-06-16','10:45:58','Log In','Successfull log in','12345678','Log In Screen'),(117,'2013-06-17','11:16:39','Log In','Successfull log in','12345678','Log In Screen'),(118,'2013-06-17','11:25:02','Log In','Successfull log in','12345678','Log In Screen'),(119,'2013-06-17','11:54:08','Log In','Successfull log in','12345678','Log In Screen'),(120,'2013-06-17','11:57:35','Log In','Successfull log in','12345678','Log In Screen'),(121,'2013-06-17','14:07:53','Log In','Successfull log in','12345678','Log In Screen'),(122,'2013-06-17','14:44:28','Log In','Successfull log in','12345678','Log In Screen'),(123,'2013-06-17','14:49:28','Log In','Successfull log in','12345678','Log In Screen'),(124,'2013-06-17','15:25:10','Log In','Successfull log in','12345678','Log In Screen'),(125,'2013-06-17','15:29:46','Log In','Successfull log in','12345678','Log In Screen'),(126,'2013-06-17','15:34:29','Log In','Successfull log in','12345678','Log In Screen'),(127,'2013-06-17','15:38:19','Log In','Successfull log in','12345678','Log In Screen'),(128,'2013-06-17','15:42:18','Log In','Successfull log in','12345678','Log In Screen'),(129,'2013-06-17','15:46:00','Log In','Successfull log in','12345678','Log In Screen'),(130,'2013-06-17','15:53:29','Log In','Successfull log in','12345678','Log In Screen'),(131,'2013-06-17','16:16:44','Log In','Successfull log in','12345678','Log In Screen'),(132,'2013-06-17','17:07:41','Log In','Successfull log in','12345678','Log In Screen'),(133,'2013-06-17','17:21:21','Log In','Successfull log in','12345678','Log In Screen'),(134,'2013-06-17','17:26:01','Log In','Successfull log in','12345678','Log In Screen'),(135,'2013-06-17','17:27:23','Log In','Successfull log in','12345678','Log In Screen'),(136,'2013-06-17','17:32:12','Log In','Successfull log in','12345678','Log In Screen'),(137,'2013-06-17','17:54:28','Log In','Successfull log in','12345678','Log In Screen'),(138,'2013-06-17','18:01:15','Log In','Successfull log in','12345678','Log In Screen'),(139,'2013-06-17','18:05:50','Log In','Successfull log in','12345678','Log In Screen'),(140,'2013-06-17','18:10:38','Log In','Successfull log in','12345678','Log In Screen'),(141,'2013-06-17','18:14:21','Log In','Successfull log in','12345678','Log In Screen'),(142,'2013-06-17','18:28:05','Log In','Successfull log in','12345678','Log In Screen'),(143,'2013-06-17','18:31:49','Log In','Successfull log in','12345678','Log In Screen'),(144,'2013-06-17','18:35:54','Log In','Successfull log in','12345678','Log In Screen'),(145,'2013-06-17','18:39:09','Log In','Successfull log in','12345678','Log In Screen'),(146,'2013-06-17','18:43:29','Log In','Successfull log in','12345678','Log In Screen'),(147,'2013-06-17','18:45:08','Log In','Successfull log in','12345678','Log In Screen'),(148,'2013-06-17','18:48:36','Log In','Successfull log in','12345678','Log In Screen'),(149,'2013-06-17','18:52:20','Log In','Successfull log in','12345678','Log In Screen'),(150,'2013-06-17','18:54:24','Log In','Successfull log in','12345678','Log In Screen'),(151,'2013-06-17','18:57:40','Log In','Successfull log in','12345678','Log In Screen'),(152,'2013-06-17','19:04:46','Log In','Successfull log in','12345678','Log In Screen'),(153,'2013-06-17','19:16:24','Log In','Successfull log in','12345678','Log In Screen'),(154,'2013-06-17','19:24:36','Log In','Successfull log in','12345678','Log In Screen'),(155,'2013-06-17','19:26:02','Log In','Successfull log in','12345678','Log In Screen'),(156,'2013-06-17','19:30:53','Log In','Successfull log in','12345678','Log In Screen'),(157,'2013-06-17','19:40:52','Log In','Successfull log in','12345678','Log In Screen'),(158,'2013-06-17','19:47:32','Log In','Successfull log in','12345678','Log In Screen'),(159,'2013-06-17','19:49:12','Log In','Successfull log in','12345678','Log In Screen'),(160,'2013-06-17','19:50:35','Log In','Successfull log in','12345678','Log In Screen'),(161,'2013-06-17','19:56:22','Log In','Successfull log in','12345678','Log In Screen'),(162,'2013-06-17','19:58:29','Log In','Successfull log in','12345678','Log In Screen'),(163,'2013-06-17','20:01:47','Log In','Successfull log in','12345678','Log In Screen'),(164,'2013-06-17','20:04:07','Log In','Successfull log in','12345678','Log In Screen'),(165,'2013-06-17','20:10:01','Log In','Successfull log in','12345678','Log In Screen'),(166,'2013-06-17','20:14:40','Log In','Successfull log in','12345678','Log In Screen'),(167,'2013-06-17','20:18:05','Log In','Successfull log in','12345678','Log In Screen'),(168,'2013-06-17','20:21:15','Log In','Successfull log in','12345678','Log In Screen'),(169,'2013-06-17','20:25:37','Log In','Successfull log in','12345678','Log In Screen'),(170,'2013-06-17','20:27:27','Log In','Successfull log in','12345678','Log In Screen'),(171,'2013-06-17','20:37:49','Log In','Successfull log in','12345678','Log In Screen'),(172,'2013-06-17','20:41:06','Log In','Successfull log in','12345678','Log In Screen'),(173,'2013-06-17','20:51:36','Log In','Successfull log in','12345678','Log In Screen'),(174,'2013-06-17','20:54:16','Log In','Successfull log in','12345678','Log In Screen'),(175,'2013-06-17','20:57:59','Log In','Successfull log in','12345678','Log In Screen'),(176,'2013-06-17','21:00:24','Log In','Successfull log in','12345678','Log In Screen'),(177,'2013-06-17','21:02:57','Log In','Successfull log in','12345678','Log In Screen'),(178,'2013-06-18','09:00:46','Log In','Successfull log in','12345678','Log In Screen'),(179,'2013-06-18','09:02:26','Log In','Successfull log in','12345678','Log In Screen'),(180,'2013-06-18','09:03:13','Log In','Successfull log in','12345678','Log In Screen'),(181,'2013-06-18','09:04:35','Log In','Successfull log in','12345678','Log In Screen'),(182,'2013-06-18','09:05:37','Log In','Successfull log in','12345678','Log In Screen'),(183,'2013-06-18','09:25:16','Log In','Successfull log in','12345678','Log In Screen'),(184,'2013-06-18','09:32:06','Log In','Successfull log in','12345678','Log In Screen'),(185,'2013-06-18','09:33:45','Log In','Successfull log in','12345678','Log In Screen'),(186,'2013-06-18','09:34:30','Log In','Successfull log in','12345678','Log In Screen'),(187,'2013-06-18','09:43:22','Log In','Successfull log in','11111111','Log In Screen'),(188,'2013-06-18','09:47:39','Log In','Successfull log in','12345678','Log In Screen'),(189,'2013-06-18','09:51:44','Log In','Successfull log in','12345678','Log In Screen'),(190,'2013-06-18','09:55:52','Log In','Successfull log in','12345678','Log In Screen'),(191,'2013-06-18','09:59:19','Log In','Successfull log in','12345678','Log In Screen'),(192,'2013-06-18','10:07:18','Log In','Successfull log in','12345678','Log In Screen'),(193,'2013-06-18','10:11:45','Log In','Successfull log in','12345678','Log In Screen'),(194,'2013-06-18','10:38:28','Log In','Successfull log in','11111111','Log In Screen'),(195,'2013-06-18','11:00:00','Log In','Successfull log in','12345678','Log In Screen'),(196,'2013-06-18','11:00:33','Log In','Successfull log in','11111111','Log In Screen'),(197,'2013-06-18','11:12:00','Log In','Successfull log in','12345678','Log In Screen'),(198,'2013-06-18','11:19:42','Log In','Successfull log in','12345678','Log In Screen'),(199,'2013-06-18','11:37:11','Log In','Successfull log in','11111111','Log In Screen'),(200,'2013-06-18','11:37:40','Log In','Successfull log in','12345678','Log In Screen'),(201,'2013-06-18','11:39:54','Log In','Successfull log in','11111111','Log In Screen'),(202,'2013-06-18','11:40:39','Log In','Successfull log in','12345678','Log In Screen'),(203,'2013-06-18','11:47:01','Log In','Successfull log in','11111111','Log In Screen');
 /*!40000 ALTER TABLE `audittrail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,9 +164,9 @@ CREATE TABLE `body` (
   `bodyType` varchar(45) DEFAULT NULL,
   `dateBodyReleased` datetime DEFAULT NULL,
   `bodyReleasedTo` varchar(45) DEFAULT NULL,
+  `bodyReleaseType` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idDeathRegisterNumber`),
-  KEY `fk_Body_Incident1_idx` (`Incident_incidentLogNumber`),
-  CONSTRAINT `fk_Body_Incident1` FOREIGN KEY (`Incident_incidentLogNumber`) REFERENCES `incident` (`incidentLogNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Body_Incident1_idx` (`Incident_incidentLogNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -177,7 +176,7 @@ CREATE TABLE `body` (
 
 LOCK TABLES `body` WRITE;
 /*!40000 ALTER TABLE `body` DISABLE KEYS */;
-INSERT INTO `body` VALUES ('099888592','female','0','3','00','00','3333','2013-04-23',20,'4444333222','4442000','44432ddd','22kfdkd','2013-04-23 00:00:00',20,6,'gg','ggrer','\0','2013-06-03 00:00:00','\0','002201301','44dddd33221','2013-06-03 00:00:00','2013-06-03');
+INSERT INTO `body` VALUES ('099888592','female','0','3','00','00','3333','2013-04-23',20,'4444333222','4442000','44432ddd','22kfdkd','2013-04-23 00:00:00',20,6,'gg','ggrer','\0','2013-06-03 00:00:00','\0','002201301','44dddd33221','2013-06-03 00:00:00','2013-06-03',NULL),('GP/DK//00001/2013','Female','Asian','1','Asheen','Singh','','0000-00-01',16,'','','','','0000-00-01 00:00:00',0,0,'1234567890123','','\0','0000-00-01 00:00:00','\0','00120130607','Head','0000-00-01 00:00:00','null',NULL),('GP/DK//00002/2013','Female','Asian','11','av','v','','0000-00-01',16,'','','','','0000-00-01 00:00:00',0,0,'1234567890123','','\0','0000-00-01 00:00:00','\0','00120130607','Head','0000-00-01 00:00:00','null',NULL),('GP/DK//00003/2013','Select','Select','1','','','','0000-00-01',5,'','','','','0000-00-01 00:00:00',0,0,'','','\0','0000-00-01 00:00:00','\0','00120130607','Select','0000-00-01 00:00:00','null',NULL),('GP/DK/00004/2013','Female','Black','null','Asheen','Singh','null','0001-01-01',0,'null','null','null','null','0001-01-01 00:00:00',0,0,'1234567890123','null','\0','0001-01-01 00:00:00','\0','00120130614','Full body','0001-01-01 00:00:00','null','null');
 /*!40000 ALTER TABLE `body` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,9 +199,8 @@ CREATE TABLE `bodyaddress` (
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
   `idBodyAddress` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idBodyAddress`),
-  KEY `fk_BodyAddress_Body1_idx` (`Body_idDeathRegisterNumber`),
-  CONSTRAINT `fk_BodyAddress_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `fk_BodyAddress_Body1_idx` (`Body_idDeathRegisterNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +209,7 @@ CREATE TABLE `bodyaddress` (
 
 LOCK TABLES `bodyaddress` WRITE;
 /*!40000 ALTER TABLE `bodyaddress` DISABLE KEYS */;
-INSERT INTO `bodyaddress` VALUES ('D','D','D','D','e','f','g','h','099888592',1);
+INSERT INTO `bodyaddress` VALUES ('D','D','D','D','e','f','g','h','099888592',1),('adfs','asf','ghdnbv','gn','2197','null','null','sdsd','GP/DK//00001/2013',2),('asdv','av','asv','gn','av','null','null','asc','GP/DK//00002/2013',3),('','','','','','null','null','','GP/DK//00003/2013',4),('University','Jorissen','Brammfontien','Johannesburg','1234','Freestate','Region 1','District 9','GP/DK/00004/2013',5);
 /*!40000 ALTER TABLE `bodyaddress` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,9 +230,8 @@ CREATE TABLE `bodyfile` (
   `idBodyFile` int(11) NOT NULL AUTO_INCREMENT,
   `dateFileClosed` date NOT NULL,
   PRIMARY KEY (`idBodyFile`),
-  KEY `fk_Case_Body1_idx` (`Body_idDeathRegisterNumber`),
-  CONSTRAINT `fk_Case_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_Case_Body1_idx` (`Body_idDeathRegisterNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,6 +240,7 @@ CREATE TABLE `bodyfile` (
 
 LOCK TABLES `bodyfile` WRITE;
 /*!40000 ALTER TABLE `bodyfile` DISABLE KEYS */;
+INSERT INTO `bodyfile` VALUES ('2013-06-07','','GP/DK//00001/2013','\0','\0','\0',1,'0000-00-01'),('2013-06-07','','GP/DK//00002/2013','\0','\0','\0',2,'0000-00-01'),('2013-06-09','','GP/DK//00003/2013','\0','\0','\0',3,'0000-00-01'),('2013-06-14','\0','GP/DK/00004/2013','\0','\0','',4,'0001-01-01');
 /*!40000 ALTER TABLE `bodyfile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,9 +257,7 @@ CREATE TABLE `bodylink` (
   `linkDeathRegisterNumber` varchar(45) NOT NULL,
   PRIMARY KEY (`idBodyLink`),
   KEY `fk_BodyLink_BodyFile2_idx` (`BodyFile_Body_idDeathRegisterNumber1`),
-  KEY `fk_BodyLink_link_idx` (`linkDeathRegisterNumber`),
-  CONSTRAINT `fk_BodyLink_BodyFile2` FOREIGN KEY (`BodyFile_Body_idDeathRegisterNumber1`) REFERENCES `bodyfile` (`Body_idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_BodyLink_link` FOREIGN KEY (`linkDeathRegisterNumber`) REFERENCES `bodyfile` (`Body_idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_BodyLink_link_idx` (`linkDeathRegisterNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -286,7 +282,7 @@ CREATE TABLE `bodypart` (
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`idBodyPart`),
   UNIQUE KEY `type_UNIQUE` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,6 +291,7 @@ CREATE TABLE `bodypart` (
 
 LOCK TABLES `bodypart` WRITE;
 /*!40000 ALTER TABLE `bodypart` DISABLE KEYS */;
+INSERT INTO `bodypart` VALUES (1,'Full body'),(2,'Head'),(3,'Leg');
 /*!40000 ALTER TABLE `bodypart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,7 +400,7 @@ DROP TABLE IF EXISTS `deathcall`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `deathcall` (
-  `Incident_incidentLogNumber` varchar(9) NOT NULL,
+  `Incident_incidentLogNumber` varchar(11) NOT NULL,
   `timeOfCall` time NOT NULL,
   `dateOfCall` date NOT NULL,
   `numberOfCaller` varchar(10) NOT NULL,
@@ -414,8 +411,7 @@ CREATE TABLE `deathcall` (
   `sceneConditions` varchar(45) NOT NULL,
   `nameOfCaller` varchar(45) NOT NULL,
   PRIMARY KEY (`Incident_incidentLogNumber`),
-  KEY `fk_DeathCall_Incident1_idx` (`Incident_incidentLogNumber`),
-  CONSTRAINT `fk_DeathCall_Incident1` FOREIGN KEY (`Incident_incidentLogNumber`) REFERENCES `incident` (`incidentLogNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_DeathCall_Incident1_idx` (`Incident_incidentLogNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -425,6 +421,7 @@ CREATE TABLE `deathcall` (
 
 LOCK TABLES `deathcall` WRITE;
 /*!40000 ALTER TABLE `deathcall` DISABLE KEYS */;
+INSERT INTO `deathcall` VALUES ('00120130607','08:03:00','2013-06-07','1234567890','adv',' asv','Freestate','Region 1',' asv','DAv'),('00120130614','00:03:00','2013-06-14','0821231234','Wayne Enterprises','123 Bat Cave\r\nStately Wayne Manor\r\nGotham City','Freestate','Region 1',' Scary','Alfred');
 /*!40000 ALTER TABLE `deathcall` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -467,8 +464,7 @@ CREATE TABLE `dutyroster` (
   `Employee_password` varchar(128) NOT NULL,
   `Employee_personnelNumber` varchar(10) NOT NULL,
   PRIMARY KEY (`idDutyRoster`),
-  KEY `fk_DutyRoster_Employee_idx` (`Employee_password`,`Employee_personnelNumber`),
-  CONSTRAINT `fk_DutyRoster_Employee` FOREIGN KEY (`Employee_password`, `Employee_personnelNumber`) REFERENCES `employee` (`password`, `personnelNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_DutyRoster_Employee_idx` (`Employee_password`,`Employee_personnelNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -524,7 +520,7 @@ CREATE TABLE `externalcircumstance` (
   `type` varchar(100) NOT NULL,
   PRIMARY KEY (`idExternalCircumstance`),
   UNIQUE KEY `type_UNIQUE` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -533,6 +529,7 @@ CREATE TABLE `externalcircumstance` (
 
 LOCK TABLES `externalcircumstance` WRITE;
 /*!40000 ALTER TABLE `externalcircumstance` DISABLE KEYS */;
+INSERT INTO `externalcircumstance` VALUES (1,'Option 1'),(2,'Option 2');
 /*!40000 ALTER TABLE `externalcircumstance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -557,8 +554,7 @@ CREATE TABLE `forensicsample` (
   `dateSent` date NOT NULL,
   `dateReceived` date NOT NULL,
   PRIMARY KEY (`sealNumber`),
-  KEY `fk_ForensicSample_LabRecord1_idx` (`labNumber`),
-  CONSTRAINT `fk_ForensicSample_LabRecord1` FOREIGN KEY (`labNumber`) REFERENCES `labrecord` (`labNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_ForensicSample_LabRecord1_idx` (`labNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -568,7 +564,7 @@ CREATE TABLE `forensicsample` (
 
 LOCK TABLES `forensicsample` WRITE;
 /*!40000 ALTER TABLE `forensicsample` DISABLE KEYS */;
-INSERT INTO `forensicsample` VALUES ('0001','0099888592','*****','','0002','','','','\0','908','2013-05-24','2013-05-24'),('1234','099888592','Reason','xxxx','brolN','tyAna','insti','speacialIn','','908','2010-10-07','0200-01-02'),('4567','099888592','Testing','','NewSeal','a','1','***K!','\0','908','2013-05-23','2012-12-05');
+INSERT INTO `forensicsample` VALUES ('0001','0099888592','*****','','0002','','','','\0','908','2013-05-24','2013-05-24'),('1234','099888592','Reason','xxxx','brolN','tyAna','insti','speacialIn','','908','2010-10-07','0200-01-02'),('4567','099888592','Testing','','NewSeal','a','1','***K!','\0','908','2013-05-23','2012-12-05'),('666','GP/DK/00004/2013','Analysis','','777','','','','\0','D123','2013-06-18','2013-06-18');
 /*!40000 ALTER TABLE `forensicsample` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -584,7 +580,7 @@ CREATE TABLE `gender` (
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`idGender`),
   UNIQUE KEY `type_UNIQUE` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -593,6 +589,7 @@ CREATE TABLE `gender` (
 
 LOCK TABLES `gender` WRITE;
 /*!40000 ALTER TABLE `gender` DISABLE KEYS */;
+INSERT INTO `gender` VALUES (1,'Female'),(2,'Male');
 /*!40000 ALTER TABLE `gender` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -609,8 +606,7 @@ CREATE TABLE `hospital` (
   `Organization_idOrganization` int(11) NOT NULL,
   PRIMARY KEY (`Organization_idOrganization`),
   UNIQUE KEY `name_UNIQUE` (`name`),
-  KEY `fk_Hospital_Organization1_idx` (`Organization_idOrganization`),
-  CONSTRAINT `fk_Hospital_Organization1` FOREIGN KEY (`Organization_idOrganization`) REFERENCES `organization` (`idOrganization`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Hospital_Organization1_idx` (`Organization_idOrganization`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -624,30 +620,6 @@ LOCK TABLES `hospital` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `icd10`
---
-
-DROP TABLE IF EXISTS `icd10`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `icd10` (
-  `idICD10` int(11) NOT NULL AUTO_INCREMENT,
-  `code` varchar(5) NOT NULL,
-  PRIMARY KEY (`idICD10`),
-  UNIQUE KEY `code_UNIQUE` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `icd10`
---
-
-LOCK TABLES `icd10` WRITE;
-/*!40000 ALTER TABLE `icd10` DISABLE KEYS */;
-/*!40000 ALTER TABLE `icd10` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `icdlevel1`
 --
 
@@ -656,7 +628,7 @@ DROP TABLE IF EXISTS `icdlevel1`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `icdlevel1` (
   `chapter` int(3) NOT NULL AUTO_INCREMENT,
-  `description` varchar(200) NOT NULL,
+  `description` varchar(500) NOT NULL,
   PRIMARY KEY (`chapter`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -681,7 +653,7 @@ DROP TABLE IF EXISTS `icdlevel2`;
 CREATE TABLE `icdlevel2` (
   `level2_id` int(10) NOT NULL AUTO_INCREMENT,
   `diag1_Id` varchar(10) NOT NULL,
-  `description` varchar(300) NOT NULL,
+  `description` varchar(500) NOT NULL,
   `ICDLevel1_chapter` int(11) NOT NULL,
   PRIMARY KEY (`level2_id`,`diag1_Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1824 DEFAULT CHARSET=utf8;
@@ -708,7 +680,7 @@ CREATE TABLE `icdlevel3` (
   `icd_level3_id` int(11) NOT NULL AUTO_INCREMENT,
   `diag1_Id` char(10) NOT NULL,
   `diag2_Id` char(10) NOT NULL,
-  `description` varchar(300) NOT NULL,
+  `description` varchar(500) NOT NULL,
   PRIMARY KEY (`icd_level3_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9287 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -733,7 +705,7 @@ DROP TABLE IF EXISTS `icdlevel4`;
 CREATE TABLE `icdlevel4` (
   `icdlevel4_Id` int(11) NOT NULL AUTO_INCREMENT,
   `diag3_Id` char(10) NOT NULL,
-  `description` varchar(300) NOT NULL,
+  `description` varchar(500) NOT NULL,
   `ICDLevel3_dia2Id` char(10) NOT NULL,
   PRIMARY KEY (`icdlevel4_Id`,`diag3_Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12227 DEFAULT CHARSET=utf8;
@@ -767,7 +739,7 @@ CREATE TABLE `incident` (
   `status` bit(1) NOT NULL,
   `reason` longtext NOT NULL,
   `bodyCount` int(11) NOT NULL,
-  `placeBodyFound` varchar(45) NOT NULL,
+  `placeBodyFound` longtext NOT NULL,
   `dateIncidentClosed` date DEFAULT NULL,
   PRIMARY KEY (`incidentLogNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -779,7 +751,7 @@ CREATE TABLE `incident` (
 
 LOCK TABLES `incident` WRITE;
 /*!40000 ALTER TABLE `incident` DISABLE KEYS */;
-INSERT INTO `incident` VALUES ('00120130604','12345',2,'2013-04-04','05:05:00','murder ','vip','','',0,' soweto',NULL),('002201301','REF',4,'2013-04-06','11:50:30','rap stabbing','had beef with Rick Ross','','Burger King',1,'vegas','2013-04-06');
+INSERT INTO `incident` VALUES ('00120130604','12345',2,'2013-04-04','05:05:00','murder ','vip','\0',' zc',0,' soweto','2013-06-07'),('00120130607','12asdf',8,'2013-04-08','03:04:00','Plane Hijacking\r\n\r\n\r\n','Aviation Accindent','','',3,'123 Sesame Street\r\nTakalani\r\nJohannesburg\r\n\r\n',NULL),('00120130614','abc123',2,'2013-03-04','01:02:00','Bat-mobile exploded ','None','','',1,'123 Bat Cave\r\nStately Wayne Manor\r\nGotham City',NULL),('002201301','REF',4,'2013-04-06','11:50:30','rap stabbing','had beef with Rick Ross','\0','SC ',1,'vegas','2013-06-07');
 /*!40000 ALTER TABLE `incident` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -800,8 +772,7 @@ CREATE TABLE `incidentmessage` (
   `Incident_incidentLogNumber` varchar(45) NOT NULL,
   `idIncidentMessage` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idIncidentMessage`),
-  KEY `fk_IncidentMessage_Incident1_idx` (`Incident_incidentLogNumber`),
-  CONSTRAINT `fk_IncidentMessage_Incident1` FOREIGN KEY (`Incident_incidentLogNumber`) REFERENCES `incident` (`incidentLogNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_IncidentMessage_Incident1_idx` (`Incident_incidentLogNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -835,8 +806,7 @@ CREATE TABLE `informantproperty` (
   `witness2_surname` varchar(45) DEFAULT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
   PRIMARY KEY (`idInformant`),
-  KEY `fk_InformantProperty_Body1_idx` (`Body_idDeathRegisterNumber`),
-  CONSTRAINT `fk_InformantProperty_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_InformantProperty_Body1_idx` (`Body_idDeathRegisterNumber`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -894,8 +864,7 @@ CREATE TABLE `kin` (
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
   `idKin` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idKin`),
-  KEY `fk_Kin_Body1_idx` (`Body_idDeathRegisterNumber`),
-  CONSTRAINT `fk_Kin_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Kin_Body1_idx` (`Body_idDeathRegisterNumber`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -923,8 +892,7 @@ CREATE TABLE `labrecord` (
   `numberOfSamples` int(11) DEFAULT NULL,
   `sampleCounter` int(11) DEFAULT NULL,
   PRIMARY KEY (`idLabRecord`),
-  KEY `fk_LabRecord_PostMortem1_idx` (`labNumber`),
-  CONSTRAINT `fk_LabRecord_PostMortem1` FOREIGN KEY (`labNumber`) REFERENCES `postmortem` (`labNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_LabRecord_PostMortem1_idx` (`labNumber`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -974,7 +942,7 @@ CREATE TABLE `maritalstatus` (
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`idMartalStatus`),
   UNIQUE KEY `type_UNIQUE` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -983,6 +951,7 @@ CREATE TABLE `maritalstatus` (
 
 LOCK TABLES `maritalstatus` WRITE;
 /*!40000 ALTER TABLE `maritalstatus` DISABLE KEYS */;
+INSERT INTO `maritalstatus` VALUES (3,'Complicated'),(1,'Marrired'),(2,'Single');
 /*!40000 ALTER TABLE `maritalstatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1003,9 +972,8 @@ CREATE TABLE `member` (
   `AtScene_Body_idDeathRegisterNumber` varchar(45) NOT NULL,
   `idMember` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idMember`),
-  KEY `fk_Member_AtScene1` (`AtScene_Body_idDeathRegisterNumber`),
-  CONSTRAINT `fk_Member_AtScene1` FOREIGN KEY (`AtScene_Body_idDeathRegisterNumber`) REFERENCES `atscene` (`Body_idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_Member_AtScene1` (`AtScene_Body_idDeathRegisterNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1014,6 +982,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
+INSERT INTO `member` VALUES ('Bruce','Banner','Rank 1','null','SAPS','0821231234','GP/DK/00004/2013',7),('Clark','Kent','Rank 1','11111111','null','0821231234','GP/DK/00004/2013',8),('Tony','Stark','Rank 1','null','null','null','GP/DK/00004/2013',9);
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1029,7 +998,7 @@ CREATE TABLE `occupation` (
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`idOccupation`),
   UNIQUE KEY `type_UNIQUE` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1038,6 +1007,7 @@ CREATE TABLE `occupation` (
 
 LOCK TABLES `occupation` WRITE;
 /*!40000 ALTER TABLE `occupation` DISABLE KEYS */;
+INSERT INTO `occupation` VALUES (2,'Superhero'),(1,'Unemployed');
 /*!40000 ALTER TABLE `occupation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1055,9 +1025,8 @@ CREATE TABLE `organization` (
   `OrganizationType_type` varchar(45) NOT NULL,
   PRIMARY KEY (`idOrganization`),
   UNIQUE KEY `name_UNIQUE` (`name`),
-  KEY `fk_Organization_OrganizationType1_idx` (`OrganizationType_type`),
-  CONSTRAINT `fk_Organization_OrganizationType1` FOREIGN KEY (`OrganizationType_type`) REFERENCES `organizationtype` (`type`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_Organization_OrganizationType1_idx` (`OrganizationType_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1066,6 +1035,7 @@ CREATE TABLE `organization` (
 
 LOCK TABLES `organization` WRITE;
 /*!40000 ALTER TABLE `organization` DISABLE KEYS */;
+INSERT INTO `organization` VALUES (3,'Carealot Hospital','1234567890','Hostpital'),(4,'GS Funerals','0987654321','Funeral Parlour');
 /*!40000 ALTER TABLE `organization` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1088,6 +1058,7 @@ CREATE TABLE `organizationtype` (
 
 LOCK TABLES `organizationtype` WRITE;
 /*!40000 ALTER TABLE `organizationtype` DISABLE KEYS */;
+INSERT INTO `organizationtype` VALUES ('Funeral Parlour'),('Hostpital');
 /*!40000 ALTER TABLE `organizationtype` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1103,8 +1074,7 @@ CREATE TABLE `pathologyunit` (
   `contactNumber` varchar(45) NOT NULL,
   `Organization_idOrganization` int(11) NOT NULL,
   PRIMARY KEY (`Organization_idOrganization`),
-  KEY `fk_PathologyUnit_Organization1_idx` (`Organization_idOrganization`),
-  CONSTRAINT `fk_PathologyUnit_Organization1` FOREIGN KEY (`Organization_idOrganization`) REFERENCES `organization` (`idOrganization`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_PathologyUnit_Organization1_idx` (`Organization_idOrganization`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1129,8 +1099,7 @@ CREATE TABLE `policestation` (
   `contactNumber` varchar(45) NOT NULL,
   `Organization_idOrganization` int(11) NOT NULL,
   PRIMARY KEY (`Organization_idOrganization`),
-  KEY `fk_PoliceStation_Organization1_idx` (`Organization_idOrganization`),
-  CONSTRAINT `fk_PoliceStation_Organization1` FOREIGN KEY (`Organization_idOrganization`) REFERENCES `organization` (`idOrganization`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_PoliceStation_Organization1_idx` (`Organization_idOrganization`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1159,9 +1128,9 @@ CREATE TABLE `postmortem` (
   `approved` bit(1) NOT NULL,
   `DHA1663number` varchar(45) NOT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
+  `reason` longtext,
   PRIMARY KEY (`labNumber`),
-  KEY `fk_PostMortem_Body1_idx` (`Body_idDeathRegisterNumber`),
-  CONSTRAINT `fk_PostMortem_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_PostMortem_Body1_idx` (`Body_idDeathRegisterNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1171,7 +1140,7 @@ CREATE TABLE `postmortem` (
 
 LOCK TABLES `postmortem` WRITE;
 /*!40000 ALTER TABLE `postmortem` DISABLE KEYS */;
-INSERT INTO `postmortem` VALUES ('908','f','g','gy','','','ff','099888592');
+INSERT INTO `postmortem` VALUES ('908','f','g','gy','','','ff','099888592',NULL);
 /*!40000 ALTER TABLE `postmortem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1183,24 +1152,24 @@ DROP TABLE IF EXISTS `property`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `property` (
-  `sealNumber` varchar(45) NOT NULL,
-  `description` longtext NOT NULL,
-  `date` date NOT NULL,
-  `type` varchar(45) NOT NULL,
-  `sealType` varchar(45) NOT NULL,
-  `takenBy` varchar(10) NOT NULL,
-  `witness1_name` varchar(45) NOT NULL,
-  `witness1_surname` varchar(45) NOT NULL,
-  `witness2_name` varchar(45) NOT NULL,
-  `witness2_surname` varchar(45) NOT NULL,
-  `SAPS_name` varchar(45) NOT NULL,
-  `SAPS_surname` varchar(45) NOT NULL,
+  `sealNumber` varchar(45) DEFAULT NULL,
+  `description` longtext,
+  `date` date DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `sealType` varchar(45) DEFAULT NULL,
+  `takenBy` varchar(10) DEFAULT NULL,
+  `witness1_name` varchar(45) DEFAULT NULL,
+  `witness1_surname` varchar(45) DEFAULT NULL,
+  `witness2_name` varchar(45) DEFAULT NULL,
+  `witness2_surname` varchar(45) DEFAULT NULL,
+  `SAPS_name` varchar(45) DEFAULT NULL,
+  `SAPS_surname` varchar(45) DEFAULT NULL,
   `SAPS_taken` bit(1) NOT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
-  `released` bit(1) DEFAULT NULL,
-  PRIMARY KEY (`sealNumber`),
-  KEY `fk_Property_Body1_idx` (`Body_idDeathRegisterNumber`),
-  CONSTRAINT `fk_Property_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `released` bit(1) NOT NULL,
+  `idProperty` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idProperty`),
+  KEY `fk_Property_Body1_idx` (`Body_idDeathRegisterNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1210,7 +1179,6 @@ CREATE TABLE `property` (
 
 LOCK TABLES `property` WRITE;
 /*!40000 ALTER TABLE `property` DISABLE KEYS */;
-INSERT INTO `property` VALUES ('2','Hello, World','2012-03-05','q','','Mubien','','','','','','','\0','099888592','\0');
 /*!40000 ALTER TABLE `property` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1276,7 +1244,7 @@ CREATE TABLE `race` (
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`idRace`),
   UNIQUE KEY `type_UNIQUE` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1285,6 +1253,7 @@ CREATE TABLE `race` (
 
 LOCK TABLES `race` WRITE;
 /*!40000 ALTER TABLE `race` DISABLE KEYS */;
+INSERT INTO `race` VALUES (1,'Asian'),(2,'Black'),(3,'Coloured'),(4,'White');
 /*!40000 ALTER TABLE `race` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1300,7 +1269,7 @@ CREATE TABLE `rank` (
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`idRank`),
   UNIQUE KEY `type_UNIQUE` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1309,6 +1278,7 @@ CREATE TABLE `rank` (
 
 LOCK TABLES `rank` WRITE;
 /*!40000 ALTER TABLE `rank` DISABLE KEYS */;
+INSERT INTO `rank` VALUES (1,'Rank 1'),(2,'Rank 2');
 /*!40000 ALTER TABLE `rank` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1329,8 +1299,7 @@ CREATE TABLE `recipient` (
   `contactNumber` varchar(45) DEFAULT NULL,
   `Body_idDeathRegisterNumber` varchar(45) NOT NULL,
   PRIMARY KEY (`idRecipient`),
-  KEY `fk_table1_Body1_idx` (`Body_idDeathRegisterNumber`),
-  CONSTRAINT `fk_table1_Body1` FOREIGN KEY (`Body_idDeathRegisterNumber`) REFERENCES `body` (`idDeathRegisterNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_table1_Body1_idx` (`Body_idDeathRegisterNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1353,9 +1322,10 @@ DROP TABLE IF EXISTS `region`;
 CREATE TABLE `region` (
   `idRegion` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
+  `province` varchar(45) NOT NULL,
   PRIMARY KEY (`idRegion`),
-  UNIQUE KEY `type_UNIQUE` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `province_UNIQUE` (`province`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1364,7 +1334,6 @@ CREATE TABLE `region` (
 
 LOCK TABLES `region` WRITE;
 /*!40000 ALTER TABLE `region` DISABLE KEYS */;
-INSERT INTO `region` VALUES (1,'Region 1'),(2,'Region 2');
 /*!40000 ALTER TABLE `region` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1380,7 +1349,7 @@ CREATE TABLE `relationship` (
   `type` varchar(45) NOT NULL,
   PRIMARY KEY (`idRelationship`),
   UNIQUE KEY `type_UNIQUE` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1389,33 +1358,56 @@ CREATE TABLE `relationship` (
 
 LOCK TABLES `relationship` WRITE;
 /*!40000 ALTER TABLE `relationship` DISABLE KEYS */;
+INSERT INTO `relationship` VALUES (3,'Brother'),(1,'Father'),(2,'Mother'),(4,'Sister');
 /*!40000 ALTER TABLE `relationship` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `samlpelab`
+-- Table structure for table `releasedto`
 --
 
-DROP TABLE IF EXISTS `samlpelab`;
+DROP TABLE IF EXISTS `releasedto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `samlpelab` (
-  `name` varchar(45) NOT NULL,
-  `contactNumber` varchar(45) NOT NULL,
-  `Organization_idOrganization` int(11) NOT NULL,
-  PRIMARY KEY (`Organization_idOrganization`),
-  KEY `fk_SamlpeLab_Organization1_idx` (`Organization_idOrganization`),
-  CONSTRAINT `fk_SamlpeLab_Organization1` FOREIGN KEY (`Organization_idOrganization`) REFERENCES `organization` (`idOrganization`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `releasedto` (
+  `idReleasedTo` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idReleasedTo`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `samlpelab`
+-- Dumping data for table `releasedto`
 --
 
-LOCK TABLES `samlpelab` WRITE;
-/*!40000 ALTER TABLE `samlpelab` DISABLE KEYS */;
-/*!40000 ALTER TABLE `samlpelab` ENABLE KEYS */;
+LOCK TABLES `releasedto` WRITE;
+/*!40000 ALTER TABLE `releasedto` DISABLE KEYS */;
+INSERT INTO `releasedto` VALUES (1,'Kin'),(2,'University');
+/*!40000 ALTER TABLE `releasedto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `releasedtype`
+--
+
+DROP TABLE IF EXISTS `releasedtype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `releasedtype` (
+  `idReleasedType` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idReleasedType`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `releasedtype`
+--
+
+LOCK TABLES `releasedtype` WRITE;
+/*!40000 ALTER TABLE `releasedtype` DISABLE KEYS */;
+INSERT INTO `releasedtype` VALUES (1,'Pauper'),(2,'Research');
+/*!40000 ALTER TABLE `releasedtype` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1443,6 +1435,32 @@ LOCK TABLES `sample` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `samplelab`
+--
+
+DROP TABLE IF EXISTS `samplelab`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `samplelab` (
+  `name` varchar(45) NOT NULL,
+  `contactNumber` varchar(45) NOT NULL,
+  `Organization_idOrganization` int(11) NOT NULL,
+  PRIMARY KEY (`Organization_idOrganization`),
+  UNIQUE KEY `name_UNIQUE` (`name`),
+  KEY `fk_SamlpeLab_Organization1_idx` (`Organization_idOrganization`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `samplelab`
+--
+
+LOCK TABLES `samplelab` WRITE;
+/*!40000 ALTER TABLE `samplelab` DISABLE KEYS */;
+/*!40000 ALTER TABLE `samplelab` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `scenetype`
 --
 
@@ -1452,8 +1470,9 @@ DROP TABLE IF EXISTS `scenetype`;
 CREATE TABLE `scenetype` (
   `idSceneType` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) NOT NULL,
-  PRIMARY KEY (`idSceneType`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idSceneType`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1462,6 +1481,7 @@ CREATE TABLE `scenetype` (
 
 LOCK TABLES `scenetype` WRITE;
 /*!40000 ALTER TABLE `scenetype` DISABLE KEYS */;
+INSERT INTO `scenetype` VALUES (1,'Scene 1'),(2,'Scene 2');
 /*!40000 ALTER TABLE `scenetype` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1475,8 +1495,9 @@ DROP TABLE IF EXISTS `seal`;
 CREATE TABLE `seal` (
   `idSeal` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idSeal`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idSeal`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1485,7 +1506,6 @@ CREATE TABLE `seal` (
 
 LOCK TABLES `seal` WRITE;
 /*!40000 ALTER TABLE `seal` DISABLE KEYS */;
-INSERT INTO `seal` VALUES (1,'9'),(2,'8'),(3,'7'),(4,'6'),(5,'5');
 /*!40000 ALTER TABLE `seal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1499,8 +1519,9 @@ DROP TABLE IF EXISTS `specialcircumstance`;
 CREATE TABLE `specialcircumstance` (
   `idSpecialCircumstance` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idSpecialCircumstance`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idSpecialCircumstance`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1509,7 +1530,7 @@ CREATE TABLE `specialcircumstance` (
 
 LOCK TABLES `specialcircumstance` WRITE;
 /*!40000 ALTER TABLE `specialcircumstance` DISABLE KEYS */;
-INSERT INTO `specialcircumstance` VALUES (1,'vip');
+INSERT INTO `specialcircumstance` VALUES (1,'Aviation Accindent'),(2,'None');
 /*!40000 ALTER TABLE `specialcircumstance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1522,7 +1543,8 @@ DROP TABLE IF EXISTS `vehicle`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vehicle` (
   `registrationNumber` varchar(11) NOT NULL,
-  PRIMARY KEY (`registrationNumber`)
+  PRIMARY KEY (`registrationNumber`),
+  UNIQUE KEY `registrationNumber_UNIQUE` (`registrationNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1532,6 +1554,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
+INSERT INTO `vehicle` VALUES ('ABC123GP'),('EFG456GP');
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1548,11 +1571,10 @@ CREATE TABLE `vehicledispatch` (
   `Vehicle_registrationNumber` varchar(11) NOT NULL,
   `idVehicleDispatch` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idVehicleDispatch`),
+  UNIQUE KEY `Vehicle_registrationNumber_UNIQUE` (`Vehicle_registrationNumber`),
   KEY `fk_VehicleDispatch_Incident1_idx` (`Incident_incidentLogNumber`),
-  KEY `fk_VehicleDispatch_Vehicle1_idx` (`Vehicle_registrationNumber`),
-  CONSTRAINT `fk_VehicleDispatch_Incident1` FOREIGN KEY (`Incident_incidentLogNumber`) REFERENCES `incident` (`incidentLogNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_VehicleDispatch_Vehicle1` FOREIGN KEY (`Vehicle_registrationNumber`) REFERENCES `vehicle` (`registrationNumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_VehicleDispatch_Vehicle1_idx` (`Vehicle_registrationNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1561,6 +1583,7 @@ CREATE TABLE `vehicledispatch` (
 
 LOCK TABLES `vehicledispatch` WRITE;
 /*!40000 ALTER TABLE `vehicledispatch` DISABLE KEYS */;
+INSERT INTO `vehicledispatch` VALUES ('00120130607','2013-06-07 08:46:04','ABC123GP',1);
 /*!40000 ALTER TABLE `vehicledispatch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1574,7 +1597,8 @@ DROP TABLE IF EXISTS `vehiclerecord`;
 CREATE TABLE `vehiclerecord` (
   `idVehicle` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
-  PRIMARY KEY (`idVehicle`)
+  PRIMARY KEY (`idVehicle`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1588,8 +1612,2074 @@ LOCK TABLES `vehiclerecord` WRITE;
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'mydb'
+-- Dumping routines for database 'mydb_dump_staging'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `CALL_Procedures` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CALL_Procedures`(OUT ex INT, OUT msg VARCHAR(45))
+BEGIN
+/*
+This procedure extract data from mydb database. 
+It acheives that my calling extract_* procedures which copy data from 
+the main database and store it in appropriate tables. 
+
+*/
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET ex = -2; END;
+	SET ex = 0; SET msg = 'Call Procedures Are Successful';
+
+	CALL `mydb_dump_staging`.`Truncate_tables`(msg);
+
+	CALL `mydb_dump_staging`.`Extract_atscene`(msg);
+	CALL `mydb_dump_staging`.`Extract_analysis`(msg);
+	CALL `mydb_dump_staging`.`Extract_atmortuary`(msg);
+	CALL `mydb_dump_staging`.`Extract_audittrail`(msg);
+	CALL `mydb_dump_staging`.`Extract_body`(msg);
+	CALL `mydb_dump_staging`.`Extract_bodyaddress`(msg);
+	CALL `mydb_dump_staging`.`Extract_bodyfile`(msg);
+	CALL `mydb_dump_staging`.`Extract_bodylink`(msg);
+	CALL `mydb_dump_staging`.`Extract_bodypart`(msg);
+	CALL `mydb_dump_staging`.`Extract_bodyreleaseplace`(msg);
+	CALL `mydb_dump_staging`.`Extract_bodyreleasestatus`(msg);
+	CALL `mydb_dump_staging`.`Extract_bodystatus`(msg);
+	CALL `mydb_dump_staging`.`Extract_bodystorage`(msg);
+	CALL `mydb_dump_staging`.`Extract_deathCall`(msg);
+	CALL `mydb_dump_staging`.`Extract_dutyroster`(msg);
+	CALL `mydb_dump_staging`.`Extract_driver`(msg);
+	CALL `mydb_dump_staging`.`Extract_employee`(msg);
+	CALL `mydb_dump_staging`.`Extract_externalcircumstance`(msg);
+	CALL `mydb_dump_staging`.`Extract_forensicsample`(msg);
+	CALL `mydb_dump_staging`.`Extract_gender`(msg);
+	CALL `mydb_dump_staging`.`Extract_hospital`(msg);
+	CALL `mydb_dump_staging`.`Extract_icd10level1`(msg);
+	CALL `mydb_dump_staging`.`Extract_icd10level2`(msg);
+	CALL `mydb_dump_staging`.`Extract_icd10level3`(msg);
+	CALL `mydb_dump_staging`.`Extract_icd10level4`(msg);
+	CALL `mydb_dump_staging`.`Extract_incident`(msg);
+	CALL `mydb_dump_staging`.`Extract_incidentmessage`(msg);
+	CALL `mydb_dump_staging`.`Extract_informantproperty`(msg);
+	CALL `mydb_dump_staging`.`Extract_institution`(msg);
+	CALL `mydb_dump_staging`.`Extract_kin`(msg);
+	CALL `mydb_dump_staging`.`Extract_labrecord`(msg);
+	CALL `mydb_dump_staging`.`Extract_mannerofdeath`(msg);
+	CALL `mydb_dump_staging`.`Extract_maritalstatus`(msg);
+	CALL `mydb_dump_staging`.`Extract_member`(msg);
+	CALL `mydb_dump_staging`.`Extract_occupation`(msg);
+	CALL `mydb_dump_staging`.`Extract_organization`(msg);
+	CALL `mydb_dump_staging`.`Extract_organizationtype`(msg);
+	CALL `mydb_dump_staging`.`Extract_pathologyunit`(msg);
+	CALL `mydb_dump_staging`.`Extract_postmortem`(msg);
+	CALL `mydb_dump_staging`.`Extract_policestation`(msg);
+	CALL `mydb_dump_staging`.`Extract_property`(msg);
+	CALL `mydb_dump_staging`.`Extract_propertytype`(msg);
+	CALL `mydb_dump_staging`.`Extract_province`(msg);
+	CALL `mydb_dump_staging`.`Extract_race`(msg);
+	CALL `mydb_dump_staging`.`Extract_rank`(msg);
+	CALL `mydb_dump_staging`.`Extract_recipient`(msg);
+	CALL `mydb_dump_staging`.`Extract_region`(msg);
+	CALL `mydb_dump_staging`.`Extract_relationship`(msg);
+	CALL `mydb_dump_staging`.`Extract_releasedto`(msg);
+	CALL `mydb_dump_staging`.`Extract_releasedtype`(msg);
+	CALL `mydb_dump_staging`.`Extract_samplelab`(msg);
+	CALL `mydb_dump_staging`.`Extract_sample`(msg);
+	CALL `mydb_dump_staging`.`Extract_scenetype`(msg);
+	CALL `mydb_dump_staging`.`Extract_seal`(msg);
+	CALL `mydb_dump_staging`.`Extract_specialcircumstance`(msg);
+	CALL `mydb_dump_staging`.`Extract_vehicle`(msg);
+	CALL `mydb_dump_staging`.`Extract_vehicledispatch`(msg);
+	CALL `mydb_dump_staging`.`Extract_vehiclerecord`(msg);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_analysis` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_analysis`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_analysis'; END;
+	SET  msg = '';
+
+
+
+INSERT INTO `mydb_dump_staging`.`analysis`
+(`idAnalysis`,
+`type`)
+SELECT *
+		FROM mydb.analysis;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_atmortuary` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_atmortuary`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_atmortuary'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`atmortuary`
+(`bodyReceivedFromPerNumber`,
+`bodyHandOverFromPerNumber`,
+`Body_idDeathRegisterNumber`,
+`idAtMortuary`)
+SELECT *
+		FROM mydb.atmortuary;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_atscene` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_atscene`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_atscene'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`atscene`
+(`sceneIncidentOccured`,
+`sceneDateTime`,
+`pathOnScene`,
+`allegedInjuryDateTime`,
+`allegedDeathDateTime`,
+`externalCircumstanceOfInjury`,
+`placeOfDeath`,
+`dateTimeBodyFound`,
+`Body_idDeathRegisterNumber`,
+`idAtScene`)
+SELECT *
+		FROM mydb.atscene;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_audittrail` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_audittrail`(OUT msg VARCHAR(45))
+BEGIN
+
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_audittrail'; END;
+	SET msg = '';
+
+
+INSERT INTO `mydb_dump_staging`.`audittrail`
+(`idAuditTrail`,
+`date`,
+`time`,
+`eventType`,
+`eventMessage`,
+`currentUser`,
+`eventLocation`)
+SELECT *
+		FROM mydb.audittrail;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_body` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_body`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_body'; END;
+	SET  msg = '';
+
+INSERT INTO `mydb_dump_staging`.`body`
+(`idDeathRegisterNumber`,
+`gender`,
+`race`,
+`assignedTo`,
+`nameOfDeceased`,
+`surnameOfDeceased`,
+`placeOfBirth`,
+`dateOfBirth`,
+`ageOnDateFound`,
+`maritalStatus`,
+`occupation`,
+`citizen`,
+`maidenName`,
+`identifiedDateTime`,
+`estimatedAgeYear`,
+`estimatedAgeMonth`,
+`ID`,
+`passport`,
+`bodyStatus`,
+`dateBodyReceived`,
+`bodyReleased`,
+`Incident_incidentLogNumber`,
+`bodyType`,
+		`dateBodyReleased`,
+		`bodyReleasedTo`,
+		`bodyReleaseType`)
+	SELECT * FROM `mydb`.`body`;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_bodyaddress` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyaddress`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodyaddress'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`bodyaddress`
+(`building`,
+`street`,
+`suburb`,
+`city`,
+`postalCode`,
+`province`,
+`region`,
+`magisterialDistrict`,
+`Body_idDeathRegisterNumber`,
+`idBodyAddress`)
+SELECT *
+		FROM mydb.bodyaddress;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_bodyfile` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyfile`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodyfile'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`bodyfile`
+(`dateFileOpened`,
+`bodyFileStatus`,
+`Body_idDeathRegisterNumber`,
+`allSamplesReceived`,
+`bodyIdentified`,
+`postMortemComplete`,
+`idBodyFile`,
+`dateFileClosed`)
+SELECT *
+		FROM mydb.bodyfile;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_bodylink` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodylink`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodylink'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`bodylink`
+(`idBodyLink`,
+`BodyFile_Body_idDeathRegisterNumber1`)
+SELECT *
+		FROM mydb.bodylink;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_bodypart` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodypart`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodypart'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`bodypart`
+(`idBodyPart`,
+`type`)
+SELECT *
+		FROM mydb.bodypart;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_bodyreleaseplace` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyreleaseplace`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodyreleaseplace'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`bodyreleaseplace`
+(`idBodyReleasePlace`,
+`type`)
+SELECT *
+		FROM mydb.bodyreleaseplace;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_bodyreleasestatus` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodyreleasestatus`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodyreleasestatus'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`bodyreleasestatus`
+(`idBodyReleaseStatus`,
+`type`)
+SELECT *
+		FROM mydb.bodyreleasestatus;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_bodystatus` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodystatus`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodystatus'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`bodystatus`
+(`idBodyStatus`, `state`)
+SELECT *
+		FROM `mydb`.`bodystatus`;
+
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_bodystorage` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_bodystorage`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_bodystorage'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`bodystorage`
+(`idBodyStorage`,
+`numberOfBins`,
+`nameOfMortuary`)
+SELECT * FROM mydb.bodystorage;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_deathcall` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_deathcall`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_deathcall'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`deathcall`
+(`Incident_incidentLogNumber`,
+`timeOfCall`,
+`dateOfCall`,
+`numberOfCaller`,
+`institution`,
+`sceneAddress`,
+`province`,
+`region`,
+`sceneConditions`,
+`nameOfCaller`)
+SELECT *
+		FROM mydb.deathcall;
+
+
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_driver` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_driver`(OUT msg VARCHAR(45))
+BEGIN
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_driver'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`driver`
+(`idDriver`,
+`name`,
+`surname`)
+select * from mydb.driver;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_dutyroster` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_dutyroster`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_dutyroster'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`dutyroster`
+(`idDutyRoster`,
+`startTime`,
+`endTime`,
+`role`,
+`Employee_password`,
+`Employee_personnelNumber`)
+SELECT *
+		FROM mydb.dutyroster;
+
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_employee` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_employee`(OUT msg VARCHAR(45))
+BEGIN
+
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_employee'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`employee`
+(`password`,
+`personnelNumber`,
+`name`,
+`surname`,
+`rank`,
+`email`,
+`access`,
+`active`)
+
+SELECT *
+		FROM mydb.employee;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_externalcircumstance` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_externalcircumstance`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_externalcircumstance'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`externalcircumstance`
+(`idExternalCircumstance`,
+`type`)
+select * from mydb.externalcircumstance;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_forensicsample` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_forensicsample`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_forensicsample'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`forensicsample`
+(`sealNumber`,
+`deathRegisterNumber`,
+`reason`,
+`sealType`,
+`brokenSealNumber`,
+`typeOfAnalysis`,
+`institution`,
+`specialInstructions`,
+`received`,
+`labNumber`,
+`dateSent`,
+`dateReceived`)
+
+SELECT *
+		FROM mydb.forensicsample;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_gender` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_gender`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_gender'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`gender`
+(`idGender`,
+`type`)
+SELECT *
+		FROM mydb.gender;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_hospital` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_hospital`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_hospital'; END;
+	SET msg = '';
+INSERT INTO `mydb_dump_staging`.`hospital`
+(`name`,
+`contactNumber`,
+`Organization_idOrganization`)
+select * from mydb.hospital;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_ICD10level1` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_ICD10level1`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_ICD10level1'; END;
+
+	INSERT INTO `mydb_dump_staging`.`icdlevel1`
+		(`chapter`,
+		`description`)
+	SELECT * FROM `mydb`.`icdlevel1`;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_ICD10level2` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_ICD10level2`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_ICD10level2'; END;
+
+	INSERT INTO `mydb_dump_staging`.`icdlevel2`
+		(`level2_id`,
+		`diag1_Id`,
+		`description`,
+		`ICDLevel1_chapter`)
+	SELECT * FROM `mydb`.`icdlevel2`;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_ICD10level3` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_ICD10level3`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_ICD10level3'; END;
+
+
+	INSERT INTO `mydb_dump_staging`.`icdlevel3`
+		(`icd_level3_id`,
+		`diag1_Id`,
+		`diag2_Id`,
+		`description`)
+	SELECT * FROM `mydb`.`icdlevel3`;
+
+
+
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_ICD10level4` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_ICD10level4`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_ICD10level4'; END;
+
+	INSERT INTO `mydb_dump_staging`.`icdlevel4`
+		(`icdlevel4_Id`,
+		`diag3_Id`,
+		`description`,
+		`ICDLevel3_dia2Id`)
+	SELECT * FROM `mydb`.`icdlevel4`;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_incident` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_incident`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_incident'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`incident`
+(`incidentLogNumber`,
+`referenceNumber`,
+`numberOfBodies`,
+`dateOfIncident`,
+`timeOfIncident`,
+`circumstanceOfDeath`,
+`specialCircumstances`,
+`status`,
+`reason`,
+`bodyCount`,
+`placeBodyFound`,
+`dateIncidentClosed`)
+
+SELECT *
+		FROM mydb.incident;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_incidentmessage` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_incidentmessage`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_incidentmessage'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`incidentmessage`
+(`date`,
+`time`,
+`mannerOfDeath`,
+`nameOfDeceased`,
+`vip`,
+`bodyFileStatus`,
+`Incident_incidentLogNumber`,
+`idIncidentMessage`)
+
+SELECT *
+		FROM mydb.incidentmessage;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_InformantProperty` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_InformantProperty`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_InformantProperty'; END;
+
+	INSERT INTO `mydb_dump_staging`.`informantproperty`
+		(`idInformant`,
+		`name`,
+		`surname`,
+		`address`,
+		`propertyDescription`,
+		`cash`,
+		`otherGoods`,
+		`witness1_name`,
+		`witness1_surname`,
+		`witness2_name`,
+		`witness2_surname`,
+		`Body_idDeathRegisterNumber`)
+	SELECT * FROM `mydb`.`informantproperty`;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_institution` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_institution`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_institution'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`institution`
+(`idInstitution`,
+`type`)
+
+SELECT *
+		FROM mydb.institution;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_kin` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_kin`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_kin'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`kin`
+(`passport`,
+`name`,
+`surname`,
+`relationWithDeceased`,
+`contactNumber`,
+`address`,
+`workAddress`,
+`ID`,
+`Body_idDeathRegisterNumber`,
+`idKin`)
+
+SELECT *
+		FROM mydb.kin;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_labrecord` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_labrecord`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_labrecord'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`labrecord`
+(`receivedAllSamples`,
+`labNumber`,
+`idLabRecord`,
+`numberOfSamples`,
+`sampleCounter`)
+
+SELECT *
+		FROM mydb.labrecord;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_mannerofdeath` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_mannerofdeath`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_mannerofdeath'; END;
+	SET msg = '';
+
+
+INSERT INTO `mydb_dump_staging`.`mannerofdeath`
+(`idMannerOfDeath`,
+`type`)
+SELECT *
+		FROM mydb.mannerofdeath;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_maritalstatus` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_maritalstatus`(OUT msg VARCHAR(45))
+BEGIN
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_maritalstatus'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`maritalstatus`
+(`idMartalStatus`,
+`type`)
+SELECT *
+		FROM mydb.maritalstatus;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_member` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_member`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_member'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`member`
+(`name`,
+`surname`,
+`rank`,
+`personnelNumber`,
+`organization`,
+`contactNumber`,
+`AtScene_Body_idDeathRegisterNumber`,
+`idMember`)
+SELECT *
+		FROM mydb.member;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_occupation` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_occupation`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_occupation'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`occupation`
+(`idOccupation`,
+`type`)
+SELECT *
+		FROM mydb.occupation;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_organization` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_organization`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_organization'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`organization`
+(`idOrganization`,
+`name`,
+`contactNumber`,
+`OrganizationType_type`)
+SELECT *
+		FROM mydb.organization;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_organizationtype` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_organizationtype`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_organizationtype'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`organizationtype`
+(`type`)
+SELECT *
+		FROM mydb.organizationtype;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_pathologyunit` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_pathologyunit`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_pathologyunit'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`pathologyunit`
+(`name`,
+`contactNumber`,
+`Organization_idOrganization`)
+Select * from mydb.pathologyunit;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_policestation` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_policestation`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_policestation'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`policestation`
+(`name`,
+`contactNumber`,
+`Organization_idOrganization`)
+
+Select * from mydb.policestation;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_postmortem` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_postmortem`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_postmortem'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`postmortem`
+(`labNumber`,
+`icd10`,
+`chiefFind`,
+`causeOfDeath`,
+`status`,
+`approved`,
+`DHA1663number`,
+`Body_idDeathRegisterNumber`,
+`reason`)
+SELECT *
+		FROM mydb.postmortem;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_property` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_property`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_property'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`property`
+(`sealNumber`,
+`description`,
+`date`,
+`type`,
+`sealType`,
+`takenBy`,
+`witness1_name`,
+`witness1_surname`,
+`witness2_name`,
+`witness2_surname`,
+`SAPS_name`,
+`SAPS_surname`,
+`SAPS_taken`,
+`Body_idDeathRegisterNumber`,
+`released`)
+SELECT *
+		FROM `mydb`.`property`;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_propertytype` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_propertytype`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_scenetype'; END;
+	SET msg = '';
+INSERT INTO `mydb_dump_staging`.`propertytype`
+(`idPropertyType`,
+`type`)
+SELECT * FROM mydb.propertytype;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_province` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_province`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_province'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`province`
+(`idProvince`,
+`type`)
+SELECT *
+		FROM mydb.province;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_race` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_race`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_race'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`race`
+(`idRace`,
+`type`)
+SELECT *
+		FROM mydb.race;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_rank` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_rank`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_rank'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`rank`
+(`idRank`,
+`type`)
+SELECT *
+		FROM mydb.rank;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_Recipient` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_Recipient`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_Recipient'; END;
+
+	INSERT INTO `mydb_dump_staging`.`recipient`
+		(`idRecipient`,
+		`name`,
+		`surname`,
+		`ID`,
+		`idType`,
+		`address`,
+		`contactNumber`,
+		`Body_idDeathRegisterNumber`)
+	SELECT * FROM `mydb`.`recipient`;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_region` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_region`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_region'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`region`
+(`idRegion`,
+`type`)
+SELECT *
+		FROM mydb.region;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_relationship` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_relationship`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_relationship'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`relationship`
+(`idRelationship`,
+`type`)
+SELECT *
+		FROM mydb.relationship;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_releasedto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_releasedto`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_releasedto'; END;
+	SET  msg = '';
+
+INSERT INTO `mydb_dump_staging`.`releasedto`
+(`idReleasedTo`,
+`type`)
+SELECT *
+		FROM mydb.releasedto;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_releasedtype` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_releasedtype`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_releasedtype'; END;
+	SET  msg = '';
+
+INSERT INTO `mydb_dump_staging`.`releasedtype`
+(`idReleasedType`,
+`type`)
+SELECT *
+		FROM mydb.releasedtype;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_sample` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_sample`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_sample'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`sample`
+(`idSample`,
+`type`)
+SELECT *
+		FROM mydb.sample;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_samplelab` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_samplelab`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_samplelab'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`samlpelab`
+(`name`,
+`contactNumber`,
+`Organization_idOrganization`)
+SELECT * FROM mydb.samlpelab;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_scenetype` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_scenetype`(OUT msg VARCHAR(45))
+BEGIN
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_scenetype'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`scenetype`
+(`idSceneType`,
+`type`)
+SELECT * FROM mydb.scenetype;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_seal` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_seal`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_seal'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`seal`
+(`idSeal`,
+`type`)
+SELECT *
+		FROM mydb.seal;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_specialcircumstance` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_specialcircumstance`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_specialcircumstance'; END;
+	SET msg = '';
+
+
+INSERT INTO `mydb_dump_staging`.`specialcircumstance`
+(`idSpecialCircumstance`,
+`type`)
+SELECT *
+		FROM mydb.specialcircumstance;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_vehicle` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_vehicle`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_vehicle'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`vehicle`
+(`registrationNumber`)
+SELECT *
+		FROM mydb.vehicle;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_vehicledispatch` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_vehicledispatch`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_vehicledispatch'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`vehicledispatch`
+(`Incident_incidentLogNumber`,
+`notificationDateTime`,
+`Vehicle_registrationNumber`,
+`idVehicleDispatch`)
+SELECT *
+		FROM mydb.vehicledispatch;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Extract_vehiclerecord` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Extract_vehiclerecord`(OUT msg VARCHAR(45))
+BEGIN
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Extract_vehiclerecord'; END;
+	SET msg = '';
+
+INSERT INTO `mydb_dump_staging`.`vehiclerecord`
+(`idVehicle`,
+`type`)
+SELECT * FROM mydb.vehiclerecord;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Truncate_tables` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Truncate_tables`(OUT msg VARCHAR(45))
+BEGIN
+DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN SET  msg = 'Error in Truncate_Tables'; END;
+	SET msg = '';
+	
+	TRUNCATE `mydb_dump_staging`.`analysis`;
+	TRUNCATE `mydb_dump_staging`.`atmortuary`;
+	TRUNCATE `mydb_dump_staging`.`atscene`;
+	TRUNCATE `mydb_dump_staging`.`audittrail`;
+	TRUNCATE `mydb_dump_staging`.`body`;
+	TRUNCATE `mydb_dump_staging`.`bodyaddress`;
+	TRUNCATE `mydb_dump_staging`.`bodyfile`;
+	TRUNCATE `mydb_dump_staging`.`bodylink`;
+	TRUNCATE `mydb_dump_staging`.`bodypart`;
+	TRUNCATE `mydb_dump_staging`.`bodyreleaseplace`;
+	TRUNCATE `mydb_dump_staging`.`bodyreleasestatus`;
+	TRUNCATE `mydb_dump_staging`.`bodystatus`;
+	TRUNCATE `mydb_dump_staging`.`bodystorage`;
+	TRUNCATE `mydb_dump_staging`.`deathcall`;
+	TRUNCATE `mydb_dump_staging`.`driver`;
+	TRUNCATE `mydb_dump_staging`.`dutyroster`;
+	TRUNCATE `mydb_dump_staging`.`employee`;
+	TRUNCATE `mydb_dump_staging`.`externalcircumstance`;
+	TRUNCATE `mydb_dump_staging`.`forensicsample`;
+	TRUNCATE `mydb_dump_staging`.`gender`;
+	TRUNCATE `mydb_dump_staging`.`hospital`;
+	TRUNCATE `mydb_dump_staging`.`icdlevel1`;
+	TRUNCATE `mydb_dump_staging`.`icdlevel2`;
+	TRUNCATE `mydb_dump_staging`.`icdlevel3`;
+	TRUNCATE `mydb_dump_staging`.`icdlevel4`;
+	TRUNCATE `mydb_dump_staging`.`incident`;
+	TRUNCATE `mydb_dump_staging`.`incidentmessage`;
+	TRUNCATE `mydb_dump_staging`.`informantproperty`;
+	TRUNCATE `mydb_dump_staging`.`institution`;
+	TRUNCATE `mydb_dump_staging`.`kin`;
+	TRUNCATE `mydb_dump_staging`.`labrecord`;
+	TRUNCATE `mydb_dump_staging`.`mannerofdeath`;
+	TRUNCATE `mydb_dump_staging`.`maritalstatus`;
+	TRUNCATE `mydb_dump_staging`.`member`;
+	TRUNCATE `mydb_dump_staging`.`occupation`;
+	TRUNCATE `mydb_dump_staging`.`organization`;
+	TRUNCATE `mydb_dump_staging`.`organizationtype`;
+	TRUNCATE `mydb_dump_staging`.`pathologyunit`;
+	TRUNCATE `mydb_dump_staging`.`policestation`;
+	TRUNCATE `mydb_dump_staging`.`postmortem`;
+	TRUNCATE `mydb_dump_staging`.`property`;
+	TRUNCATE `mydb_dump_staging`.`propertytype`;
+	TRUNCATE `mydb_dump_staging`.`province`;
+	TRUNCATE `mydb_dump_staging`.`race`;
+	TRUNCATE `mydb_dump_staging`.`rank`;
+	TRUNCATE `mydb_dump_staging`.`recipient`;
+	TRUNCATE `mydb_dump_staging`.`region`;
+	TRUNCATE `mydb_dump_staging`.`relationship`;
+	TRUNCATE `mydb_dump_staging`.`releasedto`;
+	TRUNCATE `mydb_dump_staging`.`releasedtype`;
+	TRUNCATE `mydb_dump_staging`.`sample`;
+	TRUNCATE `mydb_dump_staging`.`samplelab`;
+	TRUNCATE `mydb_dump_staging`.`scenetype`;
+	TRUNCATE `mydb_dump_staging`.`seal`;
+	TRUNCATE `mydb_dump_staging`.`specialcircumstance`;
+	TRUNCATE `mydb_dump_staging`.`vehicle`;
+	TRUNCATE `mydb_dump_staging`.`vehicledispatch`;
+	TRUNCATE `mydb_dump_staging`.`vehiclerecord`;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1600,4 +3690,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-06-05 10:18:00
+-- Dump completed on 2013-06-20  8:38:06
