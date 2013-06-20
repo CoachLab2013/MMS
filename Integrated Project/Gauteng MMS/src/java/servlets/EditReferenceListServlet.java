@@ -10,6 +10,8 @@ import database.DatabaseConnector;
 import database.DbDetail;
 import database.Employee;
 import database.EmployeeDb;
+import database.OrganisationType;
+import database.OrganisationTypeDB;
 import database.ReferenceListDb;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -605,6 +607,29 @@ public class EditReferenceListServlet extends HttpServlet {
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "releaseTo");
                 sess.setAttribute("releaseToResult", "Release-To type did not delete because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        }else if (request.getParameter("table").equals("organizationtype")) {
+             
+            OrganisationType OrgType = new OrganisationType(Olditem);
+            OrganisationTypeDB emp = new OrganisationTypeDB(OrgType, dbDetail);
+           // emp.init();
+            result = emp.edit(item);
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "organisationType");
+                sess.setAttribute("organisationTypeResult", "Organisation type has been successfuly edited  ");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "organisationType");
+                sess.setAttribute("organisationTypeResult", "Organisation type did not edit because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }

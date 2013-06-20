@@ -22,6 +22,7 @@ $(document).ready(function() {
 
             );
 
+ //Specifies the controls being validated in the specified form
 
 
     $('#AddUser').validate({
@@ -297,6 +298,53 @@ $(document).ready(function() {
         }
 
     });
+    
+      $('#AddOrganisationType').validate({
+        rules: {
+            txtOrganisationType: {
+                required: true
+               
+            }
+
+        }
+
+    });
+    
+      $('#AddOrganisation').validate({
+        rules: {
+            txtOrganisationName: {
+                required: true
+               
+            },
+               txtOrganisationContact: {
+                required: true,
+                minlength: 10,   
+                number: true
+               
+            }
+            
+
+        }
+
+    });
+    
+     $('#AddBodyStorage').validate({
+        rules: {
+            txtBodyStorageName: {
+                required: true
+               
+            },
+               txtBodyStorageSize: {
+                required: true,   
+                number: true
+               
+            }
+            
+
+        }
+
+    });
+    
    $('#AddBody').validate({
         rules: {
             
