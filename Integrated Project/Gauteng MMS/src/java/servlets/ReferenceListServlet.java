@@ -677,14 +677,86 @@ public class ReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "releaseTo");
-                sess.setAttribute("releaseToResult", "Seal type has been successfuly saved to database");
+                sess.setAttribute("releaseToResult", "Release-to type has been successfuly saved to database");
                 response.sendRedirect("Admin.jsp");
             } else {
                 //if save is not successful
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "releaseTo");
-                sess.setAttribute("releaseToResult", "Seal type did not save because " + result);
+                sess.setAttribute("releaseToResult", "Release-to type did not save because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        }else if (request.getParameter("form").equals("AddOrganisationType")) {
+            String type = request.getParameter("txtOrganisationType");
+            OrganisationType OrgType = new OrganisationType(type);
+            OrganisationTypeDB emp = new OrganisationTypeDB(OrgType, dbDetail);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "organisationType");
+                sess.setAttribute("organisationTypeResult", "Organisation type has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "organisationType");
+                sess.setAttribute("organisationTypeResult", "Organisation type did not save because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        }else if (request.getParameter("form").equals("AddOrganisation")) {
+            String name = request.getParameter("txtOrganisationName");
+            String contact = request.getParameter("txtOrganisationContact");
+            String type = request.getParameter("organisationTypeLst");
+            Organization Org = new Organization(name, contact, type);
+            OrganizationDb emp = new OrganizationDb(Org, dbDetail);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "organisation");
+                sess.setAttribute("organisationResult", "Organisation has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "organisation");
+                sess.setAttribute("organisationResult", "Organisation did not save because " + result);
+                response.sendRedirect("Admin.jsp");
+
+            }
+
+        }else if (request.getParameter("form").equals("AddBodyStorage")) {
+            String nane = request.getParameter("txtBodyStorageName");
+            Integer size =  Integer.parseInt(request.getParameter("txtBodyStorageSize").trim());
+            BodyStorage bs = new BodyStorage(size, nane);
+            BodyStorageDb emp = new BodyStorageDb(dbDetail, bs);
+            emp.init();
+            result = emp.add().trim();
+            //if save is successful, return a message to page
+            if (result.equals("successful")) {
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "bodyStorage");
+                sess.setAttribute("bodyStorageResult", "Body Storage has been successfuly saved to database");
+                response.sendRedirect("Admin.jsp");
+            } else {
+                //if save is not successful
+                HttpSession sess = request.getSession();
+                sess.setAttribute("main", "ref");
+                sess.setAttribute("tab", "bodyStorage");
+                sess.setAttribute("bodyStorageResult", "Body Storage did not save because " + result);
                 response.sendRedirect("Admin.jsp");
 
             }

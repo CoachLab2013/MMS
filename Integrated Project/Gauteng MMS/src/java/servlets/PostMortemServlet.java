@@ -44,6 +44,7 @@ System.err.println("DR Number: " +  request.getSession().getAttribute("death_reg
             body.setDeathRegisterNumber(request.getSession().getAttribute("death_register_number").toString());
 
             PostMortem postmortem = new PostMortem(
+                    "",
                 request.getParameter("ICDlevel1").split(" ")[0] + " " + request.getParameter("ICDlevel2").split(" ")[0] + " " + request.getParameter("ICDlevel3").split(" ")[0] + " " + request.getParameter("ICDlevel4").split(" ")[0],
                 request.getParameter("findingsmortem"), //
                 request.getParameter("findingsdeath"), //

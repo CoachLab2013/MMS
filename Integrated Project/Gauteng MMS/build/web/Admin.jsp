@@ -11,6 +11,12 @@
 <%@page import="database.EmployeeDb"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="database.Employee"%>
+<%@page import="database.OrganisationType"%>
+<%@page import="database.OrganisationTypeDB"%>
+<%@page import="database.Organization"%>
+<%@page import="database.OrganizationDb"%>
+<%@page import="database.BodyStorage"%>
+<%@page import="database.BodyStorageDb"%>
 <%@page import="database.DbDetail"%>
 <%@page import="database.ReferenceListDb"%>
 
@@ -86,6 +92,9 @@
             String sceneResult = "";
             String releaseTypeResult = "";
             String releaseToResult = "";
+            String organisationTypeResult = "";
+            String organisationResult = "";
+            String bodyStorageResult = "";
 
             //Vriables to determine which tab to open when coming from servlets
             String main1 = "";
@@ -114,104 +123,148 @@
             String releaseTo = "";
             String scene = "";
             String releaseType = "";
+            String organisationType = "";
+            String organisation = "";
+            String bodyStorage = "";
 
             //checks which tab to open, set the above variables to active if that tab must be open
-            try{
-            
-            if (session.getAttribute("main").equals("user")) {
-                main1 = "active";
-                if (null != session.getAttribute("result")) {
-                    userResult = session.getAttribute("result").toString();
-                }
-                if (session.getAttribute("tab").toString().equals("Adduser")) {
-                    addUserTab = "active";
+            try {
+
+                if (session.getAttribute("main").equals("user")) {
+                    main1 = "active";
+                    if (null != session.getAttribute("result")) {
+                        userResult = session.getAttribute("result").toString();
+                    }
+                    if (session.getAttribute("tab").toString().equals("Adduser")) {
+                        addUserTab = "active";
+
+                    } else {
+                        currentUserTab = "active";
+                    }
+                } else if (session.getAttribute("main").equals("ref")) {
+
+                    main2 = "active";
+
+                    if (session.getAttribute("tab").equals("insti")) {
+                        inst = "active";
+                        instiResult = session.getAttribute("insti").toString();
+
+                    } else if (session.getAttribute("tab").equals("analysis")) {
+                        analysis = "active";
+                        analysisResult = session.getAttribute("analysisResult").toString();
+
+                    } else if (session.getAttribute("tab").equals("property")) {
+                        propertyResult = session.getAttribute("propertyResult").toString();
+                        property = "active";
+                    } else if (session.getAttribute("tab").equals("vehi")) {
+                        vehicleResult = session.getAttribute("vehicleResult").toString();
+                        vehi = "active";
+                    } else if (session.getAttribute("tab").equals("rank")) {
+                        rankResult = session.getAttribute("rankResult").toString();
+                        rank = "active";
+                    } else if (session.getAttribute("tab").equals("gender")) {
+                        genderResult = session.getAttribute("genderResult").toString();
+                        gender = "active";
+                    } else if (session.getAttribute("tab").equals("occu")) {
+                        occupationResult = session.getAttribute("occupationResult").toString();
+                        occu = "active";
+                    } else if (session.getAttribute("tab").equals("race")) {
+                        raceResult = session.getAttribute("raceResult").toString();
+                        race = "active";
+                    } else if (session.getAttribute("tab").equals("marital")) {
+                        maritalResult = session.getAttribute("maritalResult").toString();
+                        marital = "active";
+                    } else if (session.getAttribute("tab").equals("province")) {
+                        provinceResult = session.getAttribute("provinceResult").toString();
+                        province = "active";
+
+                    } else if (session.getAttribute("tab").equals("region")) {
+                        regionResult = session.getAttribute("regionResult").toString();
+                        region = "active";
+
+                    } else if (session.getAttribute("tab").equals("manner")) {
+                        mannerResult = session.getAttribute("mannerResult").toString();
+                        manner = "active";
+                    } else if (session.getAttribute("tab").equals("sample")) {
+
+                        sampleResult = session.getAttribute("sampleResult").toString();
+                        sample = "active";
+
+                    } else if (session.getAttribute("tab").equals("status")) {
+                        statusResult = session.getAttribute("statusResult").toString();
+                        status = "active";
+                    } else if (session.getAttribute("tab").equals("relationship")) {
+                        relationshipResult = session.getAttribute("relationshipResult").toString();
+                        relationship = "active";
+                    } else if (session.getAttribute("tab").equals("bodyPart")) {
+                        bodyPart = "active";
+                        bodyPartResult = session.getAttribute("bodyPartResult").toString();
+                    } else if (session.getAttribute("tab").equals("specialCur")) {
+                        specialCur = "active";
+                        specialCurResult = session.getAttribute("specialCurResult").toString();
+                    } else if (session.getAttribute("tab").equals("Adduser")) {
+                        addUserTab = "active";
+                        userResult = session.getAttribute("relationshipResult").toString();
+                    } else if (session.getAttribute("tab").equals("exCause")) {
+                        exCause = "active";
+                        exCauseResult = session.getAttribute("externalCauseResults").toString();
+                    } else if (session.getAttribute("tab").equals("seal")) {
+                        slType = "active";
+                        slTypeResult = session.getAttribute("sealTypeResults").toString();
+                    } else if (session.getAttribute("tab").equals("scene")) {
+                        scene = "active";
+                        sceneResult = session.getAttribute("sceneResult").toString();
+                    } else if (session.getAttribute("tab").equals("releaseType")) {
+                        releaseType = "active";
+                        releaseTypeResult = session.getAttribute("releaseTypeResult").toString();
+                    } else if (session.getAttribute("tab").equals("releaseTo")) {
+                        releaseTo = "active";
+                        releaseToResult = session.getAttribute("releaseToResult").toString();
+                    } else if (session.getAttribute("tab").equals("organisationType")) {
+                        organisationType = "active";
+                        organisationTypeResult = session.getAttribute("organisationTypeResult").toString();
+                    } else if (session.getAttribute("tab").equals("organisation")) {
+                        organisation = "active";
+                        organisationResult = session.getAttribute("organisationResult").toString();
+                    } else if (session.getAttribute("tab").equals("bodyStorage")) {
+                        bodyStorage = "active";
+                        bodyStorageResult = session.getAttribute("bodyStorageResult").toString();
+                    }
+
 
                 } else {
+                    main1 = "active";
+                    addUserTab = "";
                     currentUserTab = "active";
-                }
-            } else if (session.getAttribute("main").equals("ref")) {
-
-                main2 = "active";
-
-                if (session.getAttribute("tab").equals("insti")) {
-                    inst = "active";
-                    instiResult = session.getAttribute("insti").toString();
-
-                } else if (session.getAttribute("tab").equals("analysis")) {
-                    analysis = "active";
-                    analysisResult = session.getAttribute("analysisResult").toString();
-
-                } else if (session.getAttribute("tab").equals("property")) {
-                    propertyResult = session.getAttribute("propertyResult").toString();
-                    property = "active";
-                } else if (session.getAttribute("tab").equals("vehi")) {
-                    vehicleResult = session.getAttribute("vehicleResult").toString();
-                    vehi = "active";
-                } else if (session.getAttribute("tab").equals("rank")) {
-                    rankResult = session.getAttribute("rankResult").toString();
-                    rank = "active";
-                } else if (session.getAttribute("tab").equals("gender")) {
-                    genderResult = session.getAttribute("genderResult").toString();
-                    gender = "active";
-                } else if (session.getAttribute("tab").equals("occu")) {
-                    occupationResult = session.getAttribute("occupationResult").toString();
-                    occu = "active";
-                } else if (session.getAttribute("tab").equals("race")) {
-                    raceResult = session.getAttribute("raceResult").toString();
-                    race = "active";
-                } else if (session.getAttribute("tab").equals("marital")) {
-                    maritalResult = session.getAttribute("maritalResult").toString();
-                    marital = "active";
-                } else if (session.getAttribute("tab").equals("province")) {
-                    provinceResult = session.getAttribute("provinceResult").toString();
-                    province = "active";
-
-                } else if (session.getAttribute("tab").equals("region")) {
-                    regionResult = session.getAttribute("regionResult").toString();
-                    region = "active";
-
-                } else if (session.getAttribute("tab").equals("manner")) {
-                    mannerResult = session.getAttribute("mannerResult").toString();
-                    manner = "active";
-                } else if (session.getAttribute("tab").equals("sample")) {
-
-                    sampleResult = session.getAttribute("sampleResult").toString();
-                    sample = "active";
-
-                } else if (session.getAttribute("tab").equals("status")) {
-                    statusResult = session.getAttribute("statusResult").toString();
-                    status = "active";
-                } else if (session.getAttribute("tab").equals("relationship")) {
-                    relationshipResult = session.getAttribute("relationshipResult").toString();
-                    relationship = "active";
-                } else if (session.getAttribute("tab").equals("bodyPart")) {
-                    bodyPart = "active";
-                    bodyPartResult = session.getAttribute("bodyPartResult").toString();
-                } else if (session.getAttribute("tab").equals("specialCur")) {
-                    specialCur = "active";
-                    specialCurResult = session.getAttribute("specialCurResult").toString();
-                } else if (session.getAttribute("tab").equals("Adduser")) {
-                    addUserTab = "active";
-                    userResult = session.getAttribute("relationshipResult").toString();
-                } else if (session.getAttribute("tab").equals("exCause")) {
-                    exCause = "active";
-                    exCauseResult = session.getAttribute("externalCauseResults").toString();
-                } else if (session.getAttribute("tab").equals("seal")) {
-                    slType = "active";
-                    slTypeResult = session.getAttribute("sealTypeResults").toString();
-                } else if (session.getAttribute("tab").equals("scene")) {
-                    scene = "active";
-                    sceneResult = session.getAttribute("sceneResult").toString();
-                } else if (session.getAttribute("tab").equals("releaseType")) {
-                    releaseType = "active";
-                    releaseTypeResult = session.getAttribute("releaseTypeResult").toString();
-                } else if (session.getAttribute("tab").equals("releaseTo")) {
-                    releaseTo = "active";
-                    releaseToResult = session.getAttribute("releaseToResult").toString();
+                    main2 = "";
+                    inst = "";
+                    analysis = "";
+                    relationship = "";
+                    bodyPart = "";
+                    status = "";
+                    sample = "";
+                    manner = "";
+                    province = "";
+                    region = "";
+                    marital = "";
+                    race = "";
+                    occu = "";
+                    gender = "";
+                    rank = "";
+                    vehi = "";
+                    property = "";
+                    specialCur = "";
+                    exCause = "";
+                    slType = "";
+                    releaseTo = "";
+                    scene = "";
+                    releaseType = "";
+                    organisationType = "";
+                    organisation = "";
+                    bodyStorage = "";
                 }
 
-
-            } else {
+            } catch (NullPointerException ex) {
                 main1 = "active";
                 addUserTab = "";
                 currentUserTab = "active";
@@ -238,36 +291,9 @@
                 releaseTo = "";
                 scene = "";
                 releaseType = "";
-
-            }
-            
-            }catch(NullPointerException ex){
-                main1 = "active";
-                addUserTab = "";
-                currentUserTab = "active";
-                main2 = "";
-                inst = "";
-                analysis = "";
-                relationship = "";
-                bodyPart = "";
-                status = "";
-                sample = "";
-                manner = "";
-                province = "";
-                region = "";
-                marital = "";
-                race = "";
-                occu = "";
-                gender = "";
-                rank = "";
-                vehi = "";
-                property = "";
-                specialCur = "";
-                exCause = "";
-                slType = "";
-                releaseTo = "";
-                scene = "";
-                releaseType = "";
+                organisationType = "";
+                organisation = "";
+                bodyStorage = "";
             }
 
             SetDbDetail dbset = new SetDbDetail();
@@ -277,7 +303,7 @@
             emplo.init();
             ArrayList<Employee> employeeList = emplo.employeeList();
 
-                              //Code to populate list boxes in tabs//
+            //Code to populate list boxes in tabs//
 
             //For institution list box
             ReferenceListDb emp = new ReferenceListDb("institution", "e", "type", "e", dbset.getDbdetail());
@@ -390,6 +416,22 @@
             emp = new ReferenceListDb("releasedto", "e", "type", "e", dbset.getDbdetail());
             emp.init();
             ArrayList<String> releasedToList = emp.referenceList();
+
+            //For Organisation Type list box
+            OrganisationTypeDB orgTypeDB = new OrganisationTypeDB(dbset.getDbdetail());
+            orgTypeDB.init();
+            ArrayList<OrganisationType> OrgTypeList = orgTypeDB.organizationTypeList();
+
+            //For Organisation   list box
+            OrganizationDb orgDB = new OrganizationDb(dbset.getDbdetail());
+            orgDB.init();
+            ArrayList<Organization> OrgList = orgDB.organizationList(OrgTypeList.get(0).getType().trim());
+
+            //For Body Storage   list box
+            BodyStorageDb bsDB = new BodyStorageDb(dbset.getDbdetail());
+            bsDB.init();
+            ArrayList<BodyStorage> bsList = bsDB.getBodyStorage();
+
         %>
 
 
@@ -418,28 +460,28 @@
                             <div id="cUser" class="tab-pane <%out.println(String.valueOf(currentUserTab));%>">  
                                 <legend>Users</legend>
                                 <%--  Current user content : Display users in a table--%>
-                                <table >
-                                    <tr>
-                                        <th width="150"><H4>Name</H4></th>
-                                    <th width="150"><H4>Surname</H4></th>
-                                    <th width="150"><H4>Persal number</H4></th>
-                                    <th width="150"><H4>Email Address <H4></th>
-                                            <th width="150"><H4>Active<H4></th>
-                                                    </tr>
+                                <table class= "tabledisplay">
+
+                                    <th  class="tableheading" width="150">Name</th>
+                                    <th  class="tableheading" width="150">Surname</th>
+                                    <th  class="tableheading" width="150">Persal number</th>
+                                    <th  class="tableheading" width="150">Email Address</th>
+                                            <th  class="tableheading" width="150">Active</th>
+
 
                                                     <%
                                                         for (int i = 0; i < employeeList.size(); i++) {
                                                     %>
-                                                    <TR>
+                                                    <TR class='tablerow'>
 
 
                                                     <input type="hidden" name="userPersonnel" value="<%= employeeList.get(i).getName().trim()%> ">
 
-                                                    <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getName().trim()%></a></TD>
-                                                    <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getSurname().trim()%></a></TD>
-                                                    <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getPersonnelNumber().trim()%></a></TD>
-                                                    <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getEmail().trim()%></a></TD>
-                                                    <TD><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).isActive()%></a></TD>
+                                                    <TD  class="tablecell"><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getName().trim()%></a></TD>
+                                                    <TD class="tablecell"><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getSurname().trim()%></a></TD>
+                                                    <TD class="tablecell"><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getPersonnelNumber().trim()%></a></TD>
+                                                    <TD class="tablecell"><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).getEmail().trim()%></a></TD>
+                                                    <TD class="tablecell"><a href=<%= "EditUser?Id=" + employeeList.get(i).getPersonnelNumber().trim()%> target="_blank"><%= employeeList.get(i).isActive()%></a></TD>
 
                                                     </TR>
                                                     <%
@@ -531,7 +573,7 @@
                                                                 <br/>                               
                                                                 <div class="offset3">
                                                                     <input type="submit"  class="btn" type="button" value="Add User" /> 
-                                                                   
+
                                                                 </div>
 
                                                                 <br/> <br/> 
@@ -573,24 +615,27 @@
                                                                     <li class="<%out.println(String.valueOf(scene));%>"><a href="#scene" data-toggle="tab">Scene Type</a></li>
                                                                     <li class="<%out.println(String.valueOf(releaseType));%>"><a href="#releaseType" data-toggle="tab">Release Type</a></li>
                                                                     <li class="<%out.println(String.valueOf(releaseTo));%>"><a href="#releaseTo" data-toggle="tab">Release To</a></li>
+                                                                    <li class="<%out.println(String.valueOf(organisationType));%>"><a href="#organisationType" data-toggle="tab">Organisation Type</a></li>
+                                                                    <li class="<%out.println(String.valueOf(organisation));%>"><a href="#organisation" data-toggle="tab">Organisation</a></li>
+                                                                    <li class="<%out.println(String.valueOf(bodyStorage));%>"><a href="#bodyStorage" data-toggle="tab">Body Storage </a></li>
 
                                                                 </ul>
                                                             </div>
                                                             <div class="tab-content" >
-                                                                 <%-- Institution tab   --%>
+                                                                <%-- Institution tab   --%>
                                                                 <div id="inst" class="tab-pane <%out.println(String.valueOf(inst));%>" >  
                                                                     <div align="center"><h2>Institution </h2> </div>
 
                                                                     <div class="offset2 ">
                                                                         <form name="AddInsitution" id="AddInsitution" method="post" action="ReferenceListServlet"  >
-                                                                             <%--this is a hidden textbox that is used in the ReferenceListServlet to identify the form --%>
+                                                                            <%--this is a hidden textbox that is used in the ReferenceListServlet to identify the form --%>
                                                                             <input type="text" name="form" value="AddInsitution" style="visibility: hidden" />
                                                                             <div class="control-group form-horizontal">
                                                                                 <label class="control-label" for="txtInsitution">Institution Name:</label>
                                                                                 <div class="controls">
-                                                                                     <%--  Textboxes are validated in the script.js in the js folder. USed the the textbox id to identify the text box --%>
+                                                                                    <%--  Textboxes are validated in the script.js in the js folder. USed the the textbox id to identify the text box --%>
                                                                                     <input type="text" id="txtInsitution" name="txtInsitution"   />
-                                                                                     <%-- Button to submit the form to the ReferenceListServlet and all the data that is in the text boxes  --%>
+                                                                                    <%-- Button to submit the form to the ReferenceListServlet and all the data that is in the text boxes  --%>
                                                                                     <input class="btn" type="submit" value="Add Institution" name="cmdInsitution" />
                                                                                 </div>
 
@@ -598,7 +643,7 @@
                                                                         </form>
                                                                         <div class="controls offset2" >
                                                                             <label class="control-label" for="InsitutionList">Current Institutions:</label>
-                                                                                 <%-- Display institution list   --%>
+                                                                            <%-- Display institution list   --%>
                                                                             <select id="InsitutionList" name="InsitutionList" size="5">
                                                                                 <%
                                                                                     for (int i = 0; i < institutionList.size(); i++) {
@@ -610,21 +655,21 @@
                                                                                 %>
                                                                             </select>
                                                                             <br/>
-                                                                             <%-- Buttons to edit or delete selected institution. When clicked, the function in the EditReferenceList.js page in the js folder is called     --%>
-                                                                              <%--The methods take the table name and the id of List.--%>
+                                                                            <%-- Buttons to edit or delete selected institution. When clicked, the function in the EditReferenceList.js page in the js folder is called     --%>
+                                                                            <%--The methods take the table name and the id of List.--%>
                                                                             <input class="btn" type="button" onclick="editReferenceList('Insitution', 'InsitutionList')" value="Edit Institution" id="cmdEditInsitutions" name="cmdEditInsitution" />
                                                                             <input class="btn" type="button" onclick="deleteReferenceList('Insitution', 'InsitutionList')" value="Delete Institution" id="cmdDeleteInsitutions" name="cmdDeleteInsitutions" />
 
                                                                         </div>
                                                                     </div>     
                                                                     <div  class="offset3">
-                                                                         <%-- display results  --%>
+                                                                        <%-- display results  --%>
                                                                         <label  > <% out.println(String.valueOf(instiResult));%></label>
                                                                     </div>   <br/>
                                                                     <br/>
                                                                 </div>
                                                                 <div id="anlysis" class="tab-pane <%out.println(String.valueOf(analysis));%>"> 
-                                                                     <%-- Analysis tab  --%>
+                                                                    <%-- Analysis tab  --%>
                                                                     <div align="center"><h2>Type of Analysis </h2> </div> 
                                                                     <div class="offset2 ">
                                                                         <form name="AddAnalysis" id="AddAnalysis" method="post" action="ReferenceListServlet"  >
@@ -1005,20 +1050,20 @@
                                                                             <div class="control-group form-horizontal">
                                                                                 <label class="control-label" for="ProvRegionList">Province</label>
                                                                                 <div class="controls">
-                                                                                         <%--List box used to filter region list box according to the selected Province   --%>
-                                                                                          <%--  The method SelectProvince() in the RegionScript.js page is called when the list is loaded or changed  --%>
+                                                                                    <%--List box used to filter region list box according to the selected Province   --%>
+                                                                                    <%--  The method SelectProvince() in the RegionScript.js page is called when the list is loaded or changed  --%>
                                                                                     <select id="ProvRegionList" name="ProvRegionList" onload="SelectProvince()" onchange='SelectProvince()'>
                                                                                         <%
                                                                                             String prov = "";
                                                                                             String selected = "";
-                                                                                                
+
                                                                                             //It sets prov from provTab that is set in the ReferenceListServlet under the loop statement that pertains the region
                                                                                             //prov variable will contain either one of the provinces or nothing 
                                                                                             if (null != session.getAttribute("provTab")) {
                                                                                                 prov = session.getAttribute("provTab").toString();
                                                                                             }
 
-                                                                                                //We loop through the province list that has all provinces, and find the reference list that is equal prov
+                                                                                            //We loop through the province list that has all provinces, and find the reference list that is equal prov
                                                                                             for (int i = 0; i < provinceList.size(); i++) {
                                                                                                 //if we do find that province ...
                                                                                                 if (prov.trim().equals(provinceList.get(i).trim())) {
@@ -1031,7 +1076,7 @@
                                                                                                     //if we dont find it, clear the selected variable
                                                                                                 }
                                                                                         %>
-                                                                                         <%-- we then set the select the province that equals prov to be the one selected in the list. If we dont find any the default selected will be the first one on the province list  --%>
+                                                                                        <%-- we then set the select the province that equals prov to be the one selected in the list. If we dont find any the default selected will be the first one on the province list  --%>
                                                                                         <option <%out.println(String.valueOf(selected));%>  value="<% out.print(provinceList.get(i));%>"><% out.print(provinceList.get(i));%> </option>
 
                                                                                         <%
@@ -1058,7 +1103,7 @@
                                                                             <select id="RegionList" name="RegionList" size="5">
                                                                                 <%
 
-                                                                                   //display the region list that was generated in the above province section.
+                                                                                    //display the region list that was generated in the above province section.
                                                                                     for (int i = 0; i < regionList.size(); i++) {
 
                                                                                 %>
@@ -1553,6 +1598,194 @@
                                                                     <br/>
                                                                 </div>
 
+
+                                                                <div id="organisationType" class=" tab-pane <%out.println(String.valueOf(organisationType));%> "> 
+                                                                    <div align="center"><h2>Organisation Type</h2> </div>   
+                                                                    <%--content for organisation Type reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddOrganisationType" id="AddOrganisationType" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddOrganisationType" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtOrganisationType">Organisation Type:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtOrganisationType" name="txtOrganisationType"   />
+                                                                                    <input class="btn" type="submit" value="Add Organisation Type" name="cmdOrganisationType" />
+                                                                                </div>
+
+                                                                                <br/>  </div>
+                                                                        </form>
+                                                                        <div class="controls offset2" >
+                                                                            <label class="control-label" for="organisationTypeList">Organisation Type(s):</label>
+
+                                                                            <select id="organisationTypeList" name="organisationTypeList" size="5">
+                                                                                <%
+                                                                                    for (int i = 0; i < OrgTypeList.size(); i++) {
+                                                                                %>
+                                                                                <option><% out.print(OrgTypeList.get(i).getType());%> </option>
+
+
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </select>
+                                                                            <br/>
+                                                                            <%-- 
+                                                                             Incomplete code to edit and delete reference list
+                                                                            <input class="btn" type="button" onclick="editReferenceList('organizationtype', 'organisationTypeList')" value="Edit Release To" id="cmdEditReleaseTo" name="cmdEditReleaseTo" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('organizationtype', 'organisationTypeList')" value="Delete Release To" id="cmdDeleteReleaseTo" name="cmdDeleteReleaseTo" />
+                                                                                --%>
+
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label> <% out.println(String.valueOf(organisationTypeResult));%> </label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
+
+                                                                <div id="organisation" class=" tab-pane <%out.println(String.valueOf(organisation));%> "> 
+                                                                    <div align="center"><h2>Organisation</h2> </div>   
+                                                                    <%--content for seal type reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddOrganisation" id="AddOrganisation" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddOrganisation" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtOrganisationName">Organisation Name:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtOrganisationName" name="txtOrganisationName"   />
+                                                                                </div>
+                                                                                <label class="control-label" for="txtOrganisationContact">Organisation Contact:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtOrganisationContact" name="txtOrganisationContact"/>
+                                                                                </div>
+                                                                                <label class="control-label" for="organisationTypeLst">Organisation Type:</label>
+                                                                                <div class="controls">
+                                                                                    <select id="organisationTypeLst" name="organisationTypeLst" >
+                                                                                        <%
+                                                                                            for (int i = 0; i < OrgTypeList.size(); i++) {
+                                                                                        %>
+                                                                                        <option><% out.print(OrgTypeList.get(i).getType());%> </option>
+
+
+                                                                                        <%
+                                                                                            }
+                                                                                        %>
+                                                                                    </select>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <input  class="btn offset3" type="submit" value="Add Organisation" name="cmdOrganisation" />
+
+                                                                        </form>
+                                                                        <div class="controls offset0" >
+
+                                                                            <table class= "tabledisplay" id="AddOrg">
+
+                                                                                <th  class="tableheading" width="150">Name</th>
+                                                                                <th   class="tableheading" width="150">Contact Number</th>
+                                                                                <th   class="tableheading" width="150">Type</th>
+
+
+
+                                                                                <%
+                                                                                    for (int i = 0; i < OrgList.size(); i++) {
+                                                                                %>
+                                                                                <TR class='tablerow' id="<%out.println(String.valueOf(OrgList.get(i).getName().trim()));%>">
+
+
+                                                                                <input type="hidden" id="orgName" name="orgName" value="<% out.println(String.valueOf(OrgList.get(i).getName().trim()));%> ">
+
+                                                                                <TD class="tablecell"> <%out.println(String.valueOf(OrgList.get(i).getName().trim()));%></TD>
+                                                                                <TD class="tablecell"> <%out.println(String.valueOf(OrgList.get(i).getContactNumber()));%></TD>
+                                                                                <TD class="tablecell"> <%out.println(String.valueOf(OrgList.get(i).getType().trim()));%></TD>
+
+                                                                                </TR>
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </table>
+                                                                            <br/>
+                                                                            <%--
+                                                                             Incomplete code to edit and delete reference list
+                                                                            <input class="btn" type="button" onclick="editReferenceList('releasedto', 'releasedToList')" value="Edit Release To" id="cmdEditReleaseTo" name="cmdEditReleaseTo" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('releasedto', 'releasedToList')" value="Delete Release To" id="cmdDeleteReleaseTo" name="cmdDeleteReleaseTo" />
+                                                                            --%> 
+
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label> <% out.println(String.valueOf(organisationResult));%> </label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
+
+                                                                <div id="bodyStorage" class=" tab-pane <%out.println(String.valueOf(bodyStorage));%> "> 
+                                                                    <div align="center"><h2>Body Storage</h2> </div>   
+                                                                    <%--content for seal type reference list--%>
+                                                                    <div class="offset2 ">
+                                                                        <form name="AddBodyStorage" id="AddBodyStorage" method="post" action="ReferenceListServlet"  >
+                                                                            <input type="text" name="form" value="AddBodyStorage" style="visibility: hidden" />
+                                                                            <div class="control-group form-horizontal">
+                                                                                <label class="control-label" for="txtBodyStorageName">Mortuary Name:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtBodyStorageName" name="txtBodyStorageName"   />
+                                                                                </div>
+                                                                                <label class="control-label" for="txtBodyStorageSize">Number of bins:</label>
+                                                                                <div class="controls">
+                                                                                    <input type="text" id="txtBodyStorageSize" name="txtBodyStorageSize"/>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <input  class="btn offset3" type="submit" value="Add Body Storage Facility" name="cmdBodyStorage" />
+
+                                                                        </form>
+                                                                        <div class="controls offset0" >
+
+                                                                            <table class= "tabledisplay" id="AddBS">
+
+                                                                                <th class= "tableheading" width="150">Mortuary Name</th>
+                                                                                <th  class="tableheading" width="150">Number of Bins</th>
+
+
+
+
+                                                                                <%
+                                                                                    for (int i = 0; i < bsList.size(); i++) {
+                                                                                %>
+                                                                                <TR  class="tablerow" id="<%out.println(String.valueOf(bsList.get(i).getNameOfMortuary().trim()));%>">
+
+
+                                                                                <input type="hidden" name="organisationName" value="<% out.println(String.valueOf(bsList.get(i).getNameOfMortuary()));%> ">
+
+                                                                                <TD class="tablecell"> <%out.println(String.valueOf(bsList.get(i).getNameOfMortuary().trim()));%></TD>
+                                                                                <TD class="tablecell"> <%out.println(String.valueOf(bsList.get(i).getNumberOfBins()));%></TD>
+
+
+                                                                                </TR>
+                                                                                <%
+                                                                                    }
+                                                                                %>
+                                                                            </table>
+                                                                            <br/>
+                                                                             <%--
+                                                                             Incomplete code to edit and delete reference list
+                                                                            <input class="btn" type="button" onclick="editReferenceList('releasedto', 'releasedToList')" value="Edit Release To" id="cmdEditReleaseTo" name="cmdEditReleaseTo" />
+                                                                            <input class="btn" type="button" onclick="deleteReferenceList('releasedto', 'releasedToList')" value="Delete Release To" id="cmdDeleteReleaseTo" name="cmdDeleteReleaseTo" />
+                                                                                --%> 
+
+                                                                        </div>
+                                                                    </div> 
+                                                                    <%--Display save result --%> 
+                                                                    <div  class="offset3">
+                                                                        <label> <% out.println(String.valueOf(bodyStorageResult));%> </label>
+                                                                    </div>
+                                                                    <br/>
+                                                                    <br/>
+                                                                </div>
                                                             </div>
                                                         </div> 
                                                     </div>           
@@ -1562,7 +1795,7 @@
                                                     </div>
 
 
-                                                      <%-- The form used to edit selected reference list item. The form is called in the EditReferenceList.js page in the js form   --%>
+                                                    <%-- The form used to edit selected reference list item. The form is called in the EditReferenceList.js page in the js form   --%>
                                                     <form name="formname" action="EditReferenceListServlet" method="post">
 
                                                         <input type="hidden" id="item" name="item">  <%-- the new item that is being edited to  --%>
@@ -1570,15 +1803,15 @@
                                                         <input type="hidden" id="table" name="table">  <%--  Table name that contains the selected item --%>
                                                         <input type="hidden" id="editProv" name="editProv">  <%-- used when editing the region, since we need to know which province contains that region  --%>
                                                     </form>
-                                                     
-                                                           <%--Used to delete the selected item  --%>
+
+                                                    <%--Used to delete the selected item  --%>
                                                     <form name="formdelete" action="DeleteReferenceListServlet" method="post">
                                                         <input type="hidden" id="item1" name="item1">  <%-- item being deleted  --%>
                                                         <input type="hidden" id="table1" name="table1">  <%--  table where the deleted item exists --%>
                                                         <input type="hidden" id="editProv1" name="editProv1">  <%-- used when deleting a region to select the correct item  --%>                                                       <input type="hidden" id="editProv1" name="editProv1">
 
                                                     </form>
-                               
+
 
 
                                                     </div>                                       
