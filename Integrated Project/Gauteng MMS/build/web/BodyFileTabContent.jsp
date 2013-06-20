@@ -63,6 +63,7 @@
                 <div id="OpenBodyFiles" class="tab-pane active">   
                     <jsp:include page="OpenBodyFileContent.jsp" />
                 </div>
+                
 
                 <div id="NewBodyFiles" class="tab-pane  ">
                     <%--new body file content --%>
@@ -124,6 +125,7 @@
 
             </div>
         </div>
+                
     </body>
 
 </html>

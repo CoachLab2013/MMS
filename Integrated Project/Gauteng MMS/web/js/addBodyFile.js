@@ -35,6 +35,11 @@ $(document).ready(function() {
         return arg != value;
     });
     
+    $("#open_incident_list").click(function(){
+         $("#at_scene_lognmber").val($("#open_incident_list option:selected").text());
+        $("#at_mort_lognmber").val($("#open_incident_list option:selected").text());
+    });
+    
     $("#SAPSpropertyDescr").blur(function(){
         if($("#SAPSpropertyDescr").val().length == 0){
             $("#no_saps_description").show();            

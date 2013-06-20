@@ -35,13 +35,17 @@
         %>
 
             <h4>Select Body for Release : </h4>
-            <%
+            <%if(session.getAttribute("death_register_number")!= null)
+             {
                 out.println(new Tools().bodyReleaseTable(session.getAttribute("death_register_number").toString()));
+                               }
             %>
 
             <h4>Linked Bodies : </h4>
-            <%
+            <%if(session.getAttribute("death_register_number")!= null)
+             {
                 out.println(new Tools().bodyReleaseLinkedTable(session.getAttribute("death_register_number").toString()));
+                               }
             %>
             <hr/>
 

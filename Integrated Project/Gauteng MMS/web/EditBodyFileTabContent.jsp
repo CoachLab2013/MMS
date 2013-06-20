@@ -10,6 +10,7 @@
     <head>
 <script language="javascript" type="text/javascript" src="js/jquery-1.9.1.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.validate.min.js"></script>
+        <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap-datetimepicker.min.css">
         <link type="text/css" rel="stylesheet"  href="bootstrap/css/bootstrap.css">           
         <script  src="bootstrap/js/bootstrap-tabs.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,7 +26,7 @@
             
             <div class="tab-content" >
                 <div id="IncidentInformation" class="tab-pane active">
-                   <jsp:include page="IncidentInformationTabContent.jsp"/>
+                  <jsp:include page="IncidentInformationTabContent.jsp"/>
                 </div>
                 
                 <div id="BodyIdentification" class="tab-pane ">
@@ -33,11 +34,11 @@
                 </div> 
                 
                 <div id="PostMortem" class="tab-pane ">
-                    <jsp:include page="PostMortemTabContent.jsp"/>
+                   <jsp:include page="PostMortemTabContent.jsp"/>
                 </div> 
                 
                 <div id="ReleaseBody" class="tab-pane "> 
-                     <jsp:include page="ReleaseBodyContent.jsp"/>
+                    <jsp:include page="ReleaseBodyContent.jsp"/>
                 </div> 
                 
             </div>

@@ -28,6 +28,21 @@ $(document).ready(function(){
           },
           deceasedCitizenship:{
                required: true
+          },
+          btnDeceasedNameDis:{
+              valueNotEquals: "Confirm"
+          },
+          btnDeceasedSurnameDis:{
+              valueNotEquals: "Confirm"
+          },
+          btnDeceasedNumberDis:{
+              valueNotEquals: "Confirm"
+          },
+          btnDeceasedGenderDis:{
+              valueNotEquals: "Confirm"
+          },
+          btnDeceasedRaceDis:{
+              valueNotEquals: "Confirm"
           }
       },
       messages:{
@@ -58,6 +73,21 @@ $(document).ready(function(){
           },
           deceasedCitizenship:{
                required: "Please enter in the citizenship of the deceased"
+          },
+          btnDeceasedNameDis:{
+              valueNotEquals: "Please confirm the deceased's name"
+          },
+          btnDeceasedSurnameDis:{
+              valueNotEquals: "Please confirm the deceased's surname"
+          },
+          btnDeceasedNumberDis:{
+              valueNotEquals: "Please confirm the deceased's identification number"
+          },
+          btnDeceasedGenderDis:{
+              valueNotEquals: "Please confirm the deceased's gender"
+          },
+          btnDeceasedRaceDis:{
+              valueNotEquals: "Please confirm the deceased's gender"
           }
           
       }
@@ -95,6 +125,23 @@ $(document).ready(function(){
         toggle("btnDeceasedNameDis","txtDeceasedNameDis");
     });
     
+    $("#btnDeceasedSurnameDis").click(function(){
+        toggle("btnDeceasedSurnameDis","txtDeceasedSurnameDis");
+    });
+    
+    $("#btnDeceasedNumberDis").click(function(){
+        toggle("btnDeceasedNumberDis","txtDeceasedNumberDis");
+    });
+    
+    $("#btnDeceasedGenderDis").click(function(){
+        toggle("btnDeceasedGenderDis","selDeceasedGenderDis");
+    });
+    
+    $("#btnDeceasedRaceDis").click(function(){
+        toggle("btnDeceasedRaceDis","selDeceasedRaceDis");
+    });
+    
+    
     function toggle(button, text){
         if($("#"+button).val() == "Confirm"){
             $("#"+text).attr("readonly", true);
@@ -103,8 +150,7 @@ $(document).ready(function(){
         else if($("#"+button).val() == "Edit"){
             $("#"+text).attr("readonly", false);
             $("#"+button).attr("value", "Confirm");
-        }
-        
+        }        
     };
     
     

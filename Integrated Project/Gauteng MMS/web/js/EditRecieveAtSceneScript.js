@@ -4,6 +4,7 @@
  */
 
 $(document).ready(function(){
+    
     if($("#checkscene").val() == "true"){
         //lose focus from the incidents side
         $("#OpenIncidents").removeClass("tab-pane active");
@@ -414,7 +415,7 @@ $.validator.addMethod("checkSceneTime", function(value, element, arg){
         }
     });
     
-    $("#edit_inAllegedDeathTime").click(function(){
+  /*  $("#edit_inAllegedDeathTime").click(function(){
         $("#edit_inAllegedDeathDate").rules("add",{
             required: true,
             messages:{
@@ -430,7 +431,7 @@ $.validator.addMethod("checkSceneTime", function(value, element, arg){
                 required: "Please select a date"
             }
         });
-    });
+    });*/
     
 });
 

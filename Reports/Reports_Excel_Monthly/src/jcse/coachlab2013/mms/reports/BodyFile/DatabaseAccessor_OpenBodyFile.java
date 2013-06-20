@@ -21,9 +21,7 @@ public final class DatabaseAccessor_OpenBodyFile extends Template_DatabaseAccess
     @Override
     public ResultSet read() {        
         ResultSet tempSet = null;
-         Calendar now = Calendar.getInstance(); 
-        int month = now.get(Calendar.MONTH)+1;
-        String s = Integer.toString(month);
+            
         try {
             
             preparedStatement = connection.prepareStatement("Select\n" +
@@ -47,9 +45,7 @@ public final class DatabaseAccessor_OpenBodyFile extends Template_DatabaseAccess
                 "		LEFT JOIN `reporting database`.`dim_status`  AS `reporting_SamplesStatus` ON `reporting_SamplesStatus`.`Status_SK` = `reporting_Body`.`FK_SamplesStatus_SK`\n" +
                 "		LEFT JOIN `reporting database`.`dim_status`  AS `reporting_PostMortemStatus` ON `reporting_PostMortemStatus`.`Status_SK` = `reporting_Body`.`FK_PostMortemStatus_SK`\n" +
                 "		LEFT JOIN `reporting database`.`dim_mannerofdeath` AS `reporting_MannerOfDeath` ON `reporting_MannerOfDeath`.`mannerOfDeath_SK` = `reporting_Body`.`FK_MannerOfDeath_SK`\n" +
-                "	WHERE `reporting_SamplesStatus`.`status_BK` = FALSE AND `reporting_DateReleased`.`date_SK` = '19000101'"
-                    + "and EXTRACT(MONTH FROM TIMESTAMP (`reporting_DateReceived`.`dateStamp`))="+s 
-                    + ";");            
+                "	WHERE `reporting_SamplesStatus`.`status_BK` = FALSE AND `reporting_DateReleased`.`date_SK` = '19000101';");            
             tempSet = preparedStatement.executeQuery();
             
         } catch (SQLException ex) {
