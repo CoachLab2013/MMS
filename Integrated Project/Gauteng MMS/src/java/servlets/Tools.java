@@ -20,8 +20,10 @@ public class Tools {
      * constructor for an instance of Tools it initializes the database connection settings
      */
     public Tools() {
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password");
 
+ 
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "msandas777");
+ 
     }
     //end constructor
 
@@ -37,7 +39,7 @@ public class Tools {
         db1.init();
         EmployeeDb db2 = new EmployeeDb(e2, getDbdetail());
         db2.init();
-        db1.add();
+        db1.add();  
         return (db2.add());
     }
 

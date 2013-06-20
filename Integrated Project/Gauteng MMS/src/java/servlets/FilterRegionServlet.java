@@ -51,6 +51,7 @@ public class FilterRegionServlet extends HttpServlet {
                 regions = regions+regionListFilter.get(i) + "%";
 
             }
+            //This returns a strign of all regions that are in the Procince 'province' reperated by %.
             out.println(regions);
         } catch (SQLException ex) {
             Logger.getLogger(FilterRegionServlet.class.getName()).log(Level.SEVERE, null, ex);
