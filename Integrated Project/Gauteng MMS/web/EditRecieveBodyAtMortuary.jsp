@@ -55,8 +55,8 @@
                     value = "";
                 }
                 list = t.makeReferenceList("employee", "personnelNumber", value);
-                list = list.replaceFirst("name='edit_employee'", "name='edit_employee_handing'");
-                list = list.replaceFirst("id='edit_employee'", "id='edit_employee_handing'");
+                list = list.replaceFirst("name='employee'", "name='edit_employee_handing'");
+                list = list.replaceFirst("id='employee'", "id='edit_employee_handing'");
                 out.println(list);
                 %>
             </div>
@@ -74,7 +74,10 @@
                 } else {
                     value = "";
                 }
-                out.print(t.makeReferenceList("organization", "name", value));
+                list = t.makeReferenceList("organization", "name", value);
+                list=list.replaceFirst("name='organization'", "name='edit_organization'");
+                list=list.replaceFirst("id='organization'", "id='edit_organization'");
+                out.println(list);
                 %>
             </div>
         </div>
@@ -288,7 +291,11 @@
                             value = "";
                         }
                     %>
-                    <% out.println(t.makeReferenceList("province", "type", value));%>
+                    <% list = t.makeReferenceList("province", "type", value);
+                    list=list.replaceFirst("name='province'", "name='edit_province'");
+                    list=list.replaceFirst("id='province'", "id='edit_province'");
+                    out.println(list);
+                    %>
                 </div>
             </div>
 
@@ -306,7 +313,11 @@
                             value = "";
                         }
                     %>
-                    <% out.println(t.makeReferenceList("region", "type", value));%>
+                    <% list = t.makeReferenceList("region", "type", value);
+                    list=list.replaceFirst("name='region'", "name='edit_region'");
+                    list=list.replaceFirst("id='region'", "id='edit_region'");
+                    out.println(list);
+                    %>
                 </div>
             </div>
 
@@ -340,7 +351,10 @@
                     } else {
                         value = "";
                     }
-                    out.print(t.makeReferenceList("race", "type", value));
+                    list = t.makeReferenceList("race", "type", value);
+                    list=list.replaceFirst("name='race'", "name='edit_race'");
+                    list=list.replaceFirst("id='race'", "id='edit_race'");
+                    out.println(list);
                     %>
                 </div>
             </div>
@@ -356,7 +370,10 @@
                     } else {
                         value = "";
                     }
-                    out.print(t.makeReferenceList("gender", "type", value));
+                    list = t.makeReferenceList("gender", "type", value);
+                    list=list.replaceFirst("name='gender'", "name='edit_gender'");
+                    list=list.replaceFirst("id='gender'", "id='edit_gender'");
+                    out.println(list);
                     %>
                 </div>
             </div>
@@ -465,7 +482,7 @@
                 <%--Display save result --%> 
             </div>
             <br/><br/>
-            <input  type="hidden" id="edit_fps_property_counter_mort" name ="fps_property_counter_mort" value="0"/>
+            <input  type="hidden" id="edit_fps_property_counter_mort" name ="edit_fps_property_counter_mort" value="0"/>
         </fieldset>
 
         <div class="offset5">

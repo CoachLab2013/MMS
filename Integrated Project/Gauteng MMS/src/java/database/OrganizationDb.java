@@ -14,6 +14,17 @@ import java.util.ArrayList;
  */
 public class OrganizationDb extends DatabaseConnector{
     private Organization organization;
+    private Organization Oldorganization;
+
+    public Organization getOldorganization() {
+        return Oldorganization;
+    }
+
+    public void setOldorganization(Organization Oldorganization) {
+        this.Oldorganization = Oldorganization;
+    }
+
+    
     //CONSTUCTORS
     public OrganizationDb(DbDetail dbDetail){
         super(dbDetail);
@@ -46,7 +57,7 @@ public class OrganizationDb extends DatabaseConnector{
         {
             return "error" + ex.getMessage();
         }
-        return "added organization to organization table"; 
+        return "successful"; 
     }
     
     // Function to read a single Organization FROM the Datebase
@@ -69,12 +80,12 @@ public class OrganizationDb extends DatabaseConnector{
     }
     
     //Function to read all the organizations from the database and return them in a list for displaying
-    public  ArrayList<Organization> organizationList()
+    public  ArrayList<Organization> organizationList(String type)
     {
         ArrayList<Organization> list = new ArrayList<Organization>();
         try 
         {
-            statement.executeQuery("SELECT * FROM Organization;");
+            statement.executeQuery("SELECT * FROM Organization  where OrganizationType_type= '"+ type+ "';");
             ResultSet resultSet = statement.getResultSet();
             while(resultSet.next())
             {
@@ -91,7 +102,7 @@ public class OrganizationDb extends DatabaseConnector{
         catch (SQLException ex) 
         {
             System.out.println("fail " + ex.getMessage());
-        }
+        } 
         return list;
     }
     
@@ -100,7 +111,7 @@ public class OrganizationDb extends DatabaseConnector{
     public String edit(){//Has to pass primary key un less we assume they cannot change the primary key
          try 
         {
-            statement.executeUpdate("UPDATE Organization SET name='" + organization.getName()+ "', contactNumber='" + organization.getContactNumber() +"', OrganizationType_type='"+ organization.getType() +"' WHERE idOrganization = '"+ organization.getIdOrganization() +"';" );
+            statement.executeUpdate("UPDATE Organization SET name='" + organization.getName()+ "', contactNumber='" + organization.getContactNumber() +"', OrganizationType_type='"+ organization.getType() +"' WHERE name = '"+ Oldorganization.getName()+"'&&  OrganizationType_type='"+ Oldorganization.getType() +"' ;" );
             statement.close();
             connection.close();
         } 
@@ -108,7 +119,7 @@ public class OrganizationDb extends DatabaseConnector{
         {
             return "fail " + ex.getMessage();
         }
-        return "Update Successful";
+        return "successful";
     }
     
     //function(s) to delete an organization from the appropriate tables
@@ -116,7 +127,8 @@ public class OrganizationDb extends DatabaseConnector{
     public String delete(){
         try 
         {
-            statement.executeUpdate("DELETE FROM Organization WHERE idOrganization = '" + organization.getIdOrganization() +"'");
+            statement.executeUpdate("DELETE FROM Organization WHERE name = '" + organization.getName() +"'&&  OrganizationType_type='"+ organization.getType() +"' ;");
+           
             statement.close();
             connection.close();
         } 

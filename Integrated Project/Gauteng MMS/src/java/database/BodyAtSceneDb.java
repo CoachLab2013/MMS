@@ -170,10 +170,19 @@ public class BodyAtSceneDb extends DatabaseConnector
     {
         try 
         {
-            statement.executeQuery("SELECT * FROM AtScene;");
+            statement.executeQuery("SELECT * FROM AtScene WHERE Body_idDeathRegisterNumber = '"+bodyAtScene.getBody().getDeathRegisterNumber()+"';");
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
-            bodyAtScene = new BodyAtScene(resultSet.getString("sceneIncidentOccured"), resultSet.getBoolean("pathOnScene"), resultSet.getString("allegedInjuryDateTime"), resultSet.getString("allegedDeathDateTime"), resultSet.getString("externalCircumstanceOfInjury"), resultSet.getString("placeOfDeath"), resultSet.getString("Body_idDeathRegisterNumber"),new BodyAtMortuary());
+            bodyAtScene.setAllegedDeathDateTime(resultSet.getString("allegedDeathDateTime"));
+            bodyAtScene.setAllegedInjuryDateTime(resultSet.getString("allegedInjuryDateTime"));
+            //bodyAtScene.setBody(null);
+            bodyAtScene.setDateTimeBodyFound(resultSet.getString("dateTimeBodyFound"));
+            bodyAtScene.setExternalCircumstanceOfInjury(resultSet.getString("externalCircumstanceOfInjury"));
+            bodyAtScene.setFacilityDateTime(resultSet.getString("facilityDateTime"));
+            bodyAtScene.setPathOnScene(resultSet.getBoolean("pathOnScene"));
+            bodyAtScene.setPlaceOfDeath(resultSet.getString("placeOfDeath"));
+            bodyAtScene.setSceneDateTime(resultSet.getString("sceneDateTime"));
+            bodyAtScene.setSceneIncidentOccured(resultSet.getString("sceneIncidentOccured"));
             if(resultSet.getString("sceneDateTime").isEmpty()!=true){
                 bodyAtScene.setSceneDateTime(resultSet.getString("sceneDateTime"));
             }else if(resultSet.getString("facilityDateTime").isEmpty()!=true){

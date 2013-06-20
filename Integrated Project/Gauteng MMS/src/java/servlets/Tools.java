@@ -20,8 +20,12 @@ public class Tools {
      * constructor for an instance of Tools it initializes the database connection settings
      */
     public Tools() {
+<<<<<<< HEAD
         dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
 
+=======
+        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
+>>>>>>> origin/master
     }
     //end constructor
 
@@ -37,7 +41,7 @@ public class Tools {
         db1.init();
         EmployeeDb db2 = new EmployeeDb(e2, getDbdetail());
         db2.init();
-        db1.add();
+        db1.add();  
         return (db2.add());
     }
 
@@ -183,6 +187,11 @@ public class Tools {
         return out;
     }
 
+    /**
+     * This method returns the number of a month
+     * @param month The month that needs to be converted to a number
+     * @return The number of the month
+     */
     public int getMonthNumber(String month) {
         String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         int index = 0;
@@ -192,6 +201,12 @@ public class Tools {
         return index + 1;
     }
 
+    /**
+     * This
+     * @param name
+     * @param day_num
+     * @return 
+     */
     public String makeDay(String name, int day_num) {
         String out = "<select id=" + name + " name=" + name + ">";
         if (day_num == -1) {

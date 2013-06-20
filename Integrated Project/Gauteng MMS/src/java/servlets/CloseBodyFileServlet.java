@@ -4,23 +4,23 @@
  */
 package servlets;
 
-import AssistiveClasses.SetDbDetail;
-import database.BodyAtMortuary;
 import database.BodyFile;
 import database.BodyFileDb;
-import database.PostMortem;
-import database.PostMortemDb;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Mubien Nakhooda Coachlab 2013
+ * @author Asheen
  */
-public class PostMortemServlet extends HttpServlet {
+@WebServlet(name = "CloseBodyFileServlet", urlPatterns = {"/CloseBodyFileServlet"})
+public class CloseBodyFileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -35,44 +35,27 @@ public class PostMortemServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                       
-            SetDbDetail dbSet = new SetDbDetail();
-            
-            //Needed for Postmortem Constructor
-            BodyAtMortuary body = new BodyAtMortuary();
-            body.setDeathRegisterNumber(request.getSession().getAttribute("death_register_number").toString());
-
-            PostMortem postmortem = new PostMortem(
- 
-                    "",
- 
- 
-                request.getParameter("ICDlevel1").split(" ")[0] + " " + request.getParameter("ICDlevel2").split(" ")[0] + " " + request.getParameter("ICDlevel3").split(" ")[0] + " " + request.getParameter("ICDlevel4").split(" ")[0],
-                request.getParameter("findingsmortem"), //
-                request.getParameter("findingsdeath"), //
-                false,
-                false,
-                request.getParameter("findingsnumber"), //
-                body,
-                null //LabRecord, Has been removed from database but still exists in Postmortem Class?
-            );
-
-            PostMortemDb postmortemDB = new PostMortemDb(postmortem, dbSet.getDbdetail());
-            postmortemDB.init();    
-            System.out.println(postmortemDB.add());
-
-            BodyFile bodyFile = new BodyFile(request.getSession().getAttribute("death_register_number").toString());
-            BodyFileDb bodyFileDB = new BodyFileDb(dbSet.getDbdetail(), bodyFile);
-            bodyFileDB.init();
-            System.out.println(bodyFileDB.read());
-            bodyFileDB.getBodyFile().setPostMortemCompleted(true);
-            bodyFileDB.init();
-            System.out.println(bodyFileDB.edit());
-            
-            request.getSession().setAttribute("_PostMortem", "true");
-            response.sendRedirect("Home.jsp");
+        PrintWriter out = response.getWriter();
+        Tools t = new Tools();
+        String deathregister = request.getParameter("selectedbodyfile");
+        String reason = request.getParameter("closebodyreason");
+        BodyFileDb bfdb = new BodyFileDb(t.getDbdetail());
+        bfdb.init();
+        bfdb.readBodyFile(deathregister);
+        BodyFile bodyfile = bfdb.getBodyFile();
+        String date = t.getDateTime().split(" ")[0];
+        bodyfile.setDateFileClosed(date);
+        bodyfile.setBodyFileStatus(true);
+        BodyFileDb bfdb2 = new BodyFileDb(t.getDbdetail(), bodyfile);
+        bfdb2.init();
+        bfdb2.edit();
+        HttpSession sess = request.getSession();
+        sess.setAttribute("closedbody", true);
+        t.makeAuditTrail("Body File Manually Closed", "Death register number: "+deathregister +". Reason: "+reason, sess.getAttribute("personnelnumber").toString() , "Open body file tab");
+        response.sendRedirect("Home.jsp");
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.
