@@ -194,7 +194,7 @@ public class AtMortuaryServlet extends HttpServlet {
         out.println(incidentDb.IncreaseBodyCount());
         HttpSession sess = request.getSession();
         sess.setAttribute("atMortuary", true);
-        //response.sendRedirect("Home.jsp");
+        response.sendRedirect("Home.jsp");
 
     }
 

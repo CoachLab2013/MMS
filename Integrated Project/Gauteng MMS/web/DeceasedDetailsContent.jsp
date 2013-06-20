@@ -321,7 +321,13 @@
          
 
     </form>
-    <script type="text/javascript" src="js/DeceasedDetailsDateTime.js"></script>                       
+                     <%
+                     if(session.getAttribute("death_register_number")!= null){
+                         out.println("<script type='text/javascript' src='js/DeceasedDetailsDateTime.js'></script>");
+                     }
+                     
+%>                                        
+                           
 </body>
 
 </html>

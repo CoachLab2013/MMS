@@ -20,7 +20,11 @@ $(document).ready(function(){
     }
     
     $("#recieve_body_scene_form").validate({
-        rules:{
+        ignore: [],
+        rules:{            
+            at_scene_lognmber:{
+                valueNotEquals: "Select"
+            },
             receivedBodyFromName:{
                 required: true
             },
@@ -91,7 +95,9 @@ $(document).ready(function(){
             
         },
         messages:{ 
-
+            at_scene_lognmber:{
+                valueNotEquals: "Please select an incident log number"
+            },
             receivedBodyFromName:{
                 required: "Please enter in the name of the person handing over the body"
             },
@@ -160,6 +166,7 @@ $(document).ready(function(){
                 required: "Please enter in the place of death"
             }
             
+            
         }
         
     });
@@ -168,7 +175,7 @@ $(document).ready(function(){
         _data = $("#recieve_body_scene_form").serialize();
     });
     
-     /**
+    /**
      * Custom rule to ensure that user has selected an item
      * in the drop down list
      */
@@ -202,7 +209,7 @@ $(document).ready(function(){
         return value
     });
     
-$.validator.addMethod("checkInjuryDate", function(value, element, arg){
+    $.validator.addMethod("checkInjuryDate", function(value, element, arg){
         if($("#inAllegedInjuryDate").val() == ""){
             return !value;
         }
@@ -210,12 +217,12 @@ $.validator.addMethod("checkInjuryDate", function(value, element, arg){
             return value;
         }
         else if($("#inAllegedInjuryDate").val() > $("#bodyFoundDate").val()){
-                return !value
+            return !value
         }
         return value;
     });  
     
-$.validator.addMethod("checkDeathDate", function(value, element, arg){
+    $.validator.addMethod("checkDeathDate", function(value, element, arg){
         if($("#inAllegedDeathDate").val() == ""){
             return !value;
         }
@@ -223,7 +230,7 @@ $.validator.addMethod("checkDeathDate", function(value, element, arg){
             return value;
         }
         else if($("#inAllegedDeathDate").val() < $("#inAllegedInjuryDate").val()){
-                return !value
+            return !value
         }
         else if($("#inAllegedDeathDate").val() > $("#bodyFoundDate").val()){
             return !value;
@@ -239,19 +246,19 @@ $.validator.addMethod("checkDeathDate", function(value, element, arg){
             return value;
         }
         else if($("#inAllegedDeathDate").val() == $("#inAllegedInjuryDate").val()){
-                if($("#inAllegedDeathTime").val() < $("#inAllegedInjuryTime").val()){
-                    return !value;
-                }                        
+            if($("#inAllegedDeathTime").val() < $("#inAllegedInjuryTime").val()){
+                return !value;
+            }                        
         }
         else if($("#inAllegedDeathDate").val() == $("#bodyFoundDate").val()){
             if($("#inAllegedDeathTime").val() > $("#bodyFoundTime").val()){
-                    return !value;
-                } 
+                return !value;
+            } 
         }
         return value;
     }); 
     
-$.validator.addMethod("checkInjuryTime", function(value, element, arg){
+    $.validator.addMethod("checkInjuryTime", function(value, element, arg){
         if($("#inAllegedInjuryTime").val()==""){            
             return !value;
         }
@@ -266,7 +273,7 @@ $.validator.addMethod("checkInjuryTime", function(value, element, arg){
         return value;
     });    
     
-$.validator.addMethod("checkSceneDate", function(value, element, arg){
+    $.validator.addMethod("checkSceneDate", function(value, element, arg){
         if($("#ReceivedSceneDate").val() < $("#bodyFoundDate").val()){
             return !value;
         }
@@ -279,7 +286,7 @@ $.validator.addMethod("checkSceneDate", function(value, element, arg){
         return value;
     });    
     
-$.validator.addMethod("checkSceneTime", function(value, element, arg){
+    $.validator.addMethod("checkSceneTime", function(value, element, arg){
         if($("#ReceivedSceneDate").val() == $("#bodyFoundDate").val()){
             if($("#ReceivedSceneTime").val() < $("#bodyFoundTime").val()){
                 return !value;
@@ -289,7 +296,7 @@ $.validator.addMethod("checkSceneTime", function(value, element, arg){
     });     
     
     $("#pathologistAtScene").click(function(){
-       if($('#pathologistAtScene option').filter(':selected').text() == "Yes"){
+        if($('#pathologistAtScene option').filter(':selected').text() == "Yes"){
             $("#pathologist_at_scene_details").show();
             $("#pathologistBodyName").rules("remove");
             $("#pathologistBodyName").rules("add",{
@@ -323,33 +330,33 @@ $.validator.addMethod("checkSceneTime", function(value, element, arg){
     
     $("#recieve_at_scene_id_type").click(function(){
         if($("#recieve_at_scene_id_type option").filter(':selected').text() == "ID"){
-             $("#recieve_at_scene_id_type").rules("remove");
-             $("#atSceneBodyID").rules("remove");
-             $("#atSceneBodyID").rules("add",{
-                 required:true,
-                 number: true,
-                 minlength: 13,
-                 maxlength: 13,
-                 messages:{
+            $("#recieve_at_scene_id_type").rules("remove");
+            $("#atSceneBodyID").rules("remove");
+            $("#atSceneBodyID").rules("add",{
+                required:true,
+                number: true,
+                minlength: 13,
+                maxlength: 13,
+                messages:{
                     required: "Please enter in an ID number",
-                   number: "Invalid ID number. It must contain exactly 13 numeric digits",
-                   minlength: "Invalid ID number. It must contain exactly 13 numeric digits",
-                   maxlength: "Invalid ID number. It must contain exactly 13 numeric digits" 
-                 }
-             });
+                    number: "Invalid ID number. It must contain exactly 13 numeric digits",
+                    minlength: "Invalid ID number. It must contain exactly 13 numeric digits",
+                    maxlength: "Invalid ID number. It must contain exactly 13 numeric digits" 
+                }
+            });
         }
         else if($("#recieve_at_scene_id_type option").filter(':selected').text() == "Passport"){
-             $("#recieve_at_scene_id_type").rules("remove");
-             $("#atSceneBodyID").rules("remove");
-             $("#atSceneBodyID").rules("add",{
-                 required:true,
-                 messages:{
+            $("#recieve_at_scene_id_type").rules("remove");
+            $("#atSceneBodyID").rules("remove");
+            $("#atSceneBodyID").rules("add",{
+                required:true,
+                messages:{
                     required: "Please enter in an passport number"
-                 }
-             });
+                }
+            });
         }
         else{            
-             $("#atSceneBodyID").rules("remove");
+            $("#atSceneBodyID").rules("remove");
         }
     });
     
@@ -384,29 +391,29 @@ $.validator.addMethod("checkSceneTime", function(value, element, arg){
     });
     
     $("#atSceneBodyEstAge").click(function(){
-       if($("#atSceneBodyEstAge option").filter(':selected').text() != "Age"){
-           $("#atSceneBodyEstAge").rules("remove");
-           $("#at_scene_body_estimated_age_type").rules("remove");
-           $("#at_scene_body_estimated_age_type").rules("add",{             
-               valueNotEquals: "Years/Months",
-               messages:{
-                   valueNotEquals: "Please select years or months"
-               }
-           });
-       } 
-       else{
-           $("#at_scene_body_estimated_age_type").rules("remove");
-       }
+        if($("#atSceneBodyEstAge option").filter(':selected').text() != "Age"){
+            $("#atSceneBodyEstAge").rules("remove");
+            $("#at_scene_body_estimated_age_type").rules("remove");
+            $("#at_scene_body_estimated_age_type").rules("add",{             
+                valueNotEquals: "Years/Months",
+                messages:{
+                    valueNotEquals: "Please select years or months"
+                }
+            });
+        } 
+        else{
+            $("#at_scene_body_estimated_age_type").rules("remove");
+        }
     });
     
     $('#at_scene_body_estimated_age_type').click(function(){
         if($('#at_scene_body_estimated_age_type option').filter(':selected').text() != "Years/Months"){
             $('#atSceneBodyEstAge').rules("remove");
             $('#atSceneBodyEstAge').rules("add",{
-               valueNotEquals: "Age",
-               messages:{
-                valueNotEquals: "Please select an estimated age"
-               }
+                valueNotEquals: "Age",
+                messages:{
+                    valueNotEquals: "Please select an estimated age"
+                }
             });
         }
         else{
@@ -414,7 +421,7 @@ $.validator.addMethod("checkSceneTime", function(value, element, arg){
         }
     });
     
-    $("#inAllegedDeathTime").click(function(){
+/*   $("#inAllegedDeathTime").click(function(){
         $("#inAllegedDeathDate").rules("add",{
             required: true,
             messages:{
@@ -431,7 +438,7 @@ $.validator.addMethod("checkSceneTime", function(value, element, arg){
             }
         });
     });
-    
+    */
 });
 
 

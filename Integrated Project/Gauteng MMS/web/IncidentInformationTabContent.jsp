@@ -41,11 +41,11 @@
                             <div class="control-group">
                                 <label class="control-label" for="open_incident_list">Incident Number</label> 
                                 <div class="controls"> <%
-                                    Tools t = new Tools();
+                                    Tools t = new Tools();                                    
                                     if(session.getAttribute("bIdIncidentLog")!=null){
-                                        out.println(t.getOPenIncidentList("open_incident_list", session.getAttribute("bIdIncidentLog").toString()));
+                                        out.println(t.getOPenIncidentList("edit_open_incident_list", session.getAttribute("bIdIncidentLog").toString()));
                                     }else{
-                                        out.print(t.getOPenIncidentList("open_incident_list", ""));
+                                        out.print(t.getOPenIncidentList("edit_open_incident_list", ""));
                                     }
                                     
                                     %>
@@ -53,7 +53,7 @@
                                 <br>
                                 <label class="control-label" for="deathRegister">Death Register Number</label> 
                                 <div class="controls">
-                                    <input type="text" name="deathRegister" id="deathRegister" readonly="true" value =<% 
+                                    <input type="text" name="deathRegister" id="edit_deathRegister" readonly="true" value =<% 
                                     if(session.getAttribute("death_register_number")!=null){
                                         out.println(session.getAttribute("death_register_number"));
                                     }

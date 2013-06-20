@@ -36,7 +36,7 @@
                     <jsp:include page="DeceasedAddressContent.jsp"/>
                 </div>
                 
-                <div id="Releaseproperty" class="tab-pane ">
+               <div id="Releaseproperty" class="tab-pane ">
                   <jsp:include page="ReleasePropertyContent.jsp"/>
                 </div>
         

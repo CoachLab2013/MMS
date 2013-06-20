@@ -31,6 +31,7 @@
             out.println("<input id='edit_checkscene'  type='text' value="+session.getAttribute("edit_atScene")+" />");
             session.removeAttribute("edit_atScene");
         }
+        String value="";
      %>
     <legend class="legend"><h3>Receive body from scene</h3> </legend>
     
@@ -204,7 +205,17 @@
             <div class="control-group">
                 <label class="control-label">Body Classification</label> 
                 <div class="controls"><%
-                    out.print(t.makeReferenceList("bodypart", "type", ""));
+                if (session.getAttribute("bIdBodytype") != null) {
+
+                        if (!(session.getAttribute("bIdBodytype").toString().equals("null"))) {
+                            value = session.getAttribute("bIdBodytype").toString();
+                        } else {
+                            value = "";
+                        }
+                    } else {
+                        value = "";
+                    }
+                    out.print(t.makeReferenceList("bodypart", "type", value));
                     %>
                     <%--<select id="edit_BodyClass" name="edit_BodyClass">                            
                         <option>Head</option>
@@ -217,7 +228,18 @@
             <div class="control-group">
                 <label class="control-label" for="edit_atSceneBodyName">Name</label> 
                 <div class="controls">
-                    <input type="text" name="edit_atSceneBodyName" id="edit_atSceneBodyName"/> 
+                    <%
+                        if (session.getAttribute("bIdFullName") != null) {
+                            if (!(session.getAttribute("bIdFullName").toString().equals("null"))) {
+                                value = session.getAttribute("bIdFullName").toString();
+                            } else {
+                                value = "";
+                            }
+                        } else {
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atSceneBodyName" id="edit_atSceneBodyName" <%out.println("value='" + value + "' ");%> /> 
                 </div>
 
 
@@ -226,7 +248,18 @@
             <div class="control-group">
                 <label class="control-label" for="edit_atSceneBodySurname">Surname</label>
                 <div class="controls">
-                    <input type="text" name="edit_atSceneBodySurname" id="edit_atSceneBodySurname"/> 
+                    <%
+                        if (session.getAttribute("bIdSurname") != null) {
+                            if (!(session.getAttribute("bIdSurname").toString().equals("null"))) {
+                                value = session.getAttribute("bIdSurname").toString();
+                            } else {
+                                value = "";
+                            }
+                        } else {
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atSceneBodySurname" id="edit_atSceneBodySurname" <%out.println("value='" + value + "' ");%> /> 
                 </div>
             </div>
 
@@ -235,11 +268,27 @@
 
 
                 <div class="controls">
-                    <select id="edit_recieve_at_scene_id_type" name="edit_recieve_at_scene_id_type">
-                        <option selected="selected">Select</option>
-                        <option>ID</option>
-                        <option>Passport</option>
-                    </select>
+                    <%
+                        String identification_type;
+                        if ((session.getAttribute("bIdIDNumber") != null) | (session.getAttribute("bIdPassport") != null)) {
+                            String id = session.getAttribute("bIdIDNumber").toString();
+                            String passport = session.getAttribute("bIdPassport").toString();
+                            if ((id.toString().equals("null")) && (passport.toString().equals("null"))) {
+                                identification_type = "<select id='edit_recieve_at_scene_id_type' name='edit_recieve_at_scene_id_type'><option selected='selected'>Select</option><option>ID</option><option>Passport</option></select>";
+                                value = "";
+                            } else if (!(id.toString().equals("null"))) {
+                                identification_type = "<select id='edit_recieve_at_scene_id_type' name='edit_recieve_at_scene_id_type'><option>Select</option><option selected='selected'>ID</option><option>Passport</option></select>";
+                                value = id;
+                            } else {
+                                identification_type = "<select id='edit_recieve_at_scene_id_type' name='edit_recieve_at_scene_id_type'><option>Select</option><option>ID</option><option selected='selected'>Passport</option></select>";
+                                value = passport;
+                            }
+                        } else {
+                            identification_type = "<select id='edit_recieve_at_scene_id_type' name='edit_recieve_at_scene_id_type'><option selected='selected'>Select</option><option>ID</option><option>Passport</option></select>";
+                            value = "";
+                        }
+                        out.println(identification_type);
+                    %>
                     <label id="edit_no_id_type" class="error" style="display:none;">Please select an identification type</label>
                 </div>
             </div>
@@ -247,7 +296,7 @@
             <div class="control-group">
                 <label class="control-label" for="edit_atSceneBodyID">Identification number</label>
                 <div class="controls">
-                    <input type="text" name="edit_atSceneBodyID" id="edit_atSceneBodyID"/> 
+                    <input type="text" name="edit_atSceneBodyID" id="edit_atSceneBodyID" <%out.println("value='" + value + "' ");%> /> 
                     <label id ="invalid_id" class="error" style="display:none;">Invalid ID number</label>
                     <label id="edit_invalid_passport" class="error" style="display:none;">Invalid passport number</label>
                 </div>
@@ -258,55 +307,145 @@
             <div class="control-group">
                 <label class="control-label" for="edit_atSceneBodyAddressBuilding">Building</label>
                 <div class="controls">
-                    <input type="text" name="edit_atSceneBodyAddressBuilding" id="edit_atSceneBodyAddressBuilding"/> 
+                    <%
+                        if (session.getAttribute("bIdBuild") != null) {
+                            if (!(session.getAttribute("bIdBuild").toString().equals("null"))) {
+                                value = session.getAttribute("bIdBuild").toString();
+                            } else {
+                                value = "";
+                            }
+                        } else {
+                            value = "";
+                        }
+                    %>
+                    
+                    <input type="text" name="edit_atSceneBodyAddressBuilding" id="edit_atSceneBodyAddressBuilding" <%out.println("value='" + value + "' ");%> /> 
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="edit_atSceneBodyAddressStreet">Street</label>
                 <div class="controls">
-                    <input type="text" name="edit_atSceneBodyAddressStreet" id="edit_atSceneBodyAddressStreet"/> 
+                    <%
+                        if (session.getAttribute("bIdStreet") != null) {
+
+                            if (!(session.getAttribute("bIdStreet").toString().equals("null"))) {
+                                value = session.getAttribute("bIdStreet").toString();
+                            } else {
+                                value = "";
+                            }
+                        } else {
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atSceneBodyAddressStreet" id="edit_atSceneBodyAddressStreet" <%out.println("value='" + value + "' ");%> /> 
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_atSceneBodyAddressSuburb">Suburb</label>
                 <div class="controls">
-                    <input type="text" name="edit_atSceneBodyAddressSuburb" id="edit_atSceneBodyAddressSuburb"/> 
+                    <%
+                        if (session.getAttribute("bIdSuburb") != null) {
+                            if (!(session.getAttribute("bIdSuburb").toString().equals("null"))) {
+                                value = session.getAttribute("bIdSuburb").toString();
+                            } else {
+                                value = "";
+                            }
+                        } else {
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atSceneBodyAddressSuburb" id="edit_atSceneBodyAddressSuburb" <%out.println("value='" + value + "' ");%> /> 
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_atSceneBodyAddressCity">City</label>
                 <div class="controls">
-                    <input type="text" name="edit_atSceneBodyAddressCity" id="edit_atSceneBodyAddressCity"/> 
+                    <%
+                        if (session.getAttribute("bIdCity") != null) {
+                            if (!(session.getAttribute("bIdCity").toString().equals("null"))) {
+                                value = session.getAttribute("bIdCity").toString();
+                            } else {
+                                value = "";
+                            }
+                        } else {
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atSceneBodyAddressCity" id="edit_atSceneBodyAddressCity" <%out.println("value='" + value + "' ");%> /> 
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_atSceneBodyAddressPostalCode">Postal Code</label>
                 <div class="controls">
-                    <input type="text" name="edit_atSceneBodyAddressPostalCode" id="edit_atSceneBodyAddressPostalCode"/> 
+                    <%
+                        if (session.getAttribute("bIdPostCode") != null) {
+                            if (!(session.getAttribute("bIdPostCode").toString().equals("null"))) {
+                                value = session.getAttribute("bIdPostCode").toString();
+                            } else {
+                                value = "";
+                            }
+                        } else {
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atSceneBodyAddressPostalCode" id="edit_atSceneBodyAddressPostalCode" <%out.println("value='" + value + "' ");%> /> 
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_province">Province</label>
-                <div class="controls">                                                        
-                    <% out.println(t.makeReferenceList("province", "type", ""));%>
+                <div class="controls">   
+                    <%
+                        if (session.getAttribute("bIdProvince") != null) {
+                            if (!(session.getAttribute("bIdProvince").toString().equals("null"))) {
+                                value = session.getAttribute("bIdProvince").toString();
+                            } else {
+                                value = "";
+                            }
+                        } else {
+                            value = "";
+                        }
+                    %>
+                    <% out.println(t.makeReferenceList("province", "type", value));%>
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_region">Region</label>
                 <div class="controls">
-                    <% out.println(t.makeReferenceList("region", "type", ""));%>
+                    <%
+                        if (session.getAttribute("bIdRegion") != null) {
+                            if (!(session.getAttribute("bIdRegion").toString().equals("null"))) {
+                                value = session.getAttribute("bIdRegion").toString();
+                            } else {
+                                value = "";
+                            }
+                        } else {
+                            value = "";
+                        }
+                    %>
+                    <% out.println(t.makeReferenceList("region", "type", value));%>
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="edit_atSceneBodyAddressMagisterialDistrict">Magisterial District</label>
                 <div class="controls">
-                    <input type="text" name="edit_atSceneBodyAddressMagisterialDistrict" id="edit_atSceneBodyAddressMagisterialDistrict"/> 
+                    <%
+                        if (session.getAttribute("bIdDistrict") != null) {
+                            if (!(session.getAttribute("bIdDistrict").toString().equals("null"))) {
+                                value = session.getAttribute("bIdDistrict").toString();
+                            } else {
+                                value = "";
+                            }
+                        } else {
+                            value = "";
+                        }
+                    %>
+                    <input type="text" name="edit_atSceneBodyAddressMagisterialDistrict" id="edit_atSceneBodyAddressMagisterialDistrict" <%out.println("value='" + value + "' ");%> /> 
                 </div>
             </div>
 
@@ -323,7 +462,16 @@
             <div class="control-group">
                 <label class="control-label">Race</label> 
                 <div class="controls"><%
-                    out.print(t.makeReferenceList("race", "type", ""));
+                if (session.getAttribute("bIdRace") != null) {
+                        if (!(session.getAttribute("bIdRace").toString().equals("null"))) {
+                            value = session.getAttribute("bIdRace").toString();
+                        } else {
+                            value = "";
+                        }
+                    } else {
+                        value = "";
+                    }
+                    out.print(t.makeReferenceList("race", "type", value));
                     %>                      
                     <%--<select id="edit_Brace" name="edit_Brace"><option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
                     <%
@@ -340,7 +488,16 @@
             <div class="control-group">
                 <label class="control-label">Gender</label> 
                 <div class="controls"><%
-                    out.print(t.makeReferenceList("gender", "type", ""));
+                if (session.getAttribute("bIdGender") != null) {
+                        if (!(session.getAttribute("bIdGender").toString().equals("null"))) {
+                            value = session.getAttribute("bIdGender").toString();
+                        } else {
+                            value = "";
+                        }
+                    } else {
+                        value = "";
+                    }
+                    out.print(t.makeReferenceList("gender", "type", value));
                     %>
                     <%--<select id="edit_Bgender" name="edit_Bgender">                            
                         <option value=""> <% out.println(String.valueOf("-Please Select-"));%></option>
@@ -363,18 +520,50 @@
                     <table>
                         <tr>
                             <td><select name="edit_atSceneBodyEstAge" id="edit_atSceneBodyEstAge" style="width:100px;" >
-                                    <option selected="selected">Age</option>
-                                    <%
-                                        for (int i = 1; i < 101; i++) {
-                                            out.println("<option>" + i + "</option>");
+                                   <%
+                                        if (session.getAttribute("bIdEstAgeYear") != null) {
+                                            out.println("<option>Age</option>");
+                                            int est_year = Integer.parseInt(session.getAttribute("bIdEstAgeYear").toString());
+                                            value = "Years";
+                                            for (int i = 1; i < 101; i++) {
+                                                if (i == est_year) {
+                                                    out.println("<option selected='selected'>" + i + "</option>");
+                                                } else {
+                                                    out.println("<option>" + i + "</option>");
+                                                }
+                                            }
+                                        } else if (session.getAttribute("bIdEstAgeMonth") != null) {
+                                            out.println("<option>Age</option>");
+                                            int est_month = Integer.parseInt(session.getAttribute("bIdEstAgeMonth").toString());
+                                            value = "Months";
+                                            for (int i = 1; i < 101; i++) {
+                                                if (i == est_month) {
+                                                    out.println("<option selected='selected'>" + i + "</option>");
+                                                } else {
+                                                    out.println("<option>" + i + "</option>");
+                                                }
+                                            }
+                                        } else {
+                                            out.println("<option selected='selected'>Age</option>");
+                                            value = "";
+                                            for (int i = 1; i < 101; i++) {
+                                                out.println("<option>" + i + "</option>");
+                                            }
                                         }
                                     %>
                                 </select></td>
-                            <td><select name="edit_at_scene_body_estimated_age_type" id="edit_at_scene_body_estimated_age_type" style="width:120px;" >
-                                    <option selected="selected">Years/Months</option>
-                                    <option>Years</option>
-                                    <option>Months</option>
-                                </select></td>
+                            <td>
+                                <%
+                                if (value == "") {
+                                    list = "<select name='edit_at_scene_body_estimated_age_type' id='edit_at_scene_body_estimated_age_type' style='width:120px;' ><option selected='selected'>Years/Months</option><option>Years</option><option>Months</option></select> ";
+                                } else if (value == "Years") {
+                                    list = "<select name='edit_at_scene_body_estimated_age_type' id='edit_at_scene_body_estimated_age_type' style='width:120px;' ><option>Years/Months</option><option selected='selected'>Years</option><option>Months</option></select> ";
+                                } else {
+                                    list = "<select name='edit_at_scene_body_estimated_age_type' id='edit_at_scene_body_estimated_age_type' style='width:120px;' ><option>Years/Months</option><option>Years</option><option selected='selected'>Months</option></select> ";
+                                }
+                                out.println(list);
+                                %>
+                            </td>     
                         </tr>
                     </table>                                                         
                 </div>
@@ -627,7 +816,6 @@
             <input  type="submit"  class="btn" name="edit_recieve_at_scene_save" id="edit_recieve_at_scene_save"   value="Save" /> 
             <%--Display save result --%> 
         </div>              
-    </form>  
-<script type="text/javascript" src="js/EditRecieveBodyDateTime.js"></script>        
+    </form>         
 </body>         
 </html>

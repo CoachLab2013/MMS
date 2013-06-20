@@ -16,7 +16,11 @@ $(document).ready(function(){
     }
     
      $("#recieve_body_mort_form").validate({
+         ignore: [],
         rules:{
+            at_mort_lognmber:{
+              valueNotEquals: "Select"  
+            },
             employee:{
                 valueNotEquals: "Select"
             },
@@ -29,6 +33,9 @@ $(document).ready(function(){
             }
         },
         messages:{
+            at_mort_lognmber:{
+              valueNotEquals: "Please select an incident log number"  
+            },
             employee:{
                 valueNotEquals: "Please select an employee"
             },

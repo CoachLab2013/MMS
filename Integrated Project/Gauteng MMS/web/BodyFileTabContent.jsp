@@ -63,9 +63,7 @@
                 <div id="OpenBodyFiles" class="tab-pane active">   
                     <jsp:include page="OpenBodyFileContent.jsp" />
                 </div>
-                <div id="EditBodyFiles" class="tab-pane "> 
-                 <jsp:include page="EditBodyFileTabContent.jsp"/>
-                </div>
+                
 
                 <div id="NewBodyFiles" class="tab-pane  ">
                     <%--new body file content --%>
@@ -117,7 +115,9 @@
                     </div>
                 </div>
 
-                
+                <div id="EditBodyFiles" class="tab-pane "> 
+                 <jsp:include page="EditBodyFileTabContent.jsp"/>
+                </div>
 
                 <div id="LinkBodyFiles" class="tab-pane ">
                     <jsp:include page="LinkBodyContent.jsp"/>
@@ -125,6 +125,7 @@
 
             </div>
         </div>
+                
     </body>
 
 </html>

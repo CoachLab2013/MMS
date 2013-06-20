@@ -59,7 +59,7 @@ public class DeceasedDetailsServlet extends HttpServlet {
         }
         body.setMaidenName(request.getParameter("DeceasedMaidenName"));
         body.setSurnameOfDeceased(request.getParameter("DeceasedSurname"));
-        //body.setIdentifiedDateTime(request.getParameter("deceasedbodyIdentifiedDate") + " " + request.getParameter("deceasedbodyIdentifiedTime"));
+        body.setIdentifiedDateTime(request.getParameter("deceasedbodyIdentifiedDate") + " " + request.getParameter("deceasedbodyIdentifiedTime"));
         body.setPlaceOfBirth(request.getParameter("deceasedPlaceBirth"));
         body.setDateOfBirth(request.getParameter("deceasedDateBirth"));
         body.setAgeOnDateFound(Integer.parseInt(request.getParameter("deceasedage")));

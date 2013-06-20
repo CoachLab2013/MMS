@@ -26,7 +26,7 @@
             
             <div class="tab-content" >
                 <div id="IncidentInformation" class="tab-pane active">
-                   <jsp:include page="IncidentInformationTabContent.jsp"/>
+                  <jsp:include page="IncidentInformationTabContent.jsp"/>
                 </div>
                 
                 <div id="BodyIdentification" class="tab-pane ">
@@ -34,11 +34,11 @@
                 </div> 
                 
                 <div id="PostMortem" class="tab-pane ">
-                    <jsp:include page="PostMortemTabContent.jsp"/>
+                   <jsp:include page="PostMortemTabContent.jsp"/>
                 </div> 
                 
                 <div id="ReleaseBody" class="tab-pane "> 
-                     <jsp:include page="ReleaseBodyContent.jsp"/>
+                    <jsp:include page="ReleaseBodyContent.jsp"/>
                 </div> 
                 
             </div>

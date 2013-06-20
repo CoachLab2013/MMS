@@ -353,7 +353,7 @@ public class BodyDb extends DatabaseConnector{
         }
         return "successful";
     }
-    private BodyAtMortuary getBodyAtMortuary() throws SQLException
+    public BodyAtMortuary getBodyAtMortuary() throws SQLException
     {
         init();
         statement.executeQuery("SELECT * FROM AtMortuary WHERE Body_idDeathRegisterNumber='" + body.getDeathRegisterNumber()+"';");
