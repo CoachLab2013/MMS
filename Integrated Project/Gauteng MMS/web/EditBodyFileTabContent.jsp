@@ -25,6 +25,11 @@
             </ul>
             
             <div class="tab-content" >
+                <%
+                if(session.getAttribute("death_register_number") !=null){
+                    out.println("<legend>Death Register Number: "+session.getAttribute("death_register_number")+"</legend>");
+                }
+                %>
                 <div id="IncidentInformation" class="tab-pane active">
                   <jsp:include page="IncidentInformationTabContent.jsp"/>
                 </div>
