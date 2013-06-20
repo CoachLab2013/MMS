@@ -17,6 +17,7 @@ public class OrganisationTypeDB extends DatabaseConnector{
 
     public OrganisationTypeDB(DbDetail dbDetail) {
         super(dbDetail);
+        organizationT = new OrganisationType();
     }
 
     public OrganisationTypeDB(OrganisationType organization, DbDetail dbDetail) {
@@ -80,7 +81,8 @@ public class OrganisationTypeDB extends DatabaseConnector{
     public String delete() {
        try 
         {
-            statement.executeUpdate("DELETE FROM  organizationtype WHERE type = '" + organizationT.getType() +"';");
+             
+            statement.executeUpdate("DELETE FROM  organizationtype WHERE type = '" + organizationT.getType().trim() +"';");
             statement.close();
             connection.close();
         } 

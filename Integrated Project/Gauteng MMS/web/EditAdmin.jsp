@@ -46,8 +46,8 @@
                 String Afalse = "";
                 String Atrue = "";
             try {
-                  name = (String) session.getAttribute("name");
-                  surnme = (String) session.getAttribute("surname");
+                  name =  session.getAttribute("name").toString();
+                  surnme =   session.getAttribute("surname").toString();
                   email = (String) session.getAttribute("email");
                   personnel = (String) session.getAttribute("personnel");
                   level = Integer.parseInt(session.getAttribute("level").toString().trim());
@@ -97,21 +97,21 @@
 
                         <label  class="control-label" for="firstName">Full Name(s):</label> 
                         <div class="controls error">
-                            <input type="text" name="firstName" id="firstName" value=<%= name%>  /> 
+                            <input type="text" name="firstName" id="firstName" value="${name}"  /> 
                         </div>
                     </div>
 
                     <div class="control-group  ">
                         <label  class="control-label" for="surname">Surname:</label> 
                         <div class="controls error">
-                            <input  type="text" name="surname"  id="surname"  value=<%= surnme%> />
+                            <input  type="text" name="surname"  id="surname" value=<%= surnme%> />
                         </div>
                     </div>
 
                     <div class="control-group  ">
                         <label  class="control-label" for="email" >Email:</label> 
                         <div class="controls error">
-                            <input type="text" name="email" value=<%= email%> id="email" />
+                            <input type="text" name="email" value=<%= email%>  id="email" />
                         </div>
                     </div>
                 </fieldset>

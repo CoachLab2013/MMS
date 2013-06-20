@@ -615,8 +615,8 @@ public class EditReferenceListServlet extends HttpServlet {
              
             OrganisationType OrgType = new OrganisationType(Olditem);
             OrganisationTypeDB emp = new OrganisationTypeDB(OrgType, dbDetail);
-           // emp.init();
-            result = emp.edit(item);
+            emp.init();
+            result = emp.delete();
             //if save is successful, return a message to page
             if (result.equals("successful")) {
                 HttpSession sess = request.getSession();
@@ -629,7 +629,7 @@ public class EditReferenceListServlet extends HttpServlet {
                 HttpSession sess = request.getSession();
                 sess.setAttribute("main", "ref");
                 sess.setAttribute("tab", "organisationType");
-                sess.setAttribute("organisationTypeResult", "Organisation type did not edit because " + result);
+                sess.setAttribute("organisationTypeResult", "Organisation type did not edit because " + result );
                 response.sendRedirect("Admin.jsp");
 
             }
