@@ -41,7 +41,7 @@
                       <td width="80"> <input class="btn"  type="submit" value="Edit" id="editbodyfilebutton" /> </td>
                        <td> <input type="hidden" id="selectedbody" name="selectedbody" /> </td>
                     </form>
-               <td width="80"> <input class="btn"  type="button" value="Edit" id="editbodyfilebutton" /> </td>
+               
                 <td width="80">  <input class="btn" type="button" value="Close body file" id="closebody"/> </td>
 
             </tr>

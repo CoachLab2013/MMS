@@ -78,7 +78,7 @@ public class EditAtSceneDetails extends HttpServlet {
         }
         
         Member pathologistOnScene = new Member();
-        pathologistOnScene.setIdMember(idMember);
+        //pathologistOnScene.setIdMember(idMember);
         //reading original member details from database before making any changes
             memberDb.setMember(pathologistOnScene);
             memberDb.init();
@@ -105,7 +105,7 @@ public class EditAtSceneDetails extends HttpServlet {
         
         //build body received from
             Member receivedFrom = new Member();
-            receivedFrom.setIdMember(idMember);
+            //receivedFrom.setIdMember(idMember);
             //reading original member details from database before making any changes
                 memberDb.setMember(receivedFrom);
                 memberDb.init();
@@ -130,7 +130,7 @@ public class EditAtSceneDetails extends HttpServlet {
         
         //SAPS member
             Member SAPSmember = new Member();
-            SAPSmember.setIdMember(idMember);
+            //SAPSmember.setIdMember(idMember);
             //reading original member details from database before making any changes
                 memberDb.setMember(SAPSmember);
                 memberDb.init();
@@ -149,7 +149,7 @@ public class EditAtSceneDetails extends HttpServlet {
         
         //FPSmemeber
             Member FPSmemeber = new Member();
-            FPSmemeber.setIdMember(idMember);
+            //FPSmemeber.setIdMember(idMember);
             //reading original member details from database before making any changes
                 memberDb.setMember(FPSmemeber);
                 memberDb.init();

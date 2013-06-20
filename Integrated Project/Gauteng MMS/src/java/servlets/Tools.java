@@ -6,6 +6,8 @@ import database.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -19,13 +21,9 @@ public class Tools {
     /**
      * constructor for an instance of Tools it initializes the database connection settings
      */
-    public Tools() {
-<<<<<<< HEAD
+    public Tools()
+    {
         dbdetail = new DbDetail("localhost", "/mydb", "root", "hello");
-
-=======
-        dbdetail = new DbDetail("localhost", "/mydb", "root", "password123");
->>>>>>> origin/master
     }
     //end constructor
 
@@ -785,6 +783,31 @@ public class Tools {
         kinDb.init();
         kinDb.read();
         return kinDb.getkin();
+    }
+    public Member getMemberFromScene(String memberType, ArrayList<Member> listMemebers)
+    {
+        Member m = null;
+         if(listMemebers != null)
+         for(int i = 0;i < listMemebers.size();i++)
+         {
+             if(listMemebers.get(i).getMemberType().contains(memberType))
+             {
+                 m = listMemebers.get(i);
+             }
+         }
+         return m;
+    }
+    public ArrayList<Member> getMemberList(String deathReg)
+    {
+         MemberDb memberDb = new MemberDb(dbdetail);
+         memberDb.init();
+         ArrayList<Member> listMemeber = null;
+        try {
+            listMemeber = memberDb.BodySpecificMemberList(deathReg);
+        } catch (SQLException ex) {
+            ;
+        }
+         return listMemeber;
     }
 }
 

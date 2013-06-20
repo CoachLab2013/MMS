@@ -41,7 +41,10 @@ public class Member
         this.deathRegisterNumber = deathRegisterNumber;
         this.memberType = memberType;
     }
-
+    public Member(String deathRegisterNumber)
+    {
+        this.deathRegisterNumber = deathRegisterNumber;
+    }
     public Member(int id, String name, String surname, String rank, String personnelNumber, String organization, String contactNumber, String deathRegisterNumber, String memberType) {
         this.idMember = id;
         this.name = name;
