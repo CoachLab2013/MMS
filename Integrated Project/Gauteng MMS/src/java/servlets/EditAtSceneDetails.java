@@ -174,18 +174,7 @@ public class EditAtSceneDetails extends HttpServlet {
             }
             
         }
-        /*/body fields that are not given by the UI input
-        bodyAtScene.getBody().setDateOfBirth("0000-00-00");
-        bodyAtScene.getBody().setIdentifiedDateTime("0000-00-00 00:00");
-        bodyAtScene.getBody().setBodyStatus(false);
-        bodyAtScene.getBody().setDateBodyReceived("0000-00-00");
-        bodyAtScene.getBody().setDateBodyReleased("0000-00-00");
-        bodyAtScene.getBody().setBodyReleased(false);
-        bodyAtScene.getBody().setBodyReleaseTo(null);*/
-        //end of body fiels that are not given by the UI
-        //end of Body details
-        
-        
+      
         //inserting body into database
         BodyDb bodyDb = new BodyDb(dbdetail, bodyAtScene.getBody());
         bodyDb.init();

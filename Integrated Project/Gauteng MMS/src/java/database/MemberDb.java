@@ -7,6 +7,8 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -58,7 +60,27 @@ public class MemberDb extends DatabaseConnector {
 
     @Override
     public String read() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try 
+        {
+            statement.executeQuery("SELECT * FROM member WHERE idMember = " + member.getIdMember() + ";");
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+            member.setContactNumber(resultSet.getString("contactNumber"));
+            member.setDeathRegisterNumber(resultSet.getString("AtScene_Body_idDeathRegisterNumber"));
+            member.setMemberType(resultSet.getString("memberType"));
+            member.setName(resultSet.getString("name"));
+            member.setOrganization(resultSet.getString("organization"));
+            member.setPersonnelNumber(resultSet.getString("personnelNumber"));
+            member.setRank(resultSet.getString("rank"));
+            member.setSurname(resultSet.getString("surname"));
+            member.setIdMember(resultSet.getInt("idMember"));
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            return "failed " + ex.getMessage();
+        }
+        return "Successful";
+        
     }
     
     public ArrayList<Member> BodySpecificMemberList(String inDeathRegisterNumber) throws SQLException{
@@ -112,6 +134,7 @@ public class MemberDb extends DatabaseConnector {
                     + "personnelNumber='" + member.getPersonnelNumber() + "',"
                     + "organization='" + member.getOrganization() + "',"
                     + "contactNumber='" + member.getContactNumber() + "',"
+                    + "AtScene_Body_idDeathRegisterNumber='" + member.getDeathRegisterNumber() + "',"
                     + "memberType='" + member.getMemberType() + "'"
                     +" WHERE idMember="+ member.getIdMember()+";");
             statement.close();
